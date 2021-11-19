@@ -1,0 +1,26 @@
+﻿using Bybit.Net.Converters;
+using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+using System;
+
+namespace Bybit.Net.Objects.Models
+{
+    /// <summary>
+    /// Kline info
+    /// </summary>
+    public class BybitIndexPriceKline : BybitKlineBase
+    {
+        /// Open time
+        /// </summary>
+        [JsonProperty("open_time"), JsonConverter(typeof(TimestampSecondsConverter))]
+        public DateTime OpenTime { get; set; }
+
+        /// <summary>
+        /// Data recording period
+        /// </summary>
+        [JsonConverter(typeof(KlineIntervalConverter))]
+        public KlineInterval Period { get; set; }
+
+    }
+}

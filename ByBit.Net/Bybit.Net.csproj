@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+	  <LangVersion>8.0</LangVersion>
+	  <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<DocumentationFile>Bybit.Net.xml</DocumentationFile>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CryptoExchange.Net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
+  </ItemGroup>
+	
+
+  <ItemGroup>
+    <Folder Include="Clients\Rest\InverseFutures\" />
+    <Folder Include="Clients\Rest\USDPerpetual\" />
+    <Folder Include="Clients\Rest\Spot\" />
+    <Folder Include="Clients\Socket\" />
+    <Folder Include="Icon\" />
+    <Folder Include="SymbolOrderBooks\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+</Project>
