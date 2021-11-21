@@ -22,7 +22,6 @@
     <Folder Include="Clients\Socket\" />
     <Folder Include="Icon\" />
     <Folder Include="SymbolOrderBooks\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>
