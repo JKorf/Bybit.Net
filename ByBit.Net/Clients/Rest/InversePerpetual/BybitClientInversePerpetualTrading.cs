@@ -5,6 +5,7 @@ using Bybit.Net.Objects.Models;
 using ByBit.Net.Objects.Internal;
 using ByBit.Net.Objects.Models;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System;
@@ -20,8 +21,7 @@ namespace ByBit.Net.Clients.Rest.InversePerpetual
     /// <summary>
     /// Spot system endpoints
     /// </summary>
-    public class BybitClientInversePerpetualTrading : IBybitClientInversePerpetualTrading
-    //: IBybitInversePerpetualClientAccount
+    public class BybitClientInversePerpetualTrading //: IBybitClientInversePerpetualTrading
     {
         private readonly BybitClientInversePerpetual _baseClient;
 
@@ -74,10 +74,10 @@ namespace ByBit.Net.Clients.Rest.InversePerpetual
 
         #endregion
 
-        #region Get open orders
+        #region Get orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOpenOrdersAsync(
+        public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(
             string symbol,
             OrderStatus? status = null,
             SearchDirection? direction = null,
@@ -146,8 +146,11 @@ namespace ByBit.Net.Clients.Rest.InversePerpetual
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledOrder>>(_baseClient.GetUrl("private/order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledOrder>>(_baseClient.GetUrl("private/order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (result && result.Data == null)
+                return result.As<IEnumerable<BybitCanceledOrder>>(new BybitCanceledOrder[0]);
 
+            return result;
         }
 
         #endregion
@@ -283,5 +286,208 @@ namespace ByBit.Net.Clients.Rest.InversePerpetual
         }
 
         #endregion
+
+        #region Get conditional orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetConditionalOrdersAsync(
+            string symbol,
+            OrderStatus? status = null,
+            SearchDirection? direction = null,
+            int? limit = null,
+            string? cursor = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+            };
+
+            parameters.AddOptionalParameter("order_status", status == null ? null : JsonConvert.SerializeObject(status, new OrderStatusConverter(false)));
+            parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("cursor", cursor);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>(_baseClient.GetUrl("private/stop-order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+
+        }
+
+        #endregion
+
+        #region Cancel conditional order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(
+            string symbol,
+            string? stopOrderId = null,
+            string? clientOrderId = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            if ((stopOrderId == null && clientOrderId == null) || (stopOrderId != null && clientOrderId != null))
+                throw new ArgumentException($"1 of {nameof(stopOrderId)} or {nameof(clientOrderId)} should be provided");
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+            };
+
+            parameters.AddOptionalParameter("stop_order_id", stopOrderId);
+            parameters.AddOptionalParameter("order_link_id", clientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitStopOrderId>(_baseClient.GetUrl("private/stop-order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+
+        }
+
+        #endregion
+
+        #region Cancel all conditional orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditionalOrdersAsync(
+            string symbol,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledConditionalOrder>>(_baseClient.GetUrl("private/stop-order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+           
+            if (result && result.Data == null)
+                return result.As<IEnumerable<BybitCanceledConditionalOrder>>(new BybitCanceledConditionalOrder[0]);
+
+            return result;
+        }
+
+        #endregion
+
+        #region Modify order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(
+            string symbol,
+            string? stopOrderId = null,
+            string? clientOrderId = null,
+            decimal? newPrice = null,
+            decimal? newTriggerPrice = null,
+            decimal? newQuantity = null,
+            decimal? takeProfitPrice = null,
+            decimal? stopLossPrice = null,
+            TriggerType? takeProfitTriggerType = null,
+            TriggerType? stopLossTriggerType = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            if ((stopOrderId == null && clientOrderId == null) || (stopOrderId != null && clientOrderId != null))
+                throw new ArgumentException($"1 of {nameof(stopOrderId)} or {nameof(clientOrderId)} should be provided");
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+            };
+
+            parameters.AddOptionalParameter("p_r_price", newPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("p_r_qty", newQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("p_r_trigger_price", newTriggerPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stop_order_id", stopOrderId);
+            parameters.AddOptionalParameter("order_link_id", clientOrderId);
+            parameters.AddOptionalParameter("take_profit", takeProfitPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitStopOrderId>(_baseClient.GetUrl("private/stop-order/replace"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+
+        }
+
+        #endregion
+
+        #region Get open orders realtime
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
+            string symbol,
+            string? stopOrderId = null,
+            string? clientOrderId = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            if ((stopOrderId == null && clientOrderId == null) || (stopOrderId != null && clientOrderId != null))
+                throw new ArgumentException($"1 of {nameof(stopOrderId)} or {nameof(clientOrderId)} should be provided");
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+            };
+            parameters.AddOptionalParameter("stop_order_id", stopOrderId);
+            parameters.AddOptionalParameter("order_link_id", clientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("private/stop-order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrdersRealTimeAsync(
+            string symbol,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitConditionalOrder>>(_baseClient.GetUrl("private/stop-order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+
+        }
+
+        #endregion
+
+        #region User trades
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(
+            string symbol,
+            string? orderId = null,
+            DateTime? startTime = null,
+            int? page = null,
+            int? pageSize = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+            };
+            parameters.AddOptionalParameter("order_id", orderId);
+            parameters.AddOptionalParameter("start_time", startTime == null ? null: JsonConvert.SerializeObject(startTime, new TimestampConverter()));
+            parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<BybitTradeWrapper>(_baseClient.GetUrl("private/execution/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitUserTrade>>(default);
+
+            if (result.Data.Trades == null)
+                return result.As<IEnumerable<BybitUserTrade>>(new BybitUserTrade[0]);
+
+            return result.As(result.Data.Trades);
+        }
+
+        #endregion
+
     }
 }

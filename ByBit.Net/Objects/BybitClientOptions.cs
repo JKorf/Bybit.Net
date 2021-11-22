@@ -57,5 +57,30 @@ namespace ByBit.Net.Objects
 
             Copy(this, Default);
         }
-    }    
+    }
+
+    /// <summary>
+    /// Options for the binance client
+    /// </summary>
+    public class BybitSocketClientInversePerpetualOptions : SocketClientOptions
+    {
+        /// <summary>
+        /// Default options for the spot client
+        /// </summary>
+        public static BybitSocketClientInversePerpetualOptions Default { get; set; } = new BybitSocketClientInversePerpetualOptions()
+        {
+            BaseAddress = "wss://stream.bybit.com/realtime"
+        };
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BybitSocketClientInversePerpetualOptions()
+        {
+            if (Default == null)
+                return;
+
+            Copy(this, Default);
+        }
+    }
 }

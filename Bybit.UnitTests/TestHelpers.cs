@@ -20,7 +20,7 @@ using System.Collections;
 using Newtonsoft.Json;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net;
-using ByBit.Net.Clients.Rest.InversePerptual;
+using ByBit.Net.Clients.Rest.InversePerpetual;
 using ByBit.Net.Objects;
 
 namespace Bybit.Net.Testing

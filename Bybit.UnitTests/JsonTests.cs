@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Interfaces;
-using ByBit.Net.Clients.Rest.InversePerptual;
+using ByBit.Net.Clients.Rest.InversePerpetual;
 using Bybit.Net.UnitTests;
 using Bybit.Net.Testing;
 using ByBit.Net.Objects;
@@ -22,11 +22,12 @@ namespace CoinEx.Net.UnitTests
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> 
                 {
                     { "GetWalletFundHistoryAsync", "data" },
-                    { "GetWithdrawalHistoryAsync", "data" },
+                    { "GetWithdrawalHistoryAsync", "data" }
                 },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
-                    { "GetWithdrawalHistoryAsync", new List<string> { "current_page", "last_page" } }
+                    { "GetWithdrawalHistoryAsync", new List<string> { "current_page", "last_page" } },
+                    { "GetPositionAsync", new List<string> { "oc_calc_data" } }
                 },
                 useNestedJsonPropertyForAllCompare: new List<string> { "result" },
                 parametersToSetNull: new string[] {  }
@@ -56,12 +57,14 @@ namespace CoinEx.Net.UnitTests
             await _comparer.ProcessSubject("InversePerpetual/Trading", c => c.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
-
+                    { "GetUserTradesAsync", "trade_list" }
                 },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
                     { "GetOpenOrderRealTimeAsync", new List<string> { "ext_fields" } },
-                    { "GetOpenOrdersRealTimeAsync", new List<string> { "ext_fields" } }
+                    { "GetOpenOrdersRealTimeAsync", new List<string> { "ext_fields" } },
+                    { "GetOpenConditionalOrderRealTimeAsync", new List<string> { "ext_fields" } },
+                    { "GetOpenConditionalOrdersRealTimeAsync", new List<string> { "ext_fields" } }
                 },
                 useNestedJsonPropertyForAllCompare: new List<string> { "result" },
                 parametersToSetNull: new string[] { "clientOrderId" }
