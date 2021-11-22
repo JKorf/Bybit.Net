@@ -79,7 +79,7 @@ namespace Bybit.Net.Clients.Socket
                     return;
                 }
 
-                handler(data.As(desResult.Data));
+                handler(data.As(desResult.Data, desResult.Data.First().Symbol));
             });
             return await SubscribeAsync(
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "trade." + s).ToArray() },
@@ -112,6 +112,7 @@ namespace Bybit.Net.Clients.Socket
             if (requestParams.Any(p => !args.Contains(p)))
                 return false;
 
+            callResult = new CallResult<object>(default, null);
             return data["success"]?.Value<bool>() == true;
         }
 
@@ -120,12 +121,8 @@ namespace Bybit.Net.Clients.Socket
             if (message.Type != JTokenType.Object)
                 return false;
 
-            var type = message["type"]?.ToString();
             var topic = message["topic"]?.ToString();
             if (topic == null)
-                return false;
-
-            if (type == null || type != "snapshot" && type != "delta")
                 return false;
 
             var requestParams = ((BybitRequestMessage)request).Parameters;
@@ -140,7 +137,11 @@ namespace Bybit.Net.Clients.Socket
         {
             if(identifier == "Heartbeat")
             {
-                var isPing = message["ret_msg"].ToString() == "pong";
+                var ret = message["ret_msg"];
+                if (ret == null)
+                    return false;
+
+                var isPing = ret.ToString() == "pong";
                 if (!isPing)
                     return false;
 
