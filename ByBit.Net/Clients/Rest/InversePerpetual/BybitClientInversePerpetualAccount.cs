@@ -15,12 +15,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ByBit.Net.Clients.Rest.InversePerptual
+namespace ByBit.Net.Clients.Rest.InversePerpetual
 {
     /// <summary>
     /// Spot system endpoints
     /// </summary>
-    public class BybitClientInversePerpetualAccount //: IBybitInversePerpetualClientAccount
+    public class BybitClientInversePerpetualAccount : IBybitClientInversePerpetualAccount
+    //: IBybitInversePerpetualClientAccount
     {
         private readonly BybitClientInversePerpetual _baseClient;
 
@@ -52,7 +53,7 @@ namespace ByBit.Net.Clients.Rest.InversePerptual
             parameters.AddOptionalParameter("currency", asset);
             parameters.AddOptionalParameter("start_date", startTime?.ToString("yyyy-MM-dd"));
             parameters.AddOptionalParameter("end_date", endTime?.ToString("yyyy-MM-dd"));
-            parameters.AddOptionalParameter("wallet_fund_type", type == null ? null: JsonConvert.SerializeObject(type, new WalletFundTypeConverter(false)));
+            parameters.AddOptionalParameter("wallet_fund_type", type == null ? null : JsonConvert.SerializeObject(type, new WalletFundTypeConverter(false)));
             parameters.AddOptionalParameter("page", page?.ToString());
             parameters.AddOptionalParameter("limit", pageSize?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -61,7 +62,7 @@ namespace ByBit.Net.Clients.Rest.InversePerptual
             if (!result)
                 return result.As<IEnumerable<BybitWalletFundRecord>>(default);
 
-            if(result.Data.Data == null)
+            if (result.Data.Data == null)
                 return result.As<IEnumerable<BybitWalletFundRecord>>(new BybitWalletFundRecord[0]);
 
             return result.As(result.Data.Data);
@@ -102,11 +103,11 @@ namespace ByBit.Net.Clients.Rest.InversePerptual
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("from", fromId?.ToString());
-            parameters.AddOptionalParameter("direction", direction == null? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
+            parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
             parameters.AddOptionalParameter("limit", limit?.ToString());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitExchangeHistoryEntry>>(_baseClient.GetUrl("private/exchange-order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);            
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitExchangeHistoryEntry>>(_baseClient.GetUrl("private/exchange-order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

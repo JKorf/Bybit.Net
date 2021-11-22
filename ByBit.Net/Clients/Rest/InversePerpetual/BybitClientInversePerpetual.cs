@@ -13,15 +13,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ByBit.Net.Clients.Rest.InversePerptual
+namespace ByBit.Net.Clients.Rest.InversePerpetual
 {
     public class BybitClientInversePerpetual : RestClient//, IBybitInversePerpetualClient
+, IBybitClientInversePerpetual
     {
         internal new BybitClientInversePerpetualOptions ClientOptions { get; }
 
-        public BybitClientInversePerpetualAccount Account { get; }
-        public BybitClientInversePerpetualExchangeData ExchangeData { get; }
-        public BybitClientInversePerpetualTrading Trading { get; }
+        public IBybitClientInversePerpetualAccount Account { get; }
+        public IBybitClientInversePerpetualExchangeData ExchangeData { get; }
+        public IBybitClientInversePerpetualTrading Trading { get; }
 
         #region ctor
         /// <summary>

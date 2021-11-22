@@ -15,12 +15,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ByBit.Net.Clients.Rest.InversePerptual
+namespace ByBit.Net.Clients.Rest.InversePerpetual
 {
     /// <summary>
     /// Spot system endpoints
     /// </summary>
-    public class BybitClientInversePerpetualTrading //: IBybitInversePerpetualClientAccount
+    public class BybitClientInversePerpetualTrading : IBybitClientInversePerpetualTrading
+    //: IBybitInversePerpetualClientAccount
     {
         private readonly BybitClientInversePerpetual _baseClient;
 
@@ -33,12 +34,12 @@ namespace ByBit.Net.Clients.Rest.InversePerptual
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitOrder>> PlaceOrderAsync(
-            string symbol, 
-            OrderSide side, 
-            OrderType type, 
-            decimal quantity, 
-            TimeInForce timeInForce,  
-            decimal? price = null, 
+            string symbol,
+            OrderSide side,
+            OrderType type,
+            decimal quantity,
+            TimeInForce timeInForce,
+            decimal? price = null,
             bool? closeOnTrigger = null,
             string? clientOrderId = null,
             decimal? takeProfitPrice = null,
@@ -46,7 +47,7 @@ namespace ByBit.Net.Clients.Rest.InversePerptual
             TriggerType? takeProfitTriggerType = null,
             TriggerType? stopLossTriggerType = null,
             bool? reduceOnly = null,
-            long? receiveWindow = null, 
+            long? receiveWindow = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
@@ -63,7 +64,7 @@ namespace ByBit.Net.Clients.Rest.InversePerptual
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("take_profit", takeProfitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null: JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("reduce_only", reduceOnly?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -82,14 +83,14 @@ namespace ByBit.Net.Clients.Rest.InversePerptual
             SearchDirection? direction = null,
             int? limit = null,
             string? cursor = null,
-            long? receiveWindow = null, 
+            long? receiveWindow = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol },
             };
-           
+
             parameters.AddOptionalParameter("order_status", status == null ? null : JsonConvert.SerializeObject(status, new OrderStatusConverter(false)));
             parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -195,7 +196,7 @@ namespace ByBit.Net.Clients.Rest.InversePerptual
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(
-            string symbol,       
+            string symbol,
             string? orderId = null,
             string? clientOrderId = null,
             long? receiveWindow = null,

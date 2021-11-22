@@ -15,12 +15,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ByBit.Net.Clients.Rest.InversePerptual
+namespace ByBit.Net.Clients.Rest.InversePerpetual
 {
     /// <summary>
     /// Spot system endpoints
     /// </summary>
-    public class BybitClientInversePerpetualExchangeData //: IBybitInversePerpetualClientAccount
+    public class BybitClientInversePerpetualExchangeData : IBybitClientInversePerpetualExchangeData
+    //: IBybitInversePerpetualClientAccount
     {
         private readonly BybitClientInversePerpetual _baseClient;
 
