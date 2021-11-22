@@ -17,6 +17,11 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("clOrdID")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
+        /// Order status
+        /// </summary>
+        [JsonProperty("order_status"), JsonConverter(typeof(OrderStatusConverter))]
+        public OrderStatus? Status { get; set; }
+        /// <summary>
         /// The state of initiating a matchmaking request
         /// </summary>
         [JsonProperty("cross_status"), JsonConverter(typeof(OrderStatusConverter))]

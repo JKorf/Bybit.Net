@@ -43,11 +43,7 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("time_in_force"), JsonConverter(typeof(TimeInForceConverter))]
         public TimeInForce TimeInForce { get; set; }
-        /// <summary>
-        /// Order status
-        /// </summary>
-        [JsonProperty("order_status"), JsonConverter(typeof(OrderStatusConverter))]
-        public OrderStatus? Status { get; set; }
+        
         /// <summary>
         /// The estimated value corresponding to the number of remaining orders
         /// </summary>

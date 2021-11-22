@@ -136,6 +136,9 @@
         <member name="M:ByBit.Net.Clients.Rest.InversePerptual.BybitClientInversePerpetualTrading.GetOpenOrdersRealTimeAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:ByBit.Net.Clients.Rest.InversePerptual.BybitClientInversePerpetualTrading.PlaceConditionalOrderAsync(System.String,Bybit.Net.Enums.OrderSide,Bybit.Net.Enums.OrderType,System.Decimal,System.Decimal,System.Decimal,Bybit.Net.Enums.TimeInForce,System.Nullable{System.Decimal},System.Nullable{Bybit.Net.Enums.TriggerType},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bybit.Net.Enums.TriggerType},System.Nullable{Bybit.Net.Enums.TriggerType},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:ByBit.Net.Objects.BybitClientOptionsBase">
             <summary>
             Options for the binance client
@@ -826,6 +829,11 @@
             Cancel order id
             </summary>
         </member>
+        <member name="P:Bybit.Net.Objects.Models.BybitCanceledOrder.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
         <member name="P:Bybit.Net.Objects.Models.BybitCanceledOrder.CrossStatus">
             <summary>
             The state of initiating a matchmaking request
@@ -839,6 +847,31 @@
         <member name="P:Bybit.Net.Objects.Models.BybitCanceledOrder.CrossSequence">
             <summary>
             Cross sequence
+            </summary>
+        </member>
+        <member name="T:Bybit.Net.Objects.Models.BybitConditionalOrder">
+            <summary>
+            Conditional order info
+            </summary>
+        </member>
+        <member name="P:Bybit.Net.Objects.Models.BybitConditionalOrder.Id">
+            <summary>
+            Stop order id
+            </summary>
+        </member>
+        <member name="P:Bybit.Net.Objects.Models.BybitConditionalOrder.Remark">
+            <summary>
+            Remark
+            </summary>
+        </member>
+        <member name="P:Bybit.Net.Objects.Models.BybitConditionalOrder.StopPrice">
+            <summary>
+            Stop price
+            </summary>
+        </member>
+        <member name="P:Bybit.Net.Objects.Models.BybitConditionalOrder.RejectReason">
+            <summary>
+            Reason for reject
             </summary>
         </member>
         <member name="T:Bybit.Net.Objects.Models.BybitExchangeHistoryEntry">
@@ -1049,6 +1082,11 @@
             Order id
             </summary>
         </member>
+        <member name="P:Bybit.Net.Objects.Models.BybitOrder.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
         <member name="P:Bybit.Net.Objects.Models.BybitOrder.LastTradeTime">
             <summary>
             Time of last fill
@@ -1142,11 +1180,6 @@
         <member name="P:Bybit.Net.Objects.Models.BybitOrderBase.TimeInForce">
             <summary>
             Time in force
-            </summary>
-        </member>
-        <member name="P:Bybit.Net.Objects.Models.BybitOrderBase.Status">
-            <summary>
-            Order status
             </summary>
         </member>
         <member name="P:Bybit.Net.Objects.Models.BybitOrderBase.LeavesValue">

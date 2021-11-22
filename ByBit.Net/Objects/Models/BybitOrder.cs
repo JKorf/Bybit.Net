@@ -15,7 +15,12 @@ namespace Bybit.Net.Objects.Models
         /// Order id
         /// </summary>
         [JsonProperty("order_id")]
-        public string Id { get; set; } = string.Empty;        
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
+        /// Order status
+        /// </summary>
+        [JsonProperty("order_status"), JsonConverter(typeof(OrderStatusConverter))]
+        public OrderStatus? Status { get; set; }
         /// <summary>
         /// Time of last fill
         /// </summary>
