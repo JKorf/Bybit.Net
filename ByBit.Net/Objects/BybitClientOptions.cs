@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Interfaces;
+﻿using Bybit.Net.Clients.Socket;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace ByBit.Net.Objects
     }
 
     /// <summary>
-    /// Options for the binance client
+    /// Options for the inverse perpetual socket client
     /// </summary>
     public class BybitSocketClientInversePerpetualOptions : SocketClientOptions
     {
@@ -82,5 +83,13 @@ namespace ByBit.Net.Objects
 
             Copy(this, Default);
         }
+    }
+
+    /// <summary>
+    /// Options for the binance client
+    /// </summary>
+    public class BybitInversePerpetualSymbolOrderBookOptions : OrderBookOptions
+    {
+        public BybitSocketClientInversePerpetual? SocketClient { get; set; }
     }
 }

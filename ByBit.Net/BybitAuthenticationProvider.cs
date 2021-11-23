@@ -65,5 +65,11 @@ namespace ByBit.Net
                 parameters.Add("sign", ByteToString(_encryptor.ComputeHash(Encoding.UTF8.GetBytes(signData))));
             return parameters;
         }
+
+        public override string Sign(string toSign)
+        {
+            lock (_signLock)
+                return ByteToString(_encryptor.ComputeHash(Encoding.UTF8.GetBytes(toSign)));
+        }
     }
 }

@@ -20,7 +20,6 @@
     <Folder Include="Clients\Rest\USDPerpetual\" />
     <Folder Include="Clients\Rest\Spot\" />
     <Folder Include="Icon\" />
-    <Folder Include="SymbolOrderBooks\" />
   </ItemGroup>
 
 	<ItemGroup>
