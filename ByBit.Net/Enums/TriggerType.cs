@@ -16,6 +16,10 @@
         /// <summary>
         /// Mark price
         /// </summary>
-        MarkPrice
+        MarkPrice,
+        /// <summary>
+        /// Unknown
+        /// </summary>
+        Unknown
     }
 }

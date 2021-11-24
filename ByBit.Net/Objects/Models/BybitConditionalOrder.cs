@@ -13,7 +13,7 @@ namespace Bybit.Net.Objects.Models
         /// Stop order id
         /// </summary>
         [JsonProperty("stop_order_id")]
-        public string Id { get; set; } = string.Empty;
+        public override string Id { get; set; } = string.Empty;
         [JsonProperty("order_id")]
         internal string? _stopId { get => Id; set { if (value != null) Id = value; } }
         /// <summary>

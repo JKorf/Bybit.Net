@@ -49,4 +49,10 @@ namespace Bybit.Net.Objects.Internal
         public bool IsValid { get; set; }
     }
 
+    internal class BybitPositionUsdData : BybitData<BybitPositionUsd>
+    {
+        [JsonProperty("is_valid")]
+        public bool IsValid { get; set; }
+    }
+
 }

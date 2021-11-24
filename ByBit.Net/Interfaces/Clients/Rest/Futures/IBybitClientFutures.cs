@@ -1,26 +1,26 @@
 ﻿using CryptoExchange.Net.Interfaces;
 
-namespace ByBit.Net.Clients.Rest.InversePerpetual
+namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
     /// Client
     /// </summary>
-    public interface IBybitClientInversePerpetual: IRestClient
+    public interface IBybitClientFutures: IRestClient
     {
         /// <summary>
         /// Account
         /// </summary>
-        IBybitClientInversePerpetualAccount Account { get; }
+        IBybitClientFuturesAccount Account { get; }
 
         /// <summary>
         /// Exc
         /// </summary>
-        IBybitClientInversePerpetualExchangeData ExchangeData { get; }
+        IBybitClientFuturesExchangeData ExchangeData { get; }
 
         /// <summary>
         /// Tra
         /// </summary>
-        IBybitClientInversePerpetualTrading Trading { get; }
+        IBybitClientFuturesTrading Trading { get; }
 
         /// <summary>
         /// Set 

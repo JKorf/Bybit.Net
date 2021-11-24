@@ -1,5 +1,6 @@
-﻿using ByBit.Net.Objects;
-using ByBit.Net.Objects.Internal;
+﻿using Bybit.Net;
+using Bybit.Net.Objects;
+using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
@@ -13,44 +14,31 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ByBit.Net.Clients.Rest.InversePerpetual
+namespace Bybit.Net.Clients.Rest.Futures
 {
-    public class BybitClientInversePerpetual : RestClient//, IBybitInversePerpetualClient
+    public abstract class BybitClientFuturesBase : RestClient//, IBybitInversePerpetualClient
     {
-        internal new BybitClientInversePerpetualOptions ClientOptions { get; }
-
-        public BybitClientInversePerpetualAccount Account { get; }
-        public BybitClientInversePerpetualExchangeData ExchangeData { get; }
-        public BybitClientInversePerpetualTrading Trading { get; }
-
-        #region ctor
-        /// <summary>
-        /// Create a new instance of BybitInversePerpetualClient using the default options
-        /// </summary>
-        public BybitClientInversePerpetual() : this(BybitClientInversePerpetualOptions.Default)
-        {
-        }
+        internal new BybitClientFuturesOptions ClientOptions { get; }
 
         /// <summary>
-        /// Create a new instance of BybitInversePerpetualClient using the provided options
+        /// ctor
         /// </summary>
-        public BybitClientInversePerpetual(BybitClientInversePerpetualOptions options) : base("Bybit[InversePerpetual]", options, options.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.ApiCredentials))
+        /// <param name="exchangeName"></param>
+        /// <param name="options"></param>
+        /// <param name="authProvider"></param>
+        protected BybitClientFuturesBase(string exchangeName, BybitClientFuturesOptions options, AuthenticationProvider? authProvider) : base(exchangeName, options, authProvider)
         {
             ClientOptions = options;
-            Account = new BybitClientInversePerpetualAccount(this);
-            ExchangeData = new BybitClientInversePerpetualExchangeData(this);
-            Trading = new BybitClientInversePerpetualTrading(this);
         }
-        #endregion
 
         #region methods
         /// <summary>
         /// Sets the default options to use for new clients
         /// </summary>
         /// <param name="options">The options to use for new clients</param>
-        public static void SetDefaultOptions(BybitClientInversePerpetualOptions options)
+        public static void SetDefaultOptions(BybitClientFuturesOptions options)
         {
-            BybitClientInversePerpetualOptions.Default = options;
+            BybitClientFuturesOptions.Default = options;
         }
 
         /// <summary>
@@ -70,7 +58,7 @@ namespace ByBit.Net.Clients.Rest.InversePerpetual
         /// <returns></returns>
         internal Uri GetUrl(string endpoint)
         {
-            return new Uri($"{ClientOptions.BaseAddress}v2/{endpoint}");
+            return new Uri($"{ClientOptions.BaseAddress}/{endpoint}");
         }
 
         internal async Task<WebCallResult<BybitResult<T>>> SendRequestWrapperAsync<T>(
@@ -97,7 +85,7 @@ namespace ByBit.Net.Clients.Rest.InversePerpetual
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
              bool signed = false,
-             JsonSerializer? deserializer = null) 
+             JsonSerializer? deserializer = null)
         {
             var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer);
             if (!result)

@@ -14,6 +14,7 @@ namespace Bybit.Net.Converters
             new KeyValuePair<TriggerType, string>(TriggerType.LastPrice, "LastPrice"),
             new KeyValuePair<TriggerType, string>(TriggerType.MarkPrice, "MarkPrice"),
             new KeyValuePair<TriggerType, string>(TriggerType.IndexPrice, "IndexPrice"),
+            new KeyValuePair<TriggerType, string>(TriggerType.Unknown, "UNKNOWN"),
         };
     }
 }

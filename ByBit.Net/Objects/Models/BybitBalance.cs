@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ByBit.Net.Objects.Models
+namespace Bybit.Net.Objects.Models
 {
     /// <summary>
     /// Balance info

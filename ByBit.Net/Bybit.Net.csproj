@@ -16,8 +16,6 @@
 	
 
   <ItemGroup>
-    <Folder Include="Clients\Rest\InverseFutures\" />
-    <Folder Include="Clients\Rest\USDPerpetual\" />
     <Folder Include="Clients\Rest\Spot\" />
     <Folder Include="Icon\" />
   </ItemGroup>

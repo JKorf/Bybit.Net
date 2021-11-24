@@ -2,9 +2,9 @@
 using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects.Models;
 using Bybit.Net.Objects.Models.Socket;
-using ByBit.Net;
-using ByBit.Net.Objects;
-using ByBit.Net.Objects.Models;
+using Bybit.Net;
+using Bybit.Net.Objects;
+using Bybit.Net.Objects.Models;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
@@ -23,20 +23,20 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.Socket
 {
     /// <inheritdoc />
-    public class BybitSocketClientInversePerpetual: SocketClient
+    public class BybitSocketClientFutures: SocketClient
     {
         /// <summary>
-        /// Create a new instance of BybitSocketClientInversePerpetual using the default options
+        /// Create a new instance of BybitSocketClientFutures using the default options
         /// </summary>
-        public BybitSocketClientInversePerpetual() : this(BybitSocketClientInversePerpetualOptions.Default)
+        public BybitSocketClientFutures() : this(BybitSocketClientFuturesOptions.Default)
         {
         }
 
         /// <summary>
-        /// Create a new instance of BybitSocketClientInversePerpetual using provided options
+        /// Create a new instance of BybitSocketClientFutures using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BybitSocketClientInversePerpetual(BybitSocketClientInversePerpetualOptions options) : base("Bybit[InversePerpetual]", options, options.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.ApiCredentials))
+        public BybitSocketClientFutures(BybitSocketClientFuturesOptions options) : base("Bybit[Futures]", options, options.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.ApiCredentials))
         {
             if (options == null)
                 throw new ArgumentException("Cant pass null options, use empty constructor for default");
@@ -62,9 +62,9 @@ namespace Bybit.Net.Clients.Socket
         /// set the default options used when creating a client without specifying options
         /// </summary>
         /// <param name="newDefaultOptions"></param>
-        public static void SetDefaultOptions(BybitSocketClientInversePerpetualOptions newDefaultOptions)
+        public static void SetDefaultOptions(BybitSocketClientFuturesOptions newDefaultOptions)
         {
-            BybitSocketClientInversePerpetualOptions.Default = newDefaultOptions;
+            BybitSocketClientFuturesOptions.Default = newDefaultOptions;
         }
 
         /// <inheritdoc />
@@ -279,8 +279,7 @@ namespace Bybit.Net.Clients.Socket
         }
 
         /// <inheritdoc />
-        // TODO BybitPosition has more fields than the update
-        public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPosition>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUpdate>>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -288,10 +287,10 @@ namespace Bybit.Net.Clients.Socket
                 if (internalData == null)
                     return;
 
-                var desResult = Deserialize<IEnumerable<BybitPosition>>(internalData);
+                var desResult = Deserialize<IEnumerable<BybitPositionUpdate>>(internalData);
                 if (!desResult)
                 {
-                    log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitPosition)} object: " + desResult.Error);
+                    log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitPositionUpdate)} object: " + desResult.Error);
                     return;
                 }
 
@@ -299,6 +298,98 @@ namespace Bybit.Net.Clients.Socket
             });
             return await SubscribeAsync(
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "position" } },
+                null, true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BybitUserTradeUpdate>>> handler, CancellationToken ct = default)
+        {
+            var internalHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var desResult = Deserialize<IEnumerable<BybitUserTradeUpdate>>(internalData);
+                if (!desResult)
+                {
+                    log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitUserTradeUpdate)} object: " + desResult.Error);
+                    return;
+                }
+
+                handler(data.As(desResult.Data));
+            });
+            return await SubscribeAsync(
+                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "execution" } },
+                null, true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default)
+        {
+            var internalHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var desResult = Deserialize<IEnumerable<BybitOrderUpdate>>(internalData);
+                if (!desResult)
+                {
+                    log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitOrderUpdate)} object: " + desResult.Error);
+                    return;
+                }
+
+                handler(data.As(desResult.Data));
+            });
+            return await SubscribeAsync(
+                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
+                null, true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitStopOrderUpdate>>> handler, CancellationToken ct = default)
+        {
+            var internalHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var desResult = Deserialize<IEnumerable<BybitStopOrderUpdate>>(internalData);
+                if (!desResult)
+                {
+                    log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitStopOrderUpdate)} object: " + desResult.Error);
+                    return;
+                }
+
+                handler(data.As(desResult.Data));
+            });
+            return await SubscribeAsync(
+                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
+                null, true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BybitBalanceUpdate>>> handler, CancellationToken ct = default)
+        {
+            var internalHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var desResult = Deserialize<IEnumerable<BybitBalanceUpdate>>(internalData);
+                if (!desResult)
+                {
+                    log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitBalanceUpdate)} object: " + desResult.Error);
+                    return;
+                }
+
+                handler(data.As(desResult.Data));
+            });
+            return await SubscribeAsync(
+                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "wallet" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace ByBit.Net.Objects.Internal
+namespace Bybit.Net.Objects.Internal
 {
     internal class BybitResult<T>
     {

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace ByBit.Net.Objects
+namespace Bybit.Net.Objects
 {
     /// <summary>
     /// Options for the binance client
@@ -32,16 +32,16 @@ namespace ByBit.Net.Objects
     }
 
     /// <summary>
-    /// Options for the Bybit inverse perpetual client
+    /// Options for the Bybit futures client
     /// </summary>
-    public class BybitClientInversePerpetualOptions : BybitClientOptionsBase
+    public class BybitClientFuturesOptions : BybitClientOptionsBase
     {
         /// <summary>
-        /// Default options for the spot client
+        /// Default options for the futures client
         /// </summary>
-        public static BybitClientInversePerpetualOptions Default { get; set; } = new BybitClientInversePerpetualOptions()
+        public static BybitClientFuturesOptions Default { get; set; } = new BybitClientFuturesOptions()
         {
-            BaseAddress = "https://api.bybit.com",
+            BaseAddress = "https://api.bybit.com/",
             RateLimiters = new List<IRateLimiter>
             {
                 new RateLimiter() // TODO
@@ -51,7 +51,7 @@ namespace ByBit.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
-        public BybitClientInversePerpetualOptions()
+        public BybitClientFuturesOptions()
         {
             if (Default == null)
                 return;
@@ -61,14 +61,14 @@ namespace ByBit.Net.Objects
     }
 
     /// <summary>
-    /// Options for the inverse perpetual socket client
+    /// Options for the futures socket client
     /// </summary>
-    public class BybitSocketClientInversePerpetualOptions : SocketClientOptions
+    public class BybitSocketClientFuturesOptions : SocketClientOptions
     {
         /// <summary>
-        /// Default options for the spot client
+        /// Default options for the futures socket client
         /// </summary>
-        public static BybitSocketClientInversePerpetualOptions Default { get; set; } = new BybitSocketClientInversePerpetualOptions()
+        public static BybitSocketClientFuturesOptions Default { get; set; } = new BybitSocketClientFuturesOptions()
         {
             BaseAddress = "wss://stream.bybit.com/realtime"
         };
@@ -76,7 +76,7 @@ namespace ByBit.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
-        public BybitSocketClientInversePerpetualOptions()
+        public BybitSocketClientFuturesOptions()
         {
             if (Default == null)
                 return;
@@ -86,10 +86,10 @@ namespace ByBit.Net.Objects
     }
 
     /// <summary>
-    /// Options for the binance client
+    /// Options for the futures symbol order book
     /// </summary>
-    public class BybitInversePerpetualSymbolOrderBookOptions : OrderBookOptions
+    public class BybitFuturesSymbolOrderBookOptions : OrderBookOptions
     {
-        public BybitSocketClientInversePerpetual? SocketClient { get; set; }
+        public BybitSocketClientFutures? SocketClient { get; set; }
     }
 }

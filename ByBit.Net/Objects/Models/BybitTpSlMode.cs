@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+﻿using Bybit.Net.Converters;
+using Bybit.Net.Enums;
 using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Models
@@ -11,7 +12,7 @@ namespace Bybit.Net.Objects.Models
         /// <summary>
         /// New mode
         /// </summary>
-        [JsonProperty("tp_sl_mode")]
+        [JsonProperty("tp_sl_mode"), JsonConverter(typeof(StopLossTakeProfitModeConverter))]
         public StopLossTakeProfitMode Mode { get; set; }
     }
 }

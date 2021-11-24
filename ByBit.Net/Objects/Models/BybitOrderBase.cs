@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 
@@ -8,8 +9,12 @@ namespace Bybit.Net.Objects.Models
     /// <summary>
     /// Order data
     /// </summary>
-    public class BybitOrderBase
+    public abstract class BybitOrderBase
     {
+        /// <summary>
+        /// Id
+        /// </summary>
+        public abstract string Id { get; set; }
         /// <summary>
         /// User id
         /// </summary>
@@ -53,17 +58,21 @@ namespace Bybit.Net.Objects.Models
         /// Number of unfilled contracts from the order's size
         /// </summary>
         [JsonProperty("leaves_qty")]
-        public decimal LeavesQuantity { get; set; }
+        public decimal? LeavesQuantity { get; set; }
         /// <summary>
         /// Creation time
         /// </summary>
         [JsonProperty("created_at")]
-        public DateTime CreateTime { get; set; }
+        public DateTime? CreateTime { get; set; }
+        [JsonProperty("created_time"), JsonConverter(typeof(DateTimeConverter))]
+        internal DateTime? _createTime { set => CreateTime = value; }
         /// <summary>
         /// Update time
         /// </summary>
         [JsonProperty("updated_at")]
-        public DateTime UpdateTime { get; set; }
+        public DateTime? UpdateTime { get; set; }
+        [JsonProperty("updated_time"), JsonConverter(typeof(DateTimeConverter))]
+        internal DateTime? _updateTime { set => UpdateTime = value; }
         /// <summary>
         /// Trigger scenario for cancel operation
         /// </summary>

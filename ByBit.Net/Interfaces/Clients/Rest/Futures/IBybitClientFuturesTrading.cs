@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ByBit.Net.Clients.Rest.InversePerpetual
+namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
     /// Trad
     /// </summary>
-    public interface IBybitClientInversePerpetualTrading
+    public interface IBybitClientFuturesTrading
     {
         /// <summary>
         /// 1

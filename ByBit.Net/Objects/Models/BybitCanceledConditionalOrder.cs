@@ -13,7 +13,7 @@ namespace Bybit.Net.Objects.Models
         /// Cancel order id
         /// </summary>
         [JsonProperty("clOrdID")]
-        public string Id { get; set; } = string.Empty;
+        public override string Id { get; set; } = string.Empty;
         /// <summary>
         /// Order status
         /// </summary>

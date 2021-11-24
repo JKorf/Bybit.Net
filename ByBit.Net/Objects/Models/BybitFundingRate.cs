@@ -21,7 +21,7 @@ namespace Bybit.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("funding_rate_timestamp"), JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonProperty("funding_rate_timestamp"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

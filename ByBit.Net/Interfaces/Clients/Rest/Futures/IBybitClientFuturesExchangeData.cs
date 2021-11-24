@@ -1,18 +1,18 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models;
-using ByBit.Net.Objects.Models;
+using Bybit.Net.Objects.Models;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ByBit.Net.Clients.Rest.InversePerpetual
+namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
     /// ex
     /// </summary>
-    public interface IBybitClientInversePerpetualExchangeData
+    public interface IBybitClientFuturesExchangeData
     {
         /// <summary>
         /// 1
@@ -43,8 +43,20 @@ namespace ByBit.Net.Clients.Rest.InversePerpetual
         /// <param name="receiveWindow"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
-        
+        Task<WebCallResult<IEnumerable<BybitKline>>> GetInverseKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// 3
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <param name="interval"></param>
+        /// <param name="from"></param>
+        /// <param name="limit"></param>
+        /// <param name="receiveWindow"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitKline>>> GetLinearKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+
         /// <summary>
         /// 4
         /// </summary>
@@ -52,8 +64,17 @@ namespace ByBit.Net.Clients.Rest.InversePerpetual
         /// <param name="receiveWindow"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<BybitFundingRate>> GetLastFundingRateAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
-        
+        Task<WebCallResult<BybitFundingRate>> GetInverseLastFundingRateAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// 4
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <param name="receiveWindow"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitFundingRate>> GetLinearLastFundingRateAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
+
         /// <summary>
         /// 5
         /// </summary>

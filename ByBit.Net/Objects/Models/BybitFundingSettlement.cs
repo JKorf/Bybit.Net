@@ -41,5 +41,7 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("exec_timestamp")]
         [JsonConverter(typeof(TimestampSecondsConverter))]
         public DateTime? Timestamp { get; set; }
+        [JsonProperty("exec_time")]
+        internal DateTime? _time { set => Timestamp = value; }
     }
 }

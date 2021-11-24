@@ -1,15 +1,14 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 
-namespace Bybit.Net.Objects.Models
+namespace Bybit.Net.Objects.Models.Socket
 {
     /// <summary>
     /// Order info
     /// </summary>
-    public class BybitOrder: BybitOrderBase
+    public class BybitOrderUpdate: BybitOrderBase
     {
         /// <summary>
         /// Order id
@@ -17,20 +16,20 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("order_id")]
         public override string Id { get; set; } = string.Empty;
         /// <summary>
+        /// Client order id
+        /// </summary>
+        [JsonProperty("order_link_id")]
+        public string? ClientOrderId { get; set; }
+        /// <summary>
+        /// Create type
+        /// </summary>
+        [JsonProperty("create_type")]
+        public string CreateType { get; set; } = string.Empty;
+        /// <summary>
         /// Order status
         /// </summary>
         [JsonProperty("order_status"), JsonConverter(typeof(OrderStatusConverter))]
         public OrderStatus? Status { get; set; }
-        /// <summary>
-        /// Time of last fill
-        /// </summary>
-        [JsonProperty("last_exec_time"), JsonConverter(typeof(TimestampSecondsConverter))]
-        public DateTime? LastTradeTime { get; set; }
-        /// <summary>
-        /// Price of last fill
-        /// </summary>
-        [JsonProperty("last_exec_price")]
-        public decimal LastTradePrice { get; set; }        
         /// <summary>
         /// Quote quantity filled
         /// </summary>
@@ -47,15 +46,9 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("cum_exec_fee")]
         public decimal Fee { get; set; }
         /// <summary>
-        /// Reason for reject
+        /// Timestamp
         /// </summary>
-        [JsonProperty("reject_reason")]
-        public string? RejectReason { get; set; }
-        /// <summary>
-        /// Client order id
-        /// </summary>
-        [JsonProperty("order_link_id")]
-        public string? ClientOrderId { get; set; }        
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Take profit price
         /// </summary>
@@ -67,24 +60,30 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("stop_loss")]
         public decimal? StopLoss { get; set; }
         /// <summary>
-        /// Take profit trigger type
+        /// Trailing stop
         /// </summary>
-        [JsonProperty("tp_trigger_by"), JsonConverter(typeof(TriggerTypeConverter))]
-        public TriggerType? TakeProfitTriggerType { get; set; }
+        [JsonProperty("trailing_stop")]
+        public decimal? TrailingStop { get; set; }
+
         /// <summary>
-        /// Stop loss trigger type
+        /// Trailing stop active price
         /// </summary>
-        [JsonProperty("sl_trigger_by"), JsonConverter(typeof(TriggerTypeConverter))]
-        public TriggerType? StopLossTriggerType { get; set; }
+        [JsonProperty("trailing_active")]
+        public decimal? TrailingActive { get; set; }
         /// <summary>
-        /// True means close order, false means open position
+        /// Price of last fill
+        /// </summary>
+        [JsonProperty("last_exec_price")]
+        public decimal LastTradePrice { get; set; }
+        /// <summary>
+        /// True means your position can only reduce in size if this order is triggered
         /// </summary>
         [JsonProperty("reduce_only")]
-        public bool? ReduceOnly { get; set; }
+        public bool ReduceOnly { get; set; }
         /// <summary>
-        /// Is close on trigger order
+        /// For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.
         /// </summary>
         [JsonProperty("close_on_trigger")]
-        public bool? CloseOnTrigger { get; set; }
+        public bool CloseOnTrigger { get; set; }
     }
 }

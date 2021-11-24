@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 
@@ -37,6 +38,8 @@ namespace Bybit.Net.Objects.Models
         /// Timestamp of the trade
         /// </summary>
         [JsonProperty("time")]
-        public DateTime Timestamp { get; set; }
+        public DateTime? Timestamp { get; set; }
+        [JsonProperty("trade_time_ms"), JsonConverter(typeof(DateTimeConverter))]
+        internal DateTime Time { set => Timestamp = value; }
     }
 }

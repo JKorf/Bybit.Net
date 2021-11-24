@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Interfaces;
-using ByBit.Net.Clients.Rest.InversePerpetual;
 using Bybit.Net.UnitTests;
 using Bybit.Net.Testing;
-using ByBit.Net.Objects;
+using Bybit.Net.Objects;
+using Bybit.Net.Clients.Rest.Futures;
 
 namespace CoinEx.Net.UnitTests
 {
     [TestFixture]
     public class JsonTests
     {
-        private JsonToObjectComparer<BybitClientInversePerpetual> _comparer = new JsonToObjectComparer<BybitClientInversePerpetual>((json) => TestHelpers.CreateResponseClient(json, new BybitClientInversePerpetualOptions()
+        private JsonToObjectComparer<BybitClientUsdFutures> _comparer = new JsonToObjectComparer<BybitClientUsdFutures>((json) => TestHelpers.CreateResponseClient(json, new BybitClientFuturesOptions()
+        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), OutputOriginalData = true, RateLimiters = new List<IRateLimiter>() }, System.Net.HttpStatusCode.OK));
+
+        private JsonToObjectComparer<BybitClientCoinFutures> _comparerCoin = new JsonToObjectComparer<BybitClientCoinFutures>((json) => TestHelpers.CreateResponseClientCoin(json, new BybitClientFuturesOptions()
         { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), OutputOriginalData = true, RateLimiters = new List<IRateLimiter>() }, System.Net.HttpStatusCode.OK));
 
         [Test]
-        public async Task ValidateInversePerpetualAccountCalls()
+        public async Task ValidateFuturesAccountCalls()
         {   
             await _comparer.ProcessSubject("InversePerpetual/Account", c => c.Account,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> 
@@ -35,7 +38,7 @@ namespace CoinEx.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateInversePerpetualExchangeDataCalls()
+        public async Task ValidateFuturesExchangeDataCalls()
         {
             await _comparer.ProcessSubject("InversePerpetual/ExchangeData", c => c.ExchangeData,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
@@ -52,7 +55,7 @@ namespace CoinEx.Net.UnitTests
 
 
         [Test]
-        public async Task ValidateInversePerpetualTradingCalls()
+        public async Task ValidateFuturesTradingCalls()
         {
             await _comparer.ProcessSubject("InversePerpetual/Trading", c => c.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>

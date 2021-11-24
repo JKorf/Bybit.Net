@@ -20,8 +20,8 @@ using System.Collections;
 using Newtonsoft.Json;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net;
-using ByBit.Net.Clients.Rest.InversePerpetual;
-using ByBit.Net.Objects;
+using Bybit.Net.Objects;
+using Bybit.Net.Clients.Rest.Futures;
 
 namespace Bybit.Net.Testing
 {
@@ -67,17 +67,32 @@ namespace Bybit.Net.Testing
             return self == to;
         }
 
-        public static BybitClientInversePerpetual CreateClient(BybitClientInversePerpetualOptions options = null)
+        public static BybitClientUsdFutures CreateClient(BybitClientFuturesOptions options = null)
         {
-            BybitClientInversePerpetual client;
-            client = options != null ? new BybitClientInversePerpetual(options) : new BybitClientInversePerpetual();
+            BybitClientUsdFutures client;
+            client = options != null ? new BybitClientUsdFutures(options) : new BybitClientUsdFutures();
             client.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
         }
 
-        public static BybitClientInversePerpetual CreateResponseClient(string response, BybitClientInversePerpetualOptions options = null, HttpStatusCode code = HttpStatusCode.OK)
+        public static BybitClientUsdFutures CreateResponseClient(string response, BybitClientFuturesOptions options = null, HttpStatusCode code = HttpStatusCode.OK)
         {
-            var client = (BybitClientInversePerpetual)CreateClient(options);
+            var client = (BybitClientUsdFutures)CreateClient(options);
+            SetResponse(client, response, code);
+            return client;
+        }
+
+        public static BybitClientCoinFutures CreateClientCoin(BybitClientFuturesOptions options = null)
+        {
+            BybitClientCoinFutures client;
+            client = options != null ? new BybitClientCoinFutures(options) : new BybitClientCoinFutures();
+            client.RequestFactory = Mock.Of<IRequestFactory>();
+            return client;
+        }
+
+        public static BybitClientCoinFutures CreateResponseClientCoin(string response, BybitClientFuturesOptions options = null, HttpStatusCode code = HttpStatusCode.OK)
+        {
+            var client = (BybitClientCoinFutures)CreateClientCoin(options);
             SetResponse(client, response, code);
             return client;
         }

@@ -9,7 +9,7 @@ using System.Text;
 using System.Web;
 using System.Linq;
 
-namespace ByBit.Net
+namespace Bybit.Net
 {
     internal class BybitAuthenticationProvider : AuthenticationProvider
     {

@@ -3,7 +3,7 @@ using Bybit.Net.Enums;
 using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 
-namespace ByBit.Net.Objects.Models
+namespace Bybit.Net.Objects.Models
 {
     /// <summary>
     /// Order book entry

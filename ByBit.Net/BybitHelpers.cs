@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ByBit.Net
+namespace Bybit.Net
 {
     public class Class1
     {

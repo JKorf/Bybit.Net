@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Bybit.Net.Clients.Socket;
 using Bybit.Net.Objects.Models.Socket;
-using ByBit.Net.Objects;
-using ByBit.Net.Objects.Models;
+using Bybit.Net.Objects;
+using Bybit.Net.Objects.Models;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
@@ -18,9 +18,9 @@ namespace Bitfinex.Net.SymbolOrderBooks
     /// <summary>
     /// Live order book implementation
     /// </summary>
-    public class BybitInversePerpetualSymbolOrderBook: SymbolOrderBook
+    public class BybitFuturesSymbolOrderBook: SymbolOrderBook
     {
-        private readonly BybitSocketClientInversePerpetual socketClient;
+        private readonly BybitSocketClientFutures socketClient;
         private readonly bool _socketOwner;
 
         /// <summary>
@@ -29,9 +29,9 @@ namespace Bitfinex.Net.SymbolOrderBooks
         /// <param name="symbol">The symbol the order book is for</param>
         /// <param name="limit">The limit of entries in the order book, either 25 or 200</param>
         /// <param name="options">Options for the order book</param>
-        public BybitInversePerpetualSymbolOrderBook(string symbol, int limit, BybitInversePerpetualSymbolOrderBookOptions? options = null) : base("Bybit[InversePerpetual]", symbol, options ?? new BybitInversePerpetualSymbolOrderBookOptions())
+        public BybitFuturesSymbolOrderBook(string symbol, int limit, BybitFuturesSymbolOrderBookOptions? options = null) : base("Bybit[Futures]", symbol, options ?? new BybitFuturesSymbolOrderBookOptions())
         {
-            socketClient = options?.SocketClient ?? new BybitSocketClientInversePerpetual(new BybitSocketClientInversePerpetualOptions
+            socketClient = options?.SocketClient ?? new BybitSocketClientFutures(new BybitSocketClientFuturesOptions
             {
                 LogLevel = options?.LogLevel ?? LogLevel.Information
             });

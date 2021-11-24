@@ -1,18 +1,18 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models;
-using ByBit.Net.Objects.Models;
+using Bybit.Net.Objects.Models;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ByBit.Net.Clients.Rest.InversePerpetual
+namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
     /// Ac
     /// </summary>
-    public interface IBybitClientInversePerpetualAccount
+    public interface IBybitClientFuturesAccount
     {
         /// <summary>
         /// 1
