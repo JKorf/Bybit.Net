@@ -39,7 +39,7 @@ namespace Bybit.Net.Objects.Models
         /// Funding settlement time
         /// </summary>
         [JsonProperty("exec_timestamp")]
-        [JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }
         [JsonProperty("exec_time")]
         internal DateTime? _time { set => Timestamp = value; }

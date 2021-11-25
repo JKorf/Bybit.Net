@@ -17,7 +17,7 @@ namespace Bybit.Net.Objects.Models
         public long? Id { get; set; }
         /// Open time
         /// </summary>
-        [JsonProperty("start_at"), JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonProperty("start_at"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime OpenTime { get; set; }
         /// <summary>
         /// Data recording period

@@ -18,7 +18,7 @@ namespace Bybit.Net.Objects.Models.Socket
         /// <summary>
         /// Trade time
         /// </summary>
-        [JsonConverter(typeof(TimestampConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("trade_time_ms")]
         public DateTime TradeTime { get; set; }
         /// <summary>

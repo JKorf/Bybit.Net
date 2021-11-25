@@ -13,7 +13,7 @@ namespace Bybit.Net.Objects.Models
     {
         /// Open time
         /// </summary>
-        [JsonProperty("open_time"), JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonProperty("open_time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime OpenTime { get; set; }
 
         /// <summary>

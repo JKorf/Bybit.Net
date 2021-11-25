@@ -7,7 +7,7 @@ using Bybit.Net.Testing;
 using Bybit.Net.Objects;
 using Bybit.Net.Clients.Rest.Futures;
 
-namespace CoinEx.Net.UnitTests
+namespace Bybit.Net.UnitTests
 {
     [TestFixture]
     public class JsonTests

@@ -99,7 +99,7 @@ namespace Bybit.Net.Objects.Models
         /// Creation time
         /// </summary>
         [JsonProperty("created_at")]
-        [JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
     }
 }

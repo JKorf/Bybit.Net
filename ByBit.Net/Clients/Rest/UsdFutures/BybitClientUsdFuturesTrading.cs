@@ -483,8 +483,8 @@ namespace Bybit.Net.Clients.Rest.Futures
                 { "symbol", symbol },
             };
             parameters.AddOptionalParameter("exec_type", type == null ? null: JsonConvert.SerializeObject(type, new TradeTypeConverter(false)));
-            parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime, new TimestampConverter()));
-            parameters.AddOptionalParameter("end_time", endTime == null ? null : JsonConvert.SerializeObject(endTime, new TimestampConverter()));
+            parameters.AddOptionalParameter("start_time",  DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("end_time",  DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

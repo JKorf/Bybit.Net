@@ -27,7 +27,7 @@ namespace Bybit.Net.Objects.Models
         /// <summary>
         /// Timestamp of the trade
         /// </summary>
-        [JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             {
                 { "symbol", symbol },
                 { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
-                { "from", JsonConvert.SerializeObject(from, new TimestampSecondsConverter()) },
+                { "from",  DateTimeConverter.ConvertToSeconds(from)! },
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -87,7 +87,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             {
                 { "symbol", symbol },
                 { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
-                { "from", JsonConvert.SerializeObject(from, new TimestampSecondsConverter()) },
+                { "from",  DateTimeConverter.ConvertToSeconds(from)! },
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -106,7 +106,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             {
                 { "symbol", symbol },
                 { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
-                { "from", JsonConvert.SerializeObject(from, new TimestampSecondsConverter()) },
+                { "from",  DateTimeConverter.ConvertToSeconds(from) },
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -125,7 +125,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             {
                 { "symbol", symbol },
                 { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
-                { "from", JsonConvert.SerializeObject(from, new TimestampSecondsConverter()) },
+                { "from",  DateTimeConverter.ConvertToSeconds(from) },
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

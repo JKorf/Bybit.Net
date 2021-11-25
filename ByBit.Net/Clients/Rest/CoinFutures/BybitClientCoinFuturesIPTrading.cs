@@ -472,7 +472,7 @@ namespace Bybit.Net.Clients.Rest.Futures
                 { "symbol", symbol },
             };
             parameters.AddOptionalParameter("order_id", orderId);
-            parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime, new TimestampConverter()));
+            parameters.AddOptionalParameter("start_time",  DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

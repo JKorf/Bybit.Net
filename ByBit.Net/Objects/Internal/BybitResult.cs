@@ -14,10 +14,10 @@ namespace Bybit.Net.Objects.Internal
         public int? ExtCode { get; set; }
         [JsonProperty("ext_info")]
         public string? ExtInfo { get; set; }
-        [JsonProperty("time_now"), JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonProperty("time_now"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         public int? RateLimitStatus { get; set; }
-        [JsonProperty("rate_limit_reset_ms"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("rate_limit_reset_ms"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? RateLimitReset { get; set; }
         public int? RateLimit { get; set; }
 

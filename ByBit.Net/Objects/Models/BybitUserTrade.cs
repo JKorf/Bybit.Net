@@ -113,7 +113,7 @@ namespace Bybit.Net.Objects.Models
         /// <summary>
         /// Trade time
         /// </summary>
-        [JsonProperty("trade_time_ms"), JsonConverter(typeof(TimestampConverter))]
+        [JsonProperty("trade_time_ms"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

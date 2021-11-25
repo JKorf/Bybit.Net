@@ -125,8 +125,8 @@ namespace Bybit.Net.Clients.Rest.Futures
             {
                 { "symbol", symbol },
             };
-            parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime.Value, new TimestampSecondsConverter()));
-            parameters.AddOptionalParameter("end_time", endTime == null ? null : JsonConvert.SerializeObject(endTime.Value, new TimestampSecondsConverter()));
+            parameters.AddOptionalParameter("start_time",  DateTimeConverter.ConvertToSeconds(startTime));
+            parameters.AddOptionalParameter("end_time",  DateTimeConverter.ConvertToSeconds(endTime));
             parameters.AddOptionalParameter("exec_type", type == null ? null : JsonConvert.SerializeObject(type.Value, new TradeTypeConverter(false)));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));

@@ -399,7 +399,7 @@ namespace Bybit.Net.Clients.Socket
             if (authProvider == null)
                 return new CallResult<bool>(false, new NoApiCredentialsError());
 
-            var expireTime = JsonConvert.SerializeObject(DateTime.UtcNow.AddSeconds(5), new TimestampConverter());
+            var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(5));
             var key = authProvider.Credentials.Key!.GetString();
             var sign = authProvider.Sign($"GET/realtime{expireTime}");
 

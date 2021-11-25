@@ -12,13 +12,13 @@ namespace Bybit.Net.Objects.Models.Socket
         /// <summary>
         /// Open time of the kline
         /// </summary>
-        [JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("start")]
         public DateTime OpenTime { get; set; }
         /// <summary>
         /// Close time of the kline
         /// </summary>
-        [JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("end")]
         public DateTime CloseTime { get; set; }
         /// <summary>
@@ -63,7 +63,7 @@ namespace Bybit.Net.Objects.Models.Socket
         /// <summary>
         /// Data timestamp
         /// </summary>
-        [JsonConverter(typeof(TimestampMicroSecondsConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

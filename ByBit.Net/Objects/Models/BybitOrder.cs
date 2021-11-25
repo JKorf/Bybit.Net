@@ -24,7 +24,7 @@ namespace Bybit.Net.Objects.Models
         /// <summary>
         /// Time of last fill
         /// </summary>
-        [JsonProperty("last_exec_time"), JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonProperty("last_exec_time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? LastTradeTime { get; set; }
         /// <summary>
         /// Price of last fill
