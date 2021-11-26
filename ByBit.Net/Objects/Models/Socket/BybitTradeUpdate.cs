@@ -54,6 +54,6 @@ namespace Bybit.Net.Objects.Models.Socket
         /// Cross sequence
         /// </summary>
         [JsonProperty("cross_seq")]
-        public long CrossSequence { get; set; }
+        public long? CrossSequence { get; set; }
     }
 }

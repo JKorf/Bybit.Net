@@ -18,9 +18,9 @@ namespace Bitfinex.Net.SymbolOrderBooks
     /// <summary>
     /// Live order book implementation
     /// </summary>
-    public class BybitFuturesSymbolOrderBook: SymbolOrderBook
+    public class BybitCoinFuturesSymbolOrderBook: SymbolOrderBook
     {
-        private readonly BybitSocketClientFutures socketClient;
+        private readonly BybitSocketClientCoinFutures socketClient;
         private readonly bool _socketOwner;
 
         /// <summary>
@@ -29,9 +29,9 @@ namespace Bitfinex.Net.SymbolOrderBooks
         /// <param name="symbol">The symbol the order book is for</param>
         /// <param name="limit">The limit of entries in the order book, either 25 or 200</param>
         /// <param name="options">Options for the order book</param>
-        public BybitFuturesSymbolOrderBook(string symbol, int limit, BybitFuturesSymbolOrderBookOptions? options = null) : base("Bybit[Futures]", symbol, options ?? new BybitFuturesSymbolOrderBookOptions())
+        public BybitCoinFuturesSymbolOrderBook(string symbol, int limit, BybitFuturesSymbolOrderBookOptions? options = null) : base("Bybit[Futures]", symbol, options ?? new BybitFuturesSymbolOrderBookOptions())
         {
-            socketClient = options?.SocketClient ?? new BybitSocketClientFutures(new BybitSocketClientFuturesOptions
+            socketClient = options?.SocketClient ?? new BybitSocketClientCoinFutures(new BybitSocketClientFuturesOptions
             {
                 LogLevel = options?.LogLevel ?? LogLevel.Information
             });

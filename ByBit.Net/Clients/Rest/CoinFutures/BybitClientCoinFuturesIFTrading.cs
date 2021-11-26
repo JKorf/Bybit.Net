@@ -37,6 +37,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             string symbol,
             OrderSide side,
             OrderType type,
+            PositionMode positionMode,
             decimal quantity,
             TimeInForce timeInForce,
             decimal? price = null,
@@ -53,6 +54,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             var parameters = new Dictionary<string, object>()
             {
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "position_idx", JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)) },
                 { "symbol", symbol },
                 { "order_type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
                 { "qty", quantity.ToString(CultureInfo.InvariantCulture) },
@@ -69,7 +71,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("reduce_only", reduceOnly?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("v2/private/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("futures/private/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -97,7 +99,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("cursor", cursor);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitOrder>>>(_baseClient.GetUrl("v2/private/order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitOrder>>>(_baseClient.GetUrl("futures/private/order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -125,7 +127,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("v2/private/order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("futures/private/order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -146,7 +148,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledOrder>>(_baseClient.GetUrl("v2/private/order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledOrder>>(_baseClient.GetUrl("futures/private/order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result && result.Data == null)
                 return result.As<IEnumerable<BybitCanceledOrder>>(new BybitCanceledOrder[0]);
 
@@ -189,7 +191,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitOrderId>(_baseClient.GetUrl("v2/private/order/replace"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitOrderId>(_baseClient.GetUrl("futures/private/order/replace"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -216,7 +218,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("v2/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("futures/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -233,7 +235,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitOrder>>(_baseClient.GetUrl("v2/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitOrder>>(_baseClient.GetUrl("futures/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -246,6 +248,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             string symbol,
             OrderSide side,
             OrderType type,
+            PositionMode positionMode,
             decimal quantity,
             decimal basePrice,
             decimal triggerPrice,
@@ -264,6 +267,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             var parameters = new Dictionary<string, object>()
             {
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "position_idx", JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)) },
                 { "symbol", symbol },
                 { "order_type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
                 { "qty", quantity.ToString(CultureInfo.InvariantCulture) },
@@ -282,7 +286,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("v2/private/stop-order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("futures/private/stop-order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -292,7 +296,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         /// <inheritdoc />
         public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetConditionalOrdersAsync(
             string symbol,
-            OrderStatus? status = null,
+            StopOrderStatus? status = null,
             SearchDirection? direction = null,
             int? limit = null,
             string? cursor = null,
@@ -304,13 +308,13 @@ namespace Bybit.Net.Clients.Rest.Futures
                 { "symbol", symbol },
             };
 
-            parameters.AddOptionalParameter("order_status", status == null ? null : JsonConvert.SerializeObject(status, new OrderStatusConverter(false)));
+            parameters.AddOptionalParameter("order_status", status == null ? null : JsonConvert.SerializeObject(status, new StopOrderStatusConverter(false)));
             parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("cursor", cursor);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>(_baseClient.GetUrl("v2/private/stop-order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>(_baseClient.GetUrl("futures/private/stop-order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -338,7 +342,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitStopOrderId>(_baseClient.GetUrl("v2/private/stop-order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitStopOrderId>(_baseClient.GetUrl("futures/private/stop-order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -359,7 +363,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledConditionalOrder>>(_baseClient.GetUrl("v2/private/stop-order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledConditionalOrder>>(_baseClient.GetUrl("futures/private/stop-order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
             if (result && result.Data == null)
                 return result.As<IEnumerable<BybitCanceledConditionalOrder>>(new BybitCanceledConditionalOrder[0]);
@@ -405,7 +409,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitStopOrderId>(_baseClient.GetUrl("v2/private/stop-order/replace"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitStopOrderId>(_baseClient.GetUrl("futures/private/stop-order/replace"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -432,7 +436,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("v2/private/stop-order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("futures/private/stop-order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -449,7 +453,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitConditionalOrder>>(_baseClient.GetUrl("v2/private/stop-order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitConditionalOrder>>(_baseClient.GetUrl("futures/private/stop-order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -477,7 +481,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitTradeWrapper>(_baseClient.GetUrl("v2/private/execution/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitTradeWrapper>(_baseClient.GetUrl("futures/private/execution/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitUserTrade>>(default);
 

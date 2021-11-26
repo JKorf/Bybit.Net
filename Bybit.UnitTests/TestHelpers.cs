@@ -13,7 +13,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CoinEx.Net;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using System.Collections;

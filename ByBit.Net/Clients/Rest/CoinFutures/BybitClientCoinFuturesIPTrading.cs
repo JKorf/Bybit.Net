@@ -292,7 +292,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         /// <inheritdoc />
         public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetConditionalOrdersAsync(
             string symbol,
-            OrderStatus? status = null,
+            StopOrderStatus? status = null,
             SearchDirection? direction = null,
             int? limit = null,
             string? cursor = null,
@@ -304,7 +304,7 @@ namespace Bybit.Net.Clients.Rest.Futures
                 { "symbol", symbol },
             };
 
-            parameters.AddOptionalParameter("order_status", status == null ? null : JsonConvert.SerializeObject(status, new OrderStatusConverter(false)));
+            parameters.AddOptionalParameter("order_status", status == null ? null : JsonConvert.SerializeObject(status, new StopOrderStatusConverter(false)));
             parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("cursor", cursor);

@@ -90,6 +90,6 @@ namespace Bybit.Net.Objects
     /// </summary>
     public class BybitFuturesSymbolOrderBookOptions : OrderBookOptions
     {
-        public BybitSocketClientFutures? SocketClient { get; set; }
+        public BybitSocketClientCoinFutures? SocketClient { get; set; }
     }
 }

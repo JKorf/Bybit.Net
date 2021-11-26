@@ -23,12 +23,12 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.Socket
 {
     /// <inheritdoc />
-    public class BybitSocketClientFutures: SocketClient
+    public class BybitSocketClientUsdFutures : SocketClient
     {
         /// <summary>
         /// Create a new instance of BybitSocketClientFutures using the default options
         /// </summary>
-        public BybitSocketClientFutures() : this(BybitSocketClientFuturesOptions.Default)
+        public BybitSocketClientUsdFutures() : this(BybitSocketClientFuturesOptions.Default)
         {
         }
 
@@ -36,7 +36,7 @@ namespace Bybit.Net.Clients.Socket
         /// Create a new instance of BybitSocketClientFutures using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BybitSocketClientFutures(BybitSocketClientFuturesOptions options) : base("Bybit[Futures]", options, options.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.ApiCredentials))
+        public BybitSocketClientUsdFutures(BybitSocketClientFuturesOptions options) : base("Bybit[Futures]", options, options.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.ApiCredentials))
         {
             if (options == null)
                 throw new ArgumentException("Cant pass null options, use empty constructor for default");
@@ -93,9 +93,9 @@ namespace Bybit.Net.Clients.Socket
 
                 handler(data.As(desResult.Data, desResult.Data.First().Symbol));
             });
-            return await SubscribeAsync(
+            return await SubscribeAsync(ClientOptions.BaseAddress + "_public",
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "trade." + s).ToArray() },
-                null, true, internalHandler, ct).ConfigureAwait(false);
+                null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -125,7 +125,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, desResult.Data.Symbol));
                 
             });
-            return await SubscribeAsync(
+            return await SubscribeAsync(ClientOptions.BaseAddress + "_public",
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "instrument_info.100ms." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
@@ -401,7 +401,7 @@ namespace Bybit.Net.Clients.Socket
 
             var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(5));
             var key = authProvider.Credentials.Key!.GetString();
-            var sign = authProvider.Sign($"GET/realtime{expireTime}");
+            var sign = authProvider.Sign($"GET/realtime_private{expireTime}");
 
             var authRequest = new BybitRequestMessage() { 
                 Operation = "auth",
