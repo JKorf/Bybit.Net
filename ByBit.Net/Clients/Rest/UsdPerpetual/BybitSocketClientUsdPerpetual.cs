@@ -29,6 +29,7 @@ namespace Bybit.Net.Clients.Socket
     {
         private readonly Log _log;
         private readonly BybitSocketClient _baseClient;
+        private readonly BybitSocketClientOptions _options;
 
         /// <summary>
         /// Create a new instance of BybitSocketClientFutures using provided options
@@ -38,6 +39,7 @@ namespace Bybit.Net.Clients.Socket
             : base(options.OptionsUsdPerpetual, options.OptionsUsdPerpetual.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.OptionsUsdPerpetual.ApiCredentials))
         {
             _log = log;
+            _options = options;
             _baseClient = baseClient;
         }
 
@@ -61,13 +63,13 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitTradeUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitTradeUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitTradeUpdate)} object: " + desResult.Error);
                     return;
                 }
 
                 handler(data.As(desResult.Data, desResult.Data.First().Symbol));
             });
-            return await _baseClient.SubscribeInternalAsync(this, BaseAddress + "_public",
+            return await _baseClient.SubscribeInternalAsync(this, BaseAddress,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "trade." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
@@ -92,14 +94,14 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<BybitTickerUpdate>(innerData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitTickerUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitTickerUpdate)} object: " + desResult.Error);
                     return;
                 }
 
                 handler(data.As(desResult.Data, desResult.Data.Symbol));
                 
             });
-            return await _baseClient.SubscribeInternalAsync(this, BaseAddress + "_public",
+            return await _baseClient.SubscribeInternalAsync(this,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "instrument_info.100ms." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
@@ -133,7 +135,7 @@ namespace Bybit.Net.Clients.Socket
                     var desResult = _baseClient.DeserializeInternal<BybitDeltaUpdate<BybitOrderBookEntry>>(internalData);
                     if (!desResult)
                     {
-                        _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitOrderBookEntry)} object: " + desResult.Error);
+                        _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitOrderBookEntry)} object: " + desResult.Error);
                         return;
                     }
 
@@ -145,7 +147,7 @@ namespace Bybit.Net.Clients.Socket
                     var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitOrderBookEntry>>(internalData);
                     if (!desResult)
                     {
-                        _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitOrderBookEntry)} object: " + desResult.Error);
+                        _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitOrderBookEntry)} object: " + desResult.Error);
                         return;
                     }
 
@@ -178,7 +180,7 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitInsuranceUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitInsuranceUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitInsuranceUpdate)} object: " + desResult.Error);
                     return;
                 }
 
@@ -209,7 +211,7 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitKlineUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitInsuranceUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitInsuranceUpdate)} object: " + desResult.Error);
                     return;
                 }
 
@@ -264,13 +266,13 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitPositionUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitPositionUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitPositionUpdate)} object: " + desResult.Error);
                     return;
                 }
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, 
+            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsUsdPerpetual.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "position" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -287,13 +289,13 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitUserTradeUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitUserTradeUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitUserTradeUpdate)} object: " + desResult.Error);
                     return;
                 }
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, 
+            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsUsdPerpetual.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "execution" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -310,13 +312,13 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitOrderUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitOrderUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitOrderUpdate)} object: " + desResult.Error);
                     return;
                 }
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, 
+            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsUsdPerpetual.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -339,7 +341,7 @@ namespace Bybit.Net.Clients.Socket
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, 
+            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsUsdPerpetual.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -356,13 +358,13 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitBalanceUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitBalanceUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitBalanceUpdate)} object: " + desResult.Error);
                     return;
                 }
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, 
+            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsUsdPerpetual.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "wallet" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }

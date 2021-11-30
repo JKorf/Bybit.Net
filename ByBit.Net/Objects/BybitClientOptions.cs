@@ -83,6 +83,21 @@ namespace Bybit.Net.Objects
         }
     }
 
+    public class BybitSocketSubClientOptions: SubClientOptions
+    {
+        /// <summary>
+        /// The base address for the authenticated websocket
+        /// </summary>
+        public string BaseAddressAuthenticated { get; set; }
+
+        public new void Copy<T>(T input, T def) where T : BybitSocketSubClientOptions
+        {
+            base.Copy(input, def);
+
+            input.BaseAddressAuthenticated = def.BaseAddressAuthenticated;
+        }
+    }
+
     /// <summary>
     /// Options for the futures socket client
     /// </summary>
@@ -93,28 +108,32 @@ namespace Bybit.Net.Objects
         /// </summary>
         public static BybitSocketClientOptions Default { get; set; } = new BybitSocketClientOptions()
         {
-            OptionsInverseFutures = new SocketSubClientOptions
+            OptionsInverseFutures = new BybitSocketSubClientOptions
             {
-                BaseAddress = "wss://stream.bybit.com/realtime"
+                BaseAddress = "wss://stream.bybit.com/realtime",
+                BaseAddressAuthenticated = "wss://stream.bybit.com/realtime"
             },
-            OptionsInversePerpetual = new SocketSubClientOptions
+            OptionsInversePerpetual = new BybitSocketSubClientOptions
             {
-                BaseAddress = "wss://stream.bybit.com/realtime"
+                BaseAddress = "wss://stream.bybit.com/realtime",
+                BaseAddressAuthenticated = "wss://stream.bybit.com/realtime"
             },
-            OptionsUsdPerpetual = new SocketSubClientOptions
+            OptionsUsdPerpetual = new BybitSocketSubClientOptions
             {
-                BaseAddress = "wss://stream.bybit.com/realtime"
+                BaseAddress = "wss://stream.bybit.com/realtime_public",
+                BaseAddressAuthenticated = "wss://stream.bybit.com/realtime_private"
             },
-            OptionsSpot = new SocketSubClientOptions
+            OptionsSpot = new BybitSocketSubClientOptions
             {
-                BaseAddress = "wss://stream.bybit.com/realtime"
+                BaseAddress = "wss://stream.bybit.com/realtime",
+                BaseAddressAuthenticated = "wss://stream.bybit.com/realtime"
             }
         };
 
-        public SocketSubClientOptions OptionsInverseFutures { get; set; }
-        public SocketSubClientOptions OptionsInversePerpetual { get; set; }
-        public SocketSubClientOptions OptionsUsdPerpetual { get; set; }
-        public SocketSubClientOptions OptionsSpot { get; set; }
+        public BybitSocketSubClientOptions OptionsInverseFutures { get; set; }
+        public BybitSocketSubClientOptions OptionsInversePerpetual { get; set; }
+        public BybitSocketSubClientOptions OptionsUsdPerpetual { get; set; }
+        public BybitSocketSubClientOptions OptionsSpot { get; set; }
 
         /// <summary>
         /// ctor
@@ -137,16 +156,16 @@ namespace Bybit.Net.Objects
         {
             base.Copy(input, def);
 
-            input.OptionsInverseFutures = new SocketSubClientOptions();
+            input.OptionsInverseFutures = new BybitSocketSubClientOptions();
             def.OptionsInverseFutures.Copy(input.OptionsInverseFutures, def.OptionsInverseFutures);
 
-            input.OptionsInversePerpetual = new SocketSubClientOptions();
+            input.OptionsInversePerpetual = new BybitSocketSubClientOptions();
             def.OptionsInversePerpetual.Copy(input.OptionsInversePerpetual, def.OptionsInversePerpetual);
 
-            input.OptionsUsdPerpetual = new SocketSubClientOptions();
+            input.OptionsUsdPerpetual = new BybitSocketSubClientOptions();
             def.OptionsUsdPerpetual.Copy(input.OptionsUsdPerpetual, def.OptionsUsdPerpetual);
 
-            input.OptionsSpot = new SocketSubClientOptions();
+            input.OptionsSpot = new BybitSocketSubClientOptions();
             def.OptionsSpot.Copy(input.OptionsSpot, def.OptionsSpot);
         }
     }
