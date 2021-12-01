@@ -22,12 +22,12 @@ using Bybit.Net.Clients.Rest.Futures;
 
 namespace Bybit.Net.Clients
 {
-    public class BybitSocketClient: SocketClient, IBybitSocketClient
+    public class BybitSocketClient: BaseSocketClient, IBybitSocketClient
     {
-        public IBybitSocketClientUsdPerpetual UsdPerpetual { get; }
-        public IBybitSocketClientInversePerpetual InversePerpetual { get; }
-        public IBybitSocketClientInverseFutures InverseFutures { get; }
-        public IBybitSocketClientSpot Spot { get; }
+        public IBybitSocketClientUsdPerpetual UsdPerpetualStreams { get; }
+        public IBybitSocketClientInversePerpetual InversePerpetualStreams { get; }
+        public IBybitSocketClientInverseFutures InverseFuturesStreams { get; }
+        public IBybitSocketClientSpot SpotStreams { get; }
 
         /// <summary>
         /// Create a new instance of BybitSocketClientFutures using the default options
@@ -48,8 +48,8 @@ namespace Bybit.Net.Clients
             ContinueOnQueryResponse = true;
             UnhandledMessageExpected = true;
 
-            UsdPerpetual = new BybitSocketClientUsdPerpetual(log, this, options);
-            InversePerpetual = new BybitSocketClientInversePerpetual(log, this, options);
+            UsdPerpetualStreams = new BybitSocketClientUsdPerpetual(log, this, options);
+            InversePerpetualStreams = new BybitSocketClientInversePerpetual(log, this, options);
             //InverseFutures = new BybitSocketClientInverseFutures(log, this, options);
             //Spot = new BybitSocketClientSpot(log, this, options);
 
@@ -60,28 +60,28 @@ namespace Bybit.Net.Clients
         internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
             => Deserialize<T>(obj, serializer, requestId);
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(SocketSubClient subClient, object? request, string? identifier, bool authenticated, Action<DataEvent<T>> dataHandler, CancellationToken ct)
+        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(SocketApiClient apiClient, object? request, string? identifier, bool authenticated, Action<DataEvent<T>> dataHandler, CancellationToken ct)
         {
-            return SubscribeAsync(subClient, request, identifier, authenticated, dataHandler, ct);
+            return SubscribeAsync(apiClient, request, identifier, authenticated, dataHandler, ct);
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(SocketSubClient subClient, string url, object? request, string? identifier, bool authenticated, Action<DataEvent<T>> dataHandler, CancellationToken ct)
+        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(SocketApiClient apiClient, string url, object? request, string? identifier, bool authenticated, Action<DataEvent<T>> dataHandler, CancellationToken ct)
         {
-            return SubscribeAsync(subClient, url, request, identifier, authenticated, dataHandler, ct);
+            return SubscribeAsync(apiClient, url, request, identifier, authenticated, dataHandler, ct);
         }
 
-        internal Task<CallResult<T>> QueryInternalAsync<T>(SocketSubClient subClient, object request, bool authenticated)
-            => QueryAsync<T>(subClient, request, authenticated);
+        internal Task<CallResult<T>> QueryInternalAsync<T>(SocketApiClient apiClient, object request, bool authenticated)
+            => QueryAsync<T>(apiClient, request, authenticated);
 
         /// <inheritdoc />
         protected override async Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection socketConnection)
         {
-            if (socketConnection.SubClient.AuthenticationProvider == null)
+            if (socketConnection.ApiClient.AuthenticationProvider == null)
                 return new CallResult<bool>(false, new NoApiCredentialsError());
 
             var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(5));
-            var key = socketConnection.SubClient.AuthenticationProvider.Credentials.Key!.GetString();
-            var sign = socketConnection.SubClient.AuthenticationProvider.Sign($"GET/realtime{expireTime}");
+            var key = socketConnection.ApiClient.AuthenticationProvider.Credentials.Key!.GetString();
+            var sign = socketConnection.ApiClient.AuthenticationProvider.Sign($"GET/realtime{expireTime}");
 
             var authRequest = new BybitRequestMessage()
             {

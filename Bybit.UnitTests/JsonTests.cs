@@ -6,22 +6,40 @@ using Bybit.Net.UnitTests;
 using Bybit.Net.Testing;
 using Bybit.Net.Objects;
 using Bybit.Net.Clients.Rest.Futures;
+using Bybit.Net.Clients;
 
 namespace Bybit.Net.UnitTests
 {
     [TestFixture]
     public class JsonTests
     {
-        private JsonToObjectComparer<BybitClientUsdFutures> _comparer = new JsonToObjectComparer<BybitClientUsdFutures>((json) => TestHelpers.CreateResponseClient(json, new BybitClientFuturesOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), OutputOriginalData = true, RateLimiters = new List<IRateLimiter>() }, System.Net.HttpStatusCode.OK));
-
-        private JsonToObjectComparer<BybitClientCoinFutures> _comparerCoin = new JsonToObjectComparer<BybitClientCoinFutures>((json) => TestHelpers.CreateResponseClientCoin(json, new BybitClientFuturesOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), OutputOriginalData = true, RateLimiters = new List<IRateLimiter>() }, System.Net.HttpStatusCode.OK));
+        private JsonToObjectComparer<BybitClient> _comparer = new JsonToObjectComparer<BybitClient>((json) => TestHelpers.CreateResponseClient(json, new BybitClientOptions()
+        { 
+            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), 
+            OutputOriginalData = true, 
+            SpotApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>()
+            },
+            InverseFuturesApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>()
+            },
+            InversePerpetualApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>()
+            },
+            UsdPerpetualApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>()
+            }
+        },
+            System.Net.HttpStatusCode.OK));
 
         [Test]
         public async Task ValidateFuturesAccountCalls()
         {   
-            await _comparer.ProcessSubject("InversePerpetual/Account", c => c.Account,
+            await _comparer.ProcessSubject("InversePerpetual/Account", c => c.InversePerpetualApi.Account,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string> 
                 {
                     { "GetWalletFundHistoryAsync", "data" },
@@ -40,7 +58,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public async Task ValidateFuturesExchangeDataCalls()
         {
-            await _comparer.ProcessSubject("InversePerpetual/ExchangeData", c => c.ExchangeData,
+            await _comparer.ProcessSubject("InversePerpetual/ExchangeData", c => c.InversePerpetualApi.ExchangeData,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
 
@@ -57,7 +75,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public async Task ValidateFuturesTradingCalls()
         {
-            await _comparer.ProcessSubject("InversePerpetual/Trading", c => c.Trading,
+            await _comparer.ProcessSubject("InversePerpetual/Trading", c => c.InversePerpetualApi.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                     { "GetUserTradesAsync", "trade_list" }

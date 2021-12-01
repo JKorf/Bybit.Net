@@ -8,9 +8,9 @@ namespace Bybit.Net.Interfaces.Clients
 {
     public interface IBybitClient: IRestClient
     {
-        IBybitClientInversePerpetual InversePerpetual { get; }
-        IBybitClientUsdPerpetual UsdPerpetual { get; }
-        IBybitClientInverseFutures InverseFutures { get; }
-        IBybitClientSpot Spot { get; }
+        IBybitClientInversePerpetual InversePerpetualApi { get; }
+        IBybitClientUsdPerpetual UsdPerpetualApi { get; }
+        IBybitClientInverseFutures InverseFuturesApi { get; }
+        IBybitClientSpot SpotApi { get; }
     }
 }

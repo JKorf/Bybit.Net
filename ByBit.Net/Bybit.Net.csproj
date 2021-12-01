@@ -16,7 +16,7 @@
 	
 
   <ItemGroup>
-    <Folder Include="Clients\Rest\Spot\" />
+    <Folder Include="Clients\Spot\" />
     <Folder Include="Icon\" />
   </ItemGroup>
 

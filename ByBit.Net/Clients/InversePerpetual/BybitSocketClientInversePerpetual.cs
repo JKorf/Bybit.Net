@@ -25,7 +25,7 @@ using Bybit.Net.Interfaces.Clients.InversePerpetual;
 namespace Bybit.Net.Clients.Socket
 {
     /// <inheritdoc />
-    public class BybitSocketClientInversePerpetual: SocketSubClient, IBybitSocketClientInversePerpetual
+    public class BybitSocketClientInversePerpetual: SocketApiClient, IBybitSocketClientInversePerpetual
     {
         private readonly Log _log;
         private readonly BybitSocketClient _baseClient;
@@ -36,12 +36,15 @@ namespace Bybit.Net.Clients.Socket
         /// </summary>
         /// <param name="options">The options to use for this client</param>
         public BybitSocketClientInversePerpetual(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
-            : base(options.OptionsInversePerpetual, options.OptionsInversePerpetual.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.OptionsInversePerpetual.ApiCredentials))
+            : base(options, options.InversePerpetualStreamsOptions)
         {
             _log = log;
             _options = options;
             _baseClient = baseClient;
         }
+
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, CancellationToken ct = default)
@@ -272,7 +275,7 @@ namespace Bybit.Net.Clients.Socket
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsInversePerpetual.BaseAddressAuthenticated,
+            return await _baseClient.SubscribeInternalAsync(this, _options.InversePerpetualStreamsOptions.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "position" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -295,7 +298,7 @@ namespace Bybit.Net.Clients.Socket
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsInversePerpetual.BaseAddressAuthenticated,
+            return await _baseClient.SubscribeInternalAsync(this, _options.InversePerpetualStreamsOptions.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "execution" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -318,7 +321,7 @@ namespace Bybit.Net.Clients.Socket
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsInversePerpetual.BaseAddressAuthenticated,
+            return await _baseClient.SubscribeInternalAsync(this, _options.InversePerpetualStreamsOptions.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -341,7 +344,7 @@ namespace Bybit.Net.Clients.Socket
 
                 handler(data.As(desResult.Data));
             });
-            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsInversePerpetual.BaseAddressAuthenticated,
+            return await _baseClient.SubscribeInternalAsync(this, _options.InversePerpetualStreamsOptions.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
@@ -364,7 +367,7 @@ namespace Bybit.Net.Clients.Socket
 
                 handler(data.As(desResult.Data));   
             });
-            return await _baseClient.SubscribeInternalAsync(this, _options.OptionsInversePerpetual.BaseAddressAuthenticated,
+            return await _baseClient.SubscribeInternalAsync(this, _options.InversePerpetualStreamsOptions.BaseAddressAuthenticated,
                 new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "wallet" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }

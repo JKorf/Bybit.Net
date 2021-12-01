@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients
 {
-    public class BybitClient: RestClient, IBybitClient
+    public class BybitClient: BaseRestClient, IBybitClient
     {
-        public IBybitClientSpot Spot { get; }
-        public IBybitClientInversePerpetual InversePerpetual { get; }
-        public IBybitClientInverseFutures InverseFutures { get; }
-        public IBybitClientUsdPerpetual UsdPerpetual { get; }
+        public IBybitClientSpot SpotApi { get; }
+        public IBybitClientInversePerpetual InversePerpetualApi { get; }
+        public IBybitClientInverseFutures InverseFuturesApi { get; }
+        public IBybitClientUsdPerpetual UsdPerpetualApi { get; }
 
         #region constructor/destructor
         /// <summary>
@@ -34,9 +34,9 @@ namespace Bybit.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public BybitClient(BybitClientOptions options) : base("Bybit", options)
         {
-            InversePerpetual = new BybitClientInversePerpetual(this, options);
-            InverseFutures = new BybitClientInverseFutures(this, options);
-            UsdPerpetual = new BybitClientUsdPerpetual(this, options);
+            InversePerpetualApi = new BybitClientInversePerpetual(this, options);
+            InverseFuturesApi = new BybitClientInverseFutures(this, options);
+            UsdPerpetualApi = new BybitClientUsdPerpetual(this, options);
             //Spot = new BybitClientSpot(this, options);
         }
         #endregion
@@ -50,11 +50,11 @@ namespace Bybit.Net.Clients
             BybitClientOptions.Default = options;
         }
 
-        internal Task<WebCallResult<T>> SendRequestInternal<T>(RestSubClient subClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
+        internal Task<WebCallResult<T>> SendRequestInternal<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
             ArrayParametersSerialization? arraySerialization = null, int weight = 1, JsonSerializer? deserializer = null) where T : class
         {
-            return base.SendRequestAsync<T>(subClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, deserializer);
+            return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, deserializer);
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Bybit.Net.Interfaces.Clients
 {
     public interface IBybitSocketClient: ISocketClient
     {
-        public IBybitSocketClientUsdPerpetual UsdPerpetual { get; }
-        public IBybitSocketClientSpot Spot { get; }
-        public IBybitSocketClientInversePerpetual InversePerpetual { get; }
-        public IBybitSocketClientInverseFutures InverseFutures { get; }
+        public IBybitSocketClientUsdPerpetual UsdPerpetualStreams { get; }
+        public IBybitSocketClientSpot SpotStreams { get; }
+        public IBybitSocketClientInversePerpetual InversePerpetualStreams { get; }
+        public IBybitSocketClientInverseFutures InverseFuturesStreams { get; }
     }
 }

@@ -16,31 +16,32 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
-    public class BybitClientInverseFutures : RestSubClient, IBybitClientInverseFutures
+    public class BybitClientUsdPerpetual : RestApiClient, IBybitClientUsdPerpetual
     {
+
         private readonly BybitClient _baseClient;
 
         internal new BybitClientOptions ClientOptions { get; }
 
-        public IBybitClientInverseFuturesAccount Account { get; }
-        public IBybitClientInverseFuturesExchangeData ExchangeData { get; }
-        public IBybitClientInverseFuturesTrading Trading { get; }
+        public IBybitClientUsdPerpetualAccount Account { get; }
+        public IBybitClientUsdPerpetualExchangeData ExchangeData { get; }
+        public IBybitClientUsdPerpetualTrading Trading { get; }
 
         #region ctor
-        /// <summary>
-        /// Create a new instance of BybitClientFutures using the provided options
-        /// </summary>
-        public BybitClientInverseFutures(BybitClient baseClient, BybitClientOptions options) 
-            : base(options.OptionsInverseFutures, options.OptionsInverseFutures.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.OptionsInverseFutures.ApiCredentials))
+        internal BybitClientUsdPerpetual(BybitClient baseClient, BybitClientOptions options)
+            : base(options, options.UsdPerpetualApiOptions)
         {
             _baseClient = baseClient;
             ClientOptions = options;
 
-            Account = new BybitClientInverseFuturesAccount(this);
-            ExchangeData = new BybitClientInverseFuturesExchangeData(this);
-            Trading = new BybitClientInverseFuturesTrading(this);
+            Account = new BybitClientUsdPerpetualAccount(this);
+            ExchangeData = new BybitClientUsdPerpetualExchangeData(this);
+            Trading = new BybitClientUsdPerpetualTrading(this);
         }
         #endregion
+
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new BybitAuthenticationProvider(credentials);
 
         /// <summary>
         /// Get url for an endpoint
@@ -49,7 +50,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         /// <returns></returns>
         internal Uri GetUrl(string endpoint)
         {
-            return new Uri($"{BaseAddress}/{endpoint}");
+            return new Uri(BaseAddress.AppendPath(endpoint));
         }
 
         internal async Task<WebCallResult<BybitResult<T>>> SendRequestWrapperAsync<T>(

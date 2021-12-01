@@ -46,7 +46,7 @@ namespace Bitfinex.Net.SymbolOrderBooks
         protected override async Task<CallResult<UpdateSubscription>> DoStartAsync()
         {
             // TODO are these all the same? ie. do we need seperate books for each api?
-            var result = await socketClient.InversePerpetual.SubscribeToOrderBookUpdatesAsync(Symbol, Levels!.Value, ProcessSnapshot, ProcessUpdate).ConfigureAwait(false);
+            var result = await socketClient.InversePerpetualStreams.SubscribeToOrderBookUpdatesAsync(Symbol, Levels!.Value, ProcessSnapshot, ProcessUpdate).ConfigureAwait(false);
             if (!result)
                 return result;
 

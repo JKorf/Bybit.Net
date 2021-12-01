@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
-    public class BybitClientInversePerpetual : RestSubClient, IBybitClientInversePerpetual
+    public class BybitClientInversePerpetual : RestApiClient, IBybitClientInversePerpetual
     {
         private readonly BybitClient _baseClient;
 
@@ -31,7 +31,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         /// Create a new instance of BybitClientFutures using the provided options
         /// </summary>
         public BybitClientInversePerpetual(BybitClient baseClient, BybitClientOptions options) 
-            : base(options.OptionsInversePerpetual, options.OptionsInversePerpetual.ApiCredentials == null ? null : new BybitAuthenticationProvider(options.OptionsInversePerpetual.ApiCredentials))
+            : base(options, options.InversePerpetualApiOptions)
         {
             _baseClient = baseClient;
             ClientOptions = options;
@@ -42,6 +42,9 @@ namespace Bybit.Net.Clients.Rest.Futures
         }
         #endregion
 
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new BybitAuthenticationProvider(credentials);
+
         /// <summary>
         /// Get url for an endpoint
         /// </summary>
@@ -49,7 +52,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         /// <returns></returns>
         internal Uri GetUrl(string endpoint)
         {
-            return new Uri($"{BaseAddress}/{endpoint}");
+            return new Uri(BaseAddress.AppendPath(endpoint));
         }
 
         internal async Task<WebCallResult<BybitResult<T>>> SendRequestWrapperAsync<T>(
