@@ -15,10 +15,10 @@ namespace Bybit.Net.Clients
 {
     public class BybitClient: BaseRestClient, IBybitClient
     {
-        public IBybitClientSpot SpotApi { get; }
-        public IBybitClientInversePerpetual InversePerpetualApi { get; }
-        public IBybitClientInverseFutures InverseFuturesApi { get; }
-        public IBybitClientUsdPerpetual UsdPerpetualApi { get; }
+        public IBybitClientSpotApi SpotApi { get; }
+        public IBybitClientInversePerpetualApi InversePerpetualApi { get; }
+        public IBybitClientInverseFuturesApi InverseFuturesApi { get; }
+        public IBybitClientUsdPerpetualApi UsdPerpetualApi { get; }
 
         #region constructor/destructor
         /// <summary>
@@ -34,9 +34,9 @@ namespace Bybit.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public BybitClient(BybitClientOptions options) : base("Bybit", options)
         {
-            InversePerpetualApi = new BybitClientInversePerpetual(this, options);
-            InverseFuturesApi = new BybitClientInverseFutures(this, options);
-            UsdPerpetualApi = new BybitClientUsdPerpetual(this, options);
+            InversePerpetualApi = new BybitClientInversePerpetualApi(this, options);
+            InverseFuturesApi = new BybitClientInverseFuturesApi(this, options);
+            UsdPerpetualApi = new BybitClientUsdPerpetualApi(this, options);
             //Spot = new BybitClientSpot(this, options);
         }
         #endregion

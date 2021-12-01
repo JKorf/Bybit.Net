@@ -16,7 +16,7 @@
 	
 
   <ItemGroup>
-    <Folder Include="Clients\Spot\" />
+    <Folder Include="Clients\SpotApi\" />
     <Folder Include="Icon\" />
   </ItemGroup>
 

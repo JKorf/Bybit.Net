@@ -24,10 +24,10 @@ namespace Bybit.Net.Clients
 {
     public class BybitSocketClient: BaseSocketClient, IBybitSocketClient
     {
-        public IBybitSocketClientUsdPerpetual UsdPerpetualStreams { get; }
-        public IBybitSocketClientInversePerpetual InversePerpetualStreams { get; }
-        public IBybitSocketClientInverseFutures InverseFuturesStreams { get; }
-        public IBybitSocketClientSpot SpotStreams { get; }
+        public IBybitSocketClientUsdPerpetualStreams UsdPerpetualStreams { get; }
+        public IBybitSocketClientInversePerpetualStreams InversePerpetualStreams { get; }
+        public IBybitSocketClientInverseFuturesStreams InverseFuturesStreams { get; }
+        public IBybitSocketClientSpotStreams SpotStreams { get; }
 
         /// <summary>
         /// Create a new instance of BybitSocketClientFutures using the default options
@@ -48,8 +48,8 @@ namespace Bybit.Net.Clients
             ContinueOnQueryResponse = true;
             UnhandledMessageExpected = true;
 
-            UsdPerpetualStreams = new BybitSocketClientUsdPerpetual(log, this, options);
-            InversePerpetualStreams = new BybitSocketClientInversePerpetual(log, this, options);
+            UsdPerpetualStreams = new BybitSocketClientUsdPerpetualStreams(log, this, options);
+            InversePerpetualStreams = new BybitSocketClientInversePerpetualStreams(log, this, options);
             //InverseFutures = new BybitSocketClientInverseFutures(log, this, options);
             //Spot = new BybitSocketClientSpot(log, this, options);
 
