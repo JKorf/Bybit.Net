@@ -1,0 +1,20 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": {
+        "accountId": "10054",
+        "symbol": "ETHUSDT",
+        "orderLinkId": "162081160171552",
+        "orderId": "889826641228952064",
+        "transactTime": "1620811601728",
+        "price": "20000",
+        "origQty": "10",
+        "executedQty": "0",
+        "status": "CANCELED",
+        "timeInForce": "GTC",
+        "type": "LIMIT",
+        "side": "BUY"
+    }
+}

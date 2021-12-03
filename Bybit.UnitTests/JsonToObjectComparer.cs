@@ -45,14 +45,17 @@ namespace Bybit.Net.UnitTests
             var methods = typeof(K).GetMethods();
             var callResultMethods = methods.Where(m => m.Name.EndsWith("Async")).ToList();
             var skippedMethods = new List<string>();
+            var path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "JsonResponses", folderPrefix);
+            var unusedJsonFiles = Directory.GetFiles(path).ToList();
 
             foreach (var method in callResultMethods)
             {
-                var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
                 FileStream file = null;
                 try
                 {
-                    file = File.OpenRead(Path.Combine(path, $"JsonResponses", folderPrefix, $"{method.Name}.txt"));
+                    var filePath = Path.Combine(path, $"{method.Name}.txt");
+                    file = File.OpenRead(filePath);
+                    unusedJsonFiles.Remove(filePath);
                 }
                 catch (FileNotFoundException)
                 {
@@ -142,8 +145,12 @@ namespace Bybit.Net.UnitTests
                         {
                             var arrayProp = resultProps.SingleOrDefault(p => p.Item2?.Index == i).p;
                             if (arrayProp != null)
-                                CheckPropertyValue(method.Name, item, arrayProp.GetValue(resultData), arrayProp.Name, "Array index " + i, arrayProp, ignoreProperties);
-
+                            {
+                                if (!(ignoreProperties?.ContainsKey(method.Name) == true && ignoreProperties[method.Name].Contains(arrayProp.Name)))
+                                {
+                                    CheckPropertyValue(method.Name, item, arrayProp.GetValue(resultData), arrayProp.Name, "Array index " + i, arrayProp, ignoreProperties);
+                                }
+                            }
                             i++;
                         }
                     }
@@ -201,6 +208,11 @@ namespace Bybit.Net.UnitTests
                 Debug.WriteLine($"Successfully validated {method.Name}");
             }
 
+            if (unusedJsonFiles.Any())
+                Debug.WriteLine("Unused json files:");
+            foreach (var file in unusedJsonFiles)
+                Debug.WriteLine(Path.GetFileName(file));
+            Debug.WriteLine("");
             if (skippedMethods.Any())
                 Debug.WriteLine("Skipped methods:");
             foreach (var method in skippedMethods)
@@ -229,7 +241,7 @@ namespace Bybit.Net.UnitTests
                 CheckPropertyValue(method, prop.Value, propertyValue, property.Name, prop.Name, property, ignoreProperties);
         }
 
-        private static void CheckPropertyValue(string method, JToken propValue, object propertyValue, string? propertyName = null, string? propName = null, PropertyInfo info = null, Dictionary<string, List<string>> ignoreProperties = null)
+        private static void CheckPropertyValue(string method, JToken propValue, object propertyValue, string propertyName = null, string propName = null, PropertyInfo info = null, Dictionary<string, List<string>> ignoreProperties = null)
         {
             if (propertyValue == default && propValue.Type != JTokenType.Null && !string.IsNullOrEmpty(propValue.ToString()))
             {
@@ -347,8 +359,12 @@ namespace Bybit.Net.UnitTests
             {
                 var arrayProp = resultProps.SingleOrDefault(p => p.Item2?.Index == i).p;
                 if (arrayProp != null)
-                    CheckPropertyValue(method, item, arrayProp.GetValue(resultObj), arrayProp.Name, "Array index " + i, arrayProp, ignoreProperties);
-
+                {
+                    if (!(ignoreProperties?.ContainsKey(method) == true && ignoreProperties[method].Contains(arrayProp.Name)))
+                    {
+                        CheckPropertyValue(method, item, arrayProp.GetValue(resultObj), arrayProp.Name, "Array index " + i, arrayProp, ignoreProperties);
+                    }
+                }
                 i++;
             }
         }
@@ -382,7 +398,7 @@ namespace Bybit.Net.UnitTests
                         throw new Exception($"{method}: {property} not equal: {jsonValue.Value<bool>()} vs {(bool)objectValue}");
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 throw;
             }

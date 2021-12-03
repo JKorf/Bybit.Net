@@ -9,12 +9,12 @@ using System.Collections.Generic;
 namespace Bybit.Net.Objects
 {
     /// <summary>
-    /// Options for the binance client
+    /// Options for the Bybit client
     /// </summary>
     public class BybitClientOptions : BaseRestClientOptions
     {
         /// <summary>
-        /// Default options for the futures client
+        /// Default options for the Bybit client
         /// </summary>
         public static BybitClientOptions Default { get; set; } = new BybitClientOptions();
 
@@ -24,6 +24,9 @@ namespace Bybit.Net.Objects
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
         private RestApiClientOptions _inverseFuturesApiOptions = new RestApiClientOptions("https://api.bybit.com/");
+        /// <summary>
+        /// Inverse futures API options
+        /// </summary>
         public RestApiClientOptions InverseFuturesApiOptions
         {
             get => _inverseFuturesApiOptions;
@@ -31,6 +34,9 @@ namespace Bybit.Net.Objects
         }
 
         private RestApiClientOptions _inversePerpetualApiOptions = new RestApiClientOptions("https://api.bybit.com/");
+        /// <summary>
+        /// Inverse perpetual API options
+        /// </summary>
         public RestApiClientOptions InversePerpetualApiOptions
         {
             get => _inversePerpetualApiOptions;
@@ -38,6 +44,9 @@ namespace Bybit.Net.Objects
         }
 
         private RestApiClientOptions _usdPerpetualApiOptions = new RestApiClientOptions("https://api.bybit.com/");
+        /// <summary>
+        /// Usd perpetual API options
+        /// </summary>
         public RestApiClientOptions UsdPerpetualApiOptions
         {
             get => _usdPerpetualApiOptions;
@@ -45,6 +54,9 @@ namespace Bybit.Net.Objects
         }
 
         private RestApiClientOptions _spotApiOptions = new RestApiClientOptions("https://api.bybit.com/");
+        /// <summary>
+        /// Spot API options
+        /// </summary>
         public RestApiClientOptions SpotApiOptions
         {
             get => _spotApiOptions;
@@ -88,9 +100,15 @@ namespace Bybit.Net.Objects
         /// <summary>
         /// Default options for the futures socket client
         /// </summary>
-        public static BybitSocketClientOptions Default { get; set; } = new BybitSocketClientOptions();
+        public static BybitSocketClientOptions Default { get; set; } = new BybitSocketClientOptions()
+        {
+            SocketSubscriptionsCombineTarget = 10
+        };
 
         private BybitSocketApiClientOptions _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime", "wss://stream.bybit.com/realtime");
+        /// <summary>
+        /// Inverse futures streams options
+        /// </summary>
         public BybitSocketApiClientOptions InverseFuturesStreamsOptions
         {
             get => _inverseFuturesStreamsOptions;
@@ -98,6 +116,9 @@ namespace Bybit.Net.Objects
         }
 
         private BybitSocketApiClientOptions _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime", "wss://stream.bybit.com/realtime");
+        /// <summary>
+        /// Inverse perpetual streams options
+        /// </summary>
         public BybitSocketApiClientOptions InversePerpetualStreamsOptions
         {
             get => _inversePerpetualStreamsOptions;
@@ -105,13 +126,19 @@ namespace Bybit.Net.Objects
         }
 
         private BybitSocketApiClientOptions _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime_public", "wss://stream.bybit.com/realtime_private");
+        /// <summary>
+        /// Usd perpetual streams options
+        /// </summary>
         public BybitSocketApiClientOptions UsdPerpetualStreamsOptions
         {
             get => _usdPerpetualStreamsOptions;
             set => _usdPerpetualStreamsOptions.Copy(_usdPerpetualStreamsOptions, value);
         }
 
-        private BybitSocketApiClientOptions _spotStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime", "wss://stream.bybit.com/realtime");
+        private BybitSocketApiClientOptions _spotStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/spot/quote/ws/v2", "wss://stream.bybit.com/spot/ws");
+        /// <summary>
+        /// Spot streams options
+        /// </summary>
         public BybitSocketApiClientOptions SpotStreamsOptions
         {
             get => _spotStreamsOptions;
@@ -140,12 +167,15 @@ namespace Bybit.Net.Objects
             base.Copy(input, def);
 
             input.InverseFuturesStreamsOptions = new BybitSocketApiClientOptions(def.InverseFuturesStreamsOptions);
-            input.InversePerpetualStreamsOptions = new BybitSocketApiClientOptions(def.InverseFuturesStreamsOptions);
-            input.SpotStreamsOptions = new BybitSocketApiClientOptions(def.InverseFuturesStreamsOptions);
-            input.UsdPerpetualStreamsOptions = new BybitSocketApiClientOptions(def.InverseFuturesStreamsOptions);
+            input.InversePerpetualStreamsOptions = new BybitSocketApiClientOptions(def.InversePerpetualStreamsOptions);
+            input.SpotStreamsOptions = new BybitSocketApiClientOptions(def.SpotStreamsOptions);
+            input.UsdPerpetualStreamsOptions = new BybitSocketApiClientOptions(def.UsdPerpetualStreamsOptions);
         }
     }
 
+    /// <summary>
+    /// Bybit socket API client options
+    /// </summary>
     public class BybitSocketApiClientOptions : ApiClientOptions
     {
         /// <summary>
@@ -153,20 +183,33 @@ namespace Bybit.Net.Objects
         /// </summary>
         public string BaseAddressAuthenticated { get; set; }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public BybitSocketApiClientOptions()
         {
         }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseOn"></param>
         public BybitSocketApiClientOptions(BybitSocketApiClientOptions baseOn): base(baseOn)
         {
-            BaseAddressAuthenticated = BaseAddressAuthenticated;
+            BaseAddressAuthenticated = baseOn.BaseAddressAuthenticated;
         }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseAddress"></param>
+        /// <param name="baseAddressAuthenticated"></param>
         public BybitSocketApiClientOptions(string baseAddress, string baseAddressAuthenticated): base(baseAddress)
         {
             BaseAddressAuthenticated = baseAddressAuthenticated;
         }
 
+        /// <inheritdoc />
         public new void Copy<T>(T input, T def) where T : BybitSocketApiClientOptions
         {
             base.Copy(input, def);
@@ -180,6 +223,9 @@ namespace Bybit.Net.Objects
     /// </summary>
     public class BybitFuturesSymbolOrderBookOptions : OrderBookOptions
     {
+        /// <summary>
+        /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
+        /// </summary>
         public IBybitSocketClient? SocketClient { get; set; }
     }
 }

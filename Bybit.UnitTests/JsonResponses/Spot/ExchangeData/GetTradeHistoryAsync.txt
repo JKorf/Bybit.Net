@@ -1,0 +1,26 @@
+{
+    "ret_code": 0,
+    "ret_msg": null,
+    "result": [
+        {
+            "price": "50005.12",
+            "time": 1620822657672,
+            "qty": "0.0001",
+            "isBuyerMaker": true
+        },
+        {
+            "price": "50008.34",
+            "time": 1620891050659,
+            "qty": "0.0001",
+            "isBuyerMaker": true
+        },
+        {
+            "price": "50008.34",
+            "time": 1620891093266,
+            "qty": "0.0001",
+            "isBuyerMaker": true
+        }
+    ],
+    "ext_code": null,
+    "ext_info": null
+}

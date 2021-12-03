@@ -1,0 +1,30 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": [
+        {
+            "accountId": "10054",
+            "exchangeId": "301",
+            "symbol": "ETHUSDT",
+            "symbolName": "ETHUSDT",
+            "orderLinkId": "1620615771764",
+            "orderId": "888183901021893120",
+            "price": "5000",
+            "origQty": "1",
+            "executedQty": "0",
+            "cummulativeQuoteQty": "0",
+            "avgPrice": "0",
+            "status": "CANCELED",
+            "timeInForce": "GTC",
+            "type": "LIMIT",
+            "side": "BUY",
+            "stopPrice": "0.0",
+            "icebergQty": "0.0",
+            "time": "1620615771836",
+            "updateTime": "1620617056334",
+            "isWorking": true
+        }
+    ]
+}

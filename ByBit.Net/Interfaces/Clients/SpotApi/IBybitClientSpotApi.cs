@@ -1,24 +1,24 @@
-﻿using CryptoExchange.Net.Interfaces;
+﻿using System;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
-    /// Client
+    /// Bybit spot API endpoints
     /// </summary>
-    public interface IBybitClientSpotApi
+    public interface IBybitClientSpotApi : IDisposable
     {
         /// <summary>
-        /// Account
+        /// Endpoints related to account settings, info or actions
         /// </summary>
         IBybitClientSpotApiAccount Account { get; }
 
         /// <summary>
-        /// Exc
+        /// Endpoints related to retrieving market and system data
         /// </summary>
         IBybitClientSpotApiExchangeData ExchangeData { get; }
 
         /// <summary>
-        /// Tra
+        /// Endpoints related to orders and trades
         /// </summary>
         IBybitClientSpotApiTrading Trading { get; }
     }

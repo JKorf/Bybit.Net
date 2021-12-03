@@ -16,21 +16,22 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
+    /// <inheritdoc cref="IBybitClientInversePerpetualApi" />
     public class BybitClientInversePerpetualApi : RestApiClient, IBybitClientInversePerpetualApi
     {
         private readonly BybitClient _baseClient;
 
-        internal new BybitClientOptions ClientOptions { get; }
+        internal BybitClientOptions ClientOptions { get; }
 
+        /// <inheritdoc />
         public IBybitClientInversePerpetualApiAccount Account { get; }
+        /// <inheritdoc />
         public IBybitClientInversePerpetualApiExchangeData ExchangeData { get; }
+        /// <inheritdoc />
         public IBybitClientInversePerpetualApiTrading Trading { get; }
 
         #region ctor
-        /// <summary>
-        /// Create a new instance of BybitClientFutures using the provided options
-        /// </summary>
-        public BybitClientInversePerpetualApi(BybitClient baseClient, BybitClientOptions options) 
+        internal BybitClientInversePerpetualApi(BybitClient baseClient, BybitClientOptions options) 
             : base(options, options.InversePerpetualApiOptions)
         {
             _baseClient = baseClient;
@@ -42,7 +43,8 @@ namespace Bybit.Net.Clients.Rest.Futures
         }
         #endregion
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
 
         /// <summary>

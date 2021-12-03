@@ -16,15 +16,18 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
+    /// <inheritdoc cref="IBybitClientUsdPerpetualApi" />
     public class BybitClientUsdPerpetualApi : RestApiClient, IBybitClientUsdPerpetualApi
     {
-
         private readonly BybitClient _baseClient;
 
-        internal new BybitClientOptions ClientOptions { get; }
+        internal BybitClientOptions ClientOptions { get; }
 
+        /// <inheritdoc />
         public IBybitClientUsdPerpetualApiAccount Account { get; }
+        /// <inheritdoc />
         public IBybitClientUsdPerpetualApiExchangeData ExchangeData { get; }
+        /// <inheritdoc />
         public IBybitClientUsdPerpetualApiTrading Trading { get; }
 
         #region ctor
@@ -40,7 +43,8 @@ namespace Bybit.Net.Clients.Rest.Futures
         }
         #endregion
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
 
         /// <summary>

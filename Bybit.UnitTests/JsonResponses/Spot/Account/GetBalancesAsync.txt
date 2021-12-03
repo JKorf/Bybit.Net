@@ -1,0 +1,18 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": {
+        "balances": [
+            {
+                "coin": "USDT",
+                "coinId": "USDT",
+                "coinName": "USDT",
+                "total": "10",
+                "free": "10",
+                "locked": "0"
+            }
+        ]
+    }
+}

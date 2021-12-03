@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 {
+    /// <summary>
+    /// Bybit inverse perpetual streams
+    /// </summary>
     public interface IBybitSocketClientInversePerpetualStreams
     {
         Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit, Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler, CancellationToken ct = default);

@@ -1,0 +1,10 @@
+{
+    "ret_code": 0,
+    "ret_msg": null,
+    "result": {
+        "symbol": "BTCUSDT",
+        "price": "50008"
+    },
+    "ext_code": null,
+    "ext_info": null
+}

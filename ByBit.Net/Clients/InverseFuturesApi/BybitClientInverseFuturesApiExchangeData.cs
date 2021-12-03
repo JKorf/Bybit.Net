@@ -17,9 +17,7 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BybitClientInverseFuturesApiExchangeData: IBybitClientInverseFuturesApiExchangeData //: BybitClientFuturesBaseExchangeData
     {
         private BybitClientInverseFuturesApi _baseClient;

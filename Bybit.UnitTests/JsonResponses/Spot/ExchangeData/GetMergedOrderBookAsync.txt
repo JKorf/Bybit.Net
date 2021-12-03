@@ -1,0 +1,21 @@
+{
+    "ret_code": 0,
+    "ret_msg": null,
+    "result": {
+        "time": 1620891567679,
+        "bids": [
+            [
+                "50008",
+                "1.8501"
+            ]
+        ],
+        "asks": [
+            [
+                "70000",
+                "1"
+            ]
+        ]
+    },
+    "ext_code": null,
+    "ext_info": null
+}

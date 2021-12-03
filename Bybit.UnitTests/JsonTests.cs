@@ -91,5 +91,55 @@ namespace Bybit.Net.UnitTests
                 parametersToSetNull: new string[] { "clientOrderId" }
                 );
         }
+
+        [Test]
+        public async Task ValidateSpotAccountCalls()
+        {
+            await _comparer.ProcessSubject("Spot/Account", c => c.SpotApi.Account,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetBalancesAsync", "balances" }
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" },
+                parametersToSetNull: new string[] { }
+                );
+        }
+
+        [Test]
+        public async Task ValidateSpotTradingCalls()
+        {
+            await _comparer.ProcessSubject("Spot/Trading", c => c.SpotApi.Trading,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                    { "PlaceOrderAsync", new List<string>{ "executedQty" } },
+                    { "CancelOrderAsync", new List<string>{ "executedQty" } }
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" },
+                parametersToSetNull: new string[] { "clientOrderId" }
+
+                );
+        }
+
+        [Test]
+        public async Task ValidateSpotExchangeDataCalls()
+        {
+            await _comparer.ProcessSubject("Spot/ExchangeData", c => c.SpotApi.ExchangeData,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                    { "GetKlinesAsync", new List<string>() { "CloseTime" } }
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+
+                );
+        }
     }
 }

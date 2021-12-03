@@ -16,21 +16,22 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
+    /// <inheritdoc cref="IBybitClientInverseFuturesApi" />
     public class BybitClientInverseFuturesApi : RestApiClient, IBybitClientInverseFuturesApi
     {
         private readonly BybitClient _baseClient;
 
-        internal new BybitClientOptions ClientOptions { get; }
+        internal BybitClientOptions ClientOptions { get; }
 
+        /// <inheritdoc />
         public IBybitClientInverseFuturesApiAccount Account { get; }
+        /// <inheritdoc />
         public IBybitClientInverseFuturesApiExchangeData ExchangeData { get; }
+        /// <inheritdoc />
         public IBybitClientInverseFuturesApiTrading Trading { get; }
 
         #region ctor
-        /// <summary>
-        /// Create a new instance of BybitClientFutures using the provided options
-        /// </summary>
-        public BybitClientInverseFuturesApi(BybitClient baseClient, BybitClientOptions options) 
+        internal BybitClientInverseFuturesApi(BybitClient baseClient, BybitClientOptions options) 
             : base(options, options.InverseFuturesApiOptions)
         {
             _baseClient = baseClient;
@@ -38,11 +39,12 @@ namespace Bybit.Net.Clients.Rest.Futures
 
             Account = new BybitClientInverseFuturesApiAccount(this);
             ExchangeData = new BybitClientInverseFuturesApiExchangeData(this);
-            Trading = new BybitClientInverseFuturesTradingStreams(this);
+            Trading = new BybitClientInverseFuturesApiTrading(this);
         }
         #endregion
-        
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
 
         /// <summary>

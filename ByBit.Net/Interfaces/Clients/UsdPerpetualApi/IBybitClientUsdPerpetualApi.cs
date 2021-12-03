@@ -1,24 +1,24 @@
-﻿using CryptoExchange.Net.Interfaces;
+﻿using System;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
-    /// Client
+    /// Bybit USD perpetual API endpoints
     /// </summary>
-    public interface IBybitClientUsdPerpetualApi
+    public interface IBybitClientUsdPerpetualApi: IDisposable
     {
         /// <summary>
-        /// Account
+        /// Endpoints related to account settings, info or actions
         /// </summary>
         IBybitClientUsdPerpetualApiAccount Account { get; }
 
         /// <summary>
-        /// Exc
+        /// Endpoints related to retrieving market and system data
         /// </summary>
         IBybitClientUsdPerpetualApiExchangeData ExchangeData { get; }
 
         /// <summary>
-        /// Tra
+        /// Endpoints related to orders and trades
         /// </summary>
         IBybitClientUsdPerpetualApiTrading Trading { get; }
     }

@@ -1,0 +1,28 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": {
+        "accountId": "1054",
+        "exchangeId": "301",
+        "symbol": "ETHUSDT",
+        "symbolName": "ETHUSDT",
+        "orderLinkId": "162081160171552",
+        "orderId": "889826641228952064",
+        "price": "20000",
+        "origQty": "10",
+        "executedQty": "0",
+        "cummulativeQuoteQty": "0",
+        "avgPrice": "0",
+        "status": "NEW",
+        "timeInForce": "GTC",
+        "type": "LIMIT",
+        "side": "BUY",
+        "stopPrice": "0.0",
+        "icebergQty": "0.0",
+        "time": "1620811601728",
+        "updateTime": "1620811601743",
+        "isWorking": true
+    }
+}

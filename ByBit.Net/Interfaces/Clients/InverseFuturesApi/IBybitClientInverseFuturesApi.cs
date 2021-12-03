@@ -1,24 +1,24 @@
-﻿using CryptoExchange.Net.Interfaces;
+﻿using System;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
-    /// Client
+    /// Bybit inverse futures API endpoints
     /// </summary>
-    public interface IBybitClientInverseFuturesApi
+    public interface IBybitClientInverseFuturesApi : IDisposable
     {
         /// <summary>
-        /// Account
+        /// Endpoints related to account settings, info or actions
         /// </summary>
         IBybitClientInverseFuturesApiAccount Account { get; }
 
         /// <summary>
-        /// Exc
+        /// Endpoints related to retrieving market and system data
         /// </summary>
         IBybitClientInverseFuturesApiExchangeData ExchangeData { get; }
 
         /// <summary>
-        /// Tra
+        /// Endpoints related to orders and trades
         /// </summary>
         IBybitClientInverseFuturesApiTrading Trading { get; }
     }

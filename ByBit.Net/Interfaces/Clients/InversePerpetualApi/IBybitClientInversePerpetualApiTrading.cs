@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
-    /// Trad
+    /// Bybit trading endpoints, placing and mananging orders.
     /// </summary>
     public interface IBybitClientInversePerpetualApiTrading
     {

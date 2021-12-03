@@ -1,16 +1,28 @@
 ﻿using Bybit.Net.Clients.Rest.Futures;
 using CryptoExchange.Net.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Interfaces.Clients
 {
+    /// <summary>
+    /// Client for accessing the Bybit Rest API. 
+    /// </summary>
     public interface IBybitClient: IRestClient
     {
+        /// <summary>
+        /// Inverse perpetual API endpoints
+        /// </summary>
         IBybitClientInversePerpetualApi InversePerpetualApi { get; }
+        /// <summary>
+        /// USD perpetual API endpoints
+        /// </summary>
         IBybitClientUsdPerpetualApi UsdPerpetualApi { get; }
+        /// <summary>
+        /// Inverse futures API endpoints
+        /// </summary>
         IBybitClientInverseFuturesApi InverseFuturesApi { get; }
+        /// <summary>
+        /// Spot API endpoints
+        /// </summary>
         IBybitClientSpotApi SpotApi { get; }
     }
 }

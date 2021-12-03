@@ -1,0 +1,21 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": {
+        "accountId": "1",
+        "symbol": "ETHUSDT",
+        "symbolName": "ETHUSDT",
+        "orderLinkId": "162073788655749",
+        "orderId": "889208273689997824",
+        "transactTime": "1620737886573",
+        "price": "20000",
+        "origQty": "10",
+        "executedQty": "0",
+        "status": "NEW",
+        "timeInForce": "GTC",
+        "type": "LIMIT",
+        "side": "BUY"
+    }
+}

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <summary>
-    /// Ac
+    /// Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
     /// </summary>
     public interface IBybitClientUsdPerpetualApiAccount
     {

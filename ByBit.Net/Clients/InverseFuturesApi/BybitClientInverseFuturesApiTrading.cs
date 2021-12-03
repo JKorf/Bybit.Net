@@ -18,14 +18,12 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
-    public class BybitClientInverseFuturesTradingStreams: IBybitClientInverseFuturesApiTrading//: IBybitClientInversePerpetualTrading
+    /// <inheritdoc />
+    public class BybitClientInverseFuturesApiTrading: IBybitClientInverseFuturesApiTrading
     {
         private BybitClientInverseFuturesApi _baseClient;
 
-        internal BybitClientInverseFuturesTradingStreams(BybitClientInverseFuturesApi baseClient)
+        internal BybitClientInverseFuturesApiTrading(BybitClientInverseFuturesApi baseClient)
         {
             _baseClient = baseClient;
         }

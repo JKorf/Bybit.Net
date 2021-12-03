@@ -12,6 +12,6 @@ namespace Bybit.Net.Objects.Internal.Socket
         public bool ReturnMessage { get; set; }
         [JsonProperty("conn_id")]
         public string ConnectionId { get; set; }
-        public BybitRequestMessage Request { get; set; }
+        public BybitFuturesRequestMessage Request { get; set; }
     }
 }

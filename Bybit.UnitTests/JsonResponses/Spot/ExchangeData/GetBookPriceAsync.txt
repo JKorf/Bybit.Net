@@ -1,0 +1,14 @@
+{
+    "ret_code": 0,
+    "ret_msg": null,
+    "result": {
+        "symbol": "BTCUSDT",
+        "bidPrice": "50005.12",
+        "bidQty": "394",
+        "askPrice": "50008",
+        "askQty": "0.8001",
+        "time": 1620919281808
+    },
+    "ext_code": null,
+    "ext_info": null
+}

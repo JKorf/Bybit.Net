@@ -24,18 +24,14 @@ using Bybit.Net.Interfaces.Clients.UsdPerpetual;
 
 namespace Bybit.Net.Clients.Socket
 {
-    /// <inheritdoc />
+    /// <inheritdoc cref="IBybitSocketClientUsdPerpetualStreams" />
     public class BybitSocketClientUsdPerpetualStreams : SocketApiClient, IBybitSocketClientUsdPerpetualStreams
     {
         private readonly Log _log;
         private readonly BybitSocketClient _baseClient;
         private readonly BybitSocketClientOptions _options;
-
-        /// <summary>
-        /// Create a new instance of BybitSocketClientFutures using provided options
-        /// </summary>
-        /// <param name="options">The options to use for this client</param>
-        public BybitSocketClientUsdPerpetualStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options) 
+                
+        internal BybitSocketClientUsdPerpetualStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options) 
             : base(options, options.UsdPerpetualStreamsOptions)
         {
             _log = log;
@@ -43,7 +39,8 @@ namespace Bybit.Net.Clients.Socket
             _baseClient = baseClient;
         }
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
@@ -73,7 +70,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, desResult.Data.First().Symbol));
             });
             return await _baseClient.SubscribeInternalAsync(this, BaseAddress,
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "trade." + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "trade." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -105,7 +102,7 @@ namespace Bybit.Net.Clients.Socket
                 
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "instrument_info.100ms." + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "instrument_info.100ms." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -159,7 +156,7 @@ namespace Bybit.Net.Clients.Socket
             });
             var topic = limit == 25 ? "orderBookL2_25." : "orderBook_200.100ms.";
             return await _baseClient.SubscribeInternalAsync(this, 
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => topic + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => topic + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -190,7 +187,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, desResult.Data.First().Asset));
             });
             return await _baseClient.SubscribeInternalAsync(this, 
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "insurance." + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "insurance." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -222,7 +219,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, topic.Split('.').Last()));
             });
             return await _baseClient.SubscribeInternalAsync(this, 
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "klineV2.1." + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "klineV2.1." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -253,7 +250,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, desResult.Data.Symbol));
             });
             return await _baseClient.SubscribeInternalAsync(this, 
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "liquidation." + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "liquidation." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -276,7 +273,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data));
             });
             return await _baseClient.SubscribeInternalAsync(this, _options.UsdPerpetualStreamsOptions.BaseAddressAuthenticated,
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "position" } },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "position" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -299,7 +296,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data));
             });
             return await _baseClient.SubscribeInternalAsync(this, _options.UsdPerpetualStreamsOptions.BaseAddressAuthenticated,
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "execution" } },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "execution" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -322,7 +319,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data));
             });
             return await _baseClient.SubscribeInternalAsync(this, _options.UsdPerpetualStreamsOptions.BaseAddressAuthenticated,
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -345,7 +342,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data));
             });
             return await _baseClient.SubscribeInternalAsync(this, _options.UsdPerpetualStreamsOptions.BaseAddressAuthenticated,
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -368,7 +365,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data));
             });
             return await _baseClient.SubscribeInternalAsync(this, _options.UsdPerpetualStreamsOptions.BaseAddressAuthenticated,
-                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "wallet" } },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "wallet" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
     }

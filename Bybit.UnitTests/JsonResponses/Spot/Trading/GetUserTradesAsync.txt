@@ -1,0 +1,30 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": [
+       {
+            "id": "931975237315196160",
+            "symbol": "BTCUSDT",
+            "symbolName": "BTCUSDT",
+            "orderId": "931975236946097408",
+            "matchOrderId": "931975113180558592",
+            "price": "20000.00001",
+            "qty": "0.01",
+            "commission": "0.02000000001",
+            "commissionAsset": "USDT",
+            "time": "1625836105890",
+            "isBuyer": false,
+            "isMaker": false,
+            "fee": {
+                "feeTokenId": "USDT",
+                "feeTokenName": "USDT",
+                "fee": "0.02000000001"
+            },
+            "feeTokenId": "USDT",
+            "feeAmount": "0.02000000001",
+            "makerRebate": "0"
+       }
+    ]
+}

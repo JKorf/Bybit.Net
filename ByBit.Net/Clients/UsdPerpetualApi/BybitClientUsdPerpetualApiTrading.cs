@@ -18,9 +18,7 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {
-    /// <summary>
-    /// Spot system endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class BybitClientUsdPerpetualApiTrading: IBybitClientUsdPerpetualApiTrading
     {
         private BybitClientUsdPerpetualApi _baseClient;

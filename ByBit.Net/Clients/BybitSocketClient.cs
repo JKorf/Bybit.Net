@@ -19,14 +19,20 @@ using Newtonsoft.Json;
 using System.Threading;
 using Bybit.Net.Clients.Socket;
 using Bybit.Net.Clients.Rest.Futures;
+using Bybit.Net.Objects.Models.Socket.Spot;
 
 namespace Bybit.Net.Clients
 {
+    /// <inheritdoc cref="IBybitSocketClient" />
     public class BybitSocketClient: BaseSocketClient, IBybitSocketClient
     {
+        /// <inheritdoc />
         public IBybitSocketClientUsdPerpetualStreams UsdPerpetualStreams { get; }
+        /// <inheritdoc />
         public IBybitSocketClientInversePerpetualStreams InversePerpetualStreams { get; }
+        /// <inheritdoc />
         public IBybitSocketClientInverseFuturesStreams InverseFuturesStreams { get; }
+        /// <inheritdoc />
         public IBybitSocketClientSpotStreams SpotStreams { get; }
 
         /// <summary>
@@ -40,7 +46,7 @@ namespace Bybit.Net.Clients
         /// Create a new instance of BybitSocketClientFutures using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public BybitSocketClient(BybitSocketClientOptions options) : base("Bybit[Futures]", options)
+        public BybitSocketClient(BybitSocketClientOptions options) : base("Bybit", options)
         {
             if (options == null)
                 throw new ArgumentException("Cant pass null options, use empty constructor for default");
@@ -51,9 +57,14 @@ namespace Bybit.Net.Clients
             UsdPerpetualStreams = new BybitSocketClientUsdPerpetualStreams(log, this, options);
             InversePerpetualStreams = new BybitSocketClientInversePerpetualStreams(log, this, options);
             //InverseFutures = new BybitSocketClientInverseFutures(log, this, options);
-            //Spot = new BybitSocketClientSpot(log, this, options);
+            SpotStreams = new BybitSocketClientSpotStreams(log, this, options);
 
-            SendPeriodic(TimeSpan.FromSeconds(30), (connection) => new BybitRequestMessage() { Operation = "ping" });
+            SendPeriodic(TimeSpan.FromSeconds(30), (connection) => {
+                if(connection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+                    return new BybitSpotPing() { Ping = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)!.Value };
+                else
+                    return new BybitFuturesRequestMessage() { Operation = "ping" };
+            });
             AddGenericHandler("Heartbeat", (evnt) => { });
         }
 
@@ -79,11 +90,11 @@ namespace Bybit.Net.Clients
             if (socketConnection.ApiClient.AuthenticationProvider == null)
                 return new CallResult<bool>(false, new NoApiCredentialsError());
 
-            var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(5));
+            var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(5))!;
             var key = socketConnection.ApiClient.AuthenticationProvider.Credentials.Key!.GetString();
             var sign = socketConnection.ApiClient.AuthenticationProvider.Sign($"GET/realtime{expireTime}");
 
-            var authRequest = new BybitRequestMessage()
+            var authRequest = new BybitFuturesRequestMessage()
             {
                 Operation = "auth",
                 Parameters = new object[]
@@ -101,14 +112,23 @@ namespace Bybit.Net.Clients
                 if (data.Type != JTokenType.Object)
                     return false;
 
-                var operation = data["request"]?["op"]?.ToString();
-                var args = data["request"]?["args"].Select(p => p.ToString()).ToList();
-                if (operation != "auth")
-                    return false;
+                if (socketConnection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+                {
+                    var auth = data["auth"]?.ToString();
+                    result = auth == "success";
+                    return auth != null;
+                }
+                else
+                {
+                    var operation = data["request"]?["op"]?.ToString();
+                    var args = data["request"]?["args"].Select(p => p.ToString()).ToList();
+                    if (operation != "auth")
+                        return false;
 
-                result = data["success"]?.Value<bool>() == true;
-                error = data["ret_msg"]?.ToString();
-                return true;
+                    result = data["success"]?.Value<bool>() == true;
+                    error = data["ret_msg"]?.ToString();
+                    return true;
+                }
             }).ConfigureAwait(false);
             return new CallResult<bool>(result, result ? null : new ServerError(error));
         }
@@ -126,22 +146,43 @@ namespace Bybit.Net.Clients
             if (data.Type != JTokenType.Object)
                 return false;
 
-            var requestParams = ((BybitRequestMessage)request).Parameters;
+            if (socketConnection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+            {
+                var bRequest = ((BybitSpotRequestMessage)request);
+                var requestSymbols = bRequest.Parameters["symbol"]?.ToString().Split(',');
+                var operation = data["event"]?.ToString();
+                var topic = data["topic"]?.ToString();
+                var symbols = data["params"]?["symbol"]?.ToString().Split(',').ToList();
+                if (operation != "sub")
+                    return false;
 
-            var operation = data["request"]?["op"]?.ToString();
-            var args = data["request"]?["args"].Select(p => p.ToString()).ToList();
-            if (operation != "subscribe")
-                return false;
+                if (topic != bRequest.Operation)
+                    return false;
 
-            if (requestParams.Any(p => !args.Contains(p)))
-                return false;
+                if (requestSymbols.Any(p => !symbols.Contains(p)))
+                    return false;
 
-            callResult = new CallResult<object>(default, null);
-            return data["success"]?.Value<bool>() == true;
+                callResult = new CallResult<object>(default, null);
+                return data["msg"]?.Value<string>() == "Success";
+            }
+            else
+            {
+                var requestParams = ((BybitFuturesRequestMessage)request).Parameters;
+                var operation = data["request"]?["op"]?.ToString();
+                var args = data["request"]?["args"].Select(p => p.ToString()).ToList();
+                if (operation != "subscribe")
+                    return false;
+
+                if (requestParams.Any(p => !args.Contains(p)))
+                    return false;
+
+                callResult = new CallResult<object>(default, null);
+                return data["success"]?.Value<bool>() == true;
+            }
         }
 
         /// <inheritdoc />
-        protected override bool MessageMatchesHandler(JToken message, object request)
+        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
         {
             if (message.Type != JTokenType.Object)
                 return false;
@@ -150,25 +191,52 @@ namespace Bybit.Net.Clients
             if (topic == null)
                 return false;
 
-            var requestParams = ((BybitRequestMessage)request).Parameters;
-            if (requestParams.Any(p => topic == p.ToString()))
+            if (socketConnection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+            {
+                var bRequest = ((BybitSpotRequestMessage)request);
+                var requestSymbols = bRequest.Parameters["symbol"]?.ToString().Split(',');
+                var symbol = message["params"]?["symbol"]?.ToString();
+
+                if (bRequest.Operation != topic)
+                    return false;
+
+                if (!requestSymbols.Contains(symbol))
+                    return false;
+
+                var klineInterval = message["params"]?["klineType"]?.ToString();
+                if (klineInterval != null && bRequest.Parameters.ContainsKey("klineType"))
+                {
+                    if (klineInterval != (string)bRequest.Parameters["klineType"])
+                        return false;
+                }
+
                 return true;
+            }
+            else
+            {
+                var requestParams = ((BybitFuturesRequestMessage)request).Parameters;
+                if (requestParams.Any(p => topic == p.ToString()))
+                    return true;
 
-            var split = topic.Split('.');
-            var symbol = split.Last();
-            var mainTopic = topic.Substring(0, topic.Length - symbol.Length - 1);
+                var split = topic.Split('.');
+                var symbol = split.Last();
+                var mainTopic = topic.Substring(0, topic.Length - symbol.Length - 1);
 
-            if (requestParams.Any(p => (string)p == (mainTopic + ".*")))
-                return true;
+                if (requestParams.Any(p => (string)p == (mainTopic + ".*")))
+                    return true;
 
-            return false;
+                return false;
+            }
         }
 
         /// <inheritdoc />
-        protected override bool MessageMatchesHandler(JToken message, string identifier)
+        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
         {
             if (identifier == "Heartbeat")
             {
+                if (message.Type != JTokenType.Object)
+                    return false;
+
                 var ret = message["ret_msg"];
                 if (ret == null)
                     return false;
@@ -180,33 +248,74 @@ namespace Bybit.Net.Clients
                 return true;
             }
 
+            if(identifier == "AccountInfo")
+            {
+                if (message.Type != JTokenType.Array)
+                    return false;
+
+                var updateType = ((JArray)message)[0]["e"]?.ToString();
+                if (updateType == null)
+                    return false;
+
+                return updateType == "outboundAccountInfo" || updateType == "executionReport" || updateType == "ticketInfo";
+            }
+
             return false;
         }
 
         /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {
-            var requestParams = ((BybitRequestMessage)subscriptionToUnsub.Request!).Parameters;
-            var message = new BybitRequestMessage { Operation = "unsubscribe", Parameters = requestParams };
-
-            var result = false;
-            await connection.SendAndWaitAsync(message, ClientOptions.SocketResponseTimeout, data =>
+            if (connection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
             {
-                if (data.Type != JTokenType.Object)
-                    return false;
+                var bRequest = ((BybitSpotRequestMessage)subscriptionToUnsub.Request!);
+                var message = new BybitSpotRequestMessage 
+                { 
+                    Operation = bRequest.Operation, 
+                    Parameters =  new Dictionary<string, object>
+                    {
+                        { "symbol", bRequest.Parameters["symbol"] }
+                    },
+                    Event = "cancel" 
+                };
 
-                var operation = data["request"]?["op"]?.ToString();
-                var args = data["request"]?["args"].Select(p => p.ToString()).ToList();
-                if (operation != "unsubscribe")
-                    return false;
+                var result = false;
+                await connection.SendAndWaitAsync(message, ClientOptions.SocketResponseTimeout, data =>
+                {
+                    if (data.Type != JTokenType.Object)
+                        return false;
 
-                if (requestParams.Any(p => !args.Contains(p)))
-                    return false;
+                    // TODo
 
-                result = data["success"]?.Value<bool>() == true;
-                return true;
-            }).ConfigureAwait(false);
-            return result;
+                    result = data["success"]?.Value<bool>() == true;
+                    return true;
+                }).ConfigureAwait(false);
+                return result;
+            }
+            else
+            {
+                var requestParams = ((BybitFuturesRequestMessage)subscriptionToUnsub.Request!).Parameters;
+                var message = new BybitFuturesRequestMessage { Operation = "unsubscribe", Parameters = requestParams };
+
+                var result = false;
+                await connection.SendAndWaitAsync(message, ClientOptions.SocketResponseTimeout, data =>
+                {
+                    if (data.Type != JTokenType.Object)
+                        return false;
+
+                    var operation = data["request"]?["op"]?.ToString();
+                    var args = data["request"]?["args"].Select(p => p.ToString()).ToList();
+                    if (operation != "unsubscribe")
+                        return false;
+
+                    if (requestParams.Any(p => !args.Contains(p)))
+                        return false;
+
+                    result = data["success"]?.Value<bool>() == true;
+                    return true;
+                }).ConfigureAwait(false);
+                return result;
+            }
         }
     }
 }
