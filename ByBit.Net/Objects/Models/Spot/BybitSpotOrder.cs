@@ -17,7 +17,7 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Quantity executed
         /// </summary>
         [JsonProperty("executedQty")]
-        public decimal QuantityExecuted { get; set; }
+        public decimal QuantityFilled { get; set; }
         /// <summary>
         /// Quote quantity
         /// </summary>
