@@ -211,6 +211,34 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         #endregion
 
+        #region Get last user funding fee
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitFundingSettlement>> GetLastUserFundingFeeAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitFundingSettlement>(_baseClient.GetUrl("v2/private/funding/prev-funding"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);            
+        }
+
+        #endregion
+
+        #region Get last user funding fee
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitPredictedFunding>> GetPredictedUserFundingFeeAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitPredictedFunding>(_baseClient.GetUrl("v2/private/funding/predicted-funding"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get wallet fund history
 
         /// <inheritdoc />

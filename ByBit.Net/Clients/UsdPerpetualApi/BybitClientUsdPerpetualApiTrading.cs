@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <inheritdoc />
-    public class BybitClientUsdPerpetualApiTrading: IBybitClientUsdPerpetualApiTrading
+    public class BybitClientUsdPerpetualApiTrading : IBybitClientUsdPerpetualApiTrading
     {
         private BybitClientUsdPerpetualApi _baseClient;
 
@@ -480,9 +480,9 @@ namespace Bybit.Net.Clients.Rest.Futures
             {
                 { "symbol", symbol },
             };
-            parameters.AddOptionalParameter("exec_type", type == null ? null: JsonConvert.SerializeObject(type, new TradeTypeConverter(false)));
-            parameters.AddOptionalParameter("start_time",  DateTimeConverter.ConvertToMilliseconds(startTime));
-            parameters.AddOptionalParameter("end_time",  DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("exec_type", type == null ? null : JsonConvert.SerializeObject(type, new TradeTypeConverter(false)));
+            parameters.AddOptionalParameter("start_time", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("end_time", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

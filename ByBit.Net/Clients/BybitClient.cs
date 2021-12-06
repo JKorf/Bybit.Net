@@ -20,6 +20,8 @@ namespace Bybit.Net.Clients
     public class BybitClient: BaseRestClient, IBybitClient
     {
         /// <inheritdoc />
+        public IBybitClientGeneralApi GeneralApi { get; }
+        /// <inheritdoc />
         public IBybitClientSpotApi SpotApi { get; }
         /// <inheritdoc />
         public IBybitClientInversePerpetualApi InversePerpetualApi { get; }
@@ -46,6 +48,7 @@ namespace Bybit.Net.Clients
             InverseFuturesApi = new BybitClientInverseFuturesApi(this, options);
             UsdPerpetualApi = new BybitClientUsdPerpetualApi(this, options);
             SpotApi = new BybitClientSpotApi(this, options);
+            GeneralApi = new BybitClientGeneralApi(this, options);
 
             requestBodyFormat = RequestBodyFormat.FormData;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;

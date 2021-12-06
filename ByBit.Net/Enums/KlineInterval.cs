@@ -48,7 +48,7 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// 720
         /// </summary>
-        TwelfHours,
+        TwelveHours,
         /// <summary>
         /// D
         /// </summary>

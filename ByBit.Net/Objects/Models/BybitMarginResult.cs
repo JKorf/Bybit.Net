@@ -83,12 +83,12 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("occ_closing_fee")]
         public decimal ClosingFee { get; set; }
         /// <summary>
-        /// Today's realised Profit and Loss
+        /// Today's realized Profit and Loss
         /// </summary>
         [JsonProperty("realised_pnl")]
         public decimal RealizedPnl { get; set; }
         /// <summary>
-        /// Cumulative realised Profit and Loss
+        /// Cumulative realized Profit and Loss
         /// </summary>
         [JsonProperty("cum_realised_pnl")]
         public decimal TotalRealizedPnl { get; set; }

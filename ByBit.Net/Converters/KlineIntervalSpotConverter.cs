@@ -20,7 +20,7 @@ namespace Bybit.Net.Converters
             new KeyValuePair<KlineInterval, string>(KlineInterval.TwoHours, "2h"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.FourHours, "4h"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.SixHours, "6h"),
-            new KeyValuePair<KlineInterval, string>(KlineInterval.TwelfHours, "12h"),
+            new KeyValuePair<KlineInterval, string>(KlineInterval.TwelveHours, "12h"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneDay, "1d"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneWeek, "1w"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneMonth, "1m"),

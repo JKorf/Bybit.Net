@@ -52,7 +52,7 @@ namespace Bybit.Net.Objects.Models.Socket
         [JsonProperty("turnover")]
         public decimal Turnover { get; set; }
         /// <summary>
-        /// Is confirm
+        /// Is the final kline
         /// </summary>
         public bool Confirm { get; set; }
         /// <summary>

@@ -16,6 +16,7 @@ namespace Bybit.Net.Interfaces.Clients.Spot
     {
         /// <summary>
         /// Subscribe to public trade updates
+        /// <para>https://bybit-exchange.github.io/docs/spot/#t-websocketv2trade</para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="handler">Data handler</param>
@@ -25,6 +26,7 @@ namespace Bybit.Net.Interfaces.Clients.Spot
 
         /// <summary>
         /// Subscribe to order book updates
+        /// <para>https://bybit-exchange.github.io/docs/spot/#t-websocketv2depth</para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="handler">Data handler</param>
@@ -34,6 +36,7 @@ namespace Bybit.Net.Interfaces.Clients.Spot
 
         /// <summary>
         /// Subscribe to kline updates
+        /// <para>https://bybit-exchange.github.io/docs/spot/#t-websocketv2kline</para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="interval">Interval of the kline data</param>
@@ -44,6 +47,7 @@ namespace Bybit.Net.Interfaces.Clients.Spot
 
         /// <summary>
         /// Subscribe to book price updates
+        /// <para>https://bybit-exchange.github.io/docs/spot/#t-websocketv2bookticker</para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="handler">Data handler</param>
@@ -53,6 +57,7 @@ namespace Bybit.Net.Interfaces.Clients.Spot
 
         /// <summary>
         /// Subscribe to ticker updates
+        /// <para>https://bybit-exchange.github.io/docs/spot/#t-websocketv2realtimes</para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="handler">Data handler</param>
@@ -62,6 +67,7 @@ namespace Bybit.Net.Interfaces.Clients.Spot
 
         /// <summary>
         /// Subscribe to account data updates
+        /// <para>https://bybit-exchange.github.io/docs/spot/#t-privatetopics</para>
         /// </summary>
         /// <param name="accountUpdateHandler">Account(balance) update handler</param>
         /// <param name="orderUpdateHandler">Order update handler</param>

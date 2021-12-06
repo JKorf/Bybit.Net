@@ -1,5 +1,4 @@
-﻿using Bybit.Net.Interfaces.Clients.InverseFutures;
-using Bybit.Net.Interfaces.Clients.InversePerpetual;
+﻿using Bybit.Net.Interfaces.Clients.InversePerpetual;
 using Bybit.Net.Interfaces.Clients.Spot;
 using Bybit.Net.Interfaces.Clients.UsdPerpetual;
 using CryptoExchange.Net.Interfaces;
@@ -23,9 +22,5 @@ namespace Bybit.Net.Interfaces.Clients
         /// Inverse perpetual streams
         /// </summary>
         public IBybitSocketClientInversePerpetualStreams InversePerpetualStreams { get; }
-        /// <summary>
-        /// Inverse futures streams
-        /// </summary>
-        public IBybitSocketClientInverseFuturesStreams InverseFuturesStreams { get; }
     }
 }

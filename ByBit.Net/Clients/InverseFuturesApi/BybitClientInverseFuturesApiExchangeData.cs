@@ -2,7 +2,6 @@
 using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models;
 using Bybit.Net.Objects.Internal;
-using Bybit.Net.Objects.Models;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
@@ -18,7 +17,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <inheritdoc />
-    public class BybitClientInverseFuturesApiExchangeData: IBybitClientInverseFuturesApiExchangeData //: BybitClientFuturesBaseExchangeData
+    public class BybitClientInverseFuturesApiExchangeData : IBybitClientInverseFuturesApiExchangeData
     {
         private BybitClientInverseFuturesApi _baseClient;
 

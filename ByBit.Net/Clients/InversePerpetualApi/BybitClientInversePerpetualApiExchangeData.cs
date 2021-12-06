@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.Rest.Futures
 {
     /// <inheritdoc />
-    public class BybitClientInversePerpetualApiExchangeData : IBybitClientInversePerpetualApiExchangeData //: BybitClientFuturesBaseExchangeData
+    public class BybitClientInversePerpetualApiExchangeData : IBybitClientInversePerpetualApiExchangeData
     {
         private BybitClientInversePerpetualApi _baseClient;
 

@@ -9,6 +9,10 @@ namespace Bybit.Net.Interfaces.Clients
     public interface IBybitClient: IRestClient
     {
         /// <summary>
+        /// General API endpoints
+        /// </summary>
+        public IBybitClientGeneralApi GeneralApi { get; }
+        /// <summary>
         /// Inverse perpetual API endpoints
         /// </summary>
         IBybitClientInversePerpetualApi InversePerpetualApi { get; }

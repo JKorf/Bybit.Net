@@ -1,13 +1,9 @@
-﻿using Bybit.Net.Objects.Internal;
-using Bybit.Net.Objects.Internal.Socket;
+﻿using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects.Models;
 using Bybit.Net.Objects.Models.Socket;
-using Bybit.Net;
 using Bybit.Net.Objects;
-using Bybit.Net.Objects.Models;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
@@ -16,11 +12,12 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Logging;
 using Bybit.Net.Interfaces.Clients.InversePerpetual;
+using Bybit.Net.Enums;
+using Bybit.Net.Converters;
 
 namespace Bybit.Net.Clients.Socket
 {
@@ -192,15 +189,15 @@ namespace Bybit.Net.Clients.Socket
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
-            => SubscribeToKlineUpdatesAsync(new string[] { "*" }, handler, ct);
+        public Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+            => SubscribeToKlineUpdatesAsync(new string[] { "*" }, interval, handler, ct);
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
-            => SubscribeToKlineUpdatesAsync(new string[] { symbol }, handler, ct);
+        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+            => SubscribeToKlineUpdatesAsync(new string[] { symbol }, interval, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -219,7 +216,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, topic.Split('.').Last()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "klineV2.1." + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "klineV2."+JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))+"." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 

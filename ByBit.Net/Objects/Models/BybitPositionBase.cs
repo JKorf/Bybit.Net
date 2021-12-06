@@ -95,7 +95,7 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("realised_pnl")]
         public decimal RealizedPnl { get; set; }
         /// <summary>
-        /// Accumulated realised pnl (all-time total)
+        /// Accumulated realized pnl (all-time total)
         /// </summary>
         [JsonProperty("cum_realised_pnl")]
         public decimal TotalRealizedPnl { get; set; }

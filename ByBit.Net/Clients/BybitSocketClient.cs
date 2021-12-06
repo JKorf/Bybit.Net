@@ -13,7 +13,6 @@ using System.Linq;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Interfaces.Clients.UsdPerpetual;
 using Bybit.Net.Interfaces.Clients.InversePerpetual;
-using Bybit.Net.Interfaces.Clients.InverseFutures;
 using Bybit.Net.Interfaces.Clients.Spot;
 using Newtonsoft.Json;
 using System.Threading;
@@ -30,8 +29,6 @@ namespace Bybit.Net.Clients
         public IBybitSocketClientUsdPerpetualStreams UsdPerpetualStreams { get; }
         /// <inheritdoc />
         public IBybitSocketClientInversePerpetualStreams InversePerpetualStreams { get; }
-        /// <inheritdoc />
-        public IBybitSocketClientInverseFuturesStreams InverseFuturesStreams { get; }
         /// <inheritdoc />
         public IBybitSocketClientSpotStreams SpotStreams { get; }
 
@@ -59,7 +56,7 @@ namespace Bybit.Net.Clients
             //InverseFutures = new BybitSocketClientInverseFutures(log, this, options);
             SpotStreams = new BybitSocketClientSpotStreams(log, this, options);
 
-            SendPeriodic(TimeSpan.FromSeconds(30), (connection) => {
+            SendPeriodic("Ping", TimeSpan.FromSeconds(30), (connection) => {
                 if(connection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
                     return new BybitSpotPing() { Ping = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)!.Value };
                 else

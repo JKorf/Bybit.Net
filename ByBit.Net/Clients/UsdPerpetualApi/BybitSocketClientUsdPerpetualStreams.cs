@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Logging;
 using Microsoft.Extensions.Logging;
 using Bybit.Net.Interfaces.Clients.UsdPerpetual;
+using Bybit.Net.Enums;
+using Bybit.Net.Converters;
 
 namespace Bybit.Net.Clients.Socket
 {
@@ -161,46 +163,15 @@ namespace Bybit.Net.Clients.Socket
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToInsurancesUpdatesAsync(Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, CancellationToken ct = default)
-            => SubscribeToInsuranceUpdatesAsync(new string[] { "*" }, handler, ct);
+        public Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+            => SubscribeToKlineUpdatesAsync(new string[] { "*" }, interval, handler, ct);
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, CancellationToken ct = default)
-            => SubscribeToInsuranceUpdatesAsync(new string[] { symbol }, handler, ct);
+        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+            => SubscribeToKlineUpdatesAsync(new string[] { symbol }, interval, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, CancellationToken ct = default)
-        {
-            var internalHandler = new Action<DataEvent<JToken>>(data =>
-            {
-                var internalData = data.Data["data"];
-                if (internalData == null)
-                    return;
-
-                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitInsuranceUpdate>>(internalData);
-                if (!desResult)
-                {
-                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitInsuranceUpdate)} object: " + desResult.Error);
-                    return;
-                }
-
-                handler(data.As(desResult.Data, desResult.Data.First().Asset));
-            });
-            return await _baseClient.SubscribeInternalAsync(this, 
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "insurance." + s).ToArray() },
-                null, false, internalHandler, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
-            => SubscribeToKlineUpdatesAsync(new string[] { "*" }, handler, ct);
-
-        /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
-            => SubscribeToKlineUpdatesAsync(new string[] { symbol }, handler, ct);
-
-        /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -211,7 +182,7 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitKlineUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitInsuranceUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitKlineUpdate)} object: " + desResult.Error);
                     return;
                 }
 
@@ -219,7 +190,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, topic.Split('.').Last()));
             });
             return await _baseClient.SubscribeInternalAsync(this, 
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "klineV2.1." + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "candle." + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) + "." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -335,7 +306,7 @@ namespace Bybit.Net.Clients.Socket
                 var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitStopOrderUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to _baseClient.DeserializeInternal {nameof(BybitStopOrderUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitStopOrderUpdate)} object: " + desResult.Error);
                     return;
                 }
 

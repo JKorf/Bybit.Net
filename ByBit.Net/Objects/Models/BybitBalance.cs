@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models
     public class BybitBalance
     {
         /// <summary>
-        /// Equity, wallet balance + unrealised pnl
+        /// Equity, wallet balance + unrealized pnl
         /// </summary>
         public decimal Equity { get; set; }
         /// <summary>

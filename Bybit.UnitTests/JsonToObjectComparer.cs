@@ -246,10 +246,11 @@ namespace Bybit.Net.UnitTests
             if (propertyValue == default && propValue.Type != JTokenType.Null && !string.IsNullOrEmpty(propValue.ToString()))
             {
                 // Property value not correct
-                throw new Exception($"{method}: Property `{propertyName}` has no value while input json `{propName}` has value {propValue}");
+                if(propValue.ToString() != "0")
+                    throw new Exception($"{method}: Property `{propertyName}` has no value while input json `{propName}` has value {propValue}");
             }
 
-            if (propertyValue == default && (propValue.Type == JTokenType.Null || string.IsNullOrEmpty(propValue.ToString())))
+            if (propertyValue == default)
                 return;
 
             if (propertyValue.GetType().GetInterfaces().Contains(typeof(IDictionary)))
@@ -271,7 +272,8 @@ namespace Bybit.Net.UnitTests
                         if (dict[dictProp.Name] == default && dictProp.Value.Type != JTokenType.Null)
                         {
                             // Property value not correct
-                            throw new Exception($"{method}: Dictionary entry `{dictProp.Name}` has no value while input json has value {propValue}");
+                            if(dictProp.Value.ToString() != "0")
+                                throw new Exception($"{method}: Dictionary entry `{dictProp.Name}` has no value while input json has value {propValue}");
                         }
                     }
                 }
@@ -310,7 +312,8 @@ namespace Bybit.Net.UnitTests
                         var value = enumerator.Current;
                         if (value == default && ((JValue)jtoken).Type != JTokenType.Null)
                         {
-                            throw new Exception($"{method}: Property `{propertyName}` has no value while input json `{propName}` has value {jtoken}");
+                            if(jtoken.ToString() != "0")
+                                throw new Exception($"{method}: Property `{propertyName}` has no value while input json `{propName}` has value {jtoken}");
                         }
 
                         CheckValues(method, propertyName, (JValue)jtoken, value);

@@ -44,7 +44,7 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("position_status"), JsonConverter(typeof(PositionStatusConverter))]
         public PositionStatus PositionStatus { get; set; }
         /// <summary>
-        /// Unrealised pnl
+        /// Unrealized pnl
         /// </summary>
         [JsonProperty("unrealised_pnl")]
         public decimal UnrealizedPnl { get; set; }        

@@ -2,8 +2,6 @@
 using Bybit.Net.Enums;
 using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models;
-using Bybit.Net.Objects.Internal;
-using Bybit.Net.Objects.Models;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
@@ -12,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -474,7 +471,7 @@ namespace Bybit.Net.Clients.Rest.Futures
                 { "symbol", symbol },
             };
             parameters.AddOptionalParameter("order_id", orderId);
-            parameters.AddOptionalParameter("start_time",  DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("start_time", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
