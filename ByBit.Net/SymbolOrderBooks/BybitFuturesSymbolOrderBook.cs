@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Bybit.Net.Clients.Socket;
 using Bybit.Net.Objects.Models.Socket;
 using Bybit.Net.Objects;
 using Bybit.Net.Objects.Models;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
 using CryptoExchange.Net.Sockets;

@@ -1,16 +1,12 @@
-﻿using Bybit.Net;
-using Bybit.Net.Objects;
+﻿using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

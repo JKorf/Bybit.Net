@@ -2,7 +2,6 @@
 using Bybit.Net.Enums;
 using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models;
-using Bybit.Net.Objects.Models.Spot;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
@@ -10,9 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -132,7 +129,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         #endregion
 
-        #region Get subaccount transfer history
+        #region Get subaccounts
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync(long? receiveWindow = null, CancellationToken ct = default)

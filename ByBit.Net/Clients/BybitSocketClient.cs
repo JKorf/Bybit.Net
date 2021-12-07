@@ -3,7 +3,6 @@ using Bybit.Net.Objects;
 using CryptoExchange.Net;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using CryptoExchange.Net.Objects;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Sockets;
@@ -17,7 +16,6 @@ using Bybit.Net.Interfaces.Clients.Spot;
 using Newtonsoft.Json;
 using System.Threading;
 using Bybit.Net.Clients.Socket;
-using Bybit.Net.Clients.Rest.Futures;
 using Bybit.Net.Objects.Models.Socket.Spot;
 
 namespace Bybit.Net.Clients
@@ -131,7 +129,7 @@ namespace Bybit.Net.Clients
         }
 
         /// <inheritdoc />
-        protected override bool HandleQueryResponse<T>(SocketConnection socketConnection, object request, JToken data, out CallResult<T>? callResult)
+        protected override bool HandleQueryResponse<T>(SocketConnection socketConnection, object request, JToken data, out CallResult<T> callResult)
         {
             throw new NotImplementedException();
         }
@@ -156,7 +154,7 @@ namespace Bybit.Net.Clients
                 if (topic != bRequest.Operation)
                     return false;
 
-                if (requestSymbols.Any(p => !symbols.Contains(p)))
+                if (requestSymbols.Any(p => symbols?.Contains(p) != true))
                     return false;
 
                 callResult = new CallResult<object>(default, null);

@@ -1,14 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CryptoExchange.Net.ExchangeInterfaces;
+using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Symbol info
     /// </summary>
-    public class BybitSpotSymbol
+    public class BybitSpotSymbol: ICommonSymbol
     {
         /// <summary>
         /// Name of the symbol
@@ -66,5 +64,9 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Category
         /// </summary>
         public int Category { get; set; }
+
+        string ICommonSymbol.CommonName => Name;
+
+        decimal ICommonSymbol.CommonMinimumTradeQuantity => MinOrderQuantity;
     }
 }

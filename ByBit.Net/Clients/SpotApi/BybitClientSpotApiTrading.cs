@@ -1,18 +1,13 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
-using Bybit.Net.Objects.Internal;
-using Bybit.Net.Objects.Models;
 using Bybit.Net.Objects.Models.Spot;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -45,7 +40,10 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (result)
+                _baseClient.InvokeOrderPlaced(result.Data);
+            return result;
         }
 
         #endregion
@@ -113,7 +111,10 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            if (result)
+                _baseClient.InvokeOrderCanceled(result.Data);
+            return result;
         }
 
         #endregion

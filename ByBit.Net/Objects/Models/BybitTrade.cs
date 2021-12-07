@@ -40,6 +40,6 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("time")]
         public DateTime? Timestamp { get; set; }
         [JsonProperty("trade_time_ms"), JsonConverter(typeof(DateTimeConverter))]
-        internal DateTime Time { set => Timestamp = value; }
+        internal DateTime Time { set => Timestamp = value; get => Timestamp ?? default; }
     }
 }

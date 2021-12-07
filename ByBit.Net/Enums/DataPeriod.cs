@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
-
-namespace Bybit.Net.Enums
+﻿namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Period

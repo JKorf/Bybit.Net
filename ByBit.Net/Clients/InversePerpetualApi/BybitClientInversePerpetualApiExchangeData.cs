@@ -1,8 +1,6 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models;
-using Bybit.Net.Objects.Internal;
-using Bybit.Net.Objects.Models;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
@@ -11,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

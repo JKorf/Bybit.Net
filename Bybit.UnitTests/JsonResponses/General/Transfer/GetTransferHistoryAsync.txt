@@ -1,0 +1,42 @@
+{
+    "ret_code": 0,
+    "ret_msg": "OK",
+    "ext_code": "",
+    "result": {
+        "list": [
+            {
+                "transfer_id": "selfTransfer_c5ae452d-43e8-47e6-aa7c-d2bab57c0958",
+                "coin": "BTC",
+                "amount": "1",
+                "from_account_type": "CONTRACT",
+                "to_account_type": "SPOT",
+                "timestamp": "1629965054",
+                "status": "SUCCESS"
+            },
+            {
+                "transfer_id": "selfTransfer_9a183347-152d-4bdc-990d-8b20284385f9",
+                "coin": "BTC",
+                "amount": "1",
+                "from_account_type": "SPOT",
+                "to_account_type": "CONTRACT",
+                "timestamp": "1629963043",
+                "status": "SUCCESS"
+            },
+            {
+                "transfer_id": "selfTransfer_5f9bfd6e-1718-4a16-814e-1d1bff4b01eb",
+                "coin": "BTC",
+                "amount": "20",
+                "from_account_type": "SPOT",
+                "to_account_type": "CONTRACT",
+                "timestamp": "1629874294",
+                "status": "SUCCESS"
+            }
+        ],
+        "cursor": "eyJtaW5JRCI6Nzg5NTcsIm1heElEIjo3OTM2NH0="
+    },
+    "ext_info": null,
+    "time_now": 1629971474462,
+    "rate_limit_status": 59,
+    "rate_limit_reset_ms": 1629971474462,
+    "rate_limit": 1
+}

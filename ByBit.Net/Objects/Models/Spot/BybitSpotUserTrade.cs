@@ -1,15 +1,14 @@
 ﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Models.Spot
 {
     /// <summary>
     /// User trade info
     /// </summary>
-    public class BybitSpotUserTrade
+    public class BybitSpotUserTrade: ICommonTrade
     {
         /// <summary>
         /// Trade id
@@ -67,7 +66,7 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Fee details
         /// </summary>
         [JsonProperty("fee")]
-        public BybitTradeFee FeeDetails { get; set; }
+        public BybitTradeFee FeeDetails { get; set; } = default!;
         /// <summary>
         /// Fee otken id
         /// </summary>
@@ -80,6 +79,18 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Maker rebate
         /// </summary>
         public decimal MakerRebate { get; set; }
+
+        string ICommonTrade.CommonId => Id.ToString();
+
+        decimal ICommonTrade.CommonPrice => Price;
+
+        decimal ICommonTrade.CommonQuantity => Quantity;
+
+        decimal ICommonTrade.CommonFee => Fee;
+
+        string? ICommonTrade.CommonFeeAsset => FeeAsset;
+
+        DateTime ICommonTrade.CommonTradeTime => TradeTime;
     }
 
     /// <summary>

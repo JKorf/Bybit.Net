@@ -1,0 +1,55 @@
+{
+    "ret_code": 0,
+    "ret_msg": "OK",
+    "ext_code": "",
+    "result": {
+        "list": [
+            {
+                "transfer_id": "5f95de18-b10f-43ba-9756-0b95c4a37d07",
+                "coin": "BTC",
+                "amount": "0.1",
+                "user_id": 229988,
+                "sub_user_id": 251711,
+                "timestamp": "1629968375",
+                "status": "SUCCESS",
+                "type": "IN"
+            },
+            {
+                "transfer_id": "5f95de18-b10f-43be-9756-0b95c4a37d07",
+                "coin": "BTC",
+                "amount": "0.1",
+                "user_id": 229988,
+                "sub_user_id": 251711,
+                "timestamp": "1629968351",
+                "status": "SUCCESS",
+                "type": "IN"
+            },
+            {
+                "transfer_id": "5f95de18-b10f-43be-9746-0b95c4a37d07",
+                "coin": "BTC",
+                "amount": "0.1",
+                "user_id": 229988,
+                "sub_user_id": 251711,
+                "timestamp": "1629967817",
+                "status": "SUCCESS",
+                "type": "IN"
+            },
+            {
+                "transfer_id": "5f95de18-b10f-43be-9746-7b95c4a37d97",
+                "coin": "BTC",
+                "amount": "0.1",
+                "user_id": 229988,
+                "sub_user_id": 251711,
+                "timestamp": "1629966772",
+                "status": "SUCCESS",
+                "type": "IN"
+            }
+        ],
+        "cursor": "eyJtaW5JRCI6NzkzNzgsIm1heElEIjo3OTQwMH0="
+    },
+    "ext_info": null,
+    "time_now": 1629978073116,
+    "rate_limit_status": 59,
+    "rate_limit_reset_ms": 1629978073116,
+    "rate_limit": 1
+}

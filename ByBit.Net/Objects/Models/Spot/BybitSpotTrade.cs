@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 using System;
 
@@ -7,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Spot trade info
     /// </summary>
-    public class BybitSpotTrade
+    public class BybitSpotTrade: ICommonRecentTrade
     {
         /// <summary>
         /// Trade price
@@ -27,5 +28,11 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Is the buyer the maker
         /// </summary>
         public bool IsBuyerMaker { get; set; }
+
+        decimal ICommonRecentTrade.CommonPrice => Price;
+
+        decimal ICommonRecentTrade.CommonQuantity => Quantity;
+
+        DateTime ICommonRecentTrade.CommonTradeTime => TradeTime;
     }
 }

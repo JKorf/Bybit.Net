@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Internal.Socket
 {
@@ -11,7 +8,7 @@ namespace Bybit.Net.Objects.Internal.Socket
         [JsonProperty("ret_msg")]
         public bool ReturnMessage { get; set; }
         [JsonProperty("conn_id")]
-        public string ConnectionId { get; set; }
-        public BybitFuturesRequestMessage Request { get; set; }
+        public string ConnectionId { get; set; } = string.Empty;
+        public BybitFuturesRequestMessage Request { get; set; } = default!;
     }
 }

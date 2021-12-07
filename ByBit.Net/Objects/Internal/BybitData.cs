@@ -1,8 +1,5 @@
 ﻿using Bybit.Net.Objects.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Internal
 {
@@ -15,7 +12,12 @@ namespace Bybit.Net.Objects.Internal
         /// <summary>
         /// The data
         /// </summary>
+#pragma warning disable 8618
         public T Data { get; set; }
+#pragma warning restore
+
+        [JsonProperty("list")]
+        internal T ListData { set => Data = value; get => Data; }
     }
 
     /// <summary>

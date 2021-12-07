@@ -141,5 +141,51 @@ namespace Bybit.Net.UnitTests
 
                 );
         }
+
+        [Test]
+        public async Task ValidateGeneralTransferCalls()
+        {
+            await _comparer.ProcessSubject("General/Transfer", c => c.GeneralApi.TransferApi,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+
+                );
+        }
+
+        [Test]
+        public async Task ValidateUsdPerpetualAccountCalls()
+        {
+            await _comparer.ProcessSubject("UsdPerpetual/Account", c => c.UsdPerpetualApi.Account,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+
+                );
+        }
+
+        [Test]
+        public async Task ValidateUsdPerpetualExchangeDataCalls()
+        {
+            await _comparer.ProcessSubject("UsdPerpetual/ExchangeData", c => c.UsdPerpetualApi.ExchangeData,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                    { "GetKlinesAsync", new List<string>{ "id", "period", "start_at" } }
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+
+                );
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models;
-using Bybit.Net.Objects.Models;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;

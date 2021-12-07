@@ -21,6 +21,8 @@ namespace Bybit.Net.Objects.Internal
         public DateTime? RateLimitReset { get; set; }
         public int? RateLimit { get; set; }
 
+#pragma warning disable 8618
         public T Result { get; set; }
+#pragma warning restore
     }
 }

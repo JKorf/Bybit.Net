@@ -16,6 +16,7 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonConverter(typeof(KlineIntervalConverter))]
         public KlineInterval Interval { get; set; }
+        /// <summary>
         /// Open time
         /// </summary>
         [JsonProperty("open_time"), JsonConverter(typeof(DateTimeConverter))]

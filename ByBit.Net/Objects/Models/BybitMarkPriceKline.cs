@@ -15,6 +15,7 @@ namespace Bybit.Net.Objects.Models
         /// Id
         /// </summary>
         public long? Id { get; set; }
+        /// <summary>
         /// Open time
         /// </summary>
         [JsonProperty("start_at"), JsonConverter(typeof(DateTimeConverter))]

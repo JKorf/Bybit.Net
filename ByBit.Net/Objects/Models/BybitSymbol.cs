@@ -51,17 +51,17 @@ namespace Bybit.Net.Objects.Models
         /// Leverage filter
         /// </summary>
         [JsonProperty("leverage_filter")]
-        public BybitLeverageFilter LeverageFilter { get; set; }
+        public BybitLeverageFilter LeverageFilter { get; set; } = default!;
         /// <summary>
         /// Price filter
         /// </summary>
         [JsonProperty("price_filter")]
-        public BybitPriceFilter PriceFilter { get; set; }
+        public BybitPriceFilter PriceFilter { get; set; } = default!;
         /// <summary>
         /// Lot size filter
         /// </summary>
         [JsonProperty("lot_size_filter")]
-        public BybitLotSizeFilter LotSizeFilter { get; set; }
+        public BybitLotSizeFilter LotSizeFilter { get; set; } = default!;
     }
 
     /// <summary>

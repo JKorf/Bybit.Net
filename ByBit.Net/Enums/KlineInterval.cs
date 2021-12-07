@@ -1,8 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Bybit.Net.Enums
+﻿namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Kline interval

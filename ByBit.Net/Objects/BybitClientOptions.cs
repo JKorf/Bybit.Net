@@ -1,9 +1,6 @@
-﻿using Bybit.Net.Clients.Socket;
-using Bybit.Net.Interfaces.Clients;
-using CryptoExchange.Net.Interfaces;
+﻿using Bybit.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects;
 using System;
-using System.Collections.Generic;
 
 
 namespace Bybit.Net.Objects
@@ -186,9 +183,11 @@ namespace Bybit.Net.Objects
         /// <summary>
         /// ctor
         /// </summary>
+#pragma warning disable 8618
         public BybitSocketApiClientOptions()
         {
         }
+#pragma warning restore
 
         /// <summary>
         /// ctor

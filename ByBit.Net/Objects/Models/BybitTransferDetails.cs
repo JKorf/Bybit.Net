@@ -2,8 +2,6 @@
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Models
 {
@@ -70,5 +68,9 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("sub_user_id")]
         public long SubAccountId { get; set; }
+        /// <summary>
+        /// Type
+        /// </summary>
+        public TransferType Type { get; set; }
     }
 }

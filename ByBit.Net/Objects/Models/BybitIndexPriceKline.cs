@@ -11,6 +11,7 @@ namespace Bybit.Net.Objects.Models
     /// </summary>
     public class BybitIndexPriceKline : BybitKlineBase
     {
+        /// <summary>
         /// Open time
         /// </summary>
         [JsonProperty("open_time"), JsonConverter(typeof(DateTimeConverter))]

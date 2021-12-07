@@ -1,10 +1,6 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Models.Spot
 {

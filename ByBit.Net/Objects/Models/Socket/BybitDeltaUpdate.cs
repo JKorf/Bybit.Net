@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.Socket
 {
@@ -11,14 +12,14 @@ namespace Bybit.Net.Objects.Models.Socket
         /// <summary>
         /// Delete entries
         /// </summary>
-        public IEnumerable<T> Delete { get; set; }
+        public IEnumerable<T> Delete { get; set; } = Array.Empty<T>();
         /// <summary>
         /// Update entries
         /// </summary>
-        public IEnumerable<T> Update { get; set; }
+        public IEnumerable<T> Update { get; set; } = Array.Empty<T>();
         /// <summary>
         /// Insert entries
         /// </summary>
-        public IEnumerable<T> Insert { get; set; }
+        public IEnumerable<T> Insert { get; set; } = Array.Empty<T>();
     }
 }

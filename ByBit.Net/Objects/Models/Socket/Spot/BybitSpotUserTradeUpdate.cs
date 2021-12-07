@@ -1,6 +1,4 @@
-﻿using Bybit.Net.Converters;
-using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
+﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 
