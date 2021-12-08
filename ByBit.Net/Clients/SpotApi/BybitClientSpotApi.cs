@@ -4,7 +4,9 @@ using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
+using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,12 @@ namespace Bybit.Net.Clients.Rest.Futures
     public class BybitClientSpotApi : RestApiClient, IBybitClientSpotApi, IExchangeClient
     {
         private readonly BybitClient _baseClient;
+        private readonly BybitClientOptions _options;
+        private readonly Log _log;
+
+        internal static TimeSpan TimeOffset;
+        internal static SemaphoreSlim SemaphoreSlim = new SemaphoreSlim(1, 1);
+        internal static DateTime LastTimeSync;
 
         /// <inheritdoc />
         public event Action<ICommonOrderId>? OnOrderPlaced;
@@ -34,10 +42,12 @@ namespace Bybit.Net.Clients.Rest.Futures
         public IBybitClientSpotApiTrading Trading { get; }
 
         #region ctor
-        internal BybitClientSpotApi(BybitClient baseClient, BybitClientOptions options)
+        internal BybitClientSpotApi(Log log, BybitClient baseClient, BybitClientOptions options)
             : base(options, options.SpotApiOptions)
         {
             _baseClient = baseClient;
+            _log = log;
+            _options = options;
             ClientOptions = options;
 
             Account = new BybitClientSpotApiAccount(this);
@@ -233,5 +243,31 @@ namespace Bybit.Net.Clients.Rest.Futures
             OnOrderCanceled?.Invoke(id);
         }
         #endregion
+
+        /// <inheritdoc />
+        protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
+        {
+            return ExchangeData.GetServerTimeAsync();
+        }
+
+        /// <inheritdoc />
+        protected override TimeSyncModel GetTimeSyncParameters()
+        {
+            return new TimeSyncModel(_options.SpotApiOptions.AutoTimestamp, SemaphoreSlim, LastTimeSync);
+        }
+
+        /// <inheritdoc />
+        protected override void UpdateTimeOffset(TimeSpan timestamp)
+        {
+            LastTimeSync = DateTime.UtcNow;
+            if (timestamp.TotalMilliseconds > 0 && timestamp.TotalMilliseconds < 500)
+                return;
+
+            _log.Write(LogLevel.Information, $"Time offset set to {Math.Round(timestamp.TotalMilliseconds)}ms");
+            TimeOffset = timestamp;
+        }
+
+        /// <inheritdoc />
+        public override TimeSpan GetTimeOffset() => TimeOffset;
     }
 }

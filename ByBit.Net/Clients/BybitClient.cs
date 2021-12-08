@@ -16,7 +16,7 @@ using System.Web;
 namespace Bybit.Net.Clients
 {
     /// <inheritdoc cref="IBybitClient" />
-    public class BybitClient: BaseRestClient, IBybitClient
+    public class BybitClient : BaseRestClient, IBybitClient
     {
         /// <inheritdoc />
         public IBybitClientGeneralApi GeneralApi { get; }
@@ -43,11 +43,11 @@ namespace Bybit.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public BybitClient(BybitClientOptions options) : base("Bybit", options)
         {
-            InversePerpetualApi = new BybitClientInversePerpetualApi(this, options);
-            InverseFuturesApi = new BybitClientInverseFuturesApi(this, options);
-            UsdPerpetualApi = new BybitClientUsdPerpetualApi(this, options);
-            SpotApi = new BybitClientSpotApi(this, options);
-            GeneralApi = new BybitClientGeneralApi(this, options);
+            InversePerpetualApi = new BybitClientInversePerpetualApi(log, this, options);
+            InverseFuturesApi = new BybitClientInverseFuturesApi(log, this, options);
+            UsdPerpetualApi = new BybitClientUsdPerpetualApi(log, this, options);
+            SpotApi = new BybitClientSpotApi(log, this, options);
+            GeneralApi = new BybitClientGeneralApi(log, this, options);
 
             requestBodyFormat = RequestBodyFormat.FormData;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
@@ -71,26 +71,22 @@ namespace Bybit.Net.Clients
         }
 
         /// <inheritdoc />
-        protected override void WriteParamBody(IRequest request, Dictionary<string, object> parameters, string contentType)
+        protected override IComparer<string> GetParameterComparer()
         {
-            var formData = HttpUtility.ParseQueryString(string.Empty);
-            foreach (var kvp in parameters.OrderBy(p => p.Key).Where(p => p.Key != "sign"))
+            return new BybitComparer();
+        }
+
+        internal class BybitComparer : IComparer<string>
+        {
+            public int Compare(string x, string y)
             {
-                if (kvp.Value.GetType().IsArray)
-                {
-                    var array = (Array)kvp.Value;
-                    foreach (var value in array)
-                        formData.Add(kvp.Key, value.ToString());
-                }
-                else
-                    formData.Add(kvp.Key, kvp.Value.ToString());
+                if (x == "sign")
+                    return 1;
+                if (y == "sign")
+                    return -1;
+
+                return x.CompareTo(y);
             }
-
-            if (parameters.ContainsKey("sign"))
-                formData.Add("sign", parameters["sign"].ToString());
-
-            var stringData = formData.ToString();
-            request.SetContent(stringData, contentType);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Bybit.Net.Clients.Rest.Futures
                 { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
             };
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", JsonConvert.SerializeObject(timeInForce, new TimeInForceSpotConverter(false)));
+            parameters.AddOptionalParameter("timeInForce", timeInForce == null? null: JsonConvert.SerializeObject(timeInForce, new TimeInForceSpotConverter(false)));
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 

@@ -2,7 +2,9 @@
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,8 @@ namespace Bybit.Net.Clients.Rest.Futures
     public class BybitClientGeneralApi : RestApiClient, IBybitClientGeneralApi
     {
         private readonly BybitClient _baseClient;
+        private readonly Log _log;
+        private readonly BybitClientOptions _options;
 
         internal BybitClientOptions ClientOptions { get; }
 
@@ -23,10 +27,12 @@ namespace Bybit.Net.Clients.Rest.Futures
         public IBybitClientGeneralApiTransfer TransferApi { get; }
 
         #region ctor
-        internal BybitClientGeneralApi(BybitClient baseClient, BybitClientOptions options)
+        internal BybitClientGeneralApi(Log log, BybitClient baseClient, BybitClientOptions options)
             : base(options, options.SpotApiOptions)
         {
             _baseClient = baseClient;
+            _log = log;
+            _options = options;
             ClientOptions = options;
 
             TransferApi = new BybitClientGeneralApiTransfer(this);
@@ -82,5 +88,32 @@ namespace Bybit.Net.Clients.Rest.Futures
 
             return result.As(result.Data.Result);
         }
+
+
+        /// <inheritdoc />
+        protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
+        {
+            return _baseClient.UsdPerpetualApi.ExchangeData.GetServerTimeAsync();
+        }
+
+        /// <inheritdoc />
+        protected override TimeSyncModel GetTimeSyncParameters()
+        {
+            return new TimeSyncModel(_options.InverseFuturesApiOptions.AutoTimestamp, BybitClientInversePerpetualApi.SemaphoreSlim, BybitClientInversePerpetualApi.LastTimeSync);
+        }
+
+        /// <inheritdoc />
+        protected override void UpdateTimeOffset(TimeSpan timestamp)
+        {
+            BybitClientInversePerpetualApi.LastTimeSync = DateTime.UtcNow;
+            if (timestamp.TotalMilliseconds > 0 && timestamp.TotalMilliseconds < 500)
+                return;
+
+            _log.Write(LogLevel.Information, $"Time offset set to {Math.Round(timestamp.TotalMilliseconds)}ms");
+            BybitClientInversePerpetualApi.TimeOffset = timestamp;
+        }
+
+        /// <inheritdoc />
+        public override TimeSpan GetTimeOffset() => BybitClientInversePerpetualApi.TimeOffset;
     }
 }
