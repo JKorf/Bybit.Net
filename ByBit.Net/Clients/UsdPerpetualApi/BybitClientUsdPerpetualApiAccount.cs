@@ -77,11 +77,12 @@ namespace Bybit.Net.Clients.Rest.Futures
         #region Set risk limit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, long riskId, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side, long riskId, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "risk_id", riskId.ToString(CultureInfo.InvariantCulture) },
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

@@ -28,9 +28,12 @@ namespace Bybit.Net.Clients.Rest.Futures
         #region Get server time
 
         /// <inheritdoc />
-        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var result = await _baseClient.SendRequestAsync<BybitSpotTime>(_baseClient.GetUrl("spot/v1/time"), HttpMethod.Get, ct).ConfigureAwait(false);
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<BybitSpotTime>(_baseClient.GetUrl("spot/v1/time"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
             return result.As(result.Data?.ServerTime ?? default);
         }
 

@@ -97,28 +97,14 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
-        {
-            return ExchangeData.GetServerTimeAsync();
-        }
+            => ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        protected override TimeSyncModel GetTimeSyncParameters()
-        {
-            return new TimeSyncModel(_options.InverseFuturesApiOptions.AutoTimestamp, BybitClientInversePerpetualApi.SemaphoreSlim, BybitClientInversePerpetualApi.LastTimeSync);
-        }
+        protected override TimeSyncInfo GetTimeSyncInfo()
+            => new TimeSyncInfo(_log, _options.InverseFuturesApiOptions.AutoTimestamp, BybitClientInversePerpetualApi.TimeSyncState);
 
         /// <inheritdoc />
-        protected override void UpdateTimeOffset(TimeSpan timestamp)
-        {
-            BybitClientInversePerpetualApi.LastTimeSync = DateTime.UtcNow;
-            if (timestamp.TotalMilliseconds > 0 && timestamp.TotalMilliseconds < 500)
-                return;
-
-            _log.Write(LogLevel.Information, $"Time offset set to {Math.Round(timestamp.TotalMilliseconds)}ms");
-            BybitClientInversePerpetualApi.TimeOffset = timestamp;
-        }
-
-        /// <inheritdoc />
-        public override TimeSpan GetTimeOffset() => BybitClientInversePerpetualApi.TimeOffset;
+        public override TimeSpan GetTimeOffset()
+            => BybitClientInversePerpetualApi.TimeSyncState.TimeOffset;
     }
 }

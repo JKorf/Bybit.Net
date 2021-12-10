@@ -158,24 +158,6 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         #endregion
 
-        #region Set position mode
-
-        /// <inheritdoc />
-        public async Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>()
-            {
-                { "symbol", symbol },
-                { "mode", hedgeMode ? 3: 0 },
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("futures/private/position/switch-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-            return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
-        }
-
-        #endregion
-
         #region Set isolated mode
 
         /// <inheritdoc />

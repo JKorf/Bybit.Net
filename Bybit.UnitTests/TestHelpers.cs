@@ -99,12 +99,12 @@ namespace Bybit.Net.Testing
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
             var factory = Mock.Get(client.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<string>(), It.IsAny<int>()))
+            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
             return request;
         }
 
-        public static object? GetTestValue(Type type, int i)
+        public static object GetTestValue(Type type, int i)
         {
             if (type == typeof(bool))
                 return true;

@@ -69,24 +69,5 @@ namespace Bybit.Net.Clients
         {
             return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, deserializer);
         }
-
-        /// <inheritdoc />
-        protected override IComparer<string> GetParameterComparer()
-        {
-            return new BybitComparer();
-        }
-
-        internal class BybitComparer : IComparer<string>
-        {
-            public int Compare(string x, string y)
-            {
-                if (x == "sign")
-                    return 1;
-                if (y == "sign")
-                    return -1;
-
-                return x.CompareTo(y);
-            }
-        }
     }
 }
