@@ -16,7 +16,7 @@ namespace Bybit.Net.Clients.Rest.Futures
     {
         /// <summary>
         /// Create a new transfer from one account type to the other
-        /// <para>https://bybit-exchange.github.io/docs/account_asset/#t-createinternaltransfer</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-createinternaltransfer" /></para>
         /// </summary>
         /// <param name="transferId">A generated UUID, should be unique</param>
         /// <param name="asset">The asset to transfer</param>
@@ -30,7 +30,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Create a new transfer for a subaccount
-        /// <para>https://bybit-exchange.github.io/docs/account_asset/#t-createsubaccounttransfer</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-createsubaccounttransfer" /></para>
         /// </summary>
         /// <param name="transferId">A generated UUID, should be unique</param>
         /// <param name="asset">The asset to transfer</param>
@@ -44,7 +44,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get history of transfers
-        /// <para>https://bybit-exchange.github.io/docs/account_asset/#t-querytransferlist</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-querytransferlist" /></para>
         /// </summary>
         /// <param name="transferId">Filter by transfer id</param>
         /// <param name="asset">Filter by asset</param>
@@ -71,7 +71,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get history of sub account transfers
-        /// <para>https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccounttransferlist</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccounttransferlist" /></para>
         /// </summary>
         /// <param name="transferId">Filter by transfer id</param>
         /// <param name="asset">Filter by asset</param>

@@ -17,7 +17,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
     {
         /// <summary>
         /// Subscribe to public trade updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websockettrade</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websockettrade" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -26,7 +26,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
         
         /// <summary>
         /// Subscribe to public trade updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websockettrade</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websockettrade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -36,7 +36,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
         
         /// <summary>
         /// Subscribe to public trade updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websockettrade</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websockettrade" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -46,7 +46,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to ticker updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -55,7 +55,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
         
         /// <summary>
         /// Subscribe to ticker updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -65,7 +65,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
         
         /// <summary>
         /// Subscribe to ticker updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -75,8 +75,8 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to orderbook updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25</para>
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200" /></para>
         /// </summary>
         /// <param name="limit">The amount of rows to receive updates for. Either 25 or 200.</param>
         /// <param name="snapshotHandler">The event handler for the initial snapshot data</param>
@@ -87,8 +87,8 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to orderbook updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25</para>
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200" /></para>
         /// </summary>
         /// <param name="limit">The amount of rows to receive updates for. Either 25 or 200.</param>
         /// <param name="symbol">The symbol to receive updates for</param>
@@ -100,8 +100,8 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to orderbook updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25</para>
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200" /></para>
         /// </summary>
         /// <param name="limit">The amount of rows to receive updates for. Either 25 or 200.</param>
         /// <param name="symbols">The symbols to receive updates for</param>
@@ -118,7 +118,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to insurance fund updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -127,7 +127,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to insurance fund updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -137,7 +137,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to insurance fund updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -147,7 +147,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to kline (candlestick) updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2" /></para>
         /// </summary>
         /// <param name="interval">The interval of the klines</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -157,7 +157,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to kline (candlestick) updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2" /></para>
         /// </summary>
         /// <param name="interval">The interval of the klines</param>
         /// <param name="symbol">The symbol to receive updates for</param>
@@ -168,7 +168,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to kline (candlestick) updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2" /></para>
         /// </summary>
         /// <param name="interval">The interval of the klines</param>
         /// <param name="symbols">The symbols to receive updates for</param>
@@ -179,7 +179,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to liquidation order updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -188,7 +188,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to liquidation order updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -198,7 +198,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to liquidation order updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -208,7 +208,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to user position updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketposition</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketposition" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -217,7 +217,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to user trade updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -226,7 +226,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to user order updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketorder</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketorder" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -235,7 +235,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to user stop order updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -244,7 +244,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
 
         /// <summary>
         /// Subscribe to user balance updates
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>

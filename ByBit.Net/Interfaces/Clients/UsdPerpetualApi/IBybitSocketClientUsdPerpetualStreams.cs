@@ -17,7 +17,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
     {
         /// <summary>
         /// Subscribe to public trade updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websockettrade</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websockettrade" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -26,7 +26,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to public trade updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websockettrade</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websockettrade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -36,7 +36,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to public trade updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websockettrade</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websockettrade" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -46,7 +46,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to ticker updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -55,7 +55,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to ticker updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -65,7 +65,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to ticker updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -75,8 +75,8 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to orderbook updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25</para>
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200" /></para>
         /// </summary>
         /// <param name="limit">The amount of rows to receive updates for. Either 25 or 200.</param>
         /// <param name="snapshotHandler">The event handler for the initial snapshot data</param>
@@ -87,8 +87,8 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to orderbook updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25</para>
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200" /></para>
         /// </summary>
         /// <param name="limit">The amount of rows to receive updates for. Either 25 or 200.</param>
         /// <param name="symbol">The symbol to receive updates for</param>
@@ -100,8 +100,8 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to orderbook updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25</para>
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200" /></para>
         /// </summary>
         /// <param name="limit">The amount of rows to receive updates for. Either 25 or 200.</param>
         /// <param name="symbols">The symbols to receive updates for</param>
@@ -118,7 +118,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to kline (candlestick) updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketkline</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketkline" /></para>
         /// </summary>
         /// <param name="interval">The interval of the klines</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -128,7 +128,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to kline (candlestick) updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketkline</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketkline" /></para>
         /// </summary>
         /// <param name="interval">The interval of the klines</param>
         /// <param name="symbol">The symbol to receive updates for</param>
@@ -139,7 +139,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to kline (candlestick) updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketkline</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketkline" /></para>
         /// </summary>
         /// <param name="interval">The interval of the klines</param>
         /// <param name="symbols">The symbols to receive updates for</param>
@@ -150,7 +150,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to liquidation order updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -159,7 +159,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to liquidation order updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -169,7 +169,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to liquidation order updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
@@ -179,7 +179,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to user position updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketposition</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketposition" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -188,7 +188,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to user trade updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketexecution</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketexecution" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -197,7 +197,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to user order updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketorder</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketorder" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -206,7 +206,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to user stop order updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketstoporder</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketstoporder" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -215,7 +215,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
 
         /// <summary>
         /// Subscribe to user balance updates
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-websocketwallet</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketwallet" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>

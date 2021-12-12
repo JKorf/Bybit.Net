@@ -16,7 +16,7 @@ namespace Bybit.Net.Clients.Rest.Futures
     /// <inheritdoc />
     public class BybitClientSpotApiTrading : IBybitClientSpotApiTrading
     {
-        private BybitClientSpotApi _baseClient;
+        private readonly BybitClientSpotApi _baseClient;
 
         internal BybitClientSpotApiTrading(BybitClientSpotApi baseClient)
         {

@@ -13,7 +13,7 @@ namespace Bybit.Net.Clients.Rest.Futures
     {
         /// <summary>
         /// Get wallet balances
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-balance</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-balance" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

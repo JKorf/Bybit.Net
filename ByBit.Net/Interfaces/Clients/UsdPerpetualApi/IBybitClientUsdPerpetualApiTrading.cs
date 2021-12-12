@@ -17,7 +17,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         #region Orders
         /// <summary>
         /// Place a new order
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-placeactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-placeactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
@@ -39,7 +39,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Change an exising order. Either orderId or clientOrderId should be provided
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-replaceactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-replaceactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">Stop order id</param>
@@ -57,7 +57,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get orders
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-getactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-getactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">Filter by order id</param>
@@ -73,7 +73,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get order information for up to 500 orders
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-queryactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-queryactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -83,7 +83,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get order information. Either orderId or clientOrderId should be provided
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-queryactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-queryactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId"></param>
@@ -95,7 +95,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Cancel an order, either orderId or clientOrderId should be provided
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-cancelactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-cancelactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">The id of the order to cancel</param>
@@ -107,7 +107,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Cancel all active orders for a symbol
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-cancelallactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-cancelallactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -119,7 +119,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         #region Conditional orders
         /// <summary>
         /// Place a new conditional order
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-placecond</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-placecond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
@@ -144,7 +144,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Change an exising order. Either stopOrderId or clientOrderId should be provided
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-replacecond</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-replacecond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="stopOrderId">Stop order id</param>
@@ -163,7 +163,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get order information for up to 10 conditional orders
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-querycond</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-querycond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -173,7 +173,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get conditional order information. Either stopOrderId or clientOrderId should be provided
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-querycond</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-querycond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="stopOrderId">The order id</param>
@@ -185,7 +185,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get a list of conditional orders
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-getcond</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-getcond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="stopOrderId">Filter by order id</param>
@@ -201,7 +201,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Cancel a conditional order, either stopOrderId or clientOrderId should be provided
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-cancelcond</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-cancelcond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="stopOrderId">The id of the conditional order to cancel</param>
@@ -213,7 +213,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Cancel all active conditional orders for a symbol
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-cancelallcond</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-cancelallcond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -225,7 +225,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get executed user trades
-        /// <para>https://bybit-exchange.github.io/docs/linear/#t-usertraderecords</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-usertraderecords" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="startTime">Filter by start time</param>

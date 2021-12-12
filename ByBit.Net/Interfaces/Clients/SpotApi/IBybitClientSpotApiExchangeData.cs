@@ -15,7 +15,7 @@ namespace Bybit.Net.Clients.Rest.Futures
     {
         /// <summary>
         /// Get the server time
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-servertime</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-servertime" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -24,7 +24,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get all supported symbols
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -33,7 +33,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get the current order book for a symbol
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-orderbook</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-orderbook" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="limit">The number of rows</param>
@@ -44,7 +44,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get merged order book based on the scale
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="scale">The scale of the order book. 1 means 1 digit</param>
@@ -56,7 +56,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get public trade history
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="limit">Max amount of results</param>
@@ -67,7 +67,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get price klines
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-querykline</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-querykline" /></para>
         /// </summary>
         /// <param name="symbol">Symbol of the klines</param>
         /// <param name="interval">Interval of the kline data</param>
@@ -81,7 +81,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// The ticker info for a symbol
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -91,7 +91,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// The ticker info for all symbols
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -100,7 +100,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get the last trade price of a symbol
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -110,7 +110,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get the last trade price of all symbols
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -119,7 +119,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get the best ask/bid price for a symbol
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-bestbidask</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-bestbidask" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -129,7 +129,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get the best ask/bid prices for all symbols
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-bestbidask</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-bestbidask" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

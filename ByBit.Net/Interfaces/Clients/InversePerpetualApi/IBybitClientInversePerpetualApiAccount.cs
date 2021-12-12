@@ -18,7 +18,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get position risk limit
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-getrisklimit</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-getrisklimit" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -28,7 +28,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Set position risk
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-setrisklimit</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-setrisklimit" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="riskId">The risk id to set</param>
@@ -44,7 +44,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get user positions
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-myposition</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-myposition" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -54,7 +54,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Change margin
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-changemargin</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-changemargin" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="mode">The position mode</param>
@@ -66,7 +66,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Set leverage
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-setleverage</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-setleverage" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="buyLeverage">Buy leverage</param>
@@ -78,7 +78,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get user's profit and loss records
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-closedprofitandloss</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-closedprofitandloss" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get records for</param>
         /// <param name="startTime">Filter by startTime</param>
@@ -93,7 +93,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Switch between full or partial Stop loss/Take profit mode
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-switchmode</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-switchmode" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="mode">New mode</param>
@@ -104,7 +104,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Switch between cross and isolated mode.
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-marginswitch</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-marginswitch" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="isIsolated">Is isolated</param>
@@ -121,7 +121,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get wallet balances
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-balance</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-balance" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -131,7 +131,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get wallet fund endpoints
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-walletrecords</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-walletrecords" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
@@ -146,7 +146,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get withdrawal history
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-withdrawrecords</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-withdrawrecords" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
@@ -161,7 +161,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get asset exchange history
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-assetexchangerecords</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-assetexchangerecords" /></para>
         /// </summary>
         /// <param name="fromId">Filter by id</param>
         /// <param name="direction">Filter by direction</param>
@@ -177,7 +177,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get user last funding fee
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-mylastfundingfee</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-mylastfundingfee" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -187,7 +187,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get predicted next funding rate
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-predictedfunding</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-predictedfunding" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -199,7 +199,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get Api key info
-        /// <para>https://bybit-exchange.github.io/docs/inverse/#t-key</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-key" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

@@ -14,7 +14,7 @@ namespace Bybit.Net.Clients.Rest.Futures
     {
         /// <summary>
         /// Place a new order
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-placeactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-placeactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
@@ -30,7 +30,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get order, either orderId or clientOrderId should be provided
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-getactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-getactive" /></para>
         /// </summary>
         /// <param name="orderId">The id of the order</param>
         /// <param name="clientOrderId">The client order id</param>
@@ -41,7 +41,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get open orders
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-openorders</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-openorders" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">Filter by order id, will only return orders with an orderId smaller than this</param>
@@ -53,7 +53,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get orders
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-orderhistory</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-orderhistory" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="orderId">Filter by order id, will only return orders with an orderId smaller than this</param>
@@ -65,7 +65,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Cancel an active order. Either orderId or clientOrderId should be provided
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-cancelactive</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-cancelactive" /></para>
         /// </summary>
         /// <param name="orderId">The order id</param>
         /// <param name="clientOrderId">The client order id</param>
@@ -76,7 +76,7 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <summary>
         /// Get user trade history
-        /// <para>https://bybit-exchange.github.io/docs/spot/#t-tradehistory</para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-tradehistory" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="fromId">Filter by start id</param>

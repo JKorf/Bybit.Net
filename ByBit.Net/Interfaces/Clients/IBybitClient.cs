@@ -11,7 +11,7 @@ namespace Bybit.Net.Interfaces.Clients
         /// <summary>
         /// General API endpoints
         /// </summary>
-        public IBybitClientGeneralApi GeneralApi { get; }
+        IBybitClientGeneralApi GeneralApi { get; }
         /// <summary>
         /// Inverse perpetual API endpoints
         /// </summary>

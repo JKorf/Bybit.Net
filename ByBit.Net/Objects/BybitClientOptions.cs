@@ -20,7 +20,7 @@ namespace Bybit.Net.Objects
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
-        private RestApiClientOptions _inverseFuturesApiOptions = new RestApiClientOptions("https://api.bybit.com/");
+        private readonly RestApiClientOptions _inverseFuturesApiOptions = new RestApiClientOptions("https://api.bybit.com/");
         /// <summary>
         /// Inverse futures API options
         /// </summary>
@@ -30,7 +30,7 @@ namespace Bybit.Net.Objects
             set => _inverseFuturesApiOptions.Copy(_inverseFuturesApiOptions, value);
         }
 
-        private RestApiClientOptions _inversePerpetualApiOptions = new RestApiClientOptions("https://api.bybit.com/");
+        private readonly RestApiClientOptions _inversePerpetualApiOptions = new RestApiClientOptions("https://api.bybit.com/");
         /// <summary>
         /// Inverse perpetual API options
         /// </summary>
@@ -40,7 +40,7 @@ namespace Bybit.Net.Objects
             set => _inversePerpetualApiOptions.Copy(_inversePerpetualApiOptions, value);
         }
 
-        private RestApiClientOptions _usdPerpetualApiOptions = new RestApiClientOptions("https://api.bybit.com/");
+        private readonly RestApiClientOptions _usdPerpetualApiOptions = new RestApiClientOptions("https://api.bybit.com/");
         /// <summary>
         /// Usd perpetual API options
         /// </summary>
@@ -50,7 +50,7 @@ namespace Bybit.Net.Objects
             set => _usdPerpetualApiOptions.Copy(_usdPerpetualApiOptions, value);
         }
 
-        private RestApiClientOptions _spotApiOptions = new RestApiClientOptions("https://api.bybit.com/");
+        private readonly RestApiClientOptions _spotApiOptions = new RestApiClientOptions("https://api.bybit.com/");
         /// <summary>
         /// Spot API options
         /// </summary>
@@ -102,7 +102,7 @@ namespace Bybit.Net.Objects
             SocketSubscriptionsCombineTarget = 10
         };
 
-        private BybitSocketApiClientOptions _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime", "wss://stream.bybit.com/realtime");
+        private readonly BybitSocketApiClientOptions _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime", "wss://stream.bybit.com/realtime");
         /// <summary>
         /// Inverse futures streams options
         /// </summary>
@@ -112,7 +112,7 @@ namespace Bybit.Net.Objects
             set => _inverseFuturesStreamsOptions.Copy(_inverseFuturesStreamsOptions, value);
         }
 
-        private BybitSocketApiClientOptions _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime", "wss://stream.bybit.com/realtime");
+        private readonly BybitSocketApiClientOptions _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime", "wss://stream.bybit.com/realtime");
         /// <summary>
         /// Inverse perpetual streams options
         /// </summary>
@@ -122,7 +122,7 @@ namespace Bybit.Net.Objects
             set => _inversePerpetualStreamsOptions.Copy(_inversePerpetualStreamsOptions, value);
         }
 
-        private BybitSocketApiClientOptions _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime_public", "wss://stream.bybit.com/realtime_private");
+        private readonly BybitSocketApiClientOptions _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/realtime_public", "wss://stream.bybit.com/realtime_private");
         /// <summary>
         /// Usd perpetual streams options
         /// </summary>
@@ -132,7 +132,7 @@ namespace Bybit.Net.Objects
             set => _usdPerpetualStreamsOptions.Copy(_usdPerpetualStreamsOptions, value);
         }
 
-        private BybitSocketApiClientOptions _spotStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/spot/quote/ws/v2", "wss://stream.bybit.com/spot/ws");
+        private readonly BybitSocketApiClientOptions _spotStreamsOptions = new BybitSocketApiClientOptions("wss://stream.bybit.com/spot/quote/ws/v2", "wss://stream.bybit.com/spot/ws");
         /// <summary>
         /// Spot streams options
         /// </summary>
