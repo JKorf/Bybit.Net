@@ -1,5 +1,10 @@
 ﻿using Bybit.Net.Clients.Rest.Futures;
 using Bybit.Net.Interfaces.Clients;
+using Bybit.Net.Interfaces.Clients.GeneralApi;
+using Bybit.Net.Interfaces.Clients.InverseFuturesApi;
+using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
+using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Interfaces;

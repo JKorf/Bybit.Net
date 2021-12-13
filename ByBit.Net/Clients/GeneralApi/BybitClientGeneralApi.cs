@@ -1,4 +1,6 @@
-﻿using Bybit.Net.Objects;
+﻿using Bybit.Net.Interfaces.Clients.GeneralApi;
+using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
@@ -24,7 +26,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         internal BybitClientOptions ClientOptions { get; }
 
         /// <inheritdoc />
-        public IBybitClientGeneralApiTransfer TransferApi { get; }
+        public IBybitClientGeneralApiTransfer Transfer { get; }
 
         #region ctor
         internal BybitClientGeneralApi(Log log, BybitClient baseClient, BybitClientOptions options)
@@ -35,7 +37,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             _options = options;
             ClientOptions = options;
 
-            TransferApi = new BybitClientGeneralApiTransfer(this);
+            Transfer = new BybitClientGeneralApiTransfer(this);
         }
         #endregion
 

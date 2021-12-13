@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Interfaces.Clients.InversePerpetual
+namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 {
     /// <summary>
     /// Bybit inverse perpetual streams
@@ -23,7 +23,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Subscribe to public trade updates
         /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websockettrade" /></para>
@@ -33,7 +33,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Subscribe to public trade updates
         /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websockettrade" /></para>
@@ -52,7 +52,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Subscribe to ticker updates
         /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo" /></para>
@@ -62,7 +62,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetual
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Subscribe to ticker updates
         /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo" /></para>

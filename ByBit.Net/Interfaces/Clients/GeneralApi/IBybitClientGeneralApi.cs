@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// Bybit general API endpoints
@@ -10,6 +10,6 @@ namespace Bybit.Net.Clients.Rest.Futures
         /// <summary>
         /// Endpoints related to asset transfer
         /// </summary>
-        IBybitClientGeneralApiTransfer TransferApi { get; }
+        IBybitClientGeneralApiTransfer Transfer { get; }
     }
 }

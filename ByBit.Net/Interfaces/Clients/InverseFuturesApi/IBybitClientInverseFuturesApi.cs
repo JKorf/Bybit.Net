@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 {
     /// <summary>
     /// Bybit inverse futures API endpoints

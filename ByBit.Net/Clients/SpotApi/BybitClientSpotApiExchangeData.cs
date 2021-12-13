@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Bybit.Net.Objects.Models.Spot;
+using Bybit.Net.Interfaces.Clients.SpotApi;
 
 namespace Bybit.Net.Clients.Rest.Futures
 {

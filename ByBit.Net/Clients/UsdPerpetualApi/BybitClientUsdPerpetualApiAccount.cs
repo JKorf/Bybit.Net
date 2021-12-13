@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
+using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models;
 using CryptoExchange.Net;

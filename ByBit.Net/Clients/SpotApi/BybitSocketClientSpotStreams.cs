@@ -12,11 +12,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Logging;
-using Bybit.Net.Interfaces.Clients.Spot;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Enums;
 using Bybit.Net.Converters;
 using Bybit.Net.Objects.Models.Spot;
+using Bybit.Net.Interfaces.Clients.SpotApi;
 
 namespace Bybit.Net.Clients.Socket
 {

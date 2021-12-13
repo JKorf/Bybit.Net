@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 {
     /// <summary>
     /// Bybit inverse perpetual API endpoints

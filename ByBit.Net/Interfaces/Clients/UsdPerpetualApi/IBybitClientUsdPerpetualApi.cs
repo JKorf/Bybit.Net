@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 {
     /// <summary>
     /// Bybit USD perpetual API endpoints
     /// </summary>
-    public interface IBybitClientUsdPerpetualApi: IDisposable
+    public interface IBybitClientUsdPerpetualApi : IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions

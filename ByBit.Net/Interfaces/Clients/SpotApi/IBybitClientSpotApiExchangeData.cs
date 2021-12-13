@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.

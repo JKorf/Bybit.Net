@@ -15,9 +15,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Logging;
 using Microsoft.Extensions.Logging;
-using Bybit.Net.Interfaces.Clients.UsdPerpetual;
 using Bybit.Net.Enums;
 using Bybit.Net.Converters;
+using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 
 namespace Bybit.Net.Clients.Socket
 {

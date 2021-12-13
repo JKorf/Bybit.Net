@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 {
     /// <summary>
     /// Bybit trading endpoints, placing and mananging orders.
@@ -174,7 +174,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetConditionalOrdersAsync(string symbol, StopOrderStatus? status = null, SearchDirection? direction = null, int? limit = null, string? cursor = null, long? receiveWindow = null, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Get conditional order information. Either stopOrderId or clientOrderId should be provided
         /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond" /></para>

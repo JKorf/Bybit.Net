@@ -1,4 +1,5 @@
 ﻿using Bybit.Net.Enums;
+using Bybit.Net.Interfaces.Clients.SpotApi;
 using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;

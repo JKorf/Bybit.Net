@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Bybit spot API endpoints

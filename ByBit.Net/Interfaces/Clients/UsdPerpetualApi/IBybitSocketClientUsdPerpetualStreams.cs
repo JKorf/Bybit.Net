@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Interfaces.Clients.UsdPerpetual
+namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 {
     /// <summary>
     /// Bybit usd perpetual streams

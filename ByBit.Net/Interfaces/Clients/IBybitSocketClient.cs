@@ -1,6 +1,6 @@
-﻿using Bybit.Net.Interfaces.Clients.InversePerpetual;
-using Bybit.Net.Interfaces.Clients.Spot;
-using Bybit.Net.Interfaces.Clients.UsdPerpetual;
+﻿using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
+using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using CryptoExchange.Net.Interfaces;
 
 namespace Bybit.Net.Interfaces.Clients

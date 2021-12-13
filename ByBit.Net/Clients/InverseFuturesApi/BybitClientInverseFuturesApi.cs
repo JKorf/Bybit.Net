@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Objects;
+﻿using Bybit.Net.Interfaces.Clients.InverseFuturesApi;
+using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;

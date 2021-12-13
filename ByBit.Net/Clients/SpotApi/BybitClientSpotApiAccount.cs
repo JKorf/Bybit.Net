@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Objects.Models.Spot;
+﻿using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Objects.Models.Spot;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using System.Collections.Generic;

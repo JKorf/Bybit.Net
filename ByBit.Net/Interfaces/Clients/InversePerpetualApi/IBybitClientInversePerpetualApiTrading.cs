@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 {
     /// <summary>
     /// Bybit trading endpoints, placing and mananging orders.

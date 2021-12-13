@@ -10,13 +10,13 @@ using CryptoExchange.Net.Converters;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using Bybit.Net.Interfaces.Clients;
-using Bybit.Net.Interfaces.Clients.UsdPerpetual;
-using Bybit.Net.Interfaces.Clients.InversePerpetual;
-using Bybit.Net.Interfaces.Clients.Spot;
 using Newtonsoft.Json;
 using System.Threading;
 using Bybit.Net.Clients.Socket;
 using Bybit.Net.Objects.Models.Socket.Spot;
+using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
+using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
 
 namespace Bybit.Net.Clients
 {

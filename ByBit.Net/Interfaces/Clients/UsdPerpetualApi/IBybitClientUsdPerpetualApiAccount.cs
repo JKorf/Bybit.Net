@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 {
     /// <summary>
     /// Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
@@ -221,6 +221,6 @@ namespace Bybit.Net.Clients.Rest.Futures
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
-        
+
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings

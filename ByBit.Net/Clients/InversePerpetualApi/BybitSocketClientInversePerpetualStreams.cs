@@ -15,9 +15,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Logging;
-using Bybit.Net.Interfaces.Clients.InversePerpetual;
 using Bybit.Net.Enums;
 using Bybit.Net.Converters;
+using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
 
 namespace Bybit.Net.Clients.Socket
 {
