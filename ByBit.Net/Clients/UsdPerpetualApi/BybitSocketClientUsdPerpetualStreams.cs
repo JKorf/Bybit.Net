@@ -141,7 +141,7 @@ namespace Bybit.Net.Clients.Socket
                 }
                 else
                 {
-                    var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitOrderBookEntry>>(internalData);
+                    var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitOrderBookEntry>>(internalData["order_book"]!);
                     if (!desResult)
                     {
                         _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitOrderBookEntry)} object: " + desResult.Error);

@@ -226,5 +226,10 @@ namespace Bybit.Net.Objects
         /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.
         /// </summary>
         public IBybitSocketClient? SocketClient { get; set; }
+
+        /// <summary>
+        /// The limit of entries in the order book, either 25 or 200
+        /// </summary>
+        public int? Limit { get; }
     }
 }

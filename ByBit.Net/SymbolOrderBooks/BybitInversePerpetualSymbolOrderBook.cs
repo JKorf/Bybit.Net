@@ -17,7 +17,7 @@ namespace Bitfinex.Net.SymbolOrderBooks
     /// <summary>
     /// Live order book implementation
     /// </summary>
-    public class BybitFuturesSymbolOrderBook: SymbolOrderBook
+    public class BybitInversePerpetualSymbolOrderBook : SymbolOrderBook
     {
         private readonly IBybitSocketClient socketClient;
         private readonly bool _socketOwner;
@@ -26,9 +26,8 @@ namespace Bitfinex.Net.SymbolOrderBooks
         /// Create a new order book instance
         /// </summary>
         /// <param name="symbol">The symbol the order book is for</param>
-        /// <param name="limit">The limit of entries in the order book, either 25 or 200</param>
         /// <param name="options">Options for the order book</param>
-        public BybitFuturesSymbolOrderBook(string symbol, int limit, BybitFuturesSymbolOrderBookOptions? options = null) : base("Bybit[Futures]", symbol, options ?? new BybitFuturesSymbolOrderBookOptions())
+        public BybitInversePerpetualSymbolOrderBook(string symbol, BybitFuturesSymbolOrderBookOptions? options = null) : base("Bybit", symbol, options ?? new BybitFuturesSymbolOrderBookOptions())
         {
             socketClient = options?.SocketClient ?? new BybitSocketClient(new BybitSocketClientOptions
             {
@@ -36,13 +35,12 @@ namespace Bitfinex.Net.SymbolOrderBooks
             });
             _socketOwner = options?.SocketClient == null;
 
-            Levels = limit;
+            Levels = options?.Limit ?? 25;
         }
 
         /// <inheritdoc />
         protected override async Task<CallResult<UpdateSubscription>> DoStartAsync()
         {
-            // TODO are these all the same? ie. do we need seperate books for each api?
             var result = await socketClient.InversePerpetualStreams.SubscribeToOrderBookUpdatesAsync(Symbol, Levels!.Value, ProcessSnapshot, ProcessUpdate).ConfigureAwait(false);
             if (!result)
                 return result;
