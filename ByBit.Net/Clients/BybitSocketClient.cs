@@ -49,10 +49,9 @@ namespace Bybit.Net.Clients
             ContinueOnQueryResponse = true;
             UnhandledMessageExpected = true;
 
-            UsdPerpetualStreams = new BybitSocketClientUsdPerpetualStreams(log, this, options);
-            InversePerpetualStreams = new BybitSocketClientInversePerpetualStreams(log, this, options);
-            //InverseFutures = new BybitSocketClientInverseFutures(log, this, options);
-            SpotStreams = new BybitSocketClientSpotStreams(log, this, options);
+            UsdPerpetualStreams = AddApiClient(new BybitSocketClientUsdPerpetualStreams(log, this, options));
+            InversePerpetualStreams = AddApiClient(new BybitSocketClientInversePerpetualStreams(log, this, options));
+            SpotStreams = AddApiClient(new BybitSocketClientSpotStreams(log, this, options));
 
             SendPeriodic("Ping", TimeSpan.FromSeconds(30), (connection) => {
                 if(connection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))

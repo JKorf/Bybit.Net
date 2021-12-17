@@ -145,7 +145,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public async Task ValidateGeneralTransferCalls()
         {
-            await _comparer.ProcessSubject("General/Transfer", c => c.GeneralApi.TransferApi,
+            await _comparer.ProcessSubject("General/Transfer", c => c.GeneralApi.Transfer,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                 },
