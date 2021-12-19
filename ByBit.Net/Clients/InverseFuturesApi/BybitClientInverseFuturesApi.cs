@@ -1,11 +1,11 @@
-﻿using Bybit.Net.Interfaces.Clients.InverseFuturesApi;
+﻿using Bybit.Net.Clients.InversePerpetualApi;
+using Bybit.Net.Interfaces.Clients.InverseFuturesApi;
 using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.InverseFuturesApi
 {
     /// <inheritdoc cref="IBybitClientInverseFuturesApi" />
     public class BybitClientInverseFuturesApi : RestApiClient, IBybitClientInverseFuturesApi
@@ -32,7 +32,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         public IBybitClientInverseFuturesApiTrading Trading { get; }
 
         #region ctor
-        internal BybitClientInverseFuturesApi(Log log, BybitClient baseClient, BybitClientOptions options) 
+        internal BybitClientInverseFuturesApi(Log log, BybitClient baseClient, BybitClientOptions options)
             : base(options, options.InverseFuturesApiOptions)
         {
             _baseClient = baseClient;

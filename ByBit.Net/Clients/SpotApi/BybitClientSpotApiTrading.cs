@@ -12,7 +12,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.SpotApi
 {
     /// <inheritdoc />
     public class BybitClientSpotApiTrading : IBybitClientSpotApiTrading
@@ -37,7 +37,7 @@ namespace Bybit.Net.Clients.Rest.Futures
                 { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
             };
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null? null: JsonConvert.SerializeObject(timeInForce, new TimeInForceSpotConverter(false)));
+            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceSpotConverter(false)));
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 

@@ -7,7 +7,6 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.SpotApi
 {
     /// <inheritdoc cref="IBybitClientSpotApi" />
     public class BybitClientSpotApi : RestApiClient, IBybitClientSpotApi, IExchangeClient
@@ -152,12 +151,12 @@ namespace Bybit.Net.Clients.Rest.Futures
         async Task<WebCallResult<ICommonOrderId>> IExchangeClient.PlaceOrderAsync(string symbol, IExchangeClient.OrderSide side, IExchangeClient.OrderType type, decimal quantity, decimal? price = null, string? accountId = null)
         {
             var result = await Trading.PlaceOrderAsync(
-                symbol, 
-                side == IExchangeClient.OrderSide.Buy ? OrderSide.Buy: OrderSide.Sell,
-                type == IExchangeClient.OrderType.Limit ? OrderType.Limit: OrderType.Market,
+                symbol,
+                side == IExchangeClient.OrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
+                type == IExchangeClient.OrderType.Limit ? OrderType.Limit : OrderType.Market,
                 quantity,
                 price,
-                type == IExchangeClient.OrderType.Limit? TimeInForce.GoodTillCanceled: (TimeInForce?)null
+                type == IExchangeClient.OrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null
                 ).ConfigureAwait(false);
             return result.As<ICommonOrderId>(result.Data);
         }
@@ -225,8 +224,8 @@ namespace Bybit.Net.Clients.Rest.Futures
                 return KlineInterval.OneDay;
             if (timeSpan.TotalDays == 7)
                 return KlineInterval.OneWeek;
-            if ((timeSpan.TotalDays == 30)
-             || (timeSpan.TotalDays == 31))
+            if (timeSpan.TotalDays == 30
+             || timeSpan.TotalDays == 31)
                 return KlineInterval.OneMonth;
 
             throw new ArgumentException("Unsupported timespan for Bybit Klines, check supported intervals using Bybit.Net.Enums.KlineInterval");

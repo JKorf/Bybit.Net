@@ -15,7 +15,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.InverseFuturesApi
 {
     /// <inheritdoc />
     public class BybitClientInverseFuturesApiAccount : IBybitClientInverseFuturesApiAccount
@@ -51,7 +51,7 @@ namespace Bybit.Net.Clients.Rest.Futures
                 { "symbol", symbol },
                 { "risk_id", riskId.ToString(CultureInfo.InvariantCulture) },
             };
-            parameters.AddOptionalParameter("position_idx", mode == null ? null: JsonConvert.SerializeObject(mode, new PositionModeConverter(false)));
+            parameters.AddOptionalParameter("position_idx", mode == null ? null : JsonConvert.SerializeObject(mode, new PositionModeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitRiskId>(_baseClient.GetUrl("futures/private/position/risk-limit"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -125,8 +125,8 @@ namespace Bybit.Net.Clients.Rest.Futures
             {
                 { "symbol", symbol },
             };
-            parameters.AddOptionalParameter("start_time",  DateTimeConverter.ConvertToSeconds(startTime));
-            parameters.AddOptionalParameter("end_time",  DateTimeConverter.ConvertToSeconds(endTime));
+            parameters.AddOptionalParameter("start_time", DateTimeConverter.ConvertToSeconds(startTime));
+            parameters.AddOptionalParameter("end_time", DateTimeConverter.ConvertToSeconds(endTime));
             parameters.AddOptionalParameter("exec_type", type == null ? null : JsonConvert.SerializeObject(type.Value, new TradeTypeConverter(false)));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));

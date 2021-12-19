@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Bybit.Net.Objects.Models.Spot;
 using Bybit.Net.Interfaces.Clients.SpotApi;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.SpotApi
 {
     /// <inheritdoc />
     public class BybitClientSpotApiExchangeData : IBybitClientSpotApiExchangeData

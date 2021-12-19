@@ -14,7 +14,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
     public class BybitClientGeneralApiTransfer : IBybitClientGeneralApiTransfer
@@ -70,15 +70,15 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInternalTransferDetails>>>> GetTransferHistoryAsync(
-            string? transferId = null, 
-            string? asset = null, 
-            TransferStatus? status = null, 
-            DateTime? startTime = null, 
+            string? transferId = null,
+            string? asset = null,
+            TransferStatus? status = null,
+            DateTime? startTime = null,
             DateTime? endTime = null,
-            SearchDirection? direction = null, 
-            int? limit = null, 
-            string? cursor = null, 
-            long? receiveWindow = null, 
+            SearchDirection? direction = null,
+            int? limit = null,
+            string? cursor = null,
+            long? receiveWindow = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
@@ -89,7 +89,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("end_time", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("direction", transferId);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("direction", direction == null ? null: JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
+            parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
             parameters.AddOptionalParameter("cursor", cursor);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -121,7 +121,7 @@ namespace Bybit.Net.Clients.Rest.Futures
             parameters.AddOptionalParameter("end_time", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("direction", transferId);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("direction", direction == null ? null: JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
+            parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
             parameters.AddOptionalParameter("cursor", cursor);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 

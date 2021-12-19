@@ -1,4 +1,8 @@
-﻿using Bybit.Net.Clients.Rest.Futures;
+﻿using Bybit.Net.Clients.GeneralApi;
+using Bybit.Net.Clients.InverseFuturesApi;
+using Bybit.Net.Clients.InversePerpetualApi;
+using Bybit.Net.Clients.SpotApi;
+using Bybit.Net.Clients.UsdPerpetualApi;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Interfaces.Clients.GeneralApi;
 using Bybit.Net.Interfaces.Clients.InverseFuturesApi;
@@ -7,16 +11,13 @@ using Bybit.Net.Interfaces.Clients.SpotApi;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Objects;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace Bybit.Net.Clients
 {

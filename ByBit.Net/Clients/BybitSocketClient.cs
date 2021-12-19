@@ -12,11 +12,13 @@ using System.Linq;
 using Bybit.Net.Interfaces.Clients;
 using Newtonsoft.Json;
 using System.Threading;
-using Bybit.Net.Clients.Socket;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Interfaces.Clients.SpotApi;
 using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
+using Bybit.Net.Clients.SpotApi;
+using Bybit.Net.Clients.InversePerpetualApi;
+using Bybit.Net.Clients.UsdPerpetualApi;
 
 namespace Bybit.Net.Clients
 {

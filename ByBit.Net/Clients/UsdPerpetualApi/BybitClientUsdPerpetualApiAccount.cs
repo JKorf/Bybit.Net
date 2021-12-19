@@ -15,7 +15,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.UsdPerpetualApi
 {
     /// <inheritdoc />
     public class BybitClientUsdPerpetualApiAccount : IBybitClientUsdPerpetualApiAccount

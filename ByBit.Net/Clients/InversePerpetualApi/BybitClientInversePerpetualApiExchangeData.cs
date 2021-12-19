@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.InversePerpetualApi
 {
     /// <inheritdoc />
     public class BybitClientInversePerpetualApiExchangeData : IBybitClientInversePerpetualApiExchangeData
@@ -181,10 +181,10 @@ namespace Bybit.Net.Clients.Rest.Futures
 
         #endregion
 
-        #region Get ticker
+        #region Get tickers
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickerAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickersAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbol", symbol);

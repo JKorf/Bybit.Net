@@ -19,15 +19,15 @@ using Bybit.Net.Enums;
 using Bybit.Net.Converters;
 using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
 
-namespace Bybit.Net.Clients.Socket
+namespace Bybit.Net.Clients.InversePerpetualApi
 {
     /// <inheritdoc cref="IBybitSocketClientInversePerpetualStreams" />
-    public class BybitSocketClientInversePerpetualStreams: SocketApiClient, IBybitSocketClientInversePerpetualStreams
+    public class BybitSocketClientInversePerpetualStreams : SocketApiClient, IBybitSocketClientInversePerpetualStreams
     {
         private readonly Log _log;
         private readonly BybitSocketClient _baseClient;
         private readonly BybitSocketClientOptions _options;
-               
+
         internal BybitSocketClientInversePerpetualStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
             : base(options, options.InversePerpetualStreamsOptions)
         {
@@ -84,7 +84,7 @@ namespace Bybit.Net.Clients.Socket
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
-                var innerData = data.Data["type"]?.ToString() == "delta" ? data.Data["data"]?["update"]?[0]: data.Data["data"];
+                var innerData = data.Data["type"]?.ToString() == "delta" ? data.Data["data"]?["update"]?[0] : data.Data["data"];
                 if (innerData == null)
                     return;
 
@@ -96,7 +96,7 @@ namespace Bybit.Net.Clients.Socket
                 }
 
                 handler(data.As(desResult.Data, desResult.Data.Symbol));
-                
+
             });
             return await _baseClient.SubscribeInternalAsync(this,
                 new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "instrument_info.100ms." + s).ToArray() },
@@ -113,9 +113,9 @@ namespace Bybit.Net.Clients.Socket
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(
-            IEnumerable<string> symbols, 
+            IEnumerable<string> symbols,
             int limit,
-            Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, 
+            Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler,
             Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler,
             CancellationToken ct = default)
         {
@@ -216,7 +216,7 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, topic.Split('.').Last()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "klineV2."+JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))+"." + s).ToArray() },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "klineV2." + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) + "." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -359,7 +359,7 @@ namespace Bybit.Net.Clients.Socket
                     return;
                 }
 
-                handler(data.As(desResult.Data));   
+                handler(data.As(desResult.Data));
             });
             return await _baseClient.SubscribeInternalAsync(this, _options.InversePerpetualStreamsOptions.BaseAddressAuthenticated,
                 new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "wallet" } },

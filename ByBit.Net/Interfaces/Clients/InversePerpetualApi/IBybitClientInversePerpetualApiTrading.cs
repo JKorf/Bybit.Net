@@ -22,7 +22,6 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
         /// <param name="type">Order type</param>
-        /// <param name="positionMode">Position mode</param>
         /// <param name="quantity">Quantity</param>
         /// <param name="timeInForce">Time in force</param>
         /// <param name="price">Price</param>
@@ -36,7 +35,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, PositionMode positionMode, decimal quantity, TimeInForce timeInForce, decimal? price = null, bool? closeOnTrigger = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, bool? reduceOnly = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, decimal? price = null, bool? closeOnTrigger = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, bool? reduceOnly = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change an exising order. Either orderId or clientOrderId should be provided

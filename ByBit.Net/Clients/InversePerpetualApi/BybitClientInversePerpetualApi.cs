@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.InversePerpetualApi
 {
     /// <inheritdoc cref="IBybitClientInversePerpetualApi" />
     public class BybitClientInversePerpetualApi : RestApiClient, IBybitClientInversePerpetualApi
@@ -34,7 +34,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         public IBybitClientInversePerpetualApiTrading Trading { get; }
 
         #region ctor
-        internal BybitClientInversePerpetualApi(Log log, BybitClient baseClient, BybitClientOptions options) 
+        internal BybitClientInversePerpetualApi(Log log, BybitClient baseClient, BybitClientOptions options)
             : base(options, options.InversePerpetualApiOptions)
         {
             _baseClient = baseClient;

@@ -19,7 +19,7 @@ using Bybit.Net.Enums;
 using Bybit.Net.Converters;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 
-namespace Bybit.Net.Clients.Socket
+namespace Bybit.Net.Clients.UsdPerpetualApi
 {
     /// <inheritdoc cref="IBybitSocketClientUsdPerpetualStreams" />
     public class BybitSocketClientUsdPerpetualStreams : SocketApiClient, IBybitSocketClientUsdPerpetualStreams
@@ -27,8 +27,8 @@ namespace Bybit.Net.Clients.Socket
         private readonly Log _log;
         private readonly BybitSocketClient _baseClient;
         private readonly BybitSocketClientOptions _options;
-                
-        internal BybitSocketClientUsdPerpetualStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options) 
+
+        internal BybitSocketClientUsdPerpetualStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
             : base(options, options.UsdPerpetualStreamsOptions)
         {
             _log = log;
@@ -84,7 +84,7 @@ namespace Bybit.Net.Clients.Socket
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
-                var innerData = data.Data["type"]?.ToString() == "delta" ? data.Data["data"]?["update"]?[0]: data.Data["data"];
+                var innerData = data.Data["type"]?.ToString() == "delta" ? data.Data["data"]?["update"]?[0] : data.Data["data"];
                 if (innerData == null)
                     return;
 
@@ -96,7 +96,7 @@ namespace Bybit.Net.Clients.Socket
                 }
 
                 handler(data.As(desResult.Data, desResult.Data.Symbol));
-                
+
             });
             return await _baseClient.SubscribeInternalAsync(this,
                 new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "instrument_info.100ms." + s).ToArray() },
@@ -113,9 +113,9 @@ namespace Bybit.Net.Clients.Socket
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(
-            IEnumerable<string> symbols, 
+            IEnumerable<string> symbols,
             int limit,
-            Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, 
+            Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler,
             Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler,
             CancellationToken ct = default)
         {
@@ -152,7 +152,7 @@ namespace Bybit.Net.Clients.Socket
                 }
             });
             var topic = limit == 25 ? "orderBookL2_25." : "orderBook_200.100ms.";
-            return await _baseClient.SubscribeInternalAsync(this, 
+            return await _baseClient.SubscribeInternalAsync(this,
                 new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => topic + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
@@ -184,7 +184,7 @@ namespace Bybit.Net.Clients.Socket
                 var topic = data.Data["topic"]!.ToString();
                 handler(data.As(desResult.Data, topic.Split('.').Last()));
             });
-            return await _baseClient.SubscribeInternalAsync(this, 
+            return await _baseClient.SubscribeInternalAsync(this,
                 new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "candle." + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) + "." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
@@ -215,7 +215,7 @@ namespace Bybit.Net.Clients.Socket
 
                 handler(data.As(desResult.Data, desResult.Data.Symbol));
             });
-            return await _baseClient.SubscribeInternalAsync(this, 
+            return await _baseClient.SubscribeInternalAsync(this,
                 new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "liquidation." + s).ToArray() },
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }

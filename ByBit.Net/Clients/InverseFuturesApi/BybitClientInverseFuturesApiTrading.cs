@@ -14,7 +14,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.InverseFuturesApi
 {
     /// <inheritdoc />
     public class BybitClientInverseFuturesApiTrading : IBybitClientInverseFuturesApiTrading

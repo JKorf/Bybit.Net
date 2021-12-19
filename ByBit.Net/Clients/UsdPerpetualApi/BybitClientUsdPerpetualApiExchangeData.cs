@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.UsdPerpetualApi
 {
     /// <inheritdoc />
     public class BybitClientUsdPerpetualApiExchangeData : IBybitClientUsdPerpetualApiExchangeData
@@ -142,7 +142,7 @@ namespace Bybit.Net.Clients.Rest.Futures
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            
+
             var result = await _baseClient.SendRequestWrapperAsync<object>(_baseClient.GetUrl("v2/public/time"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
             if (!result)
                 return result.As<DateTime>(default);

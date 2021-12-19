@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
+﻿using Bybit.Net.Clients.InversePerpetualApi;
+using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
@@ -13,7 +14,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.Rest.Futures
+namespace Bybit.Net.Clients.UsdPerpetualApi
 {
     /// <inheritdoc cref="IBybitClientUsdPerpetualApi" />
     public class BybitClientUsdPerpetualApi : RestApiClient, IBybitClientUsdPerpetualApi

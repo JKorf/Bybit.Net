@@ -19,7 +19,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
         /// <param name="type">Order type</param>
-        /// <param name="quantity">Quantity</param>
+        /// <param name="quantity">Quantity of the order. Note that for market buy orders this is the quantity of quote asset, otherwise it's in base asset</param>
         /// <param name="price">Price</param>
         /// <param name="timeInForce">Time in force</param>
         /// <param name="clientOrderId">Client order id</param>

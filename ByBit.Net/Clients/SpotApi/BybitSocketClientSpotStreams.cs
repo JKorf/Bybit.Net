@@ -18,7 +18,7 @@ using Bybit.Net.Converters;
 using Bybit.Net.Objects.Models.Spot;
 using Bybit.Net.Interfaces.Clients.SpotApi;
 
-namespace Bybit.Net.Clients.Socket
+namespace Bybit.Net.Clients.SpotApi
 {
     /// <inheritdoc cref="IBybitSocketClientSpotStreams" />
     public class BybitSocketClientSpotStreams : SocketApiClient, IBybitSocketClientSpotStreams
@@ -26,7 +26,7 @@ namespace Bybit.Net.Clients.Socket
         private readonly Log _log;
         private readonly BybitSocketClient _baseClient;
         private readonly BybitSocketClientOptions _options;
-               
+
         internal BybitSocketClientSpotStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
             : base(options, options.SpotStreamsOptions)
         {
@@ -58,11 +58,11 @@ namespace Bybit.Net.Clients.Socket
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage() 
-                { 
-                    Operation = "trade", 
-                    Event = "sub", 
-                    Parameters = new Dictionary<string, object> 
+                new BybitSpotRequestMessage()
+                {
+                    Operation = "trade",
+                    Event = "sub",
+                    Parameters = new Dictionary<string, object>
                     {
                         { "symbol", symbol }
                     }
@@ -197,18 +197,18 @@ namespace Bybit.Net.Clients.Socket
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(
-            Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler, 
-            Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler, 
+            Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler,
+            Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler,
             Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler,
             CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
                 var jArray = (JArray)data.Data;
-                foreach(var item in jArray)
+                foreach (var item in jArray)
                 {
                     var topic = item["e"]?.ToString();
-                    if(topic == "outboundAccountInfo")
+                    if (topic == "outboundAccountInfo")
                     {
                         var desResult = _baseClient.DeserializeInternal<BybitSpotAccountUpdate>(item);
                         if (!desResult)
@@ -230,7 +230,7 @@ namespace Bybit.Net.Clients.Socket
 
                         orderUpdateHandler(data.As(desResult.Data));
                     }
-                    else if(topic == "ticketInfo")
+                    else if (topic == "ticketInfo")
                     {
                         var desResult = _baseClient.DeserializeInternal<BybitSpotUserTradeUpdate>(item);
                         if (!desResult)
@@ -249,8 +249,8 @@ namespace Bybit.Net.Clients.Socket
 
             });
             return await _baseClient.SubscribeInternalAsync(
-                this, 
-                _options.SpotStreamsOptions.BaseAddressAuthenticated, 
+                this,
+                _options.SpotStreamsOptions.BaseAddressAuthenticated,
                 null,
                 "AccountInfo", true, internalHandler, ct).ConfigureAwait(false);
         }
