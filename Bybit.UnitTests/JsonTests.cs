@@ -5,7 +5,6 @@ using CryptoExchange.Net.Interfaces;
 using Bybit.Net.UnitTests;
 using Bybit.Net.Testing;
 using Bybit.Net.Objects;
-using Bybit.Net.Clients.Rest.Futures;
 using Bybit.Net.Clients;
 
 namespace Bybit.Net.UnitTests
