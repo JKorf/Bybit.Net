@@ -230,6 +230,6 @@ namespace Bybit.Net.Objects
         /// <summary>
         /// The limit of entries in the order book, either 25 or 200
         /// </summary>
-        public int? Limit { get; }
+        public int? Limit { get; set; }
     }
 }

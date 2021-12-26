@@ -23,6 +23,9 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 ## More docs comming soon
 
 ## Release notes
+* Version 0.0.1-alpha2 - 21 Dec 2021
+    * Update to new CryptoExchange.Net version
+
 * Version 0.0.1-alpha1 - 07 Dec 2021
     * Initial version
 

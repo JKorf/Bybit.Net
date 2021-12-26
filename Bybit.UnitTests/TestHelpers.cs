@@ -20,7 +20,6 @@ using Newtonsoft.Json;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net;
 using Bybit.Net.Objects;
-using Bybit.Net.Clients.Rest.Futures;
 using Bybit.Net.Clients;
 
 namespace Bybit.Net.Testing
