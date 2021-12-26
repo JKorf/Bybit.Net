@@ -13,7 +13,7 @@ using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Clients;
 using Bybit.Net.Objects.Models.Socket.Spot;
 
-namespace Bitfinex.Net.SymbolOrderBooks
+namespace Bybit.Net.SymbolOrderBooks
 {
     /// <summary>
     /// Live order book implementation

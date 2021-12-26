@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Clients;
 
-namespace Bitfinex.Net.SymbolOrderBooks
+namespace Bybit.Net.SymbolOrderBooks
 {
     /// <summary>
     /// Live order book implementation
