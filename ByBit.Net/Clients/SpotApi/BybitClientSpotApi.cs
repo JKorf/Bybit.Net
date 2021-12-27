@@ -33,6 +33,9 @@ namespace Bybit.Net.Clients.SpotApi
         internal BybitClientOptions ClientOptions { get; }
 
         /// <inheritdoc />
+        public string ExchangeName => "Bybit";
+
+        /// <inheritdoc />
         public IBybitClientSpotApiAccount Account { get; }
         /// <inheritdoc />
         public IBybitClientSpotApiExchangeData ExchangeData { get; }
