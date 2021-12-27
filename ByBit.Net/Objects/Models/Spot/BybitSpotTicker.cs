@@ -40,7 +40,7 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Last trade price
         /// </summary>
         [JsonProperty("lastPrice")]
-        public decimal LastTradePrice { get; set; }
+        public decimal LastPrice { get; set; }
         /// <summary>
         /// 24 hour high price
         /// </summary>

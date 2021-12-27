@@ -44,7 +44,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
         /// Last trade price
         /// </summary>
         [JsonProperty("c")]
-        public decimal LastTradePrice { get; set; }
+        public decimal LastPrice { get; set; }
         /// <summary>
         /// 24 hour high price
         /// </summary>
