@@ -23,6 +23,9 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 ## More docs comming soon
 
 ## Release notes
+* Version 0.0.1-alpha4 - 01 Jan 2022
+    * New comon implementation, added AddBybit extension method
+
 * Version 0.0.1-alpha3 - 27 Dec 2021
     * Fixed some small issues
     * Updated CryptoExchange.Net
