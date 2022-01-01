@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Order book info
     /// </summary>
-    public class BybitSpotOrderBook: ICommonOrderBook
+    public class BybitSpotOrderBook
     {
         /// <summary>
         /// Timestamp of the data
@@ -28,9 +27,5 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Asks
         /// </summary>
         public IEnumerable<BybitSpotOrderBookEntry> Asks { get; set; } = Array.Empty<BybitSpotOrderBookEntry>();
-
-        IEnumerable<ISymbolOrderBookEntry> ICommonOrderBook.CommonBids => Bids;
-
-        IEnumerable<ISymbolOrderBookEntry> ICommonOrderBook.CommonAsks => Asks;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 using System;
 
@@ -8,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// User trade info
     /// </summary>
-    public class BybitSpotUserTrade: ICommonTrade
+    public class BybitSpotUserTrade
     {
         /// <summary>
         /// Trade id
@@ -79,18 +78,6 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Maker rebate
         /// </summary>
         public decimal MakerRebate { get; set; }
-
-        string ICommonTrade.CommonId => Id.ToString();
-
-        decimal ICommonTrade.CommonPrice => Price;
-
-        decimal ICommonTrade.CommonQuantity => Quantity;
-
-        decimal ICommonTrade.CommonFee => Fee;
-
-        string? ICommonTrade.CommonFeeAsset => FeeAsset;
-
-        DateTime ICommonTrade.CommonTradeTime => TradeTime;
     }
 
     /// <summary>

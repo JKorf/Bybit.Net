@@ -64,6 +64,15 @@ namespace Bybit.Net.Clients
             AddGenericHandler("Heartbeat", (evnt) => { });
         }
 
+        /// <summary>
+        /// Set the default options to be used when creating new clients
+        /// </summary>
+        /// <param name="options"></param>
+        public static void SetDefaultOptions(BybitSocketClientOptions options)
+        {
+            BybitSocketClientOptions.Default = options;
+        }
+
         internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
             => Deserialize<T>(obj, serializer, requestId);
 

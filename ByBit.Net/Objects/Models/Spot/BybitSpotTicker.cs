@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 using System;
 
@@ -8,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Ticker info
     /// </summary>
-    public class BybitSpotTicker: ICommonTicker
+    public class BybitSpotTicker
     {
         /// <summary>
         /// Timestamp of the data
@@ -53,13 +52,5 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Price 24 hours ago
         /// </summary>
         public decimal OpenPrice { get; set; }
-
-        string ICommonTicker.CommonSymbol => Symbol;
-
-        decimal ICommonTicker.CommonHighPrice => HighPrice;
-
-        decimal ICommonTicker.CommonLowPrice => LowPrice;
-
-        decimal ICommonTicker.CommonVolume => Volume;
     }
 }

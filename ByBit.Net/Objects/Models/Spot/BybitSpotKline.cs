@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 using System;
 
@@ -9,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// Kline data
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitSpotKline: ICommonKline
+    public class BybitSpotKline
     {
         /// <summary>
         /// Candle open time
@@ -66,17 +65,5 @@ namespace Bybit.Net.Objects.Models.Spot
         /// </summary>
         [ArrayProperty(10)]
         public decimal TakerQuoteVolume { get; set; }
-
-        decimal ICommonKline.CommonHighPrice => HighPrice;
-
-        decimal ICommonKline.CommonLowPrice => LowPrice;
-
-        decimal ICommonKline.CommonOpenPrice => OpenPrice;
-
-        decimal ICommonKline.CommonClosePrice => ClosePrice;
-
-        DateTime ICommonKline.CommonOpenTime => OpenTime;
-
-        decimal ICommonKline.CommonVolume => Volume;
     }
 }

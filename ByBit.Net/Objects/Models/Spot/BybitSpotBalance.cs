@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.ExchangeInterfaces;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +12,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Balance info
     /// </summary>
-    public class BybitSpotBalance: ICommonBalance
+    public class BybitSpotBalance
     {
         /// <summary>
         /// Asset
@@ -43,11 +42,5 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Total
         /// </summary>
         public decimal Total { get; set; }
-
-        string ICommonBalance.CommonAsset => Asset;
-
-        decimal ICommonBalance.CommonAvailable => Available;
-
-        decimal ICommonBalance.CommonTotal => Total;
     }
 }

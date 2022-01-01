@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptoExchange.Net.Interfaces;
+using System;
 
 namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 {
