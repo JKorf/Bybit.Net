@@ -3,7 +3,7 @@ using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.SpotApi;
 using Bybit.Net.Objects.Models.Spot;
 using CryptoExchange.Net;
-using CryptoExchange.Net.ComonObjects;
+using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System;

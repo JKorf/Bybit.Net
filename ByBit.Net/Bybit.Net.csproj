@@ -42,7 +42,7 @@
     <None Include="Icon\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CryptoExchange.Net" Version="5.0.0-alpha5" />
+    <PackageReference Include="CryptoExchange.Net" Version="5.0.0-alpha6" />
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
