@@ -23,6 +23,10 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 ## More docs comming soon
 
 ## Release notes
+* Version 0.0.1-alpha6 - 07 Jan 2022
+    * Updated CrytpoExchange.Net
+    * Added optional parameter for socket client lifetime in AddBybit
+
 * Version 0.0.1-alpha5 - 03 Jan 2022
     * Updated CryptoExchange.Net
 
