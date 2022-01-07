@@ -16,8 +16,12 @@ namespace Bybit.Net
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="defaultOptionsCallback">Set default options for the client</param>
+        /// <param name="socketClientLifeTime">The lifetime of the IBybitSocketClient for the service collection. Defaults to Scoped.</param>
         /// <returns></returns>
-        public static IServiceCollection AddBybit(this IServiceCollection services, Action<BybitClientOptions, BybitSocketClientOptions>? defaultOptionsCallback = null)
+        public static IServiceCollection AddBybit(
+            this IServiceCollection services,
+            Action<BybitClientOptions, BybitSocketClientOptions>? defaultOptionsCallback = null,
+            ServiceLifetime? socketClientLifeTime = null)
         {
             if (defaultOptionsCallback != null)
             {
@@ -29,8 +33,12 @@ namespace Bybit.Net
                 BybitSocketClient.SetDefaultOptions(socketOptions);
             }
 
-            return services.AddTransient<IBybitClient, BybitClient>()
-                           .AddScoped<IBybitSocketClient, BybitSocketClient>();
+            services.AddTransient<IBybitClient, BybitClient>();
+            if (socketClientLifeTime == null)
+                services.AddScoped<IBybitSocketClient, BybitSocketClient>();
+            else
+                services.Add(new ServiceDescriptor(typeof(IBybitSocketClient), typeof(BybitSocketClient), socketClientLifeTime.Value));
+            return services;
         }
     }
 }
