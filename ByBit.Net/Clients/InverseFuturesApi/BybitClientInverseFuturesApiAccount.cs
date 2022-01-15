@@ -172,7 +172,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("futures/private/position/switch-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-            return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+            return result.AsDataless();
         }
 
         #endregion
@@ -192,7 +192,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("futures/private/position/switch-isolated"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-            return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+            return result.AsDataless();
         }
 
         #endregion

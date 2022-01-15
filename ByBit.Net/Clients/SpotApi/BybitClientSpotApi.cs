@@ -87,7 +87,7 @@ namespace Bybit.Net.Clients.SpotApi
                 return result.As<BybitResult<T>>(default);
 
             if (result.Data.ReturnCode != 0)
-                return new WebCallResult<BybitResult<T>>(result.ResponseStatusCode, result.ResponseHeaders, default, new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<BybitResult<T>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));               
 
             return result.As(result.Data);
         }
@@ -105,8 +105,8 @@ namespace Bybit.Net.Clients.SpotApi
                 return result.As<T>(default);
 
             if (result.Data.ReturnCode != 0)
-                return new WebCallResult<T>(result.ResponseStatusCode, result.ResponseHeaders, default, new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
-
+                return result.AsError<T>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                
             return result.As(result.Data.Result);
         }
 

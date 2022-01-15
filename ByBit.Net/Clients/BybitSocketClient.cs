@@ -93,7 +93,7 @@ namespace Bybit.Net.Clients
         protected override async Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection socketConnection)
         {
             if (socketConnection.ApiClient.AuthenticationProvider == null)
-                return new CallResult<bool>(false, new NoApiCredentialsError());
+                return new CallResult<bool>(new NoApiCredentialsError());
 
             var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(5))!;
             var key = socketConnection.ApiClient.AuthenticationProvider.Credentials.Key!.GetString();
@@ -135,7 +135,7 @@ namespace Bybit.Net.Clients
                     return true;
                 }
             }).ConfigureAwait(false);
-            return new CallResult<bool>(result, result ? null : new ServerError(error));
+            return result ? new CallResult<bool>(result) : new CallResult<bool>(new ServerError(error));
         }
 
         /// <inheritdoc />
@@ -167,7 +167,7 @@ namespace Bybit.Net.Clients
                 if (requestSymbols.Any(p => symbols?.Contains(p) != true))
                     return false;
 
-                callResult = new CallResult<object>(default, null);
+                callResult = new CallResult<object>(new object());
                 return data["msg"]?.Value<string>() == "Success";
             }
             else
@@ -181,7 +181,7 @@ namespace Bybit.Net.Clients
                 if (requestParams.Any(p => !args.Contains(p)))
                     return false;
 
-                callResult = new CallResult<object>(default, null);
+                callResult = new CallResult<object>(new object());
                 return data["success"]?.Value<bool>() == true;
             }
         }

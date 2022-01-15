@@ -143,7 +143,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("private/linear/position/set-auto-add-margin"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-            return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+            return result.AsDataless();
         }
 
         #endregion
@@ -180,7 +180,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("private/linear/position/set-leverage"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-            return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+            return result.AsDataless();
         }
 
         #endregion
@@ -243,7 +243,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("private/linear/position/switch-isolated"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
-            return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+            return result.AsDataless();
         }
 
         #endregion
