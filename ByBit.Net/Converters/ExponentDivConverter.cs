@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 
 namespace Bybit.Net.Converters
 {
@@ -22,7 +23,17 @@ namespace Bybit.Net.Converters
             if (reader.Value == null)
                 return null;
 
-            var value = (long)reader.Value;
+            long value;
+            if (reader.Value is string strValue)
+            {
+                if(!long.TryParse(strValue, out value))
+                {
+                    Debug.WriteLine($"Failed to parse exponential value {strValue}");
+                    return default;
+                }
+            }
+            else
+                value = (long)reader.Value;
             return (decimal)(value/_div);
         }
 
