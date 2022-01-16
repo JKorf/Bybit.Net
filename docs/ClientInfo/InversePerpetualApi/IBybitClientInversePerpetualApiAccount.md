@@ -2,6 +2,7 @@
 title: IBybitClientInversePerpetualApiAccount
 has_children: false
 parent: IBybitClientInversePerpetualApi
+grand_parent: IBybitClient
 ---
 *[generated documentation]*  
 `BybitClient > InversePerpetualApi > Account`

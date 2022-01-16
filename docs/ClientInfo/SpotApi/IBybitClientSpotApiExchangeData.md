@@ -2,6 +2,7 @@
 title: IBybitClientSpotApiExchangeData
 has_children: false
 parent: IBybitClientSpotApi
+grand_parent: IBybitClient
 ---
 *[generated documentation]*  
 `BybitClient > SpotApi > ExchangeData`

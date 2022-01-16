@@ -2,6 +2,7 @@
 title: IBybitSocketClientSpotStreams
 has_children: true
 parent: IBybitClientSpotApi
+grand_parent: IBybitClient
 ---
 *[generated documentation]*  
 `BybitClient > SpotApi > SpotStreams`

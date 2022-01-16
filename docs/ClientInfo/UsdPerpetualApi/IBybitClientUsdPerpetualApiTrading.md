@@ -2,6 +2,7 @@
 title: IBybitClientUsdPerpetualApiTrading
 has_children: false
 parent: IBybitClientUsdPerpetualApi
+grand_parent: IBybitClient
 ---
 *[generated documentation]*  
 `BybitClient > UsdPerpetualApi > Trading`

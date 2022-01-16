@@ -2,6 +2,7 @@
 title: IBybitClientInverseFuturesApiTrading
 has_children: false
 parent: IBybitClientInverseFuturesApi
+grand_parent: IBybitClient
 ---
 *[generated documentation]*  
 `BybitClient > InverseFuturesApi > Trading`
