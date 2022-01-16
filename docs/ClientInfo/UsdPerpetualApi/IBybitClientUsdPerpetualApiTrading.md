@@ -1,5 +1,9 @@
+---
+title: IBybitClientUsdPerpetualApiTrading
+parent: IBybitClientUsdPerpetualApi
+---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > Trading`  
+`BybitClient > UsdPerpetualApi > Trading`
 *Bybit trading endpoints, placing and mananging orders.*
   
 

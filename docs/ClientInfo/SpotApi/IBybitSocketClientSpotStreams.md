@@ -1,5 +1,9 @@
+---
+title: IBybitSocketClientSpotStreams
+parent: IBybitClientSpotApi
+---
 *[generated documentation]*  
-`BybitClient > SpotApi > SpotStreams`  
+`BybitClient > SpotApi > SpotStreams`
 *Bybit spot streams*
   
 

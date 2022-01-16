@@ -1,5 +1,9 @@
+---
+title: IBybitClientUsdPerpetualApiAccount
+parent: IBybitClientUsdPerpetualApi
+---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > Account`  
+`BybitClient > UsdPerpetualApi > Account`
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 

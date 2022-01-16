@@ -1,5 +1,9 @@
+---
+title: IBybitClientInversePerpetualApiAccount
+parent: IBybitClientInversePerpetualApi
+---
 *[generated documentation]*  
-`BybitClient > InversePerpetualApi > Account`  
+`BybitClient > InversePerpetualApi > Account`
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 

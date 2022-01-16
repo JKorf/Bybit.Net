@@ -1,4 +1,8 @@
+---
+title: IBybitSocketClient
+---
 *[generated documentation]*  
+``
 *Client for accessing the bybit websocket API*
   
 ***

@@ -1,5 +1,9 @@
+---
+title: IBybitClientSpotApiAccount
+parent: IBybitClientSpotApi
+---
 *[generated documentation]*  
-`BybitClient > SpotApi > Account`  
+`BybitClient > SpotApi > Account`
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 

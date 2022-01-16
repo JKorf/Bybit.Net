@@ -1,6 +1,12 @@
-[Home](https://github.com/JKorf/Bybit.Net/wiki/Home)  
+[BybitClient](https://github.com/JKorf/Bybit.Net/wiki/BybitClient)  
+
+[BybitSocketClient](https://github.com/JKorf/Bybit.Net/wiki/BybitSocketClient)  
+
+[index](https://github.com/JKorf/Bybit.Net/wiki/index)  
 
 [Usage](https://github.com/JKorf/Bybit.Net/wiki/Usage)  
+
+[_config](https://github.com/JKorf/Bybit.Net/wiki/_config)  
 
 <details>
 <summary>

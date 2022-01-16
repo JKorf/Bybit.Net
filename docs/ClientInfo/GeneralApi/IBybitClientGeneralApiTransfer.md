@@ -1,5 +1,9 @@
+---
+title: IBybitClientGeneralApiTransfer
+parent: IBybitClientGeneralApi
+---
 *[generated documentation]*  
-`BybitClient > GeneralApi > Transfer`  
+`BybitClient > GeneralApi > Transfer`
 *Bybit asset transfer endpoints*
   
 

@@ -1,5 +1,9 @@
+---
+title: IBybitSocketClientInversePerpetualStreams
+parent: IBybitClientInversePerpetualApi
+---
 *[generated documentation]*  
-`BybitClient > InversePerpetualApi > InversePerpetualStreams`  
+`BybitClient > InversePerpetualApi > InversePerpetualStreams`
 *Bybit inverse perpetual streams*
   
 

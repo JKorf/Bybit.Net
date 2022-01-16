@@ -1,5 +1,9 @@
+---
+title: IBybitClientInverseFuturesApiTrading
+parent: IBybitClientInverseFuturesApi
+---
 *[generated documentation]*  
-`BybitClient > InverseFuturesApi > Trading`  
+`BybitClient > InverseFuturesApi > Trading`
 *Bybit trading endpoints, placing and mananging orders.*
   
 

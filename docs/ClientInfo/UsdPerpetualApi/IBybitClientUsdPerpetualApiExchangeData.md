@@ -1,5 +1,9 @@
+---
+title: IBybitClientUsdPerpetualApiExchangeData
+parent: IBybitClientUsdPerpetualApi
+---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > ExchangeData`  
+`BybitClient > UsdPerpetualApi > ExchangeData`
 *Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 

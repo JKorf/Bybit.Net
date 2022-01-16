@@ -1,5 +1,9 @@
+---
+title: IBybitSocketClientUsdPerpetualStreams
+parent: IBybitClientUsdPerpetualApi
+---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > UsdPerpetualStreams`  
+`BybitClient > UsdPerpetualApi > UsdPerpetualStreams`
 *Bybit usd perpetual streams*
   
 

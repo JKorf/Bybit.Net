@@ -1,5 +1,9 @@
+---
+title: IBybitClientInverseFuturesApiAccount
+parent: IBybitClientInverseFuturesApi
+---
 *[generated documentation]*  
-`BybitClient > InverseFuturesApi > Account`  
+`BybitClient > InverseFuturesApi > Account`
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 

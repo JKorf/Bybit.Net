@@ -1,5 +1,9 @@
+---
+title: IBybitClientSpotApi
+parent: IBybitClient
+---
 *[generated documentation]*  
-`BybitClient > SpotApi `  
+`BybitClient > SpotApi`
 *Bybit spot API endpoints*
   
 ***

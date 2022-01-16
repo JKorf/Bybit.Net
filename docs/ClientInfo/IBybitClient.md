@@ -1,4 +1,8 @@
+---
+title: IBybitClient
+---
 *[generated documentation]*  
+``
 *Client for accessing the Bybit Rest API.*
   
 ***

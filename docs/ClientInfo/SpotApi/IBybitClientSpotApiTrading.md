@@ -1,5 +1,9 @@
+---
+title: IBybitClientSpotApiTrading
+parent: IBybitClientSpotApi
+---
 *[generated documentation]*  
-`BybitClient > SpotApi > Trading`  
+`BybitClient > SpotApi > Trading`
 *Bybit trading endpoints, placing and mananging orders.*
   
 

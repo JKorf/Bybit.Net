@@ -1,5 +1,9 @@
+---
+title: IBybitClientUsdPerpetualApi
+parent: IBybitClient
+---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi `  
+`BybitClient > UsdPerpetualApi`
 *Bybit USD perpetual API endpoints*
   
 ***

@@ -1,5 +1,9 @@
+---
+title: IBybitClientInversePerpetualApi
+parent: IBybitClient
+---
 *[generated documentation]*  
-`BybitClient > InversePerpetualApi `  
+`BybitClient > InversePerpetualApi`
 *Bybit inverse perpetual API endpoints*
   
 ***
