@@ -60,7 +60,7 @@ Make sure to read the [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoE
 <BlockQuote>
 
 #### Get market data
-```
+```C#
 // Getting info on all symbols
 var symbolData = await bybitClient.SpotApi.ExchangeData.GetSymbolsAsync();
 
@@ -75,7 +75,7 @@ var tradeHistoryData = await bybitClient.SpotApi.ExchangeData.GetTradeHistoryAsy
 ```
 
 #### Requesting balances
-```
+```C#
 var accountData = await bybitClient.SpotApi.Account.GetBalancesAsync();
 ```
 #### Placing order
