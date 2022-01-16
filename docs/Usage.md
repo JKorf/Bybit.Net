@@ -52,7 +52,7 @@ See [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoExchange.Net/wiki/C
 ## Usage
 Make sure to read the [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoExchange.Net/wiki/Clients#processing-request-responses) on processing responses.
 
-<Details markdown="block">
+<Details>
 <Summary>
 <b>Spot API</b>
 
@@ -60,7 +60,7 @@ Make sure to read the [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoE
 <BlockQuote>
 
 #### Get market data
-````C#
+```
 // Getting info on all symbols
 var symbolData = await bybitClient.SpotApi.ExchangeData.GetSymbolsAsync();
 
@@ -72,12 +72,12 @@ var orderBookData = await bybitClient.SpotApi.ExchangeData.GetOrderBookAsync("BT
 
 // Getting recent trades of a symbol
 var tradeHistoryData = await bybitClient.SpotApi.ExchangeData.GetTradeHistoryAsync("BTC-USDT");
-````
+```
 
 #### Requesting balances
-````C#
+```
 var accountData = await bybitClient.SpotApi.Account.GetBalancesAsync();
-````
+```
 #### Placing order
 ````C#
 // Placing a buy limit order for 0.001 BTC at a price of 50000USDT each
