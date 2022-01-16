@@ -1,5 +1,6 @@
 ---
 title: IBybitSocketClientUsdPerpetualStreams
+has_children: true
 parent: IBybitClientUsdPerpetualApi
 ---
 *[generated documentation]*  

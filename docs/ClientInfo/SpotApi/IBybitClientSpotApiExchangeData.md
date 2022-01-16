@@ -1,5 +1,6 @@
 ---
 title: IBybitClientSpotApiExchangeData
+has_children: false
 parent: IBybitClientSpotApi
 ---
 *[generated documentation]*  

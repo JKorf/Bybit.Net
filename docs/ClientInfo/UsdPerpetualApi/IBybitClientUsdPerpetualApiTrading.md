@@ -1,5 +1,6 @@
 ---
 title: IBybitClientUsdPerpetualApiTrading
+has_children: false
 parent: IBybitClientUsdPerpetualApi
 ---
 *[generated documentation]*  

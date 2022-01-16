@@ -1,5 +1,6 @@
 ---
 title: IBybitClientInverseFuturesApiExchangeData
+has_children: false
 parent: IBybitClientInverseFuturesApi
 ---
 *[generated documentation]*  

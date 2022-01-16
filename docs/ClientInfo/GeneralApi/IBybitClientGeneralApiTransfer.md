@@ -1,5 +1,6 @@
 ---
 title: IBybitClientGeneralApiTransfer
+has_children: false
 parent: IBybitClientGeneralApi
 ---
 *[generated documentation]*  

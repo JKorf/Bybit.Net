@@ -1,5 +1,6 @@
 ---
 title: IBybitClientGeneralApi
+has_children: true
 parent: IBybitClient
 ---
 *[generated documentation]*  

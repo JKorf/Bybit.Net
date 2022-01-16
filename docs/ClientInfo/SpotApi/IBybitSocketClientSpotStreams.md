@@ -1,5 +1,6 @@
 ---
 title: IBybitSocketClientSpotStreams
+has_children: true
 parent: IBybitClientSpotApi
 ---
 *[generated documentation]*  

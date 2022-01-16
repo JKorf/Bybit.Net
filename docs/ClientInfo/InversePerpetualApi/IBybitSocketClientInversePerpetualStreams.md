@@ -1,5 +1,6 @@
 ---
 title: IBybitSocketClientInversePerpetualStreams
+has_children: true
 parent: IBybitClientInversePerpetualApi
 ---
 *[generated documentation]*  

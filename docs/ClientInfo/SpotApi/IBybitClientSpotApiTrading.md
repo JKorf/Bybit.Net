@@ -1,5 +1,6 @@
 ---
 title: IBybitClientSpotApiTrading
+has_children: false
 parent: IBybitClientSpotApi
 ---
 *[generated documentation]*  

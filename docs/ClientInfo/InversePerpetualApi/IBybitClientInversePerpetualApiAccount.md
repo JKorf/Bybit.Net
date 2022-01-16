@@ -1,5 +1,6 @@
 ---
 title: IBybitClientInversePerpetualApiAccount
+has_children: false
 parent: IBybitClientInversePerpetualApi
 ---
 *[generated documentation]*  

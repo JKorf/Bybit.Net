@@ -1,5 +1,6 @@
 ---
 title: IBybitClient
+has_children: true
 ---
 *[generated documentation]*  
 *Client for accessing the Bybit Rest API.*
