@@ -2,21 +2,20 @@
 title: IBybitClient
 ---
 *[generated documentation]*  
-``
 *Client for accessing the Bybit Rest API.*
   
 ***
 *General API endpoints*  
-**[IBybitClientGeneralApi](https://github.com/JKorf/Bybit.Net/wiki/IBybitClientGeneralApi) GeneralApi { get; }**  
+**[IBybitClientGeneralApi](IBybitClientGeneralApi.md) GeneralApi { get; }**  
 ***
 *Inverse futures API endpoints*  
-**[IBybitClientInverseFuturesApi](https://github.com/JKorf/Bybit.Net/wiki/IBybitClientInverseFuturesApi) InverseFuturesApi { get; }**  
+**[IBybitClientInverseFuturesApi](IBybitClientInverseFuturesApi.md) InverseFuturesApi { get; }**  
 ***
 *Inverse perpetual API endpoints*  
-**[IBybitClientInversePerpetualApi](https://github.com/JKorf/Bybit.Net/wiki/IBybitClientInversePerpetualApi) InversePerpetualApi { get; }**  
+**[IBybitClientInversePerpetualApi](IBybitClientInversePerpetualApi.md) InversePerpetualApi { get; }**  
 ***
 *Spot API endpoints*  
-**[IBybitClientSpotApi](https://github.com/JKorf/Bybit.Net/wiki/IBybitClientSpotApi) SpotApi { get; }**  
+**[IBybitClientSpotApi](IBybitClientSpotApi.md) SpotApi { get; }**  
 ***
 *USD perpetual API endpoints*  
-**[IBybitClientUsdPerpetualApi](https://github.com/JKorf/Bybit.Net/wiki/IBybitClientUsdPerpetualApi) UsdPerpetualApi { get; }**  
+**[IBybitClientUsdPerpetualApi](IBybitClientUsdPerpetualApi.md) UsdPerpetualApi { get; }**  

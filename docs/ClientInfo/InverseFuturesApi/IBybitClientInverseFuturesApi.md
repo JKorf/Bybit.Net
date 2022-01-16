@@ -8,10 +8,10 @@ parent: IBybitClient
   
 ***
 *Endpoints related to account settings, info or actions*  
-**[IBybitClientInverseFuturesApiAccount](https://github.com/JKorf/Bybit.Net/wiki/IBybitClientInverseFuturesApiAccount) Account { get; }**  
+**[IBybitClientInverseFuturesApiAccount](IBybitClientInverseFuturesApiAccount.md) Account { get; }**  
 ***
 *Endpoints related to retrieving market and system data*  
-**[IBybitClientInverseFuturesApiExchangeData](https://github.com/JKorf/Bybit.Net/wiki/IBybitClientInverseFuturesApiExchangeData) ExchangeData { get; }**  
+**[IBybitClientInverseFuturesApiExchangeData](IBybitClientInverseFuturesApiExchangeData.md) ExchangeData { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**[IBybitClientInverseFuturesApiTrading](https://github.com/JKorf/Bybit.Net/wiki/IBybitClientInverseFuturesApiTrading) Trading { get; }**  
+**[IBybitClientInverseFuturesApiTrading](IBybitClientInverseFuturesApiTrading.md) Trading { get; }**  
