@@ -52,7 +52,7 @@ See [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoExchange.Net/wiki/C
 ## Usage
 Make sure to read the [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoExchange.Net/wiki/Clients#processing-request-responses) on processing responses.
 
-<Details>
+<Details markdown="block">
 <Summary>
 <b>Spot API</b>
 
