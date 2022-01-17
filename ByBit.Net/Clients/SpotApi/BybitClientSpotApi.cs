@@ -427,6 +427,6 @@ namespace Bybit.Net.Clients.SpotApi
             => TimeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        public ISpotClient ComonSpotClient => this;
+        public ISpotClient CommonSpotClient => this;
     }
 }

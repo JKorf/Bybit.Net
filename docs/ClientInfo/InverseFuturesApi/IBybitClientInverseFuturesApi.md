@@ -9,10 +9,10 @@ parent: IBybitClient
   
 ***
 *Endpoints related to account settings, info or actions*  
-**[IBybitClientInverseFuturesApiAccount](IBybitClientInverseFuturesApiAccount.html){:target="_blank"} Account { get; }**  
+**[IBybitClientInverseFuturesApiAccount](IBybitClientInverseFuturesApiAccount.html) Account { get; }**  
 ***
 *Endpoints related to retrieving market and system data*  
-**[IBybitClientInverseFuturesApiExchangeData](IBybitClientInverseFuturesApiExchangeData.html){:target="_blank"} ExchangeData { get; }**  
+**[IBybitClientInverseFuturesApiExchangeData](IBybitClientInverseFuturesApiExchangeData.html) ExchangeData { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**[IBybitClientInverseFuturesApiTrading](IBybitClientInverseFuturesApiTrading.html){:target="_blank"} Trading { get; }**  
+**[IBybitClientInverseFuturesApiTrading](IBybitClientInverseFuturesApiTrading.html) Trading { get; }**  
