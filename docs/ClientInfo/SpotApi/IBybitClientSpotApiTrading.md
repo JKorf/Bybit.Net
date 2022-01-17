@@ -29,10 +29,10 @@ Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = defau
 
 |Parameter|Description|
 |---|---|
-|[Optional] `orderId`|The order id|
-|[Optional] `clientOrderId`|The client order id|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ orderId|The order id|
+|_[Optional]_ clientOrderId|The client order id|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -56,11 +56,11 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync(string? symb
 
 |Parameter|Description|
 |---|---|
-|[Optional] `symbol`|The symbol|
-|[Optional] `orderId`|Filter by order id, will only return orders with an orderId smaller than this|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ symbol|The symbol|
+|_[Optional]_ orderId|Filter by order id, will only return orders with an orderId smaller than this|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -84,10 +84,10 @@ Task<WebCallResult<BybitSpotOrder>> GetOrderAsync(long? orderId = default, strin
 
 |Parameter|Description|
 |---|---|
-|[Optional] `orderId`|The id of the order|
-|[Optional] `clientOrderId`|The client order id|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ orderId|The id of the order|
+|_[Optional]_ clientOrderId|The client order id|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -111,11 +111,11 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync(string? symbol =
 
 |Parameter|Description|
 |---|---|
-|[Optional] `symbol`|Filter by symbol|
-|[Optional] `orderId`|Filter by order id, will only return orders with an orderId smaller than this|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ symbol|Filter by symbol|
+|_[Optional]_ orderId|Filter by order id, will only return orders with an orderId smaller than this|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -139,12 +139,12 @@ Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync(string? 
 
 |Parameter|Description|
 |---|---|
-|[Optional] `symbol`|Filter by symbol|
-|[Optional] `fromId`|Filter by start id|
-|[Optional] `toId`|Filter by end id|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ symbol|Filter by symbol|
+|_[Optional]_ fromId|Filter by start id|
+|_[Optional]_ toId|Filter by end id|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -168,14 +168,14 @@ Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSi
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `side`|Order side|
-| `type`|Order type|
-| `quantity`|Quantity of the order. Note that for market buy orders this is the quantity of quote asset, otherwise it's in base asset|
-|[Optional] `price`|Price|
-|[Optional] `timeInForce`|Time in force|
-|[Optional] `clientOrderId`|Client order id|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|side|Order side|
+|type|Order type|
+|quantity|Quantity of the order. Note that for market buy orders this is the quantity of quote asset, otherwise it's in base asset|
+|_[Optional]_ price|Price|
+|_[Optional]_ timeInForce|Time in force|
+|_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>

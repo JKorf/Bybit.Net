@@ -29,9 +29,9 @@ Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, long? r
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -55,8 +55,8 @@ Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync(long? re
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -80,13 +80,13 @@ Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, K
 
 |Parameter|Description|
 |---|---|
-| `symbol`|Symbol of the klines|
-| `interval`|Interval of the kline data|
-|[Optional] `startTime`|Start time of the data|
-|[Optional] `endTime`|End time of the data|
-|[Optional] `limit`|Max amount of candles|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|Symbol of the klines|
+|interval|Interval of the kline data|
+|_[Optional]_ startTime|Start time of the data|
+|_[Optional]_ endTime|End time of the data|
+|_[Optional]_ limit|Max amount of candles|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -110,11 +110,11 @@ Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, i
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `scale`|The scale of the order book. 1 means 1 digit|
-|[Optional] `limit`|The amount of rows|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ scale|The scale of the order book. 1 means 1 digit|
+|_[Optional]_ limit|The amount of rows|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -138,10 +138,10 @@ Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, int? li
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `limit`|The number of rows|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ limit|The number of rows|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -165,9 +165,9 @@ Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, long? receiveWi
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -191,8 +191,8 @@ Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync(long? receiveWin
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -216,8 +216,8 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(long? receiveWindow = default, 
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -241,8 +241,8 @@ Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync(long? receiveW
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -266,9 +266,9 @@ Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, long? receive
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -292,8 +292,8 @@ Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync(long? receiveW
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -317,9 +317,9 @@ Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string sym
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>

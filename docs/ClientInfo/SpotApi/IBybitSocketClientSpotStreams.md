@@ -28,10 +28,10 @@ Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataE
 
 |Parameter|Description|
 |---|---|
-| `accountUpdateHandler`|Account(balance) update handler|
-| `orderUpdateHandler`|Order update handler|
-| `tradeUpdateHandler`|User trade update handler|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|accountUpdateHandler|Account(balance) update handler|
+|orderUpdateHandler|Order update handler|
+|tradeUpdateHandler|User trade update handler|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -55,9 +55,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string sym
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `handler`|Data handler|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol|
+|handler|Data handler|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -81,10 +81,10 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `interval`|Interval of the kline data|
-| `handler`|Data handler|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol|
+|interval|Interval of the kline data|
+|handler|Data handler|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -108,9 +108,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `handler`|Data handler|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol|
+|handler|Data handler|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -134,9 +134,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `handler`|Data handler|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol|
+|handler|Data handler|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -160,8 +160,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `handler`|Data handler|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol|
+|handler|Data handler|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>

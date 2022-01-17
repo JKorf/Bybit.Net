@@ -29,11 +29,11 @@ Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode,
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `mode`|The position mode|
-| `margin`|The margin|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|mode|The position mode|
+|margin|The margin|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -57,8 +57,8 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? recei
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -82,11 +82,11 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 
 |Parameter|Description|
 |---|---|
-|[Optional] `fromId`|Filter by id|
-|[Optional] `direction`|Filter by direction|
-|[Optional] `limit`|Max records|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ fromId|Filter by id|
+|_[Optional]_ direction|Filter by direction|
+|_[Optional]_ limit|Max records|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -110,9 +110,9 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? a
 
 |Parameter|Description|
 |---|---|
-|[Optional] `asset`|Filter by asset|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -136,9 +136,9 @@ Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(string? symbol
 
 |Parameter|Description|
 |---|---|
-|[Optional] `symbol`|Filter by symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ symbol|Filter by symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -162,14 +162,14 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol to get records for|
-|[Optional] `startTime`|Filter by startTime|
-|[Optional] `endTime`|Filter by endTime|
-|[Optional] `type`|Filter by type|
-|[Optional] `page`|Page|
-|[Optional] `pageSize`|Page size|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol to get records for|
+|_[Optional]_ startTime|Filter by startTime|
+|_[Optional]_ endTime|Filter by endTime|
+|_[Optional]_ type|Filter by type|
+|_[Optional]_ page|Page|
+|_[Optional]_ pageSize|Page size|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -193,9 +193,9 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string? symbo
 
 |Parameter|Description|
 |---|---|
-|[Optional] `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -219,14 +219,14 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 
 |Parameter|Description|
 |---|---|
-|[Optional] `asset`|Filter by asset|
-|[Optional] `startTime`|Filter by start time|
-|[Optional] `endTime`|Filter by end time|
-|[Optional] `type`|Filter by type|
-|[Optional] `pageSize`|Page size|
-|[Optional] `page`|Page|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ type|Filter by type|
+|_[Optional]_ pageSize|Page size|
+|_[Optional]_ page|Page|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -250,14 +250,14 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(stri
 
 |Parameter|Description|
 |---|---|
-|[Optional] `asset`|Filter by asset|
-|[Optional] `startTime`|Filter by start time|
-|[Optional] `endTime`|Filter by end time|
-|[Optional] `status`|Filter by status|
-|[Optional] `pageSize`|Page size|
-|[Optional] `page`|Page|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ status|Filter by status|
+|_[Optional]_ pageSize|Page size|
+|_[Optional]_ page|Page|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -281,10 +281,10 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `mode`|New mode|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|mode|New mode|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -308,12 +308,12 @@ Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `isIsolated`|Is isolated|
-| `buyLeverage`|Buy leverage|
-| `sellLeverage`|Sell leverage|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|isIsolated|Is isolated|
+|buyLeverage|Buy leverage|
+|sellLeverage|Sell leverage|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -337,11 +337,11 @@ Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int se
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `buyLeverage`|Buy leverage|
-| `sellLeverage`|Sell leverage|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|buyLeverage|Buy leverage|
+|sellLeverage|Sell leverage|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -367,10 +367,10 @@ Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, long? re
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `hedgeMode`|Hedgemode|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|hedgeMode|Hedgemode|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -394,10 +394,10 @@ Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, long riskId, P
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `riskId`|The risk id to set|
-|[Optional] `mode`|Position mode|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|riskId|The risk id to set|
+|_[Optional]_ mode|Position mode|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>

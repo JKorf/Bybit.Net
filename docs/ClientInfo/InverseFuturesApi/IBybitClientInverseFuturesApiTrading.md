@@ -29,9 +29,9 @@ Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditi
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -55,9 +55,9 @@ Task<WebCallResult<IEnumerable<BybitCanceledOrder>>> CancelAllOrdersAsync(string
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -81,11 +81,11 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `stopOrderId`|The id of the conditional order to cancel|
-|[Optional] `clientOrderId`|The client order id of the conditional order to cancel|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ stopOrderId|The id of the conditional order to cancel|
+|_[Optional]_ clientOrderId|The client order id of the conditional order to cancel|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -109,11 +109,11 @@ Task<WebCallResult<BybitOrder>> CancelOrderAsync(string symbol, string? orderId 
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `orderId`|The id of the order to cancel|
-|[Optional] `clientOrderId`|The client order id of the conditional order to cancel|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ orderId|The id of the order to cancel|
+|_[Optional]_ clientOrderId|The client order id of the conditional order to cancel|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -137,13 +137,13 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetCond
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `status`|Filter by status|
-|[Optional] `direction`|Filter by direction|
-|[Optional] `limit`|Max number of results|
-|[Optional] `cursor`|Page cursor|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ status|Filter by status|
+|_[Optional]_ direction|Filter by direction|
+|_[Optional]_ limit|Max number of results|
+|_[Optional]_ cursor|Page cursor|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -167,11 +167,11 @@ Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `stopOrderId`|The order id|
-|[Optional] `clientOrderId`|The client order id|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ stopOrderId|The order id|
+|_[Optional]_ clientOrderId|The client order id|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -195,9 +195,9 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrders
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -221,11 +221,11 @@ Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, string?
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `orderId`||
-|[Optional] `clientOrderId`||
-|[Optional] `receiveWindow`||
-|[Optional] `ct`||
+|symbol|The symbol|
+|_[Optional]_ orderId||
+|_[Optional]_ clientOrderId||
+|_[Optional]_ receiveWindow||
+|_[Optional]_ ct||
 
 </p>
 
@@ -249,9 +249,9 @@ Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string s
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -275,13 +275,13 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(str
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `status`|Filter by status|
-|[Optional] `direction`|Filter by direction|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `cursor`|Page cursor|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ status|Filter by status|
+|_[Optional]_ direction|Filter by direction|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ cursor|Page cursor|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -305,13 +305,13 @@ Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbo
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `orderId`|Filter by order id|
-|[Optional] `startTime`|Filter by start time|
-|[Optional] `page`|Page|
-|[Optional] `pageSize`|Page size|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ orderId|Filter by order id|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ page|Page|
+|_[Optional]_ pageSize|Page size|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -335,18 +335,18 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `stopOrderId`|Stop order id|
-|[Optional] `clientOrderId`|Client order id|
-|[Optional] `newPrice`|New price to set|
-|[Optional] `newTriggerPrice`|New trigger price to set|
-|[Optional] `newQuantity`|New quantity to set|
-|[Optional] `takeProfitPrice`|New take profit price|
-|[Optional] `stopLossPrice`|New stop loss price|
-|[Optional] `takeProfitTriggerType`|New take profit trigger type|
-|[Optional] `stopLossTriggerType`|New stop loss profit price|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ stopOrderId|Stop order id|
+|_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ newPrice|New price to set|
+|_[Optional]_ newTriggerPrice|New trigger price to set|
+|_[Optional]_ newQuantity|New quantity to set|
+|_[Optional]_ takeProfitPrice|New take profit price|
+|_[Optional]_ stopLossPrice|New stop loss price|
+|_[Optional]_ takeProfitTriggerType|New take profit trigger type|
+|_[Optional]_ stopLossTriggerType|New stop loss profit price|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -370,17 +370,17 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, string? orderI
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `orderId`|Stop order id|
-|[Optional] `clientOrderId`|Client order id|
-|[Optional] `newPrice`|New price to set|
-|[Optional] `newQuantity`|New quantity to set|
-|[Optional] `takeProfitPrice`|New take profit price|
-|[Optional] `stopLossPrice`|New stop loss price|
-|[Optional] `takeProfitTriggerType`|New take profit trigger type|
-|[Optional] `stopLossTriggerType`|New stop loss profit price|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ orderId|Stop order id|
+|_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ newPrice|New price to set|
+|_[Optional]_ newQuantity|New quantity to set|
+|_[Optional]_ takeProfitPrice|New take profit price|
+|_[Optional]_ stopLossPrice|New stop loss price|
+|_[Optional]_ takeProfitTriggerType|New take profit trigger type|
+|_[Optional]_ stopLossTriggerType|New stop loss profit price|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -404,24 +404,24 @@ Task<WebCallResult<BybitConditionalOrder>> PlaceConditionalOrderAsync(string sym
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `side`|Order side|
-| `type`|Order type|
-| `positionMode`|Position mode|
-| `quantity`|Quantity|
-| `basePrice`|It will be used to compare with the value of trigger price, to decide whether your conditional order will be triggered by crossing trigger price from upper side or lower side. Mainly used to identify the expected direction of the current conditional order.|
-| `triggerPrice`|Trigger price|
-| `timeInForce`|Time in force|
-|[Optional] `price`|Price|
-|[Optional] `triggerType`|Trigger type|
-|[Optional] `closeOnTrigger`|For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.|
-|[Optional] `clientOrderId`|Client order id|
-|[Optional] `takeProfitPrice`|Take profit price, only take effect upon opening the position|
-|[Optional] `stopLossPrice`|Stop loss price, only take effect upon opening the position|
-|[Optional] `takeProfitTriggerType`|Take profit trigger price type, default: LastPrice|
-|[Optional] `stopLossTriggerType`|Stop loss trigger price type, default: LastPrice|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|side|Order side|
+|type|Order type|
+|positionMode|Position mode|
+|quantity|Quantity|
+|basePrice|It will be used to compare with the value of trigger price, to decide whether your conditional order will be triggered by crossing trigger price from upper side or lower side. Mainly used to identify the expected direction of the current conditional order.|
+|triggerPrice|Trigger price|
+|timeInForce|Time in force|
+|_[Optional]_ price|Price|
+|_[Optional]_ triggerType|Trigger type|
+|_[Optional]_ closeOnTrigger|For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.|
+|_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ takeProfitPrice|Take profit price, only take effect upon opening the position|
+|_[Optional]_ stopLossPrice|Stop loss price, only take effect upon opening the position|
+|_[Optional]_ takeProfitTriggerType|Take profit trigger price type, default: LastPrice|
+|_[Optional]_ stopLossTriggerType|Stop loss trigger price type, default: LastPrice|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -445,21 +445,21 @@ Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, O
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `side`|Order side|
-| `type`|Order type|
-| `positionMode`|Position mode|
-| `quantity`|Quantity|
-| `timeInForce`|Time in force|
-|[Optional] `price`|Price|
-|[Optional] `closeOnTrigger`|For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.|
-|[Optional] `clientOrderId`|Client order id|
-|[Optional] `takeProfitPrice`|Take profit price, only take effect upon opening the position|
-|[Optional] `stopLossPrice`|Stop loss price, only take effect upon opening the position|
-|[Optional] `takeProfitTriggerType`|Take profit trigger price type, default: LastPrice|
-|[Optional] `stopLossTriggerType`|Stop loss trigger price type, default: LastPrice|
-|[Optional] `reduceOnly`|True means your position can only reduce in size if this order is triggered|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|side|Order side|
+|type|Order type|
+|positionMode|Position mode|
+|quantity|Quantity|
+|timeInForce|Time in force|
+|_[Optional]_ price|Price|
+|_[Optional]_ closeOnTrigger|For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.|
+|_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ takeProfitPrice|Take profit price, only take effect upon opening the position|
+|_[Optional]_ stopLossPrice|Stop loss price, only take effect upon opening the position|
+|_[Optional]_ takeProfitTriggerType|Take profit trigger price type, default: LastPrice|
+|_[Optional]_ stopLossTriggerType|Stop loss trigger price type, default: LastPrice|
+|_[Optional]_ reduceOnly|True means your position can only reduce in size if this order is triggered|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>

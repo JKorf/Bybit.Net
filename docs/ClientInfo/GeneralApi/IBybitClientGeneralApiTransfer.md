@@ -29,13 +29,13 @@ Task<WebCallResult<BybitTransfer>> CreateInternalTransferAsync(string transferId
 
 |Parameter|Description|
 |---|---|
-| `transferId`|A generated UUID, should be unique|
-| `asset`|The asset to transfer|
-| `quantity`|Quantity to transfer|
-| `fromAccountType`|From account|
-| `toAccountType`|To account|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|transferId|A generated UUID, should be unique|
+|asset|The asset to transfer|
+|quantity|Quantity to transfer|
+|fromAccountType|From account|
+|toAccountType|To account|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -59,13 +59,13 @@ Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transfer
 
 |Parameter|Description|
 |---|---|
-| `transferId`|A generated UUID, should be unique|
-| `asset`|The asset to transfer|
-| `quantity`|Quantity to transfer|
-| `subAccountId`|The sub account id|
-| `type`|The type of the transfer|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|transferId|A generated UUID, should be unique|
+|asset|The asset to transfer|
+|quantity|Quantity to transfer|
+|subAccountId|The sub account id|
+|type|The type of the transfer|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -88,8 +88,8 @@ Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync(long? receiveWindow
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -113,16 +113,16 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitSubAccountTransferDetails>>>
 
 |Parameter|Description|
 |---|---|
-|[Optional] `transferId`|Filter by transfer id|
-|[Optional] `asset`|Filter by asset|
-|[Optional] `status`|Filter by status|
-|[Optional] `startTime`|Filter by start time|
-|[Optional] `endTime`|Filter by end time|
-|[Optional] `direction`|Filter by direction|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `cursor`|Page cursor|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ transferId|Filter by transfer id|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ status|Filter by status|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ direction|Filter by direction|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ cursor|Page cursor|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -146,15 +146,15 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInternalTransferDetails>>>> 
 
 |Parameter|Description|
 |---|---|
-|[Optional] `transferId`|Filter by transfer id|
-|[Optional] `asset`|Filter by asset|
-|[Optional] `status`|Filter by status|
-|[Optional] `startTime`|Filter by start time|
-|[Optional] `endTime`|Filter by end time|
-|[Optional] `direction`|Filter by direction|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `cursor`|Page cursor|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ transferId|Filter by transfer id|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ status|Filter by status|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ direction|Filter by direction|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ cursor|Page cursor|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>

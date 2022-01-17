@@ -29,8 +29,8 @@ Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync(long? 
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -54,12 +54,12 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(
 
 |Parameter|Description|
 |---|---|
-| `symbol`|Symbol of the klines|
-| `interval`|Interval of the kline data|
-| `from`|Start time of the data|
-|[Optional] `limit`|Max amount of candles|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|Symbol of the klines|
+|interval|Interval of the kline data|
+|from|Start time of the data|
+|_[Optional]_ limit|Max amount of candles|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -83,12 +83,12 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, Kline
 
 |Parameter|Description|
 |---|---|
-| `symbol`|Symbol of the klines|
-| `interval`|Interval of the kline data|
-| `from`|Start time of the data|
-|[Optional] `limit`|Max amount of candles|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|Symbol of the klines|
+|interval|Interval of the kline data|
+|from|Start time of the data|
+|_[Optional]_ limit|Max amount of candles|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -112,9 +112,9 @@ Task<WebCallResult<BybitFundingRate>> GetLastFundingRateAsync(string symbol, lon
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -138,11 +138,11 @@ Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(strin
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `period`|The data period|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|period|The data period|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -166,12 +166,12 @@ Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(st
 
 |Parameter|Description|
 |---|---|
-| `symbol`|Symbol of the klines|
-| `interval`|Interval of the kline data|
-| `from`|Start time of the data|
-|[Optional] `limit`|Max amount of candles|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|Symbol of the klines|
+|interval|Interval of the kline data|
+|from|Start time of the data|
+|_[Optional]_ limit|Max amount of candles|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -195,11 +195,11 @@ Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string 
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-| `period`|The period of data|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|period|The period of data|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -223,9 +223,9 @@ Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string s
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -249,12 +249,12 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetPremiumIndexKlinesAsyn
 
 |Parameter|Description|
 |---|---|
-| `symbol`|Symbol of the klines|
-| `interval`|Interval of the kline data|
-| `from`|Start time of the data|
-|[Optional] `limit`|Max amount of candles|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|Symbol of the klines|
+|interval|Interval of the kline data|
+|from|Start time of the data|
+|_[Optional]_ limit|Max amount of candles|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -278,10 +278,10 @@ Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string s
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `limit`|The max amount of results|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ limit|The max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -305,8 +305,8 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(long? receiveWindow = default, 
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -330,8 +330,8 @@ Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync(long? receiveWindo
 
 |Parameter|Description|
 |---|---|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -355,9 +355,9 @@ Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickerAsync(string? symbol = de
 
 |Parameter|Description|
 |---|---|
-|[Optional] `symbol`|The symbol|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|_[Optional]_ symbol|The symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>
 
@@ -381,9 +381,9 @@ Task<WebCallResult<IEnumerable<BybitTrade>>> GetTradeHistoryAsync(string symbol,
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol|
-|[Optional] `limit`|Max amount of results|
-|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|[Optional] `ct`|Cancellation token|
+|symbol|The symbol|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
 
 </p>

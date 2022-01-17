@@ -28,8 +28,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -53,8 +53,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsurancesUpdatesAsync(Action<Da
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -78,9 +78,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(string sym
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol to receive updates for|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol to receive updates for|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -104,9 +104,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(IEnumerabl
 
 |Parameter|Description|
 |---|---|
-| `symbols`|The symbols to receive updates for|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbols|The symbols to receive updates for|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -130,9 +130,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval
 
 |Parameter|Description|
 |---|---|
-| `interval`|The interval of the klines|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|interval|The interval of the klines|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -156,10 +156,10 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol to receive updates for|
-| `interval`|The interval of the klines|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol to receive updates for|
+|interval|The interval of the klines|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -183,10 +183,10 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 
 |Parameter|Description|
 |---|---|
-| `symbols`|The symbols to receive updates for|
-| `interval`|The interval of the klines|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbols|The symbols to receive updates for|
+|interval|The interval of the klines|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -210,8 +210,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -235,9 +235,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol to receive updates for|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol to receive updates for|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -261,9 +261,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 
 |Parameter|Description|
 |---|---|
-| `symbols`|The symbols to receive updates for|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbols|The symbols to receive updates for|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -288,10 +288,10 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit
 
 |Parameter|Description|
 |---|---|
-| `limit`|The amount of rows to receive updates for. Either 25 or 200.|
-| `snapshotHandler`|The event handler for the initial snapshot data|
-| `updateHandler`|The event handler for the update messages|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|limit|The amount of rows to receive updates for. Either 25 or 200.|
+|snapshotHandler|The event handler for the initial snapshot data|
+|updateHandler|The event handler for the update messages|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -316,11 +316,11 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol to receive updates for|
-| `limit`|The amount of rows to receive updates for. Either 25 or 200.|
-| `snapshotHandler`|The event handler for the initial snapshot data|
-| `updateHandler`|The event handler for the update messages|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol to receive updates for|
+|limit|The amount of rows to receive updates for. Either 25 or 200.|
+|snapshotHandler|The event handler for the initial snapshot data|
+|updateHandler|The event handler for the update messages|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -345,11 +345,11 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 
 |Parameter|Description|
 |---|---|
-| `symbols`|The symbols to receive updates for|
-| `limit`|The amount of rows to receive updates for. Either 25 or 200.|
-| `snapshotHandler`|The event handler for the initial snapshot data|
-| `updateHandler`|The event handler for the update messages|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbols|The symbols to receive updates for|
+|limit|The amount of rows to receive updates for. Either 25 or 200.|
+|snapshotHandler|The event handler for the initial snapshot data|
+|updateHandler|The event handler for the update messages|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -373,8 +373,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -398,8 +398,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -423,8 +423,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<Dat
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -448,8 +448,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataE
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -473,9 +473,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol to receive updates for|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol to receive updates for|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -499,9 +499,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 
 |Parameter|Description|
 |---|---|
-| `symbols`|The symbols to receive updates for|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbols|The symbols to receive updates for|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -525,8 +525,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEv
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -550,9 +550,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 
 |Parameter|Description|
 |---|---|
-| `symbol`|The symbol to receive updates for|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbol|The symbol to receive updates for|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -576,9 +576,9 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 
 |Parameter|Description|
 |---|---|
-| `symbols`|The symbols to receive updates for|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|symbols|The symbols to receive updates for|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
 
@@ -602,7 +602,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<Dat
 
 |Parameter|Description|
 |---|---|
-| `handler`|The event handler for the received data|
-|[Optional] `ct`|Cancellation token for closing this subscription|
+|handler|The event handler for the received data|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
 
 </p>
