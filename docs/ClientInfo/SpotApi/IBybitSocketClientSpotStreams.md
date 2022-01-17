@@ -1,11 +1,10 @@
 ---
 title: IBybitSocketClientSpotStreams
 has_children: true
-parent: IBybitClientSpotApi
-grand_parent: IBybitClient
+parent: IBybitSocketClient
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi > SpotStreams`
+`BybitSocketClient > SpotStreams`
 *Bybit spot streams*
   
 

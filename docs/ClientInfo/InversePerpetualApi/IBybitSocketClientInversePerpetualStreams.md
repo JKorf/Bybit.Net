@@ -1,11 +1,10 @@
 ---
 title: IBybitSocketClientInversePerpetualStreams
 has_children: true
-parent: IBybitClientInversePerpetualApi
-grand_parent: IBybitClient
+parent: IBybitSocketClient
 ---
 *[generated documentation]*  
-`BybitClient > InversePerpetualApi > InversePerpetualStreams`
+`BybitSocketClient > InversePerpetualStreams`
 *Bybit inverse perpetual streams*
   
 

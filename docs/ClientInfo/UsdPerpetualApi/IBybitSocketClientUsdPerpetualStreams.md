@@ -1,11 +1,10 @@
 ---
 title: IBybitSocketClientUsdPerpetualStreams
 has_children: true
-parent: IBybitClientUsdPerpetualApi
-grand_parent: IBybitClient
+parent: IBybitSocketClient
 ---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > UsdPerpetualStreams`
+`BybitSocketClient > UsdPerpetualStreams`
 *Bybit usd perpetual streams*
   
 
