@@ -68,7 +68,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("futures/private/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("v2/private/order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitPosition>>(default);
 
