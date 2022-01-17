@@ -8,23 +8,23 @@ nav_order: 2
 There are 2 clients available to interact with the Bybit API, the `BybitClient` and `BybitSocketClient`.
 
 *Create a new rest client*
-````C#
+```csharp
 var bybitClient = new BybitClient(new BybitClientOptions()
 {
 	// Set options here for this client
 });
-````
+```
 
 *Create a new socket client*
-````C#
+```csharp
 var bybitSocketClient = new BybitSocketClient(new BybitSocketClientOptions()
 {
 	// Set options here for this client
 });
-````
+```
 
 Different options are available to set on the clients, see this example
-````C#
+```csharp
 var bybitClient = new BybitClient(new BybitClientOptions()
 {
 	ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET"),
@@ -36,14 +36,14 @@ var bybitClient = new BybitClient(new BybitClientOptions()
 		AutoTimestamp = false
 	}
 });
-````
+```
 Alternatively, options can be provided before creating clients by using `SetDefaultOptions`:
-````C#
+```csharp
 BybitClient.SetDefaultOptions(new BybitClientOptions{
 	// Set options here for all new clients
 });
 var bybitClient = new BybitClient();
-````
+```
 More info on the specific options can be found on the [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoExchange.Net/wiki/Options)
 
 ### Dependency injection
@@ -60,7 +60,7 @@ Make sure to read the [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoE
 <BlockQuote>
 
 #### Get market data
-```C#
+```csharp
 // Getting info on all symbols
 var symbolData = await bybitClient.SpotApi.ExchangeData.GetSymbolsAsync();
 
@@ -75,11 +75,11 @@ var tradeHistoryData = await bybitClient.SpotApi.ExchangeData.GetTradeHistoryAsy
 ```
 
 #### Requesting balances
-```C#
+```csharp
 var accountData = await bybitClient.SpotApi.Account.GetBalancesAsync();
 ```
 #### Placing order
-````C#
+```csharp
 // Placing a buy limit order for 0.001 BTC at a price of 50000USDT each
 var orderData = await bybitClient.SpotApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
@@ -95,41 +95,41 @@ var orderData = await bybitClient.SpotApi.Trading.PlaceOrderAsync(
                 OrderSide.Buy,
                 OrderType.Market,
                 50);
-````
+```
 
 #### Requesting a specific order
-````C#
+```csharp
 // Request info on order with id `1234`
 var orderData = await bybitClient.SpotApi.Trading.GetOrderAsync(1234);
-````
+```
 
 #### Requesting order history
-````C#
+```csharp
 // Get all orders conform the parameters
  var ordersData = await bybitClient.SpotApi.Trading.GetOrdersAsync();
-````
+```
 
 #### Cancel order
-````C#
+```csharp
 // Cancel order with id `1234`
 var orderData = await bybitClient.SpotApi.Trading.CancelOrderAsync(1234);
-````
+```
 
 #### Get user trades
-````C#
+```csharp
 var userTradesResult = await bybitClient.SpotApi.Trading.GetUserTradesAsync();
-````
+```
 
 #### Subscribing to market data updates
-````C#
+```csharp
 var subscribeResult = await bybitSocketClient.SpotStreams.SubscribeToTickerUpdatesAsync("BTCUSDT", data =>
 {
 	// Handle ticker data
 });
-````
+```
 
 #### Subscribing to order updates
-````C#
+```csharp
 await bybitSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(
 	accountUpdate =>
 	{
@@ -143,7 +143,7 @@ await bybitSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(
 	{
 		// Handle trade update
 	});
-````
+```
 
 </BlockQuote>
 </Details>
@@ -156,7 +156,7 @@ await bybitSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(
 <BlockQuote>
 
 #### Get market data
-````C#
+```csharp
  // Getting info on all symbols
 var symbolData = await bybitClient.UsdPerpetualApi.ExchangeData.GetSymbolsAsync();
 
@@ -165,16 +165,16 @@ var orderBookData = await bybitClient.UsdPerpetualApi.ExchangeData.GetOrderBookA
 
 // Getting recent trades of a symbol
 var tradeHistoryData = await bybitClient.UsdPerpetualApi.ExchangeData.GetTradeHistoryAsync("BTCUSDT");
-````
+```
 
 #### Requesting positions
-````C#
+```csharp
 // Getting your current positions
 var positionResultData = await bybitClient.UsdPerpetualApi.Account.GetPositionsAsync();
-````
+```
 
 #### Placing order
-````C#
+```csharp
 // Placing a Limit Sell order for 0.01 BTC at a price of 50000USDT each
 var positionResultData = await bybitClient.UsdPerpetualApi.Trading.PlaceOrderAsync(
                 "BTCUSDT",
@@ -185,41 +185,41 @@ var positionResultData = await bybitClient.UsdPerpetualApi.Trading.PlaceOrderAsy
                 false,
                 false,
                 50000);
-````
+```
 
 #### Requesting a specific order
-````C#
+```csharp
 // Get info on an order id 1234 on symbol BTCUSDT
 var orderResult = await bybitClient.UsdPerpetualApi.Trading.GetOpenOrderRealTimeAsync("BTCUSDT", "1234");
 
-````
+```
 
 #### Requesting order history
-````C#
+```csharp
 // Get all orders for the account. Can apply filters as parameters
 var orderResult = await bybitClient.UsdPerpetualApi.Trading.GetOrdersAsync("BTCUSDT");
-````
+```
 
 #### Cancel order
-````C#
+```csharp
 // Cancel order with id 1234 on symbol BTCUSDT
 var orderResult = await bybitClient.UsdPerpetualApi.Trading.CancelOrderAsync("BTCUSDT", "1234");
 
-````
+```
 
 #### Get user trades
-````C#
+```csharp
 var userTradesResult = await bybitClient.UsdPerpetualApi.Trading.GetUserTradesAsync("BTCUSDT");
-````
+```
 
 #### Subscribing to position updates
-````C#
+```csharp
 await bybitSocketClient.UsdPerpetualStreams.SubscribeToPositionUpdatesAsync(
 	data =>
 	{
 		// Handle position update
 	});
-````
+```
 
 </BlockQuote>
 </Details>
@@ -232,7 +232,7 @@ await bybitSocketClient.UsdPerpetualStreams.SubscribeToPositionUpdatesAsync(
 <BlockQuote>
 
 #### Get market data
-````C#
+```csharp
  // Getting info on all symbols
 var symbolData = await bybitClient.InverseFuturesApi.ExchangeData.GetSymbolsAsync();
 
@@ -241,16 +241,16 @@ var orderBookData = await bybitClient.InverseFuturesApi.ExchangeData.GetOrderBoo
 
 // Getting recent trades of a symbol
 var tradeHistoryData = await bybitClient.InverseFuturesApi.ExchangeData.GetTradeHistoryAsync("BTCUSDT");
-````
+```
 
 #### Requesting positions
-````C#
+```csharp
 // Getting your current positions
 var positionResultData = await bybitClient.InverseFuturesApi.Account.GetPositionsAsync();
-````
+```
 
 #### Placing order
-````C#
+```csharp
 // Placing a Market buy order for 10 USDT
 var positionResultData = await bybitClient.InverseFuturesApi.Trading.PlaceOrderAsync(
                 "BTCUSDM21",
@@ -259,32 +259,32 @@ var positionResultData = await bybitClient.InverseFuturesApi.Trading.PlaceOrderA
                 PositionMode.BothSideBuy,
                 10,
                 TimeInForce.GoodTillCanceled);
-````
+```
 
 #### Requesting a specific order
-````C#
+```csharp
 // Get info on an order id 1234 on symbol BTCUSDM21
 var orderResult = await bybitClient.InverseFuturesApi.Trading.GetOpenOrderRealTimeAsync("BTCUSDM21", "1234");
 
-````
+```
 
 #### Requesting order history
-````C#
+```csharp
 // Get all orders for the account. Can apply filters as parameters
 var orderResult = await bybitClient.InverseFuturesApi.Trading.GetOrdersAsync("BTCUSDM21");
-````
+```
 
 #### Cancel order
-````C#
+```csharp
 // Cancel order with id 1234 on symbol BTCUSDM21
 var orderResult = await bybitClient.InverseFuturesApi.Trading.CancelOrderAsync("BTCUSDM21", "1234");
 
-````
+```
 
 #### Get user trades
-````C#
+```csharp
 var userTradesResult = await bybitClient.InverseFuturesApi.Trading.GetUserTradesAsync("BTCUSDM21");
-````
+```
 
 #### Streams
 The InverseFutures API has no specific streams. The InverseFutures and InversePerpetual streams are equal and available to use via the InversePerpetualsStreams property.
@@ -300,7 +300,7 @@ The InverseFutures API has no specific streams. The InverseFutures and InversePe
 <BlockQuote>
 
 #### Get market data
-````C#
+```csharp
  // Getting info on all symbols
 var symbolData = await bybitClient.InversePerpetualApi.ExchangeData.GetSymbolsAsync();
 
@@ -309,16 +309,16 @@ var orderBookData = await bybitClient.InversePerpetualApi.ExchangeData.GetOrderB
 
 // Getting recent trades of a symbol
 var tradeHistoryData = await bybitClient.InversePerpetualApi.ExchangeData.GetTradeHistoryAsync("BTCUSD");
-````
+```
 
 #### Requesting positions
-````C#
+```csharp
 // Getting your current positions
 var positionResultData = await bybitClient.InversePerpetualApi.Account.GetPositionsAsync();
-````
+```
 
 #### Placing order
-````C#
+```csharp
 // Placing a Market buy order for 10 USDT
 var positionResultData = await bybitClient.InversePerpetualApi.Trading.PlaceOrderAsync(
                 "BTCUSD",
@@ -326,43 +326,43 @@ var positionResultData = await bybitClient.InversePerpetualApi.Trading.PlaceOrde
                 OrderType.Market,
                 10,
                 TimeInForce.GoodTillCanceled);
-````
+```
 
 #### Requesting a specific order
-````C#
+```csharp
 // Get info on an order id 1234 on symbol BTCUSD
 var orderResult = await bybitClient.InversePerpetualApi.Trading.GetOpenOrderRealTimeAsync("BTCUSD", "1234");
 
-````
+```
 
 #### Requesting order history
-````C#
+```csharp
 // Get all orders for the account. Can apply filters as parameters
 var orderResult = await bybitClient.InversePerpetualApi.Trading.GetOrdersAsync("BTCUSD");
-````
+```
 
 #### Cancel order
-````C#
+```csharp
 // Cancel order with id 1234 on symbol BTCUSD
 var orderResult = await bybitClient.InversePerpetualApi.Trading.CancelOrderAsync("BTCUSD", "1234");
 
-````
+```
 
 #### Get user trades
-````C#
+```csharp
 var userTradesResult = await bybitClient.InversePerpetualApi.Trading.GetUserTradesAsync("BTCUSD");
-````
+```
 
 #### Streams
 
 #### Subscribing to position updates
-````C#
+```csharp
 await bybitSocketClient.InversePerpetualStreams.SubscribeToPositionUpdatesAsync(
 	data =>
 	{
 		// Handle position update
 	});
-````
+```
 
 </BlockQuote>
 </Details>
