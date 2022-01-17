@@ -16,26 +16,26 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/account_asset/#t-createinternaltransfer](https://bybit-exchange.github.io/docs/account_asset/#t-createinternaltransfer)  
 <p>
 
+*Create a new transfer from one account type to the other*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.GeneralApi.Transfer.CreateInternalTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitTransfer>> CreateInternalTransferAsync(string transferId, string asset, decimal quantity, AccountType fromAccountType, AccountType toAccountType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitTransfer>> CreateInternalTransferAsync(string transferId, string asset, decimal quantity, AccountType fromAccountType, AccountType toAccountType, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`transferId`|A generated UUID, should be unique|
-|`asset`|The asset to transfer|
-|`quantity`|Quantity to transfer|
-|`fromAccountType`|From account|
-|`toAccountType`|To account|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Create a new transfer from one account type to the other*  
+| `transferId`|A generated UUID, should be unique|
+| `asset`|The asset to transfer|
+| `quantity`|Quantity to transfer|
+| `fromAccountType`|From account|
+| `toAccountType`|To account|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -46,26 +46,26 @@ Task<WebCallResult<BybitTransfer>> CreateInternalTransferAsync(string transferId
 [https://bybit-exchange.github.io/docs/account_asset/#t-createsubaccounttransfer](https://bybit-exchange.github.io/docs/account_asset/#t-createsubaccounttransfer)  
 <p>
 
+*Create a new transfer for a subaccount*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.GeneralApi.Transfer.CreateSubAccountTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transferId, string asset, decimal quantity, string subAccountId, TransferType type, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transferId, string asset, decimal quantity, string subAccountId, TransferType type, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`transferId`|A generated UUID, should be unique|
-|`asset`|The asset to transfer|
-|`quantity`|Quantity to transfer|
-|`subAccountId`|The sub account id|
-|`type`|The type of the transfer|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Create a new transfer for a subaccount*  
+| `transferId`|A generated UUID, should be unique|
+| `asset`|The asset to transfer|
+| `quantity`|Quantity to transfer|
+| `subAccountId`|The sub account id|
+| `type`|The type of the transfer|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -75,21 +75,21 @@ Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transfer
 
 <p>
 
+*Get a list of subaccount ids*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.GeneralApi.Transfer.GetSubAccountsAsync(/* parameters */);  
+var result = await client.GeneralApi.Transfer.GetSubAccountsAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get a list of subaccount ids*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -100,29 +100,29 @@ Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync([Optional] long? re
 [https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccounttransferlist](https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccounttransferlist)  
 <p>
 
+*Get history of sub account transfers*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.GeneralApi.Transfer.GetSubAccountTransferHistoryAsync(/* parameters */);  
+var result = await client.GeneralApi.Transfer.GetSubAccountTransferHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitCursorPage<IEnumerable<BybitSubAccountTransferDetails>>>> GetSubAccountTransferHistoryAsync([Optional] string? transferId, [Optional] string? asset, [Optional] TransferStatus? status, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] string? cursor, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitCursorPage<IEnumerable<BybitSubAccountTransferDetails>>>> GetSubAccountTransferHistoryAsync(string? transferId = default, string? asset = default, TransferStatus? status = default, DateTime? startTime = default, DateTime? endTime = default, SearchDirection? direction = default, int? limit = default, string? cursor = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`transferId`|Filter by transfer id|
-|`asset`|Filter by asset|
-|`status`|Filter by status|
-|`startTime`|Filter by start time|
-|`endTime`|Filter by end time|
-|`direction`|Filter by direction|
-|`limit`|Max amount of results|
-|`cursor`|Page cursor|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get history of sub account transfers*  
+|[Optional] `transferId`|Filter by transfer id|
+|[Optional] `asset`|Filter by asset|
+|[Optional] `status`|Filter by status|
+|[Optional] `startTime`|Filter by start time|
+|[Optional] `endTime`|Filter by end time|
+|[Optional] `direction`|Filter by direction|
+|[Optional] `limit`|Max amount of results|
+|[Optional] `cursor`|Page cursor|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -133,28 +133,28 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitSubAccountTransferDetails>>>
 [https://bybit-exchange.github.io/docs/account_asset/#t-querytransferlist](https://bybit-exchange.github.io/docs/account_asset/#t-querytransferlist)  
 <p>
 
+*Get history of transfers*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.GeneralApi.Transfer.GetTransferHistoryAsync(/* parameters */);  
+var result = await client.GeneralApi.Transfer.GetTransferHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInternalTransferDetails>>>> GetTransferHistoryAsync([Optional] string? transferId, [Optional] string? asset, [Optional] TransferStatus? status, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] string? cursor, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInternalTransferDetails>>>> GetTransferHistoryAsync(string? transferId = default, string? asset = default, TransferStatus? status = default, DateTime? startTime = default, DateTime? endTime = default, SearchDirection? direction = default, int? limit = default, string? cursor = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`transferId`|Filter by transfer id|
-|`asset`|Filter by asset|
-|`status`|Filter by status|
-|`startTime`|Filter by start time|
-|`endTime`|Filter by end time|
-|`direction`|Filter by direction|
-|`limit`|Max amount of results|
-|`cursor`|Page cursor|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get history of transfers*  
+|[Optional] `transferId`|Filter by transfer id|
+|[Optional] `asset`|Filter by asset|
+|[Optional] `status`|Filter by status|
+|[Optional] `startTime`|Filter by start time|
+|[Optional] `endTime`|Filter by end time|
+|[Optional] `direction`|Filter by direction|
+|[Optional] `limit`|Max amount of results|
+|[Optional] `cursor`|Page cursor|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>

@@ -16,23 +16,23 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/spot/#t-cancelactive](https://bybit-exchange.github.io/docs/spot/#t-cancelactive)  
 <p>
 
+*Cancel an active order. Either orderId or clientOrderId should be provided*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.Trading.CancelOrderAsync(/* parameters */);  
+var result = await client.SpotApi.Trading.CancelOrderAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync([Optional] long? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`orderId`|The order id|
-|`clientOrderId`|The client order id|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Cancel an active order. Either orderId or clientOrderId should be provided*  
+|[Optional] `orderId`|The order id|
+|[Optional] `clientOrderId`|The client order id|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -43,24 +43,24 @@ Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync([Optional] long? orde
 [https://bybit-exchange.github.io/docs/spot/#t-openorders](https://bybit-exchange.github.io/docs/spot/#t-openorders)  
 <p>
 
+*Get open orders*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.Trading.GetOpenOrdersAsync(/* parameters */);  
+var result = await client.SpotApi.Trading.GetOpenOrdersAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync([Optional] string? symbol, [Optional] long? orderId, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync(string? symbol = default, long? orderId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`orderId`|Filter by order id, will only return orders with an orderId smaller than this|
-|`limit`|Max amount of results|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get open orders*  
+|[Optional] `symbol`|The symbol|
+|[Optional] `orderId`|Filter by order id, will only return orders with an orderId smaller than this|
+|[Optional] `limit`|Max amount of results|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -71,23 +71,23 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync([Optional] s
 [https://bybit-exchange.github.io/docs/spot/#t-getactive](https://bybit-exchange.github.io/docs/spot/#t-getactive)  
 <p>
 
+*Get order, either orderId or clientOrderId should be provided*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.Trading.GetOrderAsync(/* parameters */);  
+var result = await client.SpotApi.Trading.GetOrderAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrder>> GetOrderAsync([Optional] long? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSpotOrder>> GetOrderAsync(long? orderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`orderId`|The id of the order|
-|`clientOrderId`|The client order id|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get order, either orderId or clientOrderId should be provided*  
+|[Optional] `orderId`|The id of the order|
+|[Optional] `clientOrderId`|The client order id|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -98,24 +98,24 @@ Task<WebCallResult<BybitSpotOrder>> GetOrderAsync([Optional] long? orderId, [Opt
 [https://bybit-exchange.github.io/docs/spot/#t-orderhistory](https://bybit-exchange.github.io/docs/spot/#t-orderhistory)  
 <p>
 
+*Get orders*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.Trading.GetOrdersAsync(/* parameters */);  
+var result = await client.SpotApi.Trading.GetOrdersAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync([Optional] string? symbol, [Optional] long? orderId, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync(string? symbol = default, long? orderId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|Filter by symbol|
-|`orderId`|Filter by order id, will only return orders with an orderId smaller than this|
-|`limit`|Max amount of results|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get orders*  
+|[Optional] `symbol`|Filter by symbol|
+|[Optional] `orderId`|Filter by order id, will only return orders with an orderId smaller than this|
+|[Optional] `limit`|Max amount of results|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -126,25 +126,25 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync([Optional] strin
 [https://bybit-exchange.github.io/docs/spot/#t-tradehistory](https://bybit-exchange.github.io/docs/spot/#t-tradehistory)  
 <p>
 
+*Get user trade history*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.Trading.GetUserTradesAsync(/* parameters */);  
+var result = await client.SpotApi.Trading.GetUserTradesAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync([Optional] string? symbol, [Optional] long? fromId, [Optional] long? toId, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync(string? symbol = default, long? fromId = default, long? toId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|Filter by symbol|
-|`fromId`|Filter by start id|
-|`toId`|Filter by end id|
-|`limit`|Max amount of results|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get user trade history*  
+|[Optional] `symbol`|Filter by symbol|
+|[Optional] `fromId`|Filter by start id|
+|[Optional] `toId`|Filter by end id|
+|[Optional] `limit`|Max amount of results|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -155,27 +155,27 @@ Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync([Optiona
 [https://bybit-exchange.github.io/docs/spot/#t-placeactive](https://bybit-exchange.github.io/docs/spot/#t-placeactive)  
 <p>
 
+*Place a new order*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotApi.Trading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, [Optional] decimal? price, [Optional] TimeInForce? timeInForce, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = default, TimeInForce? timeInForce = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`side`|Order side|
-|`type`|Order type|
-|`quantity`|Quantity of the order. Note that for market buy orders this is the quantity of quote asset, otherwise it's in base asset|
-|`price`|Price|
-|`timeInForce`|Time in force|
-|`clientOrderId`|Client order id|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Place a new order*  
+| `symbol`|The symbol|
+| `side`|Order side|
+| `type`|Order type|
+| `quantity`|Quantity of the order. Note that for market buy orders this is the quantity of quote asset, otherwise it's in base asset|
+|[Optional] `price`|Price|
+|[Optional] `timeInForce`|Time in force|
+|[Optional] `clientOrderId`|Client order id|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>

@@ -16,22 +16,22 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/spot/#t-bestbidask](https://bybit-exchange.github.io/docs/spot/#t-bestbidask)  
 <p>
 
+*Get the best ask/bid price for a symbol*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotApi.ExchangeData.GetBookPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get the best ask/bid price for a symbol*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -42,21 +42,21 @@ Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, [Option
 [https://bybit-exchange.github.io/docs/spot/#t-bestbidask](https://bybit-exchange.github.io/docs/spot/#t-bestbidask)  
 <p>
 
+*Get the best ask/bid prices for all symbols*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.ExchangeData.GetBookPricesAsync(/* parameters */);  
+var result = await client.SpotApi.ExchangeData.GetBookPricesAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get the best ask/bid prices for all symbols*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -67,26 +67,26 @@ Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync([Optiona
 [https://bybit-exchange.github.io/docs/spot/#t-querykline](https://bybit-exchange.github.io/docs/spot/#t-querykline)  
 <p>
 
+*Get price klines*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotApi.ExchangeData.GetKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, KlineInterval interval, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|Symbol of the klines|
-|`interval`|Interval of the kline data|
-|`startTime`|Start time of the data|
-|`endTime`|End time of the data|
-|`limit`|Max amount of candles|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get price klines*  
+| `symbol`|Symbol of the klines|
+| `interval`|Interval of the kline data|
+|[Optional] `startTime`|Start time of the data|
+|[Optional] `endTime`|End time of the data|
+|[Optional] `limit`|Max amount of candles|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -97,24 +97,24 @@ Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, K
 [https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook](https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook)  
 <p>
 
+*Get merged order book based on the scale*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotApi.ExchangeData.GetMergedOrderBookAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, [Optional] int? scale, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, int? scale = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`scale`|The scale of the order book. 1 means 1 digit|
-|`limit`|The amount of rows|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get merged order book based on the scale*  
+| `symbol`|The symbol|
+|[Optional] `scale`|The scale of the order book. 1 means 1 digit|
+|[Optional] `limit`|The amount of rows|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -125,23 +125,23 @@ Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, [
 [https://bybit-exchange.github.io/docs/spot/#t-orderbook](https://bybit-exchange.github.io/docs/spot/#t-orderbook)  
 <p>
 
+*Get the current order book for a symbol*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotApi.ExchangeData.GetOrderBookAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`limit`|The number of rows|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get the current order book for a symbol*  
+| `symbol`|The symbol|
+|[Optional] `limit`|The number of rows|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -152,22 +152,22 @@ Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, [Option
 [https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice)  
 <p>
 
+*Get the last trade price of a symbol*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotApi.ExchangeData.GetPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get the last trade price of a symbol*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -178,21 +178,21 @@ Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, [Optional] long
 [https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice)  
 <p>
 
+*Get the last trade price of all symbols*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.ExchangeData.GetPricesAsync(/* parameters */);  
+var result = await client.SpotApi.ExchangeData.GetPricesAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get the last trade price of all symbols*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -203,21 +203,21 @@ Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync([Optional] long?
 [https://bybit-exchange.github.io/docs/spot/#t-servertime](https://bybit-exchange.github.io/docs/spot/#t-servertime)  
 <p>
 
+*Get the server time*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.ExchangeData.GetServerTimeAsync(/* parameters */);  
+var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<DateTime>> GetServerTimeAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<DateTime>> GetServerTimeAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get the server time*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -228,21 +228,21 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync([Optional] long? receiveWindow,
 [https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol](https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol)  
 <p>
 
+*Get all supported symbols*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.ExchangeData.GetSymbolsAsync(/* parameters */);  
+var result = await client.SpotApi.ExchangeData.GetSymbolsAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get all supported symbols*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -253,22 +253,22 @@ Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync([Optional] lon
 [https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo)  
 <p>
 
+*The ticker info for a symbol*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotApi.ExchangeData.GetTickerAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*The ticker info for a symbol*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -279,21 +279,21 @@ Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, [Optional] lo
 [https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo)  
 <p>
 
+*The ticker info for all symbols*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.ExchangeData.GetTickersAsync(/* parameters */);  
+var result = await client.SpotApi.ExchangeData.GetTickersAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*The ticker info for all symbols*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -304,22 +304,22 @@ Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync([Optional] lon
 [https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords](https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords)  
 <p>
 
+*Get public trade history*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotApi.ExchangeData.GetTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string symbol, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string symbol, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`limit`|Max amount of results|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get public trade history*  
+| `symbol`|The symbol|
+|[Optional] `limit`|Max amount of results|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>

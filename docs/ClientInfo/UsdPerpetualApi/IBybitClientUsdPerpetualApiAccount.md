@@ -15,24 +15,24 @@ grand_parent: IBybitClient
 
 <p>
 
+*Add/reduce margin*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.AddReduceMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, OrderSide side, decimal margin, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, OrderSide side, decimal margin, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`side`|The side|
-|`margin`|Margin to add (positive) or remove (negative)|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Add/reduce margin*  
+| `symbol`|The symbol|
+| `side`|The side|
+| `margin`|Margin to add (positive) or remove (negative)|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -43,21 +43,21 @@ Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, Order
 [https://bybit-exchange.github.io/docs/linear/#t-key](https://bybit-exchange.github.io/docs/linear/#t-key)  
 <p>
 
+*Get Api key info*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.Account.GetApiKeyInfoAsync(/* parameters */);  
+var result = await client.UsdPerpetualApi.Account.GetApiKeyInfoAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get Api key info*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -68,24 +68,24 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] 
 [https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords)  
 <p>
 
+*Get asset exchange history*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.Account.GetAssetExchangeHistoryAsync(/* parameters */);  
+var result = await client.UsdPerpetualApi.Account.GetAssetExchangeHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHistoryAsync([Optional] long? fromId, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHistoryAsync(long? fromId = default, SearchDirection? direction = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`fromId`|Filter by id|
-|`direction`|Filter by direction|
-|`limit`|Max records|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get asset exchange history*  
+|[Optional] `fromId`|Filter by id|
+|[Optional] `direction`|Filter by direction|
+|[Optional] `limit`|Max records|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -96,22 +96,22 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 [https://bybit-exchange.github.io/docs/linear/#t-balance](https://bybit-exchange.github.io/docs/linear/#t-balance)  
 <p>
 
+*Get wallet balances*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.Account.GetBalancesAsync(/* parameters */);  
+var result = await client.UsdPerpetualApi.Account.GetBalancesAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional] string? asset, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? asset = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`asset`|Filter by asset|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get wallet balances*  
+|[Optional] `asset`|Filter by asset|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -122,22 +122,22 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional
 [https://bybit-exchange.github.io/docs/linear/#t-myposition](https://bybit-exchange.github.io/docs/linear/#t-myposition)  
 <p>
 
+*Get user positions*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.GetPositionAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|Filter by symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get user positions*  
+| `symbol`|Filter by symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -148,21 +148,21 @@ Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionAsync(string symbo
 [https://bybit-exchange.github.io/docs/linear/#t-myposition](https://bybit-exchange.github.io/docs/linear/#t-myposition)  
 <p>
 
+*Get user positions*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.Account.GetPositionsAsync(/* parameters */);  
+var result = await client.UsdPerpetualApi.Account.GetPositionsAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionsAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionsAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get user positions*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -173,27 +173,27 @@ Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionsAsync([Optional] 
 [https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss)  
 <p>
 
+*Get user's profit and loss records*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.GetProfitAndLossHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHistoryAsync(string symbol, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] TradeType? type, [Optional] int? page, [Optional] int? pageSize, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHistoryAsync(string symbol, DateTime? startTime = default, DateTime? endTime = default, TradeType? type = default, int? page = default, int? pageSize = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol to get records for|
-|`startTime`|Filter by startTime|
-|`endTime`|Filter by endTime|
-|`type`|Filter by type|
-|`page`|Page|
-|`pageSize`|Page size|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get user's profit and loss records*  
+| `symbol`|The symbol to get records for|
+|[Optional] `startTime`|Filter by startTime|
+|[Optional] `endTime`|Filter by endTime|
+|[Optional] `type`|Filter by type|
+|[Optional] `page`|Page|
+|[Optional] `pageSize`|Page size|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -204,22 +204,22 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 [https://bybit-exchange.github.io/docs/linear/#t-getrisklimit](https://bybit-exchange.github.io/docs/linear/#t-getrisklimit)  
 <p>
 
+*Get position risk limit*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.GetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get position risk limit*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -230,22 +230,22 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string symbol
 [https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee](https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee)  
 <p>
 
+*Get user last funding fee*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.GetUserLastFundingFeeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitFundingSettlement>> GetUserLastFundingFeeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitFundingSettlement>> GetUserLastFundingFeeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get user last funding fee*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -256,22 +256,22 @@ Task<WebCallResult<BybitFundingSettlement>> GetUserLastFundingFeeAsync(string sy
 [https://bybit-exchange.github.io/docs/linear/#t-predictedfunding](https://bybit-exchange.github.io/docs/linear/#t-predictedfunding)  
 <p>
 
+*Get predicted next funding rate*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.GetUserPredictedFundingRateAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitPredictedFunding>> GetUserPredictedFundingRateAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitPredictedFunding>> GetUserPredictedFundingRateAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get predicted next funding rate*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -282,27 +282,27 @@ Task<WebCallResult<BybitPredictedFunding>> GetUserPredictedFundingRateAsync(stri
 [https://bybit-exchange.github.io/docs/linear/#t-walletrecords](https://bybit-exchange.github.io/docs/linear/#t-walletrecords)  
 <p>
 
+*Get wallet fund endpoints*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.Account.GetWalletFundHistoryAsync(/* parameters */);  
+var result = await client.UsdPerpetualApi.Account.GetWalletFundHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync([Optional] string? asset, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] WalletFundType? type, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync(string? asset = default, DateTime? startTime = default, DateTime? endTime = default, WalletFundType? type = default, int? pageSize = default, int? page = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`asset`|Filter by asset|
-|`startTime`|Filter by start time|
-|`endTime`|Filter by end time|
-|`type`|Filter by type|
-|`pageSize`|Page size|
-|`page`|Page|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get wallet fund endpoints*  
+|[Optional] `asset`|Filter by asset|
+|[Optional] `startTime`|Filter by start time|
+|[Optional] `endTime`|Filter by end time|
+|[Optional] `type`|Filter by type|
+|[Optional] `pageSize`|Page size|
+|[Optional] `page`|Page|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -313,27 +313,27 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 [https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords](https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords)  
 <p>
 
+*Get withdrawal history*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.Account.GetWithdrawalHistoryAsync(/* parameters */);  
+var result = await client.UsdPerpetualApi.Account.GetWithdrawalHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Optional] string? asset, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] WithdrawStatus? status, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = default, DateTime? startTime = default, DateTime? endTime = default, WithdrawStatus? status = default, int? pageSize = default, int? page = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`asset`|Filter by asset|
-|`startTime`|Filter by start time|
-|`endTime`|Filter by end time|
-|`status`|Filter by status|
-|`pageSize`|Page size|
-|`page`|Page|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get withdrawal history*  
+|[Optional] `asset`|Filter by asset|
+|[Optional] `startTime`|Filter by start time|
+|[Optional] `endTime`|Filter by end time|
+|[Optional] `status`|Filter by status|
+|[Optional] `pageSize`|Page size|
+|[Optional] `page`|Page|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -344,24 +344,24 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Opt
 [https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin](https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin)  
 <p>
 
+*Set auto add margin switch*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.SetAutoAddMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool autoAddMargin, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool autoAddMargin, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|Symbol|
-|`side`|Side|
-|`autoAddMargin`|Auto add or not|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Set auto add margin switch*  
+| `symbol`|Symbol|
+| `side`|Side|
+| `autoAddMargin`|Auto add or not|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -372,23 +372,23 @@ Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool au
 [https://bybit-exchange.github.io/docs/linear/#t-switchmode](https://bybit-exchange.github.io/docs/linear/#t-switchmode)  
 <p>
 
+*Switch between full or partial Stop loss/Take profit mode*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.SetFullPartialPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol, StopLossTakeProfitMode mode, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol, StopLossTakeProfitMode mode, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`mode`|New mode|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Switch between full or partial Stop loss/Take profit mode*  
+| `symbol`|The symbol|
+| `mode`|New mode|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -399,24 +399,24 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 [https://bybit-exchange.github.io/docs/linear/#t-setleverage](https://bybit-exchange.github.io/docs/linear/#t-setleverage)  
 <p>
 
+*Set leverage*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.SetLeverageAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`buyLeverage`|Buy leverage|
-|`sellLeverage`|Sell leverage|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Set leverage*  
+| `symbol`|The symbol|
+| `buyLeverage`|Buy leverage|
+| `sellLeverage`|Sell leverage|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -427,25 +427,25 @@ Task<WebCallResult> SetLeverageAsync(string symbol, int buyLeverage, int sellLev
 [https://bybit-exchange.github.io/docs/linear/#t-marginswitch](https://bybit-exchange.github.io/docs/linear/#t-marginswitch)  
 <p>
 
+*Switch Cross/Isolated; must set leverage value when switching from Cross to Isolated*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.SetPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult> SetPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult> SetPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`isIsolated`|True is Isolated; false is Cross|
-|`buyLeverage`|Buy leverage|
-|`sellLeverage`|Sell leverage|
-|`receiveWindow`||
-|`ct`|Cancellation token|
-
-*Switch Cross/Isolated; must set leverage value when switching from Cross to Isolated*  
+| `symbol`|The symbol|
+| `isIsolated`|True is Isolated; false is Cross|
+| `buyLeverage`|Buy leverage|
+| `sellLeverage`|Sell leverage|
+|[Optional] `receiveWindow`||
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -456,23 +456,23 @@ Task<WebCallResult> SetPositionModeAsync(string symbol, bool isIsolated, decimal
 [https://bybit-exchange.github.io/docs/linear/#t-setrisklimit](https://bybit-exchange.github.io/docs/linear/#t-setrisklimit)  
 <p>
 
+*Set position risk*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Account.SetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side, long riskId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side, long riskId, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`side`|Side|
-|`riskId`|The risk id to set|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Set position risk*  
+| `symbol`|The symbol|
+| `side`|Side|
+| `riskId`|The risk id to set|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>

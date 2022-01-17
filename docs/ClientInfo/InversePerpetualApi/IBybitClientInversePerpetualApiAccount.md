@@ -16,24 +16,24 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/inverse/#t-changemargin](https://bybit-exchange.github.io/docs/inverse/#t-changemargin)  
 <p>
 
+*Change margin*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualApi.Account.ChangeMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode, decimal margin, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode, decimal margin, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`mode`|The position mode|
-|`margin`|The margin|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Change margin*  
+| `symbol`|The symbol|
+| `mode`|The position mode|
+| `margin`|The margin|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -44,21 +44,21 @@ Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode,
 [https://bybit-exchange.github.io/docs/inverse/#t-key](https://bybit-exchange.github.io/docs/inverse/#t-key)  
 <p>
 
+*Get Api key info*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InversePerpetualApi.Account.GetApiKeyInfoAsync(/* parameters */);  
+var result = await client.InversePerpetualApi.Account.GetApiKeyInfoAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get Api key info*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -69,24 +69,24 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] 
 [https://bybit-exchange.github.io/docs/inverse/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/inverse/#t-assetexchangerecords)  
 <p>
 
+*Get asset exchange history*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InversePerpetualApi.Account.GetAssetExchangeHistoryAsync(/* parameters */);  
+var result = await client.InversePerpetualApi.Account.GetAssetExchangeHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHistoryAsync([Optional] long? fromId, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHistoryAsync(long? fromId = default, SearchDirection? direction = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`fromId`|Filter by id|
-|`direction`|Filter by direction|
-|`limit`|Max records|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get asset exchange history*  
+|[Optional] `fromId`|Filter by id|
+|[Optional] `direction`|Filter by direction|
+|[Optional] `limit`|Max records|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -97,22 +97,22 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 [https://bybit-exchange.github.io/docs/inverse/#t-balance](https://bybit-exchange.github.io/docs/inverse/#t-balance)  
 <p>
 
+*Get wallet balances*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InversePerpetualApi.Account.GetBalancesAsync(/* parameters */);  
+var result = await client.InversePerpetualApi.Account.GetBalancesAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional] string? asset, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? asset = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`asset`|Filter by asset|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get wallet balances*  
+|[Optional] `asset`|Filter by asset|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -123,22 +123,22 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional
 [https://bybit-exchange.github.io/docs/inverse/#t-mylastfundingfee](https://bybit-exchange.github.io/docs/inverse/#t-mylastfundingfee)  
 <p>
 
+*Get user last funding fee*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualApi.Account.GetLastUserFundingFeeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitFundingSettlement>> GetLastUserFundingFeeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitFundingSettlement>> GetLastUserFundingFeeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get user last funding fee*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -149,22 +149,22 @@ Task<WebCallResult<BybitFundingSettlement>> GetLastUserFundingFeeAsync(string sy
 [https://bybit-exchange.github.io/docs/inverse/#t-myposition](https://bybit-exchange.github.io/docs/inverse/#t-myposition)  
 <p>
 
+*Get user positions*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InversePerpetualApi.Account.GetPositionsAsync(/* parameters */);  
+var result = await client.InversePerpetualApi.Account.GetPositionsAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync([Optional] string? symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(string? symbol = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|Filter by symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get user positions*  
+|[Optional] `symbol`|Filter by symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -175,22 +175,22 @@ Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync([Optional] str
 [https://bybit-exchange.github.io/docs/inverse/#t-predictedfunding](https://bybit-exchange.github.io/docs/inverse/#t-predictedfunding)  
 <p>
 
+*Get predicted next funding rate*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualApi.Account.GetPredictedUserFundingFeeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitPredictedFunding>> GetPredictedUserFundingFeeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitPredictedFunding>> GetPredictedUserFundingFeeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get predicted next funding rate*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -201,27 +201,27 @@ Task<WebCallResult<BybitPredictedFunding>> GetPredictedUserFundingFeeAsync(strin
 [https://bybit-exchange.github.io/docs/inverse/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/inverse/#t-closedprofitandloss)  
 <p>
 
+*Get user's profit and loss records*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualApi.Account.GetProfitAndLossHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHistoryAsync(string symbol, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] TradeType? type, [Optional] int? page, [Optional] int? pageSize, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHistoryAsync(string symbol, DateTime? startTime = default, DateTime? endTime = default, TradeType? type = default, int? page = default, int? pageSize = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol to get records for|
-|`startTime`|Filter by startTime|
-|`endTime`|Filter by endTime|
-|`type`|Filter by type|
-|`page`|Page|
-|`pageSize`|Page size|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get user's profit and loss records*  
+| `symbol`|The symbol to get records for|
+|[Optional] `startTime`|Filter by startTime|
+|[Optional] `endTime`|Filter by endTime|
+|[Optional] `type`|Filter by type|
+|[Optional] `page`|Page|
+|[Optional] `pageSize`|Page size|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -232,22 +232,22 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 [https://bybit-exchange.github.io/docs/inverse/#t-getrisklimit](https://bybit-exchange.github.io/docs/inverse/#t-getrisklimit)  
 <p>
 
+*Get position risk limit*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InversePerpetualApi.Account.GetRiskLimitAsync(/* parameters */);  
+var result = await client.InversePerpetualApi.Account.GetRiskLimitAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync([Optional] string? symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string? symbol = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get position risk limit*  
+|[Optional] `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -258,27 +258,27 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync([Optional] st
 [https://bybit-exchange.github.io/docs/inverse/#t-walletrecords](https://bybit-exchange.github.io/docs/inverse/#t-walletrecords)  
 <p>
 
+*Get wallet fund endpoints*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InversePerpetualApi.Account.GetWalletFundHistoryAsync(/* parameters */);  
+var result = await client.InversePerpetualApi.Account.GetWalletFundHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync([Optional] string? asset, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] WalletFundType? type, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync(string? asset = default, DateTime? startTime = default, DateTime? endTime = default, WalletFundType? type = default, int? pageSize = default, int? page = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`asset`|Filter by asset|
-|`startTime`|Filter by start time|
-|`endTime`|Filter by end time|
-|`type`|Filter by type|
-|`pageSize`|Page size|
-|`page`|Page|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get wallet fund endpoints*  
+|[Optional] `asset`|Filter by asset|
+|[Optional] `startTime`|Filter by start time|
+|[Optional] `endTime`|Filter by end time|
+|[Optional] `type`|Filter by type|
+|[Optional] `pageSize`|Page size|
+|[Optional] `page`|Page|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -289,27 +289,27 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 [https://bybit-exchange.github.io/docs/inverse/#t-withdrawrecords](https://bybit-exchange.github.io/docs/inverse/#t-withdrawrecords)  
 <p>
 
+*Get withdrawal history*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InversePerpetualApi.Account.GetWithdrawalHistoryAsync(/* parameters */);  
+var result = await client.InversePerpetualApi.Account.GetWithdrawalHistoryAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Optional] string? asset, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] WithdrawStatus? status, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = default, DateTime? startTime = default, DateTime? endTime = default, WithdrawStatus? status = default, int? pageSize = default, int? page = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`asset`|Filter by asset|
-|`startTime`|Filter by start time|
-|`endTime`|Filter by end time|
-|`status`|Filter by status|
-|`pageSize`|Page size|
-|`page`|Page|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get withdrawal history*  
+|[Optional] `asset`|Filter by asset|
+|[Optional] `startTime`|Filter by start time|
+|[Optional] `endTime`|Filter by end time|
+|[Optional] `status`|Filter by status|
+|[Optional] `pageSize`|Page size|
+|[Optional] `page`|Page|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -320,23 +320,23 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Opt
 [https://bybit-exchange.github.io/docs/inverse/#t-switchmode](https://bybit-exchange.github.io/docs/inverse/#t-switchmode)  
 <p>
 
+*Switch between full or partial Stop loss/Take profit mode*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualApi.Account.SetFullPartialPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol, StopLossTakeProfitMode mode, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol, StopLossTakeProfitMode mode, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`mode`|New mode|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Switch between full or partial Stop loss/Take profit mode*  
+| `symbol`|The symbol|
+| `mode`|New mode|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -347,25 +347,25 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 [https://bybit-exchange.github.io/docs/inverse/#t-marginswitch](https://bybit-exchange.github.io/docs/inverse/#t-marginswitch)  
 <p>
 
+*Switch between cross and isolated mode.*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualApi.Account.SetIsolatedModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`isIsolated`|Is isolated|
-|`buyLeverage`|Buy leverage|
-|`sellLeverage`|Sell leverage|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Switch between cross and isolated mode.*  
+| `symbol`|The symbol|
+| `isIsolated`|Is isolated|
+| `buyLeverage`|Buy leverage|
+| `sellLeverage`|Sell leverage|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -376,24 +376,24 @@ Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal
 [https://bybit-exchange.github.io/docs/inverse/#t-setleverage](https://bybit-exchange.github.io/docs/inverse/#t-setleverage)  
 <p>
 
+*Set leverage*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualApi.Account.SetLeverageAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`buyLeverage`|Buy leverage|
-|`sellLeverage`|Sell leverage|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Set leverage*  
+| `symbol`|The symbol|
+| `buyLeverage`|Buy leverage|
+| `sellLeverage`|Sell leverage|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -404,23 +404,23 @@ Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int se
 [https://bybit-exchange.github.io/docs/inverse/#t-setrisklimit](https://bybit-exchange.github.io/docs/inverse/#t-setrisklimit)  
 <p>
 
+*Set position risk*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualApi.Account.SetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, long riskId, [Optional] PositionMode? mode, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, long riskId, PositionMode? mode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`riskId`|The risk id to set|
-|`mode`|Position mode|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Set position risk*  
+| `symbol`|The symbol|
+| `riskId`|The risk id to set|
+|[Optional] `mode`|Position mode|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>

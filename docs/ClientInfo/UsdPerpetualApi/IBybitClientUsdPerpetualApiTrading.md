@@ -16,22 +16,22 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/linear/#t-cancelallcond](https://bybit-exchange.github.io/docs/linear/#t-cancelallcond)  
 <p>
 
+*Cancel all active conditional orders for a symbol*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.CancelAllConditionalOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<string>>> CancelAllConditionalOrdersAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<string>>> CancelAllConditionalOrdersAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Cancel all active conditional orders for a symbol*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -42,22 +42,22 @@ Task<WebCallResult<IEnumerable<string>>> CancelAllConditionalOrdersAsync(string 
 [https://bybit-exchange.github.io/docs/linear/#t-cancelallactive](https://bybit-exchange.github.io/docs/linear/#t-cancelallactive)  
 <p>
 
+*Cancel all active orders for a symbol*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.CancelAllOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<string>>> CancelAllOrdersAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<string>>> CancelAllOrdersAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Cancel all active orders for a symbol*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -68,24 +68,24 @@ Task<WebCallResult<IEnumerable<string>>> CancelAllOrdersAsync(string symbol, [Op
 [https://bybit-exchange.github.io/docs/linear/#t-cancelcond](https://bybit-exchange.github.io/docs/linear/#t-cancelcond)  
 <p>
 
+*Cancel a conditional order, either stopOrderId or clientOrderId should be provided*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.CancelConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol, string? stopOrderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`stopOrderId`|The id of the conditional order to cancel|
-|`clientOrderId`|The client order id of the conditional order to cancel|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Cancel a conditional order, either stopOrderId or clientOrderId should be provided*  
+| `symbol`|The symbol|
+|[Optional] `stopOrderId`|The id of the conditional order to cancel|
+|[Optional] `clientOrderId`|The client order id of the conditional order to cancel|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -96,24 +96,24 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 [https://bybit-exchange.github.io/docs/linear/#t-cancelactive](https://bybit-exchange.github.io/docs/linear/#t-cancelactive)  
 <p>
 
+*Cancel an order, either orderId or clientOrderId should be provided*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitOrderId>> CancelOrderAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitOrderId>> CancelOrderAsync(string symbol, string? orderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`orderId`|The id of the order to cancel|
-|`clientOrderId`|The client order id of the conditional order to cancel|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Cancel an order, either orderId or clientOrderId should be provided*  
+| `symbol`|The symbol|
+|[Optional] `orderId`|The id of the order to cancel|
+|[Optional] `clientOrderId`|The client order id of the conditional order to cancel|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -124,28 +124,28 @@ Task<WebCallResult<BybitOrderId>> CancelOrderAsync(string symbol, [Optional] str
 [https://bybit-exchange.github.io/docs/linear/#t-getcond](https://bybit-exchange.github.io/docs/linear/#t-getcond)  
 <p>
 
+*Get a list of conditional orders*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.GetConditionalOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrderUsd>>>> GetConditionalOrdersAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] OrderStatus? status, [Optional] SortOrder? order, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrderUsd>>>> GetConditionalOrdersAsync(string symbol, string? stopOrderId = default, string? clientOrderId = default, OrderStatus? status = default, SortOrder? order = default, int? pageSize = default, int? page = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`stopOrderId`|Filter by order id|
-|`clientOrderId`|Filter by client order id|
-|`status`|Filter by status|
-|`order`|Result order|
-|`pageSize`|Page size|
-|`page`|Page|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get a list of conditional orders*  
+| `symbol`|The symbol|
+|[Optional] `stopOrderId`|Filter by order id|
+|[Optional] `clientOrderId`|Filter by client order id|
+|[Optional] `status`|Filter by status|
+|[Optional] `order`|Result order|
+|[Optional] `pageSize`|Page size|
+|[Optional] `page`|Page|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -156,24 +156,24 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrderUsd>>>> GetC
 [https://bybit-exchange.github.io/docs/linear/#t-querycond](https://bybit-exchange.github.io/docs/linear/#t-querycond)  
 <p>
 
+*Get conditional order information. Either stopOrderId or clientOrderId should be provided*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.GetOpenConditionalOrderRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitConditionalOrderUsd>> GetOpenConditionalOrderRealTimeAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitConditionalOrderUsd>> GetOpenConditionalOrderRealTimeAsync(string symbol, string? stopOrderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`stopOrderId`|The order id|
-|`clientOrderId`|The client order id|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get conditional order information. Either stopOrderId or clientOrderId should be provided*  
+| `symbol`|The symbol|
+|[Optional] `stopOrderId`|The order id|
+|[Optional] `clientOrderId`|The client order id|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -184,22 +184,22 @@ Task<WebCallResult<BybitConditionalOrderUsd>> GetOpenConditionalOrderRealTimeAsy
 [https://bybit-exchange.github.io/docs/linear/#t-querycond](https://bybit-exchange.github.io/docs/linear/#t-querycond)  
 <p>
 
+*Get order information for up to 10 conditional orders*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.GetOpenConditionalOrdersRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrdersRealTimeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrdersRealTimeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get order information for up to 10 conditional orders*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -210,24 +210,24 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrders
 [https://bybit-exchange.github.io/docs/linear/#t-queryactive](https://bybit-exchange.github.io/docs/linear/#t-queryactive)  
 <p>
 
+*Get order information. Either orderId or clientOrderId should be provided*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.GetOpenOrderRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, string? orderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`orderId`||
-|`clientOrderId`||
-|`receiveWindow`||
-|`ct`||
-
-*Get order information. Either orderId or clientOrderId should be provided*  
+| `symbol`|The symbol|
+|[Optional] `orderId`||
+|[Optional] `clientOrderId`||
+|[Optional] `receiveWindow`||
+|[Optional] `ct`||
 
 </p>
 
@@ -238,22 +238,22 @@ Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, [Option
 [https://bybit-exchange.github.io/docs/linear/#t-queryactive](https://bybit-exchange.github.io/docs/linear/#t-queryactive)  
 <p>
 
+*Get order information for up to 500 orders*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.GetOpenOrdersRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get order information for up to 500 orders*  
+| `symbol`|The symbol|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -264,28 +264,28 @@ Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string s
 [https://bybit-exchange.github.io/docs/linear/#t-getactive](https://bybit-exchange.github.io/docs/linear/#t-getactive)  
 <p>
 
+*Get orders*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.GetOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] OrderStatus? status, [Optional] SortOrder? order, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(string symbol, string? orderId = default, string? clientOrderId = default, OrderStatus? status = default, SortOrder? order = default, int? pageSize = default, int? page = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`orderId`|Filter by order id|
-|`clientOrderId`|Filter by client order id|
-|`status`|Filter by status|
-|`order`|The result order|
-|`pageSize`|The page size|
-|`page`|The page|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get orders*  
+| `symbol`|The symbol|
+|[Optional] `orderId`|Filter by order id|
+|[Optional] `clientOrderId`|Filter by client order id|
+|[Optional] `status`|Filter by status|
+|[Optional] `order`|The result order|
+|[Optional] `pageSize`|The page size|
+|[Optional] `page`|The page|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -296,27 +296,27 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(str
 [https://bybit-exchange.github.io/docs/linear/#t-usertraderecords](https://bybit-exchange.github.io/docs/linear/#t-usertraderecords)  
 <p>
 
+*Get executed user trades*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.GetUserTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbol, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] int? page, [Optional] int? pageSize, [Optional] TradeType? type, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbol, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? pageSize = default, TradeType? type = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`startTime`|Filter by start time|
-|`endTime`|Filter by end time|
-|`page`|Page|
-|`pageSize`|Page size|
-|`type`|Filter by type|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get executed user trades*  
+| `symbol`|The symbol|
+|[Optional] `startTime`|Filter by start time|
+|[Optional] `endTime`|Filter by end time|
+|[Optional] `page`|Page|
+|[Optional] `pageSize`|Page size|
+|[Optional] `type`|Filter by type|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -327,31 +327,31 @@ Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbo
 [https://bybit-exchange.github.io/docs/linear/#t-replacecond](https://bybit-exchange.github.io/docs/linear/#t-replacecond)  
 <p>
 
+*Change an exising order. Either stopOrderId or clientOrderId should be provided*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.ModifyConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] decimal? newPrice, [Optional] decimal? newTriggerPrice, [Optional] decimal? newQuantity, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol, string? stopOrderId = default, string? clientOrderId = default, decimal? newPrice = default, decimal? newTriggerPrice = default, decimal? newQuantity = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`stopOrderId`|Stop order id|
-|`clientOrderId`|Client order id|
-|`newPrice`|New price to set|
-|`newTriggerPrice`|New trigger price to set|
-|`newQuantity`|New quantity to set|
-|`takeProfitPrice`|New take profit price|
-|`stopLossPrice`|New stop loss price|
-|`takeProfitTriggerType`|New take profit trigger type|
-|`stopLossTriggerType`|New stop loss profit price|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Change an exising order. Either stopOrderId or clientOrderId should be provided*  
+| `symbol`|The symbol|
+|[Optional] `stopOrderId`|Stop order id|
+|[Optional] `clientOrderId`|Client order id|
+|[Optional] `newPrice`|New price to set|
+|[Optional] `newTriggerPrice`|New trigger price to set|
+|[Optional] `newQuantity`|New quantity to set|
+|[Optional] `takeProfitPrice`|New take profit price|
+|[Optional] `stopLossPrice`|New stop loss price|
+|[Optional] `takeProfitTriggerType`|New take profit trigger type|
+|[Optional] `stopLossTriggerType`|New stop loss profit price|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -362,30 +362,30 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 [https://bybit-exchange.github.io/docs/linear/#t-replaceactive](https://bybit-exchange.github.io/docs/linear/#t-replaceactive)  
 <p>
 
+*Change an exising order. Either orderId or clientOrderId should be provided*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.ModifyOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] decimal? newPrice, [Optional] decimal? newQuantity, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, string? orderId = default, string? clientOrderId = default, decimal? newPrice = default, decimal? newQuantity = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`orderId`|Stop order id|
-|`clientOrderId`|Client order id|
-|`newPrice`|New price to set|
-|`newQuantity`|New quantity to set|
-|`takeProfitPrice`|New take profit price|
-|`stopLossPrice`|New stop loss price|
-|`takeProfitTriggerType`|New take profit trigger type|
-|`stopLossTriggerType`|New stop loss profit price|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Change an exising order. Either orderId or clientOrderId should be provided*  
+| `symbol`|The symbol|
+|[Optional] `orderId`|Stop order id|
+|[Optional] `clientOrderId`|Client order id|
+|[Optional] `newPrice`|New price to set|
+|[Optional] `newQuantity`|New quantity to set|
+|[Optional] `takeProfitPrice`|New take profit price|
+|[Optional] `stopLossPrice`|New stop loss price|
+|[Optional] `takeProfitTriggerType`|New take profit trigger type|
+|[Optional] `stopLossTriggerType`|New stop loss profit price|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -396,37 +396,37 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, [Optional] str
 [https://bybit-exchange.github.io/docs/linear/#t-placecond](https://bybit-exchange.github.io/docs/linear/#t-placecond)  
 <p>
 
+*Place a new conditional order*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.PlaceConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal basePrice, decimal triggerPrice, TimeInForce timeInForce, bool closeOnTrigger, bool reduceOnly, [Optional] decimal? price, [Optional] TriggerType? triggerType, [Optional] string? clientOrderId, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal basePrice, decimal triggerPrice, TimeInForce timeInForce, bool closeOnTrigger, bool reduceOnly, decimal? price = default, TriggerType? triggerType = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`side`|Order side|
-|`type`|Order type|
-|`quantity`|Quantity|
-|`basePrice`|It will be used to compare with the value of trigger price, to decide whether your conditional order will be triggered by crossing trigger price from upper side or lower side. Mainly used to identify the expected direction of the current conditional order.|
-|`triggerPrice`|Trigger price|
-|`timeInForce`|Time in force|
-|`closeOnTrigger`|For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.|
-|`reduceOnly`|True means your position can only reduce in size if this order is triggered. When reduce_only is true, take profit/stop loss cannot be set|
-|`price`|Price|
-|`triggerType`|Trigger type|
-|`clientOrderId`|Client order id|
-|`takeProfitPrice`|Take profit price, only take effect upon opening the position|
-|`stopLossPrice`|Stop loss price, only take effect upon opening the position|
-|`takeProfitTriggerType`|Take profit trigger price type, default: LastPrice|
-|`stopLossTriggerType`|Stop loss trigger price type, default: LastPrice|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Place a new conditional order*  
+| `symbol`|The symbol|
+| `side`|Order side|
+| `type`|Order type|
+| `quantity`|Quantity|
+| `basePrice`|It will be used to compare with the value of trigger price, to decide whether your conditional order will be triggered by crossing trigger price from upper side or lower side. Mainly used to identify the expected direction of the current conditional order.|
+| `triggerPrice`|Trigger price|
+| `timeInForce`|Time in force|
+| `closeOnTrigger`|For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.|
+| `reduceOnly`|True means your position can only reduce in size if this order is triggered. When reduce_only is true, take profit/stop loss cannot be set|
+|[Optional] `price`|Price|
+|[Optional] `triggerType`|Trigger type|
+|[Optional] `clientOrderId`|Client order id|
+|[Optional] `takeProfitPrice`|Take profit price, only take effect upon opening the position|
+|[Optional] `stopLossPrice`|Stop loss price, only take effect upon opening the position|
+|[Optional] `takeProfitTriggerType`|Take profit trigger price type, default: LastPrice|
+|[Optional] `stopLossTriggerType`|Stop loss trigger price type, default: LastPrice|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>
 
@@ -437,33 +437,33 @@ Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string 
 [https://bybit-exchange.github.io/docs/linear/#t-placeactive](https://bybit-exchange.github.io/docs/linear/#t-placeactive)  
 <p>
 
+*Place a new order*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.UsdPerpetualApi.Trading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, [Optional] decimal? price, [Optional] string? clientOrderId, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`side`|Order side|
-|`type`|Order type|
-|`quantity`|Quantity|
-|`timeInForce`|Time in force|
-|`reduceOnly`|True means your position can only reduce in size if this order is triggered|
-|`closeOnTrigger`|For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.|
-|`price`|Price|
-|`clientOrderId`|Client order id|
-|`takeProfitPrice`|Take profit price, only take effect upon opening the position|
-|`stopLossPrice`|Stop loss price, only take effect upon opening the position|
-|`takeProfitTriggerType`|Take profit trigger price type, default: LastPrice|
-|`stopLossTriggerType`|Stop loss trigger price type, default: LastPrice|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Place a new order*  
+| `symbol`|The symbol|
+| `side`|Order side|
+| `type`|Order type|
+| `quantity`|Quantity|
+| `timeInForce`|Time in force|
+| `reduceOnly`|True means your position can only reduce in size if this order is triggered|
+| `closeOnTrigger`|For a closing order. It can only reduce your position, not increase it. If the account has insufficient available balance when the closing order is triggered, then other active orders of similar contracts will be cancelled or reduced. It can be used to ensure your stop loss reduces your position regardless of current available margin.|
+|[Optional] `price`|Price|
+|[Optional] `clientOrderId`|Client order id|
+|[Optional] `takeProfitPrice`|Take profit price, only take effect upon opening the position|
+|[Optional] `stopLossPrice`|Stop loss price, only take effect upon opening the position|
+|[Optional] `takeProfitTriggerType`|Take profit trigger price type, default: LastPrice|
+|[Optional] `stopLossTriggerType`|Stop loss trigger price type, default: LastPrice|
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>

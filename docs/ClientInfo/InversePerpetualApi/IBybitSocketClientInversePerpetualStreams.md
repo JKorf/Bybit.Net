@@ -15,21 +15,21 @@ parent: IBybitSocketClient
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet](https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet)  
 <p>
 
+*Subscribe to user balance updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToBalanceUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BybitBalanceUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BybitBalanceUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to user balance updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -40,21 +40,21 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
 <p>
 
+*Subscribe to insurance fund updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToInsurancesUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToInsurancesUpdatesAsync(Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToInsurancesUpdatesAsync(Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to insurance fund updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -65,22 +65,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsurancesUpdatesAsync(Action<Da
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
 <p>
 
+*Subscribe to insurance fund updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToInsuranceUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol to receive updates for|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to insurance fund updates*  
+| `symbol`|The symbol to receive updates for|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -91,22 +91,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(string sym
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
 <p>
 
+*Subscribe to insurance fund updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToInsuranceUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitInsuranceUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbols`|The symbols to receive updates for|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to insurance fund updates*  
+| `symbols`|The symbols to receive updates for|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -117,22 +117,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(IEnumerabl
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
 <p>
 
+*Subscribe to kline (candlestick) updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToKlinesUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`interval`|The interval of the klines|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to kline (candlestick) updates*  
+| `interval`|The interval of the klines|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -143,23 +143,23 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
 <p>
 
+*Subscribe to kline (candlestick) updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol to receive updates for|
-|`interval`|The interval of the klines|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to kline (candlestick) updates*  
+| `symbol`|The symbol to receive updates for|
+| `interval`|The interval of the klines|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -170,23 +170,23 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
 <p>
 
+*Subscribe to kline (candlestick) updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbols`|The symbols to receive updates for|
-|`interval`|The interval of the klines|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to kline (candlestick) updates*  
+| `symbols`|The symbols to receive updates for|
+| `interval`|The interval of the klines|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -197,21 +197,21 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
 <p>
 
+*Subscribe to liquidation order updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToLiquidationsUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<DataEvent<BybitLiquidationUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<DataEvent<BybitLiquidationUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to liquidation order updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -222,22 +222,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
 <p>
 
+*Subscribe to liquidation order updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<BybitLiquidationUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<BybitLiquidationUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol to receive updates for|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to liquidation order updates*  
+| `symbol`|The symbol to receive updates for|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -248,22 +248,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
 <p>
 
+*Subscribe to liquidation order updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidationUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidationUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbols`|The symbols to receive updates for|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to liquidation order updates*  
+| `symbols`|The symbols to receive updates for|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -275,23 +275,23 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
 <p>
 
+*Subscribe to orderbook updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToOrderBooksUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit, Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit, Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`limit`|The amount of rows to receive updates for. Either 25 or 200.|
-|`snapshotHandler`|The event handler for the initial snapshot data|
-|`updateHandler`|The event handler for the update messages|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to orderbook updates*  
+| `limit`|The amount of rows to receive updates for. Either 25 or 200.|
+| `snapshotHandler`|The event handler for the initial snapshot data|
+| `updateHandler`|The event handler for the update messages|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -303,24 +303,24 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
 <p>
 
+*Subscribe to orderbook updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, int limit, Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, int limit, Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol to receive updates for|
-|`limit`|The amount of rows to receive updates for. Either 25 or 200.|
-|`snapshotHandler`|The event handler for the initial snapshot data|
-|`updateHandler`|The event handler for the update messages|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to orderbook updates*  
+| `symbol`|The symbol to receive updates for|
+| `limit`|The amount of rows to receive updates for. Either 25 or 200.|
+| `snapshotHandler`|The event handler for the initial snapshot data|
+| `updateHandler`|The event handler for the update messages|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -332,24 +332,24 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
 <p>
 
+*Subscribe to orderbook updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int limit, Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int limit, Action<DataEvent<IEnumerable<BybitOrderBookEntry>>> snapshotHandler, Action<DataEvent<BybitDeltaUpdate<BybitOrderBookEntry>>> updateHandler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbols`|The symbols to receive updates for|
-|`limit`|The amount of rows to receive updates for. Either 25 or 200.|
-|`snapshotHandler`|The event handler for the initial snapshot data|
-|`updateHandler`|The event handler for the update messages|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to orderbook updates*  
+| `symbols`|The symbols to receive updates for|
+| `limit`|The amount of rows to receive updates for. Either 25 or 200.|
+| `snapshotHandler`|The event handler for the initial snapshot data|
+| `updateHandler`|The event handler for the update messages|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -360,21 +360,21 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorder](https://bybit-exchange.github.io/docs/inverse/#t-websocketorder)  
 <p>
 
+*Subscribe to user order updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToOrderUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to user order updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -385,21 +385,21 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketposition](https://bybit-exchange.github.io/docs/inverse/#t-websocketposition)  
 <p>
 
+*Subscribe to user position updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToPositionUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to user position updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -410,21 +410,21 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder](https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder)  
 <p>
 
+*Subscribe to user stop order updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToStopOrderUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitStopOrderUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitStopOrderUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to user stop order updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -435,21 +435,21 @@ Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<Dat
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
 <p>
 
+*Subscribe to ticker updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToTickersUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataEvent<BybitTickerUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to ticker updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -460,22 +460,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataE
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
 <p>
 
+*Subscribe to ticker updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitTickerUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol to receive updates for|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to ticker updates*  
+| `symbol`|The symbol to receive updates for|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -486,22 +486,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
 <p>
 
+*Subscribe to ticker updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitTickerUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbols`|The symbols to receive updates for|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to ticker updates*  
+| `symbols`|The symbols to receive updates for|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -512,21 +512,21 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 [https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
 <p>
 
+*Subscribe to public trade updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToTradesUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to public trade updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -537,22 +537,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEv
 [https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
 <p>
 
+*Subscribe to public trade updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol to receive updates for|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to public trade updates*  
+| `symbol`|The symbol to receive updates for|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -563,22 +563,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 [https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
 <p>
 
+*Subscribe to public trade updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbols`|The symbols to receive updates for|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to public trade updates*  
+| `symbols`|The symbols to receive updates for|
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -589,20 +589,20 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution](https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution)  
 <p>
 
+*Subscribe to user trade updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.InversePerpetualStreams.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BybitUserTradeUpdate>>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BybitUserTradeUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`handler`|The event handler for the received data|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to user trade updates*  
+| `handler`|The event handler for the received data|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>

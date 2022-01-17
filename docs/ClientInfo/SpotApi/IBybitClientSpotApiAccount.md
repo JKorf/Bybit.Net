@@ -16,20 +16,20 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/spot/#t-balance](https://bybit-exchange.github.io/docs/spot/#t-balance)  
 <p>
 
+*Get wallet balances*  
+
 ```csharp  
 var client = new BybitClient();  
-var result = await client.SpotApi.Account.GetBalancesAsync(/* parameters */);  
+var result = await client.SpotApi.Account.GetBalancesAsync();  
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotBalance>>> GetBalancesAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
+Task<WebCallResult<IEnumerable<BybitSpotBalance>>> GetBalancesAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
-|`ct`|Cancellation token|
-
-*Get wallet balances*  
+|[Optional] `receiveWindow`|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|[Optional] `ct`|Cancellation token|
 
 </p>

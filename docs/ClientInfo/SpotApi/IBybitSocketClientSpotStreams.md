@@ -15,23 +15,23 @@ parent: IBybitSocketClient
 [https://bybit-exchange.github.io/docs/spot/#t-privatetopics](https://bybit-exchange.github.io/docs/spot/#t-privatetopics)  
 <p>
 
+*Subscribe to account data updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotStreams.SubscribeToAccountUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler, Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler, Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler, Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler, Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`accountUpdateHandler`|Account(balance) update handler|
-|`orderUpdateHandler`|Order update handler|
-|`tradeUpdateHandler`|User trade update handler|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to account data updates*  
+| `accountUpdateHandler`|Account(balance) update handler|
+| `orderUpdateHandler`|Order update handler|
+| `tradeUpdateHandler`|User trade update handler|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -42,22 +42,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataE
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2bookticker](https://bybit-exchange.github.io/docs/spot/#t-websocketv2bookticker)  
 <p>
 
+*Subscribe to book price updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotStreams.SubscribeToBookPriceUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPrice>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPrice>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`handler`|Data handler|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to book price updates*  
+| `symbol`|The symbol|
+| `handler`|Data handler|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -68,23 +68,23 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string sym
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2kline](https://bybit-exchange.github.io/docs/spot/#t-websocketv2kline)  
 <p>
 
+*Subscribe to kline updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotStreams.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitSpotKlineUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitSpotKlineUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`interval`|Interval of the kline data|
-|`handler`|Data handler|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to kline updates*  
+| `symbol`|The symbol|
+| `interval`|Interval of the kline data|
+| `handler`|Data handler|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -95,22 +95,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2depth](https://bybit-exchange.github.io/docs/spot/#t-websocketv2depth)  
 <p>
 
+*Subscribe to order book updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotStreams.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<BybitSpotOrderBookUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<BybitSpotOrderBookUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`handler`|Data handler|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to order book updates*  
+| `symbol`|The symbol|
+| `handler`|Data handler|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -121,22 +121,22 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2realtimes](https://bybit-exchange.github.io/docs/spot/#t-websocketv2realtimes)  
 <p>
 
+*Subscribe to ticker updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotStreams.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTickerUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTickerUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`handler`|Data handler|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to ticker updates*  
+| `symbol`|The symbol|
+| `handler`|Data handler|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
 
@@ -147,21 +147,21 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2trade](https://bybit-exchange.github.io/docs/spot/#t-websocketv2trade)  
 <p>
 
+*Subscribe to public trade updates*  
+
 ```csharp  
 var client = new BybitClient();  
 var result = await client.SpotStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTradeUpdate>> handler, [Optional] CancellationToken ct);  
+Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTradeUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|`symbol`|The symbol|
-|`handler`|Data handler|
-|`ct`|Cancellation token for closing this subscription|
-
-*Subscribe to public trade updates*  
+| `symbol`|The symbol|
+| `handler`|Data handler|
+|[Optional] `ct`|Cancellation token for closing this subscription|
 
 </p>
