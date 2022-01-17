@@ -7,10 +7,10 @@ has_children: true
   
 ***
 *Inverse perpetual streams*  
-**[IBybitSocketClientInversePerpetualStreams](IBybitSocketClientInversePerpetualStreams/IBybitSocketClientInversePerpetualStreams.html) InversePerpetualStreams { get; }**  
+**[IBybitSocketClientInversePerpetualStreams](InversePerpetualStreams/IBybitSocketClientInversePerpetualStreams.html) InversePerpetualStreams { get; }**  
 ***
 *Spot streams*  
-**[IBybitSocketClientSpotStreams](IBybitSocketClientSpotStreams/IBybitSocketClientSpotStreams.html) SpotStreams { get; }**  
+**[IBybitSocketClientSpotStreams](SpotStreams/IBybitSocketClientSpotStreams.html) SpotStreams { get; }**  
 ***
 *USD perpetual streams*  
-**[IBybitSocketClientUsdPerpetualStreams](IBybitSocketClientUsdPerpetualStreams/IBybitSocketClientUsdPerpetualStreams.html) UsdPerpetualStreams { get; }**  
+**[IBybitSocketClientUsdPerpetualStreams](UsdPerpetualStreams/IBybitSocketClientUsdPerpetualStreams.html) UsdPerpetualStreams { get; }**  
