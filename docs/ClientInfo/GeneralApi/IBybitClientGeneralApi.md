@@ -9,4 +9,4 @@ parent: IBybitClient
   
 ***
 *Endpoints related to asset transfer*  
-**[IBybitClientGeneralApiTransfer](IBybitClientGeneralApiTransfer.md) Transfer { get; }**  
+**[IBybitClientGeneralApiTransfer](ClientInfo/GeneralApi/IBybitClientGeneralApiTransfer.html) Transfer { get; }**  

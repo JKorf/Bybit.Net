@@ -12,10 +12,10 @@ parent: IBybitClient
 **ISpotClient ComonSpotClient { get; }**  
 ***
 *Endpoints related to account settings, info or actions*  
-**[IBybitClientSpotApiAccount](IBybitClientSpotApiAccount.md) Account { get; }**  
+**[IBybitClientSpotApiAccount](ClientInfo/SpotApi/IBybitClientSpotApiAccount.html) Account { get; }**  
 ***
 *Endpoints related to retrieving market and system data*  
-**[IBybitClientSpotApiExchangeData](IBybitClientSpotApiExchangeData.md) ExchangeData { get; }**  
+**[IBybitClientSpotApiExchangeData](ClientInfo/SpotApi/IBybitClientSpotApiExchangeData.html) ExchangeData { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**[IBybitClientSpotApiTrading](IBybitClientSpotApiTrading.md) Trading { get; }**  
+**[IBybitClientSpotApiTrading](ClientInfo/SpotApi/IBybitClientSpotApiTrading.html) Trading { get; }**  

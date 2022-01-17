@@ -7,16 +7,16 @@ has_children: true
   
 ***
 *General API endpoints*  
-**[IBybitClientGeneralApi](IBybitClientGeneralApi.md) GeneralApi { get; }**  
+**[IBybitClientGeneralApi](ClientInfo/GeneralApi/IBybitClientGeneralApi.html) GeneralApi { get; }**  
 ***
 *Inverse futures API endpoints*  
-**[IBybitClientInverseFuturesApi](IBybitClientInverseFuturesApi.md) InverseFuturesApi { get; }**  
+**[IBybitClientInverseFuturesApi](ClientInfo/InverseFuturesApi/IBybitClientInverseFuturesApi.html) InverseFuturesApi { get; }**  
 ***
 *Inverse perpetual API endpoints*  
-**[IBybitClientInversePerpetualApi](IBybitClientInversePerpetualApi.md) InversePerpetualApi { get; }**  
+**[IBybitClientInversePerpetualApi](ClientInfo/InversePerpetualApi/IBybitClientInversePerpetualApi.html) InversePerpetualApi { get; }**  
 ***
 *Spot API endpoints*  
-**[IBybitClientSpotApi](IBybitClientSpotApi.md) SpotApi { get; }**  
+**[IBybitClientSpotApi](ClientInfo/SpotApi/IBybitClientSpotApi.html) SpotApi { get; }**  
 ***
 *USD perpetual API endpoints*  
-**[IBybitClientUsdPerpetualApi](IBybitClientUsdPerpetualApi.md) UsdPerpetualApi { get; }**  
+**[IBybitClientUsdPerpetualApi](ClientInfo/UsdPerpetualApi/IBybitClientUsdPerpetualApi.html) UsdPerpetualApi { get; }**  
