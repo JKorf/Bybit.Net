@@ -16,7 +16,7 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/spot/#t-balance](https://bybit-exchange.github.io/docs/spot/#t-balance)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotBalance>>> GetBalancesAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 

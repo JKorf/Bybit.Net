@@ -15,7 +15,7 @@ grand_parent: IBybitClient
 
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, OrderSide side, decimal margin, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -38,7 +38,7 @@ Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, Order
 [https://bybit-exchange.github.io/docs/linear/#t-key](https://bybit-exchange.github.io/docs/linear/#t-key)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -58,7 +58,7 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] 
 [https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHistoryAsync([Optional] long? fromId, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -81,7 +81,7 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 [https://bybit-exchange.github.io/docs/linear/#t-balance](https://bybit-exchange.github.io/docs/linear/#t-balance)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional] string? asset, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -102,7 +102,7 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional
 [https://bybit-exchange.github.io/docs/linear/#t-myposition](https://bybit-exchange.github.io/docs/linear/#t-myposition)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -123,7 +123,7 @@ Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionAsync(string symbo
 [https://bybit-exchange.github.io/docs/linear/#t-myposition](https://bybit-exchange.github.io/docs/linear/#t-myposition)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionsAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -143,7 +143,7 @@ Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionsAsync([Optional] 
 [https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHistoryAsync(string symbol, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] TradeType? type, [Optional] int? page, [Optional] int? pageSize, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -169,7 +169,7 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 [https://bybit-exchange.github.io/docs/linear/#t-getrisklimit](https://bybit-exchange.github.io/docs/linear/#t-getrisklimit)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -190,7 +190,7 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string symbol
 [https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee](https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitFundingSettlement>> GetUserLastFundingFeeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -211,7 +211,7 @@ Task<WebCallResult<BybitFundingSettlement>> GetUserLastFundingFeeAsync(string sy
 [https://bybit-exchange.github.io/docs/linear/#t-predictedfunding](https://bybit-exchange.github.io/docs/linear/#t-predictedfunding)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitPredictedFunding>> GetUserPredictedFundingRateAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -232,7 +232,7 @@ Task<WebCallResult<BybitPredictedFunding>> GetUserPredictedFundingRateAsync(stri
 [https://bybit-exchange.github.io/docs/linear/#t-walletrecords](https://bybit-exchange.github.io/docs/linear/#t-walletrecords)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync([Optional] string? asset, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] WalletFundType? type, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -258,7 +258,7 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 [https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords](https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Optional] string? asset, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] WithdrawStatus? status, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -284,7 +284,7 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Opt
 [https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin](https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool autoAddMargin, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -307,7 +307,7 @@ Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool au
 [https://bybit-exchange.github.io/docs/linear/#t-switchmode](https://bybit-exchange.github.io/docs/linear/#t-switchmode)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol, StopLossTakeProfitMode mode, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -329,7 +329,7 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 [https://bybit-exchange.github.io/docs/linear/#t-setleverage](https://bybit-exchange.github.io/docs/linear/#t-setleverage)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -352,7 +352,7 @@ Task<WebCallResult> SetLeverageAsync(string symbol, int buyLeverage, int sellLev
 [https://bybit-exchange.github.io/docs/linear/#t-marginswitch](https://bybit-exchange.github.io/docs/linear/#t-marginswitch)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult> SetPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -376,7 +376,7 @@ Task<WebCallResult> SetPositionModeAsync(string symbol, bool isIsolated, decimal
 [https://bybit-exchange.github.io/docs/linear/#t-setrisklimit](https://bybit-exchange.github.io/docs/linear/#t-setrisklimit)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side, long riskId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 

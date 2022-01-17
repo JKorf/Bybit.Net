@@ -16,7 +16,7 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/linear/#t-announcement](https://bybit-exchange.github.io/docs/linear/#t-announcement)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -36,7 +36,7 @@ Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync([Optio
 [https://bybit-exchange.github.io/docs/linear/#t-queryindexpricekline](https://bybit-exchange.github.io/docs/linear/#t-queryindexpricekline)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -60,7 +60,7 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(
 [https://bybit-exchange.github.io/docs/linear/#t-querykline](https://bybit-exchange.github.io/docs/linear/#t-querykline)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime from, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -84,7 +84,7 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, Kline
 [https://bybit-exchange.github.io/docs/linear/#t-fundingrate](https://bybit-exchange.github.io/docs/linear/#t-fundingrate)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitFundingRate>> GetLastFundingRateAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -105,7 +105,7 @@ Task<WebCallResult<BybitFundingRate>> GetLastFundingRateAsync(string symbol, [Op
 [https://bybit-exchange.github.io/docs/linear/#t-marketaccountratio](https://bybit-exchange.github.io/docs/linear/#t-marketaccountratio)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(string symbol, DataPeriod period, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -128,7 +128,7 @@ Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(strin
 [https://bybit-exchange.github.io/docs/linear/#t-markpricekline](https://bybit-exchange.github.io/docs/linear/#t-markpricekline)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -152,7 +152,7 @@ Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(st
 [https://bybit-exchange.github.io/docs/linear/#t-marketopeninterest](https://bybit-exchange.github.io/docs/linear/#t-marketopeninterest)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string symbol, DataPeriod period, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -175,7 +175,7 @@ Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string 
 [https://bybit-exchange.github.io/docs/linear/#t-orderbook](https://bybit-exchange.github.io/docs/linear/#t-orderbook)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -196,7 +196,7 @@ Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string s
 [https://bybit-exchange.github.io/docs/linear/#t-querypremiumindexkline](https://bybit-exchange.github.io/docs/linear/#t-querypremiumindexkline)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime from, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -220,7 +220,7 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetPremiumIndexKlinesAsyn
 [https://bybit-exchange.github.io/docs/linear/#t-marketbigdeal](https://bybit-exchange.github.io/docs/linear/#t-marketbigdeal)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string symbol, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -242,7 +242,7 @@ Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string s
 [https://bybit-exchange.github.io/docs/linear/#t-servertime](https://bybit-exchange.github.io/docs/linear/#t-servertime)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<DateTime>> GetServerTimeAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -262,7 +262,7 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync([Optional] long? receiveWindow,
 [https://bybit-exchange.github.io/docs/linear/#t-querysymbol](https://bybit-exchange.github.io/docs/linear/#t-querysymbol)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -282,7 +282,7 @@ Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync([Optional] long? r
 [https://bybit-exchange.github.io/docs/linear/#t-latestsymbolinfo](https://bybit-exchange.github.io/docs/linear/#t-latestsymbolinfo)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickerAsync([Optional] string? symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -303,7 +303,7 @@ Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickerAsync([Optional] string? 
 [https://bybit-exchange.github.io/docs/linear/#t-publictradingrecords](https://bybit-exchange.github.io/docs/linear/#t-publictradingrecords)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitTrade>>> GetTradeHistoryAsync(string symbol, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 

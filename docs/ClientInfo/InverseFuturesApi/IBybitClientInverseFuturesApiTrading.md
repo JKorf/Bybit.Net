@@ -16,7 +16,7 @@ grand_parent: IBybitClient
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallcond)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditionalOrdersAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -37,7 +37,7 @@ Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditi
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallactive)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitCanceledOrder>>> CancelAllOrdersAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -58,7 +58,7 @@ Task<WebCallResult<IEnumerable<BybitCanceledOrder>>> CancelAllOrdersAsync(string
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelcond)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -81,7 +81,7 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelactive)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitOrder>> CancelOrderAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -104,7 +104,7 @@ Task<WebCallResult<BybitOrder>> CancelOrderAsync(string symbol, [Optional] strin
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-getcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-getcond)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetConditionalOrdersAsync(string symbol, [Optional] StopOrderStatus? status, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] string? cursor, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -129,7 +129,7 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetCond
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond](https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -152,7 +152,7 @@ Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond](https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrdersRealTimeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -173,7 +173,7 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrders
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -196,7 +196,7 @@ Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, [Option
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -217,7 +217,7 @@ Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string s
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-getactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-getactive)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(string symbol, [Optional] OrderStatus? status, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] string? cursor, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -242,7 +242,7 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(str
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-usertraderecords](https://bybit-exchange.github.io/docs/inverse_futures/#t-usertraderecords)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbol, [Optional] string? orderId, [Optional] DateTime? startTime, [Optional] int? page, [Optional] int? pageSize, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -267,7 +267,7 @@ Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbo
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-replacecond](https://bybit-exchange.github.io/docs/inverse_futures/#t-replacecond)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] decimal? newPrice, [Optional] decimal? newTriggerPrice, [Optional] decimal? newQuantity, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -297,7 +297,7 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-replaceactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-replaceactive)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] decimal? newPrice, [Optional] decimal? newQuantity, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -326,7 +326,7 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, [Optional] str
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-placecond](https://bybit-exchange.github.io/docs/inverse_futures/#t-placecond)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitConditionalOrder>> PlaceConditionalOrderAsync(string symbol, OrderSide side, OrderType type, PositionMode positionMode, decimal quantity, decimal basePrice, decimal triggerPrice, TimeInForce timeInForce, [Optional] decimal? price, [Optional] TriggerType? triggerType, [Optional] bool? closeOnTrigger, [Optional] string? clientOrderId, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -362,7 +362,7 @@ Task<WebCallResult<BybitConditionalOrder>> PlaceConditionalOrderAsync(string sym
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-placeactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-placeactive)  
 <p>
 
-```C#  
+```csharp  
 Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, PositionMode positionMode, decimal quantity, TimeInForce timeInForce, [Optional] decimal? price, [Optional] bool? closeOnTrigger, [Optional] string? clientOrderId, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] bool? reduceOnly, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
