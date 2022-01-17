@@ -4,18 +4,15 @@ has_children: true
 parent: IBybitSocketClient
 ---
 *[generated documentation]*  
-`BybitSocketClient > InversePerpetualStreams`
+`BybitSocketClient > InversePerpetualStreams`  
 *Bybit inverse perpetual streams*
   
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToBalanceUpdatesAsync</b>  
+## SubscribeToBalanceUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet](https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet)  
-</summary>
 <p>
 
 ```C#  
@@ -30,16 +27,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 *Subscribe to user balance updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToInsurancesUpdatesAsync</b>  
+## SubscribeToInsurancesUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
-</summary>
 <p>
 
 ```C#  
@@ -54,16 +47,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsurancesUpdatesAsync(Action<Da
 *Subscribe to insurance fund updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToInsuranceUpdatesAsync</b>  
+## SubscribeToInsuranceUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
-</summary>
 <p>
 
 ```C#  
@@ -79,16 +68,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(string sym
 *Subscribe to insurance fund updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToInsuranceUpdatesAsync</b>  
+## SubscribeToInsuranceUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
-</summary>
 <p>
 
 ```C#  
@@ -104,16 +89,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(IEnumerabl
 *Subscribe to insurance fund updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToKlinesUpdatesAsync</b>  
+## SubscribeToKlinesUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
-</summary>
 <p>
 
 ```C#  
@@ -129,16 +110,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval
 *Subscribe to kline (candlestick) updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToKlineUpdatesAsync</b>  
+## SubscribeToKlineUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
-</summary>
 <p>
 
 ```C#  
@@ -155,16 +132,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribe to kline (candlestick) updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToKlineUpdatesAsync</b>  
+## SubscribeToKlineUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
-</summary>
 <p>
 
 ```C#  
@@ -181,16 +154,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 *Subscribe to kline (candlestick) updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToLiquidationsUpdatesAsync</b>  
+## SubscribeToLiquidationsUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
-</summary>
 <p>
 
 ```C#  
@@ -205,16 +174,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<
 *Subscribe to liquidation order updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToLiquidationUpdatesAsync</b>  
+## SubscribeToLiquidationUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
-</summary>
 <p>
 
 ```C#  
@@ -230,16 +195,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 *Subscribe to liquidation order updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToLiquidationUpdatesAsync</b>  
+## SubscribeToLiquidationUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
-</summary>
 <p>
 
 ```C#  
@@ -255,17 +216,13 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 *Subscribe to liquidation order updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToOrderBooksUpdatesAsync</b>  
+## SubscribeToOrderBooksUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25)  
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
-</summary>
 <p>
 
 ```C#  
@@ -282,17 +239,13 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit
 *Subscribe to orderbook updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToOrderBookUpdatesAsync</b>  
+## SubscribeToOrderBookUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25)  
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
-</summary>
 <p>
 
 ```C#  
@@ -310,17 +263,13 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 *Subscribe to orderbook updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToOrderBookUpdatesAsync</b>  
+## SubscribeToOrderBookUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25)  
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
-</summary>
 <p>
 
 ```C#  
@@ -338,16 +287,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 *Subscribe to orderbook updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToOrderUpdatesAsync</b>  
+## SubscribeToOrderUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketorder](https://bybit-exchange.github.io/docs/inverse/#t-websocketorder)  
-</summary>
 <p>
 
 ```C#  
@@ -362,16 +307,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 *Subscribe to user order updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToPositionUpdatesAsync</b>  
+## SubscribeToPositionUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketposition](https://bybit-exchange.github.io/docs/inverse/#t-websocketposition)  
-</summary>
 <p>
 
 ```C#  
@@ -386,16 +327,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 *Subscribe to user position updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToStopOrderUpdatesAsync</b>  
+## SubscribeToStopOrderUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder](https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder)  
-</summary>
 <p>
 
 ```C#  
@@ -410,16 +347,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<Dat
 *Subscribe to user stop order updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToTickersUpdatesAsync</b>  
+## SubscribeToTickersUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
-</summary>
 <p>
 
 ```C#  
@@ -434,16 +367,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataE
 *Subscribe to ticker updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToTickerUpdatesAsync</b>  
+## SubscribeToTickerUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
-</summary>
 <p>
 
 ```C#  
@@ -459,16 +388,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 *Subscribe to ticker updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToTickerUpdatesAsync</b>  
+## SubscribeToTickerUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
-</summary>
 <p>
 
 ```C#  
@@ -484,16 +409,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 *Subscribe to ticker updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToTradesUpdatesAsync</b>  
+## SubscribeToTradesUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
-</summary>
 <p>
 
 ```C#  
@@ -508,16 +429,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEv
 *Subscribe to public trade updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToTradeUpdatesAsync</b>  
+## SubscribeToTradeUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
-</summary>
 <p>
 
 ```C#  
@@ -533,16 +450,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 *Subscribe to public trade updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToTradeUpdatesAsync</b>  
+## SubscribeToTradeUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
-</summary>
 <p>
 
 ```C#  
@@ -558,16 +471,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 *Subscribe to public trade updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToUserTradeUpdatesAsync</b>  
+## SubscribeToUserTradeUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution](https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution)  
-</summary>
 <p>
 
 ```C#  
@@ -582,4 +491,3 @@ Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<Dat
 *Subscribe to user trade updates*  
 
 </p>
-</details>

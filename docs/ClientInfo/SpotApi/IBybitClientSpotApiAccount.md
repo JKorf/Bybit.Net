@@ -5,18 +5,15 @@ parent: IBybitClientSpotApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi > Account`
+`BybitClient > SpotApi > Account`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
 ***
 
-<details>
-<summary>
-<b>GetBalancesAsync</b>  
+## GetBalancesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-balance](https://bybit-exchange.github.io/docs/spot/#t-balance)  
-</summary>
 <p>
 
 ```C#  
@@ -31,4 +28,3 @@ Task<WebCallResult<IEnumerable<BybitSpotBalance>>> GetBalancesAsync([Optional] l
 *Get wallet balances*  
 
 </p>
-</details>

@@ -5,18 +5,15 @@ parent: IBybitClientInverseFuturesApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > InverseFuturesApi > Trading`
+`BybitClient > InverseFuturesApi > Trading`  
 *Bybit trading endpoints, placing and mananging orders.*
   
 
 ***
 
-<details>
-<summary>
-<b>CancelAllConditionalOrdersAsync</b>  
+## CancelAllConditionalOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallcond)  
-</summary>
 <p>
 
 ```C#  
@@ -32,16 +29,12 @@ Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditi
 *Cancel all active conditional orders for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>CancelAllOrdersAsync</b>  
+## CancelAllOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallactive)  
-</summary>
 <p>
 
 ```C#  
@@ -57,16 +50,12 @@ Task<WebCallResult<IEnumerable<BybitCanceledOrder>>> CancelAllOrdersAsync(string
 *Cancel all active orders for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>CancelConditionalOrderAsync</b>  
+## CancelConditionalOrderAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelcond)  
-</summary>
 <p>
 
 ```C#  
@@ -84,16 +73,12 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 *Cancel a conditional order, either stopOrderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>CancelOrderAsync</b>  
+## CancelOrderAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelactive)  
-</summary>
 <p>
 
 ```C#  
@@ -111,16 +96,12 @@ Task<WebCallResult<BybitOrder>> CancelOrderAsync(string symbol, [Optional] strin
 *Cancel an order, either orderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetConditionalOrdersAsync</b>  
+## GetConditionalOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-getcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-getcond)  
-</summary>
 <p>
 
 ```C#  
@@ -140,16 +121,12 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetCond
 *Get a list of conditional orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenConditionalOrderRealTimeAsync</b>  
+## GetOpenConditionalOrderRealTimeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond](https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond)  
-</summary>
 <p>
 
 ```C#  
@@ -167,16 +144,12 @@ Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
 *Get conditional order information. Either stopOrderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenConditionalOrdersRealTimeAsync</b>  
+## GetOpenConditionalOrdersRealTimeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond](https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond)  
-</summary>
 <p>
 
 ```C#  
@@ -192,16 +165,12 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrders
 *Get order information for up to 10 conditional orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenOrderRealTimeAsync</b>  
+## GetOpenOrderRealTimeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive)  
-</summary>
 <p>
 
 ```C#  
@@ -219,16 +188,12 @@ Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, [Option
 *Get order information. Either orderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenOrdersRealTimeAsync</b>  
+## GetOpenOrdersRealTimeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive)  
-</summary>
 <p>
 
 ```C#  
@@ -244,16 +209,12 @@ Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string s
 *Get order information for up to 500 orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOrdersAsync</b>  
+## GetOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-getactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-getactive)  
-</summary>
 <p>
 
 ```C#  
@@ -273,16 +234,12 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(str
 *Get orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetUserTradesAsync</b>  
+## GetUserTradesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-usertraderecords](https://bybit-exchange.github.io/docs/inverse_futures/#t-usertraderecords)  
-</summary>
 <p>
 
 ```C#  
@@ -302,16 +259,12 @@ Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbo
 *Get executed user trades*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>ModifyConditionalOrderAsync</b>  
+## ModifyConditionalOrderAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-replacecond](https://bybit-exchange.github.io/docs/inverse_futures/#t-replacecond)  
-</summary>
 <p>
 
 ```C#  
@@ -336,16 +289,12 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 *Change an exising order. Either stopOrderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>ModifyOrderAsync</b>  
+## ModifyOrderAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-replaceactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-replaceactive)  
-</summary>
 <p>
 
 ```C#  
@@ -369,16 +318,12 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, [Optional] str
 *Change an exising order. Either orderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>PlaceConditionalOrderAsync</b>  
+## PlaceConditionalOrderAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-placecond](https://bybit-exchange.github.io/docs/inverse_futures/#t-placecond)  
-</summary>
 <p>
 
 ```C#  
@@ -409,16 +354,12 @@ Task<WebCallResult<BybitConditionalOrder>> PlaceConditionalOrderAsync(string sym
 *Place a new conditional order*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>PlaceOrderAsync</b>  
+## PlaceOrderAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-placeactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-placeactive)  
-</summary>
 <p>
 
 ```C#  
@@ -447,4 +388,3 @@ Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, O
 *Place a new order*  
 
 </p>
-</details>

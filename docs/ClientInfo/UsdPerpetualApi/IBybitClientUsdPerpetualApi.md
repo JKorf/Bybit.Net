@@ -4,7 +4,7 @@ has_children: true
 parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi`
+`BybitClient > UsdPerpetualApi`  
 *Bybit USD perpetual API endpoints*
   
 ***

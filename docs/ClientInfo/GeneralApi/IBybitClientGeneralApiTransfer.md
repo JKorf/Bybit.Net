@@ -5,18 +5,15 @@ parent: IBybitClientGeneralApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > GeneralApi > Transfer`
+`BybitClient > GeneralApi > Transfer`  
 *Bybit asset transfer endpoints*
   
 
 ***
 
-<details>
-<summary>
-<b>CreateInternalTransferAsync</b>  
+## CreateInternalTransferAsync  
 
 [https://bybit-exchange.github.io/docs/account_asset/#t-createinternaltransfer](https://bybit-exchange.github.io/docs/account_asset/#t-createinternaltransfer)  
-</summary>
 <p>
 
 ```C#  
@@ -36,16 +33,12 @@ Task<WebCallResult<BybitTransfer>> CreateInternalTransferAsync(string transferId
 *Create a new transfer from one account type to the other*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>CreateSubAccountTransferAsync</b>  
+## CreateSubAccountTransferAsync  
 
 [https://bybit-exchange.github.io/docs/account_asset/#t-createsubaccounttransfer](https://bybit-exchange.github.io/docs/account_asset/#t-createsubaccounttransfer)  
-</summary>
 <p>
 
 ```C#  
@@ -65,15 +58,11 @@ Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transfer
 *Create a new transfer for a subaccount*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetSubAccountsAsync</b>  
+## GetSubAccountsAsync  
 
-</summary>
 <p>
 
 ```C#  
@@ -88,16 +77,12 @@ Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync([Optional] long? re
 *Get a list of subaccount ids*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetSubAccountTransferHistoryAsync</b>  
+## GetSubAccountTransferHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccounttransferlist](https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccounttransferlist)  
-</summary>
 <p>
 
 ```C#  
@@ -120,16 +105,12 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitSubAccountTransferDetails>>>
 *Get history of sub account transfers*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetTransferHistoryAsync</b>  
+## GetTransferHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/account_asset/#t-querytransferlist](https://bybit-exchange.github.io/docs/account_asset/#t-querytransferlist)  
-</summary>
 <p>
 
 ```C#  
@@ -152,4 +133,3 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInternalTransferDetails>>>> 
 *Get history of transfers*  
 
 </p>
-</details>

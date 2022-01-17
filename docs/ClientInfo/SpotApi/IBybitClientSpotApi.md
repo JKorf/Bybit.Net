@@ -4,7 +4,7 @@ has_children: true
 parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi`
+`BybitClient > SpotApi`  
 *Bybit spot API endpoints*
   
 ***

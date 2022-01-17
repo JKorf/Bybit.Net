@@ -4,18 +4,15 @@ has_children: true
 parent: IBybitSocketClient
 ---
 *[generated documentation]*  
-`BybitSocketClient > SpotStreams`
+`BybitSocketClient > SpotStreams`  
 *Bybit spot streams*
   
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToAccountUpdatesAsync</b>  
+## SubscribeToAccountUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-privatetopics](https://bybit-exchange.github.io/docs/spot/#t-privatetopics)  
-</summary>
 <p>
 
 ```C#  
@@ -32,16 +29,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataE
 *Subscribe to account data updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToBookPriceUpdatesAsync</b>  
+## SubscribeToBookPriceUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2bookticker](https://bybit-exchange.github.io/docs/spot/#t-websocketv2bookticker)  
-</summary>
 <p>
 
 ```C#  
@@ -57,16 +50,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string sym
 *Subscribe to book price updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToKlineUpdatesAsync</b>  
+## SubscribeToKlineUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2kline](https://bybit-exchange.github.io/docs/spot/#t-websocketv2kline)  
-</summary>
 <p>
 
 ```C#  
@@ -83,16 +72,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribe to kline updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToOrderBookUpdatesAsync</b>  
+## SubscribeToOrderBookUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2depth](https://bybit-exchange.github.io/docs/spot/#t-websocketv2depth)  
-</summary>
 <p>
 
 ```C#  
@@ -108,16 +93,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 *Subscribe to order book updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToTickerUpdatesAsync</b>  
+## SubscribeToTickerUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2realtimes](https://bybit-exchange.github.io/docs/spot/#t-websocketv2realtimes)  
-</summary>
 <p>
 
 ```C#  
@@ -133,16 +114,12 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 *Subscribe to ticker updates*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SubscribeToTradeUpdatesAsync</b>  
+## SubscribeToTradeUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2trade](https://bybit-exchange.github.io/docs/spot/#t-websocketv2trade)  
-</summary>
 <p>
 
 ```C#  
@@ -158,4 +135,3 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 *Subscribe to public trade updates*  
 
 </p>
-</details>

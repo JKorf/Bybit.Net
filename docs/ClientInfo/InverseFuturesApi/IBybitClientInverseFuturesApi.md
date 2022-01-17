@@ -4,7 +4,7 @@ has_children: true
 parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > InverseFuturesApi`
+`BybitClient > InverseFuturesApi`  
 *Bybit inverse futures API endpoints*
   
 ***

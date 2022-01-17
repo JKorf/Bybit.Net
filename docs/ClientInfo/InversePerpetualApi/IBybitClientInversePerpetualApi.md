@@ -4,7 +4,7 @@ has_children: true
 parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > InversePerpetualApi`
+`BybitClient > InversePerpetualApi`  
 *Bybit inverse perpetual API endpoints*
   
 ***

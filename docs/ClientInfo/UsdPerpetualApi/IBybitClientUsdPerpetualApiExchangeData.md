@@ -5,18 +5,15 @@ parent: IBybitClientUsdPerpetualApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > ExchangeData`
+`BybitClient > UsdPerpetualApi > ExchangeData`  
 *Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
 ***
 
-<details>
-<summary>
-<b>GetAnnouncementsAsync</b>  
+## GetAnnouncementsAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-announcement](https://bybit-exchange.github.io/docs/linear/#t-announcement)  
-</summary>
 <p>
 
 ```C#  
@@ -31,16 +28,12 @@ Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync([Optio
 *The API announcements for the last 30 days*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetIndexPriceKlinesAsync</b>  
+## GetIndexPriceKlinesAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-queryindexpricekline](https://bybit-exchange.github.io/docs/linear/#t-queryindexpricekline)  
-</summary>
 <p>
 
 ```C#  
@@ -59,16 +52,12 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(
 *Get index price klines*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetKlinesAsync</b>  
+## GetKlinesAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-querykline](https://bybit-exchange.github.io/docs/linear/#t-querykline)  
-</summary>
 <p>
 
 ```C#  
@@ -87,16 +76,12 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, Kline
 *Get price klines*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetLastFundingRateAsync</b>  
+## GetLastFundingRateAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-fundingrate](https://bybit-exchange.github.io/docs/linear/#t-fundingrate)  
-</summary>
 <p>
 
 ```C#  
@@ -112,16 +97,12 @@ Task<WebCallResult<BybitFundingRate>> GetLastFundingRateAsync(string symbol, [Op
 *Get last funding rate*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetLongShortRatioAsync</b>  
+## GetLongShortRatioAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-marketaccountratio](https://bybit-exchange.github.io/docs/linear/#t-marketaccountratio)  
-</summary>
 <p>
 
 ```C#  
@@ -139,16 +120,12 @@ Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(strin
 *Get long/short ratio*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetMarkPriceKlinesAsync</b>  
+## GetMarkPriceKlinesAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-markpricekline](https://bybit-exchange.github.io/docs/linear/#t-markpricekline)  
-</summary>
 <p>
 
 ```C#  
@@ -167,16 +144,12 @@ Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(st
 *Get mark price klines*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenInterestAsync</b>  
+## GetOpenInterestAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-marketopeninterest](https://bybit-exchange.github.io/docs/linear/#t-marketopeninterest)  
-</summary>
 <p>
 
 ```C#  
@@ -194,16 +167,12 @@ Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string 
 *Gets the total amount of unsettled contracts. In other words, the total number of contracts held in open positions.*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOrderBookAsync</b>  
+## GetOrderBookAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-orderbook](https://bybit-exchange.github.io/docs/linear/#t-orderbook)  
-</summary>
 <p>
 
 ```C#  
@@ -219,16 +188,12 @@ Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string s
 *Get the current order book for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetPremiumIndexKlinesAsync</b>  
+## GetPremiumIndexKlinesAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-querypremiumindexkline](https://bybit-exchange.github.io/docs/linear/#t-querypremiumindexkline)  
-</summary>
 <p>
 
 ```C#  
@@ -247,16 +212,12 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetPremiumIndexKlinesAsyn
 *Get premium index klines*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetRecentBigTradesAsync</b>  
+## GetRecentBigTradesAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-marketbigdeal](https://bybit-exchange.github.io/docs/linear/#t-marketbigdeal)  
-</summary>
 <p>
 
 ```C#  
@@ -273,16 +234,12 @@ Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string s
 *Obtain filled orders worth more than 500,000 USD within the last 24h.*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetServerTimeAsync</b>  
+## GetServerTimeAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-servertime](https://bybit-exchange.github.io/docs/linear/#t-servertime)  
-</summary>
 <p>
 
 ```C#  
@@ -297,16 +254,12 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync([Optional] long? receiveWindow,
 *Get the server time*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetSymbolsAsync</b>  
+## GetSymbolsAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-querysymbol](https://bybit-exchange.github.io/docs/linear/#t-querysymbol)  
-</summary>
 <p>
 
 ```C#  
@@ -321,16 +274,12 @@ Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync([Optional] long? r
 *Get all supported symbols*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetTickerAsync</b>  
+## GetTickerAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-latestsymbolinfo](https://bybit-exchange.github.io/docs/linear/#t-latestsymbolinfo)  
-</summary>
 <p>
 
 ```C#  
@@ -346,16 +295,12 @@ Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickerAsync([Optional] string? 
 *The ticker info for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetTradeHistoryAsync</b>  
+## GetTradeHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-publictradingrecords](https://bybit-exchange.github.io/docs/linear/#t-publictradingrecords)  
-</summary>
 <p>
 
 ```C#  
@@ -372,4 +317,3 @@ Task<WebCallResult<IEnumerable<BybitTrade>>> GetTradeHistoryAsync(string symbol,
 *Get public trade history*  
 
 </p>
-</details>

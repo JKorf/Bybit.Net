@@ -5,18 +5,15 @@ parent: IBybitClientSpotApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi > Trading`
+`BybitClient > SpotApi > Trading`  
 *Bybit trading endpoints, placing and mananging orders.*
   
 
 ***
 
-<details>
-<summary>
-<b>CancelOrderAsync</b>  
+## CancelOrderAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-cancelactive](https://bybit-exchange.github.io/docs/spot/#t-cancelactive)  
-</summary>
 <p>
 
 ```C#  
@@ -33,16 +30,12 @@ Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync([Optional] long? orde
 *Cancel an active order. Either orderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenOrdersAsync</b>  
+## GetOpenOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-openorders](https://bybit-exchange.github.io/docs/spot/#t-openorders)  
-</summary>
 <p>
 
 ```C#  
@@ -60,16 +53,12 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync([Optional] s
 *Get open orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOrderAsync</b>  
+## GetOrderAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-getactive](https://bybit-exchange.github.io/docs/spot/#t-getactive)  
-</summary>
 <p>
 
 ```C#  
@@ -86,16 +75,12 @@ Task<WebCallResult<BybitSpotOrder>> GetOrderAsync([Optional] long? orderId, [Opt
 *Get order, either orderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOrdersAsync</b>  
+## GetOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-orderhistory](https://bybit-exchange.github.io/docs/spot/#t-orderhistory)  
-</summary>
 <p>
 
 ```C#  
@@ -113,16 +98,12 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync([Optional] strin
 *Get orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetUserTradesAsync</b>  
+## GetUserTradesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-tradehistory](https://bybit-exchange.github.io/docs/spot/#t-tradehistory)  
-</summary>
 <p>
 
 ```C#  
@@ -141,16 +122,12 @@ Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync([Optiona
 *Get user trade history*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>PlaceOrderAsync</b>  
+## PlaceOrderAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-placeactive](https://bybit-exchange.github.io/docs/spot/#t-placeactive)  
-</summary>
 <p>
 
 ```C#  
@@ -172,4 +149,3 @@ Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSi
 *Place a new order*  
 
 </p>
-</details>

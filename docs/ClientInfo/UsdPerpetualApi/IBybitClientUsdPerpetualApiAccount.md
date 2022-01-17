@@ -5,17 +5,14 @@ parent: IBybitClientUsdPerpetualApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > Account`
+`BybitClient > UsdPerpetualApi > Account`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
 ***
 
-<details>
-<summary>
-<b>AddReduceMarginAsync</b>  
+## AddReduceMarginAsync  
 
-</summary>
 <p>
 
 ```C#  
@@ -33,16 +30,12 @@ Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, Order
 *Add/reduce margin*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetApiKeyInfoAsync</b>  
+## GetApiKeyInfoAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-key](https://bybit-exchange.github.io/docs/linear/#t-key)  
-</summary>
 <p>
 
 ```C#  
@@ -57,16 +50,12 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] 
 *Get Api key info*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetAssetExchangeHistoryAsync</b>  
+## GetAssetExchangeHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords)  
-</summary>
 <p>
 
 ```C#  
@@ -84,16 +73,12 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 *Get asset exchange history*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetBalancesAsync</b>  
+## GetBalancesAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-balance](https://bybit-exchange.github.io/docs/linear/#t-balance)  
-</summary>
 <p>
 
 ```C#  
@@ -109,16 +94,12 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional
 *Get wallet balances*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetPositionAsync</b>  
+## GetPositionAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-myposition](https://bybit-exchange.github.io/docs/linear/#t-myposition)  
-</summary>
 <p>
 
 ```C#  
@@ -134,16 +115,12 @@ Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionAsync(string symbo
 *Get user positions*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetPositionsAsync</b>  
+## GetPositionsAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-myposition](https://bybit-exchange.github.io/docs/linear/#t-myposition)  
-</summary>
 <p>
 
 ```C#  
@@ -158,16 +135,12 @@ Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionsAsync([Optional] 
 *Get user positions*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetProfitAndLossHistoryAsync</b>  
+## GetProfitAndLossHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss)  
-</summary>
 <p>
 
 ```C#  
@@ -188,16 +161,12 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 *Get user's profit and loss records*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetRiskLimitAsync</b>  
+## GetRiskLimitAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-getrisklimit](https://bybit-exchange.github.io/docs/linear/#t-getrisklimit)  
-</summary>
 <p>
 
 ```C#  
@@ -213,16 +182,12 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string symbol
 *Get position risk limit*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetUserLastFundingFeeAsync</b>  
+## GetUserLastFundingFeeAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee](https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee)  
-</summary>
 <p>
 
 ```C#  
@@ -238,16 +203,12 @@ Task<WebCallResult<BybitFundingSettlement>> GetUserLastFundingFeeAsync(string sy
 *Get user last funding fee*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetUserPredictedFundingRateAsync</b>  
+## GetUserPredictedFundingRateAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-predictedfunding](https://bybit-exchange.github.io/docs/linear/#t-predictedfunding)  
-</summary>
 <p>
 
 ```C#  
@@ -263,16 +224,12 @@ Task<WebCallResult<BybitPredictedFunding>> GetUserPredictedFundingRateAsync(stri
 *Get predicted next funding rate*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetWalletFundHistoryAsync</b>  
+## GetWalletFundHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-walletrecords](https://bybit-exchange.github.io/docs/linear/#t-walletrecords)  
-</summary>
 <p>
 
 ```C#  
@@ -293,16 +250,12 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 *Get wallet fund endpoints*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetWithdrawalHistoryAsync</b>  
+## GetWithdrawalHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords](https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords)  
-</summary>
 <p>
 
 ```C#  
@@ -323,16 +276,12 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Opt
 *Get withdrawal history*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetAutoAddMarginAsync</b>  
+## SetAutoAddMarginAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin](https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin)  
-</summary>
 <p>
 
 ```C#  
@@ -350,16 +299,12 @@ Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool au
 *Set auto add margin switch*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetFullPartialPositionModeAsync</b>  
+## SetFullPartialPositionModeAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-switchmode](https://bybit-exchange.github.io/docs/linear/#t-switchmode)  
-</summary>
 <p>
 
 ```C#  
@@ -376,16 +321,12 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 *Switch between full or partial Stop loss/Take profit mode*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetLeverageAsync</b>  
+## SetLeverageAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-setleverage](https://bybit-exchange.github.io/docs/linear/#t-setleverage)  
-</summary>
 <p>
 
 ```C#  
@@ -403,16 +344,12 @@ Task<WebCallResult> SetLeverageAsync(string symbol, int buyLeverage, int sellLev
 *Set leverage*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetPositionModeAsync</b>  
+## SetPositionModeAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-marginswitch](https://bybit-exchange.github.io/docs/linear/#t-marginswitch)  
-</summary>
 <p>
 
 ```C#  
@@ -431,16 +368,12 @@ Task<WebCallResult> SetPositionModeAsync(string symbol, bool isIsolated, decimal
 *Switch Cross/Isolated; must set leverage value when switching from Cross to Isolated*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetRiskLimitAsync</b>  
+## SetRiskLimitAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-setrisklimit](https://bybit-exchange.github.io/docs/linear/#t-setrisklimit)  
-</summary>
 <p>
 
 ```C#  
@@ -458,4 +391,3 @@ Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side
 *Set position risk*  
 
 </p>
-</details>

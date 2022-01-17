@@ -4,7 +4,7 @@ has_children: true
 parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > GeneralApi`
+`BybitClient > GeneralApi`  
 *Bybit general API endpoints*
   
 ***

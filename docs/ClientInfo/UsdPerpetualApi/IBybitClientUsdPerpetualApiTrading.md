@@ -5,18 +5,15 @@ parent: IBybitClientUsdPerpetualApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > Trading`
+`BybitClient > UsdPerpetualApi > Trading`  
 *Bybit trading endpoints, placing and mananging orders.*
   
 
 ***
 
-<details>
-<summary>
-<b>CancelAllConditionalOrdersAsync</b>  
+## CancelAllConditionalOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-cancelallcond](https://bybit-exchange.github.io/docs/linear/#t-cancelallcond)  
-</summary>
 <p>
 
 ```C#  
@@ -32,16 +29,12 @@ Task<WebCallResult<IEnumerable<string>>> CancelAllConditionalOrdersAsync(string 
 *Cancel all active conditional orders for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>CancelAllOrdersAsync</b>  
+## CancelAllOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-cancelallactive](https://bybit-exchange.github.io/docs/linear/#t-cancelallactive)  
-</summary>
 <p>
 
 ```C#  
@@ -57,16 +50,12 @@ Task<WebCallResult<IEnumerable<string>>> CancelAllOrdersAsync(string symbol, [Op
 *Cancel all active orders for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>CancelConditionalOrderAsync</b>  
+## CancelConditionalOrderAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-cancelcond](https://bybit-exchange.github.io/docs/linear/#t-cancelcond)  
-</summary>
 <p>
 
 ```C#  
@@ -84,16 +73,12 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 *Cancel a conditional order, either stopOrderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>CancelOrderAsync</b>  
+## CancelOrderAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-cancelactive](https://bybit-exchange.github.io/docs/linear/#t-cancelactive)  
-</summary>
 <p>
 
 ```C#  
@@ -111,16 +96,12 @@ Task<WebCallResult<BybitOrderId>> CancelOrderAsync(string symbol, [Optional] str
 *Cancel an order, either orderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetConditionalOrdersAsync</b>  
+## GetConditionalOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-getcond](https://bybit-exchange.github.io/docs/linear/#t-getcond)  
-</summary>
 <p>
 
 ```C#  
@@ -142,16 +123,12 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrderUsd>>>> GetC
 *Get a list of conditional orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenConditionalOrderRealTimeAsync</b>  
+## GetOpenConditionalOrderRealTimeAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-querycond](https://bybit-exchange.github.io/docs/linear/#t-querycond)  
-</summary>
 <p>
 
 ```C#  
@@ -169,16 +146,12 @@ Task<WebCallResult<BybitConditionalOrderUsd>> GetOpenConditionalOrderRealTimeAsy
 *Get conditional order information. Either stopOrderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenConditionalOrdersRealTimeAsync</b>  
+## GetOpenConditionalOrdersRealTimeAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-querycond](https://bybit-exchange.github.io/docs/linear/#t-querycond)  
-</summary>
 <p>
 
 ```C#  
@@ -194,16 +167,12 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrders
 *Get order information for up to 10 conditional orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenOrderRealTimeAsync</b>  
+## GetOpenOrderRealTimeAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-queryactive](https://bybit-exchange.github.io/docs/linear/#t-queryactive)  
-</summary>
 <p>
 
 ```C#  
@@ -221,16 +190,12 @@ Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, [Option
 *Get order information. Either orderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOpenOrdersRealTimeAsync</b>  
+## GetOpenOrdersRealTimeAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-queryactive](https://bybit-exchange.github.io/docs/linear/#t-queryactive)  
-</summary>
 <p>
 
 ```C#  
@@ -246,16 +211,12 @@ Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string s
 *Get order information for up to 500 orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOrdersAsync</b>  
+## GetOrdersAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-getactive](https://bybit-exchange.github.io/docs/linear/#t-getactive)  
-</summary>
 <p>
 
 ```C#  
@@ -277,16 +238,12 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(str
 *Get orders*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetUserTradesAsync</b>  
+## GetUserTradesAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-usertraderecords](https://bybit-exchange.github.io/docs/linear/#t-usertraderecords)  
-</summary>
 <p>
 
 ```C#  
@@ -307,16 +264,12 @@ Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbo
 *Get executed user trades*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>ModifyConditionalOrderAsync</b>  
+## ModifyConditionalOrderAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-replacecond](https://bybit-exchange.github.io/docs/linear/#t-replacecond)  
-</summary>
 <p>
 
 ```C#  
@@ -341,16 +294,12 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 *Change an exising order. Either stopOrderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>ModifyOrderAsync</b>  
+## ModifyOrderAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-replaceactive](https://bybit-exchange.github.io/docs/linear/#t-replaceactive)  
-</summary>
 <p>
 
 ```C#  
@@ -374,16 +323,12 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, [Optional] str
 *Change an exising order. Either orderId or clientOrderId should be provided*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>PlaceConditionalOrderAsync</b>  
+## PlaceConditionalOrderAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-placecond](https://bybit-exchange.github.io/docs/linear/#t-placecond)  
-</summary>
 <p>
 
 ```C#  
@@ -414,16 +359,12 @@ Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string 
 *Place a new conditional order*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>PlaceOrderAsync</b>  
+## PlaceOrderAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-placeactive](https://bybit-exchange.github.io/docs/linear/#t-placeactive)  
-</summary>
 <p>
 
 ```C#  
@@ -451,4 +392,3 @@ Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, O
 *Place a new order*  
 
 </p>
-</details>

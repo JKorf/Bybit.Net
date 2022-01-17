@@ -5,18 +5,15 @@ parent: IBybitClientSpotApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi > ExchangeData`
+`BybitClient > SpotApi > ExchangeData`  
 *Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
 ***
 
-<details>
-<summary>
-<b>GetBookPriceAsync</b>  
+## GetBookPriceAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-bestbidask](https://bybit-exchange.github.io/docs/spot/#t-bestbidask)  
-</summary>
 <p>
 
 ```C#  
@@ -32,16 +29,12 @@ Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, [Option
 *Get the best ask/bid price for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetBookPricesAsync</b>  
+## GetBookPricesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-bestbidask](https://bybit-exchange.github.io/docs/spot/#t-bestbidask)  
-</summary>
 <p>
 
 ```C#  
@@ -56,16 +49,12 @@ Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync([Optiona
 *Get the best ask/bid prices for all symbols*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetKlinesAsync</b>  
+## GetKlinesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-querykline](https://bybit-exchange.github.io/docs/spot/#t-querykline)  
-</summary>
 <p>
 
 ```C#  
@@ -85,16 +74,12 @@ Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, K
 *Get price klines*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetMergedOrderBookAsync</b>  
+## GetMergedOrderBookAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook](https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook)  
-</summary>
 <p>
 
 ```C#  
@@ -112,16 +97,12 @@ Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, [
 *Get merged order book based on the scale*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetOrderBookAsync</b>  
+## GetOrderBookAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-orderbook](https://bybit-exchange.github.io/docs/spot/#t-orderbook)  
-</summary>
 <p>
 
 ```C#  
@@ -138,16 +119,12 @@ Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, [Option
 *Get the current order book for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetPriceAsync</b>  
+## GetPriceAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice)  
-</summary>
 <p>
 
 ```C#  
@@ -163,16 +140,12 @@ Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, [Optional] long
 *Get the last trade price of a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetPricesAsync</b>  
+## GetPricesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice)  
-</summary>
 <p>
 
 ```C#  
@@ -187,16 +160,12 @@ Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync([Optional] long?
 *Get the last trade price of all symbols*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetServerTimeAsync</b>  
+## GetServerTimeAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-servertime](https://bybit-exchange.github.io/docs/spot/#t-servertime)  
-</summary>
 <p>
 
 ```C#  
@@ -211,16 +180,12 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync([Optional] long? receiveWindow,
 *Get the server time*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetSymbolsAsync</b>  
+## GetSymbolsAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol](https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol)  
-</summary>
 <p>
 
 ```C#  
@@ -235,16 +200,12 @@ Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync([Optional] lon
 *Get all supported symbols*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetTickerAsync</b>  
+## GetTickerAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo)  
-</summary>
 <p>
 
 ```C#  
@@ -260,16 +221,12 @@ Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, [Optional] lo
 *The ticker info for a symbol*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetTickersAsync</b>  
+## GetTickersAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo)  
-</summary>
 <p>
 
 ```C#  
@@ -284,16 +241,12 @@ Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync([Optional] lon
 *The ticker info for all symbols*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetTradeHistoryAsync</b>  
+## GetTradeHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords](https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords)  
-</summary>
 <p>
 
 ```C#  
@@ -310,4 +263,3 @@ Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string sym
 *Get public trade history*  
 
 </p>
-</details>

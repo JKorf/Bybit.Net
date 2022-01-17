@@ -5,18 +5,15 @@ parent: IBybitClientInversePerpetualApi
 grand_parent: IBybitClient
 ---
 *[generated documentation]*  
-`BybitClient > InversePerpetualApi > Account`
+`BybitClient > InversePerpetualApi > Account`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
 ***
 
-<details>
-<summary>
-<b>ChangeMarginAsync</b>  
+## ChangeMarginAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-changemargin](https://bybit-exchange.github.io/docs/inverse/#t-changemargin)  
-</summary>
 <p>
 
 ```C#  
@@ -34,16 +31,12 @@ Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode,
 *Change margin*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetApiKeyInfoAsync</b>  
+## GetApiKeyInfoAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-key](https://bybit-exchange.github.io/docs/inverse/#t-key)  
-</summary>
 <p>
 
 ```C#  
@@ -58,16 +51,12 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] 
 *Get Api key info*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetAssetExchangeHistoryAsync</b>  
+## GetAssetExchangeHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/inverse/#t-assetexchangerecords)  
-</summary>
 <p>
 
 ```C#  
@@ -85,16 +74,12 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 *Get asset exchange history*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetBalancesAsync</b>  
+## GetBalancesAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-balance](https://bybit-exchange.github.io/docs/inverse/#t-balance)  
-</summary>
 <p>
 
 ```C#  
@@ -110,16 +95,12 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional
 *Get wallet balances*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetLastUserFundingFeeAsync</b>  
+## GetLastUserFundingFeeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-mylastfundingfee](https://bybit-exchange.github.io/docs/inverse/#t-mylastfundingfee)  
-</summary>
 <p>
 
 ```C#  
@@ -135,16 +116,12 @@ Task<WebCallResult<BybitFundingSettlement>> GetLastUserFundingFeeAsync(string sy
 *Get user last funding fee*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetPositionsAsync</b>  
+## GetPositionsAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-myposition](https://bybit-exchange.github.io/docs/inverse/#t-myposition)  
-</summary>
 <p>
 
 ```C#  
@@ -160,16 +137,12 @@ Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync([Optional] str
 *Get user positions*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetPredictedUserFundingFeeAsync</b>  
+## GetPredictedUserFundingFeeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-predictedfunding](https://bybit-exchange.github.io/docs/inverse/#t-predictedfunding)  
-</summary>
 <p>
 
 ```C#  
@@ -185,16 +158,12 @@ Task<WebCallResult<BybitPredictedFunding>> GetPredictedUserFundingFeeAsync(strin
 *Get predicted next funding rate*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetProfitAndLossHistoryAsync</b>  
+## GetProfitAndLossHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/inverse/#t-closedprofitandloss)  
-</summary>
 <p>
 
 ```C#  
@@ -215,16 +184,12 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 *Get user's profit and loss records*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetRiskLimitAsync</b>  
+## GetRiskLimitAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-getrisklimit](https://bybit-exchange.github.io/docs/inverse/#t-getrisklimit)  
-</summary>
 <p>
 
 ```C#  
@@ -240,16 +205,12 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync([Optional] st
 *Get position risk limit*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetWalletFundHistoryAsync</b>  
+## GetWalletFundHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-walletrecords](https://bybit-exchange.github.io/docs/inverse/#t-walletrecords)  
-</summary>
 <p>
 
 ```C#  
@@ -270,16 +231,12 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 *Get wallet fund endpoints*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>GetWithdrawalHistoryAsync</b>  
+## GetWithdrawalHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-withdrawrecords](https://bybit-exchange.github.io/docs/inverse/#t-withdrawrecords)  
-</summary>
 <p>
 
 ```C#  
@@ -300,16 +257,12 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Opt
 *Get withdrawal history*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetFullPartialPositionModeAsync</b>  
+## SetFullPartialPositionModeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-switchmode](https://bybit-exchange.github.io/docs/inverse/#t-switchmode)  
-</summary>
 <p>
 
 ```C#  
@@ -326,16 +279,12 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 *Switch between full or partial Stop loss/Take profit mode*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetIsolatedModeAsync</b>  
+## SetIsolatedModeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-marginswitch](https://bybit-exchange.github.io/docs/inverse/#t-marginswitch)  
-</summary>
 <p>
 
 ```C#  
@@ -354,16 +303,12 @@ Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal
 *Switch between cross and isolated mode.*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetLeverageAsync</b>  
+## SetLeverageAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-setleverage](https://bybit-exchange.github.io/docs/inverse/#t-setleverage)  
-</summary>
 <p>
 
 ```C#  
@@ -381,16 +326,12 @@ Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int se
 *Set leverage*  
 
 </p>
-</details>
 
 ***
 
-<details>
-<summary>
-<b>SetRiskLimitAsync</b>  
+## SetRiskLimitAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-setrisklimit](https://bybit-exchange.github.io/docs/inverse/#t-setrisklimit)  
-</summary>
 <p>
 
 ```C#  
@@ -408,4 +349,3 @@ Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, long riskId, [
 *Set position risk*  
 
 </p>
-</details>
