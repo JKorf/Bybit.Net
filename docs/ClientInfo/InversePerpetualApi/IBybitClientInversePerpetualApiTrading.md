@@ -17,6 +17,11 @@ grand_parent: IBybitClient
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.CancelAllConditionalOrdersAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditionalOrdersAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -38,6 +43,11 @@ Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditi
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.CancelAllOrdersAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitCanceledOrder>>> CancelAllOrdersAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -57,6 +67,11 @@ Task<WebCallResult<IEnumerable<BybitCanceledOrder>>> CancelAllOrdersAsync(string
 
 [https://bybit-exchange.github.io/docs/inverse/#t-cancelcond](https://bybit-exchange.github.io/docs/inverse/#t-cancelcond)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.CancelConditionalOrderAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -82,6 +97,11 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.CancelOrderAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitOrder>> CancelOrderAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -103,6 +123,11 @@ Task<WebCallResult<BybitOrder>> CancelOrderAsync(string symbol, [Optional] strin
 
 [https://bybit-exchange.github.io/docs/inverse/#t-getcond](https://bybit-exchange.github.io/docs/inverse/#t-getcond)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.GetConditionalOrdersAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetConditionalOrdersAsync(string symbol, [Optional] StopOrderStatus? status, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] string? cursor, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -130,6 +155,11 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetCond
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.GetOpenConditionalOrderRealTimeAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -153,6 +183,11 @@ Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.GetOpenConditionalOrdersRealTimeAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrdersRealTimeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -172,6 +207,11 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrders
 
 [https://bybit-exchange.github.io/docs/inverse/#t-queryactive](https://bybit-exchange.github.io/docs/inverse/#t-queryactive)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.GetOpenOrderRealTimeAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -197,6 +237,11 @@ Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, [Option
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.GetOpenOrdersRealTimeAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -216,6 +261,11 @@ Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string s
 
 [https://bybit-exchange.github.io/docs/inverse/#t-getactive](https://bybit-exchange.github.io/docs/inverse/#t-getactive)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.GetOrdersAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(string symbol, [Optional] OrderStatus? status, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] string? cursor, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -243,6 +293,11 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(str
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.GetUserTradesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbol, [Optional] string? orderId, [Optional] DateTime? startTime, [Optional] int? page, [Optional] int? pageSize, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -266,6 +321,11 @@ Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbo
 
 [https://bybit-exchange.github.io/docs/inverse/#t-replacecond](https://bybit-exchange.github.io/docs/inverse/#t-replacecond)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.ModifyConditionalOrderAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol, [Optional] string? stopOrderId, [Optional] string? clientOrderId, [Optional] decimal? newPrice, [Optional] decimal? newTriggerPrice, [Optional] decimal? newQuantity, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -298,6 +358,11 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.ModifyOrderAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, [Optional] string? orderId, [Optional] string? clientOrderId, [Optional] decimal? newPrice, [Optional] decimal? newQuantity, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -325,6 +390,11 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, [Optional] str
 
 [https://bybit-exchange.github.io/docs/inverse/#t-placecond](https://bybit-exchange.github.io/docs/inverse/#t-placecond)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.PlaceConditionalOrderAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitConditionalOrder>> PlaceConditionalOrderAsync(string symbol, OrderSide side, OrderType type, PositionMode positionMode, decimal quantity, decimal basePrice, decimal triggerPrice, TimeInForce timeInForce, [Optional] decimal? price, [Optional] TriggerType? triggerType, [Optional] bool? closeOnTrigger, [Optional] string? clientOrderId, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -361,6 +431,11 @@ Task<WebCallResult<BybitConditionalOrder>> PlaceConditionalOrderAsync(string sym
 
 [https://bybit-exchange.github.io/docs/inverse/#t-placeactive](https://bybit-exchange.github.io/docs/inverse/#t-placeactive)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InversePerpetualApi.Trading.PlaceOrderAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, [Optional] decimal? price, [Optional] bool? closeOnTrigger, [Optional] string? clientOrderId, [Optional] decimal? takeProfitPrice, [Optional] decimal? stopLossPrice, [Optional] TriggerType? takeProfitTriggerType, [Optional] TriggerType? stopLossTriggerType, [Optional] bool? reduceOnly, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  

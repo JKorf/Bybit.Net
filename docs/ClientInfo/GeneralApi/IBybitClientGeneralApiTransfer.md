@@ -17,6 +17,11 @@ grand_parent: IBybitClient
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.CreateInternalTransferAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitTransfer>> CreateInternalTransferAsync(string transferId, string asset, decimal quantity, AccountType fromAccountType, AccountType toAccountType, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -40,6 +45,11 @@ Task<WebCallResult<BybitTransfer>> CreateInternalTransferAsync(string transferId
 
 [https://bybit-exchange.github.io/docs/account_asset/#t-createsubaccounttransfer](https://bybit-exchange.github.io/docs/account_asset/#t-createsubaccounttransfer)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.CreateSubAccountTransferAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transferId, string asset, decimal quantity, string subAccountId, TransferType type, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -66,6 +76,11 @@ Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transfer
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.GetSubAccountsAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -84,6 +99,11 @@ Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync([Optional] long? re
 
 [https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccounttransferlist](https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccounttransferlist)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.GetSubAccountTransferHistoryAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitCursorPage<IEnumerable<BybitSubAccountTransferDetails>>>> GetSubAccountTransferHistoryAsync([Optional] string? transferId, [Optional] string? asset, [Optional] TransferStatus? status, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] string? cursor, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -112,6 +132,11 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitSubAccountTransferDetails>>>
 
 [https://bybit-exchange.github.io/docs/account_asset/#t-querytransferlist](https://bybit-exchange.github.io/docs/account_asset/#t-querytransferlist)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.GetTransferHistoryAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInternalTransferDetails>>>> GetTransferHistoryAsync([Optional] string? transferId, [Optional] string? asset, [Optional] TransferStatus? status, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] string? cursor, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  

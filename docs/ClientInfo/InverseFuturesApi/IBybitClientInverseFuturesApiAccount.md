@@ -17,6 +17,11 @@ grand_parent: IBybitClient
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.ChangeMarginAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode, decimal margin, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -40,6 +45,11 @@ Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode,
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetApiKeyInfoAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -58,6 +68,11 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync([Optional] 
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/inverse_futures/#t-assetexchangerecords)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetAssetExchangeHistoryAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHistoryAsync([Optional] long? fromId, [Optional] SearchDirection? direction, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -83,6 +98,11 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetBalancesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional] string? asset, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -104,6 +124,11 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync([Optional
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetPositionsAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync([Optional] string? symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -123,6 +148,11 @@ Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync([Optional] str
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/inverse_futures/#t-closedprofitandloss)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetProfitAndLossHistoryAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHistoryAsync(string symbol, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] TradeType? type, [Optional] int? page, [Optional] int? pageSize, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -151,6 +181,11 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetRiskLimitAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync([Optional] string? symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -170,6 +205,11 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync([Optional] st
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-walletrecords](https://bybit-exchange.github.io/docs/inverse_futures/#t-walletrecords)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetWalletFundHistoryAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync([Optional] string? asset, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] WalletFundType? type, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -198,6 +238,11 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetWithdrawalHistoryAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Optional] string? asset, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] WithdrawStatus? status, [Optional] int? pageSize, [Optional] int? page, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -224,6 +269,11 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync([Opt
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.SetFullPartialPositionModeAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol, StopLossTakeProfitMode mode, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -244,6 +294,11 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-marginswitch](https://bybit-exchange.github.io/docs/inverse_futures/#t-marginswitch)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.SetIsolatedModeAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -270,6 +325,11 @@ Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.SetLeverageAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -291,6 +351,11 @@ Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int se
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-switchpositionmode](https://bybit-exchange.github.io/docs/inverse_futures/#t-switchpositionmode)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.SetPositionModeAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -315,6 +380,11 @@ Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, [Optiona
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-risklimit](https://bybit-exchange.github.io/docs/inverse_futures/#t-risklimit)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.SetRiskLimitAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, long riskId, [Optional] PositionMode? mode, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  

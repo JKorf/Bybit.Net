@@ -17,6 +17,11 @@ grand_parent: IBybitClient
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Account.GetBalancesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotBalance>>> GetBalancesAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 

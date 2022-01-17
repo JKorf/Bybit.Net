@@ -16,6 +16,11 @@ parent: IBybitSocketClient
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotStreams.SubscribeToAccountUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler, Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler, Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler, [Optional] CancellationToken ct);  
 ```  
 
@@ -38,6 +43,11 @@ Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataE
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotStreams.SubscribeToBookPriceUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPrice>> handler, [Optional] CancellationToken ct);  
 ```  
 
@@ -57,6 +67,11 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string sym
 
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2kline](https://bybit-exchange.github.io/docs/spot/#t-websocketv2kline)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotStreams.SubscribeToKlineUpdatesAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitSpotKlineUpdate>> handler, [Optional] CancellationToken ct);  
@@ -81,6 +96,11 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotStreams.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<BybitSpotOrderBookUpdate>> handler, [Optional] CancellationToken ct);  
 ```  
 
@@ -102,6 +122,11 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotStreams.SubscribeToTickerUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTickerUpdate>> handler, [Optional] CancellationToken ct);  
 ```  
 
@@ -121,6 +146,11 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 
 [https://bybit-exchange.github.io/docs/spot/#t-websocketv2trade](https://bybit-exchange.github.io/docs/spot/#t-websocketv2trade)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTradeUpdate>> handler, [Optional] CancellationToken ct);  

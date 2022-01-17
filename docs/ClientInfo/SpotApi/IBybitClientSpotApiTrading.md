@@ -17,6 +17,11 @@ grand_parent: IBybitClient
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Trading.CancelOrderAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync([Optional] long? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -37,6 +42,11 @@ Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync([Optional] long? orde
 
 [https://bybit-exchange.github.io/docs/spot/#t-openorders](https://bybit-exchange.github.io/docs/spot/#t-openorders)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Trading.GetOpenOrdersAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync([Optional] string? symbol, [Optional] long? orderId, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -62,6 +72,11 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync([Optional] s
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Trading.GetOrderAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitSpotOrder>> GetOrderAsync([Optional] long? orderId, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -82,6 +97,11 @@ Task<WebCallResult<BybitSpotOrder>> GetOrderAsync([Optional] long? orderId, [Opt
 
 [https://bybit-exchange.github.io/docs/spot/#t-orderhistory](https://bybit-exchange.github.io/docs/spot/#t-orderhistory)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Trading.GetOrdersAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync([Optional] string? symbol, [Optional] long? orderId, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -107,6 +127,11 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync([Optional] strin
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Trading.GetUserTradesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync([Optional] string? symbol, [Optional] long? fromId, [Optional] long? toId, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -129,6 +154,11 @@ Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync([Optiona
 
 [https://bybit-exchange.github.io/docs/spot/#t-placeactive](https://bybit-exchange.github.io/docs/spot/#t-placeactive)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Trading.PlaceOrderAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, [Optional] decimal? price, [Optional] TimeInForce? timeInForce, [Optional] string? clientOrderId, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  

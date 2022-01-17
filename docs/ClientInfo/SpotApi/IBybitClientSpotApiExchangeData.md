@@ -17,6 +17,11 @@ grand_parent: IBybitClient
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetBookPriceAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -38,6 +43,11 @@ Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, [Option
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetBookPricesAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -56,6 +66,11 @@ Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync([Optiona
 
 [https://bybit-exchange.github.io/docs/spot/#t-querykline](https://bybit-exchange.github.io/docs/spot/#t-querykline)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetKlinesAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, KlineInterval interval, [Optional] DateTime? startTime, [Optional] DateTime? endTime, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -83,6 +98,11 @@ Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, K
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetMergedOrderBookAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, [Optional] int? scale, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -104,6 +124,11 @@ Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, [
 
 [https://bybit-exchange.github.io/docs/spot/#t-orderbook](https://bybit-exchange.github.io/docs/spot/#t-orderbook)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetOrderBookAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -128,6 +153,11 @@ Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, [Option
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetPriceAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -147,6 +177,11 @@ Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, [Optional] long
 
 [https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetPricesAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -169,6 +204,11 @@ Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync([Optional] long?
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetServerTimeAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<DateTime>> GetServerTimeAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -189,6 +229,11 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync([Optional] long? receiveWindow,
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetSymbolsAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -207,6 +252,11 @@ Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync([Optional] lon
 
 [https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetTickerAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
@@ -230,6 +280,11 @@ Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, [Optional] lo
 <p>
 
 ```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetTickersAsync(/* parameters */);  
+```  
+
+```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync([Optional] long? receiveWindow, [Optional] CancellationToken ct);  
 ```  
 
@@ -248,6 +303,11 @@ Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync([Optional] lon
 
 [https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords](https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords)  
 <p>
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetTradeHistoryAsync(/* parameters */);  
+```  
 
 ```csharp  
 Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string symbol, [Optional] int? limit, [Optional] long? receiveWindow, [Optional] CancellationToken ct);  
