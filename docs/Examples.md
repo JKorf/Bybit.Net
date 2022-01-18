@@ -4,7 +4,7 @@ nav_order: 3
 ---
 
 ## Basic operations
-Make sure to read the [CryptoExchange.Net wiki](https://github.com/JKorf/CryptoExchange.Net/wiki/Clients#processing-request-responses) on processing responses.
+Make sure to read the [CryptoExchange.Net wiki](https://jkorf.github.io/CryptoExchange.Net/Clients.html#processing-request-responses) on processing responses.
 
 <Details>
 <Summary>
