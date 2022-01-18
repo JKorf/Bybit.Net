@@ -3,10 +3,7 @@
  
 Bybit.Net is a wrapper around the Bybit API as described on [Bybit](https://bybit-exchange.github.io/docs/spot/#t-introduction), including all features the API provides using clear and readable objects, both for the REST  as the websocket API's.
 
-**If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Bybit.Net/issues)**
-
-## CryptoExchange.Net
-This library is build upon the CryptoExchange.Net library, make sure to check out the documentation on that for basic usage: [docs](https://github.com/JKorf/CryptoExchange.Net)
+[Documentation](https://jkorf.github.io/Bybit.Net/)
 
 ## Donate / Sponsor
 I develop and maintain this package on my own for free in my spare time. Donations are greatly appreciated. If you prefer to donate any other currency please contact me.
