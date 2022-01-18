@@ -54,7 +54,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             parameters.AddOptionalParameter("position_idx", mode == null ? null : JsonConvert.SerializeObject(mode, new PositionModeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitRiskId>(_baseClient.GetUrl("v2/public/risk-limit/list"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitRiskId>(_baseClient.GetUrl("v2/public/risk-limit"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -68,7 +68,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("v2/private/order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("v2/private/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitPosition>>(default);
 
