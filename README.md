@@ -23,6 +23,9 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 ## More docs comming soon
 
 ## Release notes
+* Version 0.0.1-beta2 - 18 Jan 2022
+    * Fixed multiple endpoint urls
+
 * Version 0.0.1-beta1 - 15 Jan 2022
     * Updated CryptoExchange.Net
 
