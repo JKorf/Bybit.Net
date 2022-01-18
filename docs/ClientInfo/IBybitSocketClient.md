@@ -3,6 +3,7 @@ title: Socket API documentation
 has_children: true
 ---
 *[generated documentation]*  
+### BybitSocketClient  
 *Client for accessing the bybit websocket API*
   
 ***

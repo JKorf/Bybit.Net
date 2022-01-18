@@ -3,6 +3,7 @@ title: Rest API documentation
 has_children: true
 ---
 *[generated documentation]*  
+### BybitClient  
 *Client for accessing the Bybit Rest API.*
   
 ***
