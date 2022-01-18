@@ -2,7 +2,7 @@
 title: IBybitClientGeneralApiTransfer
 has_children: false
 parent: IBybitClientGeneralApi
-grand_parent: IBybitClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitClient > GeneralApi > Transfer`  

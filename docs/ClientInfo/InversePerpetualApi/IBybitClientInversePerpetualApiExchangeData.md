@@ -2,7 +2,7 @@
 title: IBybitClientInversePerpetualApiExchangeData
 has_children: false
 parent: IBybitClientInversePerpetualApi
-grand_parent: IBybitClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitClient > InversePerpetualApi > ExchangeData`  

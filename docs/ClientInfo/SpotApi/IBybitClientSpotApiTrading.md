@@ -2,7 +2,7 @@
 title: IBybitClientSpotApiTrading
 has_children: false
 parent: IBybitClientSpotApi
-grand_parent: IBybitClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitClient > SpotApi > Trading`  

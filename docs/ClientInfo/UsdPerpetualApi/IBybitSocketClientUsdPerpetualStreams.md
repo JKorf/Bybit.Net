@@ -1,7 +1,7 @@
 ---
 title: IBybitSocketClientUsdPerpetualStreams
 has_children: true
-parent: IBybitSocketClient
+parent: Socket API documentation
 ---
 *[generated documentation]*  
 `BybitSocketClient > UsdPerpetualStreams`  

@@ -1,7 +1,7 @@
 ---
 title: IBybitClientInverseFuturesApi
 has_children: true
-parent: IBybitClient
+parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitClient > InverseFuturesApi`  

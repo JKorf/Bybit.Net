@@ -2,7 +2,7 @@
 title: IBybitClientUsdPerpetualApiExchangeData
 has_children: false
 parent: IBybitClientUsdPerpetualApi
-grand_parent: IBybitClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitClient > UsdPerpetualApi > ExchangeData`  
