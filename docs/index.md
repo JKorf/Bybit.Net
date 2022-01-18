@@ -3,6 +3,8 @@ title: Home
 nav_order: 1
 ---
 
+![Build status](https://app.travis-ci.com/JKorf/Bybit.Net.svg?token=2PbyJrjvDDpys8nuT4Xb&branch=main) ![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Bybit.Net.svg)
+ 
 This library is based on the CryptoExchange.Net base library. General usage/configuration information can be found in the [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net)
 
 ## Discord
