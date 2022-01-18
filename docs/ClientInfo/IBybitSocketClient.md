@@ -1,5 +1,5 @@
 ---
-title: IBybitSocketClient
+title: Socket API documentation
 has_children: true
 ---
 *[generated documentation]*  

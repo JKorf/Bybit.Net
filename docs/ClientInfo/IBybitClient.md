@@ -1,5 +1,5 @@
 ---
-title: IBybitClient
+title: Rest API documentation
 has_children: true
 ---
 *[generated documentation]*  

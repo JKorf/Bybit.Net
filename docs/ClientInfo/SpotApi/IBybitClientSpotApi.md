@@ -9,7 +9,7 @@ parent: IBybitClient
   
 ***
 *Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.*  
-**ISpotClient ComonSpotClient { get; }**  
+**ISpotClient CommonSpotClient { get; }**  
 ***
 *Endpoints related to account settings, info or actions*  
 **[IBybitClientSpotApiAccount](IBybitClientSpotApiAccount.html) Account { get; }**  
