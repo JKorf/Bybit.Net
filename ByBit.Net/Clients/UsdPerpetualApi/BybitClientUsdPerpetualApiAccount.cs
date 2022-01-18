@@ -223,7 +223,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitTpSlMode>(_baseClient.GetUrl("v2/private/tpsl/switch-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitTpSlMode>(_baseClient.GetUrl("private/linear/tpsl/switch-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
