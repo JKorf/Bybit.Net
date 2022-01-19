@@ -18,7 +18,7 @@ parent: Socket API documentation
 *Subscribe to user balance updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToBalanceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -43,7 +43,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 *Subscribe to kline (candlestick) updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToKlinesUpdatesAsync(/* parameters */);  
 ```  
 
@@ -69,7 +69,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval
 *Subscribe to kline (candlestick) updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -96,7 +96,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribe to kline (candlestick) updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -123,7 +123,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 *Subscribe to liquidation order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToLiquidationsUpdatesAsync(/* parameters */);  
 ```  
 
@@ -148,7 +148,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<
 *Subscribe to liquidation order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
@@ -174,7 +174,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 *Subscribe to liquidation order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
@@ -201,7 +201,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 *Subscribe to orderbook updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToOrderBooksUpdatesAsync(/* parameters */);  
 ```  
 
@@ -229,7 +229,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit
 *Subscribe to orderbook updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -258,7 +258,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 *Subscribe to orderbook updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -286,7 +286,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 *Subscribe to user order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToOrderUpdatesAsync(/* parameters */);  
 ```  
 
@@ -311,7 +311,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 *Subscribe to user position updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToPositionUpdatesAsync(/* parameters */);  
 ```  
 
@@ -336,7 +336,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 *Subscribe to user stop order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToStopOrderUpdatesAsync(/* parameters */);  
 ```  
 
@@ -361,7 +361,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<Dat
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToTickersUpdatesAsync(/* parameters */);  
 ```  
 
@@ -386,7 +386,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataE
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -412,7 +412,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -438,7 +438,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToTradesUpdatesAsync(/* parameters */);  
 ```  
 
@@ -463,7 +463,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEv
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -489,7 +489,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -515,7 +515,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 *Subscribe to user trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.UsdPerpetualStreams.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
 ```  
 
