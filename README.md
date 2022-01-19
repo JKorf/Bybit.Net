@@ -3,6 +3,8 @@
  
 Bybit.Net is a wrapper around the Bybit API as described on [Bybit](https://bybit-exchange.github.io/docs/spot/#t-introduction), including all features the API provides using clear and readable objects, both for the REST  as the websocket API's.
 
+**If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Bybit.Net/issues)**
+
 [Documentation](https://jkorf.github.io/Bybit.Net/)
 
 ## Donate / Sponsor
