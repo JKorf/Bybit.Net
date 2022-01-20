@@ -28,7 +28,7 @@ namespace Bybit.Net.Converters
             {
                 if(!long.TryParse(strValue, out value))
                 {
-                    Debug.WriteLine($"Failed to parse exponential value {strValue}");
+                    Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Failed to parse exponential value {strValue}");
                     return default;
                 }
             }
