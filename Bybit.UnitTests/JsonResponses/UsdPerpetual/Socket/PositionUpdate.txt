@@ -15,7 +15,6 @@
            "take_profit":  "0.1",
            "tp_trigger_by": 0,
            "stop_loss":  "0.12",
-           "sl_trigger_by": "Normal",
            "realised_pnl": "0",
            "cum_realised_pnl": "0.1",
            "position_seq": 14,
