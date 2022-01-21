@@ -1,6 +1,6 @@
 ---
 title: IBybitSocketClientUsdPerpetualStreams
-has_children: true
+has_children: false
 parent: Socket API documentation
 ---
 *[generated documentation]*  
@@ -316,7 +316,7 @@ var result = await client.UsdPerpetualStreams.SubscribeToPositionUpdatesAsync(/*
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUpdate>>> handler, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUsdPerpetualUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -341,7 +341,7 @@ var result = await client.UsdPerpetualStreams.SubscribeToStopOrderUpdatesAsync(/
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitStopOrderUpdate>>> handler, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualOrderUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
