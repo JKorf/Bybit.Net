@@ -15,6 +15,13 @@ namespace Bybit.Net.Objects.Models.Socket
         /// </summary>
         [JsonProperty("order_id")]
         public override string Id { get; set; } = string.Empty;
+        [JsonProperty("stop_order_id")]
+        internal string StopId { get => Id; set => Id = value; }
+        /// <summary>
+        /// Client order id
+        /// </summary>
+        [JsonProperty("order_link_id")]
+        public string? ClientOrderId { get; set; }
 
         /// <summary>
         /// Stop order status
@@ -53,5 +60,22 @@ namespace Bybit.Net.Objects.Models.Socket
         /// Timestamp
         /// </summary>
         public DateTime Timestamp { get; set; }
+    }
+
+    /// <summary>
+    /// Usd perpetual order update
+    /// </summary>
+    public class BybitUsdPerpetualOrderUpdate: BybitStopOrderUpdate
+    {
+        /// <summary>
+        /// Reduce only
+        /// </summary>
+        [JsonProperty("reduce_only")]
+        public bool? ReduceOnly { get; set; }
+        /// <summary>
+        /// Position mode
+        /// </summary>
+        [JsonProperty("position_idx"), JsonConverter(typeof(PositionModeConverter))]
+        public PositionMode? PositionMode { get; set; }
     }
 }

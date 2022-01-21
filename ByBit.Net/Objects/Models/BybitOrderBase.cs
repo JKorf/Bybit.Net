@@ -65,14 +65,18 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("created_at")]
         public DateTime? CreateTime { get; set; }
         [JsonProperty("created_time"), JsonConverter(typeof(DateTimeConverter))]
-        internal DateTime? _createTime { set => CreateTime = value; }
+        internal DateTime? _createTime { get => CreateTime; set => CreateTime = value; }
+        [JsonProperty("create_time"), JsonConverter(typeof(DateTimeConverter))]
+        internal DateTime? _createTime2 { get => CreateTime; set => CreateTime = value; }
         /// <summary>
         /// Update time
         /// </summary>
         [JsonProperty("updated_at")]
         public DateTime? UpdateTime { get; set; }
         [JsonProperty("updated_time"), JsonConverter(typeof(DateTimeConverter))]
-        internal DateTime? _updateTime { set => UpdateTime = value; }
+        internal DateTime? _updateTime { get => UpdateTime; set => UpdateTime = value; }
+        [JsonProperty("update_time"), JsonConverter(typeof(DateTimeConverter))]
+        internal DateTime? _updateTime2 { get => UpdateTime; set => UpdateTime = value; }
         /// <summary>
         /// Trigger scenario for cancel operation
         /// </summary>

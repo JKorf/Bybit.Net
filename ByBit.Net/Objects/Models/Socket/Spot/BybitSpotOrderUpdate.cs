@@ -64,7 +64,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
         /// <summary>
         /// Last filled quantity
         /// </summary>
-        [JsonProperty("I")]
+        [JsonProperty("l")]
         public decimal LastFilledQuantity { get; set; }
         /// <summary>
         /// Total filled quantity

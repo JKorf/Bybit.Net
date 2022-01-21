@@ -221,7 +221,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUsdPerpetualUpdate>>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -229,10 +229,10 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 if (internalData == null)
                     return;
 
-                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitPositionUpdate>>(internalData);
+                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitPositionUsdPerpetualUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitPositionUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitPositionUsdPerpetualUpdate)} object: " + desResult.Error);
                     return;
                 }
 
@@ -290,7 +290,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitStopOrderUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualOrderUpdate>>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -298,10 +298,10 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 if (internalData == null)
                     return;
 
-                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitStopOrderUpdate>>(internalData);
+                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitUsdPerpetualOrderUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitStopOrderUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitUsdPerpetualOrderUpdate)} object: " + desResult.Error);
                     return;
                 }
 

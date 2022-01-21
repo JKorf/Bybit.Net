@@ -1,0 +1,6 @@
+﻿[
+        {
+            "wallet_balance":429.80713,
+            "available_balance":429.67322
+        }
+    ]

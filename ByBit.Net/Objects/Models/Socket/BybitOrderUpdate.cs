@@ -85,5 +85,12 @@ namespace Bybit.Net.Objects.Models.Socket
         /// </summary>
         [JsonProperty("close_on_trigger")]
         public bool CloseOnTrigger { get; set; }
+
+        /// <summary>
+        /// Position mode (only availaable on USD perpetual)
+        /// </summary>
+        [JsonConverter(typeof(PositionModeConverter))]
+        [JsonProperty("position_idx")]
+        public PositionMode? PositionMode { get; set; }
     }
 }

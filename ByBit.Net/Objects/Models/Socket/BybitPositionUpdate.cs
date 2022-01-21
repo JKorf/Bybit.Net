@@ -45,9 +45,39 @@ namespace Bybit.Net.Objects.Models.Socket
         [JsonProperty("wallet_balance")]
         public decimal WalletBalance { get; set; }
         /// <summary>
+        /// Wallet balance
+        /// </summary>
+        [JsonProperty("available_balance")]
+        public decimal AvailableBalance { get; set; }
+        /// <summary>
         /// Position sequence
         /// </summary>
         [JsonProperty("position_seq")]
         public long PositionSequence { get; set; }
+    }
+
+    /// <summary>
+    /// Uds perpetual position update
+    /// </summary>
+    public class BybitPositionUsdPerpetualUpdate: BybitPositionUpdate
+    {
+        /// <summary>
+        /// Take profit trigger
+        /// </summary>
+        [JsonProperty("tp_sl_mode"), JsonConverter(typeof(StopLossTakeProfitModeConverter))]
+        public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
+        /// <summary>
+        /// Position mode
+        /// </summary>
+        [JsonProperty("position_idx"), JsonConverter(typeof(PositionModeConverter))]
+        public PositionMode? PositionMode { get; set; }
+        /// <summary>
+        /// Mode
+        /// </summary>
+        public string? Mode { get; set; }
+        /// <summary>
+        /// Is isolated
+        /// </summary>
+        public bool Isolated { get; set; }
     }
 }

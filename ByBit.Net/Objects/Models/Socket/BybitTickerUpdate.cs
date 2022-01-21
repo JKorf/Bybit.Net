@@ -76,6 +76,9 @@ namespace Bybit.Net.Objects.Models.Socket
         /// </summary>
         [JsonProperty("open_interest")]
         public decimal? OpenInterest { get; set; }
+        [JsonConverter(typeof(ExponentDivConverter), 8)]
+        [JsonProperty("open_interest_e8")]
+        private decimal? OpenInterestE8 { get => OpenInterest; set => OpenInterest = value; }
         /// <summary>
         /// Open value
         /// </summary>
@@ -99,11 +102,17 @@ namespace Bybit.Net.Objects.Models.Socket
         /// </summary>
         [JsonProperty("total_volume")]
         public decimal? TotalVolume { get; set; }
+        [JsonConverter(typeof(ExponentDivConverter), 8)]
+        [JsonProperty("total_volume_e8")]
+        private decimal? TotalVolumeE8 { get => TotalVolume; set => TotalVolume = value; }
         /// <summary>
         /// 24 hour volume
         /// </summary>
         [JsonProperty("volume_24h")]
         public decimal? Volume24H { get; set; }
+        [JsonConverter(typeof(ExponentDivConverter), 8)]
+        [JsonProperty("volume_24h_e8")]
+        private decimal? Volume24HE8 { get => Volume24H; set => Volume24H = value; }
         /// <summary>
         /// Predicted funding rate
         /// </summary>
@@ -135,5 +144,29 @@ namespace Bybit.Net.Objects.Models.Socket
         /// </summary>
         [JsonProperty("countdown_hour")]
         public int? CountdownHour { get; set; }
+        [JsonProperty("count_down_hour")]
+        private int? CountdownHourInternal { get => CountdownHour; set => CountdownHour = value; }
+        /// <summary>
+        /// Best ask price
+        /// </summary>
+        [JsonProperty("ask1_price")]
+        public decimal? BestAskPrice { get; set; }
+        /// <summary>
+        /// Best bid price
+        /// </summary>
+        [JsonProperty("bid1_price")]
+        public decimal? BestBidPrice { get; set; }
+
+        /// <summary>
+        /// Funding rate
+        /// </summary>
+        [JsonConverter(typeof(ExponentDivConverter), 6)]
+        [JsonProperty("funding_rate_e6")]
+        public decimal? FundingRate { get; set; }
+        /// <summary>
+        /// Funding rate interval in hours
+        /// </summary>
+        [JsonProperty("funding_rate_interval")]
+        public int? FundingRateInterval { get; set; }
     }
 }

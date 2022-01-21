@@ -31,6 +31,7 @@ namespace Bybit.Net.Objects.Models.Socket
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("time")]
         public DateTime Timestamp { get; set;}    
     }
 }
