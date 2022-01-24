@@ -23,7 +23,7 @@ var result = await client.UsdPerpetualApi.Account.AddReduceMarginAsync(/* parame
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, OrderSide side, decimal margin, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, OrderSide side, decimal margin, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -31,6 +31,7 @@ Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, Order
 |symbol|The symbol|
 |side|The side|
 |margin|Margin to add (positive) or remove (negative)|
+|_[Optional]_ positionMode|Position mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -352,7 +353,7 @@ var result = await client.UsdPerpetualApi.Account.SetAutoAddMarginAsync(/* param
 ```  
 
 ```csharp  
-Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool autoAddMargin, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool autoAddMargin, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -360,6 +361,7 @@ Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool au
 |symbol|Symbol|
 |side|Side|
 |autoAddMargin|Auto add or not|
+|_[Optional]_ positionMode|Position mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -394,6 +396,35 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 ***
 
+## SetIsolatedPositionModeAsync  
+
+[https://bybit-exchange.github.io/docs/linear/#t-marginswitch](https://bybit-exchange.github.io/docs/linear/#t-marginswitch)  
+<p>
+
+*Switch Cross/Isolated; must set leverage value when switching from Cross to Isolated*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.UsdPerpetualApi.Account.SetIsolatedPositionModeAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult> SetIsolatedPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol|
+|isIsolated|True is Isolated; false is Cross|
+|buyLeverage|Buy leverage|
+|sellLeverage|Sell leverage|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## SetLeverageAsync  
 
 [https://bybit-exchange.github.io/docs/linear/#t-setleverage](https://bybit-exchange.github.io/docs/linear/#t-setleverage)  
@@ -407,7 +438,7 @@ var result = await client.UsdPerpetualApi.Account.SetLeverageAsync(/* parameters
 ```  
 
 ```csharp  
-Task<WebCallResult> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult> SetLeverageAsync(string symbol, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -424,10 +455,10 @@ Task<WebCallResult> SetLeverageAsync(string symbol, int buyLeverage, int sellLev
 
 ## SetPositionModeAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-marginswitch](https://bybit-exchange.github.io/docs/linear/#t-marginswitch)  
 <p>
 
-*Switch Cross/Isolated; must set leverage value when switching from Cross to Isolated*  
+*Switch position mode. If you are in One-Way Mode, you can only open one position on Buy or Sell side;*  
+*If you are in Hedge Mode, you can open both Buy and Sell side positions simultaneously.*  
 
 ```csharp  
 var client = new BybitClient();  
@@ -435,16 +466,14 @@ var result = await client.UsdPerpetualApi.Account.SetPositionModeAsync(/* parame
 ```  
 
 ```csharp  
-Task<WebCallResult> SetPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
-|isIsolated|True is Isolated; false is Cross|
-|buyLeverage|Buy leverage|
-|sellLeverage|Sell leverage|
-|_[Optional]_ receiveWindow||
+|hedgeMode|True = HedgeMode, False = OneWayMode|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -464,7 +493,7 @@ var result = await client.UsdPerpetualApi.Account.SetRiskLimitAsync(/* parameter
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side, long riskId, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side, long riskId, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -472,6 +501,7 @@ Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side
 |symbol|The symbol|
 |side|Side|
 |riskId|The risk id to set|
+|_[Optional]_ positionMode|Position mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

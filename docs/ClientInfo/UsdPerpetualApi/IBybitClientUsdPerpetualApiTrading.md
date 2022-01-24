@@ -404,7 +404,7 @@ var result = await client.UsdPerpetualApi.Trading.PlaceConditionalOrderAsync(/* 
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal basePrice, decimal triggerPrice, TimeInForce timeInForce, bool closeOnTrigger, bool reduceOnly, decimal? price = default, TriggerType? triggerType = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal basePrice, decimal triggerPrice, TimeInForce timeInForce, bool closeOnTrigger, bool reduceOnly, decimal? price = default, TriggerType? triggerType = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -425,6 +425,7 @@ Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string 
 |_[Optional]_ stopLossPrice|Stop loss price, only take effect upon opening the position|
 |_[Optional]_ takeProfitTriggerType|Take profit trigger price type, default: LastPrice|
 |_[Optional]_ stopLossTriggerType|Stop loss trigger price type, default: LastPrice|
+|_[Optional]_ positionMode|Position mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -445,7 +446,7 @@ var result = await client.UsdPerpetualApi.Trading.PlaceOrderAsync(/* parameters 
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -463,6 +464,42 @@ Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, O
 |_[Optional]_ stopLossPrice|Stop loss price, only take effect upon opening the position|
 |_[Optional]_ takeProfitTriggerType|Take profit trigger price type, default: LastPrice|
 |_[Optional]_ stopLossTriggerType|Stop loss trigger price type, default: LastPrice|
+|_[Optional]_ positionMode|Position mode|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## SetTradingStopAsync  
+
+[https://bybit-exchange.github.io/docs/linear/#t-tradingstop](https://bybit-exchange.github.io/docs/linear/#t-tradingstop)  
+<p>
+
+*Set take profit, stop loss, and trailing stop for your open position*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.UsdPerpetualApi.Trading.SetTradingStopAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult> SetTradingStopAsync(string symbol, PositionSide side, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, decimal? trailingStopPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, decimal? takeProfitQuantity = default, decimal? stopLossQuantity = default, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol|
+|side|The position side|
+|_[Optional]_ takeProfitPrice|The new take profit price. Setting it to null will not change the value, setting it to 0 will remove the current TakeProfit|
+|_[Optional]_ stopLossPrice|The new stop loss price. Setting it to null will not change the value, setting it to 0 will remove the current StopLoss|
+|_[Optional]_ trailingStopPrice|Setting it to null will not change the value, setting it to 0 will remove the current TrailingStop|
+|_[Optional]_ takeProfitTriggerType|Take profit trigger type, defaults to LastPrice|
+|_[Optional]_ stopLossTriggerType|Stop loss trigger type, defaults to LastPrice|
+|_[Optional]_ takeProfitQuantity|Take profit quantity when in Partial mode|
+|_[Optional]_ stopLossQuantity|Stop loss quantity when in Partial mode|
+|_[Optional]_ positionMode|Position mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

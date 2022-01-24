@@ -290,7 +290,7 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 ***
 
-## SetIsolatedModeAsync  
+## SetIsolatedPositionModeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-marginswitch](https://bybit-exchange.github.io/docs/inverse_futures/#t-marginswitch)  
 <p>
@@ -299,11 +299,11 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InverseFuturesApi.Account.SetIsolatedModeAsync(/* parameters */);  
+var result = await client.InverseFuturesApi.Account.SetIsolatedPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult> SetIsolatedPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -332,7 +332,7 @@ var result = await client.InverseFuturesApi.Account.SetLeverageAsync(/* paramete
 ```  
 
 ```csharp  
-Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<int>> SetLeverageAsync(string symbol, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

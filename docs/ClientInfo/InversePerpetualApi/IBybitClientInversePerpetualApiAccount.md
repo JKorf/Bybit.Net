@@ -24,13 +24,12 @@ var result = await client.InversePerpetualApi.Account.ChangeMarginAsync(/* param
 ```  
 
 ```csharp  
-Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode, decimal margin, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, decimal margin, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
-|mode|The position mode|
 |margin|The margin|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
@@ -342,7 +341,7 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 ***
 
-## SetIsolatedModeAsync  
+## SetIsolatedPositionModeAsync  
 
 [https://bybit-exchange.github.io/docs/inverse/#t-marginswitch](https://bybit-exchange.github.io/docs/inverse/#t-marginswitch)  
 <p>
@@ -351,11 +350,11 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 ```csharp  
 var client = new BybitClient();  
-var result = await client.InversePerpetualApi.Account.SetIsolatedModeAsync(/* parameters */);  
+var result = await client.InversePerpetualApi.Account.SetIsolatedPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
-Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult> SetIsolatedPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -384,14 +383,14 @@ var result = await client.InversePerpetualApi.Account.SetLeverageAsync(/* parame
 ```  
 
 ```csharp  
-Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<int>> SetLeverageAsync(string symbol, decimal leverage, bool? leverageOnly = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
-|buyLeverage|Buy leverage|
-|sellLeverage|Sell leverage|
+|leverage|Leverage, must be greater than 0 and less than the risk limit leverage|
+|_[Optional]_ leverageOnly|Use this parameter to set leverage while in cross margin mode. If this field is set to false, when leverage is equal to 0 the position will use cross margin; when leverage is greater than 0 the position will use isolated margin. If this field is set to true, you can set leverage in cross margin with leverage. leverage must be greater than 0.|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
