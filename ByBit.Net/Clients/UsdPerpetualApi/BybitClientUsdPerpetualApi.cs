@@ -41,7 +41,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             _options = options;
             ClientOptions = options;
 
-            Account = new BybitClientUsdPerpetualApiAccount(this);
+            Account = new BybitClientUsdPerpetualApiAccount(baseClient, this);
             ExchangeData = new BybitClientUsdPerpetualApiExchangeData(this);
             Trading = new BybitClientUsdPerpetualApiTrading(this);
         }

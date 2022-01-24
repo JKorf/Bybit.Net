@@ -40,7 +40,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             _options = options;
             ClientOptions = options;
 
-            Account = new BybitClientInverseFuturesApiAccount(this);
+            Account = new BybitClientInverseFuturesApiAccount(_baseClient, this);
             ExchangeData = new BybitClientInverseFuturesApiExchangeData(this);
             Trading = new BybitClientInverseFuturesApiTrading(this);
         }

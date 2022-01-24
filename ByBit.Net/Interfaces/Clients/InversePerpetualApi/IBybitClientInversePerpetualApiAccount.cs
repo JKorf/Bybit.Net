@@ -57,24 +57,23 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-changemargin" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
-        /// <param name="mode">The position mode</param>
         /// <param name="margin">The margin</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode, decimal margin, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, decimal margin, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set leverage
         /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-setleverage" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
-        /// <param name="buyLeverage">Buy leverage</param>
-        /// <param name="sellLeverage">Sell leverage</param>
+        /// <param name="leverage">Leverage, must be greater than 0 and less than the risk limit leverage</param>
+        /// <param name="leverageOnly">Use this parameter to set leverage while in cross margin mode. If this field is set to false, when leverage is equal to 0 the position will use cross margin; when leverage is greater than 0 the position will use isolated margin. If this field is set to true, you can set leverage in cross margin with leverage. leverage must be greater than 0.</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<int>> SetLeverageAsync(string symbol, decimal leverage, bool? leverageOnly = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get user's profit and loss records
@@ -113,7 +112,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult> SetIsolatedPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = null, CancellationToken ct = default);
 
         #endregion
 

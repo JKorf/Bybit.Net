@@ -54,7 +54,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             parameters.AddOptionalParameter("position_idx", mode == null ? null : JsonConvert.SerializeObject(mode, new PositionModeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitRiskId>(_baseClient.GetUrl("v2/public/risk-limit"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitRiskId>(_baseClient.GetUrl("v2/private/position/risk-limit"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -83,12 +83,11 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Change margin
 
         /// <inheritdoc />
-        public async Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode, decimal margin, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, decimal margin, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol },
-                { "position_idx", JsonConvert.SerializeObject(mode, new PositionModeConverter(false)) },
                 { "margin", margin.ToString(CultureInfo.InvariantCulture) },
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -101,14 +100,14 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Set leverage
 
         /// <inheritdoc />
-        public async Task<WebCallResult<int>> SetLeverageAsync(string symbol, int buyLeverage, int sellLeverage, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<int>> SetLeverageAsync(string symbol, decimal leverage, bool? leverageOnly = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol },
-                { "buy_leverage", buyLeverage.ToString(CultureInfo.InvariantCulture) },
-                { "sell_leverage", sellLeverage.ToString(CultureInfo.InvariantCulture) },
+                { "leverage", leverage.ToString(CultureInfo.InvariantCulture) }
             };
+            parameters.AddOptionalParameter("leverage_only", leverageOnly);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<int>(_baseClient.GetUrl("v2/private/position/leverage/save"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -162,7 +161,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Set isolated mode
 
         /// <inheritdoc />
-        public async Task<WebCallResult> SetIsolatedModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> SetIsolatedPositionModeAsync(string symbol, bool isIsolated, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -207,7 +206,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
 
         #endregion
 
-        #region Get last user funding fee
+        #region Get predicted user funding fee
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitPredictedFunding>> GetPredictedUserFundingFeeAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
@@ -227,7 +226,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         public async Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, WalletFundType? type = null, int? pageSize = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("currency", asset);
+            parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("start_date", startTime?.ToString("yyyy-MM-dd"));
             parameters.AddOptionalParameter("end_date", endTime?.ToString("yyyy-MM-dd"));
             parameters.AddOptionalParameter("wallet_fund_type", type == null ? null : JsonConvert.SerializeObject(type, new WalletFundTypeConverter(false)));
@@ -253,7 +252,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         public async Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, WithdrawStatus? status = null, int? pageSize = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("currency", asset);
+            parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("start_date", startTime?.ToString("yyyy-MM-dd"));
             parameters.AddOptionalParameter("end_date", endTime?.ToString("yyyy-MM-dd"));
             parameters.AddOptionalParameter("status", status == null ? null : JsonConvert.SerializeObject(status, new WithdrawStatusConverter(false)));
