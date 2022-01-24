@@ -230,18 +230,18 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CryptoExchange.Net.CommonObjects.OrderSide side, CryptoExchange.Net.CommonObjects.OrderType type, decimal quantity, decimal? price = null, string? accountId = null)
+        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price = null, string? accountId = null)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
 
             var result = await Trading.PlaceOrderAsync(
                 symbol,
-                side == CryptoExchange.Net.CommonObjects.OrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
-                type == CryptoExchange.Net.CommonObjects.OrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
+                side == CommonOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
+                type == CommonOrderType.Limit ? OrderType.Limit : OrderType.Market,
                 quantity,
                 price,
-                type == CryptoExchange.Net.CommonObjects.OrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null
+                type == CommonOrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null
                 ).ConfigureAwait(false);
             if (!result)
                 return result.As<OrderId>(null);
@@ -271,9 +271,9 @@ namespace Bybit.Net.Clients.SpotApi
                 QuantityFilled = result.Data.QuantityFilled,
                 Timestamp = result.Data.CreateTime,
                 Symbol = result.Data.Symbol,
-                Side = result.Data.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy : CryptoExchange.Net.CommonObjects.OrderSide.Sell,
-                Type = result.Data.Type == Enums.OrderType.Limit ? CryptoExchange.Net.CommonObjects.OrderType.Limit : result.Data.Type == Enums.OrderType.Market ? CryptoExchange.Net.CommonObjects.OrderType.Market : CryptoExchange.Net.CommonObjects.OrderType.Other,
-                Status = result.Data.Status == Enums.OrderStatus.Canceled ? CryptoExchange.Net.CommonObjects.OrderStatus.Canceled : result.Data.Status == Enums.OrderStatus.Filled ? CryptoExchange.Net.CommonObjects.OrderStatus.Filled : CryptoExchange.Net.CommonObjects.OrderStatus.Active
+                Side = result.Data.Side == OrderSide.Buy ? CommonOrderSide.Buy : CommonOrderSide.Sell,
+                Type = result.Data.Type == OrderType.Limit ? CommonOrderType.Limit : result.Data.Type == OrderType.Market ? CommonOrderType.Market : CommonOrderType.Other,
+                Status = result.Data.Status == OrderStatus.Canceled ? CommonOrderStatus.Canceled : result.Data.Status == OrderStatus.Filled ? CommonOrderStatus.Filled : CommonOrderStatus.Active
             });
         }
 
@@ -315,9 +315,9 @@ namespace Bybit.Net.Clients.SpotApi
                 QuantityFilled = r.QuantityFilled,
                 Timestamp = r.CreateTime,
                 Symbol = r.Symbol,
-                Side = r.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy : CryptoExchange.Net.CommonObjects.OrderSide.Sell,
-                Type = r.Type == Enums.OrderType.Limit ? CryptoExchange.Net.CommonObjects.OrderType.Limit: r.Type == Enums.OrderType.Market ? CryptoExchange.Net.CommonObjects.OrderType.Market: CryptoExchange.Net.CommonObjects.OrderType.Other,
-                Status = r.Status == Enums.OrderStatus.Canceled ? CryptoExchange.Net.CommonObjects.OrderStatus.Canceled: r.Status == Enums.OrderStatus.Filled ? CryptoExchange.Net.CommonObjects.OrderStatus.Filled: CryptoExchange.Net.CommonObjects.OrderStatus.Active
+                Side = r.Side == OrderSide.Buy ? CommonOrderSide.Buy : CommonOrderSide.Sell,
+                Type = r.Type == OrderType.Limit ? CommonOrderType.Limit: r.Type == OrderType.Market ? CommonOrderType.Market: CommonOrderType.Other,
+                Status = r.Status == OrderStatus.Canceled ? CommonOrderStatus.Canceled: r.Status == OrderStatus.Filled ? CommonOrderStatus.Filled: CommonOrderStatus.Active
             }));
         }
 
@@ -336,9 +336,9 @@ namespace Bybit.Net.Clients.SpotApi
                 QuantityFilled = r.QuantityFilled,
                 Timestamp = r.CreateTime,
                 Symbol = r.Symbol,
-                Side = r.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy : CryptoExchange.Net.CommonObjects.OrderSide.Sell,
-                Type = r.Type == Enums.OrderType.Limit ? CryptoExchange.Net.CommonObjects.OrderType.Limit : r.Type == Enums.OrderType.Market ? CryptoExchange.Net.CommonObjects.OrderType.Market : CryptoExchange.Net.CommonObjects.OrderType.Other,
-                Status = r.Status == Enums.OrderStatus.Canceled ? CryptoExchange.Net.CommonObjects.OrderStatus.Canceled : r.Status == Enums.OrderStatus.Filled ? CryptoExchange.Net.CommonObjects.OrderStatus.Filled : CryptoExchange.Net.CommonObjects.OrderStatus.Active
+                Side = r.Side == OrderSide.Buy ? CommonOrderSide.Buy : CommonOrderSide.Sell,
+                Type = r.Type == OrderType.Limit ? CommonOrderType.Limit : r.Type == OrderType.Market ? CommonOrderType.Market : CommonOrderType.Other,
+                Status = r.Status == OrderStatus.Canceled ? CommonOrderStatus.Canceled : r.Status == OrderStatus.Filled ? CommonOrderStatus.Filled : CommonOrderStatus.Active
             }));
         }
 
