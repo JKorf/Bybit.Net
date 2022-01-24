@@ -84,7 +84,8 @@ namespace Bybit.Net.UnitTests
                     { "GetOpenOrderRealTimeAsync", new List<string> { "ext_fields" } },
                     { "GetOpenOrdersRealTimeAsync", new List<string> { "ext_fields" } },
                     { "GetOpenConditionalOrderRealTimeAsync", new List<string> { "ext_fields" } },
-                    { "GetOpenConditionalOrdersRealTimeAsync", new List<string> { "ext_fields" } }
+                    { "GetOpenConditionalOrdersRealTimeAsync", new List<string> { "ext_fields" } },
+                    { "SetTradingStopAsync", new List<string> { "oc_calc_data", "ext_fields" } }
                 },
                 useNestedJsonPropertyForAllCompare: new List<string> { "result" },
                 parametersToSetNull: new string[] { "clientOrderId" }

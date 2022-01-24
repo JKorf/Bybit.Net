@@ -43,6 +43,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             decimal? stopLossPrice = null,
             TriggerType? takeProfitTriggerType = null,
             TriggerType? stopLossTriggerType = null,
+            PositionMode? positionMode = null,
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -63,6 +64,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("position_idx", positionMode == null ? null : JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("private/linear/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -259,6 +261,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             decimal? stopLossPrice = null,
             TriggerType? takeProfitTriggerType = null,
             TriggerType? stopLossTriggerType = null,
+            PositionMode? positionMode = null,
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -282,6 +285,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("position_idx", positionMode == null ? null : JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitConditionalOrderUsd>(_baseClient.GetUrl("private/linear/stop-order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
@@ -497,5 +501,40 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
 
         #endregion
 
+        #region Set Trading Stop
+        /// <inheritdoc />
+        public async Task<WebCallResult> SetTradingStopAsync(
+            string symbol,
+            PositionSide side,
+            decimal? takeProfitPrice = null,
+            decimal? stopLossPrice = null,
+            decimal? trailingStopPrice = null,
+            TriggerType? takeProfitTriggerType = null,
+            TriggerType? stopLossTriggerType = null,
+            decimal? takeProfitQuantity = null,
+            decimal? stopLossQuantity = null,
+            PositionMode? positionMode = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+                { "side", JsonConvert.SerializeObject(side, new PositionSideConverter(false)) }
+            };
+            parameters.AddOptionalParameter("take_profit", takeProfitPrice?.ToString());
+            parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString());
+            parameters.AddOptionalParameter("trailing_stop", trailingStopPrice?.ToString());
+            parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("sl_size", stopLossQuantity?.ToString());
+            parameters.AddOptionalParameter("tp_size", takeProfitQuantity?.ToString());
+            parameters.AddOptionalParameter("position_idx", positionMode == null ? null : JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("private/linear/position/trading-stop"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return result.AsDataless();
+        }
+        #endregion
     }
 }

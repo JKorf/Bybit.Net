@@ -235,5 +235,35 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbol, string? orderId = null, DateTime? startTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Set take profit, stop loss, and trailing stop for your open position
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-tradingstop" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="positionMode">The position mode</param>
+        /// <param name="takeProfitPrice">The new take profit price. Setting it to null will not change the value, setting it to 0 will remove the current TakeProfit</param>
+        /// <param name="stopLossPrice">The new stop loss price. Setting it to null will not change the value, setting it to 0 will remove the current StopLoss</param>
+        /// <param name="trailingStopPrice">Setting it to null will not change the value, setting it to 0 will remove the current TrailingStop</param>
+        /// <param name="takeProfitTriggerType">Take profit trigger type, defaults to LastPrice</param>
+        /// <param name="stopLossTriggerType">Stop loss trigger type, defaults to LastPrice</param>
+        /// <param name="trailingStopTriggerPrice">Trailing stop trigger price. Trailing stops are triggered only when the price reaches the specified price. Trailing stops are triggered immediately by default.</param>
+        /// <param name="takeProfitQuantity">Take profit quantity when in Partial mode</param>
+        /// <param name="stopLossQuantity">Stop loss quantity when in Partial mode</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitPosition>> SetTradingStopAsync(
+            string symbol,
+            PositionMode positionMode,
+            decimal? takeProfitPrice = null,
+            decimal? stopLossPrice = null,
+            decimal? trailingStopPrice = null,
+            TriggerType? takeProfitTriggerType = null,
+            TriggerType? stopLossTriggerType = null,
+            decimal? trailingStopTriggerPrice = null,
+            decimal? takeProfitQuantity = null,
+            decimal? stopLossQuantity = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default);
     }
 }

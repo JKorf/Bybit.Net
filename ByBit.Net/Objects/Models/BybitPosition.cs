@@ -88,5 +88,10 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("position_seq")]
         public long PositionSequence { get; set; }
-    }
+        /// <summary>
+        /// Accumelated fee
+        /// </summary>
+        [JsonProperty("cum_commission")]
+        public decimal? AccumulatedFee { get; set; }
+}
 }

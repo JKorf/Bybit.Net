@@ -489,5 +489,39 @@ namespace Bybit.Net.Clients.InverseFuturesApi
 
         #endregion
 
+        #region Set Trading Stop
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitPosition>> SetTradingStopAsync(
+            string symbol,
+            PositionMode positionMode,
+            decimal? takeProfitPrice = null,
+            decimal? stopLossPrice = null,
+            decimal? trailingStopPrice = null,
+            TriggerType? takeProfitTriggerType = null,
+            TriggerType? stopLossTriggerType = null,
+            decimal? trailingStopTriggerPrice = null,
+            decimal? takeProfitQuantity = null,
+            decimal? stopLossQuantity = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol },
+                { "position_idx", JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)) }
+            };
+            parameters.AddOptionalParameter("take_profit", takeProfitPrice?.ToString());
+            parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString());
+            parameters.AddOptionalParameter("trailing_stop", trailingStopPrice?.ToString());
+            parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("new_trailing_active", trailingStopTriggerPrice?.ToString());
+            parameters.AddOptionalParameter("sl_size", stopLossQuantity?.ToString());
+            parameters.AddOptionalParameter("tp_size", takeProfitQuantity?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitPosition>(_baseClient.GetUrl("futures/private/position/trading-stop"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+        #endregion
     }
 }

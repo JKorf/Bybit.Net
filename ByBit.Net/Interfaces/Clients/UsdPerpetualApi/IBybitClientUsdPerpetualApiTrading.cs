@@ -32,10 +32,11 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="stopLossPrice">Stop loss price, only take effect upon opening the position</param>
         /// <param name="takeProfitTriggerType">Take profit trigger price type, default: LastPrice</param>
         /// <param name="stopLossTriggerType">Stop loss trigger price type, default: LastPrice</param>
+        /// <param name="positionMode">Position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change an exising order. Either orderId or clientOrderId should be provided
@@ -137,10 +138,11 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="stopLossPrice">Stop loss price, only take effect upon opening the position</param>
         /// <param name="takeProfitTriggerType">Take profit trigger price type, default: LastPrice</param>
         /// <param name="stopLossTriggerType">Stop loss trigger price type, default: LastPrice</param>
+        /// <param name="positionMode">Position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal basePrice, decimal triggerPrice, TimeInForce timeInForce, bool closeOnTrigger, bool reduceOnly, decimal? price = null, TriggerType? triggerType = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal basePrice, decimal triggerPrice, TimeInForce timeInForce, bool closeOnTrigger, bool reduceOnly, decimal? price = null, TriggerType? triggerType = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change an exising order. Either stopOrderId or clientOrderId should be provided
@@ -237,5 +239,36 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, TradeType? type = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Set take profit, stop loss, and trailing stop for your open position
+        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-tradingstop" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="side">The position side</param>
+        /// <param name="takeProfitPrice">The new take profit price. Setting it to null will not change the value, setting it to 0 will remove the current TakeProfit</param>
+        /// <param name="stopLossPrice">The new stop loss price. Setting it to null will not change the value, setting it to 0 will remove the current StopLoss</param>
+        /// <param name="trailingStopPrice">Setting it to null will not change the value, setting it to 0 will remove the current TrailingStop</param>
+        /// <param name="takeProfitTriggerType">Take profit trigger type, defaults to LastPrice</param>
+        /// <param name="stopLossTriggerType">Stop loss trigger type, defaults to LastPrice</param>
+        /// <param name="takeProfitQuantity">Take profit quantity when in Partial mode</param>
+        /// <param name="stopLossQuantity">Stop loss quantity when in Partial mode</param>
+        /// <param name="positionMode">Position mode</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetTradingStopAsync(
+            string symbol,
+            PositionSide side,
+            decimal? takeProfitPrice = null,
+            decimal? stopLossPrice = null,
+            decimal? trailingStopPrice = null,
+            TriggerType? takeProfitTriggerType = null,
+            TriggerType? stopLossTriggerType = null,
+            decimal? takeProfitQuantity = null,
+            decimal? stopLossQuantity = null,
+            PositionMode? positionMode = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default);
     }
 }

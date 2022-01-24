@@ -100,25 +100,6 @@ namespace Bybit.Net.Clients.InverseFuturesApi
 
         #endregion
 
-        #region Get premium index price klines
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>()
-            {
-                { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
-                { "from", DateTimeConverter.ConvertToSeconds(from)! },
-            };
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitIndexPriceKline>>(_baseClient.GetUrl("v2/public/premium-index-kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Get server time
 
         /// <inheritdoc />

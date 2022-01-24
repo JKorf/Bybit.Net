@@ -32,10 +32,11 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="symbol">The symbol</param>
         /// <param name="riskId">The risk id to set</param>
         /// <param name="side">Side</param>
+        /// <param name="positionMode">Position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side, long riskId, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitRiskId>> SetRiskLimitAsync(string symbol, OrderSide side, long riskId, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default);
 
         #endregion
 
@@ -65,10 +66,11 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="symbol">Symbol</param>
         /// <param name="side">Side</param>
         /// <param name="autoAddMargin">Auto add or not</param>
+        /// <param name="positionMode">Position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool autoAddMargin, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool autoAddMargin, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Switch Cross/Isolated; must set leverage value when switching from Cross to Isolated
@@ -100,10 +102,11 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="symbol">The symbol</param>
         /// <param name="side">The side</param>
         /// <param name="margin">Margin to add (positive) or remove (negative)</param>
+        /// <param name="positionMode">Position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, OrderSide side, decimal margin, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, OrderSide side, decimal margin, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set leverage
