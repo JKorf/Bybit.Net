@@ -20,6 +20,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 0.0.1-beta4 - 24 Jan 2022
+    * Updated CryptoExchange.Net
+
 * Version 0.0.1-beta3 - 24 Jan 2022
     * Added SetTradingStopAsync endpoint for futures APIs
     * Added SetPositionModeAsync endpoint inverse perpetual API
