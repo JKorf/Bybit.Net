@@ -36,9 +36,9 @@ namespace Bybit.Net.Converters
         /// <returns>
         /// The object value.
         /// </returns>
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            switch (reader.Value.ToString().ToLower().Trim())
+            switch (reader.Value?.ToString().ToLower().Trim())
             {
                 case "true":
                 case "yes":
@@ -65,7 +65,7 @@ namespace Bybit.Net.Converters
         /// Writes the JSON representation of the object.
         /// </summary>
         /// <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param><param name="value">The value.</param><param name="serializer">The calling serializer.</param>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
         }
 
