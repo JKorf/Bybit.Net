@@ -198,6 +198,7 @@ namespace Bybit.Net.Clients
 
             if (socketConnection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
             {
+                // Spot subscriptions
                 var bRequest = ((BybitSpotRequestMessage)request);
                 var requestSymbols = bRequest.Parameters["symbol"]?.ToString().Split(',');
                 var symbol = message["params"]?["symbol"]?.ToString();
@@ -219,16 +220,24 @@ namespace Bybit.Net.Clients
             }
             else
             {
+                // Futures subscriptions
                 var requestParams = ((BybitFuturesRequestMessage)request).Parameters;
                 if (requestParams.Any(p => topic == p.ToString()))
                     return true;
 
-                var split = topic.Split('.');
-                var symbol = split.Last();
-                var mainTopic = topic.Substring(0, topic.Length - symbol.Length - 1);
+                if (topic.Contains('.'))
+                {
+                    // Some subscriptions have topics like orderbook.ETHUSDT
+                    // Split on `.` to get the topic and symbol
+                    var split = topic.Split('.');
+                    var symbol = split.Last();
+                    if (symbol.Length == 0)
+                        return false;
 
-                if (requestParams.Any(p => (string)p == (mainTopic + ".*")))
-                    return true;
+                    var mainTopic = topic.Substring(0, topic.Length - symbol.Length - 1);
+                    if (requestParams.Any(p => (string)p == (mainTopic + ".*")))
+                        return true;
+                }
 
                 return false;
             }
