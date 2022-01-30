@@ -45,7 +45,8 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitTradeUpdate>>> handler, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to ticker updates
+        /// Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for 
+        /// properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.
         /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="handler">The event handler for the received data</param>
@@ -54,7 +55,8 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to ticker updates
+        /// Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for 
+        /// properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.
         /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
@@ -64,7 +66,8 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to ticker updates
+        /// Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for 
+        /// properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.
         /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to receive updates for</param>
