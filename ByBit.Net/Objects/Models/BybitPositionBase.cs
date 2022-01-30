@@ -87,6 +87,7 @@ namespace Bybit.Net.Objects.Models
         /// Whether to add margin automatically
         /// </summary>
         [JsonProperty("auto_add_margin")]
+        [JsonConverter(typeof(BoolConverter))]
         public bool AutoAddMargin { get; set; }    
         /// <summary>
         /// Today's realized pnl

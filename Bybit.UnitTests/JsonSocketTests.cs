@@ -178,7 +178,8 @@ namespace Bybit.UnitTests
         [Test]
         public async Task ValidateUPPositionUpdateStreamJson()
         {
-            await TestFileToObject<IEnumerable<BybitPositionUsdPerpetualUpdate>>(@"JsonResponses\UsdPerpetual\Socket\PositionUpdate.txt");
+            await TestFileToObject<IEnumerable<BybitPositionUsdPerpetualUpdate>>(@"JsonResponses\UsdPerpetual\Socket\PositionUpdate1.txt");
+            await TestFileToObject<IEnumerable<BybitPositionUsdPerpetualUpdate>>(@"JsonResponses\UsdPerpetual\Socket\PositionUpdate2.txt");
         }
 
         [Test]
@@ -190,7 +191,8 @@ namespace Bybit.UnitTests
         [Test]
         public async Task ValidateUPOrderUpdateStreamJson()
         {
-            await TestFileToObject<IEnumerable<BybitOrderUpdate>>(@"JsonResponses\UsdPerpetual\Socket\OrderUpdate.txt");
+            await TestFileToObject<IEnumerable<BybitOrderUpdate>>(@"JsonResponses\UsdPerpetual\Socket\OrderUpdate1.txt");
+            await TestFileToObject<IEnumerable<BybitOrderUpdate>>(@"JsonResponses\UsdPerpetual\Socket\OrderUpdate2.txt");
         }
 
         [Test]

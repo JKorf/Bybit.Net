@@ -79,5 +79,20 @@ namespace Bybit.Net.Objects.Models.Socket
         /// Is isolated
         /// </summary>
         public bool Isolated { get; set; }
+        /// <summary>
+        /// Position id
+        /// </summary>
+        [JsonProperty("position_id")]
+        public string? PositionId { get; set; }
+        /// <summary>
+        /// Adl indicator
+        /// </summary>
+        [JsonProperty("adl_rank_indicator")]
+        public int? AdlRankIndicator { get; set; }
+        /// <summary>
+        /// Fee quantity
+        /// </summary>
+        [JsonProperty("free_qty")]
+        public decimal? FeeQuantity { get; set; }
     }
 }
