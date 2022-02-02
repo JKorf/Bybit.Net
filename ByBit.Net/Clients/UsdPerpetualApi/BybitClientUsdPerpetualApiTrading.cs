@@ -468,7 +468,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         #region User trades
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(
+        public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUserTrade>>>> GetUserTradesAsync(
             string symbol,
             DateTime? startTime = null,
             DateTime? endTime = null,
@@ -489,14 +489,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitTradeWrapper>(_baseClient.GetUrl("private/linear/execution/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            if (!result)
-                return result.As<IEnumerable<BybitUserTrade>>(default);
-
-            if (result.Data.Trades == null)
-                return result.As<IEnumerable<BybitUserTrade>>(new BybitUserTrade[0]);
-
-            return result.As(result.Data.Trades);
+            return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitUserTrade>>>(_baseClient.GetUrl("private/linear/trade/execution/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
