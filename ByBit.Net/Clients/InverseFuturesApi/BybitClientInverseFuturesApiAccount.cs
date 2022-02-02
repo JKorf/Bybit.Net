@@ -62,12 +62,30 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #endregion
 
         #region Get positions
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("futures/private/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitPosition>>(default);
+
+            foreach (var position in result.Data)
+                position.Data.IsValid = position.IsValid;
+
+            return result.As(result.Data.Select(d => d.Data));
+        }
+
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("futures/private/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);

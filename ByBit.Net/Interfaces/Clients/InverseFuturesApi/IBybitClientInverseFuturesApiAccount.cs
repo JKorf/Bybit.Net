@@ -43,14 +43,23 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
         #region Positions
 
         /// <summary>
-        /// Get user positions
+        /// Get user positions for a symbol
         /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get user positions
+        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change margin

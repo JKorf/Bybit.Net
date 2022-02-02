@@ -26,7 +26,7 @@ namespace Bybit.Net.Objects.Models
         /// <summary>
         /// Side
         /// </summary>
-        [JsonConverter(typeof(OrderSideConverter))]
+        [JsonConverter(typeof(PositionSideConverter))]
         public PositionSide Side { get; set; }
         /// <summary>
         /// Quantity
