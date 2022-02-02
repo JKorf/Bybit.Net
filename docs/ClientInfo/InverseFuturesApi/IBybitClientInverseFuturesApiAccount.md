@@ -118,6 +118,32 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? a
 
 ***
 
+## GetPositionAsync  
+
+[https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition](https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition)  
+<p>
+
+*Get user positions for a symbol*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.InverseFuturesApi.Account.GetPositionAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|Filter by symbol|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetPositionsAsync  
 
 [https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition](https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition)  
@@ -131,12 +157,11 @@ var result = await client.InverseFuturesApi.Account.GetPositionsAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(string? symbol = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ symbol|Filter by symbol|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
