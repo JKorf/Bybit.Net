@@ -358,7 +358,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<Dat
 [https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo)  
 <p>
 
-*Subscribe to ticker updates*  
+*Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
+*properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
 
 ```csharp  
 var client = new BybitSocketClient();  
@@ -383,7 +384,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataE
 [https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo)  
 <p>
 
-*Subscribe to ticker updates*  
+*Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
+*properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
 
 ```csharp  
 var client = new BybitSocketClient();  
@@ -409,7 +411,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 [https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo)  
 <p>
 
-*Subscribe to ticker updates*  
+*Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
+*properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
 
 ```csharp  
 var client = new BybitSocketClient();  

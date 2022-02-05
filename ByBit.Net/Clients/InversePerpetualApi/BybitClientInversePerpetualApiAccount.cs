@@ -60,12 +60,22 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #endregion
 
         #region Get positions
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitPosition>> GetPositionAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitPosition>(_baseClient.GetUrl("v2/private/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("v2/private/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);

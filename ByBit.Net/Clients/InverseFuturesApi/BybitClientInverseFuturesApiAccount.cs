@@ -21,12 +21,10 @@ namespace Bybit.Net.Clients.InverseFuturesApi
     public class BybitClientInverseFuturesApiAccount : IBybitClientInverseFuturesApiAccount
     {
         private BybitClientInverseFuturesApi _baseClient;
-        private BybitClient _baseBaseClient;
 
-        internal BybitClientInverseFuturesApiAccount(BybitClient baseBaseClient, BybitClientInverseFuturesApi baseClient)
+        internal BybitClientInverseFuturesApiAccount(BybitClientInverseFuturesApi baseClient)
         {
             _baseClient = baseClient;
-            _baseBaseClient = baseBaseClient;
         }
 
         #region Get risk limit
@@ -62,12 +60,30 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #endregion
 
         #region Get positions
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("futures/private/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitPosition>>(default);
+
+            foreach (var position in result.Data)
+                position.Data.IsValid = position.IsValid;
+
+            return result.As(result.Data.Select(d => d.Data));
+        }
+
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<IEnumerable<BybitPositionData>>(_baseClient.GetUrl("futures/private/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
@@ -202,9 +218,13 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #region Get balances
 
         /// <inheritdoc />
-        public Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? asset = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? asset = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            return _baseBaseClient.InversePerpetualApi.Account.GetBalancesAsync();
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<Dictionary<string, BybitBalance>>(_baseClient.GetUrl("v2/private/wallet/balance"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -212,9 +232,25 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #region Get wallet fund history
 
         /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, WalletFundType? type = null, int? pageSize = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, WalletFundType? type = null, int? pageSize = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            return _baseBaseClient.InversePerpetualApi.Account.GetWalletFundHistoryAsync();
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalParameter("start_date", startTime?.ToString("yyyy-MM-dd"));
+            parameters.AddOptionalParameter("end_date", endTime?.ToString("yyyy-MM-dd"));
+            parameters.AddOptionalParameter("wallet_fund_type", type == null ? null : JsonConvert.SerializeObject(type, new WalletFundTypeConverter(false)));
+            parameters.AddOptionalParameter("page", page?.ToString());
+            parameters.AddOptionalParameter("limit", pageSize?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<BybitData<IEnumerable<BybitWalletFundRecord>>>(_baseClient.GetUrl("v2/private/wallet/fund/records"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitWalletFundRecord>>(default);
+
+            if (result.Data.Data == null)
+                return result.As<IEnumerable<BybitWalletFundRecord>>(new BybitWalletFundRecord[0]);
+
+            return result.As(result.Data.Data);
         }
 
         #endregion
@@ -222,9 +258,25 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #region Get withdrawal history
 
         /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, WithdrawStatus? status = null, int? pageSize = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, WithdrawStatus? status = null, int? pageSize = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            return _baseBaseClient.InversePerpetualApi.Account.GetWithdrawalHistoryAsync();
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalParameter("start_date", startTime?.ToString("yyyy-MM-dd"));
+            parameters.AddOptionalParameter("end_date", endTime?.ToString("yyyy-MM-dd"));
+            parameters.AddOptionalParameter("status", status == null ? null : JsonConvert.SerializeObject(status, new WithdrawStatusConverter(false)));
+            parameters.AddOptionalParameter("page", page?.ToString());
+            parameters.AddOptionalParameter("limit", pageSize?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<BybitData<IEnumerable<BybitWithdrawal>>>(_baseClient.GetUrl("v2/private/wallet/withdraw/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitWithdrawal>>(default);
+
+            if (result.Data.Data == null)
+                return result.As<IEnumerable<BybitWithdrawal>>(new BybitWithdrawal[0]);
+
+            return result.As(result.Data.Data);
         }
 
         #endregion
@@ -232,9 +284,15 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #region Get asset exchange history
 
         /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHistoryAsync(long? fromId = null, SearchDirection? direction = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHistoryAsync(long? fromId = null, SearchDirection? direction = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            return _baseBaseClient.InversePerpetualApi.Account.GetAssetExchangeHistoryAsync();
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("from", fromId?.ToString());
+            parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
+            parameters.AddOptionalParameter("limit", limit?.ToString());
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitExchangeHistoryEntry>>(_baseClient.GetUrl("v2/private/exchange-order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -242,9 +300,12 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #region Get api key info
 
         /// <inheritdoc />
-        public Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            return _baseBaseClient.InversePerpetualApi.Account.GetApiKeyInfoAsync();
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<IEnumerable<ByBitApiKeyInfo>>(_baseClient.GetUrl("v2/private/account/api-key"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

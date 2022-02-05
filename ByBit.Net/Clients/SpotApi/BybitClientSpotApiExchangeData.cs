@@ -23,7 +23,6 @@ namespace Bybit.Net.Clients.SpotApi
         internal BybitClientSpotApiExchangeData(BybitClientSpotApi baseClient)
         {
             _baseClient = baseClient;
-
         }
 
         #region Get server time

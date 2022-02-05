@@ -20,6 +20,13 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 0.0.1-beta8 - 02 Feb 2022
+    * Fixed deserialization error using GetPositionsAsync on InversePerpetual API with symbol parameter
+    * Split GetPositionsAsync into GetPositionAsync and GetPositionsAsync
+    * Fixed PositionSide parsing warning for positions
+    * Fixed cetain account endpoints on UsdFutures and InverseFutures not respecting the ApiClient settings
+    * Updated CryptoExchange.Net
+
 * Version 0.0.1-beta7 - 30 Jan 2022
     * Fixed exception during futures socket message handling when multiple different subscriptions are active
 

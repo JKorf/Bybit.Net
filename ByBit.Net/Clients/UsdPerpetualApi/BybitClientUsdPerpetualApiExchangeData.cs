@@ -23,7 +23,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         internal BybitClientUsdPerpetualApiExchangeData(BybitClientUsdPerpetualApi baseClient)
         {
             _baseClient = baseClient;
-
         }
 
         #region Get klines
