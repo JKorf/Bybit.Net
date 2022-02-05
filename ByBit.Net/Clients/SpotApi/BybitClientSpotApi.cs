@@ -117,10 +117,9 @@ namespace Bybit.Net.Clients.SpotApi
             return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
         }
 
-#pragma warning disable 1066
-        async Task<WebCallResult<IEnumerable<Symbol>>> IBaseRestClient.GetSymbolsAsync()
+        async Task<WebCallResult<IEnumerable<Symbol>>> IBaseRestClient.GetSymbolsAsync(CancellationToken ct)
         {
-            var result = await ExchangeData.GetSymbolsAsync().ConfigureAwait(false);
+            var result = await ExchangeData.GetSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<Symbol>>(null);
 
@@ -134,9 +133,9 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Ticker>>> IBaseRestClient.GetTickersAsync()
+        async Task<WebCallResult<IEnumerable<Ticker>>> IBaseRestClient.GetTickersAsync(CancellationToken ct)
         {
-            var result = await ExchangeData.GetTickersAsync().ConfigureAwait(false);
+            var result = await ExchangeData.GetTickersAsync(ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<Ticker>>(null);
 
@@ -152,12 +151,12 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<Ticker>> IBaseRestClient.GetTickerAsync(string symbol)
+        async Task<WebCallResult<Ticker>> IBaseRestClient.GetTickerAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.GetTickerAsync), nameof(symbol));
 
-            var result = await ExchangeData.GetTickerAsync(symbol).ConfigureAwait(false);
+            var result = await ExchangeData.GetTickerAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<Ticker>(null);
 
@@ -173,12 +172,12 @@ namespace Bybit.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Kline>>> IBaseRestClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
+        async Task<WebCallResult<IEnumerable<Kline>>> IBaseRestClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime, DateTime? endTime, int? limit, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.GetKlinesAsync), nameof(symbol));
 
-            var result = await ExchangeData.GetKlinesAsync(symbol, TimeSpanToInterval(timespan), startTime, endTime, limit).ConfigureAwait(false);
+            var result = await ExchangeData.GetKlinesAsync(symbol, TimeSpanToInterval(timespan), startTime, endTime, limit, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<Kline>>(null);
 
@@ -194,12 +193,12 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol)
+        async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.GetOrderBookAsync), nameof(symbol));
 
-            var result = await ExchangeData.GetOrderBookAsync(symbol).ConfigureAwait(false);
+            var result = await ExchangeData.GetOrderBookAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<OrderBook>(null);
 
@@ -211,7 +210,7 @@ namespace Bybit.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol)
+        async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.GetRecentTradesAsync), nameof(symbol));
@@ -230,7 +229,7 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price = null, string? accountId = null)
+        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, string? accountId, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
@@ -242,7 +241,7 @@ namespace Bybit.Net.Clients.SpotApi
                 quantity,
                 price,
                 type == CommonOrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null
-                ).ConfigureAwait(false);
+                , ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<OrderId>(null);
 
@@ -253,12 +252,12 @@ namespace Bybit.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for Bybit {nameof(ISpotClient.GetOrderAsync)}", nameof(orderId));
 
-            var result = await Trading.GetOrderAsync(id).ConfigureAwait(false);
+            var result = await Trading.GetOrderAsync(id, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<Order>(null);
 
@@ -277,12 +276,12 @@ namespace Bybit.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<UserTrade>>> IBaseRestClient.GetOrderTradesAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<IEnumerable<UserTrade>>> IBaseRestClient.GetOrderTradesAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for Bybit {nameof(ISpotClient.GetOrderAsync)}", nameof(orderId));
 
-            var result = await Trading.GetUserTradesAsync(fromId: id, toId: long.Parse(orderId)).ConfigureAwait(false);
+            var result = await Trading.GetUserTradesAsync(fromId: id, toId: long.Parse(orderId), ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<UserTrade>>(null);
 
@@ -300,9 +299,9 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetOpenOrdersAsync(string? symbol = null)
+        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetOpenOrdersAsync(string? symbol, CancellationToken ct)
         {
-            var result = await Trading.GetOpenOrdersAsync(symbol).ConfigureAwait(false);
+            var result = await Trading.GetOpenOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<Order>>(null);
 
@@ -321,9 +320,9 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetClosedOrdersAsync(string? symbol = null)
+        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetClosedOrdersAsync(string? symbol, CancellationToken ct)
         {
-            var result = await Trading.GetOrdersAsync(symbol).ConfigureAwait(false);
+            var result = await Trading.GetOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<Order>>(null);
 
@@ -342,21 +341,21 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<OrderId>> IBaseRestClient.CancelOrderAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<OrderId>> IBaseRestClient.CancelOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for Bybit {nameof(ISpotClient.GetOrderAsync)}", nameof(orderId));
 
-            var result = await Trading.CancelOrderAsync(id).ConfigureAwait(false);
+            var result = await Trading.CancelOrderAsync(id, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<OrderId>(null);
 
             return result.As(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
         }
 
-        async Task<WebCallResult<IEnumerable<Balance>>> IBaseRestClient.GetBalancesAsync(string? accountId = null)
+        async Task<WebCallResult<IEnumerable<Balance>>> IBaseRestClient.GetBalancesAsync(string? accountId, CancellationToken ct)
         {
-            var result = await Account.GetBalancesAsync().ConfigureAwait(false);
+            var result = await Account.GetBalancesAsync(ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<Balance>>(null);
 
@@ -368,7 +367,6 @@ namespace Bybit.Net.Clients.SpotApi
                 Total = r.Total
             }));
         }
-#pragma warning restore
 
         private static KlineInterval TimeSpanToInterval(TimeSpan timeSpan)
         {

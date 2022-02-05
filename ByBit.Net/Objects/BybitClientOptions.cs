@@ -220,7 +220,7 @@ namespace Bybit.Net.Objects
     /// <summary>
     /// Options for the futures symbol order book
     /// </summary>
-    public class BybitFuturesSymbolOrderBookOptions : OrderBookOptions
+    public class BybitSymbolOrderBookOptions : OrderBookOptions
     {
         /// <summary>
         /// The client to use for the socket connection. When using the same client for multiple order books the connection can be shared.

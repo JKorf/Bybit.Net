@@ -11,6 +11,7 @@ using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Clients;
+using System.Threading;
 
 namespace Bybit.Net.SymbolOrderBooks
 {
@@ -27,7 +28,7 @@ namespace Bybit.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">The symbol the order book is for</param>
         /// <param name="options">Options for the order book</param>
-        public BybitUsdPerpetualSymbolOrderBook(string symbol, BybitFuturesSymbolOrderBookOptions? options = null) : base("Bybit", symbol, options ?? new BybitFuturesSymbolOrderBookOptions())
+        public BybitUsdPerpetualSymbolOrderBook(string symbol, BybitSymbolOrderBookOptions? options = null) : base("Bybit", symbol, options ?? new BybitSymbolOrderBookOptions())
         {
             socketClient = options?.SocketClient ?? new BybitSocketClient(new BybitSocketClientOptions
             {
@@ -39,15 +40,21 @@ namespace Bybit.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync()
+        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync(CancellationToken ct)
         {
             var result = await socketClient.UsdPerpetualStreams.SubscribeToOrderBookUpdatesAsync(Symbol, Levels!.Value, ProcessSnapshot, ProcessUpdate).ConfigureAwait(false);
             if (!result)
                 return result;
 
+            if (ct.IsCancellationRequested)
+            {
+                await result.Data.CloseAsync().ConfigureAwait(false);
+                return result.AsError<UpdateSubscription>(new CancellationRequestedError());
+            }
+
             Status = OrderBookStatus.Syncing;
             
-            var setResult = await WaitForSetOrderBookAsync(30000).ConfigureAwait(false);
+            var setResult = await WaitForSetOrderBookAsync(30000, ct).ConfigureAwait(false);
             return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
         }
 
@@ -97,9 +104,9 @@ namespace Bybit.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<bool>> DoResyncAsync()
+        protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
         {
-            return await WaitForSetOrderBookAsync(30000).ConfigureAwait(false);
+            return await WaitForSetOrderBookAsync(30000, ct).ConfigureAwait(false);
         }
 
         /// <summary>
