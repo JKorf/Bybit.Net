@@ -238,7 +238,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, TradeType? type = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUserTrade>>>> GetUserTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, TradeType? type = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set take profit, stop loss, and trailing stop for your open position
