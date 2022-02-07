@@ -20,6 +20,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 0.0.1-beta10 - 07 Feb 2022
+    * Fixed decimal serialization for SetTradingStopAsync methods
+    * Fixed GetUserTradesAsync paged endpoints
+
 * Version 0.0.1-beta9 - 05 Feb 2022
     * Updated CryptoExchange.Net, adding Cancellation token support for Common interface and SymbolOrderBook
 
