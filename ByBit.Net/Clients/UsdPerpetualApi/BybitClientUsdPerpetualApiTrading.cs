@@ -522,13 +522,13 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new PositionSideConverter(false)) }
             };
-            parameters.AddOptionalParameter("take_profit", takeProfitPrice?.ToString());
-            parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString());
-            parameters.AddOptionalParameter("trailing_stop", trailingStopPrice?.ToString());
+            parameters.AddOptionalParameter("take_profit", takeProfitPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("trailing_stop", trailingStopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
-            parameters.AddOptionalParameter("sl_size", stopLossQuantity?.ToString());
-            parameters.AddOptionalParameter("tp_size", takeProfitQuantity?.ToString());
+            parameters.AddOptionalParameter("sl_size", stopLossQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("tp_size", takeProfitQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("position_idx", positionMode == null ? null : JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
