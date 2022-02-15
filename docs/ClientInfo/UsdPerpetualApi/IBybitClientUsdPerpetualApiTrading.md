@@ -304,7 +304,7 @@ var result = await client.UsdPerpetualApi.Trading.GetUserTradesAsync(/* paramete
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbol, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? pageSize = default, TradeType? type = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUserTrade>>>> GetUserTradesAsync(string symbol, DateTime? startTime = default, DateTime? endTime = default, int? page = default, int? pageSize = default, TradeType? type = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
