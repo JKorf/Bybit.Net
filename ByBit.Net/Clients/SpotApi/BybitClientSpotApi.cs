@@ -6,6 +6,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
@@ -229,7 +230,7 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, string? accountId, CancellationToken ct)
+        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, string? accountId, string? clientOrderId, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
@@ -240,8 +241,9 @@ namespace Bybit.Net.Clients.SpotApi
                 type == CommonOrderType.Limit ? OrderType.Limit : OrderType.Market,
                 quantity,
                 price,
-                type == CommonOrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null
-                , ct: ct).ConfigureAwait(false);
+                type == CommonOrderType.Limit ? TimeInForce.GoodTillCanceled : (TimeInForce?)null,
+                clientOrderId: clientOrderId,
+                ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<OrderId>(null);
 

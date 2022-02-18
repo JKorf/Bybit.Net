@@ -213,7 +213,8 @@ namespace Bybit.Net.Objects
         {
             base.Copy(input, def);
 
-            input.BaseAddressAuthenticated = def.BaseAddressAuthenticated;
+            if(def.BaseAddressAuthenticated != null)
+                input.BaseAddressAuthenticated = def.BaseAddressAuthenticated;
         }
     }
 
