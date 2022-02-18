@@ -20,66 +20,6 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
-* Version 0.0.1-beta10 - 07 Feb 2022
-    * Fixed decimal serialization for SetTradingStopAsync methods
-    * Fixed GetUserTradesAsync paged endpoints
-
-* Version 0.0.1-beta9 - 05 Feb 2022
-    * Updated CryptoExchange.Net, adding Cancellation token support for Common interface and SymbolOrderBook
-
-* Version 0.0.1-beta8 - 02 Feb 2022
-    * Fixed deserialization error using GetPositionsAsync on InversePerpetual API with symbol parameter
-    * Split GetPositionsAsync into GetPositionAsync and GetPositionsAsync
-    * Fixed PositionSide parsing warning for positions
-    * Fixed cetain account endpoints on UsdFutures and InverseFutures not respecting the ApiClient settings
-    * Updated CryptoExchange.Net
-
-* Version 0.0.1-beta7 - 30 Jan 2022
-    * Fixed exception during futures socket message handling when multiple different subscriptions are active
-
-* Version 0.0.1-beta6 - 30 Jan 2022
-    * Fixed some USD Perpetual position update deserialization issues
-    * Added comments for ticker subscription
-
-* Version 0.0.1-beta5 - 25 Jan 2022
-    * Fixed nanosecond timestamp deserialization with latest CryptoExchange.Net
-
-* Version 0.0.1-beta4 - 24 Jan 2022
-    * Updated CryptoExchange.Net
-
-* Version 0.0.1-beta3 - 24 Jan 2022
-    * Added SetTradingStopAsync endpoint for futures APIs
-    * Added SetPositionModeAsync endpoint inverse perpetual API
-    * Renamed SetIsolatedPositionModeAsync endpoints
-    * Changed SetLeverageAsync endpoints to accept decimal values
-    * Fixed various issues
-
-* Version 0.0.1-beta2 - 18 Jan 2022
-    * Fixed multiple endpoint urls
-
-* Version 0.0.1-beta1 - 15 Jan 2022
-    * Updated CryptoExchange.Net
-
-* Version 0.0.1-alpha7 - 13 Jan 2022
-    * Fix for exponential value parsing
-
-* Version 0.0.1-alpha6 - 07 Jan 2022
-    * Updated CrytpoExchange.Net
-    * Added optional parameter for socket client lifetime in AddBybit
-
-* Version 0.0.1-alpha5 - 03 Jan 2022
-    * Updated CryptoExchange.Net
-
-* Version 0.0.1-alpha4 - 01 Jan 2022
-    * New comon implementation, added AddBybit extension method
-
-* Version 0.0.1-alpha3 - 27 Dec 2021
-    * Fixed some small issues
-    * Updated CryptoExchange.Net
-
-* Version 0.0.1-alpha2 - 21 Dec 2021
-    * Update to new CryptoExchange.Net version
-
-* Version 0.0.1-alpha1 - 07 Dec 2021
-    * Initial version
+* Version 0.0.1 - 18 Feb 2022
+	* Initial release
 
