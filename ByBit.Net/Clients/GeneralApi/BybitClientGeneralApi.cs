@@ -98,7 +98,7 @@ namespace Bybit.Net.Clients.GeneralApi
 
         /// <inheritdoc />
         protected override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.SpotApiOptions.AutoTimestamp, BybitClientInversePerpetualApi.TimeSyncState);
+            => new TimeSyncInfo(_log, _options.SpotApiOptions.AutoTimestamp, _options.SpotApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()

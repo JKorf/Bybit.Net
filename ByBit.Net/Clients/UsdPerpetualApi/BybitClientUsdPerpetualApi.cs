@@ -103,7 +103,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
 
         /// <inheritdoc />
         protected override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.UsdPerpetualApiOptions.AutoTimestamp, BybitClientInversePerpetualApi.TimeSyncState);
+            => new TimeSyncInfo(_log, _options.UsdPerpetualApiOptions.AutoTimestamp, _options.UsdPerpetualApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()

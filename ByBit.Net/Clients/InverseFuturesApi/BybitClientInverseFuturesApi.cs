@@ -102,7 +102,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
 
         /// <inheritdoc />
         protected override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.InverseFuturesApiOptions.AutoTimestamp, BybitClientInversePerpetualApi.TimeSyncState);
+            => new TimeSyncInfo(_log, _options.InverseFuturesApiOptions.AutoTimestamp, _options.InverseFuturesApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()

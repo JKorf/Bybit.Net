@@ -20,72 +20,68 @@ namespace Bybit.Net.Objects
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
-        private readonly RestApiClientOptions _inverseFuturesApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.InverseFuturesRestClientAddress);
+        private RestApiClientOptions _inverseFuturesApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.InverseFuturesRestClientAddress);
         /// <summary>
         /// Inverse futures API options
         /// </summary>
         public RestApiClientOptions InverseFuturesApiOptions
         {
             get => _inverseFuturesApiOptions;
-            set => _inverseFuturesApiOptions.Copy(_inverseFuturesApiOptions, value);
+            set => _inverseFuturesApiOptions = new RestApiClientOptions(_inverseFuturesApiOptions, value);
         }
 
-        private readonly RestApiClientOptions _inversePerpetualApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.InversePerpetualRestClientAddress);
+        private RestApiClientOptions _inversePerpetualApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.InversePerpetualRestClientAddress);
         /// <summary>
         /// Inverse perpetual API options
         /// </summary>
         public RestApiClientOptions InversePerpetualApiOptions
         {
             get => _inversePerpetualApiOptions;
-            set => _inversePerpetualApiOptions.Copy(_inversePerpetualApiOptions, value);
+            set => _inversePerpetualApiOptions = new RestApiClientOptions(_inversePerpetualApiOptions, value);
         }
 
-        private readonly RestApiClientOptions _usdPerpetualApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.UsdPerpetualRestClientAddress);
+        private RestApiClientOptions _usdPerpetualApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.UsdPerpetualRestClientAddress);
         /// <summary>
         /// Usd perpetual API options
         /// </summary>
         public RestApiClientOptions UsdPerpetualApiOptions
         {
             get => _usdPerpetualApiOptions;
-            set => _usdPerpetualApiOptions.Copy(_usdPerpetualApiOptions, value);
+            set => _usdPerpetualApiOptions = new RestApiClientOptions(_usdPerpetualApiOptions, value);
         }
 
-        private readonly RestApiClientOptions _spotApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.SpotRestClientAddress);
+        private RestApiClientOptions _spotApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.SpotRestClientAddress);
         /// <summary>
         /// Spot API options
         /// </summary>
         public RestApiClientOptions SpotApiOptions
         {
             get => _spotApiOptions;
-            set => _spotApiOptions.Copy(_spotApiOptions, value);
+            set => _spotApiOptions = new RestApiClientOptions(_spotApiOptions, value);
         }
 
         /// <summary>
         /// ctor
         /// </summary>
-        public BybitClientOptions()
+        public BybitClientOptions() : this(Default)
         {
-            if (Default == null)
-                return;
-
-            Copy(this, Default);
         }
 
         /// <summary>
-        /// Copy the values of the def to the input
+        /// ctor
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="input"></param>
-        /// <param name="def"></param>
-        public new void Copy<T>(T input, T def) where T : BybitClientOptions
+        /// <param name="baseOn">Base the new options on other options</param>
+        internal BybitClientOptions(BybitClientOptions baseOn) : base(baseOn)
         {
-            base.Copy(input, def);
+            if (baseOn == null)
+                return;
 
-            input.ReceiveWindow = def.ReceiveWindow;
-            input.InverseFuturesApiOptions = new RestApiClientOptions(def.InverseFuturesApiOptions);
-            input.InversePerpetualApiOptions = new RestApiClientOptions(def.InversePerpetualApiOptions);
-            input.SpotApiOptions = new RestApiClientOptions(def.SpotApiOptions);
-            input.UsdPerpetualApiOptions = new RestApiClientOptions(def.UsdPerpetualApiOptions);
+            ReceiveWindow = baseOn.ReceiveWindow;
+
+            InverseFuturesApiOptions = new RestApiClientOptions(baseOn.InverseFuturesApiOptions, null);
+            InversePerpetualApiOptions = new RestApiClientOptions(baseOn.InversePerpetualApiOptions, null);
+            SpotApiOptions = new RestApiClientOptions(baseOn.SpotApiOptions, null);
+            UsdPerpetualApiOptions = new RestApiClientOptions(baseOn.UsdPerpetualApiOptions, null);
         }
     }
 
@@ -102,71 +98,66 @@ namespace Bybit.Net.Objects
             SocketSubscriptionsCombineTarget = 10
         };
 
-        private readonly BybitSocketApiClientOptions _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InverseFuturesSocketClientAddress, BybitApiAddresses.Default.InverseFuturesSocketClientAddress);
+        private BybitSocketApiClientOptions _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InverseFuturesSocketClientAddress, BybitApiAddresses.Default.InverseFuturesSocketClientAddress);
         /// <summary>
         /// Inverse futures streams options
         /// </summary>
         public BybitSocketApiClientOptions InverseFuturesStreamsOptions
         {
             get => _inverseFuturesStreamsOptions;
-            set => _inverseFuturesStreamsOptions.Copy(_inverseFuturesStreamsOptions, value);
+            set => _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions(_inverseFuturesStreamsOptions, value);
         }
 
-        private readonly BybitSocketApiClientOptions _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InversePerpetualSocketClientAddress, BybitApiAddresses.Default.InversePerpetualSocketClientAddress);
+        private BybitSocketApiClientOptions _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InversePerpetualSocketClientAddress, BybitApiAddresses.Default.InversePerpetualSocketClientAddress);
         /// <summary>
         /// Inverse perpetual streams options
         /// </summary>
         public BybitSocketApiClientOptions InversePerpetualStreamsOptions
         {
             get => _inversePerpetualStreamsOptions;
-            set => _inversePerpetualStreamsOptions.Copy(_inversePerpetualStreamsOptions, value);
+            set => _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions(_inversePerpetualStreamsOptions, value);
         }
 
-        private readonly BybitSocketApiClientOptions _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.UsdPerpetualPublicSocketClientAddress, BybitApiAddresses.Default.UsdPerpetualPrivateSocketClientAddress);
+        private BybitSocketApiClientOptions _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.UsdPerpetualPublicSocketClientAddress, BybitApiAddresses.Default.UsdPerpetualPrivateSocketClientAddress);
         /// <summary>
         /// Usd perpetual streams options
         /// </summary>
         public BybitSocketApiClientOptions UsdPerpetualStreamsOptions
         {
             get => _usdPerpetualStreamsOptions;
-            set => _usdPerpetualStreamsOptions.Copy(_usdPerpetualStreamsOptions, value);
+            set => _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions(_usdPerpetualStreamsOptions, value);
         }
 
-        private readonly BybitSocketApiClientOptions _spotStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketClientAddress, BybitApiAddresses.Default.SpotPrivateSocketClientAddress);
+        private BybitSocketApiClientOptions _spotStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketClientAddress, BybitApiAddresses.Default.SpotPrivateSocketClientAddress);
         /// <summary>
         /// Spot streams options
         /// </summary>
         public BybitSocketApiClientOptions SpotStreamsOptions
         {
             get => _spotStreamsOptions;
-            set => _spotStreamsOptions.Copy(_spotStreamsOptions, value);
+            set => _spotStreamsOptions = new BybitSocketApiClientOptions(_spotStreamsOptions, value);
         }
 
         /// <summary>
         /// ctor
         /// </summary>
-        public BybitSocketClientOptions()
+        public BybitSocketClientOptions() : this(Default)
         {
-            if (Default == null)
-                return;
-
-            Copy(this, Default);
         }
 
         /// <summary>
-        /// Copy the values of the def to the input
+        /// ctor
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="input"></param>
-        /// <param name="def"></param>
-        public new void Copy<T>(T input, T def) where T : BybitSocketClientOptions
+        /// <param name="baseOn">Base the new options on other options</param>
+        internal BybitSocketClientOptions(BybitSocketClientOptions baseOn) : base(baseOn)
         {
-            base.Copy(input, def);
+            if (baseOn == null)
+                return;
 
-            input.InverseFuturesStreamsOptions = new BybitSocketApiClientOptions(def.InverseFuturesStreamsOptions);
-            input.InversePerpetualStreamsOptions = new BybitSocketApiClientOptions(def.InversePerpetualStreamsOptions);
-            input.SpotStreamsOptions = new BybitSocketApiClientOptions(def.SpotStreamsOptions);
-            input.UsdPerpetualStreamsOptions = new BybitSocketApiClientOptions(def.UsdPerpetualStreamsOptions);
+            InverseFuturesStreamsOptions = new BybitSocketApiClientOptions(baseOn.InverseFuturesStreamsOptions, null);
+            InversePerpetualStreamsOptions = new BybitSocketApiClientOptions(baseOn.InversePerpetualStreamsOptions, null);
+            SpotStreamsOptions = new BybitSocketApiClientOptions(baseOn.SpotStreamsOptions, null);
+            UsdPerpetualStreamsOptions = new BybitSocketApiClientOptions(baseOn.UsdPerpetualStreamsOptions, null);
         }
     }
 
@@ -193,9 +184,10 @@ namespace Bybit.Net.Objects
         /// ctor
         /// </summary>
         /// <param name="baseOn"></param>
-        public BybitSocketApiClientOptions(BybitSocketApiClientOptions baseOn): base(baseOn)
+        /// <param name="newValues"></param>
+        internal BybitSocketApiClientOptions(BybitSocketApiClientOptions baseOn, BybitSocketApiClientOptions? newValues) : base(baseOn, newValues)
         {
-            BaseAddressAuthenticated = baseOn.BaseAddressAuthenticated;
+            BaseAddressAuthenticated = newValues?.BaseAddressAuthenticated ?? baseOn.BaseAddressAuthenticated;
         }
 
         /// <summary>
@@ -203,18 +195,9 @@ namespace Bybit.Net.Objects
         /// </summary>
         /// <param name="baseAddress"></param>
         /// <param name="baseAddressAuthenticated"></param>
-        public BybitSocketApiClientOptions(string baseAddress, string baseAddressAuthenticated): base(baseAddress)
+        internal BybitSocketApiClientOptions(string baseAddress, string baseAddressAuthenticated): base(baseAddress)
         {
             BaseAddressAuthenticated = baseAddressAuthenticated;
-        }
-
-        /// <inheritdoc />
-        public new void Copy<T>(T input, T def) where T : BybitSocketApiClientOptions
-        {
-            base.Copy(input, def);
-
-            if(def.BaseAddressAuthenticated != null)
-                input.BaseAddressAuthenticated = def.BaseAddressAuthenticated;
         }
     }
 
