@@ -143,7 +143,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestWrapperAsync<object>(_baseClient.GetUrl("v2/public/time"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestWrapperAsync<object>(_baseClient.GetUrl("v2/public/time"), HttpMethod.Get, ct, parameters, ignoreRatelimit: true).ConfigureAwait(false);
             if (!result)
                 return result.As<DateTime>(default);
 

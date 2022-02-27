@@ -68,9 +68,10 @@ namespace Bybit.Net.Clients.InversePerpetualApi
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
              bool signed = false,
-             JsonSerializer? deserializer = null) where T : class
+             JsonSerializer? deserializer = null,
+             bool ignoreRatelimit = false) where T : class
         {
-            var result = await _baseClient.SendRequestInternal<BybitResult<T>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestInternal<BybitResult<T>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<BybitResult<T>>(default);
 

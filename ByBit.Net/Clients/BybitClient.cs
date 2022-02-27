@@ -71,9 +71,9 @@ namespace Bybit.Net.Clients
 
         internal Task<WebCallResult<T>> SendRequestInternal<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
             Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, JsonSerializer? deserializer = null) where T : class
+            ArrayParametersSerialization? arraySerialization = null, int weight = 1, JsonSerializer? deserializer = null, bool ignoreRatelimit = false) where T : class
         {
-            return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, deserializer);
+            return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, deserializer, ignoreRatelimit: ignoreRatelimit);
         }
     }
 }
