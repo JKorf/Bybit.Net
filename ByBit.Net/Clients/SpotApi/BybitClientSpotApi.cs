@@ -27,7 +27,7 @@ namespace Bybit.Net.Clients.SpotApi
         private readonly BybitClientOptions _options;
         private readonly Log _log;
 
-        internal static TimeSyncState TimeSyncState = new TimeSyncState();
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot Api");
 
         /// <inheritdoc />
         public event Action<OrderId>? OnOrderPlaced;

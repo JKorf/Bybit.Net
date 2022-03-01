@@ -22,7 +22,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         private readonly BybitClientOptions _options;
         private readonly Log _log;
 
-        internal static TimeSyncState TimeSyncState = new TimeSyncState();
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("Inverse Perpetual Api");
 
         internal BybitClientOptions ClientOptions { get; }
 
