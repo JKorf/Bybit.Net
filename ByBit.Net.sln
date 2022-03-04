@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31423.177
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByBit.Net", "ByBit.Net\ByBit.Net.csproj", "{49F02830-8FFA-4774-A109-2593CBC7ACEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByBit.Net", "ByBit.Net\Bybit.Net.csproj", "{49F02830-8FFA-4774-A109-2593CBC7ACEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bybit.UnitTests", "Bybit.UnitTests\Bybit.UnitTests.csproj", "{4175355E-E060-4554-B774-FF35B0D55C94}"
 EndProject
