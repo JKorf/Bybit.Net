@@ -16,6 +16,6 @@ namespace Bybit.Net.Objects.Models.Socket
         /// Available balance = wallet balance - used margin
         /// </summary>
         [JsonProperty("available_balance")]
-        public decimal AvailbleBalance { get; set; }
+        public decimal AvailableBalance { get; set; }
     }
 }
