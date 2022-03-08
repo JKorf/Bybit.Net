@@ -25,7 +25,7 @@ namespace Bybit.Net
             var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters: bodyParameters;
             parameters.Add("api_key", Credentials.Key!.GetString());
             parameters.Add("timestamp", GetMillisecondTimestamp(apiClient));
-            parameters.Add("sign", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters).Query.Replace("?", "") : parameters.ToFormData()));
+            parameters.Add("sign", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : parameters.ToFormData()));
         }
 
         public override string Sign(string toSign) => SignHMACSHA256(toSign);
