@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -119,6 +120,23 @@ namespace Bybit.Net.Clients.SpotApi
             return result;
         }
 
+        #endregion
+
+        #region Cancel MultipleOrders 
+        /// <inheritdoc />
+        public async Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = null, IEnumerable<OrderType>? orderTypes = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("side", side.HasValue ? JsonConvert.SerializeObject(side, new OrderSideConverter(false)) : null);
+            parameters.AddOptionalParameter("orderTypes", orderTypes != null && orderTypes.Any() ? string.Join(",", orderTypes.Select(o => JsonConvert.SerializeObject(o, new OrderTypeConverter(false)))): null);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("spot/order/batch-cancel"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            return result.AsDataless();
+        }
         #endregion
 
         #region Get user trades

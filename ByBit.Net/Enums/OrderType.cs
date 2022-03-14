@@ -14,7 +14,7 @@
         /// </summary>
         Market,
         /// <summary>
-        /// Limit maker order
+        /// Limit maker order, only available for SPOT
         /// </summary>
         LimitMaker
     }

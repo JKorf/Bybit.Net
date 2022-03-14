@@ -75,6 +75,17 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Cancel multiple orders based on the provided parameters
+        /// </summary>
+        /// <param name="symbol">The symbol to cancel orders on</param>
+        /// <param name="side">Only cancel buy or sell orders</param>
+        /// <param name="orderTypes">Only cancel orders fitting the order types</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = null, IEnumerable<OrderType>? orderTypes = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get user trade history
         /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-tradehistory" /></para>
         /// </summary>
