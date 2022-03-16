@@ -33,12 +33,12 @@ namespace Bybit.Net.Objects.Models.Socket
         /// <summary>
         /// Quote quantity filled
         /// </summary>
-        [JsonProperty("cum_exec_qty")]
+        [JsonProperty("cum_exec_value")]
         public decimal QuoteQuantityFilled { get; set; }
         /// <summary>
         /// Base quantity filled
         /// </summary>
-        [JsonProperty("cum_exec_value")]
+        [JsonProperty("cum_exec_qty")]
         public decimal BaseQuantityFilled { get; set; }
         /// <summary>
         /// Fee paid
