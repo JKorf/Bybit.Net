@@ -79,7 +79,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="symbol">The symbol to cancel orders on</param>
         /// <param name="side">Only cancel buy or sell orders</param>
-        /// <param name="orderTypes">Only cancel orders fitting the order types</param>
+        /// <param name="orderTypes">Only cancel orders fitting the order types, default only cancels Limit orders (not LimitMaker orders)</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
