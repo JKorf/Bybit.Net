@@ -25,12 +25,12 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
         /// <summary>
         /// Asks
         /// </summary>
-        [JsonProperty("b")]
+        [JsonProperty("a")]
         public IEnumerable<BybitSpotOrderBookEntry> Asks { get; set; } = Array.Empty<BybitSpotOrderBookEntry>();
         /// <summary>
         /// Bids
         /// </summary>
-        [JsonProperty("a")]
+        [JsonProperty("b")]
         public IEnumerable<BybitSpotOrderBookEntry> Bids { get; set; } = Array.Empty<BybitSpotOrderBookEntry>();
     }
 }
