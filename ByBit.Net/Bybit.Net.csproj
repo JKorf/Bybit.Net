@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Bybit.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>0.0.8</PackageVersion>
-    <AssemblyVersion>0.0.8</AssemblyVersion>
-    <FileVersion>0.0.8</FileVersion>
+    <PackageVersion>0.0.9</PackageVersion>
+    <AssemblyVersion>0.0.9</AssemblyVersion>
+    <FileVersion>0.0.9</FileVersion>
     <Description>Bybit.Net is a .Net wrapper for the Bybit API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Bybit Bybit.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>0.0.8 - Fixed Bids/Asks being reversed in spot order book updates (also impacted BybitSpotSymbolOrderBook), Fixed swapped quantity properties on models</PackageReleaseNotes>
+    <PackageReleaseNotes>0.0.9 - Split USD Perpetual/Inverse API order models to properly map Base/QuoteQuantity properties</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bybit.Net.xml</DocumentationFile>
