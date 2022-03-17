@@ -36,7 +36,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitUsdPerpetualOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change an exising order. Either orderId or clientOrderId should be provided
@@ -70,7 +70,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(string symbol, string? orderId = null, string? clientOrderId = null, OrderStatus? status = null, SortOrder? order = null, int? pageSize = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUsdPerpetualOrder>>>> GetOrdersAsync(string symbol, string? orderId = null, string? clientOrderId = null, OrderStatus? status = null, SortOrder? order = null, int? pageSize = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order information for up to 500 orders
@@ -80,7 +80,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitUsdPerpetualOrder>>> GetOpenOrdersRealTimeAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order information. Either orderId or clientOrderId should be provided
@@ -92,7 +92,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <param name="receiveWindow"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, string? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitUsdPerpetualOrder>> GetOpenOrderRealTimeAsync(string symbol, string? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an order, either orderId or clientOrderId should be provided

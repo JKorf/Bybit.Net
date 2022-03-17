@@ -298,7 +298,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitInverseOrderUpdate>>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -306,10 +306,10 @@ namespace Bybit.Net.Clients.InversePerpetualApi
                 if (internalData == null)
                     return;
 
-                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitOrderUpdate>>(internalData);
+                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitInverseOrderUpdate>>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitOrderUpdate)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitInverseOrderUpdate)} object: " + desResult.Error);
                     return;
                 }
 

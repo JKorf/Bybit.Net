@@ -29,7 +29,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         #region Place order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitOrder>> PlaceOrderAsync(
+        public async Task<WebCallResult<BybitUsdPerpetualOrder>> PlaceOrderAsync(
             string symbol,
             OrderSide side,
             OrderType type,
@@ -67,7 +67,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("position_idx", positionMode == null ? null : JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("private/linear/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitUsdPerpetualOrder>(_baseClient.GetUrl("private/linear/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -75,7 +75,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         #region Get orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(
+        public async Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUsdPerpetualOrder>>>> GetOrdersAsync(
             string symbol,
             string? orderId = null,
             string? clientOrderId = null,
@@ -99,7 +99,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitOrder>>>(_baseClient.GetUrl("private/linear/order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitUsdPerpetualOrder>>>(_baseClient.GetUrl("private/linear/order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -200,7 +200,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         #region Get open orders realtime
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(
+        public async Task<WebCallResult<BybitUsdPerpetualOrder>> GetOpenOrderRealTimeAsync(
             string symbol,
             string? orderId = null,
             string? clientOrderId = null,
@@ -218,12 +218,12 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitOrder>(_baseClient.GetUrl("private/linear/order/serach"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitUsdPerpetualOrder>(_baseClient.GetUrl("private/linear/order/serach"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(
+        public async Task<WebCallResult<IEnumerable<BybitUsdPerpetualOrder>>> GetOpenOrdersRealTimeAsync(
             string symbol,
             long? receiveWindow = null,
             CancellationToken ct = default)
@@ -235,7 +235,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitOrder>>(_baseClient.GetUrl("v2/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitUsdPerpetualOrder>>(_baseClient.GetUrl("v2/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 

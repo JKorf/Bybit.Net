@@ -35,7 +35,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, decimal? price = null, bool? closeOnTrigger = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, bool? reduceOnly = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitInverseOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, decimal? price = null, bool? closeOnTrigger = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, bool? reduceOnly = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change an exising order. Either orderId or clientOrderId should be provided
@@ -67,7 +67,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(string symbol, OrderStatus? status = null, SearchDirection? direction = null, int? limit = null, string? cursor = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInverseOrder>>>> GetOrdersAsync(string symbol, OrderStatus? status = null, SearchDirection? direction = null, int? limit = null, string? cursor = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order information. Either orderId or clientOrderId should be provided
@@ -79,7 +79,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="receiveWindow"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, string? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitInverseOrder>> GetOpenOrderRealTimeAsync(string symbol, string? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order information for up to 500 orders
@@ -89,7 +89,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitInverseOrder>>> GetOpenOrdersRealTimeAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an order, either orderId or clientOrderId should be provided
@@ -101,7 +101,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrder>> CancelOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitInverseOrder>> CancelOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel all active orders for a symbol

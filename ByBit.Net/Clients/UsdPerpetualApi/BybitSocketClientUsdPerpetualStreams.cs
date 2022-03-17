@@ -267,30 +267,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default)
-        {
-            var internalHandler = new Action<DataEvent<JToken>>(data =>
-            {
-                var internalData = data.Data["data"];
-                if (internalData == null)
-                    return;
-
-                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitOrderUpdate>>(internalData);
-                if (!desResult)
-                {
-                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitOrderUpdate)} object: " + desResult.Error);
-                    return;
-                }
-
-                handler(data.As(desResult.Data));
-            });
-            return await _baseClient.SubscribeInternalAsync(this, _options.UsdPerpetualStreamsOptions.BaseAddressAuthenticated,
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
-                null, true, internalHandler, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualOrderUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualOrderUpdate>>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -302,6 +279,29 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 if (!desResult)
                 {
                     _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitUsdPerpetualOrderUpdate)} object: " + desResult.Error);
+                    return;
+                }
+
+                handler(data.As(desResult.Data));
+            });
+            return await _baseClient.SubscribeInternalAsync(this, _options.UsdPerpetualStreamsOptions.BaseAddressAuthenticated,
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
+                null, true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualStopOrderUpdate>>> handler, CancellationToken ct = default)
+        {
+            var internalHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var desResult = _baseClient.DeserializeInternal<IEnumerable<BybitUsdPerpetualStopOrderUpdate>>(internalData);
+                if (!desResult)
+                {
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitUsdPerpetualStopOrderUpdate)} object: " + desResult.Error);
                     return;
                 }
 

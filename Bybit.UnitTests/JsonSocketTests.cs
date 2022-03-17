@@ -123,7 +123,7 @@ namespace Bybit.UnitTests
         [Test]
         public async Task ValidateIPOrderUpdateStreamJson()
         {
-            await TestFileToObject<IEnumerable<BybitOrderUpdate>>(@"JsonResponses/InversePerpetual/Socket/OrderUpdate.txt");
+            await TestFileToObject<IEnumerable<BybitInverseOrderUpdate>>(@"JsonResponses/InversePerpetual/Socket/OrderUpdate.txt");
         }
 
         [Test]
@@ -191,14 +191,14 @@ namespace Bybit.UnitTests
         [Test]
         public async Task ValidateUPOrderUpdateStreamJson()
         {
-            await TestFileToObject<IEnumerable<BybitOrderUpdate>>(@"JsonResponses/UsdPerpetual/Socket/OrderUpdate1.txt");
-            await TestFileToObject<IEnumerable<BybitOrderUpdate>>(@"JsonResponses/UsdPerpetual/Socket/OrderUpdate2.txt");
+            await TestFileToObject<IEnumerable<BybitUsdPerpetualOrderUpdate>>(@"JsonResponses/UsdPerpetual/Socket/OrderUpdate1.txt");
+            await TestFileToObject<IEnumerable<BybitUsdPerpetualOrderUpdate>>(@"JsonResponses/UsdPerpetual/Socket/OrderUpdate2.txt");
         }
 
         [Test]
         public async Task ValidateUPStopOrderUpdateStreamJson()
         {
-            await TestFileToObject<IEnumerable<BybitUsdPerpetualOrderUpdate>>(@"JsonResponses/UsdPerpetual/Socket/StopOrderUpdate.txt");
+            await TestFileToObject<IEnumerable<BybitUsdPerpetualStopOrderUpdate>>(@"JsonResponses/UsdPerpetual/Socket/StopOrderUpdate.txt");
         }
 
         [Test]

@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Socket
     /// <summary>
     /// Order info
     /// </summary>
-    public class BybitOrderUpdate: BybitOrderBase
+    public abstract class BybitOrderUpdate: BybitOrderBase
     {
         /// <summary>
         /// Order id
@@ -34,12 +34,12 @@ namespace Bybit.Net.Objects.Models.Socket
         /// Quote quantity filled
         /// </summary>
         [JsonProperty("cum_exec_value")]
-        public decimal QuoteQuantityFilled { get; set; }
+        public abstract decimal? QuoteQuantityFilled { get; set; }
         /// <summary>
         /// Base quantity filled
         /// </summary>
         [JsonProperty("cum_exec_qty")]
-        public decimal BaseQuantityFilled { get; set; }
+        public abstract decimal? BaseQuantityFilled { get; set; }
         /// <summary>
         /// Fee paid
         /// </summary>
@@ -92,5 +92,29 @@ namespace Bybit.Net.Objects.Models.Socket
         [JsonConverter(typeof(PositionModeConverter))]
         [JsonProperty("position_idx")]
         public PositionMode? PositionMode { get; set; }
+    }
+
+    /// <inheritdoc />
+    public class BybitUsdPerpetualOrderUpdate : BybitOrderUpdate
+    {
+        /// <inheritdoc />
+        [JsonProperty("cum_exec_value")]
+        public override decimal? QuoteQuantityFilled { get; set; }
+
+        /// <inheritdoc />
+        [JsonProperty("cum_exec_qty")]
+        public override decimal? BaseQuantityFilled { get; set; }
+    }
+
+    /// <inheritdoc />
+    public class BybitInverseOrderUpdate : BybitOrderUpdate
+    {
+        /// <inheritdoc />
+        [JsonProperty("cum_exec_qty")]
+        public override decimal? QuoteQuantityFilled { get; set; }
+
+        /// <inheritdoc />
+        [JsonProperty("cum_exec_value")]
+        public override decimal? BaseQuantityFilled { get; set; }
     }
 }

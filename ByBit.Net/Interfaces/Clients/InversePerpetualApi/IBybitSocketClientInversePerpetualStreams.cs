@@ -234,7 +234,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitInverseOrderUpdate>>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user stop order updates

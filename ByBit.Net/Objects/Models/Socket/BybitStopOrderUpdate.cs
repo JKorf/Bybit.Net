@@ -65,7 +65,7 @@ namespace Bybit.Net.Objects.Models.Socket
     /// <summary>
     /// Usd perpetual order update
     /// </summary>
-    public class BybitUsdPerpetualOrderUpdate: BybitStopOrderUpdate
+    public class BybitUsdPerpetualStopOrderUpdate: BybitStopOrderUpdate
     {
         /// <summary>
         /// Reduce only
