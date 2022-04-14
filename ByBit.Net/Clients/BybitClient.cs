@@ -49,6 +49,14 @@ namespace Bybit.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public BybitClient(BybitClientOptions options) : base("Bybit", options)
         {
+            if (!string.IsNullOrEmpty(options.Referer))
+            {
+                StandardRequestHeaders = new Dictionary<string, string>
+                {
+                    { "x-referer", options.Referer! }
+                };
+            }
+
             InversePerpetualApi = AddApiClient(new BybitClientInversePerpetualApi(log, this, options));
             InverseFuturesApi = AddApiClient(new BybitClientInverseFuturesApi(log, this, options));
             UsdPerpetualApi = AddApiClient(new BybitClientUsdPerpetualApi(log, this, options));
