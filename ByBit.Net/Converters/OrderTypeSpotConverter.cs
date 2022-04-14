@@ -12,7 +12,11 @@ namespace Bybit.Net.Converters
         protected override List<KeyValuePair<OrderType, string>> Mapping => new List<KeyValuePair<OrderType, string>>
         {
             new KeyValuePair<OrderType, string>(OrderType.Limit, "LIMIT"),
+            new KeyValuePair<OrderType, string>(OrderType.Limit, "LIMIT_OF_QUOTE"),
+            new KeyValuePair<OrderType, string>(OrderType.Limit, "LIMIT_OF_BASE"),
             new KeyValuePair<OrderType, string>(OrderType.Market, "MARKET"),
+            new KeyValuePair<OrderType, string>(OrderType.Market, "MARKET_OF_QUOTE"),
+            new KeyValuePair<OrderType, string>(OrderType.Market, "MARKET_OF_BASE"),
             new KeyValuePair<OrderType, string>(OrderType.LimitMaker, "LIMIT_MAKER")
         };
     }
