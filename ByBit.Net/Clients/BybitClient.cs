@@ -54,9 +54,6 @@ namespace Bybit.Net.Clients
             UsdPerpetualApi = AddApiClient(new BybitClientUsdPerpetualApi(log, this, options));
             SpotApi = AddApiClient(new BybitClientSpotApi(log, this, options));
             GeneralApi = AddApiClient(new BybitClientGeneralApi(log, this, options));
-
-            requestBodyFormat = RequestBodyFormat.FormData;
-            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
 

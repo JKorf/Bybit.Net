@@ -16,6 +16,11 @@ namespace Bybit.Net.Objects
         public static BybitClientOptions Default { get; set; } = new BybitClientOptions();
 
         /// <summary>
+        /// A referer, will be sent in the x-referer header
+        /// </summary>
+        public string? Referer { get; set; }
+
+        /// <summary>
         /// The default receive window for requests
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
@@ -77,6 +82,7 @@ namespace Bybit.Net.Objects
                 return;
 
             ReceiveWindow = baseOn.ReceiveWindow;
+            Referer = baseOn.Referer;
 
             InverseFuturesApiOptions = new RestApiClientOptions(baseOn.InverseFuturesApiOptions, null);
             InversePerpetualApiOptions = new RestApiClientOptions(baseOn.InversePerpetualApiOptions, null);

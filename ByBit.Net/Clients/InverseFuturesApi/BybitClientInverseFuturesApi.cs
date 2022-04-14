@@ -43,6 +43,9 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             Account = new BybitClientInverseFuturesApiAccount(this);
             ExchangeData = new BybitClientInverseFuturesApiExchangeData(this);
             Trading = new BybitClientInverseFuturesApiTrading(this);
+
+            requestBodyFormat = RequestBodyFormat.FormData;
+            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
 

@@ -44,6 +44,9 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             Account = new BybitClientUsdPerpetualApiAccount(this);
             ExchangeData = new BybitClientUsdPerpetualApiExchangeData(this);
             Trading = new BybitClientUsdPerpetualApiTrading(this);
+
+            requestBodyFormat = RequestBodyFormat.FormData;
+            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
 

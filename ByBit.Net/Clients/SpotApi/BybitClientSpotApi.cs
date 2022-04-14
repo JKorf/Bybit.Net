@@ -58,6 +58,9 @@ namespace Bybit.Net.Clients.SpotApi
             Account = new BybitClientSpotApiAccount(this);
             ExchangeData = new BybitClientSpotApiExchangeData(this);
             Trading = new BybitClientSpotApiTrading(this);
+
+            requestBodyFormat = RequestBodyFormat.FormData;
+            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
 

@@ -38,6 +38,9 @@ namespace Bybit.Net.Clients.GeneralApi
             ClientOptions = options;
 
             Transfer = new BybitClientGeneralApiTransfer(this);
+
+            requestBodyFormat = RequestBodyFormat.Json;
+            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
 
