@@ -20,6 +20,12 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.0.0 - 14 Apr 2022
+    * Fixed Transfer API
+    * Added missing SpotOrderTypes
+    * Added Referer option in client options to set x-referer header
+    * Updated CryptoExchange.Net
+
 * Version 0.0.9 - 17 Mar 2022
     * Split USD Perpetual/Inverse API order models to properly map Base/QuoteQuantity properties
 
