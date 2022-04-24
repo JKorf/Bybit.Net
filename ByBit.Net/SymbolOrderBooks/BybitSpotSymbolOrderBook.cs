@@ -23,6 +23,7 @@ namespace Bybit.Net.SymbolOrderBooks
     {
         private readonly IBybitSocketClient socketClient;
         private readonly bool _socketOwner;
+        private readonly TimeSpan _initialDataTimeout;
 
         /// <summary>
         /// Create a new order book instance
@@ -36,6 +37,7 @@ namespace Bybit.Net.SymbolOrderBooks
                 LogLevel = options?.LogLevel ?? LogLevel.Information
             });
             _socketOwner = options?.SocketClient == null;
+            _initialDataTimeout = options?.InitialDataTimeout ?? TimeSpan.FromSeconds(30);
         }
 
         /// <inheritdoc />
@@ -52,7 +54,7 @@ namespace Bybit.Net.SymbolOrderBooks
             }
             Status = OrderBookStatus.Syncing;
             
-            var setResult = await WaitForSetOrderBookAsync(30000, ct).ConfigureAwait(false);
+            var setResult = await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
             return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
         }
 
@@ -69,7 +71,7 @@ namespace Bybit.Net.SymbolOrderBooks
         /// <inheritdoc />
         protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
         {
-            return await WaitForSetOrderBookAsync(30000, ct).ConfigureAwait(false);
+            return await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
         }
 
         /// <summary>
