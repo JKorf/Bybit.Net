@@ -30,7 +30,7 @@ namespace Bybit.Net.Objects.Models
         /// Price of last fill
         /// </summary>
         [JsonProperty("last_exec_price")]
-        public decimal LastTradePrice { get; set; }        
+        public decimal? LastTradePrice { get; set; }        
         /// <summary>
         /// Quote quantity filled
         /// </summary>
@@ -43,7 +43,7 @@ namespace Bybit.Net.Objects.Models
         /// Fee paid
         /// </summary>
         [JsonProperty("cum_exec_fee")]
-        public decimal Fee { get; set; }
+        public decimal? Fee { get; set; }
         /// <summary>
         /// Reason for reject
         /// </summary>

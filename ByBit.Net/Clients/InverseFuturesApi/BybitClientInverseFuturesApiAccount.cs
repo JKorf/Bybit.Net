@@ -119,7 +119,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #region Set leverage
 
         /// <inheritdoc />
-        public async Task<WebCallResult<int>> SetLeverageAsync(string symbol, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<int?>> SetLeverageAsync(string symbol, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -129,7 +129,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<int>(_baseClient.GetUrl("futures/private/position/leverage/save"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<int?>(_baseClient.GetUrl("futures/private/position/leverage/save"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

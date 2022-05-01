@@ -110,7 +110,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Set leverage
 
         /// <inheritdoc />
-        public async Task<WebCallResult<int>> SetLeverageAsync(string symbol, decimal leverage, bool? leverageOnly = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<int?>> SetLeverageAsync(string symbol, decimal leverage, bool? leverageOnly = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -120,7 +120,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             parameters.AddOptionalParameter("leverage_only", leverageOnly);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<int>(_baseClient.GetUrl("v2/private/position/leverage/save"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<int?>(_baseClient.GetUrl("v2/private/position/leverage/save"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

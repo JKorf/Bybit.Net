@@ -8,6 +8,11 @@ namespace Bybit.Net.Objects.Models.Socket
     public class BybitBalanceUpdate
     {
         /// <summary>
+        /// The asset
+        /// </summary>
+        [JsonProperty("coin")]
+        public string? Asset { get; set; }
+        /// <summary>
         /// Wallet balance
         /// </summary>
         [JsonProperty("wallet_balance")]
