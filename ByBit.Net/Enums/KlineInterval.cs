@@ -1,61 +1,61 @@
 ﻿namespace Bybit.Net.Enums
 {
     /// <summary>
-    /// Kline interval
+    /// Kline interval, int value represents the time in seconds
     /// </summary>
     public enum KlineInterval
     {
         /// <summary>
         /// 1
         /// </summary>
-        OneMinute,
+        OneMinute = 60,
         /// <summary>
         /// 3
         /// </summary>
-        ThreeMinutes,
+        ThreeMinutes = 60 * 3,
         /// <summary>
         /// 5
         /// </summary>
-        FiveMinutes,
+        FiveMinutes = 60 * 5,
         /// <summary>
         /// 15
         /// </summary>
-        FifteenMinutes,
+        FifteenMinutes = 60 * 15,
         /// <summary>
         /// 30
         /// </summary>
-        ThirtyMinutes,
+        ThirtyMinutes = 60 * 30,
         /// <summary>
         /// 60
         /// </summary>
-        OneHour,
+        OneHour = 60 * 60,
         /// <summary>
         /// 120
         /// </summary>
-        TwoHours,
+        TwoHours = 60 * 60 * 2,
         /// <summary>
         /// 240
         /// </summary>
-        FourHours,
+        FourHours = 60 * 60 * 4,
         /// <summary>
         /// 360
         /// </summary>
-        SixHours,
+        SixHours = 60 * 60 * 6,
         /// <summary>
         /// 720
         /// </summary>
-        TwelveHours,
+        TwelveHours = 60 * 60 * 12,
         /// <summary>
         /// D
         /// </summary>
-        OneDay,
+        OneDay = 60 * 60 * 24,
         /// <summary>
         /// W
         /// </summary>
-        OneWeek,
+        OneWeek = 60 * 60 * 24 * 7,
         /// <summary>
         /// M
         /// </summary>
-        OneMonth
+        OneMonth = 60 * 60 * 24 * 30
     }
 }
