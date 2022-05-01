@@ -11,6 +11,33 @@ grand_parent: Rest API documentation
 
 ***
 
+## CancelMultipleOrderAsync  
+
+<p>
+
+*Cancel multiple orders based on the provided parameters*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Trading.CancelMultipleOrderAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = default, IEnumerable<OrderType>? orderTypes = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol to cancel orders on|
+|_[Optional]_ side|Only cancel buy or sell orders|
+|_[Optional]_ orderTypes|Only cancel orders fitting the order types, default only cancels Limit orders (not LimitMaker orders)|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## CancelOrderAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-cancelactive](https://bybit-exchange.github.io/docs/spot/#t-cancelactive)  

@@ -368,7 +368,7 @@ var result = await client.InversePerpetualStreams.SubscribeToOrderUpdatesAsync(/
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitInverseOrderUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

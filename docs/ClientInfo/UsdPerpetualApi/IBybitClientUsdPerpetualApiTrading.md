@@ -218,7 +218,7 @@ var result = await client.UsdPerpetualApi.Trading.GetOpenOrderRealTimeAsync(/* p
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitOrder>> GetOpenOrderRealTimeAsync(string symbol, string? orderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitUsdPerpetualOrder>> GetOpenOrderRealTimeAsync(string symbol, string? orderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -246,7 +246,7 @@ var result = await client.UsdPerpetualApi.Trading.GetOpenOrdersRealTimeAsync(/* 
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitOrder>>> GetOpenOrdersRealTimeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitUsdPerpetualOrder>>> GetOpenOrdersRealTimeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -272,7 +272,7 @@ var result = await client.UsdPerpetualApi.Trading.GetOrdersAsync(/* parameters *
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitCursorPage<IEnumerable<BybitOrder>>>> GetOrdersAsync(string symbol, string? orderId = default, string? clientOrderId = default, OrderStatus? status = default, SortOrder? order = default, int? pageSize = default, int? page = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUsdPerpetualOrder>>>> GetOrdersAsync(string symbol, string? orderId = default, string? clientOrderId = default, OrderStatus? status = default, SortOrder? order = default, int? pageSize = default, int? page = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -446,7 +446,7 @@ var result = await client.UsdPerpetualApi.Trading.PlaceOrderAsync(/* parameters 
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitUsdPerpetualOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool reduceOnly, bool closeOnTrigger, decimal? price = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

@@ -291,7 +291,7 @@ var result = await client.UsdPerpetualStreams.SubscribeToOrderUpdatesAsync(/* pa
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualOrderUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -341,7 +341,7 @@ var result = await client.UsdPerpetualStreams.SubscribeToStopOrderUpdatesAsync(/
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualOrderUpdate>>> handler, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualStopOrderUpdate>>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

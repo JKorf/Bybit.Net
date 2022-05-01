@@ -357,7 +357,7 @@ var result = await client.InverseFuturesApi.Account.SetLeverageAsync(/* paramete
 ```  
 
 ```csharp  
-Task<WebCallResult<int>> SetLeverageAsync(string symbol, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<int?>> SetLeverageAsync(string symbol, decimal buyLeverage, decimal sellLeverage, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

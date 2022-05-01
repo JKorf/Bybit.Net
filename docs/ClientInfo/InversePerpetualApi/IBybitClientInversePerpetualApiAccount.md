@@ -408,7 +408,7 @@ var result = await client.InversePerpetualApi.Account.SetLeverageAsync(/* parame
 ```  
 
 ```csharp  
-Task<WebCallResult<int>> SetLeverageAsync(string symbol, decimal leverage, bool? leverageOnly = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<int?>> SetLeverageAsync(string symbol, decimal leverage, bool? leverageOnly = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
