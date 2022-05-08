@@ -65,7 +65,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("reduce_only", reduceOnly?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitInverseOrder>(_baseClient.GetUrl("futures/private/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
@@ -93,7 +93,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("cursor", cursor);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitInverseOrder>>>(_baseClient.GetUrl("futures/private/order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
@@ -121,7 +121,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
 
             parameters.AddOptionalParameter("order_id", orderId);
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitInverseOrder>(_baseClient.GetUrl("futures/private/order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
@@ -142,7 +142,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
                 { "symbol", symbol },
             };
 
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledOrder>>(_baseClient.GetUrl("futures/private/order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result && result.Data == null)
@@ -185,7 +185,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitOrderId>(_baseClient.GetUrl("futures/private/order/replace"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
@@ -212,7 +212,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             };
             parameters.AddOptionalParameter("order_id", orderId);
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitInverseOrder>(_baseClient.GetUrl("futures/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
@@ -229,7 +229,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
                 { "symbol", symbol },
             };
 
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitInverseOrder>>(_baseClient.GetUrl("futures/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
@@ -280,7 +280,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("futures/private/stop-order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
@@ -308,7 +308,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("direction", direction == null ? null : JsonConvert.SerializeObject(direction, new SearchDirectionConverter(false)));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("cursor", cursor);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>(_baseClient.GetUrl("futures/private/stop-order/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
@@ -336,7 +336,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
 
             parameters.AddOptionalParameter("stop_order_id", stopOrderId);
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitStopOrderId>(_baseClient.GetUrl("futures/private/stop-order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
@@ -357,7 +357,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
                 { "symbol", symbol },
             };
 
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<IEnumerable<BybitCanceledConditionalOrder>>(_baseClient.GetUrl("futures/private/stop-order/cancelAll"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
@@ -403,7 +403,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("stop_loss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tp_trigger_by", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("sl_trigger_by", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitStopOrderId>(_baseClient.GetUrl("futures/private/stop-order/replace"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
 
@@ -430,7 +430,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             };
             parameters.AddOptionalParameter("stop_order_id", stopOrderId);
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("futures/private/stop-order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
@@ -447,7 +447,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
                 { "symbol", symbol },
             };
 
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitConditionalOrder>>(_baseClient.GetUrl("futures/private/stop-order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
@@ -475,7 +475,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("start_time", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", pageSize?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<BybitTradeWrapper>(_baseClient.GetUrl("futures/private/execution/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
@@ -518,7 +518,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             parameters.AddOptionalParameter("new_trailing_active", trailingStopTriggerPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("sl_size", stopLossQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tp_size", takeProfitQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitPosition>(_baseClient.GetUrl("futures/private/position/trading-stop"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }

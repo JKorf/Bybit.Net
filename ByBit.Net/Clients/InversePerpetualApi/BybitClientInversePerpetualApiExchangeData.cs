@@ -28,7 +28,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get klines
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -46,7 +46,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get trade history
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitTrade>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitTrade>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -63,7 +63,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get last funding rate
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitFundingRate>> GetLastFundingRateAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitFundingRate>> GetLastFundingRateAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -78,7 +78,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get mark price klines
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -96,7 +96,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get index price klines
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -114,7 +114,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get premium index price klines
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -132,7 +132,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get server time
 
         /// <inheritdoc />
-        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
             var result = await _baseClient.SendRequestWrapperAsync<object>(_baseClient.GetUrl("v2/public/time"), HttpMethod.Get, ct, null, ignoreRatelimit: true).ConfigureAwait(false);
             if (!result)
@@ -146,7 +146,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get announcement
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestAsync<IEnumerable<BybitAnnouncement>>(_baseClient.GetUrl("v2/public/announcement"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
@@ -156,7 +156,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get order book
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -171,7 +171,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get tickers
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickersAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickersAsync(string? symbol = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbol", symbol);
@@ -184,7 +184,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync(CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
 
@@ -196,7 +196,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get open interest
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string symbol, DataPeriod period, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string symbol, DataPeriod period, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -213,7 +213,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get recent big trades
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string symbol, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -229,7 +229,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         #region Get long short ratio
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(string symbol, DataPeriod period, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(string symbol, DataPeriod period, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
