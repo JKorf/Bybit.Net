@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Bybit.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>1.0.1</PackageVersion>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1</FileVersion>
+    <PackageVersion>1.0.2</PackageVersion>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <FileVersion>1.0.2</FileVersion>
     <Description>Bybit.Net is a .Net wrapper for the Bybit API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Bybit Bybit.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>1.0.1 - Updated CryptoExchange.Net which fixed an timing related issue in the websocket reconnection logic, Added seconds representation to KlineInterval enum, Fixed deserialization of orders with fee of null, Fixed SetLeverageAsync deserialization error on return null result, Added missing Asset property on socket Balance update</PackageReleaseNotes>
+    <PackageReleaseNotes>1.0.2 - Removed unneeded receiveWindow parameter unauthenticated requests, Fixed receiveWindow parameter for futures apis, Added missing PositionMode property on USD futures position, Fixed incorrect stop_order topic for usd perpetual StopOrder subscription, Updated CryptoExchange.Net</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bybit.Net.xml</DocumentationFile>
