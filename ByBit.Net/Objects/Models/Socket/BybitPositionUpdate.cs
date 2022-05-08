@@ -67,11 +67,6 @@ namespace Bybit.Net.Objects.Models.Socket
         [JsonProperty("tp_sl_mode"), JsonConverter(typeof(StopLossTakeProfitModeConverter))]
         public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
         /// <summary>
-        /// Position mode
-        /// </summary>
-        [JsonProperty("position_idx"), JsonConverter(typeof(PositionModeConverter))]
-        public PositionMode? PositionMode { get; set; }
-        /// <summary>
         /// Mode
         /// </summary>
         public string? Mode { get; set; }

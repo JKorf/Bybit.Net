@@ -13,12 +13,7 @@ namespace Bybit.Net.Objects.Models
         /// <summary>
         /// Id
         /// </summary>
-        public string Id { get; set; } = string.Empty;
-        /// <summary>
-        /// Position mode
-        /// </summary>
-        [JsonProperty("position_idx"), JsonConverter(typeof(PositionModeConverter))]
-        public PositionMode Mode { get; set; }        
+        public string Id { get; set; } = string.Empty;     
         /// <summary>
         /// Whether the current data is valid. Only use data when IsValid is true
         /// </summary>

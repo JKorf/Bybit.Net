@@ -103,6 +103,6 @@ namespace Bybit.Net.Objects.Models
         /// Position mode
         /// </summary>
         [JsonProperty("position_idx"), JsonConverter(typeof(PositionModeConverter))]
-        public PositionMode Mode { get; set; }
+        public PositionMode PositionMode { get; set; }
     }
 }
