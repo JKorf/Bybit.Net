@@ -37,7 +37,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "from",  DateTimeConverter.ConvertToSeconds(from)! },
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitKline>>(_baseClient.GetUrl("public/linear/kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -54,7 +53,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "symbol", symbol }
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitTrade>>(_baseClient.GetUrl("public/linear/recent-trading-records"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -70,7 +68,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             {
                 { "symbol", symbol }
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<BybitFundingRate>(_baseClient.GetUrl("public/linear/funding/prev-funding-rate"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -89,7 +86,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "from",  DateTimeConverter.ConvertToSeconds(from)! },
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitMarkPriceKline>>(_baseClient.GetUrl("public/linear/mark-price-kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -108,7 +104,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "from",  DateTimeConverter.ConvertToSeconds(from) },
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitIndexPriceKline>>(_baseClient.GetUrl("public/linear/index-price-kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -127,7 +122,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "from",  DateTimeConverter.ConvertToSeconds(from) },
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitIndexPriceKline>>(_baseClient.GetUrl("public/linear/premium-index-kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -139,10 +133,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var result = await _baseClient.SendRequestWrapperAsync<object>(_baseClient.GetUrl("v2/public/time"), HttpMethod.Get, ct, parameters, ignoreRatelimit: true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestWrapperAsync<object>(_baseClient.GetUrl("v2/public/time"), HttpMethod.Get, ct, null, ignoreRatelimit: true).ConfigureAwait(false);
             if (!result)
                 return result.As<DateTime>(default);
 
@@ -156,10 +147,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitAnnouncement>>(_baseClient.GetUrl("v2/public/announcement"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitAnnouncement>>(_baseClient.GetUrl("v2/public/announcement"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
 
         #endregion
@@ -173,8 +161,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             {
                 { "symbol", symbol }
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
             return await _baseClient.SendRequestAsync<IEnumerable<BybitOrderBookEntry>>(_baseClient.GetUrl("v2/public/orderBook/L2"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
@@ -187,7 +173,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitTicker>>(_baseClient.GetUrl("v2/public/tickers"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -199,10 +184,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSymbol>>(_baseClient.GetUrl("v2/public/symbols"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitSymbol>>(_baseClient.GetUrl("v2/public/symbols"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
 
         #endregion
@@ -218,7 +200,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "period", JsonConvert.SerializeObject(period, new DataPeriodConverter(false)) }
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitOpenInterest>>(_baseClient.GetUrl("v2/public/open-interest"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -235,7 +216,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "symbol", symbol }
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitBigTrade>>(_baseClient.GetUrl("v2/public/big-deal"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
@@ -253,7 +233,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 { "period", JsonConvert.SerializeObject(period, new DataPeriodConverter(false)) }
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitAccountRatio>>(_baseClient.GetUrl("v2/public/account-ratio"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }

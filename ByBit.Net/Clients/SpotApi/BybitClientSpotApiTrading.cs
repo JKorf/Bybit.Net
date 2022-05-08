@@ -41,6 +41,7 @@ namespace Bybit.Net.Clients.SpotApi
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceSpotConverter(false)));
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
+            parameters.AddOptionalParameter("agentSource", _baseClient.ClientOptions.Referer);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
