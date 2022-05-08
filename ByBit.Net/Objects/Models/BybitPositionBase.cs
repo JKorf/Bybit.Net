@@ -99,5 +99,10 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("cum_realised_pnl")]
         public decimal TotalRealizedPnl { get; set; }
+        /// <summary>
+        /// Position mode
+        /// </summary>
+        [JsonProperty("position_idx"), JsonConverter(typeof(PositionModeConverter))]
+        public PositionMode Mode { get; set; }
     }
 }
