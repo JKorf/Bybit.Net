@@ -218,7 +218,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitUsdPerpetualOrder>(_baseClient.GetUrl("private/linear/order/serach"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitUsdPerpetualOrder>(_baseClient.GetUrl("private/linear/order/search"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
@@ -235,7 +235,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
 
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitUsdPerpetualOrder>>(_baseClient.GetUrl("v2/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitUsdPerpetualOrder>>(_baseClient.GetUrl("private/linear/order/search"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
