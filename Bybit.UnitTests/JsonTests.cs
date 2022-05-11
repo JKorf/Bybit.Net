@@ -187,5 +187,20 @@ namespace Bybit.Net.UnitTests
 
                 );
         }
+
+        [Test]
+        public async Task ValidateUsdPerpetualTradingCalls()
+        {
+            await _comparer.ProcessSubject("UsdPerpetual/Trading", c => c.UsdPerpetualApi.Trading,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                    { "GetUserTradesAsync", new List<string> { "trade_time" } }
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
     }
 }

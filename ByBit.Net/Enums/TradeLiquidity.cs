@@ -12,6 +12,10 @@
         /// <summary>
         /// Taker
         /// </summary>
-        Taker
+        Taker,
+        /// <summary>
+        /// Other
+        /// </summary>
+        Other
     }
 }

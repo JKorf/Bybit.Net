@@ -12,7 +12,8 @@ namespace Bybit.Net.Converters
         protected override List<KeyValuePair<TradeLiquidity, string>> Mapping => new List<KeyValuePair<TradeLiquidity, string>>
         {
             new KeyValuePair<TradeLiquidity, string>(TradeLiquidity.Maker, "AddedLiquidity"),
-            new KeyValuePair<TradeLiquidity, string>(TradeLiquidity.Taker, "RemovedLiquidity")
+            new KeyValuePair<TradeLiquidity, string>(TradeLiquidity.Taker, "RemovedLiquidity"),
+            new KeyValuePair<TradeLiquidity, string>(TradeLiquidity.Other, "LiquidityIndNA"),
         };
     }
 }

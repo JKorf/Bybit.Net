@@ -99,7 +99,7 @@ namespace Bybit.Net.Objects.Models
         /// Type of the order
         /// </summary>
         [JsonProperty("order_type"), JsonConverter(typeof(OrderTypeConverter))]
-        public OrderType OrderType { get; set; }
+        public OrderType? OrderType { get; set; }
         /// <summary>
         /// Side of the order
         /// </summary>
