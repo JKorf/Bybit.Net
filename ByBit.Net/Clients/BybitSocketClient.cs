@@ -167,8 +167,12 @@ namespace Bybit.Net.Clients
                 if (requestSymbols.Any(p => symbols?.Contains(p) != true))
                     return false;
 
-                callResult = new CallResult<object>(new object());
-                return data["msg"]?.Value<string>() == "Success";
+                var success = data["msg"]?.Value<string>() == "Success";
+                if (success)
+                    callResult = new CallResult<object>(true);
+                else
+                    callResult = new CallResult<object>(new ServerError(data["ret_msg"]!.ToString()));
+                return true;
             }
             else
             {
@@ -181,8 +185,12 @@ namespace Bybit.Net.Clients
                 if (requestParams.Any(p => !args.Contains(p)))
                     return false;
 
-                callResult = new CallResult<object>(new object());
-                return data["success"]?.Value<bool>() == true;
+                var success = data["success"]?.Value<bool>() == true;
+                if(success)
+                    callResult = new CallResult<object>(true);
+                else
+                    callResult = new CallResult<object>(new ServerError(data["ret_msg"]!.ToString()));
+                return true;
             }
         }
 
