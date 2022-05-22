@@ -24,13 +24,12 @@ var result = await client.SpotApi.ExchangeData.GetBookPriceAsync(/* parameters *
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -50,12 +49,11 @@ var result = await client.SpotApi.ExchangeData.GetBookPricesAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -75,7 +73,7 @@ var result = await client.SpotApi.ExchangeData.GetKlinesAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -85,7 +83,6 @@ Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, K
 |_[Optional]_ startTime|Start time of the data|
 |_[Optional]_ endTime|End time of the data|
 |_[Optional]_ limit|Max amount of candles|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -105,7 +102,7 @@ var result = await client.SpotApi.ExchangeData.GetMergedOrderBookAsync(/* parame
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, int? scale = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, int? scale = default, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -113,7 +110,6 @@ Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, i
 |symbol|The symbol|
 |_[Optional]_ scale|The scale of the order book. 1 means 1 digit|
 |_[Optional]_ limit|The amount of rows|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -133,14 +129,13 @@ var result = await client.SpotApi.ExchangeData.GetOrderBookAsync(/* parameters *
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
 |_[Optional]_ limit|The number of rows|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -160,13 +155,12 @@ var result = await client.SpotApi.ExchangeData.GetPriceAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -186,12 +180,11 @@ var result = await client.SpotApi.ExchangeData.GetPricesAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -211,12 +204,11 @@ var result = await client.SpotApi.ExchangeData.GetServerTimeAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<DateTime>> GetServerTimeAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -236,12 +228,11 @@ var result = await client.SpotApi.ExchangeData.GetSymbolsAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -261,13 +252,12 @@ var result = await client.SpotApi.ExchangeData.GetTickerAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -287,12 +277,11 @@ var result = await client.SpotApi.ExchangeData.GetTickersAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -312,14 +301,13 @@ var result = await client.SpotApi.ExchangeData.GetTradeHistoryAsync(/* parameter
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string symbol, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string symbol, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
 |_[Optional]_ limit|Max amount of results|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>

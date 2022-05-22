@@ -24,12 +24,11 @@ var result = await client.InverseFuturesApi.ExchangeData.GetAnnouncementsAsync()
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -49,7 +48,7 @@ var result = await client.InverseFuturesApi.ExchangeData.GetIndexPriceKlinesAsyn
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -58,7 +57,6 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(
 |interval|Interval of the kline data|
 |from|Start time of the data|
 |_[Optional]_ limit|Max amount of candles|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -78,7 +76,7 @@ var result = await client.InverseFuturesApi.ExchangeData.GetKlinesAsync(/* param
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -87,7 +85,6 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, Kline
 |interval|Interval of the kline data|
 |from|Start time of the data|
 |_[Optional]_ limit|Max amount of candles|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -107,7 +104,7 @@ var result = await client.InverseFuturesApi.ExchangeData.GetLongShortRatioAsync(
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(string symbol, DataPeriod period, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(string symbol, DataPeriod period, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -115,7 +112,6 @@ Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(strin
 |symbol|The symbol|
 |period|The data period|
 |_[Optional]_ limit|Max amount of results|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -135,7 +131,7 @@ var result = await client.InverseFuturesApi.ExchangeData.GetMarkPriceKlinesAsync
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, DateTime from, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -144,7 +140,6 @@ Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(st
 |interval|Interval of the kline data|
 |from|Start time of the data|
 |_[Optional]_ limit|Max amount of candles|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -164,7 +159,7 @@ var result = await client.InverseFuturesApi.ExchangeData.GetOpenInterestAsync(/*
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string symbol, DataPeriod period, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string symbol, DataPeriod period, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -172,7 +167,6 @@ Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string 
 |symbol|The symbol|
 |period|The period of data|
 |_[Optional]_ limit|Max amount of results|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -192,13 +186,12 @@ var result = await client.InverseFuturesApi.ExchangeData.GetOrderBookAsync(/* pa
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string symbol, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -218,14 +211,13 @@ var result = await client.InverseFuturesApi.ExchangeData.GetRecentBigTradesAsync
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string symbol, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string symbol, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |symbol|The symbol|
 |_[Optional]_ limit|The max amount of results|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -245,12 +237,11 @@ var result = await client.InverseFuturesApi.ExchangeData.GetServerTimeAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<DateTime>> GetServerTimeAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -270,12 +261,11 @@ var result = await client.InverseFuturesApi.ExchangeData.GetSymbolsAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync(long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -295,13 +285,12 @@ var result = await client.InverseFuturesApi.ExchangeData.GetTickerAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickerAsync(string? symbol = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickerAsync(string? symbol = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |_[Optional]_ symbol|The symbol|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
@@ -321,7 +310,7 @@ var result = await client.InverseFuturesApi.ExchangeData.GetTradeHistoryAsync(/*
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitTrade>>> GetTradeHistoryAsync(string symbol, long? fromId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitTrade>>> GetTradeHistoryAsync(string symbol, long? fromId = default, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -329,7 +318,6 @@ Task<WebCallResult<IEnumerable<BybitTrade>>> GetTradeHistoryAsync(string symbol,
 |symbol|The symbol|
 |_[Optional]_ fromId|Filter by records after this id|
 |_[Optional]_ limit|Max amount of results|
-|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
