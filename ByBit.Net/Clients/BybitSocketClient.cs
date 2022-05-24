@@ -50,6 +50,7 @@ namespace Bybit.Net.Clients
 
             ContinueOnQueryResponse = true;
             UnhandledMessageExpected = true;
+            KeepAliveInterval = TimeSpan.Zero;
 
             UsdPerpetualStreams = AddApiClient(new BybitSocketClientUsdPerpetualStreams(log, this, options));
             InversePerpetualStreams = AddApiClient(new BybitSocketClientInversePerpetualStreams(log, this, options));
