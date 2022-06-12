@@ -100,7 +100,7 @@ namespace Bybit.Net.Clients.GeneralApi
             => _baseClient.InversePerpetualApi.ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        protected override TimeSyncInfo GetTimeSyncInfo()
+        public override TimeSyncInfo GetTimeSyncInfo()
             => new TimeSyncInfo(_log, _options.SpotApiOptions.AutoTimestamp, _options.SpotApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
 
         /// <inheritdoc />

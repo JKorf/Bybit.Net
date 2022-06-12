@@ -107,7 +107,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             => ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        protected override TimeSyncInfo GetTimeSyncInfo()
+        public override TimeSyncInfo GetTimeSyncInfo()
             => new TimeSyncInfo(_log, _options.InversePerpetualApiOptions.AutoTimestamp, _options.InversePerpetualApiOptions.TimestampRecalculationInterval, TimeSyncState);
 
         /// <inheritdoc />

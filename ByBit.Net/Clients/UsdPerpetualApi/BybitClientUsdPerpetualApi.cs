@@ -106,7 +106,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             => ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        protected override TimeSyncInfo GetTimeSyncInfo()
+        public override TimeSyncInfo GetTimeSyncInfo()
             => new TimeSyncInfo(_log, _options.UsdPerpetualApiOptions.AutoTimestamp, _options.UsdPerpetualApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
 
         /// <inheritdoc />

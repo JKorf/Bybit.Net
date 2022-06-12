@@ -105,7 +105,7 @@ namespace Bybit.Net.Clients.InverseFuturesApi
             => ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        protected override TimeSyncInfo GetTimeSyncInfo()
+        public override TimeSyncInfo GetTimeSyncInfo()
             => new TimeSyncInfo(_log, _options.InverseFuturesApiOptions.AutoTimestamp, _options.InverseFuturesApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
 
         /// <inheritdoc />
