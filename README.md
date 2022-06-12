@@ -20,6 +20,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.0.6 - 12 Jun 2022
+    * Added missing price properties on usdt perpetual conditional order model
+    * Updated CryptoExchange.Net
+
 * Version 1.0.5 - 24 May 2022
     * Updated CryptoExchange.Net
 
