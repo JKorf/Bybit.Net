@@ -20,6 +20,10 @@
         /// <summary>
         /// Stop
         /// </summary>
-        Stop
+        Stop,
+        /// <summary>
+        /// Partial stop loss
+        /// </summary>
+        PartialStopLoss
     }
 }

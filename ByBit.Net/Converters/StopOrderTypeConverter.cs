@@ -15,6 +15,7 @@ namespace Bybit.Net.Converters
             new KeyValuePair<StopOrderType, string>(StopOrderType.StopLoss, "StopLoss"),
             new KeyValuePair<StopOrderType, string>(StopOrderType.TrailingStop, "TrailingStop"),
             new KeyValuePair<StopOrderType, string>(StopOrderType.Stop, "Stop"),
+            new KeyValuePair<StopOrderType, string>(StopOrderType.PartialStopLoss, "PartialStopLoss"),
         };
     }
 }
