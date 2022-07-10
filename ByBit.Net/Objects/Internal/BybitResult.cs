@@ -16,9 +16,11 @@ namespace Bybit.Net.Objects.Internal
         public string? ExtInfo { get; set; }
         [JsonProperty("time_now"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
+        [JsonProperty("rate_limit_status")]
         public int? RateLimitStatus { get; set; }
         [JsonProperty("rate_limit_reset_ms"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? RateLimitReset { get; set; }
+        [JsonProperty("rate_limit")]
         public int? RateLimit { get; set; }
 
 #pragma warning disable 8618

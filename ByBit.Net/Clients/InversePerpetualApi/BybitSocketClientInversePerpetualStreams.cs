@@ -339,7 +339,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
                 handler(data.As(desResult.Data));
             });
             return await _baseClient.SubscribeInternalAsync(this, _options.InversePerpetualStreamsOptions.BaseAddressAuthenticated,
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "order" } },
+                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "stop_order" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
