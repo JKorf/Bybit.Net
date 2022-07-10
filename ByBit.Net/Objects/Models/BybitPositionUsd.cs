@@ -23,7 +23,7 @@ namespace Bybit.Net.Objects.Models
         /// Quantity which can be closed
         /// </summary>
         [JsonProperty("free_qty")]
-        public decimal FeeQuantity { get; set; }
+        public decimal FreeQuantity { get; set; }
         /// <summary>
         /// Stop loss and take profit mode
         /// </summary>
