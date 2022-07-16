@@ -112,7 +112,7 @@ namespace Bybit.Net.Clients
             };
 
             var result = false;
-            var error = "";
+            var error = "unspecified error";
             await socketConnection.SendAndWaitAsync(authRequest, ClientOptions.SocketResponseTimeout, data =>
             {
                 if (data.Type != JTokenType.Object)
