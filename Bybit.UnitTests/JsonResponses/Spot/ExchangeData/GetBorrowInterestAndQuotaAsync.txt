@@ -1,0 +1,12 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": {
+        "currency": "USDT",
+        "interestRate": "0.00011",
+        "maxLoanAmount": "15000",
+        "loanAbleAmount": "1414762.97401717124312"
+    }
+}

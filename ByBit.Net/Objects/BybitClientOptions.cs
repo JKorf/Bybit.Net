@@ -101,7 +101,8 @@ namespace Bybit.Net.Objects
         /// </summary>
         public static BybitSocketClientOptions Default { get; set; } = new BybitSocketClientOptions()
         {
-            SocketSubscriptionsCombineTarget = 10
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
         };
 
         private BybitSocketApiClientOptions _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InverseFuturesSocketClientAddress, BybitApiAddresses.Default.InverseFuturesSocketClientAddress);
@@ -145,6 +146,11 @@ namespace Bybit.Net.Objects
         }
 
         /// <summary>
+        /// Interval at which to send a ping to the server
+        /// </summary>
+        public TimeSpan PingInterval { get; set; }
+
+        /// <summary>
         /// ctor
         /// </summary>
         public BybitSocketClientOptions() : this(Default)
@@ -159,6 +165,8 @@ namespace Bybit.Net.Objects
         {
             if (baseOn == null)
                 return;
+
+            PingInterval = baseOn.PingInterval;
 
             InverseFuturesStreamsOptions = new BybitSocketApiClientOptions(baseOn.InverseFuturesStreamsOptions, null);
             InversePerpetualStreamsOptions = new BybitSocketApiClientOptions(baseOn.InversePerpetualStreamsOptions, null);

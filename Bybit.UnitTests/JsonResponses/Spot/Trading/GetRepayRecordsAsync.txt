@@ -1,0 +1,25 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": [
+        {
+            "repayMarginOrderId": "1142655714041531904",
+            "repayId": "307",
+            "accountId": "290120",
+            "currency": "USDT",
+            "repaidAmount": "500",
+            "repayTime": "1650951176000",
+            "transactIds": [
+                {
+                    "transactId": "438",
+                    "repaidSerialNumber": "1142614062270779136",
+                    "repaidAmount": "500",
+                    "repaidPrincipal": "499.995",
+                    "repaidInterest": "0.005"
+                }
+            ]
+        }
+    ]
+}

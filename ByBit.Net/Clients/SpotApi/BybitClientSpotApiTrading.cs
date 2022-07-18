@@ -4,6 +4,7 @@ using Bybit.Net.Interfaces.Clients.SpotApi;
 using Bybit.Net.Objects.Models.Spot;
 using CryptoExchange.Net;
 using CryptoExchange.Net.CommonObjects;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System;
@@ -154,6 +155,79 @@ namespace Bybit.Net.Clients.SpotApi
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotUserTrade>>(_baseClient.GetUrl("spot/v1/myTrades"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+
+        #endregion
+
+        #region Cross marging
+
+        #region Place borrow order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<long>> PlaceBorrowOrderAsync(string asset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "currency", asset },
+                { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<long>(_baseClient.GetUrl("spot/v1/cross-margin/loan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Place repay order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<long>> PlaceRepayOrderAsync(string asset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "currency", asset },
+                { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<long>(_baseClient.GetUrl("spot/v1/cross-margin/repay"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get borrow info
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitBorrowRecord>>> GetBorrowRecordsAsync(DateTime? startTime = null, DateTime? endTime = null, string? asset = null, BorrowStatus? status = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("currency", asset);
+            parameters.AddOptionalParameter("status", EnumConverter.GetString(status));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitBorrowRecord>>(_baseClient.GetUrl("spot/v1/cross-margin/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get repayment history
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitRepayRecord>>> GetRepayRecordsAsync(DateTime? startTime = null, DateTime? endTime = null, string? asset = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("currency", asset);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitRepayRecord>>(_baseClient.GetUrl("spot/v1/cross-margin/repay/history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
 
         #endregion
     }

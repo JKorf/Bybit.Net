@@ -1,0 +1,20 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": [
+        {
+            "id": "0",
+            "accountId": "290120",
+            "currency": "USDT",
+            "loanAmount": "500",
+            "loanBalance": "0.005",
+            "interestAmount": "0.005",
+            "interestBalance": "0",
+            "createdTime": "1650946211000",
+            "type": 2,
+            "status": 1
+        }
+    ]
+}

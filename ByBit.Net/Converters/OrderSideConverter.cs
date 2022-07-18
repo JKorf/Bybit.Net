@@ -12,7 +12,9 @@ namespace Bybit.Net.Converters
         protected override List<KeyValuePair<OrderSide, string>> Mapping => new List<KeyValuePair<OrderSide, string>>
         {
             new KeyValuePair<OrderSide, string>(OrderSide.Buy, "Buy"),
-            new KeyValuePair<OrderSide, string>(OrderSide.Sell, "Sell")
+            new KeyValuePair<OrderSide, string>(OrderSide.Buy, "BUY"),
+            new KeyValuePair<OrderSide, string>(OrderSide.Sell, "Sell"),
+            new KeyValuePair<OrderSide, string>(OrderSide.Sell, "SELL")
         };
     }
 }

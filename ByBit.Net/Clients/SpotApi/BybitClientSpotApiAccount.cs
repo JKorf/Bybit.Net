@@ -33,5 +33,18 @@ namespace Bybit.Net.Clients.SpotApi
         }
 
         #endregion
+
+        #region Get margin account info
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitMarginAccountInfo>> GetMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<BybitMarginAccountInfo>(_baseClient.GetUrl("spot/v1/cross-margin/accounts/balance"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

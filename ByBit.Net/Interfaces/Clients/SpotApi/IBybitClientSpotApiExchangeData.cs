@@ -123,5 +123,13 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get borrow info
+        /// </summary>
+        /// <param name="asset">The asset to retrieve info on</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitBorrowInfo>> GetBorrowInterestAndQuotaAsync(string asset, CancellationToken ct = default);
     }
 }

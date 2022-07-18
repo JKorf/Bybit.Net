@@ -188,5 +188,19 @@ namespace Bybit.Net.Clients.SpotApi
         }
 
         #endregion
+
+        #region Get Borrow info
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitBorrowInfo>> GetBorrowInterestAndQuotaAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "currency", asset }
+            };
+            return await _baseClient.SendRequestAsync<BybitBorrowInfo>(_baseClient.GetUrl("spot/v1/cross-margin/loan-info"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

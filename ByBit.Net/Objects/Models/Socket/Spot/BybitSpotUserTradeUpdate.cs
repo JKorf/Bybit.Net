@@ -1,4 +1,6 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Bybit.Net.Converters;
+using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 
@@ -59,5 +61,15 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
         /// </summary>
         [JsonProperty("A")]
         public long MatchAccountId { get; set; }
+        /// <summary>
+        /// Is maker
+        /// </summary>
+        [JsonProperty("m")]
+        public bool Maker { get; set; }
+        /// <summary>
+        /// Order side
+        /// </summary>
+        [JsonConverter(typeof(OrderSideConverter))]
+        public OrderSide Side { get; set; }
     }
 }

@@ -1,0 +1,54 @@
+{
+    "ret_code": 0,
+    "ret_msg": "",
+    "ext_code": null,
+    "ext_info": null,
+    "result": {
+        "status": "1",
+        "riskRate": "0",
+        "acctBalanceSum": "17.544271415503388734",
+        "debtBalanceSum": "0.000000125952475464",
+        "loanAccountList": [
+            {
+                "tokenId": "BTC",
+                "total": "9.02798765888",
+                "locked": "0",
+                "loan": "0",
+                "interest": "0",
+                "free": "9.02798765888"
+            },
+            {
+                "tokenId": "XRP",
+                "total": "5074.35554",
+                "locked": "0",
+                "loan": "0",
+                "interest": "0",
+                "free": "5074.35554"
+            },
+            {
+                "tokenId": "ETH",
+                "total": "73.52299564",
+                "locked": "0",
+                "loan": "0",
+                "interest": "0",
+                "free": "73.52299564"
+            },
+            {
+                "tokenId": "USDT",
+                "total": "116360.2045351043476",
+                "locked": "0",
+                "loan": "0.005",
+                "interest": "0.0001",
+                "free": "116360.2045351043476"
+            },
+            {
+                "tokenId": "BIT",
+                "total": "6.78291",
+                "locked": "0",
+                "loan": "0",
+                "interest": "0",
+                "free": "6.78291"
+            }
+        ]
+    }
+}

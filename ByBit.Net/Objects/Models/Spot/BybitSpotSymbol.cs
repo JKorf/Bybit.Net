@@ -58,10 +58,17 @@ namespace Bybit.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("maxTradeAmount")]
         public decimal MaxOrderValue { get; set; }
-
         /// <summary>
         /// Category
         /// </summary>
         public int Category { get; set; }
+        /// <summary>
+        /// True indicates that the price of this currency is relatively volatile
+        /// </summary>
+        public bool Innovation { get; set; }
+        /// <summary>
+        /// True indicates that the symbol open for trading
+        /// </summary>
+        public bool ShowStatus { get; set; }
     }
 }
