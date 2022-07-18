@@ -33,3 +33,27 @@ Task<WebCallResult<IEnumerable<BybitSpotBalance>>> GetBalancesAsync(long? receiv
 |_[Optional]_ ct|Cancellation token|
 
 </p>
+
+***
+
+## GetMarginAccountInfoAsync  
+
+<p>
+
+*Get margin account info*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Account.GetMarginAccountInfoAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BybitMarginAccountInfo>> GetMarginAccountInfoAsync(long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>

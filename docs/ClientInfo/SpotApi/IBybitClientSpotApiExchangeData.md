@@ -60,6 +60,30 @@ Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync(Cancella
 
 ***
 
+## GetBorrowInterestAndQuotaAsync  
+
+<p>
+
+*Get borrow info*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.ExchangeData.GetBorrowInterestAndQuotaAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BybitBorrowInfo>> GetBorrowInterestAndQuotaAsync(string asset, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|asset|The asset to retrieve info on|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetKlinesAsync  
 
 [https://bybit-exchange.github.io/docs/spot/#t-querykline](https://bybit-exchange.github.io/docs/spot/#t-querykline)  
