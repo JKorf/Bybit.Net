@@ -122,7 +122,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<long>> PlaceRepayOrderAsync(string asset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get borrow info
+        /// Get borrow records
         /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-queryborrowinginfo" /></para>
         /// </summary>
         /// <param name="startTime">Filter by borrow time</param>
@@ -134,5 +134,18 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BybitBorrowRecord>>> GetBorrowRecordsAsync(DateTime? startTime = null, DateTime? endTime = null, string? asset = null, BorrowStatus? status = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get repayment records
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-queryrepaymenthistory" /></para>
+        /// </summary>
+        /// <param name="startTime">Filter by borrow time</param>
+        /// <param name="endTime">Filter by borrow time</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="limit">Max amount of results</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitRepayRecord>>> GetRepayRecordsAsync(DateTime? startTime = null, DateTime? endTime = null, string? asset = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

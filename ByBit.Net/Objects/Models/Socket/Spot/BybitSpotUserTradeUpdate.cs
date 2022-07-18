@@ -70,6 +70,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
         /// Order side
         /// </summary>
         [JsonConverter(typeof(OrderSideConverter))]
+        [JsonProperty("S")]
         public OrderSide Side { get; set; }
     }
 }
