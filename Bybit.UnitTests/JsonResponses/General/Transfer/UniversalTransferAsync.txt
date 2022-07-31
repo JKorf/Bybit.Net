@@ -1,0 +1,13 @@
+{
+    "ret_code": 0,
+    "ret_msg": "OK",
+    "ext_code": "",
+    "result": {
+        "transfer_id": "21ff1b44-2d5d-4293-913d-4597c5ad2611"
+    },
+    "ext_info": null,
+    "time_now": 1654674912874,
+    "rate_limit_status": 18,
+    "rate_limit_reset_ms": 1654674912874,
+    "rate_limit": 2
+}

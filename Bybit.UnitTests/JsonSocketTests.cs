@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bybit.Net.Interfaces.Clients;
+using Bybit.Net.Objects.Models.CopyTrading;
 using Bybit.Net.Objects.Models.Socket;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Objects.Models.Spot;
@@ -205,6 +206,15 @@ namespace Bybit.UnitTests
         public async Task ValidateUPBalanceUpdateStreamJson()
         {
             await TestFileToObject<IEnumerable<BybitBalanceUpdate>>(@"JsonResponses/UsdPerpetual/Socket/BalanceUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateCopyBalanceUpdateStreamJson()
+        {
+            await TestFileToObject<BybitCopyTradingBalanceUpdate>(@"JsonResponses/CopyTrading/Socket/BalanceUpdate.txt");
+            await TestFileToObject<IEnumerable<BybitCopyTradingPositionUpdate>>(@"JsonResponses/CopyTrading/Socket/PositionUpdate.txt");
+            await TestFileToObject<IEnumerable<BybitCopyTradingOrderUpdate>>(@"JsonResponses/CopyTrading/Socket/OrderUpdate.txt");
+            await TestFileToObject<IEnumerable<BybitCopyTradingUserTradeUpdate>>(@"JsonResponses/CopyTrading/Socket/TradeUpdate.txt");
         }
 
         private static async Task TestFileToObject<T>(string filePath, List<string> ignoreProperties = null)

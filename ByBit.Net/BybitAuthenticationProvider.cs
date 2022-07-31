@@ -4,6 +4,7 @@ using CryptoExchange.Net;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Bybit.Net.Clients.CopyTradingApi;
 
 namespace Bybit.Net
 {
@@ -22,10 +23,26 @@ namespace Bybit.Net
             if (!auth)
                 return;
 
-            var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters: bodyParameters;
-            parameters.Add("api_key", Credentials.Key!.GetString());
-            parameters.Add("timestamp", GetMillisecondTimestamp(apiClient));
-            parameters.Add("sign", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : parameters.ToFormData()));
+            var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters : bodyParameters;
+            if (apiClient is BybitClientCopyTradingApi)
+            {
+                var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : parameters.ToFormData();
+                var timestamp = GetMillisecondTimestamp(apiClient);
+                var key = Credentials.Key.GetString();
+                var recvWindow = 5000;
+                var sign = SignHMACSHA256(timestamp + key + recvWindow + signPayload);
+                headers.Add("X-BAPI-API-KEY", key);
+                headers.Add("X-BAPI-SIGN", sign);
+                headers.Add("X-BAPI-SIGN-TYPE", "2");
+                headers.Add("X-BAPI-TIMESTAMP", timestamp);
+                headers.Add("X-BAPI-RECV-WINDOW", recvWindow.ToString());
+            }
+            else
+            {
+                parameters.Add("api_key", Credentials.Key!.GetString());
+                parameters.Add("timestamp", GetMillisecondTimestamp(apiClient));
+                parameters.Add("sign", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : parameters.ToFormData()));
+            }
         }
 
         public override string Sign(string toSign) => SignHMACSHA256(toSign);

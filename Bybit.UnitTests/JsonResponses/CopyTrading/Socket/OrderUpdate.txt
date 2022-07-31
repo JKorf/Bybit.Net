@@ -1,0 +1,19 @@
+[
+    {
+      "orderId":"6d667921-3cf4-4efd-b93f-727bd10a3b62",
+      "orderLinkId":"w11a313223ddd132111",
+      "symbol":"ETHUSDT",
+      "orderType":"Market",
+      "price":"1863.250000",
+      "qty":"0.010000",
+      "side":"Sell",
+      "positionIdx":"2",
+      "cumExecFee":"0.01175970",
+      "cumExecValue":"19.59950000",
+      "lastExecPrice":"1959.949951",
+      "cumExecQty":"0.010000",
+      "createTime":1652932133873,
+      "updateTime":1652932133892,
+      "copyTradeOrderStatus":"OpenOrderFilled"
+    }
+  ]

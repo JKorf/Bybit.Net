@@ -158,6 +158,23 @@ namespace Bybit.Net.UnitTests
         }
 
         [Test]
+        public async Task ValidateGeneralDepositWithdrawalCalls()
+        {
+            await _comparer.ProcessSubject("General/DepositWithdraw", c => c.GeneralApi.WithdrawDeposit,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetSupportedDepositMethodsAsync", "config_list" },
+                    { "GetAssetInfoAsync", "rows" },
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+
+                );
+        }
+
+        [Test]
         public async Task ValidateUsdPerpetualAccountCalls()
         {
             await _comparer.ProcessSubject("UsdPerpetual/Account", c => c.UsdPerpetualApi.Account,
@@ -198,6 +215,52 @@ namespace Bybit.Net.UnitTests
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
                     { "GetUserTradesAsync", new List<string> { "trade_time" } }
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
+
+        [Test]
+        public async Task ValidateCopyTradingAccountCalls()
+        {
+            await _comparer.ProcessSubject("CopyTrading/Account", c => c.CopyTradingApi.Account,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
+
+        [Test]
+        public async Task ValidateCopyTradingExchangeDataCalls()
+        {
+            await _comparer.ProcessSubject("CopyTrading/ExchangeData", c => c.CopyTradingApi.ExchangeData,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetSymbolsAsync", "list" },
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
+
+        [Test]
+        public async Task ValidateCopyTradingTradingCalls()
+        {
+            await _comparer.ProcessSubject("CopyTrading/Trading", c => c.CopyTradingApi.Trading,
+                parametersToSetNull: new[] { "clientOrderId" }, 
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetPositionsAsync", "list" },
+                    { "GetOrdersAsync", "list" }
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
                 },
                 useNestedJsonPropertyForAllCompare: new List<string> { "result" }
                 );

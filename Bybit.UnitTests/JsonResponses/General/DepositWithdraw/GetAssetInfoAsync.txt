@@ -1,0 +1,37 @@
+{
+    "ret_code": 0,
+    "ret_msg": "OK",
+    "ext_code": "",
+    "result": {
+        "rows": [
+            {
+                "name": "USDT",
+                "coin": "USDT",
+                "remain_amount": "99999",
+                "chains": [
+                    {
+                        "chain_type": "ETH",
+                        "confirmation": "1",
+                        "withdraw_fee": "10",
+                        "deposit_min": "0.002",
+                        "withdraw_min": "20",
+                        "chain": "ETH"
+                    },
+                    {
+                        "chain_type": "OMNI",
+                        "confirmation": "1",
+                        "withdraw_fee": "",
+                        "deposit_min": "1",
+                        "withdraw_min": "",
+                        "chain": "OMNI"
+                    }
+                ]
+            }
+        ]
+    },
+    "ext_info": null,
+    "time_now": 1641541870237,
+    "rate_limit_status": 119,
+    "rate_limit_reset_ms": 1641541870237,
+    "rate_limit": 1
+}

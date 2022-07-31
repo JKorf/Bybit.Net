@@ -27,6 +27,8 @@ namespace Bybit.Net.Clients.GeneralApi
 
         /// <inheritdoc />
         public IBybitClientGeneralApiTransfer Transfer { get; }
+        /// <inheritdoc />
+        public IBybitClientGeneralApiWithdrawDeposit WithdrawDeposit { get; }
 
         #region ctor
         internal BybitClientGeneralApi(Log log, BybitClient baseClient, BybitClientOptions options)
@@ -38,6 +40,7 @@ namespace Bybit.Net.Clients.GeneralApi
             ClientOptions = options;
 
             Transfer = new BybitClientGeneralApiTransfer(this);
+            WithdrawDeposit = new BybitClientGeneralApiWithdrawDeposit(this);
 
             requestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;

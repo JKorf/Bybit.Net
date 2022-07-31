@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Interfaces.Clients.GeneralApi;
+﻿using Bybit.Net.Interfaces.Clients.CopyTradingApi;
+using Bybit.Net.Interfaces.Clients.GeneralApi;
 using Bybit.Net.Interfaces.Clients.InverseFuturesApi;
 using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
 using Bybit.Net.Interfaces.Clients.SpotApi;
@@ -32,5 +33,9 @@ namespace Bybit.Net.Interfaces.Clients
         /// Spot API endpoints
         /// </summary>
         IBybitClientSpotApi SpotApi { get; }
+        /// <summary>
+        /// Copy trading API endpoints
+        /// </summary>
+        IBybitClientCopyTradingApi CopyTradingApi { get; }
     }
 }

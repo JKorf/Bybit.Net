@@ -78,24 +78,6 @@ namespace Bybit.Net.Clients.SpotApi
             return new Uri(BaseAddress.AppendPath(endpoint));
         }
 
-        internal async Task<WebCallResult<BybitResult<T>>> SendRequestWrapperAsync<T>(
-             Uri uri,
-             HttpMethod method,
-             CancellationToken cancellationToken,
-             Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null) where T : class
-        {
-            var result = await _baseClient.SendRequestInternal<BybitResult<T>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
-            if (!result)
-                return result.As<BybitResult<T>>(default);
-
-            if (result.Data.ReturnCode != 0)
-                return result.AsError<BybitResult<T>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));               
-
-            return result.As(result.Data);
-        }
-
         internal async Task<WebCallResult<T>> SendRequestAsync<T>(
              Uri uri,
              HttpMethod method,

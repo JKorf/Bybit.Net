@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 {
     /// <summary>
-    /// Bybit trading endpoints, placing and mananging orders.
+    /// Bybit trading endpoints, placing and managing orders.
     /// </summary>
     public interface IBybitClientInversePerpetualApiTrading
     {

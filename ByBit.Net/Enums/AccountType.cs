@@ -24,6 +24,11 @@ namespace Bybit.Net.Enums
         /// Investment (defi) account
         /// </summary>
         [Map("INVESTMENT")]
-        Investment
+        Investment,
+        /// <summary>
+        /// Copy trading account
+        /// </summary>
+        [Map("COPYTRADING")]
+        CopyTrading
     }
 }

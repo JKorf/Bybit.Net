@@ -1,0 +1,31 @@
+{
+  "retCode": 0,
+    "retMsg": "success",
+    "result": {
+    "list": [
+      {
+        "symbol": "BTCUSDT",
+        "baseCurrency": "BTC",
+        "quoteCurrency": "USDT",
+        "priceScale": "1",
+        "takerFee": "0.00075",
+        "makerFee": "-0.00025",
+        "fundingInterval": "480",
+        "leverageFilter": {
+          "maxLeverage": "100",
+          "minLeverage": "1"
+        },
+        "priceFilter": {
+          "minPrice": "0.5",
+          "maxPrice": "999999.0",
+          "tickSize": "0.5"
+        },
+        "lotSizeFilter": {
+          "qtyStep": "0.001",
+          "maxOrderQty": "100.000",
+          "minOrderQty": "0.001"
+        }
+      }
+    ]
+  }
+}

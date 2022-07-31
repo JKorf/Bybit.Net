@@ -1,0 +1,50 @@
+{
+  "retCode": 0,
+    "retMsg": "success",
+    "result": {
+    "list": [
+      {
+        "symbol": "XRPUSDT",
+        "side": "Buy",
+        "size": "4",
+        "positionValue": "3.28",
+        "entryPrice": "0.82",
+        "liqPrice": "0.0001",
+        "bustPrice": "0.0001",
+        "markPrice": "0.5047",
+        "leverage": "10",
+        "isIsolated": false,
+        "positionMargin": "0.0415737",
+        "occClosingFee": "0.0000003",
+        "occFundingFee": "0",
+        "cumRealisedPnl": "-0.36682",
+        "freeQty": "-4",
+        "unrealisedPnl": "-1.2612",
+        "positionIdx": "1",
+        "createdTime": "1651594009009",
+        "updatedTime": "1652223355185"
+      },
+      {
+        "symbol": "XRPUSDT",
+        "side": "Sell",
+        "size": "28",
+        "positionValue": "22.6984",
+        "entryPrice": "0.81065714",
+        "liqPrice": "199.9998",
+        "bustPrice": "199.9998",
+        "markPrice": "0.5047",
+        "leverage": "10",
+        "isIsolated": false,
+        "positionMargin": "88881979.32381973",
+        "occClosingFee": "4.1999958",
+        "occFundingFee": "0",
+        "cumRealisedPnl": "1.76750995",
+        "freeQty": "28",
+        "unrealisedPnl": "8.5668",
+        "positionIdx": "2",
+        "createdTime": "1651594009009",
+        "updatedTime": "1652223355185"
+      }
+    ]
+  }
+}

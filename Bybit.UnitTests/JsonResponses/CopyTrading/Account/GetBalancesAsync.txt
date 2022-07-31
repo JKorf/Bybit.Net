@@ -1,0 +1,16 @@
+{
+  "retCode": 0,
+    "retMsg": "success",
+    "result": {
+    "availableBalance": "88881981.61301266",
+      "usedMargin": "6463.81892229",
+      "orderMargin": "6461.736762",
+      "positionMargin": "2.08216029",
+      "walletBalance": "88888445.43193495",
+      "realisedPnl": "-444.061167",
+      "unrealisedPnl": "6.948",
+      "cumRealisedPnl": "-442.56806505",
+      "coin": "USDT",
+      "equity": "88888452.37993495"
+  }
+}

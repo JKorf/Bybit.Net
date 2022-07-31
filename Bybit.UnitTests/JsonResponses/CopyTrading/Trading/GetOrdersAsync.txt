@@ -1,0 +1,26 @@
+{
+  "retCode": 0,
+    "retMsg": "success",
+    "result": {
+    "list": [
+      {
+        "orderId": "ae0700f6-c990-4de5-9d6e-0fdf8d5aabea",
+        "symbol": "ETHUSDT",
+        "orderLinkId": "234500f6-c45f-4de5-9d6e",
+        "side": "Sell",
+        "copyTradeOrderStatus": "New",
+        "price": "4000.00",
+        "qty": "5.55",
+        "timeInForce": "GoodTillCancel",
+        "leavesQty": "5.55",
+        "isIsolated": true,
+        "leavesValue": "22200",
+        "leverage": "44",
+        "cumExecValue": "0",
+        "cumExecFee": "0",
+        "createdTime": "1652216213331",
+        "updatedTime": "1652216213365"
+      }
+    ]
+  }
+}

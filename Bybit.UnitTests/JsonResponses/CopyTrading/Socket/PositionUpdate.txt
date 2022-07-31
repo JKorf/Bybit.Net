@@ -1,0 +1,22 @@
+[
+    {
+      "symbol":"ETHUSDT",
+      "positionIdx":"2",
+      "positionValue":"80.05065626",
+      "riskId":11,
+      "leverage":"10.000000",
+      "isIsolated":true,
+      "side":"Sell",
+      "size":"0.040000",
+      "unrealisedPnl":"1.62665626",
+      "liqPrice":"2191.350098",
+      "bustPrice":"2201.350098",
+      "entryPrice":"2001.26640650",
+      "positionMargin":"8.00506666",
+      "orderMargin":"0.00000000",
+      "occClosingFee":"0.05283240",
+      "cumRealisedPnl":"0.55284374",
+      "positionStatus":"Normal",
+      "positionSeq":0
+    }
+  ]

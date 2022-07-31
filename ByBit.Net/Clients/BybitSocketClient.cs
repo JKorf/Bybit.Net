@@ -32,6 +32,9 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public IBybitSocketClientSpotStreams SpotStreams { get; }
 
+        /// <inheritdoc />
+        public IBybitSocketClientCopyTradingStreams CopyTrading { get; }
+
         /// <summary>
         /// Create a new instance of BybitSocketClientFutures using the default options
         /// </summary>
@@ -55,6 +58,7 @@ namespace Bybit.Net.Clients
             UsdPerpetualStreams = AddApiClient(new BybitSocketClientUsdPerpetualStreams(log, this, options));
             InversePerpetualStreams = AddApiClient(new BybitSocketClientInversePerpetualStreams(log, this, options));
             SpotStreams = AddApiClient(new BybitSocketClientSpotStreams(log, this, options));
+            CopyTrading = AddApiClient(new BybitSocketClientCopyTradingStreams(log, this, options));
 
             SendPeriodic("Ping", options.PingInterval, (connection) => {
                 if(connection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))

@@ -1,0 +1,37 @@
+{
+    "ret_code": 0,
+    "ret_msg": "OK",
+    "ext_code": "",
+    "result": {
+        "list": [
+            {
+                "transfer_id": "21ff1b44-2d5d-4293-913d-4597c5ad2611",
+                "coin": "USDT",
+                "amount": "10",
+                "timestamp": "1654674913",
+                "status": "SUCCESS",
+                "fromAccountType": "SPOT",
+                "toAccountType": "CONTRACT",
+                "fromMemberId": "290118",
+                "toMemberId": "545366"
+            },
+            {
+                "transfer_id": "submember_transfer_7e51ba01-8f44-4c60-a780-5ab7fc578f22",
+                "coin": "USDT",
+                "amount": "10",
+                "timestamp": "1654665691",
+                "status": "SUCCESS",
+                "fromAccountType": "SPOT",
+                "toAccountType": "SPOT",
+                "fromMemberId": "290118",
+                "toMemberId": "572408"
+            }
+        ],
+        "cursor": "eyJtaW5JRCI6MjgxMzM1LCJtYXhJRCI6NDUzNzMwfQ=="
+    },
+    "ext_info": null,
+    "time_now": 1654676488240,
+    "rate_limit_status": 59,
+    "rate_limit_reset_ms": 1654676488240,
+    "rate_limit": 1
+}

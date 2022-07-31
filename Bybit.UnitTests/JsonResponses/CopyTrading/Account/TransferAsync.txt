@@ -1,0 +1,7 @@
+{
+  "retCode": 0,
+    "retMsg": "success",
+    "result": {
+    "transferId": "5f95de18-b10f-43be-9746-7b95c4a37d97"
+  }
+}

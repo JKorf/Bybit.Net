@@ -22,5 +22,9 @@ namespace Bybit.Net.Interfaces.Clients
         /// Inverse perpetual streams
         /// </summary>
         public IBybitSocketClientInversePerpetualStreams InversePerpetualStreams { get; }
+        /// <summary>
+        /// Copy trading streams
+        /// </summary>
+        public IBybitSocketClientCopyTradingStreams CopyTrading { get; }
     }
 }

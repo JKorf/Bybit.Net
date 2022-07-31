@@ -1,6 +1,7 @@
 [
         {
-            "wallet_balance": 1.50175786,
-            "available_balance": 1.50177818
+            "coin": "BTC",
+            "available_balance": "1.50121026",
+            "wallet_balance": "1.50121261"
         }
     ]

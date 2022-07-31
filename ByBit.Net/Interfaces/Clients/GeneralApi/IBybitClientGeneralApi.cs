@@ -11,5 +11,9 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
         /// Endpoints related to asset transfer
         /// </summary>
         IBybitClientGeneralApiTransfer Transfer { get; }
+        /// <summary>
+        /// Endpoint related to withrawing/depositing
+        /// </summary>
+        IBybitClientGeneralApiWithdrawDeposit WithdrawDeposit { get; }
     }
 }

@@ -18,6 +18,8 @@ namespace Bybit.Net.Objects.Internal
 
         [JsonProperty("list")]
         internal T ListData { set => Data = value; get => Data; }
+        [JsonProperty("rows")]
+        internal T RowData { set => Data = value; get => Data; }
     }
 
     /// <summary>

@@ -1,0 +1,41 @@
+{
+    "ret_code": 0,
+    "ret_msg": "OK",
+    "ext_code": "",
+    "result": {
+        "rows": [
+            {
+                "coin": "LTC",
+                "chain": "LTC",
+                "amount": "0.157",
+                "tx_id": "XXXXXXXXXXXXXXXXXXXXXXXXXX",
+                "status": "success",
+                "to_address": "XXXXXXXXXXXXXXXXXXXXXXXXXX",
+                "tag": "",
+                "withdraw_fee": "0.001",
+                "create_time": "1631694166",
+                "update_time": "1631694775",
+                "withdraw_id":"301121231312"
+            },
+            {
+                "coin": "LTC",
+                "chain": "LTC",
+                "amount": "0.159",
+                "tx_id": "XXXXXXXXXXXXXXXXXXXXXXXXXX",
+                "status": "success",
+                "to_address": "XXXXXXXXXXXXXXXXXXXXXXXXXX",
+                "tag": "",
+                "withdraw_fee": "0.001",
+                "create_time": "1631684557",
+                "update_time": "1631685384",
+                "withdraw_id":"301121231313"
+            }
+        ],
+        "cursor": "eyJtaW5JRCI6MjAxNTM1MywibWF4SUQiOjIwMTU4OTF9"
+    },
+    "ext_info": null,
+    "time_now": 1640921464384,
+    "rate_limit_status": 117,
+    "rate_limit_reset_ms": 1640921464384,
+    "rate_limit": 3
+}
