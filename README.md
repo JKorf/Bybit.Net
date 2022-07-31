@@ -20,6 +20,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.1.0 - 31 Jul 2022
+    * Added Deposit/Withdrawal endpoints
+    * Added CopyTrading Api
+    * Added UniversalTransfer endpoints
+
 * Version 1.0.10 - 18 Jul 2022
     * Added cross-margin endpoints
     * Fixed websocket reconnect loop issue
