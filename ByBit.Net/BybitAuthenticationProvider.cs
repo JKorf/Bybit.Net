@@ -28,7 +28,7 @@ namespace Bybit.Net
             {
                 var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : parameters.ToFormData();
                 var timestamp = GetMillisecondTimestamp(apiClient);
-                var key = Credentials.Key.GetString();
+                var key = Credentials.Key!.GetString();
                 var recvWindow = 5000;
                 var sign = SignHMACSHA256(timestamp + key + recvWindow + signPayload);
                 headers.Add("X-BAPI-API-KEY", key);
