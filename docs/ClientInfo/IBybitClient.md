@@ -7,6 +7,9 @@ has_children: true
 *Client for accessing the Bybit Rest API.*
   
 ***
+*Copy trading API endpoints*  
+**[IBybitClientCopyTradingApi](CopyTradingApi/IBybitClientCopyTradingApi.html) CopyTradingApi { get; }**  
+***
 *General API endpoints*  
 **[IBybitClientGeneralApi](GeneralApi/IBybitClientGeneralApi.html) GeneralApi { get; }**  
 ***

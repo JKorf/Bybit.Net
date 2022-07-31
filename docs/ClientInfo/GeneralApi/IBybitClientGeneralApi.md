@@ -10,3 +10,6 @@ parent: Rest API documentation
 ***
 *Endpoints related to asset transfer*  
 **[IBybitClientGeneralApiTransfer](IBybitClientGeneralApiTransfer.html) Transfer { get; }**  
+***
+*Endpoint related to withrawing/depositing*  
+**[IBybitClientGeneralApiWithdrawDeposit](IBybitClientGeneralApiWithdrawDeposit.html) WithdrawDeposit { get; }**  

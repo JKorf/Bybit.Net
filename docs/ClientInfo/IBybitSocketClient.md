@@ -7,6 +7,9 @@ has_children: true
 *Client for accessing the bybit websocket API*
   
 ***
+*Copy trading streams*  
+**[IBybitSocketClientCopyTradingStreams](CopyTradingApi/IBybitSocketClientCopyTradingStreams.html) CopyTrading { get; }**  
+***
 *Inverse perpetual streams*  
 **[IBybitSocketClientInversePerpetualStreams](InversePerpetualApi/IBybitSocketClientInversePerpetualStreams.html) InversePerpetualStreams { get; }**  
 ***

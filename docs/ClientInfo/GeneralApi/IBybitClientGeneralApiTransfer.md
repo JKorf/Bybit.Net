@@ -71,8 +71,35 @@ Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transfer
 
 ***
 
+## EnableSubaccountsUniversalTransferAsync  
+
+[https://bybit-exchange.github.io/docs/account_asset/#t-enableuniversaltransfer](https://bybit-exchange.github.io/docs/account_asset/#t-enableuniversaltransfer)  
+<p>
+
+*Enable universal transfers between sub accounts*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.EnableSubaccountsUniversalTransferAsync();  
+```  
+
+```csharp  
+Task<WebCallResult> EnableSubaccountsUniversalTransferAsync(IEnumerable<string>? subaccountIds = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ subaccountIds|Sub account ids to enable|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetSubAccountsAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccountlist](https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccountlist)  
 <p>
 
 *Get a list of subaccount ids*  
@@ -154,6 +181,71 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInternalTransferDetails>>>> 
 |_[Optional]_ direction|Filter by direction|
 |_[Optional]_ limit|Max amount of results|
 |_[Optional]_ cursor|Page cursor|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetUniversalTransferHistoryAsync  
+
+[https://bybit-exchange.github.io/docs/account_asset/#t-queryuniversetransferlist](https://bybit-exchange.github.io/docs/account_asset/#t-queryuniversetransferlist)  
+<p>
+
+*Get history of universal account transfers*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.GetUniversalTransferHistoryAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUniversalTransfer>>>> GetUniversalTransferHistoryAsync(string? transferId = default, string? asset = default, TransferStatus? status = default, DateTime? startTime = default, DateTime? endTime = default, SearchDirection? direction = default, int? limit = default, string? cursor = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ transferId|Filter by transfer id|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ status|Filter by status|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
+|_[Optional]_ direction|Filter by direction|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ cursor|Page cursor|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## UniversalTransferAsync  
+
+[https://bybit-exchange.github.io/docs/account_asset/#t-createuniversaltransfer](https://bybit-exchange.github.io/docs/account_asset/#t-createuniversaltransfer)  
+<p>
+
+*Create a new universal transfer*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.UniversalTransferAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BybitTransferId>> UniversalTransferAsync(string transferId, string asset, decimal quantity, string fromMemberId, string toMemberId, AccountType fromAccountType, AccountType toAccountType, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|transferId|Unique id|
+|asset|Asset|
+|quantity|Quantity|
+|fromMemberId|From id|
+|toMemberId|To id|
+|fromAccountType|From type|
+|toAccountType|To type|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

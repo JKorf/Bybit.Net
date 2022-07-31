@@ -6,7 +6,7 @@ grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitClient > InversePerpetualApi > Trading`  
-*Bybit trading endpoints, placing and mananging orders.*
+*Bybit trading endpoints, placing and managing orders.*
   
 
 ***

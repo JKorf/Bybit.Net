@@ -6,7 +6,7 @@ grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitClient > SpotApi > Trading`  
-*Bybit trading endpoints, placing and mananging orders.*
+*Bybit trading endpoints, placing and managing orders.*
   
 
 ***
@@ -70,7 +70,7 @@ Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = defau
 [https://bybit-exchange.github.io/docs/spot/#t-queryborrowinginfo](https://bybit-exchange.github.io/docs/spot/#t-queryborrowinginfo)  
 <p>
 
-*Get borrow info*  
+*Get borrow records*  
 
 ```csharp  
 var client = new BybitClient();  
@@ -170,6 +170,35 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync(string? symbol =
 |---|---|
 |_[Optional]_ symbol|Filter by symbol|
 |_[Optional]_ orderId|Filter by order id, will only return orders with an orderId smaller than this|
+|_[Optional]_ limit|Max amount of results|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetRepayRecordsAsync  
+
+[https://bybit-exchange.github.io/docs/spot/#t-queryrepaymenthistory](https://bybit-exchange.github.io/docs/spot/#t-queryrepaymenthistory)  
+<p>
+
+*Get repayment records*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.SpotApi.Trading.GetRepayRecordsAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BybitRepayRecord>>> GetRepayRecordsAsync(DateTime? startTime = default, DateTime? endTime = default, string? asset = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ startTime|Filter by borrow time|
+|_[Optional]_ endTime|Filter by borrow time|
+|_[Optional]_ asset|Filter by asset|
 |_[Optional]_ limit|Max amount of results|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
