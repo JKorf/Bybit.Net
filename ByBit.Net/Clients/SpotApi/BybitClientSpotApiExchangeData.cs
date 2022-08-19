@@ -198,7 +198,7 @@ namespace Bybit.Net.Clients.SpotApi
             {
                 { "currency", asset }
             };
-            return await _baseClient.SendRequestAsync<BybitBorrowInfo>(_baseClient.GetUrl("spot/v1/cross-margin/loan-info"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitBorrowInfo>(_baseClient.GetUrl("spot/v1/cross-margin/loan-info"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
