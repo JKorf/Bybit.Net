@@ -75,5 +75,20 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("trigger_by"), JsonConverter(typeof(TriggerTypeConverter))]
         public TriggerType? TriggerType { get; set; }
+        /// <summary>
+        /// Take profit price
+        /// </summary>
+        [JsonProperty("take_profit")]
+        public decimal? TakeProfitPrice { get; set; }
+        /// <summary>
+        /// Stop loss price
+        /// </summary>
+        [JsonProperty("stop_loss")]
+        public decimal? StopLossPrice { get; set; }
+        /// <summary>
+        /// Trigger price
+        /// </summary>
+        [JsonProperty("trigger_price")]
+        public decimal? TriggerPrice { get; set; }
     }
 }
