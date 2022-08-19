@@ -160,7 +160,7 @@ namespace Bybit.Net.Clients.GeneralApi
                 { "coin", asset },
                 { "chain", network },
                 { "address", address },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) }
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
             parameters.AddOptionalParameter("tag", tag);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
