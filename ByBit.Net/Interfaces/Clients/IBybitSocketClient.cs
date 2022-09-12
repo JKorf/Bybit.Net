@@ -15,9 +15,13 @@ namespace Bybit.Net.Interfaces.Clients
         /// </summary>
         public IBybitSocketClientUsdPerpetualStreams UsdPerpetualStreams { get; }
         /// <summary>
-        /// Spot streams
+        /// Spot streams v1
         /// </summary>
-        public IBybitSocketClientSpotStreams SpotStreams { get; }
+        public IBybitSocketClientSpotStreamsV1 SpotStreamsV1 { get; }
+        /// <summary>
+        /// Spot streams v2
+        /// </summary>
+        public IBybitSocketClientSpotStreamsV2 SpotStreamsV2 { get; }
         /// <summary>
         /// Inverse perpetual streams
         /// </summary>

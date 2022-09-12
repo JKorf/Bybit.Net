@@ -1,6 +1,7 @@
 ﻿using Bybit.Net.Enums;
 using CryptoExchange.Net.Converters;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Bybit.Net.Converters
 {
@@ -9,7 +10,7 @@ namespace Bybit.Net.Converters
         public KlineIntervalSpotConverter() : this(true) { }
         public KlineIntervalSpotConverter(bool quotes) : base(quotes) { }
 
-        protected override List<KeyValuePair<KlineInterval, string>> Mapping => new List<KeyValuePair<KlineInterval, string>>
+        private static List<KeyValuePair<KlineInterval, string>> _mapping => new List<KeyValuePair<KlineInterval, string>>
         {
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneMinute, "1m"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.ThreeMinutes, "3m"),
@@ -25,5 +26,12 @@ namespace Bybit.Net.Converters
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneWeek, "1w"),
             new KeyValuePair<KlineInterval, string>(KlineInterval.OneMonth, "1M"),
         };
+
+        public static string ToString(KlineInterval interval)
+        {
+            return _mapping.First(x => x.Key == interval).Value;
+        }
+
+        protected override List<KeyValuePair<KlineInterval, string>> Mapping => new List<KeyValuePair<KlineInterval, string>>(_mapping);
     }
 }

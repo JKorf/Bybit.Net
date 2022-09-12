@@ -15,9 +15,13 @@
         /// </summary>
         public string CopyTradingRestClientAddress { get; set; } = "";
         /// <summary>
-        /// The address used by the BybitSocketClient for the public Spot socket API
+        /// The address used by the BybitSocketClient for the public Spot socket API v1
         /// </summary>
-        public string SpotPublicSocketClientAddress { get; set; } = "";
+        public string SpotPublicSocketV1ClientAddress { get; set; } = "";
+        /// <summary>
+        /// The address used by the BybitSocketClient for the public Spot socket API v2
+        /// </summary>
+        public string SpotPublicSocketV2ClientAddress { get; set; } = "";
         /// <summary>
         /// The address used by the BybitSocketClient for the private Spot socket API
         /// </summary>
@@ -64,7 +68,8 @@
         public static BybitApiAddresses Default = new BybitApiAddresses
         {
             SpotRestClientAddress = "https://api.bybit.com",
-            SpotPublicSocketClientAddress = "wss://stream.bybit.com/spot/quote/ws/v2",
+            SpotPublicSocketV1ClientAddress = "wss://stream.bybit.com/spot/quote/ws/v1",
+            SpotPublicSocketV2ClientAddress = "wss://stream.bybit.com/spot/quote/ws/v2",
             SpotPrivateSocketClientAddress = "wss://stream.bybit.com/spot/ws",
             UsdPerpetualRestClientAddress = "https://api.bybit.com",
             UsdPerpetualPublicSocketClientAddress = "wss://stream.bybit.com/realtime_public",
@@ -83,7 +88,8 @@
         public static BybitApiAddresses TestNet = new BybitApiAddresses
         {
             SpotRestClientAddress = "https://api-testnet.bybit.com",
-            SpotPublicSocketClientAddress = "wss://stream-testnet.bybit.com/spot/quote/ws/v2",
+            SpotPublicSocketV1ClientAddress = "wss://stream-testnet.bybit.com/spot/quote/ws/v1",
+            SpotPublicSocketV2ClientAddress = "wss://stream-testnet.bybit.com/spot/quote/ws/v2",
             SpotPrivateSocketClientAddress = "wss://stream-testnet.bybit.com/spot/ws",
             UsdPerpetualRestClientAddress = "https://api-testnet.bybit.com",
             UsdPerpetualPublicSocketClientAddress = "wss://stream-testnet.bybit.com/realtime_public",

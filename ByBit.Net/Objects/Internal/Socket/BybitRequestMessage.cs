@@ -12,7 +12,13 @@ namespace Bybit.Net.Objects.Internal.Socket
         public object[] Parameters { get; set; } = Array.Empty<object>();
     }
 
-    internal class BybitSpotRequestMessage
+    internal class BybitSpotRequestMessageV1 : BybitSpotRequestMessageV2
+    {
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; } = string.Empty;
+    }
+
+    internal class BybitSpotRequestMessageV2
     {
         [JsonProperty("topic")]
         public string Operation { get; set; } = string.Empty;

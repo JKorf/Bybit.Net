@@ -20,24 +20,13 @@ using Bybit.Net.Interfaces.Clients.SpotApi;
 
 namespace Bybit.Net.Clients.SpotApi
 {
-    /// <inheritdoc cref="IBybitSocketClientSpotStreams" />
-    public class BybitSocketClientSpotStreams : SocketApiClient, IBybitSocketClientSpotStreams
+    /// <inheritdoc cref="IBybitSocketClientSpotStreamsV2" />
+    public class BybitSocketClientSpotStreamsV2 : BybitBaseSocketClientSpotStreams, IBybitSocketClientSpotStreamsV2
     {
-        private readonly Log _log;
-        private readonly BybitSocketClient _baseClient;
-        private readonly BybitSocketClientOptions _options;
-
-        internal BybitSocketClientSpotStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
-            : base(options, options.SpotStreamsOptions)
+        internal BybitSocketClientSpotStreamsV2(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
+            : base(log, baseClient,options, options.SpotStreamsV2Options)
         {
-            _log = log;
-            _options = options;
-            _baseClient = baseClient;
         }
-
-        /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTradeUpdate>> handler, CancellationToken ct = default)
@@ -58,7 +47,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "trade",
                     Event = "sub",
@@ -89,7 +78,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "depth",
                     Event = "sub",
@@ -120,7 +109,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "kline",
                     Event = "sub",
@@ -152,7 +141,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "bookTicker",
                     Event = "sub",
@@ -183,7 +172,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "realtimes",
                     Event = "sub",
@@ -250,7 +239,7 @@ namespace Bybit.Net.Clients.SpotApi
             });
             return await _baseClient.SubscribeInternalAsync(
                 this,
-                _options.SpotStreamsOptions.BaseAddressAuthenticated,
+                _options.SpotStreamsV2Options.BaseAddressAuthenticated,
                 null,
                 "AccountInfo", true, internalHandler, ct).ConfigureAwait(false);
         }
