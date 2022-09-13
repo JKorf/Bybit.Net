@@ -145,7 +145,7 @@ namespace Bybit.Net.Objects
             set => _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions(_usdPerpetualStreamsOptions, value);
         }
 
-        private BybitSocketApiClientOptions _spotStreamsV1Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV1ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketClientAddress);
+        private BybitSocketApiClientOptions _spotStreamsV1Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV1ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV1ClientAddress);
         /// <summary>
         /// Spot streams options version 1
         /// </summary>
@@ -155,7 +155,7 @@ namespace Bybit.Net.Objects
             set => _spotStreamsV1Options = new BybitSocketApiClientOptions(_spotStreamsV1Options, value);
         }
 
-        private BybitSocketApiClientOptions _spotStreamsV2Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV2ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketClientAddress);
+        private BybitSocketApiClientOptions _spotStreamsV2Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV2ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV1ClientAddress);
         /// <summary>
         /// Spot streams options version 2
         /// </summary>
@@ -163,6 +163,16 @@ namespace Bybit.Net.Objects
         {
             get => _spotStreamsV2Options;
             set => _spotStreamsV2Options = new BybitSocketApiClientOptions(_spotStreamsV2Options, value);
+        }
+
+        private BybitSocketApiClientOptions _spotStreamsV3Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV3ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV3ClientAddress);
+        /// <summary>
+        /// Spot streams options version 2
+        /// </summary>
+        public BybitSocketApiClientOptions SpotStreamsV3Options
+        {
+            get => _spotStreamsV3Options;
+            set => _spotStreamsV3Options = new BybitSocketApiClientOptions(_spotStreamsV3Options, value);
         }
 
         private BybitSocketApiClientOptions _copyTradingStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.CopyTradingSocketClientAddress, BybitApiAddresses.Default.CopyTradingSocketClientAddress);

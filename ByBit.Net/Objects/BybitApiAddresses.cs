@@ -23,9 +23,17 @@
         /// </summary>
         public string SpotPublicSocketV2ClientAddress { get; set; } = "";
         /// <summary>
-        /// The address used by the BybitSocketClient for the private Spot socket API
+        /// The address used by the BybitSocketClient for the public Spot socket API v3
         /// </summary>
-        public string SpotPrivateSocketClientAddress { get; set; } = "";
+        public string SpotPublicSocketV3ClientAddress { get; set; } = "";
+        /// <summary>
+        /// The address used by the BybitSocketClient for the private Spot socket API v1
+        /// </summary>
+        public string SpotPrivateSocketV1ClientAddress { get; set; } = "";
+        /// <summary>
+        /// The address used by the BybitSocketClient for the private Spot socket API v3
+        /// </summary>
+        public string SpotPrivateSocketV3ClientAddress { get; set; } = "";
 
         /// <summary>
         /// The address used by the BybitClient for the USD perpetual rest API
@@ -70,7 +78,9 @@
             SpotRestClientAddress = "https://api.bybit.com",
             SpotPublicSocketV1ClientAddress = "wss://stream.bybit.com/spot/quote/ws/v1",
             SpotPublicSocketV2ClientAddress = "wss://stream.bybit.com/spot/quote/ws/v2",
-            SpotPrivateSocketClientAddress = "wss://stream.bybit.com/spot/ws",
+            SpotPublicSocketV3ClientAddress = "wss://stream.bybit.com/spot/public/v3",
+            SpotPrivateSocketV1ClientAddress = "wss://stream.bybit.com/spot/ws",
+            SpotPrivateSocketV3ClientAddress = "wss://stream.bybit.com/spot/private/v3",
             UsdPerpetualRestClientAddress = "https://api.bybit.com",
             UsdPerpetualPublicSocketClientAddress = "wss://stream.bybit.com/realtime_public",
             UsdPerpetualPrivateSocketClientAddress = "wss://stream.bybit.com/realtime_private",
@@ -90,7 +100,9 @@
             SpotRestClientAddress = "https://api-testnet.bybit.com",
             SpotPublicSocketV1ClientAddress = "wss://stream-testnet.bybit.com/spot/quote/ws/v1",
             SpotPublicSocketV2ClientAddress = "wss://stream-testnet.bybit.com/spot/quote/ws/v2",
-            SpotPrivateSocketClientAddress = "wss://stream-testnet.bybit.com/spot/ws",
+            SpotPublicSocketV3ClientAddress = "wss://stream-testnet.bybit.com/spot/public/v3",
+            SpotPrivateSocketV1ClientAddress = "wss://stream-testnet.bybit.com/spot/ws",
+            SpotPrivateSocketV3ClientAddress = "wss://stream-testnet.bybit.com/spot/private/v3",
             UsdPerpetualRestClientAddress = "https://api-testnet.bybit.com",
             UsdPerpetualPublicSocketClientAddress = "wss://stream-testnet.bybit.com/realtime_public",
             UsdPerpetualPrivateSocketClientAddress = "wss://stream-testnet.bybit.com/realtime_private",

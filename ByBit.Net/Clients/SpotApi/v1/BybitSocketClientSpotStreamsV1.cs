@@ -1,11 +1,8 @@
 ﻿using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -15,12 +12,11 @@ using CryptoExchange.Net.Logging;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Enums;
 using Bybit.Net.Converters;
-using Bybit.Net.Objects.Models.Spot;
-using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.SpotApi.v1;
+using Bybit.Net.Interfaces.Clients.SpotApi.v2;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v1
 {
-    /// <inheritdoc cref="IBybitSocketClientSpotStreamsV2" />
     public class BybitSocketClientSpotStreamsV1 : BybitBaseSocketClientSpotStreams, IBybitSocketClientSpotStreamsV1
     {
         internal BybitSocketClientSpotStreamsV1(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
@@ -269,6 +265,14 @@ namespace Bybit.Net.Clients.SpotApi
                     Symbol = "$\"{symbol}NAV\""
                 },
                 null, false, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public override bool CheckAuth(JToken data, ref bool isSuccess)
+        {
+            var auth = data["auth"]?.ToString();
+            isSuccess = auth == "success";
+            return auth != null;
         }
     }
 }

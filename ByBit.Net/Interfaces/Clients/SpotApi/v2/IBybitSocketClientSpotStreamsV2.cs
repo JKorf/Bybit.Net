@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Interfaces.Clients.SpotApi
+namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
 {
     /// <summary>
     /// Bybit spot streams

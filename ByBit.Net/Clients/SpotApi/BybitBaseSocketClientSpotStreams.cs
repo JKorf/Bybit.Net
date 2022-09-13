@@ -1,20 +1,11 @@
 ﻿using Bybit.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using CryptoExchange.Net.Logging;
-using Bybit.Net.Objects.Models.Socket.Spot;
-using Bybit.Net.Enums;
-using Bybit.Net.Objects.Models.Spot;
-using Bybit.Net.Interfaces.Clients.SpotApi;
+using Newtonsoft.Json.Linq;
 
 namespace Bybit.Net.Clients.SpotApi
 {
-    /// <inheritdoc cref="IBybitSocketClientSpotStreamsV2" />
     public abstract class BybitBaseSocketClientSpotStreams : SocketApiClient
     {
         protected readonly Log _log;
@@ -32,5 +23,13 @@ namespace Bybit.Net.Clients.SpotApi
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
+
+        /// <summary>
+        /// Check auth data for valid
+        /// </summary>
+        /// <param name="data"> Response data </param>
+        /// <param name="isSuccess"> Flag if auth is succeeded </param>
+        /// <returns> Flag if response is valid </returns>
+        public abstract bool CheckAuth(JToken data, ref bool isSuccess);
     }
 }

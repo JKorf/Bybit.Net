@@ -1,7 +1,5 @@
 ﻿using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
@@ -16,15 +14,14 @@ using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Enums;
 using Bybit.Net.Converters;
 using Bybit.Net.Objects.Models.Spot;
-using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.SpotApi.v2;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v2
 {
-    /// <inheritdoc cref="IBybitSocketClientSpotStreamsV2" />
     public class BybitSocketClientSpotStreamsV2 : BybitBaseSocketClientSpotStreams, IBybitSocketClientSpotStreamsV2
     {
         internal BybitSocketClientSpotStreamsV2(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
-            : base(log, baseClient,options, options.SpotStreamsV2Options)
+            : base(log, baseClient, options, options.SpotStreamsV2Options)
         {
         }
 
@@ -242,6 +239,14 @@ namespace Bybit.Net.Clients.SpotApi
                 _options.SpotStreamsV2Options.BaseAddressAuthenticated,
                 null,
                 "AccountInfo", true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public override bool CheckAuth(JToken data, ref bool isSuccess)
+        {
+            var auth = data["auth"]?.ToString();
+            isSuccess = auth == "success";
+            return auth != null;
         }
     }
 }
