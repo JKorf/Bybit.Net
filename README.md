@@ -4,4 +4,5 @@
 Bybit.Net is a wrapper around the Bybit API as described on [Bybit](https://bybit-exchange.github.io/docs/spot/#t-introduction), including all features the API provides using clear and readable objects, both for the REST  as the websocket API's.
 
 ## Diff notes from a main repo:
-  * Added support for both versions (v1, v2) of a spot WebSocket topics
+  * Added support for both versions (v1, v2) of a spot WebSocket public topics;
+  * Added support for a new API version (v3) of a spot WebSocket public/private topics.
