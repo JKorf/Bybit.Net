@@ -95,7 +95,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public async Task ValidateSpotAccountCalls()
         {
-            await _comparer.ProcessSubject("Spot/Account", c => c.SpotApi.Account,
+            await _comparer.ProcessSubject("Spot/Account", c => c.SpotApiV1.Account,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                     { "GetBalancesAsync", "balances" }
@@ -111,7 +111,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public async Task ValidateSpotTradingCalls()
         {
-            await _comparer.ProcessSubject("Spot/Trading", c => c.SpotApi.Trading,
+            await _comparer.ProcessSubject("Spot/Trading", c => c.SpotApiV1.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                 },
@@ -129,7 +129,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public async Task ValidateSpotExchangeDataCalls()
         {
-            await _comparer.ProcessSubject("Spot/ExchangeData", c => c.SpotApi.ExchangeData,
+            await _comparer.ProcessSubject("Spot/ExchangeData", c => c.SpotApiV1.ExchangeData,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                 },

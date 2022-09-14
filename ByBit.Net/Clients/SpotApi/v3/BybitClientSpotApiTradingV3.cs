@@ -14,15 +14,16 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v3
 {
     /// <inheritdoc />
-    public class BybitClientSpotApiTrading : IBybitClientSpotApiTrading
+    public class BybitClientSpotApiTradingV3 : IBybitClientSpotApiTradingV3
     {
-        private readonly BybitClientSpotApi _baseClient;
+        private readonly BybitClientBaseSpotApi _baseClient;
 
-        internal BybitClientSpotApiTrading(BybitClientSpotApi baseClient)
+        internal BybitClientSpotApiTradingV3(BybitClientBaseSpotApi baseClient)
         {
             _baseClient = baseClient;
         }
@@ -30,22 +31,24 @@ namespace Bybit.Net.Clients.SpotApi
         #region Place order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, Enums.OrderSide side, Enums.OrderType type, decimal quantity, decimal? price = null, TimeInForce? timeInForce = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, TimeInForce? timeInForce = null, string? clientOrderId = null, int orderCategory = 0, decimal? triggerPrice = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeSpotConverter(false)) },
-                { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
+                { "orderType", JsonConvert.SerializeObject(type, new OrderTypeSpotConverter(false)) },
+                { "orderQty", quantity.ToString(CultureInfo.InvariantCulture) }
             };
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("orderPrice", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceSpotConverter(false)));
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
+            parameters.AddOptionalParameter("orderCategory", orderCategory.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("triggerPrice", triggerPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("agentSource", _baseClient.ClientOptions.Referer);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("/spot/v3/private/order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderPlaced(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
@@ -133,7 +136,7 @@ namespace Bybit.Net.Clients.SpotApi
                 { "symbol", symbol }
             };
             parameters.AddOptionalParameter("side", side.HasValue ? JsonConvert.SerializeObject(side, new OrderSideConverter(false)) : null);
-            parameters.AddOptionalParameter("orderTypes", orderTypes != null && orderTypes.Any() ? string.Join(",", orderTypes.Select(o => JsonConvert.SerializeObject(o, new OrderTypeConverter(false)))): null);
+            parameters.AddOptionalParameter("orderTypes", orderTypes != null && orderTypes.Any() ? string.Join(",", orderTypes.Select(o => JsonConvert.SerializeObject(o, new OrderTypeConverter(false)))) : null);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("spot/order/batch-cancel"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);

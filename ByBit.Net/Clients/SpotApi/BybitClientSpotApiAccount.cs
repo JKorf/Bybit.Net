@@ -13,9 +13,9 @@ namespace Bybit.Net.Clients.SpotApi
     /// <inheritdoc />
     public class BybitClientSpotApiAccount : IBybitClientSpotApiAccount
     {
-        private BybitClientSpotApi _baseClient;
+        private BybitClientBaseSpotApi _baseClient;
 
-        internal BybitClientSpotApiAccount(BybitClientSpotApi baseClient)
+        internal BybitClientSpotApiAccount(BybitClientBaseSpotApi baseClient)
         {
             _baseClient = baseClient;
         }
