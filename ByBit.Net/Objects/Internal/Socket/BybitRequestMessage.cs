@@ -29,7 +29,7 @@ namespace Bybit.Net.Objects.Internal.Socket
             var symbols = responseData["symbol"]?.ToString().Split(',').ToList();
             var requestSymbols = Symbol?.Split(',').ToList();
 
-            var success = responseData["responseData"]?.Any() ?? false;
+            var success = responseData["data"]?.Any() ?? false;
             var topic = responseData["topic"]?.ToString();
 
             if (topic != null && !Operation.StartsWith(topic))

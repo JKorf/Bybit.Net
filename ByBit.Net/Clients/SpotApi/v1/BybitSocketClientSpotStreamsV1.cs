@@ -221,7 +221,9 @@ namespace Bybit.Net.Clients.SpotApi.v1
                     return;
                 }
 
-                handler(data.As(desResult.Data, data.Data["symbol"]?.ToString()));
+                var symbol = data.Data["symbol"]?.ToString();
+                desResult.Data.Symbol = string.IsNullOrWhiteSpace(desResult.Data.Symbol) ? symbol : desResult.Data.Symbol;
+                handler(data.As(desResult.Data, symbol));
             });
             return await _baseClient.SubscribeInternalAsync(this,
                 new BybitSpotRequestMessageV1()
