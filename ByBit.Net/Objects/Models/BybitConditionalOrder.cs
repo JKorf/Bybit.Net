@@ -90,5 +90,10 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("trigger_price")]
         public decimal? TriggerPrice { get; set; }
+        /// <summary>
+        /// True means your position can only reduce in size if this order is triggered. 
+        /// </summary>
+        [JsonProperty("reduce_only")]
+        public decimal? IsReduce { get; set; }
     }
 }
