@@ -5,4 +5,5 @@ Bybit.Net is a wrapper around the Bybit API as described on [Bybit](https://bybi
 
 ## Diff notes from a main repo:
   * Added support for both versions (v1, v2) of a spot WebSocket public topics;
-  * Added support for a new API version (v3) of a spot WebSocket public/private topics.
+  * Added support for a new API version (v3) of a spot WebSocket public/private topics;
+  * Added support for a new API version (v3) of a spot REST trading endpoints (the main reasons - v3 supports stop-limit orders).
