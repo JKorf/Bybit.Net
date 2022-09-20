@@ -288,18 +288,20 @@ namespace Bybit.Net.Clients
             if (clientType.IsSubclassOf(typeof(BybitBaseSocketClientSpotStreams)))
             {
                 object message = null;
+                var isCheckable = false;
                 if (clientType == typeof(BybitSocketClientSpotStreamsV1))
                 {
                     var bRequest = ((BybitSpotRequestMessageV1)subscriptionToUnsub.Request!);
                     message = new BybitSpotRequestMessageV1
                     {
                         Operation = bRequest.Operation,
-                        Symbol = bRequest.Parameters["symbol"]?.ToString(),
+                        Symbol = bRequest.Symbol,
                         Event = "cancel"
                     };
                 }
                 else if (clientType == typeof(BybitSocketClientSpotStreamsV2))
                 {
+                    isCheckable = true;
                     var bRequest = ((BybitSpotRequestMessageV2)subscriptionToUnsub.Request!);
                     message = new BybitSpotRequestMessageV2
                     {
@@ -315,10 +317,15 @@ namespace Bybit.Net.Clients
                 var result = false;
                 await connection.SendAndWaitAsync(message, ClientOptions.SocketResponseTimeout, data =>
                 {
+                    if (!isCheckable)
+                    {
+                        //// Got fallback message only in version 2,3. In version 1 we get a plain responseData
+                        result = true;
+                        return true;
+                    }
+
                     if (data.Type != JTokenType.Object)
                         return false;
-
-                    // TODo
 
                     result = data["success"]?.Value<bool>() == true;
                     return true;

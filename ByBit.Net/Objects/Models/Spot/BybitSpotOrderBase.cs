@@ -32,6 +32,17 @@ namespace Bybit.Net.Objects.Models.Spot
         /// </summary>
         [JsonProperty("origQty")]
         public decimal Quantity { get; set; }
+
+        /// <summary>
+        /// Quantity
+        /// </summary>
+        [JsonProperty("orderQty")]
+        private decimal QuantityV3
+        {
+
+            set { Quantity = value; }
+        }
+
         /// <summary>
         /// Type
         /// </summary>
