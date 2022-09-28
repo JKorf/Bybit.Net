@@ -76,7 +76,7 @@ namespace Bybit.Net.Objects.Models.Socket
         /// </summary>
         [JsonProperty("open_interest")]
         public decimal? OpenInterest { get; set; }
-        [JsonConverter(typeof(ExponentDivConverter), 8)]
+        [JsonConverter(typeof(ExponentDivConverter), 7)]
         [JsonProperty("open_interest_e8")]
         private decimal? OpenInterestE8 { get => OpenInterest; set => OpenInterest = value; }
         /// <summary>
