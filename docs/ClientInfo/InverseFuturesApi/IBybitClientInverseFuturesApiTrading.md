@@ -13,7 +13,7 @@ grand_parent: Rest API documentation
 
 ## CancelAllConditionalOrdersAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallcond)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelallcond](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelallcond)  
 <p>
 
 *Cancel all active conditional orders for a symbol*  
@@ -39,7 +39,7 @@ Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditi
 
 ## CancelAllOrdersAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallactive)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelallactive](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelallactive)  
 <p>
 
 *Cancel all active orders for a symbol*  
@@ -65,7 +65,7 @@ Task<WebCallResult<IEnumerable<BybitCanceledOrder>>> CancelAllOrdersAsync(string
 
 ## CancelConditionalOrderAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelcond)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelcond](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelcond)  
 <p>
 
 *Cancel a conditional order, either stopOrderId or clientOrderId should be provided*  
@@ -93,7 +93,7 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 
 ## CancelOrderAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelactive)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelactive](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelactive)  
 <p>
 
 *Cancel an order, either orderId or clientOrderId should be provided*  
@@ -121,7 +121,7 @@ Task<WebCallResult<BybitInverseOrder>> CancelOrderAsync(string symbol, string? o
 
 ## GetConditionalOrdersAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-getcond](https://bybit-exchange.github.io/docs/inverse_futures/#t-getcond)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-getcond](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-getcond)  
 <p>
 
 *Get a list of conditional orders*  
@@ -151,7 +151,7 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetCond
 
 ## GetOpenConditionalOrderRealTimeAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond](https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-querycond](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-querycond)  
 <p>
 
 *Get conditional order information. Either stopOrderId or clientOrderId should be provided*  
@@ -179,7 +179,7 @@ Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
 
 ## GetOpenConditionalOrdersRealTimeAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond](https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-querycond](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-querycond)  
 <p>
 
 *Get order information for up to 10 conditional orders*  
@@ -205,7 +205,7 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrders
 
 ## GetOpenOrderRealTimeAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-queryactive](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-queryactive)  
 <p>
 
 *Get order information. Either orderId or clientOrderId should be provided*  
@@ -233,7 +233,7 @@ Task<WebCallResult<BybitInverseOrder>> GetOpenOrderRealTimeAsync(string symbol, 
 
 ## GetOpenOrdersRealTimeAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-queryactive](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-queryactive)  
 <p>
 
 *Get order information for up to 500 orders*  
@@ -259,7 +259,7 @@ Task<WebCallResult<IEnumerable<BybitInverseOrder>>> GetOpenOrdersRealTimeAsync(s
 
 ## GetOrdersAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-getactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-getactive)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-getactive](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-getactive)  
 <p>
 
 *Get orders*  
@@ -289,7 +289,7 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInverseOrder>>>> GetOrdersAs
 
 ## GetUserTradesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-usertraderecords](https://bybit-exchange.github.io/docs/inverse_futures/#t-usertraderecords)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-usertraderecords](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-usertraderecords)  
 <p>
 
 *Get executed user trades*  
@@ -319,7 +319,7 @@ Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbo
 
 ## ModifyConditionalOrderAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-replacecond](https://bybit-exchange.github.io/docs/inverse_futures/#t-replacecond)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-replacecond](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-replacecond)  
 <p>
 
 *Change an exising order. Either stopOrderId or clientOrderId should be provided*  
@@ -354,7 +354,7 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 
 ## ModifyOrderAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-replaceactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-replaceactive)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-replaceactive](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-replaceactive)  
 <p>
 
 *Change an exising order. Either orderId or clientOrderId should be provided*  
@@ -388,7 +388,7 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, string? orderI
 
 ## PlaceConditionalOrderAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-placecond](https://bybit-exchange.github.io/docs/inverse_futures/#t-placecond)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-placecond](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-placecond)  
 <p>
 
 *Place a new conditional order*  
@@ -429,7 +429,7 @@ Task<WebCallResult<BybitConditionalOrder>> PlaceConditionalOrderAsync(string sym
 
 ## PlaceOrderAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-placeactive](https://bybit-exchange.github.io/docs/inverse_futures/#t-placeactive)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-placeactive](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-placeactive)  
 <p>
 
 *Place a new order*  
@@ -468,7 +468,7 @@ Task<WebCallResult<BybitInverseOrder>> PlaceOrderAsync(string symbol, OrderSide 
 
 ## SetTradingStopAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-tradingstop](https://bybit-exchange.github.io/docs/inverse_futures/#t-tradingstop)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-tradingstop](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-tradingstop)  
 <p>
 
 *Set take profit, stop loss, and trailing stop for your open position*  
