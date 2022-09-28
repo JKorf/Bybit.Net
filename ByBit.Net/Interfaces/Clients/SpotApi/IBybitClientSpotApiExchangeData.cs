@@ -15,7 +15,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Get the server time
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-servertime" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-servertime" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -23,7 +23,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get all supported symbols
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-spot_querysymbol" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -31,7 +31,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get the current order book for a symbol
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-orderbook" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-orderbook" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="limit">The number of rows</param>
@@ -41,7 +41,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get merged order book based on the scale
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-mergedorderbook" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="scale">The scale of the order book. 1 means 1 digit</param>
@@ -52,7 +52,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get public trade history
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-publictradingrecords" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="limit">Max amount of results</param>
@@ -62,7 +62,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get price klines
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-querykline" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-querykline" /></para>
         /// </summary>
         /// <param name="symbol">Symbol of the klines</param>
         /// <param name="interval">Interval of the kline data</param>
@@ -75,7 +75,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// The ticker info for a symbol
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-spot_latestsymbolinfo" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -84,7 +84,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// The ticker info for all symbols
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-spot_latestsymbolinfo" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -92,7 +92,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get the last trade price of a symbol
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-lasttradedprice" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -101,7 +101,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get the last trade price of all symbols
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-lasttradedprice" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -109,7 +109,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get the best ask/bid price for a symbol
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-bestbidask" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-bestbidask" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -118,7 +118,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get the best ask/bid prices for all symbols
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-bestbidask" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-bestbidask" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>

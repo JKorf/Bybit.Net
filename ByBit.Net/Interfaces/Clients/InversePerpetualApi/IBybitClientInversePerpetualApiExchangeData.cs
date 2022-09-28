@@ -15,7 +15,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
     {
         /// <summary>
         /// Get the server time
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-servertime" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-servertime" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -23,7 +23,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// The API announcements for the last 30 days
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-announcement" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-announcement" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -31,7 +31,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get all supported symbols
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-querysymbol" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querysymbol" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -39,7 +39,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// The ticker info for a symbol
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-latestsymbolinfo" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-latestsymbolinfo" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -48,7 +48,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get public trade history
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-publictradingrecords" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-publictradingrecords" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="fromId">Filter by records after this id</param>
@@ -59,7 +59,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get the current order book for a symbol
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-orderbook" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-orderbook" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -68,7 +68,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get price klines
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-querykline" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querykline" /></para>
         /// </summary>
         /// <param name="symbol">Symbol of the klines</param>
         /// <param name="interval">Interval of the kline data</param>
@@ -80,7 +80,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get index price klines
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-queryindexpricekline" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-queryindexpricekline" /></para>
         /// </summary>
         /// <param name="symbol">Symbol of the klines</param>
         /// <param name="interval">Interval of the kline data</param>
@@ -92,7 +92,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get premium index klines
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-querypremiumindexkline" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querypremiumindexkline" /></para>
         /// </summary>
         /// <param name="symbol">Symbol of the klines</param>
         /// <param name="interval">Interval of the kline data</param>
@@ -104,7 +104,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get mark price klines
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-markpricekline" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-markpricekline" /></para>
         /// </summary>
         /// <param name="symbol">Symbol of the klines</param>
         /// <param name="interval">Interval of the kline data</param>
@@ -116,7 +116,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get long/short ratio
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-marketaccountratio" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketaccountratio" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="period">The data period</param>
@@ -127,7 +127,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Gets the total amount of unsettled contracts. In other words, the total number of contracts held in open positions.
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-marketopeninterest" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketopeninterest" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="period">The period of data</param>
@@ -138,7 +138,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Obtain filled orders worth more than 500,000 USD within the last 24h.
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-marketbigdeal" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketbigdeal" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="limit">The max amount of results</param>
@@ -148,7 +148,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 
         /// <summary>
         /// Get last funding rate
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse/#t-fundingrate" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-fundingrate" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>

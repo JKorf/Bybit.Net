@@ -17,7 +17,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         #region Risk
         /// <summary>
         /// Get position risk limit
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-getrisklimit" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-getrisklimit" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -27,7 +27,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Set position risk
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-setrisklimit" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setrisklimit" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="riskId">The risk id to set</param>
@@ -43,7 +43,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         #region Positions
         /// <summary>
         /// Get user positions
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-myposition" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-myposition" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -52,7 +52,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
         /// <summary>
         /// Get user positions
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-myposition" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-myposition" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -61,7 +61,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Set auto add margin switch
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setautoaddmargin" /></para>
         /// </summary>
         /// <param name="symbol">Symbol</param>
         /// <param name="side">Side</param>
@@ -74,7 +74,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Switch Cross/Isolated; must set leverage value when switching from Cross to Isolated
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-marginswitch" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-marginswitch" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="isIsolated">True is Isolated; false is Cross</param>
@@ -98,7 +98,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Switch between full or partial Stop loss/Take profit mode
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-switchmode" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-switchmode" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="mode">New mode</param>
@@ -121,7 +121,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Set leverage
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-setleverage" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setleverage" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="buyLeverage">Buy leverage</param>
@@ -133,7 +133,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Get user's profit and loss records
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-closedprofitandloss" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get records for</param>
         /// <param name="startTime">Filter by startTime</param>
@@ -151,7 +151,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Get wallet fund endpoints
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-walletrecords" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-walletrecords" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
@@ -166,7 +166,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Get asset exchange history
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-assetexchangerecords" /></para>
         /// </summary>
         /// <param name="fromId">Filter by id</param>
         /// <param name="direction">Filter by direction</param>
@@ -178,7 +178,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Get wallet balances
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-balance" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-balance" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -188,7 +188,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Get withdrawal history
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-withdrawrecords" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
@@ -207,7 +207,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Get user last funding fee
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-mylastfundingfee" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -217,7 +217,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Get predicted next funding rate
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-predictedfunding" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-predictedfunding" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -229,7 +229,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 
         /// <summary>
         /// Get Api key info
-        /// <para><a href="https://bybit-exchange.github.io/docs/linear/#t-key" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-key" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
