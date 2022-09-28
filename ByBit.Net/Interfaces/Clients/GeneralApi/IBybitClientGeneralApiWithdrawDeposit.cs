@@ -16,6 +16,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Get deposit information
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-allowdepositlist" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="network">Filter by network</param>
@@ -34,6 +35,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get deposit history
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-depositsrecordquery" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
@@ -56,6 +58,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get withdrawal history
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-withdrawrecordquery" /></para>
         /// </summary>
         /// <param name="withdrawalId">Filter by withdrawal id</param>
         /// <param name="asset">Filter by asset</param>
@@ -80,6 +83,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get asset information regarding withdrawal/deposits
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-coin_info_query" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -92,6 +96,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get account info
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-asset_info_query" /></para>
         /// </summary>
         /// <param name="asset">Filter asset</param>
         /// <param name="accountType">Filter account type</param>
@@ -106,6 +111,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Create a withdrawal request
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-withdraw_info" /></para>
         /// </summary>
         /// <param name="asset">Asset to withdraw</param>
         /// <param name="network">Network to use</param>
@@ -126,6 +132,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Cancel withdrawal
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-cancel_withdraw" /></para>
         /// </summary>
         /// <param name="withdrawalId">Id to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -138,6 +145,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get deposit addresses for an asset
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/#t-deposit_addr_info" /></para>
         /// </summary>
         /// <param name="asset">The asset to get addresses for</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
