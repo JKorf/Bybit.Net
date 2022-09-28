@@ -28,6 +28,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.1.2 - 28 Sep 2022
+    * Fixed SubscribeToTickerUpdatesAsync OpenInterest value parsing
+    * Added missing ReduceOnly field to BybitConditionalOrder model
+    * Fixed documentation links
+
 * Version 1.1.1 - 19 Aug 2022
     * Added TakeProfitPrice, StopLossPrice and TriggerPrice to BybitConditionalOrder model
     * Fixed WithdrawalAsync quantity parameter being wrongly named
