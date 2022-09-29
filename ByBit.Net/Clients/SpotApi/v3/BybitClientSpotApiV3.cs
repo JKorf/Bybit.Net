@@ -28,7 +28,7 @@ namespace Bybit.Net.Clients.SpotApi
     public class BybitClientSpotApiV3 : BybitClientBaseSpotApi, IBybitClientSpotApiV3
     {
         /// <inheritdoc />
-        public IBybitClientSpotApiAccount Account { get; }
+        public IBybitClientSpotApiAccountV3 Account { get; }
         /// <inheritdoc />
         public IBybitClientSpotApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
@@ -38,7 +38,7 @@ namespace Bybit.Net.Clients.SpotApi
         internal BybitClientSpotApiV3(Log log, BybitClient baseClient, BybitClientOptions options)
             : base(log, baseClient, options)
         {
-            Account = new BybitClientSpotApiAccount(this);
+            Account = new BybitClientSpotApiAccountV3(this);
             ExchangeData = new BybitClientSpotApiExchangeData(this);
             Trading = new BybitClientSpotApiTradingV3(this);
         }

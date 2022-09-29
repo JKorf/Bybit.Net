@@ -2,6 +2,7 @@
 using CryptoExchange.Net.Interfaces.CommonClients;
 using System;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
+using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 
 namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
 {
@@ -13,7 +14,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
-        IBybitClientSpotApiAccount Account { get; }
+        IBybitClientSpotApiAccountV3 Account { get; }
 
         /// <summary>
         /// Endpoints related to retrieving market and system data

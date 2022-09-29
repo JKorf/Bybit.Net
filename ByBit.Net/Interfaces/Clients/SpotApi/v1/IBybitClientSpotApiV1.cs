@@ -13,7 +13,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
-        IBybitClientSpotApiAccount Account { get; }
+        IBybitClientSpotApiAccountV1 Account { get; }
 
         /// <summary>
         /// Endpoints related to retrieving market and system data

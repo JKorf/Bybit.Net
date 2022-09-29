@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Interfaces.Clients.SpotApi;
+﻿using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 using Bybit.Net.Objects.Models.Spot;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
@@ -8,14 +8,14 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v1
 {
     /// <inheritdoc />
-    public class BybitClientSpotApiAccount : IBybitClientSpotApiAccount
+    public class BybitClientSpotApiAccountV1 : IBybitClientSpotApiAccountV1
     {
         private BybitClientBaseSpotApi _baseClient;
 
-        internal BybitClientSpotApiAccount(BybitClientBaseSpotApi baseClient)
+        internal BybitClientSpotApiAccountV1(BybitClientBaseSpotApi baseClient)
         {
             _baseClient = baseClient;
         }

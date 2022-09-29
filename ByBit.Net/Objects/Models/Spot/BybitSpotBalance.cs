@@ -41,6 +41,7 @@ namespace Bybit.Net.Objects.Models.Spot
         /// <summary>
         /// Total
         /// </summary>
+        [JsonProperty("total")]
         public decimal Total { get; set; }
     }
 }
