@@ -1,14 +1,15 @@
 ﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
-namespace Bybit.Net.Objects.Models.Spot
+namespace Bybit.Net.Objects.Models.Spot.v1
 {
     /// <summary>
     /// Kline data
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitSpotKline
+    public class BybitSpotKlineV1
     {
         /// <summary>
         /// Candle open time

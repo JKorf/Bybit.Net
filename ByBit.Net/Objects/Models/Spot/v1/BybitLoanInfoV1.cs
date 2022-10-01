@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bybit.Net.Objects.Models.Spot
+namespace Bybit.Net.Objects.Models.Spot.v1
 {
     /// <summary>
     /// Borrow info
     /// </summary>
-    public  class BybitBorrowInfo
+    public class BybitBorrowInfoV1
     {
         /// <summary>
         /// Asset

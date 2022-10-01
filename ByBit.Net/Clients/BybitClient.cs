@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Bybit.Net.Clients.SpotApi.v1;
+using Bybit.Net.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 
 namespace Bybit.Net.Clients

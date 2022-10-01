@@ -1,11 +1,25 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace Bybit.Net.Objects.Models.Spot
+namespace Bybit.Net.Objects.Models.Spot.v3
 {
+    /// <summary>
+    /// Wrapper for symbols deserialization
+    /// </summary>
+    public class BybitSpotSymbolWrapper
+    {
+        /// <summary>
+        /// List of spot symbols
+        /// </summary>
+        [JsonProperty("list")]
+        public IEnumerable<BybitSpotSymbolV3> Symbols { get; set; } = Array.Empty<BybitSpotSymbolV3>();
+    }
+
     /// <summary>
     /// Symbol info
     /// </summary>
-    public class BybitSpotSymbol
+    public class BybitSpotSymbolV3
     {
         /// <summary>
         /// Name of the symbol
@@ -18,13 +32,15 @@ namespace Bybit.Net.Objects.Models.Spot
         /// <summary>
         /// Base asset
         /// </summary>
-        [JsonProperty("baseCurrency")]
+        [JsonProperty("baseCoin")]
         public string BaseAsset { get; set; } = string.Empty;
+
         /// <summary>
         /// Quote asset
         /// </summary>
-        [JsonProperty("quoteCurrency")]
+        [JsonProperty("quoteCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
+
         /// <summary>
         /// Precision of the base asset
         /// </summary>
@@ -36,13 +52,15 @@ namespace Bybit.Net.Objects.Models.Spot
         /// <summary>
         /// Minimal order quantity
         /// </summary>
-        [JsonProperty("minTradeQuantity")]
+        [JsonProperty("minTradeQty")]
         public decimal MinOrderQuantity { get; set; }
+
         /// <summary>
         /// Minimal order value (quantity * price)
         /// </summary>
-        [JsonProperty("minTradeAmount")]
+        [JsonProperty("minTradeAmt")]
         public decimal MinOrderValue { get; set; }
+
         /// <summary>
         /// Price precision
         /// </summary>
@@ -51,24 +69,28 @@ namespace Bybit.Net.Objects.Models.Spot
         /// <summary>
         /// Max order quantity
         /// </summary>
-        [JsonProperty("maxTradeQuantity")]
+        [JsonProperty("maxTradeQty")]
         public decimal MaxOrderQuantity { get; set; }
+
         /// <summary>
         /// Max order value (quantity * price)
         /// </summary>
-        [JsonProperty("maxTradeAmount")]
+        [JsonProperty("maxTradeAmt")]
         public decimal MaxOrderValue { get; set; }
+
         /// <summary>
         /// Category
         /// </summary>
         public int Category { get; set; }
+
         /// <summary>
         /// True indicates that the price of this currency is relatively volatile
         /// </summary>
-        public bool Innovation { get; set; }
+        public string Innovation { get; set; }
+
         /// <summary>
         /// True indicates that the symbol open for trading
         /// </summary>
-        public bool ShowStatus { get; set; }
+        public string ShowStatus { get; set; }
     }
 }

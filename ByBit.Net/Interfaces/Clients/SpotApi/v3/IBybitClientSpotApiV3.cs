@@ -1,8 +1,5 @@
-﻿using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
+﻿using CryptoExchange.Net.Interfaces.CommonClients;
 using System;
-using Bybit.Net.Interfaces.Clients.SpotApi.v3;
-using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 
 namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
 {
@@ -19,7 +16,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
         /// <summary>
         /// Endpoints related to retrieving market and system data
         /// </summary>
-        IBybitClientSpotApiExchangeData ExchangeData { get; }
+        IBybitClientSpotApiExchangeDataV3 ExchangeData { get; }
 
         /// <summary>
         /// Endpoints related to orders and trades

@@ -1,36 +1,26 @@
-﻿using Bybit.Net.Enums;
-using Bybit.Net.Interfaces.Clients.SpotApi;
-using Bybit.Net.Objects;
-using Bybit.Net.Objects.Internal;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.CommonObjects;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
-using CryptoExchange.Net.Logging;
-using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Bybit.Net.Clients.SpotApi.v1;
-using Bybit.Net.Clients.SpotApi.v3;
-using Bybit.Net.Interfaces.Clients.SpotApi.v1;
+using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
+using Bybit.Net.Objects;
+using CryptoExchange.Net.CommonObjects;
+using CryptoExchange.Net.Interfaces.CommonClients;
+using CryptoExchange.Net.Logging;
+using CryptoExchange.Net.Objects;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v3
 {
-    /// <inheritdoc cref="IBybitClientSpotApi" />
+    /// <inheritdoc cref="IBybitClientSpotApiV3" />
     public class BybitClientSpotApiV3 : BybitClientBaseSpotApi, IBybitClientSpotApiV3
     {
         /// <inheritdoc />
         public IBybitClientSpotApiAccountV3 Account { get; }
         /// <inheritdoc />
-        public IBybitClientSpotApiExchangeData ExchangeData { get; }
+        public IBybitClientSpotApiExchangeDataV3 ExchangeData { get; }
         /// <inheritdoc />
         public IBybitClientSpotApiTradingV3 Trading { get; }
 
@@ -39,7 +29,7 @@ namespace Bybit.Net.Clients.SpotApi
             : base(log, baseClient, options)
         {
             Account = new BybitClientSpotApiAccountV3(this);
-            ExchangeData = new BybitClientSpotApiExchangeData(this);
+            ExchangeData = new BybitClientSpotApiExchangeDataV3(this);
             Trading = new BybitClientSpotApiTradingV3(this);
         }
         #endregion
@@ -53,14 +43,14 @@ namespace Bybit.Net.Clients.SpotApi
             if (!result)
                 return result.As<IEnumerable<Symbol>>(null);
 
-            return result.As(result.Data.Select(r => new Symbol
-            {
-                SourceObject = r,
-                Name = r.Name,
-                MinTradeQuantity = r.MinOrderQuantity,
-                PriceStep = r.PricePrecision,
-                QuantityStep = r.BasePrecision
-            }));
+              return result.As(result.Data.Symbols.Select(r => new Symbol
+              {
+                  SourceObject = r,
+                  Name = r.Name,
+                  MinTradeQuantity = r.MinOrderQuantity,
+                  PriceStep = r.PricePrecision,
+                  QuantityStep = r.BasePrecision
+              }));
         }
 
         /// <inheritdoc />
@@ -70,7 +60,7 @@ namespace Bybit.Net.Clients.SpotApi
             if (!result)
                 return result.As<IEnumerable<Ticker>>(null);
 
-            return result.As(result.Data.Select(r => new Ticker
+            return result.As(result.Data.Tickers.Select(r => new Ticker
             {
                 SourceObject = r,
                 Symbol = r.Symbol,
@@ -114,7 +104,7 @@ namespace Bybit.Net.Clients.SpotApi
             if (!result)
                 return result.As<IEnumerable<Kline>>(null);
 
-            return result.As(result.Data.Select(r => new Kline
+            return result.As(result.Data.Klines.Select(r => new Kline
             {
                 SourceObject = r,
                 HighPrice = r.HighPrice,
@@ -154,7 +144,7 @@ namespace Bybit.Net.Clients.SpotApi
             if (!result)
                 return result.As<IEnumerable<Trade>>(null);
 
-            return result.As(result.Data.Select(r => new Trade
+            return result.As(result.Data.Trades.Select(r => new Trade
             {
                 SourceObject = r,
                 Price = r.Price,

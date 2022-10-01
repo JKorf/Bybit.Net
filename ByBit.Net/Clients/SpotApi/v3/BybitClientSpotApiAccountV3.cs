@@ -29,7 +29,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitSpotBalanceWrapper>(_baseClient.GetUrl("/spot/v3/private/account"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitSpotBalanceWrapper>(_baseClient.GetUrl("spot/v3/private/account"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             return result.As(result.Data?.Balances!);
         }
 
@@ -43,7 +43,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitMarginAccountInfo>(_baseClient.GetUrl("/spot/v3/private/cross-margin-account"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitMarginAccountInfo>(_baseClient.GetUrl("spot/v3/private/cross-margin-account"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

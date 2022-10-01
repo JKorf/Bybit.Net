@@ -1,13 +1,28 @@
 ﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using Bybit.Net.Converters;
 
-namespace Bybit.Net.Objects.Models.Spot
+namespace Bybit.Net.Objects.Models.Spot.v3
 {
+    /// <summary>
+    /// Wrapper for book prices deserialization
+    /// </summary>
+    public class BybitSpotBookPriceWrapper
+    {
+        /// <summary>
+        /// List of spot book prices
+        /// </summary>
+        [JsonProperty("list")]
+        public IEnumerable<BybitSpotBookPriceV3> BookPrices { get; set; } = Array.Empty<BybitSpotBookPriceV3>();
+    }
+
     /// <summary>
     /// Book price info
     /// </summary>
-    public class BybitSpotBookPrice
+    /// <remarks> In some methods of v3 they changed naming, in some they changed type. Not very logic, but.. </remarks>
+    public class BybitSpotBookPriceV3
     {
         /// <summary>
         /// The symbol
@@ -17,16 +32,19 @@ namespace Bybit.Net.Objects.Models.Spot
         /// <summary>
         /// The symbol
         /// </summary>
+        /// <remarks> DO not remove, using in JSON deserialization </remarks>
         [JsonProperty("s")]
-        public string SymbolV3
+        private string SymbolV3
         {
-            set { Symbol = value; }
+            get => Symbol;
+            set => Symbol = value;
         }
 
         /// <summary>
         /// Best bid price
         /// </summary>
-        [JsonProperty("bidPrice")]
+        /// <remarks> In some methods of v3 they changed naming, in some they changed type. Not very logic, but.. </remarks>
+        [JsonProperty("bidPrice"), JsonConverter(typeof(DecimalJsonConverter))]
         public decimal BestBidPrice { get; set; }
         /// <summary>
         /// Best bid price (v3)
@@ -34,49 +52,56 @@ namespace Bybit.Net.Objects.Models.Spot
         [JsonProperty("bp")]
         private decimal BestBidPriceV3
         {
-            set { BestBidPrice = value; }
+            get => BestBidPrice;
+            set => BestBidPrice = value;
         }
 
         /// <summary>
         /// Quantity of the best bid price
         /// </summary>
-        [JsonProperty("bidQty")]
+        [JsonProperty("bidQty"), JsonConverter(typeof(DecimalJsonConverter))]
         public decimal BestBidQuantity { get; set; }
         /// <summary>
         /// Quantity of the best bid price (v3)
         /// </summary>
+        /// <remarks> DO not remove, using in JSON deserialization </remarks>
         [JsonProperty("bq")]
         private decimal BestBidQuantityV3
         {
-            set { BestBidQuantity = value; }
+            get => BestBidQuantity;
+            set => BestBidQuantity = value;
         }
 
         /// <summary>
         /// Best ask price
         /// </summary>
-        [JsonProperty("askPrice")]
+        [JsonProperty("askPrice"), JsonConverter(typeof(DecimalJsonConverter))]
         public decimal BestAskPrice { get; set; }
         /// <summary>
         /// Best ask price (v3)
         /// </summary>
+        /// <remarks> DO not remove, using in JSON deserialization </remarks>
         [JsonProperty("ap")]
         private decimal BestAskPriceV3
         {
-            set { BestAskPrice = value; }
+            get => BestAskPrice;
+            set => BestAskPrice = value;
         }
 
         /// <summary>
         /// Quantity of the best ask price
         /// </summary>
-        [JsonProperty("askQty")]
+        [JsonProperty("askQty"), JsonConverter(typeof(DecimalJsonConverter))]
         public decimal BestAskQuantity { get; set; }
         /// <summary>
         /// Quantity of the best ask price (v3)
         /// </summary>
+        /// <remarks> DO not remove, using in JSON deserialization </remarks>
         [JsonProperty("aq")]
         private decimal BestAskQuantityV3
         {
-            set { BestAskQuantity = value; }
+            get => BestAskQuantity;
+            set => BestAskQuantity = value;
         }
 
         /// <summary>
@@ -87,10 +112,12 @@ namespace Bybit.Net.Objects.Models.Spot
         /// <summary>
         /// Timestamp of the data (v3)
         /// </summary>
+        /// <remarks> DO not remove, using in JSON deserialization </remarks>
         [JsonProperty("t"), JsonConverter(typeof(DateTimeConverter))]
         private DateTime TimestampV3
         {
-            set { Timestamp = value; }
+            get => Timestamp;
+            set => Timestamp = value;
         }
     }
 }

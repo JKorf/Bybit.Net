@@ -13,8 +13,9 @@ using CryptoExchange.Net.Logging;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Enums;
 using Bybit.Net.Converters;
-using Bybit.Net.Objects.Models.Spot;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
+using Bybit.Net.Objects.Models.Spot.v1;
+using Bybit.Net.Objects.Models.Spot.v3;
 
 namespace Bybit.Net.Clients.SpotApi.v3
 {
@@ -119,7 +120,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPrice>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPriceV3>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -127,10 +128,10 @@ namespace Bybit.Net.Clients.SpotApi.v3
                 if (internalData == null)
                     return;
 
-                var desResult = _baseClient.DeserializeInternal<BybitSpotBookPrice>(internalData);
+                var desResult = _baseClient.DeserializeInternal<BybitSpotBookPriceV3>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotBookPrice)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotBookPriceV3)} object: " + desResult.Error);
                     return;
                 }
 

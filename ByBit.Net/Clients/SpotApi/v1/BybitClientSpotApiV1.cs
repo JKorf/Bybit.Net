@@ -1,36 +1,26 @@
-﻿using Bybit.Net.Enums;
-using Bybit.Net.Interfaces.Clients.SpotApi;
-using Bybit.Net.Objects;
-using Bybit.Net.Objects.Internal;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.CommonObjects;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
-using CryptoExchange.Net.Logging;
-using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Bybit.Net.Clients.SpotApi.v1;
-using Bybit.Net.Clients.SpotApi.v3;
+using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.SpotApi.v1;
-using Bybit.Net.Interfaces.Clients.SpotApi.v3;
+using Bybit.Net.Objects;
+using CryptoExchange.Net.CommonObjects;
+using CryptoExchange.Net.Interfaces.CommonClients;
+using CryptoExchange.Net.Logging;
+using CryptoExchange.Net.Objects;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v1
 {
-    /// <inheritdoc cref="IBybitClientSpotApi" />
+    /// <inheritdoc cref="IBybitClientSpotApiV1" />
     public class BybitClientSpotApiV1 : BybitClientBaseSpotApi, IBybitClientSpotApiV1
     {
         /// <inheritdoc />
         public IBybitClientSpotApiAccountV1 Account { get; }
         /// <inheritdoc />
-        public IBybitClientSpotApiExchangeData ExchangeData { get; }
+        public IBybitClientSpotApiExchangeDataV1 ExchangeData { get; }
         /// <inheritdoc />
         public IBybitClientSpotApiTradingV1 Trading { get; }
         #region ctor
@@ -38,7 +28,7 @@ namespace Bybit.Net.Clients.SpotApi
             : base(log,baseClient, options)
         {
             Account = new BybitClientSpotApiAccountV1(this);
-            ExchangeData = new BybitClientSpotApiExchangeData(this);
+            ExchangeData = new BybitClientSpotApiExchangeDataV1(this);
             Trading = new BybitClientSpotApiTradingV1(this);
         }
         #endregion

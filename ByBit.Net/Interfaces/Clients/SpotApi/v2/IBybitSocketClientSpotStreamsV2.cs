@@ -1,6 +1,6 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.Socket.Spot;
-using Bybit.Net.Objects.Models.Spot;
+using Bybit.Net.Objects.Models.Spot.v1;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -53,7 +53,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPrice>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPriceV1>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to ticker updates

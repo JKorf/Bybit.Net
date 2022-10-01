@@ -11,16 +11,17 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Bybit.Net.Objects.Models.Spot;
-using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.SpotApi.v1;
+using Bybit.Net.Objects.Models.Spot.v1;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v1
 {
     /// <inheritdoc />
-    public class BybitClientSpotApiExchangeData : IBybitClientSpotApiExchangeData
+    public class BybitClientSpotApiExchangeDataV1 : IBybitClientSpotApiExchangeDataV1
     {
         private BybitClientBaseSpotApi _baseClient;
 
-        internal BybitClientSpotApiExchangeData(BybitClientBaseSpotApi baseClient)
+        internal BybitClientSpotApiExchangeDataV1(BybitClientBaseSpotApi baseClient)
         {
             _baseClient = baseClient;
         }
@@ -39,9 +40,9 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSpotSymbolV1>>> GetSymbolsAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotSymbol>>(_baseClient.GetUrl("spot/v1/symbols"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotSymbolV1>>(_baseClient.GetUrl("spot/v1/symbols"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
 
         #endregion
@@ -82,7 +83,7 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get trade history
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSpotTradeV1>>> GetTradeHistoryAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -90,7 +91,7 @@ namespace Bybit.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotTrade>>(_baseClient.GetUrl("spot/quote/v1/trades"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotTradeV1>>(_baseClient.GetUrl("spot/quote/v1/trades"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -98,7 +99,7 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get klines
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSpotKlineV1>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -109,7 +110,7 @@ namespace Bybit.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotKline>>(_baseClient.GetUrl("spot/quote/v1/kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotKlineV1>>(_baseClient.GetUrl("spot/quote/v1/kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -117,14 +118,14 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get ticker
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotTickerV1>> GetTickerAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol }
             };
 
-            return await _baseClient.SendRequestAsync<BybitSpotTicker>(_baseClient.GetUrl("spot/quote/v1/ticker/24hr"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitSpotTickerV1>(_baseClient.GetUrl("spot/quote/v1/ticker/24hr"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -132,9 +133,9 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get tickers
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSpotTickerV1>>> GetTickersAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotTicker>>(_baseClient.GetUrl("spot/quote/v1/ticker/24hr"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotTickerV1>>(_baseClient.GetUrl("spot/quote/v1/ticker/24hr"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
 
         #endregion
@@ -167,14 +168,14 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get book price
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotBookPriceV1>> GetBookPriceAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol }
             };
 
-            return await _baseClient.SendRequestAsync<BybitSpotBookPrice>(_baseClient.GetUrl("spot/quote/v1/ticker/book_ticker"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitSpotBookPriceV1>(_baseClient.GetUrl("spot/quote/v1/ticker/book_ticker"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -182,9 +183,9 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get prices
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSpotBookPriceV1>>> GetBookPricesAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotBookPrice>>(_baseClient.GetUrl("spot/quote/v1/ticker/book_ticker"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotBookPriceV1>>(_baseClient.GetUrl("spot/quote/v1/ticker/book_ticker"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
 
         #endregion
@@ -192,13 +193,13 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get Borrow info
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitBorrowInfo>> GetBorrowInterestAndQuotaAsync(string asset, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitBorrowInfoV1>> GetBorrowInterestAndQuotaAsync(string asset, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "currency", asset }
             };
-            return await _baseClient.SendRequestAsync<BybitBorrowInfo>(_baseClient.GetUrl("spot/v1/cross-margin/loan-info"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitBorrowInfoV1>(_baseClient.GetUrl("spot/v1/cross-margin/loan-info"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
