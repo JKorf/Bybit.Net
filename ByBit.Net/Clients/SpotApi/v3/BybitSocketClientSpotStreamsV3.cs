@@ -182,63 +182,114 @@ namespace Bybit.Net.Clients.SpotApi.v3
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(
-            Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler,
-            Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler,
-            Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler,
-            CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BybitSpotAccountUpdate>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
-                var jArray = (JArray)data.Data;
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var jArray = (JArray)internalData;
                 foreach (var item in jArray)
                 {
-                    var topic = item["e"]?.ToString();
-                    if (topic == "outboundAccountInfo")
+                    var desResult = _baseClient.DeserializeInternal<BybitSpotAccountUpdate>(item);
+                    if (!desResult)
                     {
-                        var desResult = _baseClient.DeserializeInternal<BybitSpotAccountUpdate>(item);
-                        if (!desResult)
-                        {
-                            _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotAccountUpdate)} object: " + desResult.Error);
-                            return;
-                        }
+                        _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotAccountUpdate)} object: " + desResult.Error);
+                        return;
+                    }
 
-                        accountUpdateHandler(data.As(desResult.Data));
-                    }
-                    else if (topic == "order")
-                    {
-                        var desResult = _baseClient.DeserializeInternal<BybitSpotOrderUpdate>(item);
-                        if (!desResult)
-                        {
-                            _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotOrderUpdate)} object: " + desResult.Error);
-                            return;
-                        }
-
-                        orderUpdateHandler(data.As(desResult.Data));
-                    }
-                    else if (topic == "ticketInfo")
-                    {
-                        var desResult = _baseClient.DeserializeInternal<BybitSpotUserTradeUpdate>(item);
-                        if (!desResult)
-                        {
-                            _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotUserTradeUpdate)} object: " + desResult.Error);
-                            return;
-                        }
-
-                        tradeUpdateHandler(data.As(desResult.Data));
-                    }
-                    else
-                    {
-                        _log.Write(LogLevel.Warning, $"Unknown account update: " + topic);
-                    }
+                    handler(data.As(desResult.Data));
                 }
-
             });
-               return await _baseClient.SubscribeInternalAsync(
-                   this,
-                   _options.SpotStreamsV3Options.BaseAddressAuthenticated,
-                   null,
-                   "AccountInfo", true, internalHandler, ct).ConfigureAwait(false);
+
+            return await _baseClient.SubscribeInternalAsync(this,
+                _options.SpotStreamsV3Options.BaseAddressAuthenticated,
+                new BybitSpotRequestMessageV3()
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Operation = "subscribe",
+                    Parameters = new[]
+                    {
+                        "outboundAccountInfo"
+                    }
+                },
+                null, true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserOrdersUpdatesAsync(Action<DataEvent<BybitSpotOrderUpdate>> handler, CancellationToken ct = default)
+        {
+            var internalHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var jArray = (JArray)internalData;
+                foreach (var item in jArray)
+                {
+                    var desResult = _baseClient.DeserializeInternal<BybitSpotOrderUpdate>(item);
+                    if (!desResult)
+                    {
+                        _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotOrderUpdate)} object: " + desResult.Error);
+                        return;
+                    }
+
+                    handler(data.As(desResult.Data));
+                }
+            });
+
+            return await _baseClient.SubscribeInternalAsync(this,
+                _options.SpotStreamsV3Options.BaseAddressAuthenticated,
+                new BybitSpotRequestMessageV3()
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Operation = "subscribe",
+                    Parameters = new[]
+                    {
+                        "order"
+                    }
+                },
+                null, true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradesUpdatesAsync(Action<DataEvent<BybitSpotUserTradeUpdate>> handler, CancellationToken ct = default)
+        {
+            var internalHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var jArray = (JArray)internalData;
+                foreach (var item in jArray)
+                {
+                    var desResult = _baseClient.DeserializeInternal<BybitSpotUserTradeUpdate>(item);
+                    if (!desResult)
+                    {
+                        _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotUserTradeUpdate)} object: " + desResult.Error);
+                        return;
+                    }
+
+                    handler(data.As(desResult.Data));
+                }
+            });
+
+            return await _baseClient.SubscribeInternalAsync(this,
+                _options.SpotStreamsV3Options.BaseAddressAuthenticated,
+                new BybitSpotRequestMessageV3()
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Operation = "subscribe",
+                    Parameters = new[]
+                    {
+                        "ticketInfo"
+                    }
+                },
+                null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

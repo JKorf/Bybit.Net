@@ -66,18 +66,28 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
         Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTickerUpdate>> handler, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to account data updates
+        /// Subscribe to account balances update
         /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-privatetopics" /></para>
         /// </summary>
-        /// <param name="accountUpdateHandler">Account(balance) update handler</param>
-        /// <param name="orderUpdateHandler">Order update handler</param>
-        /// <param name="tradeUpdateHandler">User trade update handler</param>
+        /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(
-            Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler,
-            Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler,
-            Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler,
-            CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BybitSpotAccountUpdate>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to orders updates
+        /// </summary>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToUserOrdersUpdatesAsync(Action<DataEvent<BybitSpotOrderUpdate>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Susbcribe to user trade updates
+        /// </summary>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToUserTradesUpdatesAsync(Action<DataEvent<BybitSpotUserTradeUpdate>> handler, CancellationToken ct = default);
     }
 }
