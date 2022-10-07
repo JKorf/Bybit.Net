@@ -235,7 +235,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<Order>>(null);
 
-            return result.As(result.Data.Select(r => new Order
+            return result.As(result.Data.Orders.Select(r => new Order
             {
                 SourceObject = r,
                 Id = r.Id.ToString(CultureInfo.InvariantCulture),
@@ -257,7 +257,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<Order>>(null);
 
-            return result.As(result.Data.Select(r => new Order
+            return result.As(result.Data.Orders.Select(r => new Order
             {
                 SourceObject = r,
                 Id = r.Id.ToString(CultureInfo.InvariantCulture),

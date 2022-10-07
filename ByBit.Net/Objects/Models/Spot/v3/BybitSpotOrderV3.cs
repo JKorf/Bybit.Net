@@ -1,0 +1,116 @@
+﻿using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using Bybit.Net.Converters;
+using Bybit.Net.Enums;
+
+namespace Bybit.Net.Objects.Models.Spot.v3
+{
+    /// <summary>
+    /// Wrapper for symbols deserialization
+    /// </summary>
+    public class BybitSpotOrderWrapper
+    {
+        /// <summary>
+        /// List of spot orders
+        /// </summary>
+        [JsonProperty("list")]
+        public IEnumerable<BybitSpotOrderV3> Orders { get; set; } = Array.Empty<BybitSpotOrderV3>();
+    }
+
+    /// <summary>
+    /// Spot order info
+    /// </summary>
+    public class BybitSpotOrderV3 : BybitSpotOrderBase
+    {
+        /// <summary>
+        /// Account ID
+        /// </summary>
+        [JsonProperty("accountId")]
+        public string AccountId { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Order price
+        /// </summary>
+        [JsonProperty("orderPrice")]
+        [JsonConverter(typeof(DecimalJsonConverter))]
+        private decimal OrderPrice
+        {
+            get { return Price; }
+            set { Price = value; }
+        }
+
+        /// <summary>
+        /// Order quantity
+        /// </summary>
+        [JsonProperty("orderQty")]
+        [JsonConverter(typeof(DecimalJsonConverter))]
+        private decimal OrderQuantity
+        {
+            get { return Quantity; }
+            set { Quantity = value; }
+        }
+
+        /// <summary>
+        /// Type
+        /// </summary>
+        [JsonConverter(typeof(OrderTypeSpotConverter))]
+        [JsonProperty("orderType")]
+        private OrderType OrderType
+        {
+            get { return Type; }
+            set { Type = value; }
+        }
+
+        /// <summary>
+        /// Average execution price
+        /// </summary>
+        [JsonProperty("avgPrice")]
+        [JsonConverter(typeof(DecimalJsonConverter))]
+        public decimal AveragePrice { get; set; }
+        /// <summary>
+        /// Ice berg quantity
+        /// </summary>
+        [JsonProperty("icebergQty")]
+        [JsonConverter(typeof(DecimalJsonConverter))]
+        public decimal? IcebergQuantity { get; set; }
+        /// <summary>
+        /// Creation time
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("time")]
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("updateTime")]
+        public DateTime UpdateTime { get; set; }
+        /// <summary>
+        /// Stop price
+        /// </summary>
+        [JsonConverter(typeof(DecimalJsonConverter))]
+        public decimal? StopPrice { get; set; }
+        /// <summary>
+        /// Quantity executed
+        /// </summary>
+        [JsonProperty("execQty")]
+        [JsonConverter(typeof(DecimalJsonConverter))]
+        public decimal QuantityFilled { get; set; }
+        /// <summary>
+        /// Quote quantity
+        /// </summary>
+        [JsonProperty("cummulativeQuoteQty")]
+        [JsonConverter(typeof(DecimalJsonConverter))]
+        public decimal QuoteQuantity { get; set; }
+
+        /// <summary>
+        /// Is working
+        /// </summary>
+        /// <remarks> 0：valid, 1：invalid </remarks>
+        [JsonProperty("isWorking")]
+        [JsonConverter(typeof(BoolConverter))]
+        public bool IsWorking { get; set; }
+    }
+}

@@ -13,7 +13,7 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Order id
         /// </summary>
         [JsonProperty("orderId")]
-        public long Id { get; set; }
+        public string Id { get; set; }
         /// <summary>
         /// Client order id
         /// </summary>

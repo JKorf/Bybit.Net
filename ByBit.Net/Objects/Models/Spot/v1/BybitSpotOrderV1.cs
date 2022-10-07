@@ -2,13 +2,13 @@
 using Newtonsoft.Json;
 using System;
 
-namespace Bybit.Net.Objects.Models.Spot
+namespace Bybit.Net.Objects.Models.Spot.v1
 {
     /// <summary>
     /// Spot order info
     /// </summary>
-    public class BybitSpotOrder: BybitSpotOrderBase
-    {        
+    public class BybitSpotOrderV1 : BybitSpotOrderBase
+    {
         /// <summary>
         /// Exchange id
         /// </summary>
