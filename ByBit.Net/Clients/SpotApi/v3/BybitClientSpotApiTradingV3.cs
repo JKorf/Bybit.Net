@@ -111,7 +111,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #region Cancel order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = null, string? clientOrderId = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && clientOrderId == null || orderId != null && clientOrderId != null)
                 throw new ArgumentException($"1 of {nameof(orderId)} or {nameof(clientOrderId)} should be provided");
@@ -119,9 +119,10 @@ namespace Bybit.Net.Clients.SpotApi.v3
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
+            parameters.AddOptionalParameter("orderCategory", orderCategory ?? 0);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v3/private/cancel-order"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v3/private/cancel-order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderCanceled(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
@@ -131,7 +132,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
 
         #region Cancel MultipleOrders 
         /// <inheritdoc />
-        public async Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = null, IEnumerable<OrderType>? orderTypes = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = null, IEnumerable<OrderType>? orderTypes = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -139,6 +140,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             };
             parameters.AddOptionalParameter("side", side.HasValue ? JsonConvert.SerializeObject(side, new OrderSideConverter(false)) : null);
             parameters.AddOptionalParameter("orderTypes", orderTypes != null && orderTypes.Any() ? string.Join(",", orderTypes.Select(o => JsonConvert.SerializeObject(o, new OrderTypeConverter(false)))) : null);
+            parameters.AddOptionalParameter("orderCategory", orderCategory ?? 0);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("spot/v3/private/cancel-orders"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
