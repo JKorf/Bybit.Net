@@ -49,10 +49,11 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">Filter by order id, will only return orders with an orderId smaller than this</param>
         /// <param name="limit">Max amount of results</param>
+        /// <param name="orderCategory">Order category. 0：normal order by default; 1：TP/SL order, Required for TP/SL order.</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get orders

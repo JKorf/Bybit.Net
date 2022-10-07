@@ -76,12 +76,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #region Get open orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("orderCategory", orderCategory ?? 0);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotOrder>>(_baseClient.GetUrl("spot/v3/private/open-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
