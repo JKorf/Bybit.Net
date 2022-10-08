@@ -44,7 +44,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Best bid price
         /// </summary>
         /// <remarks> In some methods of v3 they changed naming, in some they changed type. Not very logic, but.. </remarks>
-        [JsonProperty("bidPrice"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("bidPrice")]
         public decimal BestBidPrice { get; set; }
         /// <summary>
         /// Best bid price (v3)
@@ -59,7 +59,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// <summary>
         /// Quantity of the best bid price
         /// </summary>
-        [JsonProperty("bidQty"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("bidQty")]
         public decimal BestBidQuantity { get; set; }
         /// <summary>
         /// Quantity of the best bid price (v3)
@@ -75,7 +75,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// <summary>
         /// Best ask price
         /// </summary>
-        [JsonProperty("askPrice"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("askPrice")]
         public decimal BestAskPrice { get; set; }
         /// <summary>
         /// Best ask price (v3)
@@ -91,7 +91,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// <summary>
         /// Quantity of the best ask price
         /// </summary>
-        [JsonProperty("askQty"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("askQty")]
         public decimal BestAskQuantity { get; set; }
         /// <summary>
         /// Quantity of the best ask price (v3)

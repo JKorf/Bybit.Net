@@ -20,25 +20,25 @@ namespace Bybit.Net.Objects.Models.Spot.v1
         /// Best bid price
         /// </summary>
         /// <remarks> In some methods they changed naming, in some they changed type. Not very logic, but.. </remarks>
-        [JsonProperty("bidPrice"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("bidPrice")]
         public decimal BestBidPrice { get; set; }
 
         /// <summary>
         /// Quantity of the best bid price
         /// </summary>
-        [JsonProperty("bidQty"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("bidQty")]
         public decimal BestBidQuantity { get; set; }
 
         /// <summary>
         /// Best ask price
         /// </summary>
-        [JsonProperty("askPrice"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("askPrice")]
         public decimal BestAskPrice { get; set; }
 
         /// <summary>
         /// Quantity of the best ask price
         /// </summary>
-        [JsonProperty("askQty"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("askQty")]
         public decimal BestAskQuantity { get; set; }
 
         /// <summary>

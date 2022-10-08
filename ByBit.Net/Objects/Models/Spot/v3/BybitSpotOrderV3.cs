@@ -34,7 +34,6 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Order price
         /// </summary>
         [JsonProperty("orderPrice")]
-        [JsonConverter(typeof(DecimalJsonConverter))]
         private decimal OrderPrice
         {
             get { return Price; }
@@ -45,7 +44,6 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Order quantity
         /// </summary>
         [JsonProperty("orderQty")]
-        [JsonConverter(typeof(DecimalJsonConverter))]
         private decimal OrderQuantity
         {
             get { return Quantity; }
@@ -67,13 +65,11 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Average execution price
         /// </summary>
         [JsonProperty("avgPrice")]
-        [JsonConverter(typeof(DecimalJsonConverter))]
         public decimal AveragePrice { get; set; }
         /// <summary>
         /// Ice berg quantity
         /// </summary>
         [JsonProperty("icebergQty")]
-        [JsonConverter(typeof(DecimalJsonConverter))]
         public decimal? IcebergQuantity { get; set; }
         /// <summary>
         /// Creation time
@@ -90,19 +86,16 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// <summary>
         /// Stop price
         /// </summary>
-        [JsonConverter(typeof(DecimalJsonConverter))]
         public decimal? StopPrice { get; set; }
         /// <summary>
         /// Quantity executed
         /// </summary>
         [JsonProperty("execQty")]
-        [JsonConverter(typeof(DecimalJsonConverter))]
         public decimal QuantityFilled { get; set; }
         /// <summary>
         /// Quote quantity
         /// </summary>
         [JsonProperty("cummulativeQuoteQty")]
-        [JsonConverter(typeof(DecimalJsonConverter))]
         public decimal QuoteQuantity { get; set; }
 
         /// <summary>

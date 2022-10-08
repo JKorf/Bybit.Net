@@ -16,17 +16,17 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// <summary>
         /// Interest rate
         /// </summary>
-        [JsonProperty("interestRate"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("interestRate")]
         public decimal InterestRate { get; set; }
         /// <summary>
         /// Max loan quantity
         /// </summary>
-        [JsonProperty("loanAbleAmount"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("loanAbleAmount")]
         public decimal MaxBorrowQuantity { get; set; }
         /// <summary>
         /// Borrowable quantity
         /// </summary>
-        [JsonProperty("maxLoanAmount"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("maxLoanAmount")]
         public decimal BorrowableQuantity { get; set; }
     }
 }

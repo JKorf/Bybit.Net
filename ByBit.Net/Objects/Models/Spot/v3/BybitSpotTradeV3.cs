@@ -27,7 +27,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// <summary>
         /// Trade price
         /// </summary>
-        [JsonProperty("price"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// Timestamp of the trade
@@ -37,7 +37,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("qty"), JsonConverter(typeof(DecimalJsonConverter))]
+        [JsonProperty("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Is the buyer the maker

@@ -30,7 +30,6 @@ namespace Bybit.Net.Objects.Models.Spot
         /// Price
         /// </summary>
         /// <remarks> Useful for V3 as they send it in string format </remarks>
-        [JsonConverter(typeof(DecimalJsonConverter))]
         public decimal Price { get; set; }
     }
 }
