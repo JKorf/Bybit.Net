@@ -9,7 +9,8 @@ using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Models.CopyTrading;
 using Bybit.Net.Objects.Models.Socket;
 using Bybit.Net.Objects.Models.Socket.Spot;
-using Bybit.Net.Objects.Models.Spot;
+using Bybit.Net.Objects.Models.Spot.v1;
+using Bybit.Net.Objects.Models.Spot.v3;
 using Bybit.Net.UnitTests;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -37,9 +38,15 @@ namespace Bybit.UnitTests
         }
 
         [Test]
-        public async Task ValidateBookPriceUpdateStreamJson()
+        public async Task ValidateBookPriceV1UpdateStreamJson()
         {
-            await TestFileToObject<BybitSpotBookPrice>(@"JsonResponses/Spot/Socket/BookPriceUpdate.txt");
+            await TestFileToObject<BybitSpotBookPriceV1>(@"JsonResponses/Spot/Socket/BookPriceUpdateV1.txt");
+        }
+
+        [Test]
+        public async Task ValidateBookPriceV3UpdateStreamJson()
+        {
+            await TestFileToObject<BybitSpotBookPriceV3>(@"JsonResponses/Spot/Socket/BookPriceUpdateV3.txt");
         }
 
         [Test]

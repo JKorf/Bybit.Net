@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
-using Bybit.Net.Interfaces.Clients.SpotApi;
 using Bybit.Net.Objects.Models.Spot;
 using CryptoExchange.Net;
 using CryptoExchange.Net.CommonObjects;
@@ -14,15 +13,18 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Bybit.Net.Interfaces.Clients.SpotApi.v3;
+using Bybit.Net.Objects.Models.Spot.v1;
+using Bybit.Net.Objects.Models.Spot.v3;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v3
 {
     /// <inheritdoc />
-    public class BybitClientSpotApiTrading : IBybitClientSpotApiTrading
+    public class BybitClientSpotApiTradingV3 : IBybitClientSpotApiTradingV3
     {
-        private readonly BybitClientSpotApi _baseClient;
+        private readonly BybitClientBaseSpotApi _baseClient;
 
-        internal BybitClientSpotApiTrading(BybitClientSpotApi baseClient)
+        internal BybitClientSpotApiTradingV3(BybitClientBaseSpotApi baseClient)
         {
             _baseClient = baseClient;
         }
@@ -30,22 +32,24 @@ namespace Bybit.Net.Clients.SpotApi
         #region Place order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, Enums.OrderSide side, Enums.OrderType type, decimal quantity, decimal? price = null, TimeInForce? timeInForce = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, TimeInForce? timeInForce = null, string? clientOrderId = null, int orderCategory = 0, decimal? triggerPrice = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new OrderTypeSpotConverter(false)) },
-                { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
+                { "orderType", JsonConvert.SerializeObject(type, new OrderTypeSpotConverter(false)) },
+                { "orderQty", quantity.ToString(CultureInfo.InvariantCulture) }
             };
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("orderPrice", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceSpotConverter(false)));
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
+            parameters.AddOptionalParameter("orderCategory", orderCategory.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("triggerPrice", triggerPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("agentSource", _baseClient.ClientOptions.Referer);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v3/private/order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderPlaced(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
@@ -56,7 +60,7 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitSpotOrder>> GetOrderAsync(long? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotOrderV3>> GetOrderAsync(long? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && clientOrderId == null || orderId != null && clientOrderId != null)
                 throw new ArgumentException($"1 of {nameof(orderId)} or {nameof(clientOrderId)} should be provided");
@@ -66,7 +70,7 @@ namespace Bybit.Net.Clients.SpotApi
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitSpotOrder>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitSpotOrderV3>(_baseClient.GetUrl("spot/v3/private/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -74,15 +78,16 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get open orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotOrderWrapper>> GetOpenOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("orderCategory", orderCategory ?? 0);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotOrder>>(_baseClient.GetUrl("spot/v1/open-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitSpotOrderWrapper>(_baseClient.GetUrl("spot/v3/private/open-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -90,7 +95,7 @@ namespace Bybit.Net.Clients.SpotApi
         #region Get open orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotOrderWrapper>> GetOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("orderId", orderId);
@@ -98,7 +103,7 @@ namespace Bybit.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotOrder>>(_baseClient.GetUrl("spot/v1/history-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitSpotOrderWrapper>(_baseClient.GetUrl("spot/v3/private/history-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -106,7 +111,7 @@ namespace Bybit.Net.Clients.SpotApi
         #region Cancel order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = null, string? clientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = null, string? clientOrderId = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && clientOrderId == null || orderId != null && clientOrderId != null)
                 throw new ArgumentException($"1 of {nameof(orderId)} or {nameof(clientOrderId)} should be provided");
@@ -114,9 +119,10 @@ namespace Bybit.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
+            parameters.AddOptionalParameter("orderCategory", orderCategory ?? 0);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v1/order"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitSpotOrderPlaced>(_baseClient.GetUrl("spot/v3/private/cancel-order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderCanceled(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
@@ -126,17 +132,18 @@ namespace Bybit.Net.Clients.SpotApi
 
         #region Cancel MultipleOrders 
         /// <inheritdoc />
-        public async Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = null, IEnumerable<OrderType>? orderTypes = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = null, IEnumerable<OrderType>? orderTypes = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol }
             };
             parameters.AddOptionalParameter("side", side.HasValue ? JsonConvert.SerializeObject(side, new OrderSideConverter(false)) : null);
-            parameters.AddOptionalParameter("orderTypes", orderTypes != null && orderTypes.Any() ? string.Join(",", orderTypes.Select(o => JsonConvert.SerializeObject(o, new OrderTypeConverter(false)))): null);
+            parameters.AddOptionalParameter("orderTypes", orderTypes != null && orderTypes.Any() ? string.Join(",", orderTypes.Select(o => JsonConvert.SerializeObject(o, new OrderTypeConverter(false)))) : null);
+            parameters.AddOptionalParameter("orderCategory", orderCategory ?? 0);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("spot/order/batch-cancel"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("spot/v3/private/cancel-orders"), HttpMethod.Delete, ct, parameters, true).ConfigureAwait(false);
             return result.AsDataless();
         }
         #endregion
@@ -147,13 +154,13 @@ namespace Bybit.Net.Clients.SpotApi
         public async Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync(string? symbol = null, long? fromId = null, long? toId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("fromId", fromId);
-            parameters.AddOptionalParameter("toId", toId);
+            parameters.AddOptionalParameter("fromTradeId", fromId);
+            parameters.AddOptionalParameter("toTradeId", toId);
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotUserTrade>>(_baseClient.GetUrl("spot/v1/myTrades"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotUserTrade>>(_baseClient.GetUrl("spot/v3/private/my-trades"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -167,12 +174,12 @@ namespace Bybit.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>()
             {
-                { "currency", asset },
+                { "coin", asset },
                 { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<long>(_baseClient.GetUrl("spot/v1/cross-margin/loan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<long>(_baseClient.GetUrl("spot/v3/private/cross-margin-loan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -184,12 +191,12 @@ namespace Bybit.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>()
             {
-                { "currency", asset },
+                { "coin", asset },
                 { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<long>(_baseClient.GetUrl("spot/v1/cross-margin/repay"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<long>(_baseClient.GetUrl("spot/v3/private/cross-margin-repay"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -202,12 +209,12 @@ namespace Bybit.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("currency", asset);
+            parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("status", EnumConverter.GetString(status));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitBorrowRecord>>(_baseClient.GetUrl("spot/v1/cross-margin/order"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitBorrowRecord>>(_baseClient.GetUrl("spot/v3/private/cross-margin-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -220,11 +227,11 @@ namespace Bybit.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("currency", asset);
+            parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitRepayRecord>>(_baseClient.GetUrl("spot/v1/cross-margin/repay/history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitRepayRecord>>(_baseClient.GetUrl("spot/v3/private/cross-margin-repay-history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

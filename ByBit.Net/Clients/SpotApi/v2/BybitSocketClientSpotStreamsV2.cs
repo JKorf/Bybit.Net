@@ -1,7 +1,5 @@
 ﻿using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
@@ -15,29 +13,17 @@ using CryptoExchange.Net.Logging;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Enums;
 using Bybit.Net.Converters;
-using Bybit.Net.Objects.Models.Spot;
-using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.SpotApi.v2;
+using Bybit.Net.Objects.Models.Spot.v1;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v2
 {
-    /// <inheritdoc cref="IBybitSocketClientSpotStreams" />
-    public class BybitSocketClientSpotStreams : SocketApiClient, IBybitSocketClientSpotStreams
+    public class BybitSocketClientSpotStreamsV2 : BybitBaseSocketClientSpotStreams, IBybitSocketClientSpotStreamsV2
     {
-        private readonly Log _log;
-        private readonly BybitSocketClient _baseClient;
-        private readonly BybitSocketClientOptions _options;
-
-        internal BybitSocketClientSpotStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
-            : base(options, options.SpotStreamsOptions)
+        internal BybitSocketClientSpotStreamsV2(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
+            : base(log, baseClient, options, options.SpotStreamsV2Options)
         {
-            _log = log;
-            _options = options;
-            _baseClient = baseClient;
         }
-
-        /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTradeUpdate>> handler, CancellationToken ct = default)
@@ -58,7 +44,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "trade",
                     Event = "sub",
@@ -89,7 +75,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "depth",
                     Event = "sub",
@@ -120,7 +106,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "kline",
                     Event = "sub",
@@ -134,7 +120,7 @@ namespace Bybit.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPrice>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string symbol, Action<DataEvent<BybitSpotBookPriceV1>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -142,17 +128,17 @@ namespace Bybit.Net.Clients.SpotApi
                 if (internalData == null)
                     return;
 
-                var desResult = _baseClient.DeserializeInternal<BybitSpotBookPrice>(internalData);
+                var desResult = _baseClient.DeserializeInternal<BybitSpotBookPriceV1>(internalData);
                 if (!desResult)
                 {
-                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotBookPrice)} object: " + desResult.Error);
+                    _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotBookPriceV1)} object: " + desResult.Error);
                     return;
                 }
 
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "bookTicker",
                     Event = "sub",
@@ -183,7 +169,7 @@ namespace Bybit.Net.Clients.SpotApi
                 handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
             });
             return await _baseClient.SubscribeInternalAsync(this,
-                new BybitSpotRequestMessage()
+                new BybitSpotRequestMessageV2()
                 {
                     Operation = "realtimes",
                     Event = "sub",
@@ -250,9 +236,17 @@ namespace Bybit.Net.Clients.SpotApi
             });
             return await _baseClient.SubscribeInternalAsync(
                 this,
-                _options.SpotStreamsOptions.BaseAddressAuthenticated,
+                _options.SpotStreamsV2Options.BaseAddressAuthenticated,
                 null,
                 "AccountInfo", true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public override bool CheckAuth(JToken data, ref bool isSuccess)
+        {
+            var auth = data["auth"]?.ToString();
+            isSuccess = auth == "success";
+            return auth != null;
         }
     }
 }

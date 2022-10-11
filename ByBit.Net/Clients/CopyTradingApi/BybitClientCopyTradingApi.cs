@@ -1,20 +1,13 @@
-﻿using Bybit.Net.Enums;
-using Bybit.Net.Interfaces.Clients.CopyTradingApi;
-using Bybit.Net.Interfaces.Clients.SpotApi;
+﻿using Bybit.Net.Interfaces.Clients.CopyTradingApi;
 using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.CommonObjects;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -132,7 +125,7 @@ namespace Bybit.Net.Clients.CopyTradingApi
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
-            => _baseClient.SpotApi.ExchangeData.GetServerTimeAsync();
+            => _baseClient.SpotApiV1.ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
         public override TimeSyncInfo GetTimeSyncInfo()

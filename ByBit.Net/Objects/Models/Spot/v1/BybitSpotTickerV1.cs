@@ -2,12 +2,12 @@
 using Newtonsoft.Json;
 using System;
 
-namespace Bybit.Net.Objects.Models.Spot
+namespace Bybit.Net.Objects.Models.Spot.v1
 {
     /// <summary>
     /// Ticker info
     /// </summary>
-    public class BybitSpotTicker
+    public class BybitSpotTickerV1
     {
         /// <summary>
         /// Timestamp of the data

@@ -24,6 +24,18 @@ namespace Bybit.Net.Objects.Models.Spot
         [JsonProperty("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
+        /// Asset borrowed (v3)
+        /// </summary>
+        [JsonProperty("coin")]
+        private string AssetV3
+        {
+            set
+            {
+                Asset = value;
+            }
+        }
+
+        /// <summary>
         /// Borrowed quantity
         /// </summary>
         [JsonProperty("loanAmount")]

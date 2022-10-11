@@ -14,23 +14,33 @@ using Newtonsoft.Json;
 using System.Threading;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
-using Bybit.Net.Interfaces.Clients.SpotApi;
 using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
 using Bybit.Net.Clients.SpotApi;
 using Bybit.Net.Clients.InversePerpetualApi;
 using Bybit.Net.Clients.UsdPerpetualApi;
+using Bybit.Net.Clients.SpotApi.v1;
+using Bybit.Net.Clients.SpotApi.v2;
+using Bybit.Net.Clients.SpotApi.v3;
+using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.SpotApi.v1;
+using Bybit.Net.Interfaces.Clients.SpotApi.v2;
+using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 
 namespace Bybit.Net.Clients
 {
     /// <inheritdoc cref="IBybitSocketClient" />
-    public class BybitSocketClient: BaseSocketClient, IBybitSocketClient
+    public class BybitSocketClient : BaseSocketClient, IBybitSocketClient
     {
         /// <inheritdoc />
         public IBybitSocketClientUsdPerpetualStreams UsdPerpetualStreams { get; }
         /// <inheritdoc />
         public IBybitSocketClientInversePerpetualStreams InversePerpetualStreams { get; }
         /// <inheritdoc />
-        public IBybitSocketClientSpotStreams SpotStreams { get; }
+        public IBybitSocketClientSpotStreamsV1 SpotStreamsV1 { get; }
+        /// <inheritdoc />
+        public IBybitSocketClientSpotStreamsV2 SpotStreamsV2 { get; }
+        /// <inheritdoc />
+        public IBybitSocketClientSpotStreamsV3 SpotStreamsV3 { get; }
 
         /// <inheritdoc />
         public IBybitSocketClientCopyTradingStreams CopyTrading { get; }
@@ -57,11 +67,15 @@ namespace Bybit.Net.Clients
 
             UsdPerpetualStreams = AddApiClient(new BybitSocketClientUsdPerpetualStreams(log, this, options));
             InversePerpetualStreams = AddApiClient(new BybitSocketClientInversePerpetualStreams(log, this, options));
-            SpotStreams = AddApiClient(new BybitSocketClientSpotStreams(log, this, options));
+            SpotStreamsV1 = AddApiClient(new BybitSocketClientSpotStreamsV1(log, this, options));
+            SpotStreamsV2 = AddApiClient(new BybitSocketClientSpotStreamsV2(log, this, options));
+            SpotStreamsV3 = AddApiClient(new BybitSocketClientSpotStreamsV3(log, this, options));
+
             CopyTrading = AddApiClient(new BybitSocketClientCopyTradingStreams(log, this, options));
 
-            SendPeriodic("Ping", options.PingInterval, (connection) => {
-                if(connection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+            SendPeriodic("Ping", options.PingInterval, (connection) =>
+            {
+                if (connection.ApiClient.GetType().IsSubclassOf(typeof(BybitBaseSocketClientSpotStreams)))
                     return new BybitSpotPing() { Ping = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow)!.Value };
                 else
                     return new BybitFuturesRequestMessage() { Operation = "ping" };
@@ -122,11 +136,10 @@ namespace Bybit.Net.Clients
                 if (data.Type != JTokenType.Object)
                     return false;
 
-                if (socketConnection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+                if (socketConnection.ApiClient.GetType().IsSubclassOf(typeof(BybitBaseSocketClientSpotStreams)))
                 {
-                    var auth = data["auth"]?.ToString();
-                    result = auth == "success";
-                    return auth != null;
+                    var isValid = (socketConnection.ApiClient as BybitBaseSocketClientSpotStreams)?.CheckAuth(data, ref result) ?? false;
+                    return isValid;
                 }
                 else
                 {
@@ -156,23 +169,18 @@ namespace Bybit.Net.Clients
             if (data.Type != JTokenType.Object)
                 return false;
 
-            if (socketConnection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+            var clientType = socketConnection.ApiClient.GetType();
+            if (clientType.IsSubclassOf(typeof(BybitBaseSocketClientSpotStreams)))
             {
-                var bRequest = ((BybitSpotRequestMessage)request);
-                var requestSymbols = bRequest.Parameters["symbol"]?.ToString().Split(',');
-                var operation = data["event"]?.ToString();
-                var topic = data["topic"]?.ToString();
-                var symbols = data["params"]?["symbol"]?.ToString().Split(',').ToList();
-                if (operation != "sub")
-                    return false;
+                var bRequest = request as IBybitSpotRequestValidable;
+                var forcedExit = false;
 
-                if (topic != bRequest.Operation)
+                var success = bRequest.ValidateResponse(data, ref forcedExit);
+                if (forcedExit)
+                {
                     return false;
+                }
 
-                if (requestSymbols.Any(p => symbols?.Contains(p) != true))
-                    return false;
-
-                var success = data["msg"]?.Value<string>() == "Success";
                 if (success)
                     callResult = new CallResult<object>(true);
                 else
@@ -191,7 +199,7 @@ namespace Bybit.Net.Clients
                     return false;
 
                 var success = data["success"]?.Value<bool>() == true;
-                if(success)
+                if (success)
                     callResult = new CallResult<object>(true);
                 else
                     callResult = new CallResult<object>(new ServerError(data["ret_msg"]!.ToString()));
@@ -209,27 +217,10 @@ namespace Bybit.Net.Clients
             if (topic == null)
                 return false;
 
-            if (socketConnection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+            var clientType = socketConnection.ApiClient.GetType();
+            if (clientType.IsSubclassOf(typeof(BybitBaseSocketClientSpotStreams)))
             {
-                // Spot subscriptions
-                var bRequest = ((BybitSpotRequestMessage)request);
-                var requestSymbols = bRequest.Parameters["symbol"]?.ToString().Split(',');
-                var symbol = message["params"]?["symbol"]?.ToString();
-
-                if (bRequest.Operation != topic)
-                    return false;
-
-                if (!requestSymbols.Contains(symbol))
-                    return false;
-
-                var klineInterval = message["params"]?["klineType"]?.ToString();
-                if (klineInterval != null && bRequest.Parameters.ContainsKey("klineType"))
-                {
-                    if (klineInterval != (string)bRequest.Parameters["klineType"])
-                        return false;
-                }
-
-                return true;
+                return (request as IBybitSpotRequestValidable)?.MatchReponse(message) ?? false;
             }
             else
             {
@@ -255,7 +246,7 @@ namespace Bybit.Net.Clients
                 return false;
             }
         }
-
+      
         /// <inheritdoc />
         protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
         {
@@ -275,7 +266,7 @@ namespace Bybit.Net.Clients
                 return true;
             }
 
-            if(identifier == "AccountInfo")
+            if (identifier == "AccountInfo")
             {
                 if (message.Type != JTokenType.Array)
                     return false;
@@ -284,7 +275,7 @@ namespace Bybit.Net.Clients
                 if (updateType == null)
                     return false;
 
-                return updateType == "outboundAccountInfo" || updateType == "executionReport" || updateType == "ticketInfo";
+                return updateType == "outboundAccountInfo" || updateType == "executionReport" || updateType == "order" || updateType == "ticketInfo";
             }
 
             return false;
@@ -293,26 +284,48 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {
-            if (connection.ApiClient.GetType() == typeof(BybitSocketClientSpotStreams))
+            var clientType = connection.ApiClient.GetType();
+            if (clientType.IsSubclassOf(typeof(BybitBaseSocketClientSpotStreams)))
             {
-                var bRequest = ((BybitSpotRequestMessage)subscriptionToUnsub.Request!);
-                var message = new BybitSpotRequestMessage 
-                { 
-                    Operation = bRequest.Operation, 
-                    Parameters =  new Dictionary<string, object>
+                object message = null;
+                var isCheckable = false;
+                if (clientType == typeof(BybitSocketClientSpotStreamsV1))
+                {
+                    var bRequest = ((BybitSpotRequestMessageV1)subscriptionToUnsub.Request!);
+                    message = new BybitSpotRequestMessageV1
                     {
-                        { "symbol", bRequest.Parameters["symbol"] }
-                    },
-                    Event = "cancel" 
-                };
+                        Operation = bRequest.Operation,
+                        Symbol = bRequest.Symbol,
+                        Event = "cancel"
+                    };
+                }
+                else if (clientType == typeof(BybitSocketClientSpotStreamsV2))
+                {
+                    isCheckable = true;
+                    var bRequest = ((BybitSpotRequestMessageV2)subscriptionToUnsub.Request!);
+                    message = new BybitSpotRequestMessageV2
+                    {
+                        Operation = bRequest.Operation,
+                        Parameters = new Dictionary<string, object>
+                        {
+                            { "symbol", bRequest.Parameters["symbol"] }
+                        },
+                        Event = "cancel"
+                    };
+                }
 
                 var result = false;
                 await connection.SendAndWaitAsync(message, ClientOptions.SocketResponseTimeout, data =>
                 {
+                    if (!isCheckable)
+                    {
+                        //// Got fallback message only in version 2,3. In version 1 we get a plain responseData
+                        result = true;
+                        return true;
+                    }
+
                     if (data.Type != JTokenType.Object)
                         return false;
-
-                    // TODo
 
                     result = data["success"]?.Value<bool>() == true;
                     return true;

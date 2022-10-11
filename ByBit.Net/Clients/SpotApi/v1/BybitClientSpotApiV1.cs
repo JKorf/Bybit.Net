@@ -1,110 +1,43 @@
-﻿using Bybit.Net.Enums;
-using Bybit.Net.Interfaces.Clients.SpotApi;
-using Bybit.Net.Objects;
-using Bybit.Net.Objects.Internal;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.CommonObjects;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
-using CryptoExchange.Net.Logging;
-using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Bybit.Net.Enums;
+using Bybit.Net.Interfaces.Clients.SpotApi.v1;
+using Bybit.Net.Objects;
+using CryptoExchange.Net.CommonObjects;
+using CryptoExchange.Net.Interfaces.CommonClients;
+using CryptoExchange.Net.Logging;
+using CryptoExchange.Net.Objects;
 
-namespace Bybit.Net.Clients.SpotApi
+namespace Bybit.Net.Clients.SpotApi.v1
 {
-    /// <inheritdoc cref="IBybitClientSpotApi" />
-    public class BybitClientSpotApi : RestApiClient, IBybitClientSpotApi, ISpotClient
+    /// <inheritdoc cref="IBybitClientSpotApiV1" />
+    public class BybitClientSpotApiV1 : BybitClientBaseSpotApi, IBybitClientSpotApiV1
     {
-        private readonly BybitClient _baseClient;
-        private readonly BybitClientOptions _options;
-        private readonly Log _log;
-
-        internal static TimeSyncState TimeSyncState = new TimeSyncState("Spot Api");
-
         /// <inheritdoc />
-        public event Action<OrderId>? OnOrderPlaced;
+        public IBybitClientSpotApiAccountV1 Account { get; }
         /// <inheritdoc />
-        public event Action<OrderId>? OnOrderCanceled;
-
-        internal BybitClientOptions ClientOptions { get; }
-
+        public IBybitClientSpotApiExchangeDataV1 ExchangeData { get; }
         /// <inheritdoc />
-        public string ExchangeName => "Bybit";
-
-        /// <inheritdoc />
-        public IBybitClientSpotApiAccount Account { get; }
-        /// <inheritdoc />
-        public IBybitClientSpotApiExchangeData ExchangeData { get; }
-        /// <inheritdoc />
-        public IBybitClientSpotApiTrading Trading { get; }
-
+        public IBybitClientSpotApiTradingV1 Trading { get; }
         #region ctor
-        internal BybitClientSpotApi(Log log, BybitClient baseClient, BybitClientOptions options)
-            : base(options, options.SpotApiOptions)
+        internal BybitClientSpotApiV1(Log log, BybitClient baseClient, BybitClientOptions options)
+            : base(log,baseClient, options)
         {
-            _baseClient = baseClient;
-            _log = log;
-            _options = options;
-            ClientOptions = options;
-
-            Account = new BybitClientSpotApiAccount(this);
-            ExchangeData = new BybitClientSpotApiExchangeData(this);
-            Trading = new BybitClientSpotApiTrading(this);
-
-            requestBodyFormat = RequestBodyFormat.FormData;
-            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
+            Account = new BybitClientSpotApiAccountV1(this);
+            ExchangeData = new BybitClientSpotApiExchangeDataV1(this);
+            Trading = new BybitClientSpotApiTradingV1(this);
         }
         #endregion
 
-        /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new BybitAuthenticationProvider(credentials);
-
-        /// <summary>
-        /// Get url for an endpoint
-        /// </summary>
-        /// <param name="endpoint"></param>
-        /// <returns></returns>
-        internal Uri GetUrl(string endpoint)
-        {
-            return new Uri(BaseAddress.AppendPath(endpoint));
-        }
-
-        internal async Task<WebCallResult<T>> SendRequestAsync<T>(
-             Uri uri,
-             HttpMethod method,
-             CancellationToken cancellationToken,
-             Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null,
-             bool ignoreRatelimit = false)
-        {
-            var result = await _baseClient.SendRequestInternal<BybitResult<T>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
-            if (!result)
-                return result.As<T>(default);
-
-            if (result.Data.ReturnCode != 0)
-                return result.AsError<T>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
-                
-            return result.As(result.Data.Result);
-        }
 
         #region Common interface
-        /// <inheritdoc />
-        public string GetSymbolName(string baseAsset, string quoteAsset)
-        {
-            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
-        }
 
-        async Task<WebCallResult<IEnumerable<Symbol>>> IBaseRestClient.GetSymbolsAsync(CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<IEnumerable<Symbol>>> GetSymbolsAsync(CancellationToken ct)
         {
             var result = await ExchangeData.GetSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
@@ -120,7 +53,8 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Ticker>>> IBaseRestClient.GetTickersAsync(CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<IEnumerable<Ticker>>> GetTickersAsync(CancellationToken ct)
         {
             var result = await ExchangeData.GetTickersAsync(ct: ct).ConfigureAwait(false);
             if (!result)
@@ -138,7 +72,8 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<Ticker>> IBaseRestClient.GetTickerAsync(string symbol, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<Ticker>> GetTickerAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.GetTickerAsync), nameof(symbol));
@@ -159,7 +94,8 @@ namespace Bybit.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Kline>>> IBaseRestClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime, DateTime? endTime, int? limit, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<IEnumerable<Kline>>> GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime, DateTime? endTime, int? limit, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.GetKlinesAsync), nameof(symbol));
@@ -180,7 +116,8 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<OrderBook>> GetOrderBookAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.GetOrderBookAsync), nameof(symbol));
@@ -197,7 +134,8 @@ namespace Bybit.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<IEnumerable<Trade>>> GetRecentTradesAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.GetRecentTradesAsync), nameof(symbol));
@@ -216,7 +154,8 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, string? accountId, string? clientOrderId, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<OrderId>> PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, string? accountId, string? clientOrderId, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for Bybit " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
@@ -240,7 +179,8 @@ namespace Bybit.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<Order>> GetOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for Bybit {nameof(ISpotClient.GetOrderAsync)}", nameof(orderId));
@@ -264,7 +204,8 @@ namespace Bybit.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<UserTrade>>> IBaseRestClient.GetOrderTradesAsync(string orderId, string? symbol, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<IEnumerable<UserTrade>>> GetOrderTradesAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for Bybit {nameof(ISpotClient.GetOrderAsync)}", nameof(orderId));
@@ -287,7 +228,8 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetOpenOrdersAsync(string? symbol, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<IEnumerable<Order>>> GetOpenOrdersAsync(string? symbol, CancellationToken ct)
         {
             var result = await Trading.GetOpenOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!result)
@@ -308,7 +250,8 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetClosedOrdersAsync(string? symbol, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<IEnumerable<Order>>> GetClosedOrdersAsync(string? symbol, CancellationToken ct)
         {
             var result = await Trading.GetOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!result)
@@ -329,7 +272,8 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<OrderId>> IBaseRestClient.CancelOrderAsync(string orderId, string? symbol, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<OrderId>> CancelOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for Bybit {nameof(ISpotClient.GetOrderAsync)}", nameof(orderId));
@@ -341,7 +285,8 @@ namespace Bybit.Net.Clients.SpotApi
             return result.As(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
         }
 
-        async Task<WebCallResult<IEnumerable<Balance>>> IBaseRestClient.GetBalancesAsync(string? accountId, CancellationToken ct)
+        /// <inheritdoc />
+        public override async Task<WebCallResult<IEnumerable<Balance>>> GetBalancesAsync(string? accountId, CancellationToken ct)
         {
             var result = await Account.GetBalancesAsync(ct: ct).ConfigureAwait(false);
             if (!result)
@@ -356,63 +301,10 @@ namespace Bybit.Net.Clients.SpotApi
             }));
         }
 
-        private static KlineInterval TimeSpanToInterval(TimeSpan timeSpan)
-        {
-            if (timeSpan.TotalMinutes == 1)
-                return KlineInterval.OneMinute;
-            if (timeSpan.TotalMinutes == 3)
-                return KlineInterval.ThreeMinutes;
-            if (timeSpan.TotalMinutes == 5)
-                return KlineInterval.FiveMinutes;
-            if (timeSpan.TotalMinutes == 15)
-                return KlineInterval.FifteenMinutes;
-            if (timeSpan.TotalMinutes == 30)
-                return KlineInterval.ThirtyMinutes;
-            if (timeSpan.TotalMinutes == 60)
-                return KlineInterval.OneHour;
-            if (timeSpan.TotalMinutes == 120)
-                return KlineInterval.TwoHours;
-            if (timeSpan.TotalMinutes == 240)
-                return KlineInterval.FourHours;
-            if (timeSpan.TotalMinutes == 360)
-                return KlineInterval.SixHours;
-            if (timeSpan.TotalMinutes == 720)
-                return KlineInterval.TwelveHours;
-            if (timeSpan.TotalMinutes == 1440)
-                return KlineInterval.OneDay;
-            if (timeSpan.TotalDays == 7)
-                return KlineInterval.OneWeek;
-            if (timeSpan.TotalDays == 30
-             || timeSpan.TotalDays == 31)
-                return KlineInterval.OneMonth;
-
-            throw new ArgumentException("Unsupported timespan for Bybit Klines, check supported intervals using Bybit.Net.Enums.KlineInterval");
-        }
-
-        internal void InvokeOrderPlaced(OrderId id)
-        {
-            OnOrderPlaced?.Invoke(id);
-        }
-
-        internal void InvokeOrderCanceled(OrderId id)
-        {
-            OnOrderCanceled?.Invoke(id);
-        }
         #endregion
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
             => ExchangeData.GetServerTimeAsync();
-
-        /// <inheritdoc />
-        public override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.SpotApiOptions.AutoTimestamp, _options.SpotApiOptions.TimestampRecalculationInterval, TimeSyncState);
-
-        /// <inheritdoc />
-        public override TimeSpan GetTimeOffset()
-            => TimeSyncState.TimeOffset;
-
-        /// <inheritdoc />
-        public ISpotClient CommonSpotClient => this;
     }
 }

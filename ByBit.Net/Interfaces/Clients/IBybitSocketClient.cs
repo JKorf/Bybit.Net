@@ -1,5 +1,7 @@
 ﻿using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
-using Bybit.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Interfaces.Clients.SpotApi.v1;
+using Bybit.Net.Interfaces.Clients.SpotApi.v2;
+using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using CryptoExchange.Net.Interfaces;
 
@@ -15,9 +17,17 @@ namespace Bybit.Net.Interfaces.Clients
         /// </summary>
         public IBybitSocketClientUsdPerpetualStreams UsdPerpetualStreams { get; }
         /// <summary>
-        /// Spot streams
+        /// Spot streams v1
         /// </summary>
-        public IBybitSocketClientSpotStreams SpotStreams { get; }
+        public IBybitSocketClientSpotStreamsV1 SpotStreamsV1 { get; }
+        /// <summary>
+        /// Spot streams v2
+        /// </summary>
+        public IBybitSocketClientSpotStreamsV2 SpotStreamsV2 { get; }
+        /// <summary>
+        /// Spot streams v3
+        /// </summary>
+        public IBybitSocketClientSpotStreamsV3 SpotStreamsV3 { get; }
         /// <summary>
         /// Inverse perpetual streams
         /// </summary>

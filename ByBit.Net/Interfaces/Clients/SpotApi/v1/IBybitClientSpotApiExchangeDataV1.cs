@@ -1,17 +1,18 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.Spot;
+using Bybit.Net.Objects.Models.Spot.v1;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Bybit.Net.Interfaces.Clients.SpotApi
+namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 {
     /// <summary>
     /// Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
     /// </summary>
-    public interface IBybitClientSpotApiExchangeData
+    public interface IBybitClientSpotApiExchangeDataV1
     {
         /// <summary>
         /// Get the server time
@@ -27,7 +28,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitSpotSymbolV1>>> GetSymbolsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get the current order book for a symbol
@@ -58,7 +59,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max amount of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitSpotTradeV1>>> GetTradeHistoryAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get price klines
@@ -71,7 +72,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max amount of candles</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitSpotKlineV1>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// The ticker info for a symbol
@@ -80,7 +81,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, CancellationToken ct = default);
+        Task<WebCallResult<BybitSpotTickerV1>> GetTickerAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// The ticker info for all symbols
@@ -88,7 +89,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitSpotTickerV1>>> GetTickersAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get the last trade price of a symbol
@@ -114,7 +115,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
+        Task<WebCallResult<BybitSpotBookPriceV1>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get the best ask/bid prices for all symbols
@@ -122,7 +123,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotBookPrice>>> GetBookPricesAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitSpotBookPriceV1>>> GetBookPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get borrow info
@@ -130,6 +131,6 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi
         /// <param name="asset">The asset to retrieve info on</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBorrowInfo>> GetBorrowInterestAndQuotaAsync(string asset, CancellationToken ct = default);
+        Task<WebCallResult<BybitBorrowInfoV1>> GetBorrowInterestAndQuotaAsync(string asset, CancellationToken ct = default);
     }
 }

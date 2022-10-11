@@ -1,33 +1,32 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Bybit.Net.Converters;
 
-namespace Bybit.Net.Objects.Models.Spot
+namespace Bybit.Net.Objects.Models.Spot.v3
 {
     /// <summary>
     /// Borrow info
     /// </summary>
-    public  class BybitBorrowInfo
+    public class BybitBorrowInfoV3
     {
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonProperty("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Interest rate
         /// </summary>
+        [JsonProperty("interestRate")]
         public decimal InterestRate { get; set; }
         /// <summary>
         /// Max loan quantity
         /// </summary>
-        [JsonProperty("maxLoanAmount")]
+        [JsonProperty("loanAbleAmount")]
         public decimal MaxBorrowQuantity { get; set; }
         /// <summary>
         /// Borrowable quantity
         /// </summary>
-        [JsonProperty("loanAbleAmount")]
+        [JsonProperty("maxLoanAmount")]
         public decimal BorrowableQuantity { get; set; }
     }
 }

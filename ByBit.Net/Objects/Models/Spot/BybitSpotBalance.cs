@@ -4,8 +4,14 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.Spot
 {
+    /// <summary>
+    /// Wrapper for balances deserialization
+    /// </summary>
     internal class BybitSpotBalanceWrapper
     {
+        /// <summary>
+        /// List of spot balances
+        /// </summary>
         public IEnumerable<BybitSpotBalance> Balances { get; set; } = Array.Empty<BybitSpotBalance>();
     }
 
@@ -41,6 +47,7 @@ namespace Bybit.Net.Objects.Models.Spot
         /// <summary>
         /// Total
         /// </summary>
+        [JsonProperty("total")]
         public decimal Total { get; set; }
     }
 }
