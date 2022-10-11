@@ -28,6 +28,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.2.0 - 11 Oct 2022
+    * Added support for all Spot API versions (rest V1 and V3, socket V1, V2 and V3)
+    * Fix for Usd perpetual futures conditional order parsing
+    * Upped the expiration time for websocket authentication
+
 * Version 1.1.2 - 28 Sep 2022
     * Fixed SubscribeToTickerUpdatesAsync OpenInterest value parsing
     * Added missing ReduceOnly field to BybitConditionalOrder model
