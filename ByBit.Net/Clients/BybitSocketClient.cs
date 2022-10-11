@@ -114,7 +114,7 @@ namespace Bybit.Net.Clients
             if (socketConnection.ApiClient.AuthenticationProvider == null)
                 return new CallResult<bool>(new NoApiCredentialsError());
 
-            var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(5))!;
+            var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(30))!;
             var key = socketConnection.ApiClient.AuthenticationProvider.Credentials.Key!.GetString();
             var sign = socketConnection.ApiClient.AuthenticationProvider.Sign($"GET/realtime{expireTime}");
 

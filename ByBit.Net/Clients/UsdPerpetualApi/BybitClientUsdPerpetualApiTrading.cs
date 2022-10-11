@@ -424,7 +424,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         #region Get open orders realtime
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitConditionalOrderUsd>> GetOpenConditionalOrderRealTimeAsync(
+        public async Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
             string symbol,
             string? stopOrderId = null,
             string? clientOrderId = null,
@@ -442,7 +442,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitConditionalOrderUsd>(_baseClient.GetUrl("private/linear/stop-order/search"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("private/linear/stop-order/search"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 

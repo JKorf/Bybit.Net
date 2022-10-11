@@ -28,6 +28,26 @@
         /// <summary>
         /// Order has been canceled by the user before being triggered
         /// </summary>
-        Deactivated
+        Deactivated,
+        /// <summary>
+        /// Created
+        /// </summary>
+        Created,
+        /// <summary>
+        /// New
+        /// </summary>
+        New,
+        /// <summary>
+        /// Partially filled
+        /// </summary>
+        PartiallyFilled,
+        /// <summary>
+        /// Fully filled
+        /// </summary>
+        Filled,
+        /// <summary>
+        /// Pending cancel
+        /// </summary>
+        PendingCancel
     }
 }

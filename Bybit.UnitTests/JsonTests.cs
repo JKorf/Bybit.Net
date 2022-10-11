@@ -214,9 +214,12 @@ namespace Bybit.Net.UnitTests
                 },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {
-                    { "GetUserTradesAsync", new List<string> { "trade_time" } }
+                    { "GetUserTradesAsync", new List<string> { "trade_time" } },
+                    { "GetOpenConditionalOrdersRealTimeAsync", new List<string> { "ext_fields" } },
+                    { "GetOpenConditionalOrderRealTimeAsync", new List<string> { "ext_fields" } }
                 },
-                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" },
+                parametersToSetNull: new string[] { "clientOrderId" }
                 );
         }
 

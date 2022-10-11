@@ -76,6 +76,17 @@ namespace Bybit.Net.Objects.Models
         [JsonProperty("trigger_by"), JsonConverter(typeof(TriggerTypeConverter))]
         public TriggerType? TriggerType { get; set; }
         /// <summary>
+        /// Trigger type for take profit
+        /// </summary>
+        [JsonProperty("tp_trigger_by"), JsonConverter(typeof(TriggerTypeConverter))]
+        public TriggerType? TakeProfitTriggerType { get; set; }
+        /// <summary>
+        /// Trigger type for stop loss
+        /// </summary>
+        [JsonProperty("sl_trigger_by"), JsonConverter(typeof(TriggerTypeConverter))]
+        public TriggerType? StopLossTriggerType { get; set; }
+
+        /// <summary>
         /// Take profit price
         /// </summary>
         [JsonProperty("take_profit")]
@@ -95,5 +106,11 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("reduce_only")]
         public bool ReduceOnly { get; set; }
+        /// <summary>
+        /// Position mode
+        /// </summary>
+        [JsonProperty("position_idx")]
+        [JsonConverter(typeof(PositionModeConverter))]
+        public PositionMode? PositionMode { get; set; }
     }
 }
