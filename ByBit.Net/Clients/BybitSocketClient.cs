@@ -172,7 +172,7 @@ namespace Bybit.Net.Clients
             var clientType = socketConnection.ApiClient.GetType();
             if (clientType.IsSubclassOf(typeof(BybitBaseSocketClientSpotStreams)))
             {
-                var bRequest = request as IBybitSpotRequestValidable;
+                var bRequest = (IBybitSpotRequestValidable)request;
                 var forcedExit = false;
 
                 var success = bRequest.ValidateResponse(data, ref forcedExit);
@@ -287,7 +287,7 @@ namespace Bybit.Net.Clients
             var clientType = connection.ApiClient.GetType();
             if (clientType.IsSubclassOf(typeof(BybitBaseSocketClientSpotStreams)))
             {
-                object message = null;
+                object? message = null;
                 var isCheckable = false;
                 if (clientType == typeof(BybitSocketClientSpotStreamsV1))
                 {

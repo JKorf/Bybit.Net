@@ -31,12 +31,12 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Name of the trading pair
         /// </summary>
         [JsonProperty("s")]
-        public string Pair { get; set; }
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Alias
         /// </summary>
         [JsonProperty("sn")]
-        public string Alias { get; set; }
+        public string Alias { get; set; } = string.Empty;
         /// <summary>
         /// Open price
         /// </summary>

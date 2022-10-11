@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.GeneralApi
 {
-    /// <inheritdoc cref="IBybitClientSpotApi" />
+    /// <inheritdoc cref="IBybitClientGeneralApi" />
     public class BybitClientGeneralApi : RestApiClient, IBybitClientGeneralApi
     {
         private readonly BybitClient _baseClient;

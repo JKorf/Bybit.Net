@@ -28,7 +28,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Account ID
         /// </summary>
         [JsonProperty("accountId")]
-        public string AccountId { get; set; } = string.Empty;
+        public new string AccountId { get; set; } = string.Empty;
 
         /// <summary>
         /// Order price

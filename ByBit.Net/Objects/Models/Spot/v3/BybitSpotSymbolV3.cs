@@ -86,11 +86,11 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// <summary>
         /// True indicates that the price of this currency is relatively volatile
         /// </summary>
-        public string Innovation { get; set; }
+        public string Innovation { get; set; } = string.Empty;
 
         /// <summary>
         /// True indicates that the symbol open for trading
         /// </summary>
-        public string ShowStatus { get; set; }
+        public string ShowStatus { get; set; } = string.Empty;
     }
 }

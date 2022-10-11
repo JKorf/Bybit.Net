@@ -17,6 +17,7 @@ using Bybit.Net.Interfaces.Clients.SpotApi.v2;
 
 namespace Bybit.Net.Clients.SpotApi.v1
 {
+    /// <inheritdoc cref="IBybitSocketClientSpotStreamsV1"/>
     public class BybitSocketClientSpotStreamsV1 : BybitBaseSocketClientSpotStreams, IBybitSocketClientSpotStreamsV1
     {
         internal BybitSocketClientSpotStreamsV1(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
@@ -222,7 +223,7 @@ namespace Bybit.Net.Clients.SpotApi.v1
                 }
 
                 var symbol = data.Data["symbol"]?.ToString();
-                desResult.Data.Symbol = string.IsNullOrWhiteSpace(desResult.Data.Symbol) ? symbol : desResult.Data.Symbol;
+                desResult.Data.Symbol = string.IsNullOrWhiteSpace(desResult.Data.Symbol) ? symbol! : desResult.Data.Symbol;
                 handler(data.As(desResult.Data, symbol));
             });
             return await _baseClient.SubscribeInternalAsync(this,

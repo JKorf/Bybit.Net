@@ -6,10 +6,22 @@ using Newtonsoft.Json.Linq;
 
 namespace Bybit.Net.Clients.SpotApi
 {
+    /// <summary>
+    /// Base client for Bybit spot socket streams clients
+    /// </summary>
     public abstract class BybitBaseSocketClientSpotStreams : SocketApiClient
     {
+        /// <summary>
+        /// Log
+        /// </summary>
         protected readonly Log _log;
+        /// <summary>
+        /// Base client
+        /// </summary>
         protected readonly BybitSocketClient _baseClient;
+        /// <summary>
+        /// Options
+        /// </summary>
         protected readonly BybitSocketClientOptions _options;
 
         internal BybitBaseSocketClientSpotStreams(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options, BybitSocketApiClientOptions apiOptions)

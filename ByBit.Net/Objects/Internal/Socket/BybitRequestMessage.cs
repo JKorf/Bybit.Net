@@ -53,7 +53,7 @@ namespace Bybit.Net.Objects.Internal.Socket
             var topic = responseData["topic"]?.ToString();
 
             var symbol = responseData["symbol"]?.ToString();
-            var requestSymbols = Symbol?.Split(',').ToList();
+            var requestSymbols = Symbol.Split(',').ToList();
 
             if (!Operation.StartsWith(topic))
                 return false;
@@ -119,7 +119,7 @@ namespace Bybit.Net.Objects.Internal.Socket
             var topic = responseData["topic"]?.ToString();
 
             var symbol = responseData["params"]?["symbol"]?.ToString();
-            var requestSymbols = Parameters["symbol"]?.ToString().Split(',').ToList();
+            var requestSymbols = Parameters["symbol"].ToString().Split(',').ToList();
 
             if (!Operation.StartsWith(topic))
                 return false;

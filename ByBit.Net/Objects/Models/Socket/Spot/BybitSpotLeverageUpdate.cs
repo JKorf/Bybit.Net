@@ -20,7 +20,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
         /// </summary>
         /// <remarks> Please make sure to add "NAV" as a suffix to the name of the pair you're querying </remarks>
         [JsonProperty("s")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Net asset value
         /// </summary>

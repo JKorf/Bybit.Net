@@ -2,6 +2,9 @@
 
 namespace Bybit.Net.Interfaces.Clients.SpotApi
 {
+    /// <summary>
+    /// Base for spot websocket request/response processing
+    /// </summary>
     public interface IBybitSpotRequestValidable
     {
         /// <summary>

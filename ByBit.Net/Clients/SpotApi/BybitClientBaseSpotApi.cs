@@ -24,7 +24,9 @@ using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 
 namespace Bybit.Net.Clients.SpotApi
 {
-    /// <inheritdoc cref="IBybitClientSpotApi" />
+    /// <summary>
+    /// Base client for the Bybit rest spot API
+    /// </summary>
     public abstract class BybitClientBaseSpotApi : RestApiClient, ISpotClient
     {
         private readonly BybitClient _baseClient;
@@ -38,10 +40,12 @@ namespace Bybit.Net.Clients.SpotApi
         /// <inheritdoc />
         public event Action<OrderId>? OnOrderCanceled;
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<OrderId>> PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price = null, string? accountId = null, string? clientOrderId = null, CancellationToken ct = new CancellationToken());
 
         internal BybitClientOptions ClientOptions { get; }
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<OrderId>> CancelOrderAsync(string orderId, string? symbol = null, CancellationToken ct = new CancellationToken());
 
         /// <inheritdoc />
@@ -102,28 +106,45 @@ namespace Bybit.Net.Clients.SpotApi
             return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
         }
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<IEnumerable<Symbol>>> GetSymbolsAsync(CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<Ticker>> GetTickerAsync(string symbol, CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<IEnumerable<Ticker>>> GetTickersAsync(CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<IEnumerable<Kline>>> GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<OrderBook>> GetOrderBookAsync(string symbol, CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<IEnumerable<Trade>>> GetRecentTradesAsync(string symbol, CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<IEnumerable<Balance>>> GetBalancesAsync(string? accountId = null, CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<Order>> GetOrderAsync(string orderId, string? symbol = null, CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<IEnumerable<UserTrade>>> GetOrderTradesAsync(string orderId, string? symbol = null, CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<IEnumerable<Order>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = new CancellationToken());
 
+        /// <inheritdoc />
         public abstract Task<WebCallResult<IEnumerable<Order>>> GetClosedOrdersAsync(string? symbol = null, CancellationToken ct = new CancellationToken());
 
+        /// <summary>
+        /// Timespan to kline interval
+        /// </summary>
+        /// <param name="timeSpan"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         protected static KlineInterval TimeSpanToInterval(TimeSpan timeSpan)
         {
             if (timeSpan.TotalMinutes == 1)
@@ -152,7 +173,9 @@ namespace Bybit.Net.Clients.SpotApi
                 return KlineInterval.OneWeek;
             if (timeSpan.TotalDays == 30
              || timeSpan.TotalDays == 31)
+            {
                 return KlineInterval.OneMonth;
+            }
 
             throw new ArgumentException("Unsupported timespan for Bybit Klines, check supported intervals using Bybit.Net.Enums.KlineInterval");
         }

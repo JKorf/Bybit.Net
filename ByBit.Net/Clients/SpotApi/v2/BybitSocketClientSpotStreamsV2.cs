@@ -18,6 +18,7 @@ using Bybit.Net.Objects.Models.Spot.v1;
 
 namespace Bybit.Net.Clients.SpotApi.v2
 {
+    /// <inheritdoc cref="IBybitSocketClientSpotStreamsV2"/>
     public class BybitSocketClientSpotStreamsV2 : BybitBaseSocketClientSpotStreams, IBybitSocketClientSpotStreamsV2
     {
         internal BybitSocketClientSpotStreamsV2(Log log, BybitSocketClient baseClient, BybitSocketClientOptions options)
