@@ -19,8 +19,11 @@ has_children: true
 *Inverse perpetual API endpoints*  
 **[IBybitClientInversePerpetualApi](InversePerpetualApi/IBybitClientInversePerpetualApi.html) InversePerpetualApi { get; }**  
 ***
-*Spot API endpoints*  
-**[IBybitClientSpotApi](SpotApi/IBybitClientSpotApi.html) SpotApi { get; }**  
+*Spot API endpoints (v1)*  
+**[IBybitClientSpotApiV1](IBybitClientSpotApiV1.html) SpotApiV1 { get; }**  
+***
+*Spot API endpoints (v3)*  
+**[IBybitClientSpotApiV3](IBybitClientSpotApiV3.html) SpotApiV3 { get; }**  
 ***
 *USD perpetual API endpoints*  
 **[IBybitClientUsdPerpetualApi](UsdPerpetualApi/IBybitClientUsdPerpetualApi.html) UsdPerpetualApi { get; }**  

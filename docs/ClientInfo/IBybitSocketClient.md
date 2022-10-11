@@ -13,8 +13,14 @@ has_children: true
 *Inverse perpetual streams*  
 **[IBybitSocketClientInversePerpetualStreams](InversePerpetualApi/IBybitSocketClientInversePerpetualStreams.html) InversePerpetualStreams { get; }**  
 ***
-*Spot streams*  
-**[IBybitSocketClientSpotStreams](SpotApi/IBybitSocketClientSpotStreams.html) SpotStreams { get; }**  
+*Spot streams v1*  
+**[IBybitSocketClientSpotStreamsV1](IBybitSocketClientSpotStreamsV1.html) SpotStreamsV1 { get; }**  
+***
+*Spot streams v2*  
+**[IBybitSocketClientSpotStreamsV2](IBybitSocketClientSpotStreamsV2.html) SpotStreamsV2 { get; }**  
+***
+*Spot streams v3*  
+**[IBybitSocketClientSpotStreamsV3](IBybitSocketClientSpotStreamsV3.html) SpotStreamsV3 { get; }**  
 ***
 *USD perpetual streams*  
 **[IBybitSocketClientUsdPerpetualStreams](UsdPerpetualApi/IBybitSocketClientUsdPerpetualStreams.html) UsdPerpetualStreams { get; }**  
