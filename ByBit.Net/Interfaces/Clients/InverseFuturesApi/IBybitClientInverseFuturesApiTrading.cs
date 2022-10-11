@@ -17,7 +17,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
         #region Orders
         /// <summary>
         /// Place a new order
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-placeactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-placeactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
@@ -40,7 +40,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Change an exising order. Either orderId or clientOrderId should be provided
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-replaceactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-replaceactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">Stop order id</param>
@@ -58,7 +58,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Get order information. Either orderId or clientOrderId should be provided
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-queryactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId"></param>
@@ -70,7 +70,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Get order information for up to 500 orders
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-queryactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-queryactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -80,7 +80,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Get orders
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-getactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-getactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="status">Filter by status</param>
@@ -94,7 +94,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Cancel an order, either orderId or clientOrderId should be provided
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">The id of the order to cancel</param>
@@ -106,7 +106,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Cancel all active orders for a symbol
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelallactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -119,7 +119,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
         #region Conditional orders
         /// <summary>
         /// Place a new conditional order
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-placecond" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-placecond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
@@ -144,7 +144,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Change an exising order. Either stopOrderId or clientOrderId should be provided
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-replacecond" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-replacecond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="stopOrderId">Stop order id</param>
@@ -163,7 +163,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Get a list of conditional orders
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-getcond" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-getcond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="status">Filter by status</param>
@@ -177,7 +177,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Get conditional order information. Either stopOrderId or clientOrderId should be provided
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-querycond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="stopOrderId">The order id</param>
@@ -189,7 +189,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Get order information for up to 10 conditional orders
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-querycond" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-querycond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -199,7 +199,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Cancel a conditional order, either stopOrderId or clientOrderId should be provided
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelcond" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelcond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="stopOrderId">The id of the conditional order to cancel</param>
@@ -211,7 +211,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Cancel all active conditional orders for a symbol
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-cancelallcond" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-cancelallcond" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -223,7 +223,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Get executed user trades
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-usertraderecords" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-usertraderecords" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">Filter by order id</param>
@@ -237,7 +237,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 
         /// <summary>
         /// Set take profit, stop loss, and trailing stop for your open position
-        /// <para><a href="https://bybit-exchange.github.io/docs/inverse_futures/#t-tradingstop" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-tradingstop" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="positionMode">The position mode</param>

@@ -13,7 +13,7 @@ grand_parent: Rest API documentation
 
 ## GetBalancesAsync  
 
-[https://bybit-exchange.github.io/docs/copy_trading/#t-ct_symbol_list](https://bybit-exchange.github.io/docs/copy_trading/#t-ct_symbol_list)  
+[https://bybit-exchange.github.io/docs/copy_trading/#t-ct_wallet_balance](https://bybit-exchange.github.io/docs/copy_trading/#t-ct_wallet_balance)  
 <p>
 
 *Get the current wallet balance*  

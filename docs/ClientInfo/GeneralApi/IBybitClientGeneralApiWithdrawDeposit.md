@@ -13,6 +13,7 @@ grand_parent: Rest API documentation
 
 ## CancelWithdrawalAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-cancel_withdraw](https://bybit-exchange.github.io/docs/account_asset/#t-cancel_withdraw)  
 <p>
 
 *Cancel withdrawal*  
@@ -38,6 +39,7 @@ Task<WebCallResult> CancelWithdrawalAsync(string withdrawalId, long? receiveWind
 
 ## GetAccountInfoAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-asset_info_query](https://bybit-exchange.github.io/docs/account_asset/#t-asset_info_query)  
 <p>
 
 *Get account info*  
@@ -64,6 +66,7 @@ Task<WebCallResult<Dictionary<string, BybitGeneralAccountStatus>>> GetAccountInf
 
 ## GetAssetInfoAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-coin_info_query](https://bybit-exchange.github.io/docs/account_asset/#t-coin_info_query)  
 <p>
 
 *Get asset information regarding withdrawal/deposits*  
@@ -89,6 +92,7 @@ Task<WebCallResult<IEnumerable<BybitAssetInfo>>> GetAssetInfoAsync(string? asset
 
 ## GetDepositAddressesAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-deposit_addr_info](https://bybit-exchange.github.io/docs/account_asset/#t-deposit_addr_info)  
 <p>
 
 *Get deposit addresses for an asset*  
@@ -114,6 +118,7 @@ Task<WebCallResult<BybitDepositAddress>> GetDepositAddressesAsync(string asset, 
 
 ## GetDepositHistoryAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-depositsrecordquery](https://bybit-exchange.github.io/docs/account_asset/#t-depositsrecordquery)  
 <p>
 
 *Get deposit history*  
@@ -144,6 +149,7 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitDeposit>>>> GetDepositHistor
 
 ## GetSupportedDepositMethodsAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-allowdepositlist](https://bybit-exchange.github.io/docs/account_asset/#t-allowdepositlist)  
 <p>
 
 *Get deposit information*  
@@ -172,6 +178,7 @@ Task<WebCallResult<IEnumerable<BybitDepositConfig>>> GetSupportedDepositMethodsA
 
 ## GetWithdrawalHistoryAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-withdrawrecordquery](https://bybit-exchange.github.io/docs/account_asset/#t-withdrawrecordquery)  
 <p>
 
 *Get withdrawal history*  
@@ -203,6 +210,7 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitWithdraw>>>> GetWithdrawalHi
 
 ## WithdrawAsync  
 
+[https://bybit-exchange.github.io/docs/account_asset/#t-withdraw_info](https://bybit-exchange.github.io/docs/account_asset/#t-withdraw_info)  
 <p>
 
 *Create a withdrawal request*  

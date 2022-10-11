@@ -13,7 +13,7 @@ namespace Bybit.Net.Interfaces.Clients.CopyTradingApi
     {
         /// <summary>
         /// Get the current wallet balance
-        /// <para><a href="https://bybit-exchange.github.io/docs/copy_trading/#t-ct_symbol_list" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/copy_trading/#t-ct_wallet_balance" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>

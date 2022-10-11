@@ -13,7 +13,7 @@ grand_parent: Rest API documentation
 
 ## ChangeMarginAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-changemargin](https://bybit-exchange.github.io/docs/inverse_futures/#t-changemargin)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-changemargin](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-changemargin)  
 <p>
 
 *Change margin*  
@@ -41,7 +41,7 @@ Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode,
 
 ## GetApiKeyInfoAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-key](https://bybit-exchange.github.io/docs/inverse_futures/#t-key)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-key](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-key)  
 <p>
 
 *Get Api key info*  
@@ -66,7 +66,7 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? recei
 
 ## GetAssetExchangeHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/inverse_futures/#t-assetexchangerecords)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-assetexchangerecords)  
 <p>
 
 *Get asset exchange history*  
@@ -94,7 +94,7 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 
 ## GetBalancesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-wallet](https://bybit-exchange.github.io/docs/inverse_futures/#t-wallet)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-wallet](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-wallet)  
 <p>
 
 *Get wallet balances*  
@@ -120,7 +120,7 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? a
 
 ## GetPositionAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition](https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-myposition](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-myposition)  
 <p>
 
 *Get user positions for a symbol*  
@@ -146,7 +146,7 @@ Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionAsync(string symbol, 
 
 ## GetPositionsAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition](https://bybit-exchange.github.io/docs/inverse_futures/#t-myposition)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-myposition](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-myposition)  
 <p>
 
 *Get user positions*  
@@ -171,7 +171,7 @@ Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(long? receiveW
 
 ## GetProfitAndLossHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/inverse_futures/#t-closedprofitandloss)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-closedprofitandloss)  
 <p>
 
 *Get user's profit and loss records*  
@@ -202,7 +202,7 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 
 ## GetRiskLimitAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-getrisklimit](https://bybit-exchange.github.io/docs/inverse_futures/#t-getrisklimit)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-getrisklimit](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-getrisklimit)  
 <p>
 
 *Get position risk limit*  
@@ -228,7 +228,7 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string? symbo
 
 ## GetWalletFundHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-walletrecords](https://bybit-exchange.github.io/docs/inverse_futures/#t-walletrecords)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-walletrecords](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-walletrecords)  
 <p>
 
 *Get wallet fund endpoints*  
@@ -259,7 +259,7 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 
 ## GetWithdrawalHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-withdrawrecords](https://bybit-exchange.github.io/docs/inverse_futures/#t-withdrawrecords)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-withdrawrecords](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-withdrawrecords)  
 <p>
 
 *Get withdrawal history*  
@@ -290,7 +290,7 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(stri
 
 ## SetFullPartialPositionModeAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-switchmode](https://bybit-exchange.github.io/docs/inverse_futures/#t-switchmode)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-switchmode](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-switchmode)  
 <p>
 
 *Switch between full or partial Stop loss/Take profit mode*  
@@ -317,7 +317,7 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 ## SetIsolatedPositionModeAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-marginswitch](https://bybit-exchange.github.io/docs/inverse_futures/#t-marginswitch)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marginswitch](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marginswitch)  
 <p>
 
 *Switch between cross and isolated mode.*  
@@ -346,7 +346,7 @@ Task<WebCallResult> SetIsolatedPositionModeAsync(string symbol, bool isIsolated,
 
 ## SetLeverageAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-setleverage](https://bybit-exchange.github.io/docs/inverse_futures/#t-setleverage)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-setleverage](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-setleverage)  
 <p>
 
 *Set leerage*  
@@ -374,7 +374,7 @@ Task<WebCallResult<int?>> SetLeverageAsync(string symbol, decimal buyLeverage, d
 
 ## SetPositionModeAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-switchpositionmode](https://bybit-exchange.github.io/docs/inverse_futures/#t-switchpositionmode)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-switchpositionmode](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-switchpositionmode)  
 <p>
 
 *Switch beteen onway and hedge position mode.*  
@@ -403,7 +403,7 @@ Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, long? re
 
 ## SetRiskLimitAsync  
 
-[https://bybit-exchange.github.io/docs/inverse_futures/#t-risklimit](https://bybit-exchange.github.io/docs/inverse_futures/#t-risklimit)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-risklimit](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-risklimit)  
 <p>
 
 *Set position risk*  

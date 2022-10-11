@@ -16,7 +16,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
     {
         /// <summary>
         /// Place a new order
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-placeactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-placeactive" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
@@ -32,7 +32,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Get order, either orderId or clientOrderId should be provided
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-getactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-getactive" /></para>
         /// </summary>
         /// <param name="orderId">The id of the order</param>
         /// <param name="clientOrderId">The client order id</param>
@@ -43,7 +43,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Get open orders
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-openorders" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-openorders" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="orderId">Filter by order id, will only return orders with an orderId smaller than this</param>
@@ -55,7 +55,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Get orders
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-orderhistory" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-orderhistory" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="orderId">Filter by order id, will only return orders with an orderId smaller than this</param>
@@ -67,7 +67,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Cancel an active order. Either orderId or clientOrderId should be provided
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-cancelactive" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-cancelactive" /></para>
         /// </summary>
         /// <param name="orderId">The order id</param>
         /// <param name="clientOrderId">The client order id</param>
@@ -89,7 +89,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Get user trade history
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-tradehistory" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-tradehistory" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="fromId">Filter by start id</param>
@@ -102,7 +102,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Place a new borrow order
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-borrowmarginloan" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-borrowmarginloan" /></para>
         /// </summary>
         /// <param name="asset">The asset to borrow</param>
         /// <param name="quantity">The quantity to borrow</param>
@@ -113,7 +113,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Place a new borrow order
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-repaymarginloan" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-repaymarginloan" /></para>
         /// </summary>
         /// <param name="asset">The asset to repay</param>
         /// <param name="quantity">The quantity to repay</param>
@@ -124,7 +124,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Get borrow records
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-queryborrowinginfo" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-queryborrowinginfo" /></para>
         /// </summary>
         /// <param name="startTime">Filter by borrow time</param>
         /// <param name="endTime">Filter by borrow time</param>
@@ -138,7 +138,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 
         /// <summary>
         /// Get repayment records
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-queryrepaymenthistory" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-queryrepaymenthistory" /></para>
         /// </summary>
         /// <param name="startTime">Filter by borrow time</param>
         /// <param name="endTime">Filter by borrow time</param>

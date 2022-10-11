@@ -16,7 +16,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
     {
         /// <summary>
         /// Subscribe to public trade updates
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-websocketv2trade" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-websocketv2trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="handler">Data handler</param>
@@ -26,7 +26,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
 
         /// <summary>
         /// Subscribe to order book updates
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-websocketv2depth" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-websocketv2depth" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="handler">Data handler</param>
@@ -36,7 +36,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
 
         /// <summary>
         /// Subscribe to kline updates
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-websocketv2kline" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-websocketv2kline" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="interval">Interval of the kline data</param>
@@ -47,7 +47,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
 
         /// <summary>
         /// Subscribe to book price updates
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-websocketv2bookticker" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-websocketv2bookticker" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="handler">Data handler</param>
@@ -57,7 +57,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
 
         /// <summary>
         /// Subscribe to ticker updates
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-websocketv2realtimes" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-websocketv2realtimes" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="handler">Data handler</param>
@@ -67,7 +67,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
 
         /// <summary>
         /// Subscribe to account data updates
-        /// <para><a href="https://bybit-exchange.github.io/docs/spot/#t-privatetopics" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v1/#t-privatetopics" /></para>
         /// </summary>
         /// <param name="accountUpdateHandler">Account(balance) update handler</param>
         /// <param name="orderUpdateHandler">Order update handler</param>

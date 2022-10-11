@@ -90,5 +90,10 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("trigger_price")]
         public decimal? TriggerPrice { get; set; }
+        /// <summary>
+        /// Reduce only
+        /// </summary>
+        [JsonProperty("reduce_only")]
+        public bool ReduceOnly { get; set; }
     }
 }
