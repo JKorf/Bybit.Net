@@ -41,7 +41,7 @@ Task<WebCallResult<BybitMarginResult>> AddReduceMarginAsync(string symbol, Order
 
 ## GetApiKeyInfoAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-key](https://bybit-exchange.github.io/docs/linear/#t-key)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-key](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-key)  
 <p>
 
 *Get Api key info*  
@@ -66,7 +66,7 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? recei
 
 ## GetAssetExchangeHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/linear/#t-assetexchangerecords)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-assetexchangerecords](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-assetexchangerecords)  
 <p>
 
 *Get asset exchange history*  
@@ -94,7 +94,7 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 
 ## GetBalancesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-balance](https://bybit-exchange.github.io/docs/linear/#t-balance)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-balance](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-balance)  
 <p>
 
 *Get wallet balances*  
@@ -120,7 +120,7 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? a
 
 ## GetPositionAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-myposition](https://bybit-exchange.github.io/docs/linear/#t-myposition)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-myposition](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-myposition)  
 <p>
 
 *Get user positions*  
@@ -146,7 +146,7 @@ Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionAsync(string symbo
 
 ## GetPositionsAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-myposition](https://bybit-exchange.github.io/docs/linear/#t-myposition)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-myposition](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-myposition)  
 <p>
 
 *Get user positions*  
@@ -171,7 +171,7 @@ Task<WebCallResult<IEnumerable<BybitPositionUsd>>> GetPositionsAsync(long? recei
 
 ## GetProfitAndLossHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/linear/#t-closedprofitandloss)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-closedprofitandloss](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-closedprofitandloss)  
 <p>
 
 *Get user's profit and loss records*  
@@ -202,7 +202,7 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 
 ## GetRiskLimitAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-getrisklimit](https://bybit-exchange.github.io/docs/linear/#t-getrisklimit)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-getrisklimit](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-getrisklimit)  
 <p>
 
 *Get position risk limit*  
@@ -228,7 +228,7 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string symbol
 
 ## GetUserLastFundingFeeAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee](https://bybit-exchange.github.io/docs/linear/#t-mylastfundingfee)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-mylastfundingfee](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-mylastfundingfee)  
 <p>
 
 *Get user last funding fee*  
@@ -254,7 +254,7 @@ Task<WebCallResult<BybitFundingSettlement>> GetUserLastFundingFeeAsync(string sy
 
 ## GetUserPredictedFundingRateAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-predictedfunding](https://bybit-exchange.github.io/docs/linear/#t-predictedfunding)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-predictedfunding](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-predictedfunding)  
 <p>
 
 *Get predicted next funding rate*  
@@ -280,7 +280,7 @@ Task<WebCallResult<BybitPredictedFunding>> GetUserPredictedFundingRateAsync(stri
 
 ## GetWalletFundHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-walletrecords](https://bybit-exchange.github.io/docs/linear/#t-walletrecords)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-walletrecords](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-walletrecords)  
 <p>
 
 *Get wallet fund endpoints*  
@@ -311,7 +311,7 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 
 ## GetWithdrawalHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords](https://bybit-exchange.github.io/docs/linear/#t-withdrawrecords)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-withdrawrecords](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-withdrawrecords)  
 <p>
 
 *Get withdrawal history*  
@@ -342,7 +342,7 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(stri
 
 ## SetAutoAddMarginAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin](https://bybit-exchange.github.io/docs/linear/#t-setautoaddmargin)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setautoaddmargin](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setautoaddmargin)  
 <p>
 
 *Set auto add margin switch*  
@@ -371,7 +371,7 @@ Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool au
 
 ## SetFullPartialPositionModeAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-switchmode](https://bybit-exchange.github.io/docs/linear/#t-switchmode)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-switchmode](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-switchmode)  
 <p>
 
 *Switch between full or partial Stop loss/Take profit mode*  
@@ -398,7 +398,7 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 
 ## SetIsolatedPositionModeAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-marginswitch](https://bybit-exchange.github.io/docs/linear/#t-marginswitch)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-marginswitch](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-marginswitch)  
 <p>
 
 *Switch Cross/Isolated; must set leverage value when switching from Cross to Isolated*  
@@ -427,7 +427,7 @@ Task<WebCallResult> SetIsolatedPositionModeAsync(string symbol, bool isIsolated,
 
 ## SetLeverageAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-setleverage](https://bybit-exchange.github.io/docs/linear/#t-setleverage)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setleverage](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setleverage)  
 <p>
 
 *Set leverage*  
@@ -482,7 +482,7 @@ Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, long? re
 
 ## SetRiskLimitAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-setrisklimit](https://bybit-exchange.github.io/docs/linear/#t-setrisklimit)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setrisklimit](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-setrisklimit)  
 <p>
 
 *Set position risk*  

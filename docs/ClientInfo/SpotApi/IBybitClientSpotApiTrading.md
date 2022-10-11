@@ -40,7 +40,7 @@ Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = de
 
 ## CancelOrderAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-cancelactive](https://bybit-exchange.github.io/docs/spot/#t-cancelactive)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-cancelactive](https://bybit-exchange.github.io/docs/spot/v1/#t-cancelactive)  
 <p>
 
 *Cancel an active order. Either orderId or clientOrderId should be provided*  
@@ -67,7 +67,7 @@ Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = defau
 
 ## GetBorrowRecordsAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-queryborrowinginfo](https://bybit-exchange.github.io/docs/spot/#t-queryborrowinginfo)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-queryborrowinginfo](https://bybit-exchange.github.io/docs/spot/v1/#t-queryborrowinginfo)  
 <p>
 
 *Get borrow records*  
@@ -97,7 +97,7 @@ Task<WebCallResult<IEnumerable<BybitBorrowRecord>>> GetBorrowRecordsAsync(DateTi
 
 ## GetOpenOrdersAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-openorders](https://bybit-exchange.github.io/docs/spot/#t-openorders)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-openorders](https://bybit-exchange.github.io/docs/spot/v1/#t-openorders)  
 <p>
 
 *Get open orders*  
@@ -125,7 +125,7 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOpenOrdersAsync(string? symb
 
 ## GetOrderAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-getactive](https://bybit-exchange.github.io/docs/spot/#t-getactive)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-getactive](https://bybit-exchange.github.io/docs/spot/v1/#t-getactive)  
 <p>
 
 *Get order, either orderId or clientOrderId should be provided*  
@@ -152,7 +152,7 @@ Task<WebCallResult<BybitSpotOrder>> GetOrderAsync(long? orderId = default, strin
 
 ## GetOrdersAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-orderhistory](https://bybit-exchange.github.io/docs/spot/#t-orderhistory)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-orderhistory](https://bybit-exchange.github.io/docs/spot/v1/#t-orderhistory)  
 <p>
 
 *Get orders*  
@@ -180,7 +180,7 @@ Task<WebCallResult<IEnumerable<BybitSpotOrder>>> GetOrdersAsync(string? symbol =
 
 ## GetRepayRecordsAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-queryrepaymenthistory](https://bybit-exchange.github.io/docs/spot/#t-queryrepaymenthistory)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-queryrepaymenthistory](https://bybit-exchange.github.io/docs/spot/v1/#t-queryrepaymenthistory)  
 <p>
 
 *Get repayment records*  
@@ -209,7 +209,7 @@ Task<WebCallResult<IEnumerable<BybitRepayRecord>>> GetRepayRecordsAsync(DateTime
 
 ## GetUserTradesAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-tradehistory](https://bybit-exchange.github.io/docs/spot/#t-tradehistory)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-tradehistory](https://bybit-exchange.github.io/docs/spot/v1/#t-tradehistory)  
 <p>
 
 *Get user trade history*  
@@ -238,7 +238,7 @@ Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync(string? 
 
 ## PlaceBorrowOrderAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-borrowmarginloan](https://bybit-exchange.github.io/docs/spot/#t-borrowmarginloan)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-borrowmarginloan](https://bybit-exchange.github.io/docs/spot/v1/#t-borrowmarginloan)  
 <p>
 
 *Place a new borrow order*  
@@ -265,7 +265,7 @@ Task<WebCallResult<long>> PlaceBorrowOrderAsync(string asset, decimal quantity, 
 
 ## PlaceOrderAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-placeactive](https://bybit-exchange.github.io/docs/spot/#t-placeactive)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-placeactive](https://bybit-exchange.github.io/docs/spot/v1/#t-placeactive)  
 <p>
 
 *Place a new order*  
@@ -297,7 +297,7 @@ Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSi
 
 ## PlaceRepayOrderAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-repaymarginloan](https://bybit-exchange.github.io/docs/spot/#t-repaymarginloan)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-repaymarginloan](https://bybit-exchange.github.io/docs/spot/v1/#t-repaymarginloan)  
 <p>
 
 *Place a new borrow order*  

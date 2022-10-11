@@ -13,7 +13,7 @@ grand_parent: Rest API documentation
 
 ## GetBookPriceAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-bestbidask](https://bybit-exchange.github.io/docs/spot/#t-bestbidask)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-bestbidask](https://bybit-exchange.github.io/docs/spot/v1/#t-bestbidask)  
 <p>
 
 *Get the best ask/bid price for a symbol*  
@@ -38,7 +38,7 @@ Task<WebCallResult<BybitSpotBookPrice>> GetBookPriceAsync(string symbol, Cancell
 
 ## GetBookPricesAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-bestbidask](https://bybit-exchange.github.io/docs/spot/#t-bestbidask)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-bestbidask](https://bybit-exchange.github.io/docs/spot/v1/#t-bestbidask)  
 <p>
 
 *Get the best ask/bid prices for all symbols*  
@@ -86,7 +86,7 @@ Task<WebCallResult<BybitBorrowInfo>> GetBorrowInterestAndQuotaAsync(string asset
 
 ## GetKlinesAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-querykline](https://bybit-exchange.github.io/docs/spot/#t-querykline)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-querykline](https://bybit-exchange.github.io/docs/spot/v1/#t-querykline)  
 <p>
 
 *Get price klines*  
@@ -115,7 +115,7 @@ Task<WebCallResult<IEnumerable<BybitSpotKline>>> GetKlinesAsync(string symbol, K
 
 ## GetMergedOrderBookAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook](https://bybit-exchange.github.io/docs/spot/#t-mergedorderbook)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-mergedorderbook](https://bybit-exchange.github.io/docs/spot/v1/#t-mergedorderbook)  
 <p>
 
 *Get merged order book based on the scale*  
@@ -142,7 +142,7 @@ Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, i
 
 ## GetOrderBookAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-orderbook](https://bybit-exchange.github.io/docs/spot/#t-orderbook)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-orderbook](https://bybit-exchange.github.io/docs/spot/v1/#t-orderbook)  
 <p>
 
 *Get the current order book for a symbol*  
@@ -168,7 +168,7 @@ Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, int? li
 
 ## GetPriceAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/v1/#t-lasttradedprice)  
 <p>
 
 *Get the last trade price of a symbol*  
@@ -193,7 +193,7 @@ Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, CancellationTok
 
 ## GetPricesAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/#t-lasttradedprice)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-lasttradedprice](https://bybit-exchange.github.io/docs/spot/v1/#t-lasttradedprice)  
 <p>
 
 *Get the last trade price of all symbols*  
@@ -217,7 +217,7 @@ Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync(CancellationToke
 
 ## GetServerTimeAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-servertime](https://bybit-exchange.github.io/docs/spot/#t-servertime)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-servertime](https://bybit-exchange.github.io/docs/spot/v1/#t-servertime)  
 <p>
 
 *Get the server time*  
@@ -241,7 +241,7 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 
 ## GetSymbolsAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol](https://bybit-exchange.github.io/docs/spot/#t-spot_querysymbol)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-spot_querysymbol](https://bybit-exchange.github.io/docs/spot/v1/#t-spot_querysymbol)  
 <p>
 
 *Get all supported symbols*  
@@ -265,7 +265,7 @@ Task<WebCallResult<IEnumerable<BybitSpotSymbol>>> GetSymbolsAsync(CancellationTo
 
 ## GetTickerAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/v1/#t-spot_latestsymbolinfo)  
 <p>
 
 *The ticker info for a symbol*  
@@ -290,7 +290,7 @@ Task<WebCallResult<BybitSpotTicker>> GetTickerAsync(string symbol, CancellationT
 
 ## GetTickersAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/#t-spot_latestsymbolinfo)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-spot_latestsymbolinfo](https://bybit-exchange.github.io/docs/spot/v1/#t-spot_latestsymbolinfo)  
 <p>
 
 *The ticker info for all symbols*  
@@ -314,7 +314,7 @@ Task<WebCallResult<IEnumerable<BybitSpotTicker>>> GetTickersAsync(CancellationTo
 
 ## GetTradeHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords](https://bybit-exchange.github.io/docs/spot/#t-publictradingrecords)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-publictradingrecords](https://bybit-exchange.github.io/docs/spot/v1/#t-publictradingrecords)  
 <p>
 
 *Get public trade history*  

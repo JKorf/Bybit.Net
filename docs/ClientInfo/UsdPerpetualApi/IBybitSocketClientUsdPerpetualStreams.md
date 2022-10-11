@@ -12,7 +12,7 @@ parent: Socket API documentation
 
 ## SubscribeToBalanceUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketwallet](https://bybit-exchange.github.io/docs/linear/#t-websocketwallet)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketwallet](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketwallet)  
 <p>
 
 *Subscribe to user balance updates*  
@@ -37,7 +37,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 
 ## SubscribeToKlinesUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketkline](https://bybit-exchange.github.io/docs/linear/#t-websocketkline)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline)  
 <p>
 
 *Subscribe to kline (candlestick) updates*  
@@ -63,7 +63,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval
 
 ## SubscribeToKlineUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketkline](https://bybit-exchange.github.io/docs/linear/#t-websocketkline)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline)  
 <p>
 
 *Subscribe to kline (candlestick) updates*  
@@ -90,7 +90,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 
 ## SubscribeToKlineUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketkline](https://bybit-exchange.github.io/docs/linear/#t-websocketkline)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline)  
 <p>
 
 *Subscribe to kline (candlestick) updates*  
@@ -117,7 +117,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 
 ## SubscribeToLiquidationsUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation](https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketliquidation](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketliquidation)  
 <p>
 
 *Subscribe to liquidation order updates*  
@@ -142,7 +142,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<
 
 ## SubscribeToLiquidationUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation](https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketliquidation](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketliquidation)  
 <p>
 
 *Subscribe to liquidation order updates*  
@@ -168,7 +168,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 
 ## SubscribeToLiquidationUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation](https://bybit-exchange.github.io/docs/linear/#t-websocketliquidation)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketliquidation](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketliquidation)  
 <p>
 
 *Subscribe to liquidation order updates*  
@@ -194,8 +194,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 
 ## SubscribeToOrderBooksUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25)  
-[https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook25)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook200)  
 <p>
 
 *Subscribe to orderbook updates*  
@@ -222,8 +222,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit
 
 ## SubscribeToOrderBookUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25)  
-[https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook25)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook200)  
 <p>
 
 *Subscribe to orderbook updates*  
@@ -251,8 +251,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 
 ## SubscribeToOrderBookUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook25)  
-[https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/linear/#t-websocketorderbook200)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook25)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorderbook200)  
 <p>
 
 *Subscribe to orderbook updates*  
@@ -280,7 +280,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 
 ## SubscribeToOrderUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketorder](https://bybit-exchange.github.io/docs/linear/#t-websocketorder)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorder](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketorder)  
 <p>
 
 *Subscribe to user order updates*  
@@ -305,7 +305,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 
 ## SubscribeToPositionUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketposition](https://bybit-exchange.github.io/docs/linear/#t-websocketposition)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketposition](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketposition)  
 <p>
 
 *Subscribe to user position updates*  
@@ -330,7 +330,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 
 ## SubscribeToStopOrderUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketstoporder](https://bybit-exchange.github.io/docs/linear/#t-websocketstoporder)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketstoporder](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketstoporder)  
 <p>
 
 *Subscribe to user stop order updates*  
@@ -355,7 +355,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<Dat
 
 ## SubscribeToTickersUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo)  
 <p>
 
 *Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
@@ -381,7 +381,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataE
 
 ## SubscribeToTickerUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo)  
 <p>
 
 *Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
@@ -408,7 +408,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 
 ## SubscribeToTickerUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/linear/#t-websocketinstrumentinfo)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo)  
 <p>
 
 *Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
@@ -435,7 +435,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 
 ## SubscribeToTradesUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websockettrade](https://bybit-exchange.github.io/docs/linear/#t-websockettrade)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websockettrade](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websockettrade)  
 <p>
 
 *Subscribe to public trade updates*  
@@ -460,7 +460,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEv
 
 ## SubscribeToTradeUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websockettrade](https://bybit-exchange.github.io/docs/linear/#t-websockettrade)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websockettrade](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websockettrade)  
 <p>
 
 *Subscribe to public trade updates*  
@@ -486,7 +486,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 
 ## SubscribeToTradeUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websockettrade](https://bybit-exchange.github.io/docs/linear/#t-websockettrade)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websockettrade](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websockettrade)  
 <p>
 
 *Subscribe to public trade updates*  
@@ -512,7 +512,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 
 ## SubscribeToUserTradeUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/linear/#t-websocketexecution](https://bybit-exchange.github.io/docs/linear/#t-websocketexecution)  
+[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketexecution](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketexecution)  
 <p>
 
 *Subscribe to user trade updates*  

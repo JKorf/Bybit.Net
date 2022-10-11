@@ -13,7 +13,7 @@ grand_parent: Rest API documentation
 
 ## GetBalancesAsync  
 
-[https://bybit-exchange.github.io/docs/spot/#t-balance](https://bybit-exchange.github.io/docs/spot/#t-balance)  
+[https://bybit-exchange.github.io/docs/spot/v1/#t-balance](https://bybit-exchange.github.io/docs/spot/v1/#t-balance)  
 <p>
 
 *Get wallet balances*  

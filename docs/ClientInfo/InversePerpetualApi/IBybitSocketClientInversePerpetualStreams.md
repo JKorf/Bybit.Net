@@ -12,7 +12,7 @@ parent: Socket API documentation
 
 ## SubscribeToBalanceUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet](https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketwallet](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketwallet)  
 <p>
 
 *Subscribe to user balance updates*  
@@ -37,7 +37,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 
 ## SubscribeToInsurancesUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinsurance)  
 <p>
 
 *Subscribe to insurance fund updates*  
@@ -62,7 +62,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsurancesUpdatesAsync(Action<Da
 
 ## SubscribeToInsuranceUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinsurance)  
 <p>
 
 *Subscribe to insurance fund updates*  
@@ -88,7 +88,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(string sym
 
 ## SubscribeToInsuranceUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinsurance](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinsurance)  
 <p>
 
 *Subscribe to insurance fund updates*  
@@ -114,7 +114,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(IEnumerabl
 
 ## SubscribeToKlinesUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketklinev2)  
 <p>
 
 *Subscribe to kline (candlestick) updates*  
@@ -140,7 +140,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval
 
 ## SubscribeToKlineUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketklinev2)  
 <p>
 
 *Subscribe to kline (candlestick) updates*  
@@ -167,7 +167,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 
 ## SubscribeToKlineUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/inverse/#t-websocketklinev2)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketklinev2](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketklinev2)  
 <p>
 
 *Subscribe to kline (candlestick) updates*  
@@ -194,7 +194,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 
 ## SubscribeToLiquidationsUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketliquidation)  
 <p>
 
 *Subscribe to liquidation order updates*  
@@ -219,7 +219,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<
 
 ## SubscribeToLiquidationUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketliquidation)  
 <p>
 
 *Subscribe to liquidation order updates*  
@@ -245,7 +245,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 
 ## SubscribeToLiquidationUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketliquidation](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketliquidation)  
 <p>
 
 *Subscribe to liquidation order updates*  
@@ -271,8 +271,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 
 ## SubscribeToOrderBooksUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25)  
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook25)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook200)  
 <p>
 
 *Subscribe to orderbook updates*  
@@ -299,8 +299,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit
 
 ## SubscribeToOrderBookUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25)  
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook25)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook200)  
 <p>
 
 *Subscribe to orderbook updates*  
@@ -328,8 +328,8 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 
 ## SubscribeToOrderBookUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25)  
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook25](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook25)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook200](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorderbook200)  
 <p>
 
 *Subscribe to orderbook updates*  
@@ -357,7 +357,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 
 ## SubscribeToOrderUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketorder](https://bybit-exchange.github.io/docs/inverse/#t-websocketorder)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorder](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketorder)  
 <p>
 
 *Subscribe to user order updates*  
@@ -382,7 +382,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 
 ## SubscribeToPositionUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketposition](https://bybit-exchange.github.io/docs/inverse/#t-websocketposition)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketposition](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketposition)  
 <p>
 
 *Subscribe to user position updates*  
@@ -407,7 +407,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 
 ## SubscribeToStopOrderUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder](https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketstoporder](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketstoporder)  
 <p>
 
 *Subscribe to user stop order updates*  
@@ -432,7 +432,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<Dat
 
 ## SubscribeToTickersUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinstrumentinfo)  
 <p>
 
 *Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
@@ -458,7 +458,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataE
 
 ## SubscribeToTickerUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinstrumentinfo)  
 <p>
 
 *Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
@@ -485,7 +485,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 
 ## SubscribeToTickerUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketinstrumentinfo)  
 <p>
 
 *Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
@@ -512,7 +512,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 
 ## SubscribeToTradesUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websockettrade)  
 <p>
 
 *Subscribe to public trade updates*  
@@ -537,7 +537,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEv
 
 ## SubscribeToTradeUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websockettrade)  
 <p>
 
 *Subscribe to public trade updates*  
@@ -563,7 +563,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 
 ## SubscribeToTradeUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/inverse/#t-websockettrade)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websockettrade](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websockettrade)  
 <p>
 
 *Subscribe to public trade updates*  
@@ -589,7 +589,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 
 ## SubscribeToUserTradeUpdatesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution](https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketexecution](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-websocketexecution)  
 <p>
 
 *Subscribe to user trade updates*  

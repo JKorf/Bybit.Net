@@ -13,7 +13,7 @@ grand_parent: Rest API documentation
 
 ## GetAnnouncementsAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-announcement](https://bybit-exchange.github.io/docs/inverse/#t-announcement)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-announcement](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-announcement)  
 <p>
 
 *The API announcements for the last 30 days*  
@@ -37,7 +37,7 @@ Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync(Cancel
 
 ## GetIndexPriceKlinesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-queryindexpricekline](https://bybit-exchange.github.io/docs/inverse/#t-queryindexpricekline)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-queryindexpricekline](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-queryindexpricekline)  
 <p>
 
 *Get index price klines*  
@@ -65,7 +65,7 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(
 
 ## GetKlinesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-querykline](https://bybit-exchange.github.io/docs/inverse/#t-querykline)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querykline](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querykline)  
 <p>
 
 *Get price klines*  
@@ -93,7 +93,7 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, Kline
 
 ## GetLastFundingRateAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-fundingrate](https://bybit-exchange.github.io/docs/inverse/#t-fundingrate)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-fundingrate](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-fundingrate)  
 <p>
 
 *Get last funding rate*  
@@ -118,7 +118,7 @@ Task<WebCallResult<BybitFundingRate>> GetLastFundingRateAsync(string symbol, Can
 
 ## GetLongShortRatioAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-marketaccountratio](https://bybit-exchange.github.io/docs/inverse/#t-marketaccountratio)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketaccountratio](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketaccountratio)  
 <p>
 
 *Get long/short ratio*  
@@ -145,7 +145,7 @@ Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(strin
 
 ## GetMarkPriceKlinesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-markpricekline](https://bybit-exchange.github.io/docs/inverse/#t-markpricekline)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-markpricekline](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-markpricekline)  
 <p>
 
 *Get mark price klines*  
@@ -173,7 +173,7 @@ Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(st
 
 ## GetOpenInterestAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-marketopeninterest](https://bybit-exchange.github.io/docs/inverse/#t-marketopeninterest)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketopeninterest](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketopeninterest)  
 <p>
 
 *Gets the total amount of unsettled contracts. In other words, the total number of contracts held in open positions.*  
@@ -200,7 +200,7 @@ Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string 
 
 ## GetOrderBookAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-orderbook](https://bybit-exchange.github.io/docs/inverse/#t-orderbook)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-orderbook](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-orderbook)  
 <p>
 
 *Get the current order book for a symbol*  
@@ -225,7 +225,7 @@ Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string s
 
 ## GetPremiumIndexKlinesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-querypremiumindexkline](https://bybit-exchange.github.io/docs/inverse/#t-querypremiumindexkline)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querypremiumindexkline](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querypremiumindexkline)  
 <p>
 
 *Get premium index klines*  
@@ -253,7 +253,7 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetPremiumIndexKlinesAsyn
 
 ## GetRecentBigTradesAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-marketbigdeal](https://bybit-exchange.github.io/docs/inverse/#t-marketbigdeal)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketbigdeal](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-marketbigdeal)  
 <p>
 
 *Obtain filled orders worth more than 500,000 USD within the last 24h.*  
@@ -279,7 +279,7 @@ Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string s
 
 ## GetServerTimeAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-servertime](https://bybit-exchange.github.io/docs/inverse/#t-servertime)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-servertime](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-servertime)  
 <p>
 
 *Get the server time*  
@@ -303,7 +303,7 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 
 ## GetSymbolsAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-querysymbol](https://bybit-exchange.github.io/docs/inverse/#t-querysymbol)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querysymbol](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-querysymbol)  
 <p>
 
 *Get all supported symbols*  
@@ -327,7 +327,7 @@ Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync(CancellationToken 
 
 ## GetTickersAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-latestsymbolinfo](https://bybit-exchange.github.io/docs/inverse/#t-latestsymbolinfo)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-latestsymbolinfo](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-latestsymbolinfo)  
 <p>
 
 *The ticker info for a symbol*  
@@ -352,7 +352,7 @@ Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickersAsync(string? symbol = d
 
 ## GetTradeHistoryAsync  
 
-[https://bybit-exchange.github.io/docs/inverse/#t-publictradingrecords](https://bybit-exchange.github.io/docs/inverse/#t-publictradingrecords)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-publictradingrecords](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-publictradingrecords)  
 <p>
 
 *Get public trade history*  
