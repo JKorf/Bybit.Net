@@ -180,13 +180,23 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         #region Set position mode
 
         /// <inheritdoc />
-        public async Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> SetPositionModeAsync(string symbol, string coin, bool hedgeMode, long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>();
+            if (string.IsNullOrWhiteSpace(coin))
             {
-                { "symbol", symbol },
-                { "mode", hedgeMode ? 3: 0 },
-            };
+                parameters.Add("symbol", symbol);
+            }
+            else if (string.IsNullOrWhiteSpace(symbol))
+            {
+                parameters.Add("coin", coin);
+            }
+            else
+            {
+                throw new ArgumentNullException("One of 'coin' or 'symbol' parameters is required!");
+            }
+
+            parameters.Add("mode", hedgeMode ? 3 : 0);
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("futures/private/position/switch-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
