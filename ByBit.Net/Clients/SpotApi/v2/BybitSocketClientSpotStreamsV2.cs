@@ -186,6 +186,7 @@ namespace Bybit.Net.Clients.SpotApi.v2
         public async Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(
             Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler,
             Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler,
+            Action<DataEvent<BybitSpotStopOrderUpdate>> stopOrderUpdateHandler,
             Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler,
             CancellationToken ct = default)
         {
@@ -217,6 +218,17 @@ namespace Bybit.Net.Clients.SpotApi.v2
 
                         orderUpdateHandler(data.As(desResult.Data));
                     }
+                    else if (topic == "stop_executionReport")
+                    {
+                        var desResult = _baseClient.DeserializeInternal<BybitSpotStopOrderUpdate>(item);
+                        if (!desResult)
+                        {
+                            _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotStopOrderUpdate)} object: " + desResult.Error);
+                            return;
+                        }
+
+                        stopOrderUpdateHandler(data.As(desResult.Data));
+                    }
                     else if (topic == "ticketInfo")
                     {
                         var desResult = _baseClient.DeserializeInternal<BybitSpotUserTradeUpdate>(item);
@@ -233,8 +245,8 @@ namespace Bybit.Net.Clients.SpotApi.v2
                         _log.Write(LogLevel.Warning, $"Unknown account update: " + topic);
                     }
                 }
-
             });
+
             return await _baseClient.SubscribeInternalAsync(
                 this,
                 _options.SpotStreamsV2Options.BaseAddressAuthenticated,
