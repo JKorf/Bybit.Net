@@ -234,13 +234,23 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         #region Set Position Mode Switch
 
         /// <inheritdoc />
-        public async Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> SetPositionModeAsync(string symbol, string asset, bool hedgeMode, long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new Dictionary<string, object>();
+            if (string.IsNullOrWhiteSpace(asset))
             {
-                { "symbol", symbol },
-                { "mode", hedgeMode ? "BothSide": "MergedSingle" },
-            };
+                parameters.Add("symbol", symbol);
+            }
+            else if (string.IsNullOrWhiteSpace(symbol))
+            {
+                parameters.Add("coin", asset);
+            }
+            else
+            {
+                throw new ArgumentNullException("One of 'coin' or 'symbol' parameters is required!");
+            }
+
+            parameters.Add("mode", hedgeMode ? "BothSide" : "MergedSingle");
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<object>(_baseClient.GetUrl("private/linear/position/switch-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
