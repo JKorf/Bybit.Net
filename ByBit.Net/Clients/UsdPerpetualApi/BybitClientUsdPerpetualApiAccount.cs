@@ -234,16 +234,16 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         #region Set Position Mode Switch
 
         /// <inheritdoc />
-        public async Task<WebCallResult> SetPositionModeAsync(string symbol, string coin, bool hedgeMode, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> SetPositionModeAsync(string symbol, string asset, bool hedgeMode, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            if (string.IsNullOrWhiteSpace(coin))
+            if (string.IsNullOrWhiteSpace(asset))
             {
                 parameters.Add("symbol", symbol);
             }
             else if (string.IsNullOrWhiteSpace(symbol))
             {
-                parameters.Add("coin", coin);
+                parameters.Add("coin", asset);
             }
             else
             {
