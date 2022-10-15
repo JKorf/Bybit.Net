@@ -38,82 +38,82 @@ namespace Bybit.Net.Objects.Models
         /// Price 24 hours ago
         /// </summary>
         [JsonProperty("prev_price_24h")]
-        public decimal Price24H { get; set; }
+        public decimal? Price24H { get; set; }
         /// <summary>
         /// Price change percentage since 24 hours ago
         /// </summary>
         [JsonProperty("price_24h_pcnt")]
-        public decimal PriceChangePercentage24H { get; set; }
+        public decimal? PriceChangePercentage24H { get; set; }
         /// <summary>
         /// High price in the last 24 hours
         /// </summary>
         [JsonProperty("high_price_24h")]
-        public decimal HighPrice24H { get; set; }
+        public decimal? HighPrice24H { get; set; }
         /// <summary>
         /// Low price in the last 24 hours
         /// </summary>
         [JsonProperty("low_price_24h")]
-        public decimal LowPrice24H { get; set; }
+        public decimal? LowPrice24H { get; set; }
         /// <summary>
         /// Pirce 1 hour ago
         /// </summary>
         [JsonProperty("prev_price_1h")]
-        public decimal Price1H { get; set; }
+        public decimal? Price1H { get; set; }
         /// <summary>
         /// Price change percentage since 1 hour ago
         /// </summary>
         [JsonProperty("price_1h_pcnt")]
-        public decimal PriceChangePercentage1H { get; set; }
+        public decimal? PriceChangePercentage1H { get; set; }
         /// <summary>
         /// Mark price
         /// </summary>
         [JsonProperty("mark_price")]
-        public decimal MarkPrice { get; set; }
+        public decimal? MarkPrice { get; set; }
         /// <summary>
         /// Index price
         /// </summary>
         [JsonProperty("index_price")]
-        public decimal IndexPrice { get; set; }
+        public decimal? IndexPrice { get; set; }
         /// <summary>
         /// Open interest
         /// </summary>
         [JsonProperty("open_interest")]
-        public decimal OpenInterest { get; set; }
+        public decimal? OpenInterest { get; set; }
         /// <summary>
         /// Open position value
         /// </summary>
         [JsonProperty("open_value")]
-        public decimal OpenValue { get; set; }
+        public decimal? OpenValue { get; set; }
         /// <summary>
         /// Total turnover
         /// </summary>
         [JsonProperty("total_turnover")]
-        public decimal TotalTurnover { get; set; }
+        public decimal? TotalTurnover { get; set; }
         /// <summary>
         /// Turnover in the last 24 hours
         /// </summary>
         [JsonProperty("turnover_24h")]
-        public decimal Turnover24H { get; set; }
+        public decimal? Turnover24H { get; set; }
         /// <summary>
         /// Total volume
         /// </summary>
         [JsonProperty("total_volume")]
-        public decimal TotalVolume { get; set; }
+        public decimal? TotalVolume { get; set; }
         /// <summary>
         /// Volume in the last 24 hours
         /// </summary>
         [JsonProperty("volume_24h")]
-        public decimal Volume24H { get; set; }
+        public decimal? Volume24H { get; set; }
         /// <summary>
         /// Funding rate
         /// </summary>
         [JsonProperty("funding_rate")]
-        public decimal FundingRate { get; set; }
+        public decimal? FundingRate { get; set; }
         /// <summary>
         /// Predicted funding rate
         /// </summary>
         [JsonProperty("predicted_funding_rate")]
-        public decimal PredictedFundingRate { get; set; }
+        public decimal? PredictedFundingRate { get; set; }
         /// <summary>
         /// Next settlement time of capital cost
         /// </summary>
