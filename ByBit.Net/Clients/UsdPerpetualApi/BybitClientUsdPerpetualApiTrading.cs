@@ -424,7 +424,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         #region Get open orders realtime
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
+        public async Task<WebCallResult<BybitConditionalOrderUsd>> GetOpenConditionalOrderRealTimeAsync(
             string symbol,
             string? stopOrderId = null,
             string? clientOrderId = null,
@@ -442,12 +442,12 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
             parameters.AddOptionalParameter("order_link_id", clientOrderId);
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitConditionalOrder>(_baseClient.GetUrl("private/linear/stop-order/search"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitConditionalOrderUsd>(_baseClient.GetUrl("private/linear/stop-order/search"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrdersRealTimeAsync(
+        public async Task<WebCallResult<IEnumerable<BybitConditionalOrderUsd>>> GetOpenConditionalOrdersRealTimeAsync(
             string symbol,
             long? receiveWindow = null,
             CancellationToken ct = default)
@@ -459,7 +459,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
 
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitConditionalOrder>>(_baseClient.GetUrl("private/linear/stop-order/search"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<IEnumerable<BybitConditionalOrderUsd>>(_baseClient.GetUrl("private/linear/stop-order/search"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
         }
 
