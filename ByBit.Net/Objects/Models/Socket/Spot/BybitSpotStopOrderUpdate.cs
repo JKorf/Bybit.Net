@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Bybit.Net.Converters;
 using Bybit.Net.Enums;
 using CryptoExchange.Net.Converters;
@@ -51,13 +49,13 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
         /// <summary>
         /// Status
         /// </summary>
-        [JsonProperty("X"), JsonConverter(typeof(OrderStopStatusSpotConverter))]
+        [JsonProperty("X"), JsonConverter(typeof(EnumConverter))]
         public OrderStatus Status { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
         [JsonProperty("i")]
-        public string OrderId { get; set; }
+        public string OrderId { get; set; } = string.Empty;
 
         /// <summary>
         /// Creation time
