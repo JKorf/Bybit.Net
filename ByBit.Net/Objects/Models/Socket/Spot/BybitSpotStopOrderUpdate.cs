@@ -80,11 +80,11 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
         /// The market price when place the order
         /// </summary>
         [JsonProperty("qp")]
-        public string MarketPrice { get; set; }
+        public string MarketPrice { get; set; } = string.Empty;
         /// <summary>
         /// The new order id after the tp/sl order is triggered.
         /// </summary>
         [JsonProperty("eo")]
-        public string NewOrderId { get; set; }
+        public string NewOrderId { get; set; } = string.Empty;
     }
 }
