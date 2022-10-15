@@ -28,6 +28,12 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.2.1 - 15 Oct 2022
+    * Added support for SL/TP updates via websocket in Spot API
+    * Added support for switching PositionMode per asset
+    * Fix for missing properties on order model
+    * Fixed deserialization issue due to nullability on spot GetTickersAsync API
+
 * Version 1.2.0 - 11 Oct 2022
     * Added support for all Spot API versions (rest V1 and V3, socket V1, V2 and V3)
     * Fix for Usd perpetual futures conditional order parsing
