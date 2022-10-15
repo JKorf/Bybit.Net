@@ -41,6 +41,12 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         }
 
         /// <summary>
+        /// Trigger price
+        /// </summary>
+        [JsonProperty("triggerPrice")]
+        public decimal TriggerPrice { get; set; }
+
+        /// <summary>
         /// Order quantity
         /// </summary>
         [JsonProperty("orderQty")]
