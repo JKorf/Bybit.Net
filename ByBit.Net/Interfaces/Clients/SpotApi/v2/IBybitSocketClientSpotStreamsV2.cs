@@ -71,12 +71,14 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
         /// </summary>
         /// <param name="accountUpdateHandler">Account(balance) update handler</param>
         /// <param name="orderUpdateHandler">Order update handler</param>
+        /// <param name="stopOrderUpdateHandler"> SL/TP order update handler</param>
         /// <param name="tradeUpdateHandler">User trade update handler</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(
             Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler,
             Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler,
+            Action<DataEvent<BybitSpotStopOrderUpdate>> stopOrderUpdateHandler,
             Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler,
             CancellationToken ct = default);
     }

@@ -275,7 +275,7 @@ namespace Bybit.Net.Clients
                 if (updateType == null)
                     return false;
 
-                return updateType == "outboundAccountInfo" || updateType == "executionReport" || updateType == "order" || updateType == "ticketInfo";
+                return updateType == "outboundAccountInfo" || updateType == "stop_executionReport" || updateType == "executionReport" || updateType == "order" || updateType == "ticketInfo";
             }
 
             return false;

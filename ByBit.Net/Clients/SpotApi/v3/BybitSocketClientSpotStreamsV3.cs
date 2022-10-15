@@ -3,10 +3,8 @@ using Bybit.Net.Objects;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Logging;
@@ -14,7 +12,6 @@ using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Enums;
 using Bybit.Net.Converters;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
-using Bybit.Net.Objects.Models.Spot.v1;
 using Bybit.Net.Objects.Models.Spot.v3;
 
 namespace Bybit.Net.Clients.SpotApi.v3
@@ -251,6 +248,43 @@ namespace Bybit.Net.Clients.SpotApi.v3
                     Parameters = new[]
                     {
                         "order"
+                    }
+                },
+                null, true, internalHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserStopOrdersUpdatesAsync(Action<DataEvent<BybitSpotStopOrderUpdate>> handler, CancellationToken ct = default)
+        {
+            var internalHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var internalData = data.Data["data"];
+                if (internalData == null)
+                    return;
+
+                var jArray = (JArray)internalData;
+                foreach (var item in jArray)
+                {
+                    var desResult = _baseClient.DeserializeInternal<BybitSpotStopOrderUpdate>(item);
+                    if (!desResult)
+                    {
+                        _log.Write(LogLevel.Warning, $"Failed to deserialize {nameof(BybitSpotStopOrderUpdate)} object: " + desResult.Error);
+                        return;
+                    }
+
+                    handler(data.As(desResult.Data));
+                }
+            });
+
+            return await _baseClient.SubscribeInternalAsync(this,
+                _options.SpotStreamsV3Options.BaseAddressAuthenticated,
+                new BybitSpotRequestMessageV3()
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Operation = "subscribe",
+                    Parameters = new[]
+                    {
+                        "stopOrder"
                     }
                 },
                 null, true, internalHandler, ct).ConfigureAwait(false);

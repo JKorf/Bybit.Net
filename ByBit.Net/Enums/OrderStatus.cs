@@ -1,4 +1,6 @@
-﻿namespace Bybit.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Order status
@@ -12,10 +14,12 @@
         /// <summary>
         /// Rejected
         /// </summary>
+        [Map("ORDER_FAILED")]
         Rejected,
         /// <summary>
         /// New
         /// </summary>
+        [Map("ORDER_NEW")]
         New,
         /// <summary>
         /// Partially filled
@@ -24,10 +28,12 @@
         /// <summary>
         /// Fully filled
         /// </summary>
+        [Map("ORDER_FILLED")]
         Filled,
         /// <summary>
         /// Canceled
         /// </summary>
+        [Map("ORDER_CANCELED")]
         Canceled,
         /// <summary>
         /// Pending cancel

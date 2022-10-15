@@ -83,6 +83,15 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
         Task<CallResult<UpdateSubscription>> SubscribeToUserOrdersUpdatesAsync(Action<DataEvent<BybitSpotOrderUpdate>> handler, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribe to SL/TP orders updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/spot/v3/#t-websocketspotstoporder" /></para>
+        /// </summary>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToUserStopOrdersUpdatesAsync(Action<DataEvent<BybitSpotStopOrderUpdate>> handler, CancellationToken ct = default);
+
+        /// <summary>
         /// Susbcribe to user trade updates
         /// </summary>
         /// <param name="handler">Data handler</param>
