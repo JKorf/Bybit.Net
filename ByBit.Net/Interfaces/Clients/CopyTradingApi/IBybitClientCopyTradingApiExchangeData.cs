@@ -14,6 +14,14 @@ namespace Bybit.Net.Interfaces.Clients.CopyTradingApi
     public interface IBybitClientCopyTradingApiExchangeData
     {
         /// <summary>
+        /// Retrieve the server timestamp
+        /// <para><a href="https://bybit-exchange.github.io/docs/copy_trading/#t-servertime" /></para>
+        /// </summary>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
+
+        /// <summary>
         /// Get a list of supported symbols
         /// <para><a href="https://bybit-exchange.github.io/docs/copy_trading/#t-ct_symbol_list" /></para>
         /// </summary>

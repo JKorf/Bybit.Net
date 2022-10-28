@@ -23,6 +23,13 @@ namespace Bybit.Net.Clients.CopyTradingApi
         #region Get symbols
 
         /// <inheritdoc />
+        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
+        {
+            var result = await _baseClient.SendRequestWrapperAsync<BybitCopyTradingSymbol>(_baseClient.GetUrl("/v2/public/time"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
+            return result.As(result.Data.Timestamp);
+        }
+
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BybitCopyTradingSymbol>>> GetSymbolsAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendRequestListAsync<BybitCopyTradingSymbol>(_baseClient.GetUrl("contract/v3/public/copytrading/symbol/list"), HttpMethod.Get, ct, null, false).ConfigureAwait(false);
