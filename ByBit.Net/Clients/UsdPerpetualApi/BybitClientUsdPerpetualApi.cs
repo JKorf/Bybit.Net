@@ -23,6 +23,8 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         private readonly BybitClientOptions _options;
         private readonly Log _log;
 
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("USD Perpetual Api");
+
         internal BybitClientOptions ClientOptions { get; }
 
         /// <inheritdoc />
@@ -107,10 +109,10 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
 
         /// <inheritdoc />
         public override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.UsdPerpetualApiOptions.AutoTimestamp, _options.UsdPerpetualApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
+            => new TimeSyncInfo(_log, _options.UsdPerpetualApiOptions.AutoTimestamp, _options.UsdPerpetualApiOptions.TimestampRecalculationInterval, TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()
-            => BybitClientInversePerpetualApi.TimeSyncState.TimeOffset;
+            => TimeSyncState.TimeOffset;
     }
 }

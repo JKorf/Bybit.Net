@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Clients.InversePerpetualApi;
+﻿using Bybit.Net.Clients.CopyTradingApi;
+using Bybit.Net.Clients.InversePerpetualApi;
 using Bybit.Net.Interfaces.Clients.GeneralApi;
 using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 using Bybit.Net.Objects;
@@ -104,10 +105,10 @@ namespace Bybit.Net.Clients.GeneralApi
 
         /// <inheritdoc />
         public override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.SpotApiOptions.AutoTimestamp, _options.SpotApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
+            => new TimeSyncInfo(_log, _options.SpotApiOptions.AutoTimestamp, _options.SpotApiOptions.TimestampRecalculationInterval, BybitClientCopyTradingApi.TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()
-            => BybitClientInversePerpetualApi.TimeSyncState.TimeOffset;
+            => BybitClientCopyTradingApi.TimeSyncState.TimeOffset;
     }
 }

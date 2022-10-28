@@ -24,6 +24,8 @@ namespace Bybit.Net.Clients.InverseFuturesApi
 
         internal BybitClientOptions ClientOptions { get; }
 
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("Inverse Futures Api");
+
         /// <inheritdoc />
         public IBybitClientInverseFuturesApiAccount Account { get; }
         /// <inheritdoc />
@@ -106,10 +108,10 @@ namespace Bybit.Net.Clients.InverseFuturesApi
 
         /// <inheritdoc />
         public override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.InverseFuturesApiOptions.AutoTimestamp, _options.InverseFuturesApiOptions.TimestampRecalculationInterval, BybitClientInversePerpetualApi.TimeSyncState);
+            => new TimeSyncInfo(_log, _options.InverseFuturesApiOptions.AutoTimestamp, _options.InverseFuturesApiOptions.TimestampRecalculationInterval, TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()
-            => BybitClientInversePerpetualApi.TimeSyncState.TimeOffset;
+            => TimeSyncState.TimeOffset;
     }
 }
