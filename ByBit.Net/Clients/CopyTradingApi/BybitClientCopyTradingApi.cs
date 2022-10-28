@@ -125,7 +125,7 @@ namespace Bybit.Net.Clients.CopyTradingApi
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
-            => _baseClient.SpotApiV1.ExchangeData.GetServerTimeAsync();
+            => _baseClient.CopyTradingApi.ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
         public override TimeSyncInfo GetTimeSyncInfo()
