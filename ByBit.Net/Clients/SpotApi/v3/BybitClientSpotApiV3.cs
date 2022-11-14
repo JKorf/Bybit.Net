@@ -25,9 +25,17 @@ namespace Bybit.Net.Clients.SpotApi.v3
         public IBybitClientSpotApiTradingV3 Trading { get; }
 
         #region ctor
-        internal BybitClientSpotApiV3(Log log, BybitClient baseClient, BybitClientOptions options)
-            : base(log, baseClient, options)
+        internal BybitClientSpotApiV3(Log log, BybitClientOptions options)
+            : base(log, options)
         {
+            if (!string.IsNullOrEmpty(options.Referer))
+            {
+                StandardRequestHeaders = new Dictionary<string, string>
+                {
+                    { "x-referer", options.Referer! }
+                };
+            }
+
             Account = new BybitClientSpotApiAccountV3(this);
             ExchangeData = new BybitClientSpotApiExchangeDataV3(this);
             Trading = new BybitClientSpotApiTradingV3(this);

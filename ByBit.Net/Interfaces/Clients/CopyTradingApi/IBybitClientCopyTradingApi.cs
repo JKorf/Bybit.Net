@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptoExchange.Net.Interfaces;
+using System;
 
 namespace Bybit.Net.Interfaces.Clients.CopyTradingApi
 {
@@ -7,6 +8,11 @@ namespace Bybit.Net.Interfaces.Clients.CopyTradingApi
     /// </summary>
     public interface IBybitClientCopyTradingApi: IDisposable
     {
+        /// <summary>
+        /// The factory for creating requests. Used for unit testing
+        /// </summary>
+        IRequestFactory RequestFactory { get; set; }
+
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>

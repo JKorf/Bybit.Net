@@ -13,13 +13,6 @@ using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Objects;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using Bybit.Net.Clients.SpotApi.v1;
 using Bybit.Net.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
@@ -58,21 +51,13 @@ namespace Bybit.Net.Clients
         /// <param name="options">The options to use for this client</param>
         public BybitClient(BybitClientOptions options) : base("Bybit", options)
         {
-            if (!string.IsNullOrEmpty(options.Referer))
-            {
-                StandardRequestHeaders = new Dictionary<string, string>
-                {
-                    { "x-referer", options.Referer! }
-                };
-            }
-
-            InversePerpetualApi = AddApiClient(new BybitClientInversePerpetualApi(log, this, options));
-            InverseFuturesApi = AddApiClient(new BybitClientInverseFuturesApi(log, this, options));
-            UsdPerpetualApi = AddApiClient(new BybitClientUsdPerpetualApi(log, this, options));
-            SpotApiV1 = AddApiClient(new BybitClientSpotApiV1(log, this, options));
-            SpotApiV3 = AddApiClient(new BybitClientSpotApiV3(log, this, options));
+            InversePerpetualApi = AddApiClient(new BybitClientInversePerpetualApi(log, options));
+            InverseFuturesApi = AddApiClient(new BybitClientInverseFuturesApi(log, options));
+            UsdPerpetualApi = AddApiClient(new BybitClientUsdPerpetualApi(log, options));
+            SpotApiV1 = AddApiClient(new BybitClientSpotApiV1(log, options));
+            SpotApiV3 = AddApiClient(new BybitClientSpotApiV3(log, options));
             GeneralApi = AddApiClient(new BybitClientGeneralApi(log, this, options));
-            CopyTradingApi = AddApiClient(new BybitClientCopyTradingApi(log, this, options));
+            CopyTradingApi = AddApiClient(new BybitClientCopyTradingApi(log, options));
         }
         #endregion
 
@@ -83,13 +68,6 @@ namespace Bybit.Net.Clients
         public static void SetDefaultOptions(BybitClientOptions options)
         {
             BybitClientOptions.Default = options;
-        }
-
-        internal Task<WebCallResult<T>> SendRequestInternal<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, JsonSerializer? deserializer = null, bool ignoreRatelimit = false) where T : class
-        {
-            return base.SendRequestAsync<T>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, weight, deserializer, ignoreRatelimit: ignoreRatelimit);
         }
     }
 }

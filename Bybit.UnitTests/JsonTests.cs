@@ -15,22 +15,26 @@ namespace Bybit.Net.UnitTests
         private JsonToObjectComparer<BybitClient> _comparer = new JsonToObjectComparer<BybitClient>((json) => TestHelpers.CreateResponseClient(json, new BybitClientOptions()
         { 
             ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), 
-            OutputOriginalData = true, 
+            LogLevel = Microsoft.Extensions.Logging.LogLevel.Trace,
             SpotApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
             {
-                RateLimiters = new List<IRateLimiter>()
+                RateLimiters = new List<IRateLimiter>(),
+                OutputOriginalData = true
             },
             InverseFuturesApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
             {
-                RateLimiters = new List<IRateLimiter>()
+                RateLimiters = new List<IRateLimiter>(),
+                OutputOriginalData = true
             },
             InversePerpetualApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
             {
-                RateLimiters = new List<IRateLimiter>()
+                RateLimiters = new List<IRateLimiter>(),
+                OutputOriginalData = true
             },
             UsdPerpetualApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
             {
-                RateLimiters = new List<IRateLimiter>()
+                RateLimiters = new List<IRateLimiter>(),
+                OutputOriginalData = true
             }
         },
             System.Net.HttpStatusCode.OK));

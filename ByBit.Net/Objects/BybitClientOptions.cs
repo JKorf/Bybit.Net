@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects
     /// <summary>
     /// Options for the Bybit client
     /// </summary>
-    public class BybitClientOptions : BaseRestClientOptions
+    public class BybitClientOptions : ClientOptions
     {
         /// <summary>
         /// Default options for the Bybit client
@@ -104,18 +104,19 @@ namespace Bybit.Net.Objects
     /// <summary>
     /// Options for the futures socket client
     /// </summary>
-    public class BybitSocketClientOptions : BaseSocketClientOptions
+    public class BybitSocketClientOptions : ClientOptions
     {
         /// <summary>
         /// Default options for the futures socket client
         /// </summary>
-        public static BybitSocketClientOptions Default { get; set; } = new BybitSocketClientOptions()
+        public static BybitSocketClientOptions Default { get; set; } = new BybitSocketClientOptions();
+
+        private BybitSocketApiClientOptions _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InverseFuturesSocketClientAddress, BybitApiAddresses.Default.InverseFuturesSocketClientAddress)
         {
             SocketSubscriptionsCombineTarget = 10,
             PingInterval = TimeSpan.FromSeconds(20)
         };
 
-        private BybitSocketApiClientOptions _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InverseFuturesSocketClientAddress, BybitApiAddresses.Default.InverseFuturesSocketClientAddress);
         /// <summary>
         /// Inverse futures streams options
         /// </summary>
@@ -125,7 +126,12 @@ namespace Bybit.Net.Objects
             set => _inverseFuturesStreamsOptions = new BybitSocketApiClientOptions(_inverseFuturesStreamsOptions, value);
         }
 
-        private BybitSocketApiClientOptions _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InversePerpetualSocketClientAddress, BybitApiAddresses.Default.InversePerpetualSocketClientAddress);
+        private BybitSocketApiClientOptions _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.InversePerpetualSocketClientAddress, BybitApiAddresses.Default.InversePerpetualSocketClientAddress)
+        {
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
         /// <summary>
         /// Inverse perpetual streams options
         /// </summary>
@@ -135,7 +141,12 @@ namespace Bybit.Net.Objects
             set => _inversePerpetualStreamsOptions = new BybitSocketApiClientOptions(_inversePerpetualStreamsOptions, value);
         }
 
-        private BybitSocketApiClientOptions _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.UsdPerpetualPublicSocketClientAddress, BybitApiAddresses.Default.UsdPerpetualPrivateSocketClientAddress);
+        private BybitSocketApiClientOptions _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.UsdPerpetualPublicSocketClientAddress, BybitApiAddresses.Default.UsdPerpetualPrivateSocketClientAddress)
+        {
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
         /// <summary>
         /// Usd perpetual streams options
         /// </summary>
@@ -145,7 +156,12 @@ namespace Bybit.Net.Objects
             set => _usdPerpetualStreamsOptions = new BybitSocketApiClientOptions(_usdPerpetualStreamsOptions, value);
         }
 
-        private BybitSocketApiClientOptions _spotStreamsV1Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV1ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV1ClientAddress);
+        private BybitSocketApiClientOptions _spotStreamsV1Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV1ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV1ClientAddress)
+        {
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
         /// <summary>
         /// Spot streams options version 1
         /// </summary>
@@ -155,7 +171,13 @@ namespace Bybit.Net.Objects
             set => _spotStreamsV1Options = new BybitSocketApiClientOptions(_spotStreamsV1Options, value);
         }
 
-        private BybitSocketApiClientOptions _spotStreamsV2Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV2ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV1ClientAddress);
+        private BybitSocketApiClientOptions _spotStreamsV2Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV2ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV1ClientAddress)
+        {
+
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
         /// <summary>
         /// Spot streams options version 2
         /// </summary>
@@ -165,7 +187,13 @@ namespace Bybit.Net.Objects
             set => _spotStreamsV2Options = new BybitSocketApiClientOptions(_spotStreamsV2Options, value);
         }
 
-        private BybitSocketApiClientOptions _spotStreamsV3Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV3ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV3ClientAddress);
+        private BybitSocketApiClientOptions _spotStreamsV3Options = new BybitSocketApiClientOptions(BybitApiAddresses.Default.SpotPublicSocketV3ClientAddress, BybitApiAddresses.Default.SpotPrivateSocketV3ClientAddress)
+        {
+
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
         /// <summary>
         /// Spot streams options version 2
         /// </summary>
@@ -175,7 +203,12 @@ namespace Bybit.Net.Objects
             set => _spotStreamsV3Options = new BybitSocketApiClientOptions(_spotStreamsV3Options, value);
         }
 
-        private BybitSocketApiClientOptions _copyTradingStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.CopyTradingSocketClientAddress, BybitApiAddresses.Default.CopyTradingSocketClientAddress);
+        private BybitSocketApiClientOptions _copyTradingStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.CopyTradingSocketClientAddress, BybitApiAddresses.Default.CopyTradingSocketClientAddress)
+        {
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
         /// <summary>
         /// Copy trading streams options
         /// </summary>
@@ -184,11 +217,6 @@ namespace Bybit.Net.Objects
             get => _copyTradingStreamsOptions;
             set => _copyTradingStreamsOptions = new BybitSocketApiClientOptions(_copyTradingStreamsOptions, value);
         }
-
-        /// <summary>
-        /// Interval at which to send a ping to the server
-        /// </summary>
-        public TimeSpan PingInterval { get; set; }
 
         /// <summary>
         /// ctor
@@ -206,8 +234,6 @@ namespace Bybit.Net.Objects
             if (baseOn == null)
                 return;
 
-            PingInterval = baseOn.PingInterval;
-
             InverseFuturesStreamsOptions = new BybitSocketApiClientOptions(baseOn.InverseFuturesStreamsOptions, null);
             InversePerpetualStreamsOptions = new BybitSocketApiClientOptions(baseOn.InversePerpetualStreamsOptions, null);
             SpotStreamsV1Options = new BybitSocketApiClientOptions(baseOn.SpotStreamsV1Options, null);
@@ -219,12 +245,17 @@ namespace Bybit.Net.Objects
     /// <summary>
     /// Bybit socket API client options
     /// </summary>
-    public class BybitSocketApiClientOptions : ApiClientOptions
+    public class BybitSocketApiClientOptions : SocketApiClientOptions
     {
         /// <summary>
         /// The base address for the authenticated websocket
         /// </summary>
         public string BaseAddressAuthenticated { get; set; }
+
+        /// <summary>
+        /// Interval at which to send a ping to the server
+        /// </summary>
+        public TimeSpan PingInterval { get; set; }
 
         /// <summary>
         /// ctor
@@ -242,6 +273,7 @@ namespace Bybit.Net.Objects
         /// <param name="newValues"></param>
         internal BybitSocketApiClientOptions(BybitSocketApiClientOptions baseOn, BybitSocketApiClientOptions? newValues) : base(baseOn, newValues)
         {
+            PingInterval = newValues?.PingInterval ?? baseOn.PingInterval;
             BaseAddressAuthenticated = newValues?.BaseAddressAuthenticated ?? baseOn.BaseAddressAuthenticated;
         }
 

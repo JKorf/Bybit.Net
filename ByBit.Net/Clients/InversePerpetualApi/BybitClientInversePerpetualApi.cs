@@ -18,12 +18,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
     /// <inheritdoc cref="IBybitClientInversePerpetualApi" />
     public class BybitClientInversePerpetualApi : RestApiClient, IBybitClientInversePerpetualApi
     {
-        private readonly BybitClient _baseClient;
-        private readonly BybitClientOptions _options;
-        private readonly Log _log;
-
         internal static TimeSyncState TimeSyncState = new TimeSyncState("Inverse Perpetual Api");
-
         internal BybitClientOptions ClientOptions { get; }
 
         /// <inheritdoc />
@@ -34,12 +29,17 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         public IBybitClientInversePerpetualApiTrading Trading { get; }
 
         #region ctor
-        internal BybitClientInversePerpetualApi(Log log, BybitClient baseClient, BybitClientOptions options)
-            : base(options, options.InversePerpetualApiOptions)
+        internal BybitClientInversePerpetualApi(Log log, BybitClientOptions options)
+            : base(log, options, options.InversePerpetualApiOptions)
         {
-            _baseClient = baseClient;
-            _log = log;
-            _options = options;
+            if (!string.IsNullOrEmpty(options.Referer))
+            {
+                StandardRequestHeaders = new Dictionary<string, string>
+                {
+                    { "x-referer", options.Referer! }
+                };
+            }
+
             ClientOptions = options;
 
             Account = new BybitClientInversePerpetualApiAccount(this);
@@ -74,7 +74,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
              JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false) where T : class
         {
-            var result = await _baseClient.SendRequestInternal<BybitResult<T>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<BybitResult<T>>(default);
 
@@ -92,7 +92,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
              bool signed = false,
              JsonSerializer? deserializer = null)
         {
-            var result = await _baseClient.SendRequestInternal<BybitResult<T>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
@@ -108,7 +108,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
 
         /// <inheritdoc />
         public override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.InversePerpetualApiOptions.AutoTimestamp, _options.InversePerpetualApiOptions.TimestampRecalculationInterval, TimeSyncState);
+            => new TimeSyncInfo(_log, Options.AutoTimestamp, Options.TimestampRecalculationInterval, TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()

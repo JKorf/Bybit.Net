@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using Bybit.Net.Clients.CopyTradingApi;
+using CryptoExchange.Net.Converters;
+using System.Globalization;
 
 namespace Bybit.Net
 {
@@ -24,10 +26,10 @@ namespace Bybit.Net
                 return;
 
             var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters : bodyParameters;
+            var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
             if (apiClient is BybitClientCopyTradingApi)
             {
                 var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : parameters.ToFormData();
-                var timestamp = GetMillisecondTimestamp(apiClient);
                 var key = Credentials.Key!.GetString();
                 var recvWindow = 5000;
                 var sign = SignHMACSHA256(timestamp + key + recvWindow + signPayload);
@@ -40,7 +42,7 @@ namespace Bybit.Net
             else
             {
                 parameters.Add("api_key", Credentials.Key!.GetString());
-                parameters.Add("timestamp", GetMillisecondTimestamp(apiClient));
+                parameters.Add("timestamp", timestamp);
                 parameters.Add("sign", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : parameters.ToFormData()));
             }
         }

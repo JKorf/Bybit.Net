@@ -17,10 +17,6 @@ namespace Bybit.Net.Clients.CopyTradingApi
     /// <inheritdoc cref="IBybitClientCopyTradingApi" />
     public class BybitClientCopyTradingApi : RestApiClient, IBybitClientCopyTradingApi
     {
-        private readonly BybitClient _baseClient;
-        private readonly BybitClientOptions _options;
-        private readonly Log _log;
-
         internal static TimeSyncState TimeSyncState = new TimeSyncState("CopyTrade Api");
 
         internal BybitClientOptions ClientOptions { get; }
@@ -36,12 +32,18 @@ namespace Bybit.Net.Clients.CopyTradingApi
         public IBybitClientCopyTradingApiTrading Trading { get; }
 
         #region ctor
-        internal BybitClientCopyTradingApi(Log log, BybitClient baseClient, BybitClientOptions options)
-            : base(options, options.CopyTradingApiOptions)
+        internal BybitClientCopyTradingApi(Log log, BybitClientOptions options)
+            : base(log, options, options.CopyTradingApiOptions)
         {
-            _baseClient = baseClient;
+            if (!string.IsNullOrEmpty(options.Referer))
+            {
+                StandardRequestHeaders = new Dictionary<string, string>
+                {
+                    { "x-referer", options.Referer! }
+                };
+            }
+
             _log = log;
-            _options = options;
             ClientOptions = options;
 
             Account = new BybitClientCopyTradingApiAccount(this);
@@ -75,7 +77,7 @@ namespace Bybit.Net.Clients.CopyTradingApi
              bool signed = false,
              JsonSerializer? deserializer = null) where T : class
         {
-            var result = await _baseClient.SendRequestInternal<BybitResult<T>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
             if (!result)
                 return result.As<BybitResult<T>>(default);
 
@@ -94,7 +96,7 @@ namespace Bybit.Net.Clients.CopyTradingApi
              JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false)
         {
-            var result = await _baseClient.SendRequestInternal<BybitCopyTradingResult<BybitList<T>>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitCopyTradingResult<BybitList<T>>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<T>>(default);
 
@@ -113,7 +115,7 @@ namespace Bybit.Net.Clients.CopyTradingApi
              JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false)
         {
-            var result = await _baseClient.SendRequestInternal<BybitCopyTradingResult<T>>(this, uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitCopyTradingResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
@@ -125,11 +127,11 @@ namespace Bybit.Net.Clients.CopyTradingApi
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
-            => _baseClient.CopyTradingApi.ExchangeData.GetServerTimeAsync();
+            => ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
         public override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, _options.CopyTradingApiOptions.AutoTimestamp, _options.CopyTradingApiOptions.TimestampRecalculationInterval, TimeSyncState);
+            => new TimeSyncInfo(_log, Options.AutoTimestamp,Options.TimestampRecalculationInterval, TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()
