@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Objects.Models.Spot.v1;
 using Bybit.Net.Objects.Models.Spot.v3;
+using Bybit.Net.Objects.Internal;
 
 namespace Bybit.Net.Clients.SpotApi.v3
 {
@@ -160,7 +161,11 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitSpotUserTrade>>(_baseClient.GetUrl("spot/v3/private/my-trades"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitList<BybitSpotUserTrade>>(_baseClient.GetUrl("spot/v3/private/my-trades"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitSpotUserTrade>>(default);
+
+            return result.As(result.Data.List);
         }
 
         #endregion
