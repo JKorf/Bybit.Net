@@ -28,6 +28,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.3.0 - 17 Nov 2022
+    * Updated CryptoExchange.Net
+    * Fixed SpotV3 GetUserTrades endpoint
+
 * Version 1.2.3 - 28 Oct 2022
     * Fixed timestamping inconsistencies between different APIs
 
