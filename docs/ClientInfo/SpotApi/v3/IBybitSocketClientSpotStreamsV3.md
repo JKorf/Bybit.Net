@@ -191,6 +191,31 @@ Task<CallResult<UpdateSubscription>> SubscribeToUserOrdersUpdatesAsync(Action<Da
 
 ***
 
+## SubscribeToUserStopOrdersUpdatesAsync  
+
+[https://bybit-exchange.github.io/docs/spot/v3/#t-websocketspotstoporder](https://bybit-exchange.github.io/docs/spot/v3/#t-websocketspotstoporder)  
+<p>
+
+*Subscribe to SL/TP orders updates*  
+
+```csharp  
+var client = new BybitSocketClient();  
+var result = await client.SpotApi\v3.SpotStreamsV3.SubscribeToUserStopOrdersUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToUserStopOrdersUpdatesAsync(Action<DataEvent<BybitSpotStopOrderUpdate>> handler, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|handler|Data handler|
+|_[Optional]_ ct|Cancellation token for closing this subscription|
+
+</p>
+
+***
+
 ## SubscribeToUserTradesUpdatesAsync  
 
 <p>

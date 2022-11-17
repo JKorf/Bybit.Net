@@ -374,7 +374,7 @@ Task<WebCallResult<int?>> SetLeverageAsync(string symbol, decimal buyLeverage, d
 
 ## SetPositionModeAsync  
 
-[https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-switchpositionmode](https://bybit-exchange.github.io/docs/futuresV2/inverse/#t-switchpositionmode)  
+[https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-switchpositionmode](https://bybit-exchange.github.io/docs/futuresV2/inverse_futures/#t-switchpositionmode)  
 <p>
 
 *Switch beteen onway and hedge position mode.*  
@@ -387,12 +387,13 @@ var result = await client.InverseFuturesApi.Account.SetPositionModeAsync(/* para
 ```  
 
 ```csharp  
-Task<WebCallResult> SetPositionModeAsync(string symbol, bool hedgeMode, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult> SetPositionModeAsync(string symbol, string asset, bool hedgeMode, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
-|symbol|The symbol|
+|symbol|Symbol. Required if not passing coin|
+|asset|Currency alias. Required if not passing symbol|
 |hedgeMode|Hedgemode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|

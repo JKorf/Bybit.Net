@@ -11,6 +11,30 @@ grand_parent: Rest API documentation
 
 ***
 
+## GetServerTimeAsync  
+
+[https://bybit-exchange.github.io/docs/copy_trading/#t-servertime](https://bybit-exchange.github.io/docs/copy_trading/#t-servertime)  
+<p>
+
+*Retrieve the server timestamp*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.CopyTradingApi.ExchangeData.GetServerTimeAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ ct||
+
+</p>
+
+***
+
 ## GetSymbolsAsync  
 
 [https://bybit-exchange.github.io/docs/copy_trading/#t-ct_symbol_list](https://bybit-exchange.github.io/docs/copy_trading/#t-ct_symbol_list)  

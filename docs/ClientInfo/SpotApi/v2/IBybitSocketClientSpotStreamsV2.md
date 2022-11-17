@@ -24,13 +24,14 @@ var result = await client.SpotApi\v2.SpotStreamsV2.SubscribeToAccountUpdatesAsyn
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler, Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler, Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BybitSpotAccountUpdate>> accountUpdateHandler, Action<DataEvent<BybitSpotOrderUpdate>> orderUpdateHandler, Action<DataEvent<BybitSpotStopOrderUpdate>> stopOrderUpdateHandler, Action<DataEvent<BybitSpotUserTradeUpdate>> tradeUpdateHandler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
 |---|---|
 |accountUpdateHandler|Account(balance) update handler|
 |orderUpdateHandler|Order update handler|
+|stopOrderUpdateHandler| SL/TP order update handler|
 |tradeUpdateHandler|User trade update handler|
 |_[Optional]_ ct|Cancellation token for closing this subscription|
 

@@ -14,5 +14,8 @@ parent: Rest API documentation
 *Endpoints related to retrieving market and system data*  
 **[IBybitClientInverseFuturesApiExchangeData](IBybitClientInverseFuturesApiExchangeData.html) ExchangeData { get; }**  
 ***
+*The factory for creating requests. Used for unit testing*  
+**IRequestFactory RequestFactory { get; set; }**  
+***
 *Endpoints related to orders and trades*  
 **[IBybitClientInverseFuturesApiTrading](IBybitClientInverseFuturesApiTrading.html) Trading { get; }**  

@@ -164,7 +164,7 @@ var result = await client.UsdPerpetualApi.Trading.GetOpenConditionalOrderRealTim
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(string symbol, string? stopOrderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitConditionalOrderUsd>> GetOpenConditionalOrderRealTimeAsync(string symbol, string? stopOrderId = default, string? clientOrderId = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -192,7 +192,7 @@ var result = await client.UsdPerpetualApi.Trading.GetOpenConditionalOrdersRealTi
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrdersRealTimeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitConditionalOrderUsd>>> GetOpenConditionalOrdersRealTimeAsync(string symbol, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

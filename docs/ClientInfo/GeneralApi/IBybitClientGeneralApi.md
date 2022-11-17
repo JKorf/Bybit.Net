@@ -8,6 +8,9 @@ parent: Rest API documentation
 *Bybit general API endpoints*
   
 ***
+*The factory for creating requests. Used for unit testing*  
+**IRequestFactory RequestFactory { get; set; }**  
+***
 *Endpoints related to asset transfer*  
 **[IBybitClientGeneralApiTransfer](IBybitClientGeneralApiTransfer.html) Transfer { get; }**  
 ***
