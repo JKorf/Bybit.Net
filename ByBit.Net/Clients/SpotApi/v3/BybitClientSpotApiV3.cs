@@ -222,7 +222,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<UserTrade>>(null);
 
-            return result.As(result.Data.Select(r => new UserTrade
+            return result.As(result.Data.Trades.Select(r => new UserTrade
             {
                 SourceObject = r,
                 Id = r.Id.ToString(CultureInfo.InvariantCulture),

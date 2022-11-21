@@ -1,9 +1,22 @@
 ﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.Spot
 {
+    /// <summary>
+    /// Wrapper for price deserialization
+    /// </summary>
+    public class BybitSpotUserTradeWrapper
+    {
+        /// <summary>
+        /// List of spot prices
+        /// </summary>
+        [JsonProperty("list")]
+        public IEnumerable<BybitSpotUserTrade> Trades { get; set; } = Array.Empty<BybitSpotUserTrade>();
+    }
+
     /// <summary>
     /// User trade info
     /// </summary>
