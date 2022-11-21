@@ -124,16 +124,6 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline" /></para>
         /// </summary>
         /// <param name="interval">The interval of the klines</param>
-        /// <param name="handler">The event handler for the received data</param>
-        /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);
-
-        /// <summary>
-        /// Subscribe to kline (candlestick) updates
-        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline" /></para>
-        /// </summary>
-        /// <param name="interval">The interval of the klines</param>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
