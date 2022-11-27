@@ -2,9 +2,22 @@
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.Spot
 {
+    /// <summary>
+    /// Wrapper for BybitBorrowRecord deserialization
+    /// </summary>
+    public class BybitBorrowRecordWrapper
+    {
+        /// <summary>
+        /// List of borrow records
+        /// </summary>
+        [JsonProperty("list")]
+        public IEnumerable<BybitBorrowRecord> Repay { get; set; } = Array.Empty<BybitBorrowRecord>();
+    }
+
     /// <summary>
     /// Borrow record
     /// </summary>
