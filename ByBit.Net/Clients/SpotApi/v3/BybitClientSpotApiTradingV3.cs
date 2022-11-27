@@ -175,7 +175,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #region Place borrow order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<long>> PlaceBorrowOrderAsync(string asset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<string>> PlaceBorrowOrderAsync(string asset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -184,7 +184,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<long>(_baseClient.GetUrl("spot/v3/private/cross-margin-loan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<string>(_baseClient.GetUrl("spot/v3/private/cross-margin-loan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -192,7 +192,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #region Place repay order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<long>> PlaceRepayOrderAsync(string asset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<string>> PlaceRepayOrderAsync(string asset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -201,7 +201,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<long>(_baseClient.GetUrl("spot/v3/private/cross-margin-repay"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<string>(_baseClient.GetUrl("spot/v3/private/cross-margin-repay"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
