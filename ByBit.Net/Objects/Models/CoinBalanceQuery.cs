@@ -36,7 +36,7 @@ namespace Bybit.Net.Objects.Models
         /// Balance info
         /// </summary>
         [JsonProperty("balance")]
-        public QueryBalance Balance { get; set; }
+        public QueryBalance Balance { get; set; } = null!;
     }
 
     /// <summary>
@@ -66,6 +66,6 @@ namespace Bybit.Net.Objects.Models
         /// The bonus
         /// </summary>
         [JsonProperty("bonus")]
-        public string BonusAmount { get; set; }
+        public string BonusAmount { get; set; } = string.Empty;
     }
 }
