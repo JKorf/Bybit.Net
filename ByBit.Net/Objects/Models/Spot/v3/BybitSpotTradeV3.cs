@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using Bybit.Net.Converters;
 
 using DateTimeConverter = CryptoExchange.Net.Converters.DateTimeConverter;
 

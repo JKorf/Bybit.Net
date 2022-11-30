@@ -51,7 +51,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<Symbol>>(null);
 
-              return result.As(result.Data.Symbols.Select(r => new Symbol
+              return result.As(result.Data.Select(r => new Symbol
               {
                   SourceObject = r,
                   Name = r.Name,
@@ -68,7 +68,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<Ticker>>(null);
 
-            return result.As(result.Data.Tickers.Select(r => new Ticker
+            return result.As(result.Data.Select(r => new Ticker
             {
                 SourceObject = r,
                 Symbol = r.Symbol,
@@ -112,7 +112,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<Kline>>(null);
 
-            return result.As(result.Data.Klines.Select(r => new Kline
+            return result.As(result.Data.Select(r => new Kline
             {
                 SourceObject = r,
                 HighPrice = r.HighPrice,
@@ -152,7 +152,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<Trade>>(null);
 
-            return result.As(result.Data.Trades.Select(r => new Trade
+            return result.As(result.Data.Select(r => new Trade
             {
                 SourceObject = r,
                 Price = r.Price,
@@ -243,7 +243,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<Order>>(null);
 
-            return result.As(result.Data.Orders.Select(r => new Order
+            return result.As(result.Data.Select(r => new Order
             {
                 SourceObject = r,
                 Id = r.Id.ToString(CultureInfo.InvariantCulture),
@@ -265,7 +265,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             if (!result)
                 return result.As<IEnumerable<Order>>(null);
 
-            return result.As(result.Data.Orders.Select(r => new Order
+            return result.As(result.Data.Select(r => new Order
             {
                 SourceObject = r,
                 Id = r.Id.ToString(CultureInfo.InvariantCulture),
