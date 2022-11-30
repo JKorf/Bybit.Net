@@ -209,7 +209,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #region Get borrow info
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitBorrowRecordWrapper>> GetBorrowRecordsAsync(DateTime? startTime = null, DateTime? endTime = null, string? asset = null, BorrowStatus? status = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitBorrowRecord>>> GetBorrowRecordsAsync(DateTime? startTime = null, DateTime? endTime = null, string? asset = null, BorrowStatus? status = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -219,7 +219,8 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitBorrowRecordWrapper>(_baseClient.GetUrl("spot/v3/private/cross-margin-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitBorrowRecordWrapper>(_baseClient.GetUrl("spot/v3/private/cross-margin-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result.As(result.Data.Borrows);
         }
 
         #endregion
@@ -227,7 +228,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #region Get repayment history
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitRepayRecordWrapper>> GetRepayRecordsAsync(DateTime? startTime = null, DateTime? endTime = null, string? asset = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitRepayRecord>>> GetRepayRecordsAsync(DateTime? startTime = null, DateTime? endTime = null, string? asset = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -236,7 +237,8 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitRepayRecordWrapper>(_baseClient.GetUrl("spot/v3/private/cross-margin-repay-history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitRepayRecordWrapper>(_baseClient.GetUrl("spot/v3/private/cross-margin-repay-history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result.As(result.Data.Repays);
         }
 
         #endregion
