@@ -152,7 +152,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #region Get user trades
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitSpotUserTradeWrapper>> GetUserTradesAsync(string? symbol = null, long? fromId = null, long? toId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync(string? symbol = null, long? fromId = null, long? toId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("fromTradeId", fromId);

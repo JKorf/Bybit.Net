@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Bybit.Net.Converters;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,12 +7,12 @@ using System.Collections.Generic;
 namespace Bybit.Net.Objects.Models.Spot
 {
     /// <summary>
-    /// Wrapper for price deserialization
+    /// Wrapper for user trade deserialization
     /// </summary>
     public class BybitSpotUserTradeWrapper
     {
         /// <summary>
-        /// List of spot prices
+        /// List of trades
         /// </summary>
         [JsonProperty("list")]
         public IEnumerable<BybitSpotUserTrade> Trades { get; set; } = Array.Empty<BybitSpotUserTrade>();
@@ -69,10 +70,12 @@ namespace Bybit.Net.Objects.Models.Spot
         /// <summary>
         /// Is buyer
         /// </summary>
+        [JsonConverter(typeof(BoolConverter))]
         public bool IsBuyer { get; set; }
         /// <summary>
         /// Is maker
         /// </summary>
+        [JsonConverter(typeof(BoolConverter))]
         public bool IsMaker { get; set; }
         /// <summary>
         /// Fee details
