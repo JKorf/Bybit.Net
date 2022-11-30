@@ -89,6 +89,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<BybitSpotOrderWrapper>(_baseClient.GetUrl("spot/v3/private/open-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitSpotOrderV3>>(default);
+
+            if (result.Data.Orders == null)
+                return result.As<IEnumerable<BybitSpotOrderV3>>(Array.Empty<BybitSpotOrderV3>());
+
             return result.As(result.Data.Orders);
         }
 
@@ -106,6 +113,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<BybitSpotOrderWrapper>(_baseClient.GetUrl("spot/v3/private/history-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitSpotOrderV3>>(default);
+
+            if (result.Data.Orders == null)
+                return result.As<IEnumerable<BybitSpotOrderV3>>(Array.Empty<BybitSpotOrderV3>());
+
             return result.As(result.Data.Orders);
         }
 

@@ -44,6 +44,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
         public async Task<WebCallResult<IEnumerable<BybitSpotSymbolV3>>> GetSymbolsAsync(CancellationToken ct = default)
         {
             var result = await _baseClient.SendRequestAsync<BybitSpotSymbolWrapper>(_baseClient.GetUrl("spot/v3/public/symbols"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitSpotSymbolV3>>(default);
+
+            if (result.Data.Symbols == null)
+                return result.As<IEnumerable<BybitSpotSymbolV3>>(Array.Empty<BybitSpotSymbolV3>());
+
             return result.As(result.Data.Symbols);
         }
 
@@ -94,6 +101,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
             var result = await _baseClient.SendRequestAsync<BybitSpotTradeWrapper>(_baseClient.GetUrl("spot/v3/public/quote/trades"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitSpotTradeV3>>(default);
+
+            if (result.Data.Trades == null)
+                return result.As<IEnumerable<BybitSpotTradeV3>>(Array.Empty<BybitSpotTradeV3>());
+
             return result.As(result.Data.Trades);
         }
 
@@ -114,6 +128,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
 
             var result = await _baseClient.SendRequestAsync<BybitSpotKlineWrapper>(_baseClient.GetUrl("spot/v3/public/quote/kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitSpotKlineV3>>(default);
+
+            if (result.Data.Klines == null)
+                return result.As<IEnumerable<BybitSpotKlineV3>>(Array.Empty<BybitSpotKlineV3>());
+
             return result.As(result.Data.Klines);
         }
 
@@ -140,6 +161,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
         public async Task<WebCallResult<IEnumerable<BybitSpotTickerV3>>> GetTickersAsync(CancellationToken ct = default)
         {
             var result = await _baseClient.SendRequestAsync<BybitSpotTickerWrapper>(_baseClient.GetUrl("spot/v3/public/quote/ticker/24hr"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitSpotTickerV3>>(default);
+
+            if (result.Data.Tickers == null)
+                return result.As<IEnumerable<BybitSpotTickerV3>>(Array.Empty<BybitSpotTickerV3>());
+
             return result.As(result.Data.Tickers);
         }
 
@@ -166,6 +194,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
         public async Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync(CancellationToken ct = default)
         {
             var result = await _baseClient.SendRequestAsync<BybitSpotPriceWrapper>(_baseClient.GetUrl("spot/v3/public/quote/ticker/price"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitSpotPrice>>(default);
+
+            if (result.Data.Prices == null)
+                return result.As<IEnumerable<BybitSpotPrice>>(Array.Empty<BybitSpotPrice>());
+
             return result.As(result.Data.Prices);
         }
 
@@ -192,6 +227,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
         public async Task<WebCallResult<IEnumerable<BybitSpotBookPriceV3>>> GetBookPricesAsync(CancellationToken ct = default)
         {
             var result = await _baseClient.SendRequestAsync<BybitSpotBookPriceWrapper>(_baseClient.GetUrl("spot/v3/public/quote/ticker/bookTicker"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitSpotBookPriceV3>>(default);
+
+            if (result.Data.BookPrices == null)
+                return result.As<IEnumerable<BybitSpotBookPriceV3>>(Array.Empty<BybitSpotBookPriceV3>());
+
             return result.As(result.Data.BookPrices);
         }
 
