@@ -38,6 +38,13 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Pending cancel
         /// </summary>
-        PendingCancel
+        PendingCancel,
+
+        /// <summary>
+        /// Market order was filled to near qty and the remaining USDT retrurned back 
+        /// </summary>
+        [Map("PARTIALLY_FILLED_CANCELED")]
+        PartiallyFilledCanceled,
+        
     }
 }
