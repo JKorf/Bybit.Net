@@ -158,5 +158,16 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
             string? cursor = null,
             long? receiveWindow = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Coin balance for an account type including Earn
+        /// <para><a href="https://bybit-exchange.github.io/docs/account_asset/v3/#t-queryaccountcoinbalance" /></para>
+        /// </summary>
+        /// <param name="accountType">Account type</param>
+        /// <param name="asset">Asset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinBalanceQuery>> CoinBalanceInAccount(AccountType accountType, string asset, long? receiveWindow = null, CancellationToken ct = default);
     }
 }
