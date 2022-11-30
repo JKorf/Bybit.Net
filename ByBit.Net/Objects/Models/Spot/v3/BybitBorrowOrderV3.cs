@@ -11,6 +11,6 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Borrow order transaction id
         /// </summary>
         [JsonProperty("transactId")]
-        public decimal TransactionId { get; set; }
+        public string TransactionId { get; set; } = string.Empty;
     }
 }

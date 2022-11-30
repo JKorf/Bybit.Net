@@ -15,7 +15,7 @@ namespace Bybit.Net.Objects.Models.Spot
         /// List of borrow records
         /// </summary>
         [JsonProperty("list")]
-        public IEnumerable<BybitBorrowRecord> Repay { get; set; } = Array.Empty<BybitBorrowRecord>();
+        public IEnumerable<BybitBorrowRecord> Borrows { get; set; } = Array.Empty<BybitBorrowRecord>();
     }
 
     /// <summary>
