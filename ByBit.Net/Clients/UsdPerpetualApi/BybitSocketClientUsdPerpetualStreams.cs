@@ -79,10 +79,6 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default)
-            => SubscribeToTickerUpdatesAsync(new string[] { "*" }, handler, ct);
-
-        /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default)
             => SubscribeToTickerUpdatesAsync(new string[] { symbol }, handler, ct);
 
