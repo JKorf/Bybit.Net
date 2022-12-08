@@ -11,6 +11,6 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Repay id
         /// </summary>
         [JsonProperty("repayId")]
-        public string RepayId { get; set; } = string.Empty;
+        public long RepayId { get; set; }
     }
 }

@@ -7,18 +7,6 @@ using System.Text;
 namespace Bybit.Net.Objects.Models.Spot
 {
     /// <summary>
-    /// Wrapper for BybitRepayRecord deserialization
-    /// </summary>
-    public class BybitRepayRecordWrapper
-    {
-        /// <summary>
-        /// List of repay records
-        /// </summary>
-        [JsonProperty("list")]
-        public IEnumerable<BybitRepayRecord> Repays { get; set; } = Array.Empty<BybitRepayRecord>();
-    }
-
-    /// <summary>
     /// Repay record
     /// </summary>
     public class BybitRepayRecord

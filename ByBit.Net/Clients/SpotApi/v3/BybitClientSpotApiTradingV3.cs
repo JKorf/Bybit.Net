@@ -219,8 +219,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitBorrowRecordWrapper>(_baseClient.GetUrl("spot/v3/private/cross-margin-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            return result.As(result.Data.Borrows);
+            var result = await _baseClient.SendRequestAsync<BybitList<BybitBorrowRecord>>(_baseClient.GetUrl("spot/v3/private/cross-margin-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result || result.Data == null)
+            {
+                return result.As<IEnumerable<BybitBorrowRecord>>(default);
+            }
+
+            return result.As(result.Data.List);
         }
 
         #endregion
@@ -237,8 +242,13 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitRepayRecordWrapper>(_baseClient.GetUrl("spot/v3/private/cross-margin-repay-history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
-            return result.As(result.Data.Repays);
+            var result = await _baseClient.SendRequestAsync<BybitList<BybitRepayRecord>>(_baseClient.GetUrl("spot/v3/private/cross-margin-repay-history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result || result.Data == null)
+            {
+                return result.As<IEnumerable<BybitRepayRecord>>(default);
+            }
+
+            return result.As(result.Data.List);
         }
 
         #endregion
