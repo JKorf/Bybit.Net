@@ -102,7 +102,8 @@ namespace Bybit.Net.Clients.SpotApi.v3
                     return;
                 }
 
-                handler(data.As(desResult.Data, data.Data["params"]?["symbol"]?.ToString()));
+                var topic = data.Data["topic"]!.ToString();
+                handler(data.As(desResult.Data, topic.Substring(topic.IndexOf('.') + 1)));
             });
             return await SubscribeAsync(
                 new BybitSpotRequestMessageV3()

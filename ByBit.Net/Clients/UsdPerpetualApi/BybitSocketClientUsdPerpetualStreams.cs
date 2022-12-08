@@ -189,7 +189,7 @@ namespace Bybit.Net.Clients.UsdPerpetualApi
                 }
 
                 var topic = data.Data["topic"]!.ToString();
-                handler(data.As(desResult.Data, topic.Split('.').Last()));
+                handler(data.As(desResult.Data, topic.Substring(topic.IndexOf('.') + 1)));
             });
             return await SubscribeAsync(
                 new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = symbols.Select(s => "candle." + JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) + "." + s).ToArray() },
