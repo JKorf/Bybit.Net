@@ -212,5 +212,25 @@ namespace Bybit.Net.Clients.GeneralApi
         }
 
         #endregion
+
+        #region Get transfer balance
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinBalanceQuery>> CoinBalanceInAccount(AccountType accountType, string asset, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            string queryUrl = "asset/v3/private/transfer/account-coin/balance/query";
+
+            var parameters = new Dictionary<string, object>()
+            {
+                { "accountType", EnumConverter.GetString(accountType) },
+                { "coin", asset }
+            };
+
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync<CoinBalanceQuery>(_baseClient.GetUrl(queryUrl), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

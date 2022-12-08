@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using Bybit.Net.Converters;
 
 namespace Bybit.Net.Objects.Models.Spot.v3
 {

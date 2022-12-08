@@ -19,6 +19,7 @@ namespace Bybit.Net.Converters
             new KeyValuePair<OrderStatus, string>(OrderStatus.Filled, "FILLED"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.Canceled, "CANCELED"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.PendingCancel, "PENDING_CANCEL"),
+            new KeyValuePair<OrderStatus, string>(OrderStatus.PartiallyFilledCanceled, "PARTIALLY_FILLED_CANCELED")
         };
     }
 }

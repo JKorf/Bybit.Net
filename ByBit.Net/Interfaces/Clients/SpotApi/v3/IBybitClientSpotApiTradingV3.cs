@@ -55,7 +55,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitSpotOrderWrapper>> GetOpenOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitSpotOrderV3>>> GetOpenOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, int? orderCategory = 0, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get orders
@@ -67,7 +67,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitSpotOrderWrapper>> GetOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitSpotOrderV3>>> GetOrdersAsync(string? symbol = null, long? orderId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an active order. Either orderId or clientOrderId should be provided
