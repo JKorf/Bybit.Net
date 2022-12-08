@@ -49,16 +49,6 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
         /// properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.
         /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo" /></para>
         /// </summary>
-        /// <param name="handler">The event handler for the received data</param>
-        /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);
-
-        /// <summary>
-        /// Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for 
-        /// properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.
-        /// <para><a href="https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo" /></para>
-        /// </summary>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="handler">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
