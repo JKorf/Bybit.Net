@@ -29,11 +29,11 @@ var bybitClient = new BybitClient(new BybitClientOptions()
 {
 	ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET"),
 	LogLevel = LogLevel.Trace,
-	RequestTimeout = TimeSpan.FromSeconds(60),
 	InverseFuturesApiOptions = new RestApiClientOptions
 	{
 		ApiCredentials = new ApiCredentials("FUTURES-API-KEY", "FUTURES-API-SECRET"),
-		AutoTimestamp = false
+		AutoTimestamp = false,
+		RequestTimeout = TimeSpan.FromSeconds(60)
 	}
 });
 ```
