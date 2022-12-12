@@ -28,6 +28,13 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.3.1 - 12 Dec 2022
+    * Added General.Transfer.GetAssetBalanceAsync endpoint
+    * Spot V3 usability improvements
+    * Fixed CopyTradeApi PlaceOrderAsync
+    * Added missing spot order status mapping
+    * Added interval to SubscribeToKlineUpdatesAsync topic
+
 * Version 1.3.0 - 17 Nov 2022
     * Updated CryptoExchange.Net
     * Fixed SpotV3 GetUserTrades endpoint
