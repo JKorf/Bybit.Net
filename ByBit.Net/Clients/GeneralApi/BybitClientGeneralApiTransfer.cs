@@ -216,7 +216,7 @@ namespace Bybit.Net.Clients.GeneralApi
         #region Get transfer balance
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinBalanceQuery>> CoinBalanceInAccount(AccountType accountType, string asset, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinBalanceQuery>> GetAssetBalanceAsync(AccountType accountType, string asset, long? receiveWindow = null, CancellationToken ct = default)
         {
             string queryUrl = "asset/v3/private/transfer/account-coin/balance/query";
 
