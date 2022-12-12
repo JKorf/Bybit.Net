@@ -51,10 +51,14 @@ namespace Bybit.Net.Interfaces.Clients.CopyTradingApi
         /// <param name="type">Order type</param>
         /// <param name="quantity">Quantity</param>
         /// <param name="price">Price</param>
+        /// <param name="takeProfitPrice">Take profit price</param>
+        /// <param name="stopLossPrice">Stop loss price</param>
+        /// <param name="takeProfitTriggerType">Type of take-profit activation price</param>
+        /// <param name="stopLossTriggerType">Type of stop-loss activation price</param>
         /// <param name="clientOrderId">Optional user defined id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitCopyTradingId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal price, string? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitCopyTradingId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get orders

@@ -73,17 +73,23 @@ namespace Bybit.Net.Clients.CopyTradingApi
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitCopyTradingId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal price, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitCopyTradingId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, string? clientOrderId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol },
-                { "orderType", JsonConvert.SerializeObject(type, new OrderSideConverter(false)) },
-                { "side", JsonConvert.SerializeObject(side, new OrderTypeConverter(false)) },
-                { "qty", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "price", price.ToString(CultureInfo.InvariantCulture) },
+                { "orderType", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
+                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
+                { "qty", quantity.ToString(CultureInfo.InvariantCulture) }
             };
+
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("takeProfit", takeProfitPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stopLoss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("tpTriggerBy", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("slTriggerBy", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new OrderTypeConverter(false)));
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
+
             return await _baseClient.SendRequestAsync<BybitCopyTradingId>(_baseClient.GetUrl("contract/v3/private/copytrading/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
