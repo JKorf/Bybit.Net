@@ -13,7 +13,6 @@ using CryptoExchange.Net.Sockets;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.SpotApi
@@ -68,7 +67,7 @@ namespace Bybit.Net.Clients.SpotApi
             var key = socketConnection.ApiClient.AuthenticationProvider.Credentials.Key!.GetString();
             var sign = socketConnection.ApiClient.AuthenticationProvider.Sign($"GET/realtime{expireTime}");
 
-            var authRequest = new BybitFuturesRequestMessage()
+            var authRequest = new BybitRequestMessage()
             {
                 Operation = "auth",
                 Parameters = new object[]

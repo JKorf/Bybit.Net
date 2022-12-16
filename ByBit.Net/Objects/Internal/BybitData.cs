@@ -1,4 +1,6 @@
-﻿using Bybit.Net.Objects.Models;
+﻿using Bybit.Net.Enums;
+using Bybit.Net.Objects.Models;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Internal
@@ -18,6 +20,8 @@ namespace Bybit.Net.Objects.Internal
 
         [JsonProperty("list")]
         internal T ListData { set => Data = value; get => Data; }
+        [JsonProperty("dataList")]
+        internal T ListData1 { set => Data = value; get => Data; }
         [JsonProperty("rows")]
         internal T RowData { set => Data = value; get => Data; }
     }
@@ -32,6 +36,22 @@ namespace Bybit.Net.Objects.Internal
         /// Cursor for requesting next/previous page
         /// </summary>
         public string? Cursor { get; set; }
+
+        [JsonProperty("nextPageCursor")]
+        internal string? NextPageCursor { set => Cursor = value; get => Cursor; }
+    }
+
+    /// <summary>
+    /// Cursof paged data wrapper for unified margin
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class BybitDerivativesCursorPage<T> : BybitCursorPage<T>
+    {
+        /// <summary>
+        /// Type of derivatives product
+        /// </summary>
+        [JsonConverter(typeof(EnumConverter))]
+        public Category Category = Category.Undefied;
     }
 
     /// <summary>

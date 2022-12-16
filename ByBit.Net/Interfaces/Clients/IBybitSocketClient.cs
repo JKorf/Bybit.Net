@@ -1,4 +1,7 @@
-﻿using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
+﻿using Bybit.Net.Interfaces.Clients.DerivativesApi;
+using Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi;
+using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
+using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
 using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 using Bybit.Net.Interfaces.Clients.SpotApi.v2;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
@@ -10,7 +13,7 @@ namespace Bybit.Net.Interfaces.Clients
     /// <summary>
     /// Client for accessing the bybit websocket API
     /// </summary>
-    public interface IBybitSocketClient: ISocketClient
+    public interface IBybitSocketClient : ISocketClient
     {
         /// <summary>
         /// USD perpetual streams
@@ -36,5 +39,17 @@ namespace Bybit.Net.Interfaces.Clients
         /// Copy trading streams
         /// </summary>
         public IBybitSocketClientCopyTradingStreams CopyTrading { get; }
+        /// <summary>
+        /// Derivatives public streams
+        /// </summary>
+        public IBybitSocketClientDerivativesPublicStreams DerivativesPublic { get; }
+        /// <summary>
+        /// Unified margin private streams
+        /// </summary>
+        public IBybitSocketClientUnifiedMarginStreams UnifiedMarginPrivate { get; }
+        /// <summary>
+        /// Contract private streams
+        /// </summary>
+        public IBybitSocketClientContractStreams ContractPrivate { get; }
     }
 }

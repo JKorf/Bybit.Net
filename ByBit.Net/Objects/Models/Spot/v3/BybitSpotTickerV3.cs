@@ -1,22 +1,9 @@
 ﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.Spot.v3
 {
-    /// <summary>
-    /// Wrapper for tickers deserialization
-    /// </summary>
-    public class BybitSpotTickerWrapper
-    {
-        /// <summary>
-        /// List of spot tickers
-        /// </summary>
-        [JsonProperty("list")]
-        public IEnumerable<BybitSpotTickerV3> Tickers { get; set; } = Array.Empty<BybitSpotTickerV3>();
-    }
-
     /// <summary>
     /// Ticker info
     /// </summary>

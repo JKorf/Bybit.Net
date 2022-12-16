@@ -2,7 +2,6 @@
 using Bybit.Net.Clients.GeneralApi;
 using Bybit.Net.Clients.InverseFuturesApi;
 using Bybit.Net.Clients.InversePerpetualApi;
-using Bybit.Net.Clients.SpotApi;
 using Bybit.Net.Clients.UsdPerpetualApi;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Interfaces.Clients.CopyTradingApi;
@@ -16,6 +15,8 @@ using CryptoExchange.Net;
 using Bybit.Net.Clients.SpotApi.v1;
 using Bybit.Net.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
+using Bybit.Net.Interfaces.Clients.DerivativesApi;
+using Bybit.Net.Clients.DerivativesApi;
 
 namespace Bybit.Net.Clients
 {
@@ -36,6 +37,8 @@ namespace Bybit.Net.Clients
         public IBybitClientUsdPerpetualApi UsdPerpetualApi { get; }
         /// <inheritdoc />
         public IBybitClientCopyTradingApi CopyTradingApi { get; }
+        /// <inheritdoc />
+        public IBybitClientDerivativesApi DerivativesApi { get; }
 
         #region constructor/destructor
         /// <summary>
@@ -58,6 +61,7 @@ namespace Bybit.Net.Clients
             SpotApiV3 = AddApiClient(new BybitClientSpotApiV3(log, options));
             GeneralApi = AddApiClient(new BybitClientGeneralApi(log, this, options));
             CopyTradingApi = AddApiClient(new BybitClientCopyTradingApi(log, options));
+            DerivativesApi = AddApiClient(new BybitClientDerivativesApi(log, options));
         }
         #endregion
 

@@ -1,8 +1,6 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
 
 namespace Bybit.Net.Objects.Models.CopyTrading
 {

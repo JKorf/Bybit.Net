@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Models.Spot.v3
 {
-    /// <summary>
-    /// Wrapper for symbols deserialization
-    /// </summary>
-    public class BybitSpotSymbolWrapper
-    {
-        /// <summary>
-        /// List of spot symbols
-        /// </summary>
-        [JsonProperty("list")]
-        public IEnumerable<BybitSpotSymbolV3> Symbols { get; set; } = Array.Empty<BybitSpotSymbolV3>();
-    }
-
     /// <summary>
     /// Symbol info
     /// </summary>

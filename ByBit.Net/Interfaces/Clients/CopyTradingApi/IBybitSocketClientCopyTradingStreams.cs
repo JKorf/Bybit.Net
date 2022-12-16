@@ -1,7 +1,4 @@
-﻿using Bybit.Net.Enums;
-using Bybit.Net.Objects.Models;
-using Bybit.Net.Objects.Models.CopyTrading;
-using Bybit.Net.Objects.Models.Socket;
+﻿using Bybit.Net.Objects.Models.CopyTrading;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;

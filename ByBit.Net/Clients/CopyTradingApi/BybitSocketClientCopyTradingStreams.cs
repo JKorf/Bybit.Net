@@ -34,7 +34,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
 
             SendPeriodic("Ping", options.InversePerpetualStreamsOptions.PingInterval, (connection) =>
             {
-                return new BybitFuturesRequestMessage() { Operation = "ping" };
+                return new BybitRequestMessage() { Operation = "ping" };
             });
             AddGenericHandler("Heartbeat", (evnt) => { });
         }
@@ -62,7 +62,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
                 handler(data.As(desResult.Data));
             });
             return await SubscribeAsync(_options.CopyTradingStreamsOptions.BaseAddressAuthenticated,
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "copyTradePosition" } },
+                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "copyTradePosition" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -85,7 +85,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
                 handler(data.As(desResult.Data));
             });
             return await SubscribeAsync(_options.CopyTradingStreamsOptions.BaseAddressAuthenticated,
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "copyTradeExecution" } },
+                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "copyTradeExecution" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -108,7 +108,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
                 handler(data.As(desResult.Data));
             });
             return await SubscribeAsync(_options.CopyTradingStreamsOptions.BaseAddressAuthenticated,
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "copyTradeOrder" } },
+                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "copyTradeOrder" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -131,7 +131,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
                 handler(data.As(desResult.Data));
             });
             return await SubscribeAsync(_options.CopyTradingStreamsOptions.BaseAddressAuthenticated,
-                new BybitFuturesRequestMessage() { Operation = "subscribe", Parameters = new[] { "copyTradeWallet" } },
+                new BybitRequestMessage() { Operation = "subscribe", Parameters = new[] { "copyTradeWallet" } },
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -146,7 +146,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             var key = socketConnection.ApiClient.AuthenticationProvider.Credentials.Key!.GetString();
             var sign = socketConnection.ApiClient.AuthenticationProvider.Sign($"GET/realtime{expireTime}");
 
-            var authRequest = new BybitFuturesRequestMessage()
+            var authRequest = new BybitRequestMessage()
             {
                 Operation = "auth",
                 Parameters = new object[]
@@ -190,7 +190,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             if (data.Type != JTokenType.Object)
                 return false;
 
-            var requestParams = ((BybitFuturesRequestMessage)request).Parameters;
+            var requestParams = ((BybitRequestMessage)request).Parameters;
             var operation = data["request"]?["op"]?.ToString();
             var args = data["request"]?["args"].Select(p => p.ToString()).ToList();
             if (operation != "subscribe")
@@ -217,7 +217,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             if (topic == null)
                 return false;
 
-            var requestParams = ((BybitFuturesRequestMessage)request).Parameters;
+            var requestParams = ((BybitRequestMessage)request).Parameters;
             if (requestParams.Any(p => topic == p.ToString()))
                 return true;
 
@@ -275,8 +275,8 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {           
-            var requestParams = ((BybitFuturesRequestMessage)subscriptionToUnsub.Request!).Parameters;
-            var message = new BybitFuturesRequestMessage { Operation = "unsubscribe", Parameters = requestParams };
+            var requestParams = ((BybitRequestMessage)subscriptionToUnsub.Request!).Parameters;
+            var message = new BybitRequestMessage { Operation = "unsubscribe", Parameters = requestParams };
 
             var result = false;
             await connection.SendAndWaitAsync(message, Options.SocketResponseTimeout, data =>

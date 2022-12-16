@@ -20,6 +20,10 @@
         /// <summary>
         /// Bankruptcy trade
         /// </summary>
-        BustTrade
+        BustTrade,
+        /// <summary>
+        /// Settle
+        /// </summary>
+        Settle
     }
 }
