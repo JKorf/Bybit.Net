@@ -11,7 +11,7 @@ namespace Bybit.Net.Objects.Models.Socket
         /// Base currency
         /// </summary>
         [JsonProperty("coin")]
-        public string Asset { get; set; }
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Close price

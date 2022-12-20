@@ -32,7 +32,8 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
         /// <inheritdoc />
         public async Task<WebCallResult<bool>> IsUMAEnabled()
         {
-            var result = await GetWalletBalance();
+            var result = await GetWalletBalance().ConfigureAwait(false);
+
             return result.As(result.Error == null || result.Error.Code != 10020);
         }
 
