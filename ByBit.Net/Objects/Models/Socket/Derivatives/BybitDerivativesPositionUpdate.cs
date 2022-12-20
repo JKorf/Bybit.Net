@@ -34,6 +34,12 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives
         public PositionSide Side { get; set; }
 
         /// <summary>
+        /// Position status
+        /// </summary>
+        [JsonConverter(typeof(PositionStatusConverter))]
+        public PositionStatus PositionStatus { get; set; }
+
+        /// <summary>
         /// Quantity
         /// </summary>
         [JsonProperty("size")]
@@ -50,28 +56,57 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives
         public decimal EntryPrice { get; set; }
 
         /// <summary>
+        /// Mark price
+        /// </summary>
+        public decimal? MarkPrice { get; set; }
+
+        /// <summary>
+        /// Settlement price, for USDC only
+        /// </summary>
+        [JsonProperty("sessionAvgPrice")]
+        public decimal? SettlementPrice { get; set; }
+
+        /// <summary>
+        /// Accumulated realized pnl (all-time total)
+        /// </summary>
+        [JsonProperty("cumRealisedPnl")]
+        public decimal? TotalRealizedPnl { get; set; }
+
+        /// <summary>
         /// Under the isolated margin mode, the value should be the leverage set by the user. Under the cross margin mode, the value should be the maximum leverage under the current risk limit. For contracts only, and not for options
         /// </summary>
-        public decimal Leverage { get; set; }
+        public decimal? Leverage { get; set; }
 
         /// <summary>
         /// Take profit price
         /// </summary>
-        public decimal TakeProfit { get; set; }
+        public decimal? TakeProfit { get; set; }
         /// <summary>
         /// Stop loss price
         /// </summary>
-        public decimal StopLoss { get; set; }
+        public decimal? StopLoss { get; set; }
 
         /// <summary>
         /// Trailing stop
         /// </summary>
-        public decimal TrailingStop { get; set; }
+        public decimal? TrailingStop { get; set; }
 
         /// <summary>
         /// Unrealized PnL
         /// </summary>
-        public decimal UnrealizedPnl { get; set; }
+        public decimal? UnrealisedPnl { get; set; }
+
+        /// <summary>
+        /// Position Initial margin
+        /// </summary>
+        [JsonProperty("positionIM")]
+        public decimal? InitialMargin { get; set; }
+
+        /// <summary>
+        /// Position Maintenance margin
+        /// </summary>
+        [JsonProperty("positionMM")]
+        public decimal? MaintenanceMargin { get; set; }
 
         /// <summary>
         /// Creation time of the order
@@ -85,11 +120,5 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("updatedTime")]
         public DateTime UpdateTime { get; set; }
-
-        /// <summary>
-        /// Stop loss and take profit mode
-        /// </summary>
-        [JsonProperty("tpslMode"), JsonConverter(typeof(StopLossTakeProfitModeConverter))]
-        public StopLossTakeProfitMode StopMode { get; set; }
     }
 }

@@ -15,10 +15,5 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.UnifiedMargin
         /// </summary>
         [JsonProperty("triggerBy"), JsonConverter(typeof(TriggerTypeConverter))]
         public TriggerType? TriggerType { get; set; }
-
-        /// <summary>
-        /// The batch id from paradigm. It is null if normal trade.
-        /// </summary>
-        public long? BlockTradeId { get; set; }
     }
 }

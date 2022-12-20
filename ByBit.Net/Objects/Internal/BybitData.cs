@@ -30,7 +30,7 @@ namespace Bybit.Net.Objects.Internal
     /// Cursor paged data wrapper
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BybitCursorPage<T> : BybitData<T> 
+    public class BybitCursorPage<T> : BybitData<T>
     {
         /// <summary>
         /// Cursor for requesting next/previous page
@@ -39,6 +39,16 @@ namespace Bybit.Net.Objects.Internal
 
         [JsonProperty("nextPageCursor")]
         internal string? NextPageCursor { set => Cursor = value; get => Cursor; }
+
+        /// <summary>
+        /// Result total size
+        /// </summary>
+        public int? ResultTotalSize { get; set; }
+
+        /// <summary>
+        /// Currency
+        /// </summary>
+        public string? Currency { get; set; } = string.Empty;
     }
 
     /// <summary>
@@ -50,8 +60,8 @@ namespace Bybit.Net.Objects.Internal
         /// <summary>
         /// Type of derivatives product
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
-        public Category Category = Category.Undefied;
+        [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
+        public Category Category { get; set; } = Category.Undefied;
     }
 
     /// <summary>
@@ -67,7 +77,7 @@ namespace Bybit.Net.Objects.Internal
         public int CurrentPage { get; set; }
     }
 
-    internal class BybitPositionData: BybitData<BybitPosition>
+    internal class BybitPositionData : BybitData<BybitPosition>
     {
         [JsonProperty("is_valid")]
         public bool IsValid { get; set; }

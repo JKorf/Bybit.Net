@@ -18,6 +18,7 @@ namespace Bybit.Net.Converters
             new KeyValuePair<OrderStatus, string>(OrderStatus.Filled, "Filled"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.Canceled, "Cancelled"),
             new KeyValuePair<OrderStatus, string>(OrderStatus.PendingCancel, "PendingCancel"),
+            new KeyValuePair<OrderStatus, string>(OrderStatus.UnTriggered, "UnTriggered")
         };
     }
 }

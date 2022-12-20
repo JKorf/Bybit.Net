@@ -1,0 +1,21 @@
+{
+  "retCode": 0,
+  "retMsg": "Success",
+  "result": {
+  "list": [
+    {
+      "freeBorrowingAmount": "2000.0",
+      "currency": "USDT",
+      "maxBorrowingAmount": "10000.0",
+      "hourlyBorrowRate": "0.000003630137"
+    },
+    {
+      "freeBorrowingAmount": "2000.0",
+      "currency": "USDC",
+      "maxBorrowingAmount": "10000.0",
+      "hourlyBorrowRate": "0.000003630137"
+    }
+   ]
+  },
+  "time": 1657714557086
+}

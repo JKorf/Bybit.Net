@@ -19,6 +19,11 @@ namespace Bybit.Net.Enums
         /// Liquidity maker
         /// </summary>
         [Map("MAKER")]
-        Maker
+        Maker,
+        /// <summary>
+        /// RemovedLiquidity
+        /// </summary>
+        [Map("REMOVEDLIQUIDITY")]
+        RemovedLiquidity
     }
 }

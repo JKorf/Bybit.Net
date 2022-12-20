@@ -178,6 +178,7 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
         /// <summary>
         /// Get 7-day Trading History
         /// </summary>
+        /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_usertraderecords7day" /></para>
         /// <param name="category"></param>
         /// <param name="symbol">The symbol</param>
         /// <param name="baseAsset">Base coin. When category=option. If not passed, BTC by default.</param>

@@ -75,7 +75,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
         /// <summary>
         /// Name of coin in wallet, such as BTC, ETH, USDT, and USDC.
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonProperty("currencyCoin")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
@@ -136,13 +136,13 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
         /// Order margin pre-occupied
         /// </summary>
         [JsonProperty("totalOrderIM")]
-        public decimal PreoccupiedOrderMargin { get; set; }
+        public decimal? PreoccupiedOrderMargin { get; set; }
 
         /// <summary>
         /// ∑ Initial margin of all positions + pre-occupied trading fee for closing positions
         /// </summary>
         [JsonProperty("totalPositionIM")]
-        public decimal InitialMargin { get; set; }
+        public decimal? InitialMargin { get; set; }
 
         /// <summary>
         /// Maintenance margin of all positions

@@ -55,5 +55,11 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives
         /// </summary>
         [JsonProperty("i")]
         public string Id { get; set; } = string.Empty;
+        /// <summary>
+        /// Tick direction
+        /// </summary>
+        [JsonConverter(typeof(BoolConverter))]
+        [JsonProperty("BT")]
+        public bool IsBlockTrade { get; set; }
     }
 }

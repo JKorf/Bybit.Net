@@ -1,0 +1,12 @@
+[
+    {
+            "coin": "USDT",
+            "equity": "610.3984319",
+            "walletBalance": "609.7384319",
+            "positionMargin": "4.7582882",
+            "availableBalance": "604.9801437",
+            "orderMargin": "0",
+            "unrealisedPnl": "0.66",
+            "cumRealisedPnl": "-0.2615681"
+        }
+]

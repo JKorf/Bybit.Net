@@ -13,8 +13,8 @@ namespace Bybit.Net.UnitTests
     public class JsonTests
     {
         private JsonToObjectComparer<BybitClient> _comparer = new JsonToObjectComparer<BybitClient>((json) => TestHelpers.CreateResponseClient(json, new BybitClientOptions()
-        { 
-            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), 
+        {
+            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"),
             LogLevel = Microsoft.Extensions.Logging.LogLevel.Trace,
             SpotApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
             {
@@ -35,15 +35,20 @@ namespace Bybit.Net.UnitTests
             {
                 RateLimiters = new List<IRateLimiter>(),
                 OutputOriginalData = true
+            },
+            DerivativesApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
+            {
+                RateLimiters = new List<IRateLimiter>(),
+                OutputOriginalData = true
             }
         },
             System.Net.HttpStatusCode.OK));
 
         [Test]
         public async Task ValidateFuturesAccountCalls()
-        {   
+        {
             await _comparer.ProcessSubject("InversePerpetual/Account", c => c.InversePerpetualApi.Account,
-                useNestedJsonPropertyForCompare: new Dictionary<string, string> 
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                     { "GetWalletFundHistoryAsync", "data" },
                     { "GetWithdrawalHistoryAsync", "data" }
@@ -54,7 +59,7 @@ namespace Bybit.Net.UnitTests
                     { "GetPositionAsync", new List<string> { "oc_calc_data" } }
                 },
                 useNestedJsonPropertyForAllCompare: new List<string> { "result" },
-                parametersToSetNull: new string[] {  }
+                parametersToSetNull: new string[] { }
                 );
         }
 
@@ -73,7 +78,6 @@ namespace Bybit.Net.UnitTests
                 parametersToSetNull: new string[] { }
                 );
         }
-
 
         [Test]
         public async Task ValidateFuturesTradingCalls()
@@ -260,11 +264,98 @@ namespace Bybit.Net.UnitTests
         public async Task ValidateCopyTradingTradingCalls()
         {
             await _comparer.ProcessSubject("CopyTrading/Trading", c => c.CopyTradingApi.Trading,
-                parametersToSetNull: new[] { "clientOrderId" }, 
+                parametersToSetNull: new[] { "clientOrderId" },
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
                     { "GetPositionsAsync", "list" },
                     { "GetOrdersAsync", "list" }
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
+
+        [Test]
+        public async Task ValidateDerivativesExchangeDataCalls()
+        {
+            await _comparer.ProcessSubject("Derivatives/ExchangeData", c => c.DerivativesApi.ExchangeData,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetTickerAsync", "list" },
+                    { "GetOpenInterestAsync", "list" },
+                    { "GetFundingRateAsync", "list" },
+                    { "GetRiskLimitAsync", "list" },
+                    { "GetTradeHistoryAsync", "list" },
+
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" },
+                ignoredMethods: new List<string>
+                {
+                    "GetKlinesAsync", "GetIndexPriceKlinesAsync", "GetMarkPriceKlinesAsync"
+                }
+                );
+        }
+
+        [Test]
+        public async Task ValidateUnifiedMarginTradingCalls()
+        {
+            await _comparer.ProcessSubject("Derivatives/UnifiedMargin/Trading", c => c.DerivativesApi.UnifiedMarginApi.Trading,
+                parametersToSetNull: new[] { "clientOrderId" },
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "CancelAllOrdersAsync", "list" }
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
+
+        [Test]
+        public async Task ValidateUnifiedMarginAccountCalls()
+        {
+            await _comparer.ProcessSubject("Derivatives/UnifiedMargin/Account", c => c.DerivativesApi.UnifiedMarginApi.Account,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetBorrowRateAsync", "list" }
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
+
+        [Test]
+        public async Task ValidateContractTradingCalls()
+        {
+            await _comparer.ProcessSubject("Derivatives/Contract/Trading", c => c.DerivativesApi.ContractApi.Trading,
+                parametersToSetNull: new[] { "clientOrderId" },
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                     { "CancelAllOrdersAsync", "list" }
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
+
+        [Test]
+        public async Task ValidateContractAccountCalls()
+        {
+            await _comparer.ProcessSubject("Derivatives/Contract/Account", c => c.DerivativesApi.ContractApi.Account,
+                parametersToSetNull: new[] { "settleAsset" },
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                      { "GetBalancesAsync", "list" }
                 },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {

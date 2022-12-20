@@ -69,6 +69,11 @@ namespace Bybit.Net.Objects.Models.Derivatives
         public decimal? DeliveryFeeRate { get; set; }
 
         /// <summary>
+        /// Funding interval
+        /// </summary>
+        public decimal? FundingInterval { get; set; }
+
+        /// <summary>
         /// Price precision (amount of decimals)
         /// </summary>
         [JsonProperty("priceScale")]
@@ -140,17 +145,23 @@ namespace Bybit.Net.Objects.Models.Derivatives
         /// <summary>
         /// Minimal quantity
         /// </summary>
-        [JsonProperty("minOrderQty")]
+        [JsonProperty("minTradingQty")]
         public decimal MinQuantity { get; set; }
         /// <summary>
         /// Maximum quantity
         /// </summary>
-        [JsonProperty("maxOrderQty")]
+        [JsonProperty("maxTradingQty")]
         public decimal MaxQuantity { get; set; }
         /// <summary>
         /// Quantity step
         /// </summary>
-        [JsonProperty("tickSize")]
+        [JsonProperty("qtyStep")]
         public decimal QuantityStep { get; set; }
+        /// <summary>
+        /// postOnlyMaxOrderQty
+        /// </summary>
+        /// <remarks> Not described in API docs </remarks>
+        [JsonProperty("postOnlyMaxOrderQty")]
+        public decimal MaxOrderQuantity { get; set; }
     }
 }

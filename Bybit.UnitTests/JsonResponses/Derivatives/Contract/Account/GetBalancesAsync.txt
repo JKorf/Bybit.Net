@@ -1,0 +1,24 @@
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "coin": "BTC",
+                "equity": "0.80319649",
+                "walletBalance": "0.80319649",
+                "positionMargin": "0",
+                "availableBalance": "0.80319649",
+                "orderMargin": "0",
+                "occClosingFee": "0",
+                "occFundingFee": "0",
+                "unrealisedPnl": "0",
+                "cumRealisedPnl": "0.00120039",
+                "givenCash": "0",
+                "serviceCash": "0"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1658736635763
+}

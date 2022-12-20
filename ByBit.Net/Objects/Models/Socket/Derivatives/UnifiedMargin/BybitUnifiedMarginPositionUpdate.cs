@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Bybit.Net.Converters;
+using Bybit.Net.Enums;
+using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Models.Socket.Derivatives.UnifiedMargin
 {
@@ -8,52 +10,29 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.UnifiedMargin
     public class BybitUnifiedMarginPositionUpdate : BybitDerivativesPositionUpdate
     {
         /// <summary>
-        /// Settlement price, for USDC only
-        /// </summary>
-        [JsonProperty("sessionAvgPrice")]
-        public decimal SettlementPrice { get; set; }
-
-        /// <summary>
         /// Position margin
         /// </summary>
         public decimal PositionMargin { get; set; }
 
         /// <summary>
-        /// Mark price
-        /// </summary>
-        public decimal MarkPrice { get; set; }
-
-        /// <summary>
         /// Session UPL, for USDC only
         /// </summary>
-        public decimal SessionUPL { get; set; }
+        public decimal? SessionUPL { get; set; }
 
         /// <summary>
         /// Session RPL, for USDC only
         /// </summary>
-        public decimal SessionRPL { get; set; }
-
-        /// <summary>
-        /// Position Initial margin
-        /// </summary>
-        [JsonProperty("positionIM")]
-        public decimal InitialMargin { get; set; }
-
-        /// <summary>
-        /// Position Maintenance margin
-        /// </summary>
-        [JsonProperty("positionMM")]
-        public decimal MaintenanceMargin { get; set; }
-
-        /// <summary>
-        /// Accumulated realized pnl (all-time total)
-        /// </summary>
-        [JsonProperty("cumRealisedPnl")]
-        public decimal TotalRealizedPnl { get; set; }
+        public decimal? SessionRPL { get; set; }
 
         /// <summary>
         /// Is isolated
         /// </summary>
         public bool IsIsolated { get; set; }
+
+        /// <summary>
+        /// Stop loss and take profit mode
+        /// </summary>
+        [JsonProperty("tpslMode"), JsonConverter(typeof(StopLossTakeProfitModeConverter))]
+        public StopLossTakeProfitMode StopMode { get; set; }
     }
 }

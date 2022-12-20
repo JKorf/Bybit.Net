@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives
     /// <summary>
     /// Base class for user trade updates
     /// </summary>
-    public abstract class BybitDerivativesUserTradeUpdate
+    public class BybitDerivativesUserTradeUpdate
     {
         /// <summary>
         /// Order id

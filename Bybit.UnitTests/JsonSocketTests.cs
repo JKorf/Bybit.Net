@@ -7,7 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Models.CopyTrading;
+using Bybit.Net.Objects.Models.Derivatives.UnifiedMargin;
 using Bybit.Net.Objects.Models.Socket;
+using Bybit.Net.Objects.Models.Socket.Derivatives;
+using Bybit.Net.Objects.Models.Socket.Derivatives.Contract;
+using Bybit.Net.Objects.Models.Socket.Derivatives.UnifiedMargin;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Objects.Models.Spot.v1;
 using Bybit.Net.Objects.Models.Spot.v3;
@@ -222,6 +226,72 @@ namespace Bybit.UnitTests
             await TestFileToObject<IEnumerable<BybitCopyTradingPositionUpdate>>(@"JsonResponses/CopyTrading/Socket/PositionUpdate.txt");
             await TestFileToObject<IEnumerable<BybitCopyTradingOrderUpdate>>(@"JsonResponses/CopyTrading/Socket/OrderUpdate.txt");
             await TestFileToObject<IEnumerable<BybitCopyTradingUserTradeUpdate>>(@"JsonResponses/CopyTrading/Socket/TradeUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateDerivativesKlineUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitDerivativesKlineUpdate>>(@"JsonResponses/Derivatives/PublicSocket/KlineUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateDerivativesTradeUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitDerivativesTradeUpdate>>(@"JsonResponses/Derivatives/PublicSocket/TradeUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateContractBalanceUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitContractBalanceUpdate>>(@"JsonResponses/Derivatives/Contract/Socket/BalanceUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateContractPositionUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitContractPositionUpdate>>(@"JsonResponses/Derivatives/Contract/Socket/PositionUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateContractUserTradeUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitContractUserTradeUpdate>>(@"JsonResponses/Derivatives/Contract/Socket/UserTradeUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateContractOrderUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitContractOrderUpdate>>(@"JsonResponses/Derivatives/Contract/Socket/OrderUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUMBalanceUpdateStreamJson()
+        {
+            await TestFileToObject<BybitUnifiedMarginBalance>(@"JsonResponses/Derivatives/UnifiedMargin/Socket/BalanceUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUMPositionUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitUnifiedMarginPositionUpdate>>(@"JsonResponses/Derivatives/UnifiedMargin/Socket/PositionUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUMUserTradeUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitDerivativesUserTradeUpdate>>(@"JsonResponses/Derivatives/UnifiedMargin/Socket/UserTradeUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUMOrderUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitUnifiedMarginOrderUpdate>>(@"JsonResponses/Derivatives/UnifiedMargin/Socket/OrderUpdate.txt");
+        }
+
+        [Test]
+        public async Task ValidateUMGreeksUpdateStreamJson()
+        {
+            await TestFileToObject<IEnumerable<BybitGreeksUpdate>>(@"JsonResponses/Derivatives/UnifiedMargin/Socket/GreeksUpdate.txt");
         }
 
         private static async Task TestFileToObject<T>(string filePath, List<string> ignoreProperties = null)

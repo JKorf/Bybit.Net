@@ -1,0 +1,16 @@
+{
+  "retCode": 0,
+    "retMsg":"success",
+    "result":{
+     "category":"linear",
+      "symbol":"BTCUSDT",
+      "interval":"1",
+      "list":[
+      "1621162800",
+      "49592.43",
+      "49644.91",
+      "49342.37",
+      "49349.42",
+    ]
+  }
+}

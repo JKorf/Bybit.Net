@@ -1,0 +1,18 @@
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "coin": "USDT",
+                "type": "AccountTransfer",
+                "amount": "500",
+                "walletBalance": "2731.63599033",
+                "execTime": "1658215763731"
+            }
+        ],
+        "nextPageCursor": "elZpeUVCSCtFRk5pZjMrMU9reDdMdkpJS2VZdEpqczNHaExPUU5CazA0Yz0="
+    },
+    "retExtInfo": {},
+    "time": 1658737209400
+}

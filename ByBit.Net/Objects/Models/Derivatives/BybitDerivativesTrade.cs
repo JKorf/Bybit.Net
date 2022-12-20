@@ -43,6 +43,11 @@ namespace Bybit.Net.Objects.Models.Derivatives
         /// Timestamp of the trade
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        internal DateTime Time { get; set; }
+        public DateTime Time { get; set; }
+
+        /// <summary>
+        /// The batch id from paradigm. It is null if normal trade.
+        /// </summary>
+        public bool IsBlockTrade { get; set; }
     }
 }

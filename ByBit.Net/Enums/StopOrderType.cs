@@ -24,6 +24,10 @@
         /// <summary>
         /// Partial stop loss
         /// </summary>
-        PartialStopLoss
+        PartialStopLoss,
+        /// <summary>
+        /// Unknown type
+        /// </summary>
+        Unknown
     }
 }

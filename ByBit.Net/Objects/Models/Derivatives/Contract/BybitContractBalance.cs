@@ -21,6 +21,10 @@ namespace Bybit.Net.Objects.Models.Derivatives.Contract
         /// </summary>
         public decimal WalletBalance { get; set; }
         /// <summary>
+        /// Unrealized pnl
+        /// </summary>
+        public decimal UnrealisedPnl { get; set; }
+        /// <summary>
         /// Position margin
         /// </summary>
         public decimal PositionMargin { get; set; }

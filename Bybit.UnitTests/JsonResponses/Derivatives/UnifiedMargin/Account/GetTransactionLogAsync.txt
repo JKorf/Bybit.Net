@@ -1,0 +1,30 @@
+{
+  "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+    "nextPageCursor": "1563%3A0%2C1563%3A0",
+      "currency": "USDT",
+      "category": "linear",
+      "list": [
+      {
+        "symbol": "ETHUSDT",
+        "side": "Buy",
+        "funding": "",
+        "orderLinkId": "",
+        "orderId": "7d17d359-4e38-4d3a-9a31-29791ef2dfd7",
+        "fee": "0.32215500",
+        "change": "-0.32215500",
+        "cashFlow": "0.00000000",
+        "transactionTime": 1657711949931,
+        "type": "TRADE",
+        "feeRate": "0.000600",
+        "size": "0.5000",
+        "qty": "0.5000",
+        "cashBalance": "-0.32215500",
+        "tradePrice": "1073.85000000",
+        "tradeId": "f306ca09-de6b-56a1-8893-71f0fecd2384"
+      }
+    ]
+  },
+  "time": 1657714367010
+}

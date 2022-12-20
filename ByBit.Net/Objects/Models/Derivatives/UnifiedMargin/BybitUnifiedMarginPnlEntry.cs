@@ -15,7 +15,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
         /// Trading id
         /// </summary>
         [JsonProperty("execId")]
-        public long Id { get; set; }
+        public string Id { get; set; } = string.Empty;
 
         /// <summary>
         /// Symbol
@@ -26,6 +26,11 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
         /// Order id
         /// </summary>
         public string OrderId { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Block trade id
+        /// </summary>
+        public string BlockTradeId { get; set; } = string.Empty;
 
         /// <summary>
         /// Order link id

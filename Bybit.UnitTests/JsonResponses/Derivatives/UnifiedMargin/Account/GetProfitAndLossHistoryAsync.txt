@@ -1,0 +1,31 @@
+{
+  "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+    "nextPageCursor": "1565%3A0%2C1565%3A0",
+      "category": "option",
+      "list": [
+      {
+        "orderType": "Limit",
+        "symbol": "BTC-14JUL22-17500-C",
+        "orderLinkId": "188889689-yuanzhen-558998998898",
+        "side": "Buy",
+        "orderId": "09c5836f-81ef-4208-a5b4-43135d3e02a2",
+        "leavesQty": "0.0000",
+        "execTime": 1657714122417,
+        "execFee": "0.11897082",
+        "feeRate": "0.000300",
+        "execId": "6e492560-78b4-5d2b-b331-22921d3173c9",
+        "blockTradeId": "",
+        "execPrice": "2360.00000000",
+        "lastLiquidityInd": "TAKER",
+        "orderQty": "0.0200",
+        "orderPrice": "2360.00000000",
+        "execValue": "47.20000000",
+        "execType": "Trade",
+        "execQty": "0.0200"
+      }
+    ]
+  },
+  "time": 1657714292783
+}

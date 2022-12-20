@@ -19,6 +19,11 @@ namespace Bybit.Net.Enums
         /// Perpetual
         /// </summary>
         [Map("Perpetual")]
-        Perpetual
+        Perpetual,
+        /// <summary>
+        /// Linear perpetual
+        /// </summary>
+        [Map("LinearPerpetual")]
+        LinearPerpetual
     }
 }

@@ -17,4 +17,15 @@
     <ProjectReference Include="..\ByBit.Net\Bybit.Net.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JsonResponses\Derivatives\Contract\Account\" />
+    <Folder Include="JsonResponses\Derivatives\Contract\Socket\" />
+    <Folder Include="JsonResponses\Derivatives\Contract\Trading\" />
+    <Folder Include="JsonResponses\Derivatives\ExchangeData\" />
+    <Folder Include="JsonResponses\Derivatives\PublicSocket\" />
+    <Folder Include="JsonResponses\Derivatives\UnifiedMargin\Account\" />
+    <Folder Include="JsonResponses\Derivatives\UnifiedMargin\Socket\" />
+    <Folder Include="JsonResponses\Derivatives\UnifiedMargin\Trading\" />
+  </ItemGroup>
+
 </Project>

@@ -18,6 +18,16 @@ namespace Bybit.Net.Objects.Models.Derivatives
         public string Id { get; set; } = string.Empty;
 
         /// <summary>
+        /// Symbol
+        /// </summary>
+        public string Symbol { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Block trade id
+        /// </summary>
+        public string? BlockTradeId { get; set; } = string.Empty;
+
+        /// <summary>
         /// Order side
         /// </summary>
         [JsonConverter(typeof(OrderSideConverter))]
@@ -129,6 +139,12 @@ namespace Bybit.Net.Objects.Models.Derivatives
         /// </summary>
         [JsonProperty("slTriggerBy"), JsonConverter(typeof(TriggerTypeConverter))]
         public TriggerType? StopLossTriggerType { get; set; }
+
+        /// <summary>
+        /// Trigger type
+        /// </summary>
+        [JsonConverter(typeof(TriggerTypeConverter))]
+        public TriggerType? TriggerBy { get; set; }
 
         /// <summary>
         /// Is close on trigger order

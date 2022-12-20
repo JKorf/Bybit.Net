@@ -20,5 +20,17 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.Contract
         /// </summary>
         [JsonProperty("execTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? TradeTime { get; set; }
+
+        /// <summary>
+        /// Filled price
+        /// </summary>
+        [JsonProperty("lastExecPrice")]
+        public decimal? FilledPrice { get; set; }
+
+        /// <summary>
+        /// When the order is filled or partially filled, it is filled qty. When the order is canceled, it is unfilled qty.
+        /// </summary>
+        [JsonProperty("lastExecQty")]
+        public decimal? FilledQuantity { get; set; }
     }
 }

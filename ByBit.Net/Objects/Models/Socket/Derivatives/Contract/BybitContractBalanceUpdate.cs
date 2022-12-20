@@ -35,7 +35,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.Contract
         /// <summary>
         /// Unrealized profit and loss
         /// </summary>
-        public decimal UnrealizedPnl { get; set; }
+        public decimal UnrealisedPnl { get; set; }
         /// <summary>
         /// Total realized profit and loss
         /// </summary>

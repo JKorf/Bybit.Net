@@ -26,13 +26,14 @@ namespace Bybit.Net.UnitTests
             _clientFunc = getClient;
         }
 
-        public async Task ProcessSubject<K>(Func<T, K> getSubject, 
+        public async Task ProcessSubject<K>(Func<T, K> getSubject,
             string[] parametersToSetNull = null,
            Dictionary<string, string> useNestedJsonPropertyForCompare = null,
            List<string> useNestedJsonPropertyForAllCompare = null,
            Dictionary<string, List<string>> ignoreProperties = null,
-           List<string> takeFirstItemForCompare = null)
-            => await ProcessSubject("", getSubject, parametersToSetNull, useNestedJsonPropertyForCompare, useNestedJsonPropertyForAllCompare, ignoreProperties, takeFirstItemForCompare);
+           List<string> takeFirstItemForCompare = null,
+           List<string> ignoredMethods = null)
+            => await ProcessSubject("", getSubject, parametersToSetNull, useNestedJsonPropertyForCompare, useNestedJsonPropertyForAllCompare, ignoreProperties, takeFirstItemForCompare, ignoredMethods);
 
         public async Task ProcessSubject<K>(
            string folderPrefix,
@@ -41,7 +42,8 @@ namespace Bybit.Net.UnitTests
            Dictionary<string, string> useNestedJsonPropertyForCompare = null,
            List<string> useNestedJsonPropertyForAllCompare = null,
            Dictionary<string, List<string>> ignoreProperties = null,
-           List<string> takeFirstItemForCompare = null)
+           List<string> takeFirstItemForCompare = null,
+           List<string> ignoredMethods = null)
         {
             var listener = new EnumValueTraceListener();
             Trace.Listeners.Add(listener);
@@ -54,6 +56,11 @@ namespace Bybit.Net.UnitTests
 
             foreach (var method in callResultMethods)
             {
+                if (ignoredMethods != null && ignoredMethods.Contains(method.Name))
+                {
+                    continue;
+                }
+
                 FileStream file = null;
                 try
                 {
@@ -251,7 +258,7 @@ namespace Bybit.Net.UnitTests
             }
 
             var propertyValue = property.GetValue(obj);
-            if(property.GetCustomAttribute<JsonPropertyAttribute>(true)?.ItemConverterType == null)
+            if (property.GetCustomAttribute<JsonPropertyAttribute>(true)?.ItemConverterType == null)
                 CheckPropertyValue(method, prop.Value, propertyValue, property.Name, prop.Name, property, ignoreProperties);
         }
 
@@ -260,7 +267,7 @@ namespace Bybit.Net.UnitTests
             if (propertyValue == default && propValue.Type != JTokenType.Null && !string.IsNullOrEmpty(propValue.ToString()))
             {
                 // Property value not correct
-                if(propValue.ToString() != "0")
+                if (propValue.ToString() != "0")
                     throw new Exception($"{method}: Property `{propertyName}` has no value while input json `{propName}` has value {propValue}");
             }
 
@@ -286,7 +293,7 @@ namespace Bybit.Net.UnitTests
                         if (dict[dictProp.Name] == default && dictProp.Value.Type != JTokenType.Null)
                         {
                             // Property value not correct
-                            if(dictProp.Value.ToString() != "0")
+                            if (dictProp.Value.ToString() != "0")
                                 throw new Exception($"{method}: Dictionary entry `{dictProp.Name}` has no value while input json has value {propValue}");
                         }
                     }
@@ -319,14 +326,14 @@ namespace Bybit.Net.UnitTests
                     else if (jtoken.Type == JTokenType.Array)
                     {
                         var resultObj = enumerator.Current;
-                        ProcessArray(method, resultObj, jtoken, ignoreProperties);                       
+                        ProcessArray(method, resultObj, jtoken, ignoreProperties);
                     }
                     else
                     {
                         var value = enumerator.Current;
                         if (value == default && ((JValue)jtoken).Type != JTokenType.Null)
                         {
-                            if(jtoken.ToString() != "0")
+                            if (jtoken.ToString() != "0")
                                 throw new Exception($"{method}: Property `{propertyName}` has no value while input json `{propName}` has value {jtoken}");
                         }
 
@@ -349,7 +356,7 @@ namespace Bybit.Net.UnitTests
                         }
                     }
                 }
-                else if(propValue.Type == JTokenType.Array)
+                else if (propValue.Type == JTokenType.Array)
                 {
                     ProcessArray(method, propertyValue, propValue, ignoreProperties);
                 }
@@ -415,7 +422,7 @@ namespace Bybit.Net.UnitTests
                         throw new Exception($"{method}: {property} not equal: {jsonValue.Value<bool>()} vs {(bool)objectValue}");
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }

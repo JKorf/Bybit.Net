@@ -1,0 +1,41 @@
+{
+    "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+        "nextPageCursor": "135ccc0d-8136-4e1b-8af3-07b11ee158d1%3A1665565610526%2C135ccc0d-8136-4e1b-8af3-07b11ee158d1%3A1665565610526",
+        "category": "linear",
+        "list": [
+            {
+                "symbol": "ETHUSDT",
+                "orderType": "Limit",
+                "orderLinkId": "test0000005",
+                "orderId": "135ccc0d-8136-4e1b-8af3-07b11ee158d1",
+                "stopOrderType": "UNKNOWN",
+                "orderStatus": "New",
+                "takeProfit": "",
+                "cumExecValue": "0.00000000",
+                "blockTradeId": "",
+                "price": "700.00000000",
+                "createdTime": 1665565610526,
+                "tpTriggerBy": "UNKNOWN",
+                "timeInForce": "GoodTillCancel",
+                "basePrice": "",
+                "updatedTime": 1665565610533,
+                "side": "Buy",
+                "triggerPrice": "",
+                "cumExecFee": "0.00000000",
+                "slTriggerBy": "UNKNOWN",
+                "leavesQty": "0.1000",
+                "closeOnTrigger": false,
+                "cumExecQty": "0.00000000",
+                "reduceOnly": false,
+                "qty": "0.1000",
+                "stopLoss": "",
+                "triggerBy": "UNKNOWN",
+                "orderIM": "0.00000000"
+            }
+        ]
+    },
+    "retExtInfo": null,
+    "time": 1665565614320
+}
