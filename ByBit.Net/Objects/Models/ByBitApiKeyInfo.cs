@@ -56,5 +56,20 @@ namespace Bybit.Net.Objects.Models
         /// </summary>
         [JsonProperty("read_only")]
         public bool Readonly { get; set; }
+        /// <summary>
+        /// Vip Level
+        /// </summary>
+        [JsonProperty("vip_level")]
+        public string VipLevel { get; set; } = string.Empty;
+        /// <summary>
+        /// Market Maker Level
+        /// </summary>
+        [JsonProperty("mkt_maker_level")]
+        public int MarketMakerLevel { get; set; }
+        /// <summary>
+        /// Affiliate Id
+        /// </summary>
+        [JsonProperty("affiliate_id")]
+        public long AffiliateId { get; set; }
     }
 }
