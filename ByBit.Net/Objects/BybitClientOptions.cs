@@ -109,6 +109,7 @@ namespace Bybit.Net.Objects
             InversePerpetualApiOptions = new RestApiClientOptions(baseOn.InversePerpetualApiOptions, null);
             SpotApiOptions = new RestApiClientOptions(baseOn.SpotApiOptions, null);
             UsdPerpetualApiOptions = new RestApiClientOptions(baseOn.UsdPerpetualApiOptions, null);
+            DerivativesApiOptions = new RestApiClientOptions(baseOn.DerivativesApiOptions, null);
         }
     }
 
@@ -299,6 +300,9 @@ namespace Bybit.Net.Objects
             SpotStreamsV1Options = new BybitSocketApiClientOptions(baseOn.SpotStreamsV1Options, null);
             SpotStreamsV2Options = new BybitSocketApiClientOptions(baseOn.SpotStreamsV2Options, null);
             UsdPerpetualStreamsOptions = new BybitSocketApiClientOptions(baseOn.UsdPerpetualStreamsOptions, null);
+            DerivativesPublicStreamsOptions = new BybitDerivativesSocketApiClientOptions(baseOn.DerivativesPublicStreamsOptions, null);
+            UnifiedMarginStreamsOptions = new BybitSocketApiClientOptions(baseOn.UnifiedMarginStreamsOptions, null);
+            ContractStreamsOptions = new BybitSocketApiClientOptions(baseOn.ContractStreamsOptions, null);
         }
     }
 
@@ -364,7 +368,7 @@ namespace Bybit.Net.Objects
         }
 #pragma warning restore
 
-        internal BybitDerivativesSocketApiClientOptions(BybitDerivativesSocketApiClientOptions baseOn, BybitDerivativesSocketApiClientOptions newValues) : base(baseOn, newValues)
+        internal BybitDerivativesSocketApiClientOptions(BybitDerivativesSocketApiClientOptions baseOn, BybitDerivativesSocketApiClientOptions? newValues) : base(baseOn, newValues)
         {
             PublicBaseAddresses = new Dictionary<StreamDerivativesCategory, string>();
 
