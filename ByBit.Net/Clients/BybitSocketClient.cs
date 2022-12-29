@@ -1,30 +1,23 @@
-﻿using Bybit.Net.Objects.Internal.Socket;
-using Bybit.Net.Objects;
+﻿using Bybit.Net.Objects;
 using CryptoExchange.Net;
 using System;
-using System.Collections.Generic;
-using CryptoExchange.Net.Objects;
-using System.Threading.Tasks;
-using CryptoExchange.Net.Sockets;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json.Linq;
-using System.Linq;
 using Bybit.Net.Interfaces.Clients;
-using Newtonsoft.Json;
-using System.Threading;
-using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
-using Bybit.Net.Clients.SpotApi;
 using Bybit.Net.Clients.InversePerpetualApi;
 using Bybit.Net.Clients.UsdPerpetualApi;
 using Bybit.Net.Clients.SpotApi.v1;
 using Bybit.Net.Clients.SpotApi.v2;
 using Bybit.Net.Clients.SpotApi.v3;
-using Bybit.Net.Interfaces.Clients.SpotApi;
 using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 using Bybit.Net.Interfaces.Clients.SpotApi.v2;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
+using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
+using Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi;
+using Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi;
+using Bybit.Net.Clients.DerivativesApi.ContractApi;
+using Bybit.Net.Clients.DerivativesApi;
+using Bybit.Net.Interfaces.Clients.DerivativesApi;
 
 namespace Bybit.Net.Clients
 {
@@ -44,6 +37,13 @@ namespace Bybit.Net.Clients
 
         /// <inheritdoc />
         public IBybitSocketClientCopyTradingStreams CopyTrading { get; }
+
+        /// <inheritdoc />
+        public IBybitSocketClientDerivativesPublicStreams DerivativesPublic { get; }
+        /// <inheritdoc />
+        public IBybitSocketClientUnifiedMarginStreams UnifiedMarginPrivate { get; }
+        /// <inheritdoc />
+        public IBybitSocketClientContractStreams ContractPrivate { get; }
 
         /// <summary>
         /// Create a new instance of BybitSocketClientFutures using the default options
@@ -68,6 +68,10 @@ namespace Bybit.Net.Clients
             SpotStreamsV3 = AddApiClient(new BybitSocketClientSpotStreamsV3(log, options));
 
             CopyTrading = AddApiClient(new BybitSocketClientCopyTradingStreams(log, options));
+
+            DerivativesPublic = AddApiClient(new BybitSocketClientDerivativesPublicStreams(log, options));
+            UnifiedMarginPrivate = AddApiClient(new BybitSocketClientUnifiedMarginStreams(log, options));
+            ContractPrivate = AddApiClient(new BybitSocketClientContractStreams(log, options));
         }
 
         /// <summary>

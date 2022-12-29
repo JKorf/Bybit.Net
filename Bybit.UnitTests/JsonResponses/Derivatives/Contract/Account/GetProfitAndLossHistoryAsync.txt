@@ -1,0 +1,29 @@
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "symbol": "XRPUSDT",
+                "orderId": "3834da81-2b9c-4f5b-a558-05091f26deda",
+                "side": "Buy",
+                "qty": "50",
+                "orderPrice": "0.3541",
+                "orderType": "Market",
+                "execType": "Trade",
+                "closedSize": "50",
+                "cumEntryValue": "16.68",
+                "avgEntryPrice": "0.3336",
+                "cumExitValue": "16.865",
+                "avgExitPrice": "0.3373",
+                "closedPnl": "-0.2034435",
+                "fillCount": "1",
+                "leverage": "10",
+                "createdAt": "1658914152212"
+            }
+        ],
+        "nextPageCursor": "R21aYkRjQ0haRmcxeFJBanZNYm1Db01RWWdyV3YzZmdkUVNXUmtXdGpMMD0="
+    },
+    "retExtInfo": null,
+    "time": 1658914264892
+}

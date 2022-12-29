@@ -1,7 +1,6 @@
 ﻿using Bybit.Net.Clients.CopyTradingApi;
 using Bybit.Net.Clients.InversePerpetualApi;
 using Bybit.Net.Interfaces.Clients.GeneralApi;
-using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;

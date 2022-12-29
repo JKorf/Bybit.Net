@@ -1,22 +1,9 @@
 ﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.Spot.v3
 {
-    /// <summary>
-    /// Wrapper for kline deserialization
-    /// </summary>
-    public class BybitSpotKlineWrapper
-    {
-        /// <summary>
-        /// List of spot kline
-        /// </summary>
-        [JsonProperty("list")]
-        public IEnumerable<BybitSpotKlineV3> Klines { get; set; } = Array.Empty<BybitSpotKlineV3>();
-    }
-
     /// <summary>
     /// Kline data
     /// </summary>

@@ -1,7 +1,8 @@
-﻿using Bybit.Net.Interfaces.Clients;
+﻿using Bybit.Net.Enums;
+using Bybit.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects;
 using System;
-
+using System.Collections.Generic;
 
 namespace Bybit.Net.Objects
 {
@@ -65,7 +66,7 @@ namespace Bybit.Net.Objects
             set => _spotApiOptions = new RestApiClientOptions(_spotApiOptions, value);
         }
 
-        private RestApiClientOptions _copyTradingApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.SpotRestClientAddress);
+        private RestApiClientOptions _copyTradingApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.CopyTradingRestClientAddress);
         /// <summary>
         /// Copy trading API options
         /// </summary>
@@ -73,6 +74,16 @@ namespace Bybit.Net.Objects
         {
             get => _copyTradingApiOptions;
             set => _copyTradingApiOptions = new RestApiClientOptions(_copyTradingApiOptions, value);
+        }
+
+        private RestApiClientOptions _derivativesApiOptions = new RestApiClientOptions(BybitApiAddresses.Default.DerivativesRestClientAddress);
+        /// <summary>
+        /// Copy trading API options
+        /// </summary>
+        public RestApiClientOptions DerivativesApiOptions
+        {
+            get => _derivativesApiOptions;
+            set => _derivativesApiOptions = new RestApiClientOptions(_derivativesApiOptions, value);
         }
 
         /// <summary>
@@ -98,6 +109,7 @@ namespace Bybit.Net.Objects
             InversePerpetualApiOptions = new RestApiClientOptions(baseOn.InversePerpetualApiOptions, null);
             SpotApiOptions = new RestApiClientOptions(baseOn.SpotApiOptions, null);
             UsdPerpetualApiOptions = new RestApiClientOptions(baseOn.UsdPerpetualApiOptions, null);
+            DerivativesApiOptions = new RestApiClientOptions(baseOn.DerivativesApiOptions, null);
         }
     }
 
@@ -218,6 +230,55 @@ namespace Bybit.Net.Objects
             set => _copyTradingStreamsOptions = new BybitSocketApiClientOptions(_copyTradingStreamsOptions, value);
         }
 
+        private BybitDerivativesSocketApiClientOptions _derivativesPublicStreamsOptions = new BybitDerivativesSocketApiClientOptions(
+                                                                                        BybitApiAddresses.Default.DerivativesPublicUSDTContractSocketClientAddress,
+                                                                                        BybitApiAddresses.Default.DerivativesPublicUSDCContractSocketClientAddress,
+                                                                                        BybitApiAddresses.Default.DerivativesPublicUSDCOptionSocketClientAddress,
+                                                                                        BybitApiAddresses.Default.DerivativesPublicInverseSocketClientAddress)
+        {
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
+        /// <summary>
+        /// Unified margin streams options
+        /// </summary>
+        public BybitDerivativesSocketApiClientOptions DerivativesPublicStreamsOptions
+        {
+            get => _derivativesPublicStreamsOptions;
+            set => _derivativesPublicStreamsOptions = new BybitDerivativesSocketApiClientOptions(_derivativesPublicStreamsOptions, value);
+        }
+
+        private BybitSocketApiClientOptions _unifiedMarginStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.UnifiedMarginPrivateSocketClientAddress, BybitApiAddresses.Default.UnifiedMarginPrivateSocketClientAddress)
+        {
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
+        /// <summary>
+        /// Unified margin streams options
+        /// </summary>
+        public BybitSocketApiClientOptions UnifiedMarginStreamsOptions
+        {
+            get => _unifiedMarginStreamsOptions;
+            set => _unifiedMarginStreamsOptions = new BybitSocketApiClientOptions(_unifiedMarginStreamsOptions, value);
+        }
+
+        private BybitSocketApiClientOptions _contractStreamsOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.ContractPrivateSocketClientAddress, BybitApiAddresses.Default.ContractPrivateSocketClientAddress)
+        {
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
+        /// <summary>
+        /// Contract streams options
+        /// </summary>
+        public BybitSocketApiClientOptions ContractStreamsOptions
+        {
+            get => _contractStreamsOptions;
+            set => _contractStreamsOptions = new BybitSocketApiClientOptions(_contractStreamsOptions, value);
+        }
+
         /// <summary>
         /// ctor
         /// </summary>
@@ -239,6 +300,9 @@ namespace Bybit.Net.Objects
             SpotStreamsV1Options = new BybitSocketApiClientOptions(baseOn.SpotStreamsV1Options, null);
             SpotStreamsV2Options = new BybitSocketApiClientOptions(baseOn.SpotStreamsV2Options, null);
             UsdPerpetualStreamsOptions = new BybitSocketApiClientOptions(baseOn.UsdPerpetualStreamsOptions, null);
+            DerivativesPublicStreamsOptions = new BybitDerivativesSocketApiClientOptions(baseOn.DerivativesPublicStreamsOptions, null);
+            UnifiedMarginStreamsOptions = new BybitSocketApiClientOptions(baseOn.UnifiedMarginStreamsOptions, null);
+            ContractStreamsOptions = new BybitSocketApiClientOptions(baseOn.ContractStreamsOptions, null);
         }
     }
 
@@ -285,6 +349,58 @@ namespace Bybit.Net.Objects
         internal BybitSocketApiClientOptions(string baseAddress, string baseAddressAuthenticated) : base(baseAddress)
         {
             BaseAddressAuthenticated = baseAddressAuthenticated;
+        }
+    }
+
+    /// <summary>
+    /// Socket options for UnifiedMargin account
+    /// </summary>
+    public class BybitDerivativesSocketApiClientOptions : BybitSocketApiClientOptions
+    {
+        private Dictionary<StreamDerivativesCategory, string> PublicBaseAddresses { get; set; }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+#pragma warning disable 8618
+        public BybitDerivativesSocketApiClientOptions()
+        {
+        }
+#pragma warning restore
+
+        internal BybitDerivativesSocketApiClientOptions(BybitDerivativesSocketApiClientOptions baseOn, BybitDerivativesSocketApiClientOptions? newValues) : base(baseOn, newValues)
+        {
+            PublicBaseAddresses = new Dictionary<StreamDerivativesCategory, string>();
+
+            if (newValues != null)
+            {
+                foreach (var item in newValues.PublicBaseAddresses)
+                {
+                    PublicBaseAddresses.Add(item.Key, item.Value);
+                }
+            }
+        }
+
+        internal BybitDerivativesSocketApiClientOptions(string baseUsdtAddress, string baseUsdcAddress, string baseUsdcOptionAddress, string baseInverseAddress)
+         : base(baseUsdtAddress, string.Empty)
+        {
+            PublicBaseAddresses = new Dictionary<StreamDerivativesCategory, string>
+            {
+                { StreamDerivativesCategory.USDTPerp, baseUsdtAddress },
+                { StreamDerivativesCategory.USDCPerp, baseUsdcAddress },
+                { StreamDerivativesCategory.USDCOption, baseUsdcOptionAddress },
+                { StreamDerivativesCategory.Inverse, baseInverseAddress }
+            };
+        }
+
+        internal string GetPublicAddress(StreamDerivativesCategory category)
+        {
+            if (!PublicBaseAddresses.ContainsKey(category))
+            {
+                throw new NotSupportedException("Public stream for this StreamCategory not found.");
+            }
+
+            return PublicBaseAddresses[category];
         }
     }
 

@@ -1,0 +1,38 @@
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "symbol": "XRPUSDT",
+                "orderId": "db8b74b3-72d3-4264-bf3f-52d39b41956e",
+                "side": "Sell",
+                "orderType": "Limit",
+                "stopOrderType": "Stop",
+                "price": "0.4000",
+                "qty": "15",
+                "timeInForce": "GoodTillCancel",
+                "orderStatus": "UnTriggered",
+                "triggerPrice": "0.1000",
+                "orderLinkId": "x002",
+                "createdTime": "1658901865082",
+                "updatedTime": "1658902610748",
+                "takeProfit": "0.2000",
+                "stopLoss": "1.6000",
+                "tpTriggerBy": "UNKNOWN",
+                "slTriggerBy": "UNKNOWN",
+                "triggerBy": "MarkPrice",
+                "reduceOnly": false,
+                "leavesQty": "15",
+                "leavesValue": "6",
+                "cumExecQty": "0",
+                "cumExecValue": "0",
+                "cumExecFee": "0",
+                "triggerDirection": 2
+            }
+        ],
+        "nextPageCursor": ""
+    },
+    "retExtInfo": {},
+    "time": 1658902847238
+}

@@ -14,7 +14,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
-using Bybit.Net.Objects.Models.Spot.v1;
 using Bybit.Net.Objects.Models.Spot.v3;
 using Bybit.Net.Objects.Internal;
 
@@ -88,15 +87,15 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("orderCategory", orderCategory ?? 0);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitSpotOrderWrapper>(_baseClient.GetUrl("spot/v3/private/open-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitList<BybitSpotOrderV3>>(_baseClient.GetUrl("spot/v3/private/open-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
             if (!result || result.Data == null)
                 return result.As<IEnumerable<BybitSpotOrderV3>>(default);
 
-            if (result.Data.Orders == null)
+            if (result.Data.List == null)
                 return result.As<IEnumerable<BybitSpotOrderV3>>(Array.Empty<BybitSpotOrderV3>());
 
-            return result.As(result.Data.Orders);
+            return result.As(result.Data.List);
         }
 
         #endregion
@@ -112,15 +111,15 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitSpotOrderWrapper>(_baseClient.GetUrl("spot/v3/private/history-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitList<BybitSpotOrderV3>>(_baseClient.GetUrl("spot/v3/private/history-orders"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
 
             if (!result || result.Data == null)
                 return result.As<IEnumerable<BybitSpotOrderV3>>(default);
 
-            if (result.Data.Orders == null)
+            if (result.Data.List == null)
                 return result.As<IEnumerable<BybitSpotOrderV3>>(Array.Empty<BybitSpotOrderV3>());
 
-            return result.As(result.Data.Orders);
+            return result.As(result.Data.List);
         }
 
         #endregion

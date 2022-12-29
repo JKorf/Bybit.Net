@@ -1,0 +1,33 @@
+[
+        {
+            "positionIdx": 0,
+            "riskId": 1,
+            "symbol": "BTCUSDT",
+            "side": "Buy",
+            "size": "0.024",
+            "positionValue": "394.55123078",
+            "entryPrice": "16439.63461538",
+            "tradeMode": 0,
+            "autoAddMargin": 0,
+            "leverage": "3",
+            "positionBalance": "131.67490005",
+            "liqPrice": "0.50",
+            "bustPrice": "0.50",
+            "takeProfit": "0.00",
+            "stopLoss": "0.00",
+            "trailingStop": "0.00",
+            "unrealisedPnl": "32.57676922",
+            "createdTime": "1640056352777",
+            "updatedTime": "1671002545179",
+            "tpSlMode": "Partial",
+            "sessionAvgPrice": "0.00",
+            "positionStatus": "Normal",
+            "occClosingFee": "0.0000072",
+            "markPrice": "17797.00",
+            "cumRealisedPnl": "44834.01605397",
+            "activePrice": "0.00",
+            "riskLimitValue": "2000000",
+            "positionMM": "0.00006",
+            "positionIM": "3.9455123078"
+        }
+]

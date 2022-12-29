@@ -7,12 +7,18 @@ using Newtonsoft.Json.Linq;
 
 namespace Bybit.Net.Objects.Internal.Socket
 {
-    internal class BybitFuturesRequestMessage
+    internal class BybitRequestMessage
     {
         [JsonProperty("op")]
         public string Operation { get; set; } = string.Empty;
         [JsonProperty("args")]
         public object[] Parameters { get; set; } = Array.Empty<object>();
+    }
+
+    internal class BybitDerivativesRequestMessage : BybitRequestMessage
+    {
+        [JsonProperty("req_id")]
+        public string CustomisedId { get; set; } = string.Empty;
     }
 
     internal class BybitSpotRequestMessageV1 : BybitSpotRequestMessageV2, IBybitSpotRequestValidable

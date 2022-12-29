@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
+﻿using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Internal
 {

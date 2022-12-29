@@ -1,0 +1,42 @@
+{
+  "retCode": 0,
+  "retMsg": "Success",
+  "result": {
+  "nextPageCursor": "7d17d359-4e38-4d3a-9a31-29791ef2dfd7%3A1657711949928%2C7d17d359-4e38-4d3a-9a31-29791ef2dfd7%3A1657711949928",
+    "category": "linear",
+    "list": [
+    {
+      "symbol": "ETHUSDT",
+      "orderType": "Market",
+      "orderLinkId": "",
+      "orderId": "7d17d359-4e38-4d3a-9a31-29791ef2dfd7",
+      "stopOrderType": "UNKNOWN",
+      "orderStatus": "Filled",
+      "takeProfit": "",
+      "cumExecValue": "536.92500000",
+      "blockTradeId": "",
+      "rejectReason": "EC_NoError",
+      "price": "1127.10000000",
+      "createdTime": 1657711949928,
+      "tpTriggerBy": "UNKNOWN",
+      "timeInForce": "ImmediateOrCancel",
+      "basePrice": "",
+      "leavesValue": "0.00000000",
+      "updatedTime": 1657711949945,
+      "side": "Buy",
+      "triggerPrice": "",
+      "cumExecFee": "0.32215500",
+      "slTriggerBy": "UNKNOWN",
+      "leavesQty": "0.0000",
+      "closeOnTrigger": false,
+      "cumExecQty": "0.5000",
+      "reduceOnly": false,
+      "qty": "0.5000",
+      "stopLoss": "",
+      "triggerBy": "UNKNOWN",
+      "orderIM": ""
+    }
+  ]
+},
+  "time": 1657713451741
+}

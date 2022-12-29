@@ -1,0 +1,23 @@
+[
+       {
+            "symbol": "BITUSDT",
+            "execFee": "0.02022",
+            "execId": "beba036f-9fb4-59a7-84b7-2620e5d13e1c",
+            "execPrice": "0.674",
+            "execQty": "50",
+            "execType": "Trade",
+            "execValue": "33.7",
+            "feeRate": "0.0006",
+            "lastLiquidityInd": "RemovedLiquidity",
+            "leavesQty": "0",
+            "orderId": "ddbea432-2bd7-45dd-ab42-52d920b8136d",
+            "orderLinkId": "b001",
+            "orderPrice": "0.707",
+            "orderQty": "50",
+            "orderType": "Market",
+            "stopOrderType": "UNKNOWN",
+            "side": "Buy",
+            "execTime": "1659057535081",
+            "closedSize": "0"
+        }
+]

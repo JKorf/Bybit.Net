@@ -1,22 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Bybit.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Bybit.Net.Objects.Models.Spot
+﻿namespace Bybit.Net.Objects.Models.Spot
 {
-    /// <summary>
-    /// Wrapper for price deserialization
-    /// </summary>
-    public class BybitSpotPriceWrapper
-    {
-        /// <summary>
-        /// List of spot prices
-        /// </summary>
-        [JsonProperty("list")]
-        public IEnumerable<BybitSpotPrice> Prices { get; set; } = Array.Empty<BybitSpotPrice>();
-    }
-
     /// <summary>
     /// Price info
     /// </summary>

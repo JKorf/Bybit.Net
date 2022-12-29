@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Bybit.Net.Converters;
 
 namespace Bybit.Net.Objects.Models.Spot.v3
 {

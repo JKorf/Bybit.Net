@@ -1,0 +1,20 @@
+[{
+            "symbol": "BTCUSDT",
+            "side": "Buy",
+            "orderId": "0c06343d-02df-46e8-92c7-508a008b030a",
+            "execId": "b1d29ebf-3696-5668-a005-5fdf16343d15",
+            "orderLinkId": "lin-sit-perp-1040",
+            "execPrice": "43100.00000000",
+            "orderQty": "0.0500",
+            "execType": "Trade",
+            "execQty": "0.0500",
+            "leavesQty": "0.0000",
+            "execFee": "-0.53875000",
+            "execTime": 1649127768215,
+            "feeRate": "-0.000250",
+            "execValue": "2155.00000000",
+            "lastLiquidityInd": "MAKER",
+            "orderPrice": "43100.00000000",
+            "orderType": "Limit",
+            "stopOrderType": "UNKNOWN"
+        }]

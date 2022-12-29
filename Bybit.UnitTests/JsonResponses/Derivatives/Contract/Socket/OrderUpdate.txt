@@ -1,0 +1,30 @@
+[
+        {
+            "symbol": "BTCUSD",
+            "orderId": "ee013d82-fafc-4504-97b1-d92aca21eedd",
+            "side": "Buy",
+            "orderType": "Market",
+            "stopOrderType": "UNKNOWN",
+            "price": "21920.00",
+            "qty": "200",
+            "timeInForce": "ImmediateOrCancel",
+            "orderStatus": "Filled",
+            "triggerPrice": "0.00",
+            "orderLinkId": "inv001",
+            "createdTime": "1661338622771",
+            "updatedTime": "1661338622775",
+            "takeProfit": "0.00",
+            "stopLoss": "0.00",
+            "tpTriggerBy": "UNKNOWN",
+            "slTriggerBy": "UNKNOWN",
+            "triggerBy": "UNKNOWN",
+            "reduceOnly": false,
+            "closeOnTrigger": false,
+            "triggerDirection": 0,
+            "leavesQty": "0",
+            "lastExecQty": "200",
+            "lastExecPrice": "21282.00",
+            "cumExecQty": "200",
+            "cumExecValue": "0.00939761"
+        }
+]

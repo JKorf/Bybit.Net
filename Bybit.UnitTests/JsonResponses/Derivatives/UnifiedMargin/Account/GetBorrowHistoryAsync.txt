@@ -1,0 +1,27 @@
+{
+  "retCode": 0,
+  "retMsg": "Success",
+  "result": {
+  "nextPageCursor": "540%3A0%2C539%3A0",
+    "currency": null,
+    "list": [
+    {
+      "createTime": 1657713900286,
+      "costExemption": "0.00000000",
+      "InterestBearingBorrowSize": "3073.3902403",
+      "currency": "USDT",
+      "hourlyBorrowRate": "0.000003630137",
+      "borrowCost": "0.01115682"
+    },
+    {
+      "createTime": 1657710300225,
+      "costExemption": "0.00000000",
+      "InterestBearingBorrowSize": "3088.3130293",
+      "currency": "USDT",
+      "hourlyBorrowRate": "0.000003630137",
+      "borrowCost": "0.01121099"
+    }
+   ]
+  },
+  "time": 1657714596804
+}

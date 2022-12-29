@@ -9,6 +9,6 @@ namespace Bybit.Net.Objects.Internal.Socket
         public bool ReturnMessage { get; set; }
         [JsonProperty("conn_id")]
         public string ConnectionId { get; set; } = string.Empty;
-        public BybitFuturesRequestMessage Request { get; set; } = default!;
+        public BybitRequestMessage Request { get; set; } = default!;
     }
 }

@@ -1,23 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 
 using DateTimeConverter = CryptoExchange.Net.Converters.DateTimeConverter;
 
 namespace Bybit.Net.Objects.Models.Spot.v3
 {
-    /// <summary>
-    /// Wrapper for trades deserialization
-    /// </summary>
-    public class BybitSpotTradeWrapper
-    {
-        /// <summary>
-        /// List of spot trades
-        /// </summary>
-        [JsonProperty("list")]
-        public IEnumerable<BybitSpotTradeV3> Trades { get; set; } = Array.Empty<BybitSpotTradeV3>();
-    }
-
     /// <summary>
     /// Spot trade info
     /// </summary>

@@ -45,6 +45,11 @@ namespace Bybit.Net.Enums
         /// </summary>
         [Map("PARTIALLY_FILLED_CANCELED")]
         PartiallyFilledCanceled,
-        
+
+        /// <summary>
+        /// Untriggered
+        /// </summary>
+        [Map("UnTriggered")]
+        UnTriggered
     }
 }

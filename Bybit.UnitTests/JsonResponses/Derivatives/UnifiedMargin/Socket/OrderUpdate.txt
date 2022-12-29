@@ -1,0 +1,32 @@
+[
+            {
+                "orderId": "415f8961-4073-4d74-bc3e-df2830e52843",
+                "orderLinkId": "",
+                "symbol": "BTCUSDT",
+                "side": "Buy",
+                "orderType": "Limit",
+                "price": "17000.00000000",
+                "qty": "0.0100",
+                "timeInForce": "GoodTillCancel",
+                "orderStatus": "New",
+                "cumExecQty": "0.0000",
+                "cumExecValue": "0.00000000",
+                "cumExecFee": "0.00000000",
+                "stopOrderType": "UNKNOWN",
+                "triggerBy": "UNKNOWN",
+                "triggerPrice": "",
+                "reduceOnly": true,
+                "closeOnTrigger": true,
+                "createdTime": 1661932033636,
+                "updatedTime": 1661932033644,
+                "iv": "",
+                "orderIM": "",
+                "takeProfit": "",
+                "stopLoss": "",
+                "tpTriggerBy": "UNKNOWN",
+                "slTriggerBy": "UNKNOWN",
+                "basePrice": "",
+                "blockTradeId": "",
+                "leavesQty": "0.0100"
+            }
+        ]

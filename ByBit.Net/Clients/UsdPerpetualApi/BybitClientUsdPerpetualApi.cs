@@ -1,12 +1,10 @@
-﻿using Bybit.Net.Clients.InversePerpetualApi;
-using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
+﻿using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

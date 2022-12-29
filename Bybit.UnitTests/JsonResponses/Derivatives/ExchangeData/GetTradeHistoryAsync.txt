@@ -1,0 +1,20 @@
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "category": "linear",
+        "list": [
+            {
+                "execId": "0efadcdc-f1dd-5847-9185-2f0b40e81cc7",
+                "symbol": "BTCUSDT",
+                "price": "16871.00",
+                "size": "0.006",
+                "side": "Buy",
+                "time": "1669802293550",
+                "isBlockTrade": false
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1669802294719
+}

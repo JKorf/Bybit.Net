@@ -1,0 +1,27 @@
+{
+            "accountIMRate": "0.0002",
+            "accountMMRate": "0.0000",
+            "totalEquity": "510444.50000000",
+            "totalWalletBalance": "510444.50000000",
+            "totalMarginBalance": "510444.50000000",
+            "totalAvailableBalance": "510333.52491801",
+            "totalPerpUPL": "0.00000000",
+            "totalInitialMargin": "110.97508199",
+            "totalMaintenanceMargin": "9.13733489",
+            "coin": [{
+                "currencyCoin": "USDC",
+                "equity": "0.00000000",
+                "usdValue": "0.00000000",
+                "walletBalance": "0.00000000",
+                "marginBalance": "510444.50000000",
+                "availableBalance": "510333.52491801",
+                "marginBalanceWithoutConvert": "0.00000000",
+                "availableBalanceWithoutConvert": "0.00000000",
+                "borrowSize": "0.00000000",
+                "availableToBorrow": "200000.00000000",
+                "accruedInterest": "0.00000000",
+                "totalOrderIM": "0.00000000",
+                "totalPositionIM": "0.00000000",
+                "totalPositionMM": "0.00000000"
+            }]
+        }

@@ -1,0 +1,28 @@
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "category": "linear",
+        "list": [
+            {
+                "id": 1,
+                "symbol": "BTCUSDT",
+                "limit": "2000000",
+                "maintainMargin": "0.005",
+                "initialMargin": "0.01",
+                "section": [
+                    "1",
+                    "3",
+                    "5",
+                    "10",
+                    "25",
+                    "50",
+                    "80"
+                ],
+                "isLowestRisk": 1,
+                "maxLeverage": "100.00"
+            }
+        ]
+    },
+    "time": 1657797260220
+}

@@ -1,22 +1,9 @@
 ﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.Spot.v3
 {
-    /// <summary>
-    /// Wrapper for book prices deserialization
-    /// </summary>
-    public class BybitSpotBookPriceWrapper
-    {
-        /// <summary>
-        /// List of spot book prices
-        /// </summary>
-        [JsonProperty("list")]
-        public IEnumerable<BybitSpotBookPriceV3> BookPrices { get; set; } = Array.Empty<BybitSpotBookPriceV3>();
-    }
-
     /// <summary>
     /// Book price info
     /// </summary>

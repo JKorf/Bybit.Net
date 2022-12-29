@@ -1,4 +1,5 @@
 ﻿using Bybit.Net.Interfaces.Clients.CopyTradingApi;
+using Bybit.Net.Interfaces.Clients.DerivativesApi;
 using Bybit.Net.Interfaces.Clients.GeneralApi;
 using Bybit.Net.Interfaces.Clients.InverseFuturesApi;
 using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
@@ -42,5 +43,10 @@ namespace Bybit.Net.Interfaces.Clients
         /// Copy trading API endpoints
         /// </summary>
         IBybitClientCopyTradingApi CopyTradingApi { get; }
+
+        /// <summary>
+        /// Derivatives API endpoints
+        /// </summary>
+        IBybitClientDerivativesApi DerivativesApi { get; }
     }
 }
