@@ -372,20 +372,23 @@ namespace Bybit.Net.Objects
         {
             PublicBaseAddresses = new Dictionary<StreamDerivativesCategory, string>();
 
-            foreach (var item in newValues.PublicBaseAddresses)
+            if (newValues != null)
             {
-                PublicBaseAddresses.Add(item.Key, item.Value);
+                foreach (var item in newValues.PublicBaseAddresses)
+                {
+                    PublicBaseAddresses.Add(item.Key, item.Value);
+                }
             }
         }
 
-        internal BybitDerivativesSocketApiClientOptions(string baseUSDTAddress, string baseUSDCAddress, string baseUSDCOptionAddress, string baseInverseAddress)
-         : base(baseUSDTAddress, string.Empty)
+        internal BybitDerivativesSocketApiClientOptions(string baseUsdtAddress, string baseUsdcAddress, string baseUsdcOptionAddress, string baseInverseAddress)
+         : base(baseUsdtAddress, string.Empty)
         {
             PublicBaseAddresses = new Dictionary<StreamDerivativesCategory, string>
             {
-                { StreamDerivativesCategory.USDTPerp, baseUSDTAddress },
-                { StreamDerivativesCategory.USDCPerp, baseUSDCAddress },
-                { StreamDerivativesCategory.USDCOption, baseUSDCOptionAddress },
+                { StreamDerivativesCategory.USDTPerp, baseUsdtAddress },
+                { StreamDerivativesCategory.USDCPerp, baseUsdcAddress },
+                { StreamDerivativesCategory.USDCOption, baseUsdcOptionAddress },
                 { StreamDerivativesCategory.Inverse, baseInverseAddress }
             };
         }

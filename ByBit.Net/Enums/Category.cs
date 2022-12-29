@@ -30,6 +30,6 @@ namespace Bybit.Net.Enums
         /// Category not passed
         /// </summary>
         [Map("")]
-        Undefied
+        Undefined
     }
 }

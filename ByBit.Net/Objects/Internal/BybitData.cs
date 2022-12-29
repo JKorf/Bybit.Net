@@ -61,7 +61,7 @@ namespace Bybit.Net.Objects.Internal
         /// Type of derivatives product
         /// </summary>
         [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
-        public Category Category { get; set; } = Category.Undefied;
+        public Category Category { get; set; } = Category.Undefined;
     }
 
     /// <summary>
