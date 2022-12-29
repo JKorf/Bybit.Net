@@ -28,6 +28,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.4.0 - 29 Dec 2022
+    * Added DerivativesV3 API
+    * Fixed spot PlaceBorrowOrderAsync deserialization
+    * Added missing properties BybitApiKeyInfo
+
 * Version 1.3.1 - 12 Dec 2022
     * Added General.Transfer.GetAssetBalanceAsync endpoint
     * Spot V3 usability improvements
