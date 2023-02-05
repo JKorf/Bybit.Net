@@ -6,6 +6,7 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -40,6 +41,8 @@ namespace Bybit.Net.Clients.InverseFuturesApi
                 };
             }
 
+            manualParseError = true;
+
             ClientOptions = options;
 
             Account = new BybitClientInverseFuturesApiAccount(this);
@@ -63,6 +66,19 @@ namespace Bybit.Net.Clients.InverseFuturesApi
         internal Uri GetUrl(string endpoint)
         {
             return new Uri(BaseAddress.AppendPath(endpoint));
+        }
+
+        /// <inheritdoc />
+        protected override Task<ServerError?> TryParseErrorAsync(JToken data)
+        {
+            var responseCode = data["ret_code"];
+            if (responseCode != null && responseCode.ToString() != "0")
+            {
+                var errorMessage = data["ret_msg"];
+                return Task.FromResult(new ServerError(responseCode.Value<int>(), errorMessage?.ToString()));
+            }
+
+            return Task.FromResult<ServerError?>(null);
         }
 
         internal async Task<WebCallResult<BybitResult<T>>> SendRequestWrapperAsync<T>(

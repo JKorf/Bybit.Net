@@ -8,6 +8,7 @@ using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -43,6 +44,8 @@ namespace Bybit.Net.Clients.SpotApi
         internal BybitClientBaseSpotApi(Log log, BybitClientOptions options)
             : base(log, options, options.SpotApiOptions)
         {
+            manualParseError = true;
+
             ClientOptions = options;
             requestBodyFormat = RequestBodyFormat.FormData;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
@@ -61,6 +64,19 @@ namespace Bybit.Net.Clients.SpotApi
         internal Uri GetUrl(string endpoint)
         {
             return new Uri(BaseAddress.AppendPath(endpoint));
+        }
+
+        /// <inheritdoc />
+        protected override Task<ServerError?> TryParseErrorAsync(JToken data)
+        {
+            var responseCode = data["ret_code"];
+            if (responseCode != null && responseCode.ToString() != "0")
+            {
+                var errorMessage = data["ret_msg"];
+                return Task.FromResult(new ServerError(responseCode.Value<int>(), errorMessage?.ToString()))!;
+            }
+
+            return Task.FromResult<ServerError?>(null);
         }
 
         internal async Task<WebCallResult<T>> SendRequestAsync<T>(
