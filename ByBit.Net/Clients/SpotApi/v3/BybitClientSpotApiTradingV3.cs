@@ -167,7 +167,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #region Get user trades
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync(string? symbol = null, long? fromId = null, long? toId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitSpotUserTradeV3>>> GetUserTradesAsync(string? symbol = null, long? fromId = null, long? toId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("fromTradeId", fromId);
@@ -176,9 +176,9 @@ namespace Bybit.Net.Clients.SpotApi.v3
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitList<BybitSpotUserTrade>>(_baseClient.GetUrl("spot/v3/private/my-trades"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitList<BybitSpotUserTradeV3>>(_baseClient.GetUrl("spot/v3/private/my-trades"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<BybitSpotUserTrade>>(default);
+                return result.As<IEnumerable<BybitSpotUserTradeV3>>(default);
 
             return result.As(result.Data.List);
         }
