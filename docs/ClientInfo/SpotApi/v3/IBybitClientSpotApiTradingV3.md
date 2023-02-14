@@ -110,7 +110,7 @@ var result = await client.SpotApi\v3.SpotApiTradingV3.GetOpenOrdersAsync(/* para
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrderWrapper>> GetOpenOrdersAsync(string? symbol = default, long? orderId = default, int? limit = default, int? orderCategory, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotOrderV3>>> GetOpenOrdersAsync(string? symbol = default, long? orderId = default, int? limit = default, int? orderCategory, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -166,7 +166,7 @@ var result = await client.SpotApi\v3.SpotApiTradingV3.GetOrdersAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotOrderWrapper>> GetOrdersAsync(string? symbol = default, long? orderId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotOrderV3>>> GetOrdersAsync(string? symbol = default, long? orderId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -223,7 +223,7 @@ var result = await client.SpotApi\v3.SpotApiTradingV3.GetUserTradesAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<IEnumerable<BybitSpotUserTrade>>> GetUserTradesAsync(string? symbol = default, long? fromId = default, long? toId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotUserTradeV3>>> GetUserTradesAsync(string? symbol = default, long? fromId = default, long? toId = default, int? limit = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -252,7 +252,7 @@ var result = await client.SpotApi\v3.SpotApiTradingV3.PlaceBorrowOrderAsync(/* p
 ```  
 
 ```csharp  
-Task<WebCallResult<long>> PlaceBorrowOrderAsync(string asset, decimal quantity, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitBorrowOrderV3>> PlaceBorrowOrderAsync(string asset, decimal quantity, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -313,7 +313,7 @@ var result = await client.SpotApi\v3.SpotApiTradingV3.PlaceRepayOrderAsync(/* pa
 ```  
 
 ```csharp  
-Task<WebCallResult<long>> PlaceRepayOrderAsync(string asset, decimal quantity, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitRepayOrderV3>> PlaceRepayOrderAsync(string asset, decimal quantity, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

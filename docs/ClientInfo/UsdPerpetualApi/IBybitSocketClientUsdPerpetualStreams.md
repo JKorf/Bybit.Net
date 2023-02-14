@@ -35,32 +35,6 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 
 ***
 
-## SubscribeToKlinesUpdatesAsync  
-
-[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline)  
-<p>
-
-*Subscribe to kline (candlestick) updates*  
-
-```csharp  
-var client = new BybitSocketClient();  
-var result = await client.UsdPerpetualStreams.SubscribeToKlinesUpdatesAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|interval|The interval of the klines|
-|handler|The event handler for the received data|
-|_[Optional]_ ct|Cancellation token for closing this subscription|
-
-</p>
-
-***
-
 ## SubscribeToKlineUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketkline)  
@@ -342,32 +316,6 @@ var result = await client.UsdPerpetualStreams.SubscribeToStopOrderUpdatesAsync(/
 
 ```csharp  
 Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitUsdPerpetualStopOrderUpdate>>> handler, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|handler|The event handler for the received data|
-|_[Optional]_ ct|Cancellation token for closing this subscription|
-
-</p>
-
-***
-
-## SubscribeToTickersUpdatesAsync  
-
-[https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo](https://bybit-exchange.github.io/docs/futuresV2/linear/#t-websocketinstrumentinfo)  
-<p>
-
-*Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for*  
-*properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
-
-```csharp  
-var client = new BybitSocketClient();  
-var result = await client.UsdPerpetualStreams.SubscribeToTickersUpdatesAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataEvent<BybitTickerUpdate>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

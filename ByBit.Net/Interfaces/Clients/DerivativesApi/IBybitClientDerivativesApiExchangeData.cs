@@ -117,8 +117,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
 
         /// <summary>
         /// Get funding rate history
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_historyfundingratehead" /></para>
+        /// </summary>
         /// <param name="category">Derivatives products category. If category is not passed, then return ""For now, linear inverse including inverse futures are available</param>
         /// <param name="symbol">The symbol</param>
         /// <param name="from">Start time of the data</param>
@@ -130,8 +130,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
 
         /// <summary>
         /// Get Risk Limit
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_risklimithead" /></para>
+        /// </summary>
         /// <param name="category">Derivatives products category. If category is not passed, then return ""For now, linear inverse including inverse futures are available</param>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -140,8 +140,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
 
         /// <summary>
         /// Get option delivery price
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_optiondeliveryhead" /></para>
+        /// </summary>
         /// <param name="category">Derivatives products category. If category is not passed, then return ""For now, linear inverse including inverse futures are available</param>
         /// <param name="symbol">The symbol</param>
         /// <param name="baseAsset">Base coin. Only valid when category=option. If not passed, BTC by default.</param>
@@ -152,9 +152,9 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
         Task<WebCallResult<BybitCursorPage<IEnumerable<BybitDerivativesOptionDeliveryPrice>>>> GetOptionDeliveryPriceAsync(Category? category = null, string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
-        /// 
-        /// </summary>
+        /// Get Trade history
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_publictradingrecords" /></para>
+        /// </summary>
         /// <param name="category">Derivatives products category. If category is not passed, then return ""For now, linear inverse including inverse futures are available</param>
         /// <param name="symbol">The symbol</param>
         /// <param name="baseAsset">Base coin. Only valid when category=option. If not passed, BTC by default.</param>

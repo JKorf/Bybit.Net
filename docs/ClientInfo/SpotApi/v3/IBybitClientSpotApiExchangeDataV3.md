@@ -49,7 +49,7 @@ var result = await client.SpotApi\v3.SpotApiExchangeDataV3.GetBookPricesAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotBookPriceWrapper>> GetBookPricesAsync(CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotBookPriceV3>>> GetBookPricesAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -97,7 +97,7 @@ var result = await client.SpotApi\v3.SpotApiExchangeDataV3.GetKlinesAsync(/* par
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotKlineWrapper>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotKlineV3>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -204,7 +204,7 @@ var result = await client.SpotApi\v3.SpotApiExchangeDataV3.GetPricesAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotPriceWrapper>> GetPricesAsync(CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -252,7 +252,7 @@ var result = await client.SpotApi\v3.SpotApiExchangeDataV3.GetSymbolsAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotSymbolWrapper>> GetSymbolsAsync(CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotSymbolV3>>> GetSymbolsAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -301,7 +301,7 @@ var result = await client.SpotApi\v3.SpotApiExchangeDataV3.GetTickersAsync();
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotTickerWrapper>> GetTickersAsync(CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotTickerV3>>> GetTickersAsync(CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -325,7 +325,7 @@ var result = await client.SpotApi\v3.SpotApiExchangeDataV3.GetTradeHistoryAsync(
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitSpotTradeWrapper>> GetTradeHistoryAsync(string symbol, int? limit = default, CancellationToken ct = default);  
+Task<WebCallResult<IEnumerable<BybitSpotTradeV3>>> GetTradeHistoryAsync(string symbol, int? limit = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

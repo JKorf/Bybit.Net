@@ -97,6 +97,33 @@ Task<WebCallResult> EnableSubaccountsUniversalTransferAsync(IEnumerable<string>?
 
 ***
 
+## GetAssetBalanceAsync  
+
+[https://bybit-exchange.github.io/docs/account_asset/v3/#t-queryaccountcoinbalance](https://bybit-exchange.github.io/docs/account_asset/v3/#t-queryaccountcoinbalance)  
+<p>
+
+*Coin balance for an account type including Earn*  
+
+```csharp  
+var client = new BybitClient();  
+var result = await client.GeneralApi.Transfer.GetAssetBalanceAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<CoinBalanceQuery>> GetAssetBalanceAsync(AccountType accountType, string asset, long? receiveWindow = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|accountType|Account type|
+|asset|Asset|
+|_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetSubAccountsAsync  
 
 [https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccountlist](https://bybit-exchange.github.io/docs/account_asset/#t-querysubaccountlist)  

@@ -18,8 +18,5 @@ grand_parent: Rest API documentation
 *Endpoints related to retrieving market and system data*  
 **[IBybitClientSpotApiExchangeDataV3](IBybitClientSpotApiExchangeDataV3.html) ExchangeData { get; }**  
 ***
-*The factory for creating requests. Used for unit testing*  
-**IRequestFactory RequestFactory { get; set; }**  
-***
 *Endpoints related to orders and trades*  
 **[IBybitClientSpotApiTradingV3](IBybitClientSpotApiTradingV3.html) Trading { get; }**  

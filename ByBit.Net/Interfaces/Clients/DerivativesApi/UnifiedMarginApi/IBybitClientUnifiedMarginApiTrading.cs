@@ -18,8 +18,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Place a new order
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_placeorder" /></para>
+        /// </summary>
         /// <param name="category">Type of derivatives product: linear or option.</param>
         /// <param name="symbol">The symbol</param>
         /// <param name="side">Order side</param>
@@ -98,8 +98,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Get orders
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_getorder" /></para>
+        /// </summary>
         /// <param name="category"></param>
         /// <param name="symbol">The symbol</param>
         /// <param name="baseAsset"></param>
@@ -117,8 +117,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Get orders
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_queryorderrealtime" /></para>
+        /// </summary>
         /// <param name="category"></param>
         /// <param name="symbol">The symbol</param>
         /// <param name="baseAsset">Base coin. When category=option. If not passed, BTC by default.</param>

@@ -157,7 +157,7 @@ var result = await client.CopyTradingApi.Trading.PlaceOrderAsync(/* parameters *
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitCopyTradingId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal price, string? clientOrderId = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitCopyTradingId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, string? clientOrderId = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -166,7 +166,11 @@ Task<WebCallResult<BybitCopyTradingId>> PlaceOrderAsync(string symbol, OrderSide
 |side|Order side|
 |type|Order type|
 |quantity|Quantity|
-|price|Price|
+|_[Optional]_ price|Price|
+|_[Optional]_ takeProfitPrice|Take profit price|
+|_[Optional]_ stopLossPrice|Stop loss price|
+|_[Optional]_ takeProfitTriggerType|Type of take-profit activation price|
+|_[Optional]_ stopLossTriggerType|Type of stop-loss activation price|
 |_[Optional]_ clientOrderId|Optional user defined id|
 |_[Optional]_ ct|Cancellation token|
 

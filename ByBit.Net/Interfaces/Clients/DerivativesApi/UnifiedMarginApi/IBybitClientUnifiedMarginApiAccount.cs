@@ -44,8 +44,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Modify leverage
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_setleverage" /></para>
+        /// </summary>
         /// <param name="category">Type of derivatives product: linear or option</param>
         /// <param name="symbol">Name of Contract</param>
         /// <param name="buyLeverage">leverage of the corresponding risk limit</param>
@@ -85,8 +85,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Set position TP/SL and trailing stop.
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_switchmode" /></para>
+        /// </summary>
         /// <param name="category"> Derivatives products category. If category is not passed, then return ""For now, linear is available</param>
         /// <param name="symbol"> Name of Contract</param>
         /// <param name="takeProfit"> ≥ 0, if = 0, cancel take-profit (TP)</param>
@@ -108,8 +108,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Query trading history
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_querytransactionlogs" /></para>
+        /// </summary>
         /// <param name="category">	Type of derivatives product: linear or option</param>
         /// <param name="asset">USDC, USDT, BTC, and ETH</param>
         /// <param name="baseAsset">Base coin</param>
@@ -125,8 +125,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Fund transfer between accounts
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_transfer" /></para>
+        /// </summary>
         /// <param name="transferId">UUID, globally unique</param>
         /// <param name="amount">Exchanged amount</param>
         /// <param name="currency">Currency alias</param>
@@ -139,8 +139,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Exchange Coins
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_queryexchangerecords" /></para>
+        /// </summary>
         /// <param name="fromCoint"></param>
         /// <param name="toCoint"></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -150,8 +150,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Get Borrow History
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_interestbillstatement" /></para>
+        /// </summary>
         /// <param name="asset">USDC, USDT, BTC, and ETH</param>
         /// <param name="startTime">Starting timestamp</param>
         /// <param name="endTime">Ending timestamp</param>
@@ -165,8 +165,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Get borrow rate
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_queryloaninterest" /></para>
+        /// </summary>
         /// <param name="asset">Only for UDDC, USDT. If not passed, USDT-USDC interests are returned. You could pass multiple currency separated by comma, e.a USDC,USDT</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -177,8 +177,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 
         /// <summary>
         /// Get 7-day Trading History
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/unified_margin/#t-dv_usertraderecords7day" /></para>
+        /// </summary>
         /// <param name="category"></param>
         /// <param name="symbol">The symbol</param>
         /// <param name="baseAsset">Base coin. When category=option. If not passed, BTC by default.</param>

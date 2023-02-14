@@ -147,8 +147,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi
 
         /// <summary>
         /// Get user trading fee rate
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/contract/#t-tradingfeerate" /></para>
+        /// </summary>
         /// <param name="symbol"> Symbol </param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -157,8 +157,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi
 
         /// <summary>
         /// Get user trading fee rate
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/contract/#t-dv_walletrecords" /></para>
+        /// </summary>
         /// <param name="asset"> Coin </param>
         /// <param name="startTime">Start timestamp in milliseconds</param>
         /// <param name="endTime">End timestamp in milliseconds. The past year records ONLY</param>
@@ -169,11 +169,11 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitCursorPage<IEnumerable<BybitContractWalletFundRecord>>>> GetWalletFundRecords(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, WalletFundType? fundType = null, int? limit = null, string? cursor = null, long? receiveWindow = null, CancellationToken ct = default);
-            
+
         /// <summary>
         /// Get user trading fee rate
-        /// </summary>
         /// <para><a href="https://bybit-exchange.github.io/docs/derivativesV3/contract/#t-dv_setmarginmode" /></para>
+        /// </summary>
         /// <param name="marginMode"> Margin mode </param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
