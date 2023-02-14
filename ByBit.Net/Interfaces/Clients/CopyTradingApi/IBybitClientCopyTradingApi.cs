@@ -6,13 +6,8 @@ namespace Bybit.Net.Interfaces.Clients.CopyTradingApi
     /// <summary>
     /// Bybit Copy Trading endpoints
     /// </summary>
-    public interface IBybitClientCopyTradingApi: IDisposable
+    public interface IBybitClientCopyTradingApi: IRestApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating requests. Used for unit testing
-        /// </summary>
-        IRequestFactory RequestFactory { get; set; }
-
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>

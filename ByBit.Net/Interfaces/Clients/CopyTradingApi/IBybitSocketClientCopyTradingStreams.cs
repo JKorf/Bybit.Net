@@ -1,4 +1,5 @@
 ﻿using Bybit.Net.Objects.Models.CopyTrading;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -11,7 +12,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
     /// <summary>
     /// Bybit copy trading streams
     /// </summary>
-    public interface IBybitSocketClientCopyTradingStreams
+    public interface IBybitSocketClientCopyTradingStreams: ISocketApiClient
     {
         /// <summary>
         /// Subscribe to user position updates

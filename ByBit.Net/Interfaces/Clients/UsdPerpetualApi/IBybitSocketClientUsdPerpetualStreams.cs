@@ -1,6 +1,7 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models;
 using Bybit.Net.Objects.Models.Socket;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -13,7 +14,7 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
     /// <summary>
     /// Bybit usd perpetual streams
     /// </summary>
-    public interface IBybitSocketClientUsdPerpetualStreams
+    public interface IBybitSocketClientUsdPerpetualStreams : ISocketApiClient
     {
         /// <summary>
         /// Subscribe to public trade updates

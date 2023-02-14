@@ -1,4 +1,6 @@
-﻿namespace Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi
+﻿using CryptoExchange.Net.Interfaces;
+
+namespace Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi
 {
     /// <summary>
     /// Bybit contract API endpoints

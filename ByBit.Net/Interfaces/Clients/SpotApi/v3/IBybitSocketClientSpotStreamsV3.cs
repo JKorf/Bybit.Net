@@ -6,13 +6,14 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Bybit.Net.Objects.Models.Spot.v3;
+using CryptoExchange.Net.Interfaces;
 
 namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
 {
     /// <summary>
     /// Bybit spot streams
     /// </summary>
-    public interface IBybitSocketClientSpotStreamsV3
+    public interface IBybitSocketClientSpotStreamsV3 : ISocketApiClient
     {
         /// <summary>
         /// Subscribe to public trade updates

@@ -7,13 +7,8 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
     /// <summary>
     /// Bybit spot API endpoints (v3)
     /// </summary>
-    public interface IBybitClientSpotApiV3 : IDisposable
+    public interface IBybitClientSpotApiV3 : IRestApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating requests. Used for unit testing
-        /// </summary>
-        IRequestFactory RequestFactory { get; set; }
-
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>

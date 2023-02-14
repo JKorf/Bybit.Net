@@ -1,6 +1,7 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using Bybit.Net.Objects.Models.Spot.v1;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -12,7 +13,7 @@ namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
     /// <summary>
     /// Bybit spot streams
     /// </summary>
-    public interface IBybitSocketClientSpotStreamsV2
+    public interface IBybitSocketClientSpotStreamsV2 : ISocketApiClient
     {
         /// <summary>
         /// Subscribe to public trade updates

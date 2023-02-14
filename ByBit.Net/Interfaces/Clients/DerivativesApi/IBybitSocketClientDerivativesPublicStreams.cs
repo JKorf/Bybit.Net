@@ -1,6 +1,7 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.Derivatives;
 using Bybit.Net.Objects.Models.Socket.Derivatives;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -13,7 +14,7 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
     /// <summary>
     /// Bybit public Derivatives streams
     /// </summary>
-    public interface IBybitSocketClientDerivativesPublicStreams
+    public interface IBybitSocketClientDerivativesPublicStreams : ISocketApiClient
     {
         /// <summary>
         /// Subscribe to orderbook updates

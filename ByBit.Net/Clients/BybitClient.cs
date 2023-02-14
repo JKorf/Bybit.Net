@@ -17,6 +17,7 @@ using Bybit.Net.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.DerivativesApi;
 using Bybit.Net.Clients.DerivativesApi;
+using CryptoExchange.Net.Authentication;
 
 namespace Bybit.Net.Clients
 {
@@ -72,6 +73,19 @@ namespace Bybit.Net.Clients
         public static void SetDefaultOptions(BybitClientOptions options)
         {
             BybitClientOptions.Default = options;
+        }
+
+        /// <inheritdoc />
+        public void SetApiCredentials(ApiCredentials credentials)
+        {
+            InversePerpetualApi.SetApiCredentials(credentials);
+            InverseFuturesApi.SetApiCredentials(credentials);
+            UsdPerpetualApi.SetApiCredentials(credentials);
+            SpotApiV1.SetApiCredentials(credentials);
+            SpotApiV3.SetApiCredentials(credentials);
+            GeneralApi.SetApiCredentials(credentials);
+            CopyTradingApi.SetApiCredentials(credentials);
+            DerivativesApi.SetApiCredentials(credentials);
         }
     }
 }

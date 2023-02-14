@@ -18,6 +18,7 @@ using Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi;
 using Bybit.Net.Clients.DerivativesApi.ContractApi;
 using Bybit.Net.Clients.DerivativesApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi;
+using CryptoExchange.Net.Authentication;
 
 namespace Bybit.Net.Clients
 {
@@ -81,6 +82,20 @@ namespace Bybit.Net.Clients
         public static void SetDefaultOptions(BybitSocketClientOptions options)
         {
             BybitSocketClientOptions.Default = options;
+        }
+
+        /// <inheritdoc />
+        public void SetApiCredentials(ApiCredentials credentials)
+        {
+            UsdPerpetualStreams.SetApiCredentials(credentials);
+            InversePerpetualStreams.SetApiCredentials(credentials);
+            SpotStreamsV1.SetApiCredentials(credentials);
+            SpotStreamsV2.SetApiCredentials(credentials);
+            SpotStreamsV3.SetApiCredentials(credentials);
+            CopyTrading.SetApiCredentials(credentials);
+            DerivativesPublic.SetApiCredentials(credentials);
+            UnifiedMarginPrivate.SetApiCredentials(credentials);
+            ContractPrivate.SetApiCredentials(credentials);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Bybit.Net.Objects.Models.Socket;
 using Bybit.Net.Objects.Models.Socket.Derivatives;
 using Bybit.Net.Objects.Models.Socket.Derivatives.UnifiedMargin;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -14,7 +15,7 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
     /// <summary>
     /// Bybit Unified margin streams
     /// </summary>
-    public interface IBybitSocketClientUnifiedMarginStreams
+    public interface IBybitSocketClientUnifiedMarginStreams : ISocketApiClient
     {
         /// <summary>
         /// Subscribe to user position updates

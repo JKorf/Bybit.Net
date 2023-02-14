@@ -1,4 +1,5 @@
 ﻿using Bybit.Net.Objects.Models.Socket.Derivatives.Contract;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -11,7 +12,7 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi
     /// <summary>
     /// Bybit Contract streams
     /// </summary>
-    public interface IBybitSocketClientContractStreams
+    public interface IBybitSocketClientContractStreams : ISocketApiClient
     {
         /// <summary>
         /// Subscribe to user position updates

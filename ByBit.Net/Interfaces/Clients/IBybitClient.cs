@@ -6,6 +6,7 @@ using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
 using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 
 namespace Bybit.Net.Interfaces.Clients
@@ -48,5 +49,11 @@ namespace Bybit.Net.Interfaces.Clients
         /// Derivatives API endpoints
         /// </summary>
         IBybitClientDerivativesApi DerivativesApi { get; }
+
+        /// <summary>
+        /// Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+        /// </summary>
+        /// <param name="credentials">The credentials to set</param>
+        void SetApiCredentials(ApiCredentials credentials);
     }
 }

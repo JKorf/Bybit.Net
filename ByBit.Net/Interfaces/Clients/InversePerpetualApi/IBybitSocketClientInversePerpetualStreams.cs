@@ -1,6 +1,7 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models;
 using Bybit.Net.Objects.Models.Socket;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -13,7 +14,7 @@ namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
     /// <summary>
     /// Bybit inverse perpetual streams
     /// </summary>
-    public interface IBybitSocketClientInversePerpetualStreams
+    public interface IBybitSocketClientInversePerpetualStreams : ISocketApiClient
     {
         /// <summary>
         /// Subscribe to public trade updates

@@ -6,13 +6,8 @@ namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
     /// <summary>
     /// Bybit USD perpetual API endpoints
     /// </summary>
-    public interface IBybitClientUsdPerpetualApi : IDisposable
+    public interface IBybitClientUsdPerpetualApi : IRestApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating requests. Used for unit testing
-        /// </summary>
-        IRequestFactory RequestFactory { get; set; }
-
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>

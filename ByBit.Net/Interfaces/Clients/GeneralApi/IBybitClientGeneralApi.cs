@@ -6,7 +6,7 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
     /// <summary>
     /// Bybit general API endpoints
     /// </summary>
-    public interface IBybitClientGeneralApi : IDisposable
+    public interface IBybitClientGeneralApi : IRestApiClient, IDisposable
     {
         /// <summary>
         /// The factory for creating requests. Used for unit testing

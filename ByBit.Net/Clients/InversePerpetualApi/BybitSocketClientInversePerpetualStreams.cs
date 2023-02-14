@@ -398,7 +398,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
 
             var result = false;
             var error = "unspecified error";
-            await socketConnection.SendAndWaitAsync(authRequest, Options.SocketResponseTimeout, data =>
+            await socketConnection.SendAndWaitAsync(authRequest, Options.SocketResponseTimeout, null, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;
@@ -518,7 +518,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
             var message = new BybitRequestMessage { Operation = "unsubscribe", Parameters = requestParams };
 
             var result = false;
-            await connection.SendAndWaitAsync(message, Options.SocketResponseTimeout, data =>
+            await connection.SendAndWaitAsync(message, Options.SocketResponseTimeout, null, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;

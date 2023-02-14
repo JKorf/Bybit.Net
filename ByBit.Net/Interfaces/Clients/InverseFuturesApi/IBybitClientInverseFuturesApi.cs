@@ -6,7 +6,7 @@ namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
     /// <summary>
     /// Bybit inverse futures API endpoints
     /// </summary>
-    public interface IBybitClientInverseFuturesApi : IDisposable
+    public interface IBybitClientInverseFuturesApi : IRestApiClient, IDisposable
     {
         /// <summary>
         /// The factory for creating requests. Used for unit testing

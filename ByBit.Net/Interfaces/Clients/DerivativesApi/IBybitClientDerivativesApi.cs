@@ -8,13 +8,8 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
     /// <summary>
     /// Bybit Derivatives v3 endpoints
     /// </summary>
-    public interface IBybitClientDerivativesApi : IDisposable
+    public interface IBybitClientDerivativesApi : IRestApiClient, IDisposable
     {
-        /// <summary>
-        /// The factory for creating requests. Used for unit testing
-        /// </summary>
-        IRequestFactory RequestFactory { get; set; }
-
         /// <summary>
         /// Endpoints related to retrieving market and system data
         /// </summary>
