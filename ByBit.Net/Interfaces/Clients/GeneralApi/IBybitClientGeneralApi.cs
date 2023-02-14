@@ -9,11 +9,6 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
     public interface IBybitClientGeneralApi : IRestApiClient, IDisposable
     {
         /// <summary>
-        /// The factory for creating requests. Used for unit testing
-        /// </summary>
-        IRequestFactory RequestFactory { get; set; }
-
-        /// <summary>
         /// Endpoints related to asset transfer
         /// </summary>
         IBybitClientGeneralApiTransfer Transfer { get; }
