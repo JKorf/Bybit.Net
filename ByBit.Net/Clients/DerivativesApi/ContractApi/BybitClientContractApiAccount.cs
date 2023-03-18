@@ -239,7 +239,7 @@ namespace Bybit.Net.Clients.DerivativesApi.ContractApi
         {
             var parameters = new Dictionary<string, object>()
             {
-                { "mode",  JsonConvert.SerializeObject(hedgeMode, new PositionModeConverter(false)) }
+                { "mode",  hedgeMode == PositionMode.OneWay ? "0" : "3" }
             };
 
             if (symbol == null && asset == null || symbol != null && asset != null)
