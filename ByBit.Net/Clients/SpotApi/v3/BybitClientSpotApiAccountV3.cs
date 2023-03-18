@@ -30,14 +30,14 @@ namespace Bybit.Net.Clients.SpotApi.v3
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var result = await _baseClient.SendRequestAsync<BybitList<BybitSpotBalance>>(_baseClient.GetUrl("spot/v3/private/account"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitBalanceWrapper>(_baseClient.GetUrl("spot/v3/private/account"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result || result.Data == null)
                 return result.As<IEnumerable<BybitSpotBalance>>(default);
 
-            if (result.Data.List == null)
+            if (result.Data.Balances == null)
                 return result.As<IEnumerable<BybitSpotBalance>>(Array.Empty<BybitSpotBalance>());
 
-            return result.As(result.Data.List);
+            return result.As(result.Data.Balances);
         }
 
         #endregion
