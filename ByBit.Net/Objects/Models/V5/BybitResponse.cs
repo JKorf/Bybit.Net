@@ -1,0 +1,44 @@
+﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Bybit.Net.Objects.Models.V5
+{
+    /// <summary>
+    /// Bybit response info
+    /// </summary>
+    /// <typeparam name="T">Type of the response data</typeparam>
+    public class BybitResponse<T>
+    {
+        /// <summary>
+        /// Category
+        /// </summary>
+        [JsonConverter(typeof(EnumConverter))]
+        public Category? Category { get; set; }
+        /// <summary>
+        /// Total items
+        /// </summary>
+        public int? Total { get; set; }
+        /// <summary>
+        /// Symbol
+        /// </summary>
+        public string? Symbol { get; set; }
+        /// <summary>
+        /// Cursor for pagination
+        /// </summary>
+        public string? NextPageCursor { get; set; }
+        /// <summary>
+        /// Data list
+        /// </summary>
+        public IEnumerable<T> List { get; set; } = Array.Empty<T>();
+        /// <summary>
+        /// Data updated time
+        /// </summary>
+        [JsonProperty("updatedTime")]
+        [JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? UpdateTime { get; set; }
+    }
+}

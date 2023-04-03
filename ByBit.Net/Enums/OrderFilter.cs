@@ -19,6 +19,11 @@ namespace Bybit.Net.Enums
         /// Conditional order
         /// </summary>
         [Map("StopOrder")]
-        StopOrder
+        StopOrder,
+        /// <summary>
+        /// Spot TakeProfit/StopLoss order
+        /// </summary>
+        [Map("tpslOrder")]
+        TpSlOrder
     }
 }

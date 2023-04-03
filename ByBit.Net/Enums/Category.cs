@@ -18,9 +18,13 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Inverse futures, including inverse perpetual, inverse futures.
         /// </summary>
-        /// <remarks> Not supported in private endpoints</remarks>
         [Map("inverse")]
         Inverse,
+        /// <summary>
+        /// Spot
+        /// </summary>
+        [Map("spot")]
+        Spot,
         /// <summary>
         /// USDC Option
         /// </summary>

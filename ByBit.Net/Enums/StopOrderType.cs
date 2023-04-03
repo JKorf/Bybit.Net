@@ -26,6 +26,14 @@
         /// </summary>
         PartialStopLoss,
         /// <summary>
+        /// Partial stop loss
+        /// </summary>
+        PartialTakeProfit,
+        /// <summary>
+        /// Spot TP/SL order
+        /// </summary>
+        TpSlOrder,
+        /// <summary>
         /// Unknown type
         /// </summary>
         Unknown

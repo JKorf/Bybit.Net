@@ -7,6 +7,7 @@ using System.Net.Http;
 using Bybit.Net.Clients.CopyTradingApi;
 using CryptoExchange.Net.Converters;
 using System.Globalization;
+using Bybit.Net.Clients.V5;
 
 namespace Bybit.Net
 {
@@ -27,7 +28,7 @@ namespace Bybit.Net
 
             var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters : bodyParameters;
             var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
-            if (apiClient is BybitClientCopyTradingApi)
+            if (apiClient is BybitClientCopyTradingApi || apiClient is BybitClientApi)
             {
                 var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : parameters.ToFormData();
                 var key = Credentials.Key!.GetString();

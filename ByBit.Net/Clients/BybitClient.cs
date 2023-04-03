@@ -41,6 +41,8 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public IBybitClientDerivativesApi DerivativesApi { get; }
 
+        public V5.BybitClientApi V5Api { get; }
+
         #region constructor/destructor
         /// <summary>
         /// Create a new instance of the BybitClient using the default options
@@ -63,6 +65,7 @@ namespace Bybit.Net.Clients
             GeneralApi = AddApiClient(new BybitClientGeneralApi(log, this, options));
             CopyTradingApi = AddApiClient(new BybitClientCopyTradingApi(log, options));
             DerivativesApi = AddApiClient(new BybitClientDerivativesApi(log, options));
+            V5Api = AddApiClient(new V5.BybitClientApi(log, options));
         }
         #endregion
 
