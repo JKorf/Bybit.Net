@@ -13,8 +13,12 @@ namespace Bybit.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         IBybitClientGeneralApiTransfer Transfer { get; }
         /// <summary>
-        /// Endpoint related to withrawing/depositing
+        /// Endpoint related to withdrawing/depositing
         /// </summary>
         IBybitClientGeneralApiWithdrawDeposit WithdrawDeposit { get; }
+        /// <summary>
+        /// Endpoint related to master/sub-accounts
+        /// </summary>
+        IBybitClientGeneralApiMasterSub MasterSub { get; }
     }
 }

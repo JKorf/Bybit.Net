@@ -363,5 +363,20 @@ namespace Bybit.Net.UnitTests
                 useNestedJsonPropertyForAllCompare: new List<string> { "result" }
                 );
         }
+
+        [Test]
+        public async Task ValidateGeneralMasterSubCalls()
+        {
+            await _comparer.ProcessSubject("General/MasterSub", c => c.GeneralApi.MasterSub,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+
+            );
+        }
     }
 }
