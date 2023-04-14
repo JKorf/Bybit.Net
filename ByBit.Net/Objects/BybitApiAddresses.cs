@@ -102,6 +102,15 @@
         public string UnifiedMarginPrivateSocketClientAddress { get; set; } = "";
 
         /// <summary>
+        /// The address used by the BybitSocketClient for the V5 socket API
+        /// </summary>
+        public string V5PrivateSocketClientAddress { get; set; } = "";
+        /// <summary>
+        /// The address used by the BybitSocketClient for the V5 socket API
+        /// </summary>
+        public string V5PublicSocketClientAddress { get; set; } = "";
+
+        /// <summary>
         /// The default addresses to connect to the Bybit.com API
         /// </summary>
         public static BybitApiAddresses Default = new BybitApiAddresses
@@ -129,6 +138,8 @@
             UnifiedMarginPrivateSocketClientAddress = "wss://stream.bybit.com/unified/private/v3",
             ContractPrivateSocketClientAddress = "wss://stream.bybit.com/contract/private/v3",
 
+            V5PublicSocketClientAddress = "wss://stream.bybit.com/v5/public",
+            V5PrivateSocketClientAddress = "wss://stream.bybit.com/v5/private"
         };
 
         /// <summary>
@@ -156,6 +167,9 @@
             DerivativesPublicInverseSocketClientAddress = "wss://stream-testnet.bybit.com/contract/inverse/public/v3",
             UnifiedMarginPrivateSocketClientAddress = "wss://stream-testnet.bybit.com/unified/private/v3",
             ContractPrivateSocketClientAddress = "wss://stream-testnet.bybit.com/contract/private/v3",
+
+            V5PublicSocketClientAddress = "wss://stream-testnet.bybit.com/v5/public",
+            V5PrivateSocketClientAddress = "wss://stream-testnet.bybit.com/v5/private"
         };
     }
 }

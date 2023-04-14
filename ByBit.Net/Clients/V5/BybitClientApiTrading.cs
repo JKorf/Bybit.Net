@@ -9,12 +9,14 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net;
 using Bybit.Net.Objects.Models.V5;
 using System.Globalization;
+using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Enums.V5;
 
 namespace Bybit.Net.Clients.V5
 {
-    public class BybitClientApiTrading
+    /// <inheritdoc />
+    public class BybitClientApiTrading : IBybitClientApiTrading
     {
-
         private BybitClientApi _baseClient;
 
         internal BybitClientApiTrading(BybitClientApi baseClient)
@@ -39,7 +41,7 @@ namespace Bybit.Net.Clients.V5
             TriggerType? triggerBy = null,
             decimal? orderIv = null,
             TimeInForce? timeInForce = null,
-            PositionMode? positionMode = null,
+            Enums.V5.PositionMode? positionMode = null,
             string? clientOrderId = null,
             decimal? takeProfit = null,
             decimal? stopLoss = null,
@@ -157,10 +159,10 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Get Open Order
+        #region Get Open Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<Objects.Models.V5.BybitOrder>>> GetOpenOrdersAsync(
+        public async Task<WebCallResult<BybitResponse<Objects.Models.V5.BybitOrder>>> GetOrdersAsync(
             Category category,
             string? symbol = null,
             string? baseAsset = null,
@@ -196,7 +198,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Cancel order
+        #region Cancel All Orders
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(
@@ -222,7 +224,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Get Open Order
+        #region Get Order History
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<Objects.Models.V5.BybitOrder>>> GetOrderHistoryAsync(
@@ -259,7 +261,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Place order
+        #region Get Borrow Quota
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitBorrowQuota>> GetBorrowQuotaAsync(
@@ -283,7 +285,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Place order
+        #region Set Disconnect Cancel All
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitBorrowQuota>> SetDisconnectCancelAllAsync(
@@ -296,6 +298,210 @@ namespace Bybit.Net.Clients.V5
             };
 
             return await _baseClient.SendRequestAsync<BybitBorrowQuota>(_baseClient.GetUrl("v5/order/disconnected-cancel-all"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get User Trades
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitUserTrade>>> GetUserTradesAsync(
+            Category category,
+            string? symbol = null,
+            string? baseAsset = null,
+            string? orderId = null,
+            string? clientOrderId = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            TradeType? tradeType = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) }
+            };
+
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("baseCoin", baseAsset);
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("orderLinkId", clientOrderId);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("execType", EnumConverter.GetString(tradeType));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            return await _baseClient.SendRequestAsync<BybitResponse<BybitUserTrade>>(_baseClient.GetUrl("v5/execution/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Positions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitPosition>>> GetPositionsAsync(
+            Category category,
+            string? symbol = null,
+            string? baseAsset = null,
+            string? settleAsset = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) },
+            };
+
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("baseCoin", baseAsset);
+            parameters.AddOptionalParameter("settleCoin", settleAsset);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            return await _baseClient.SendRequestAsync<BybitResponse<BybitPosition>>(_baseClient.GetUrl("v5/position/list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Asset Exchange History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitAssetExchange>>> GetAssetExchangeHistoryAsync(
+            string? fromAsset = null,
+            string? toAsset = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("fromCoin", fromAsset);
+            parameters.AddOptionalParameter("toCoin", toAsset);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            var result = await _baseClient.SendRequestAsync<BybitAssetExchageWrapper>(_baseClient.GetUrl("v5/asset/exchange/order-record"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitAssetExchange>>(null);
+
+            return result.As(result.Data.OrderBody);
+        }
+
+        #endregion
+
+        #region Get Delivery History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitDeliveryRecord>>> GetDeliveryHistoryAsync(
+            Category category,
+            string? symbol = null,
+            DateTime? expiryDate = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) }
+            };
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("expDate", DateTimeConverter.ConvertToMilliseconds(expiryDate));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            return await _baseClient.SendRequestAsync<BybitResponse<BybitDeliveryRecord>>(_baseClient.GetUrl("v5/asset/delivery-record"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Settlement History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitSettlementRecord>>> GetSettlementHistoryAsync(
+            Category category,
+            string? symbol = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) }
+            };
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            return await _baseClient.SendRequestAsync<BybitResponse<BybitSettlementRecord>>(_baseClient.GetUrl("v5/asset/settlement-record"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+
+        #region Get Closed Profit And Loss
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitClosedPnl>>> GetClosedProfitLossAsync(
+            Category category,
+            string? symbol = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) }
+            };
+
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            return await _baseClient.SendRequestAsync<BybitResponse<BybitClosedPnl>>(_baseClient.GetUrl("v5/position/closed-pnl"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Set Trading Stop
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> SetTradingStopAsync(
+            Category category,
+            string symbol,
+            PositionIdx positionIdx,
+            decimal? takeProfit = null,
+            decimal? stopLoss = null,
+            decimal? trailingStop = null,
+            TriggerType? takeProfitTrigger = null,
+            TriggerType? stopLossTrigger = null,
+            decimal? activePrice = null,
+            decimal? takeProfitQuantity = null,
+            decimal? stopLossQuantity = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "symbol", symbol },
+                { "positionIdx", EnumConverter.GetString(positionIdx) }
+            };
+
+            parameters.AddOptionalParameter("takeProfit", takeProfit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("stopLoss", stopLoss?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("trailingStop", trailingStop?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("tpTriggerBy", EnumConverter.GetString(takeProfitTrigger));
+            parameters.AddOptionalParameter("slTriggerBy", EnumConverter.GetString(stopLossTrigger));
+            parameters.AddOptionalParameter("activePrice", activePrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("tpSize", takeProfitQuantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("slSize", stopLossQuantity?.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/position/trading-stop"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion

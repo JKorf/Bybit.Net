@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 {
     /// <summary>
-    /// Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+    /// Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and changing account settings
     /// </summary>
     public interface IBybitClientUsdPerpetualApiAccount
     {

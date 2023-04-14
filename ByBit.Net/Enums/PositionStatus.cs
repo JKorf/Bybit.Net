@@ -1,4 +1,6 @@
-﻿namespace Bybit.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Position status
@@ -8,14 +10,17 @@
         /// <summary>
         /// Normal
         /// </summary>
+        [Map("Normal")]
         Normal,
         /// <summary>
         /// Liquidation
         /// </summary>
+        [Map("Liq")]
         Liqidation,
         /// <summary>
         /// Auto deleverage
         /// </summary>
+        [Map("Adl")]
         AutoDeleverage
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Bybit.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Trade type
@@ -8,22 +10,32 @@
         /// <summary>
         /// Normal trade
         /// </summary>
+        [Map("Trade")]
         Trade,
         /// <summary>
         /// Adl trade
         /// </summary>
+        [Map("AdlTrade")]
         AdlTrade,
         /// <summary>
         /// Funding trade
         /// </summary>
+        [Map("Funding")]
         Funding,
         /// <summary>
         /// Bankruptcy trade
         /// </summary>
+        [Map("BustTrade")]
         BustTrade,
         /// <summary>
         /// Settle
         /// </summary>
-        Settle
+        [Map("Settle")]
+        Settle,
+        /// <summary>
+        /// Delivery
+        /// </summary>
+        [Map("Delivery")]
+        Delivery
     }
 }

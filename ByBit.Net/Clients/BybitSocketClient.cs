@@ -19,6 +19,8 @@ using Bybit.Net.Clients.DerivativesApi.ContractApi;
 using Bybit.Net.Clients.DerivativesApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi;
 using CryptoExchange.Net.Authentication;
+using Bybit.Net.Clients.V5;
+using Bybit.Net.Interfaces.Clients.V5;
 
 namespace Bybit.Net.Clients
 {
@@ -45,6 +47,14 @@ namespace Bybit.Net.Clients
         public IBybitSocketClientUnifiedMarginStreams UnifiedMarginPrivate { get; }
         /// <inheritdoc />
         public IBybitSocketClientContractStreams ContractPrivate { get; }
+        /// <inheritdoc />
+        public IBybitSocketClientSpotStreams V5SpotStreams { get; }
+        /// <inheritdoc />
+        public IBybitSocketClientLinearStreams V5LinearStreams { get; }
+        /// <inheritdoc />
+        public IBybitSocketClientOptionStreams V5OptionsStreams { get; }
+        /// <inheritdoc />
+        public IBybitSocketClientPrivateStreams V5PrivateStreams { get; }
 
         /// <summary>
         /// Create a new instance of BybitSocketClientFutures using the default options
@@ -54,7 +64,7 @@ namespace Bybit.Net.Clients
         }
 
         /// <summary>
-        /// Create a new instance of BybitSocketClientFutures using provided options
+        /// Create a new instance of BybitSocketClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
         public BybitSocketClient(BybitSocketClientOptions options) : base("Bybit", options)
@@ -73,6 +83,11 @@ namespace Bybit.Net.Clients
             DerivativesPublic = AddApiClient(new BybitSocketClientDerivativesPublicStreams(log, options));
             UnifiedMarginPrivate = AddApiClient(new BybitSocketClientUnifiedMarginStreams(log, options));
             ContractPrivate = AddApiClient(new BybitSocketClientContractStreams(log, options));
+
+            V5SpotStreams = AddApiClient(new BybitSocketClientSpotStreams(log, options));
+            V5LinearStreams = AddApiClient(new BybitSocketClientLinearStreams(log, options));
+            V5OptionsStreams = AddApiClient(new BybitSocketClientOptionStreams(log, options));
+            V5PrivateStreams = AddApiClient(new BybitSocketClientPrivateStreams(log, options));
         }
 
         /// <summary>
@@ -96,6 +111,10 @@ namespace Bybit.Net.Clients
             DerivativesPublic.SetApiCredentials(credentials);
             UnifiedMarginPrivate.SetApiCredentials(credentials);
             ContractPrivate.SetApiCredentials(credentials);
+            V5LinearStreams.SetApiCredentials(credentials);
+            V5OptionsStreams.SetApiCredentials(credentials);
+            V5PrivateStreams.SetApiCredentials(credentials);
+            V5SpotStreams.SetApiCredentials(credentials);
         }
     }
 }

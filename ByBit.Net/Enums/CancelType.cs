@@ -80,6 +80,10 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Cancel by DCP
         /// </summary>
-        CancelByDCP
+        CancelByDCP,
+        /// <summary>
+        /// Unknown
+        /// </summary>
+        Unknown
     }
 }

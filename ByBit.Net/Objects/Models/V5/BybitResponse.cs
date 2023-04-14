@@ -8,10 +8,9 @@ using System.Text;
 namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
-    /// Bybit response info
+    /// Bybit response
     /// </summary>
-    /// <typeparam name="T">Type of the response data</typeparam>
-    public class BybitResponse<T>
+    public class BybitBaseResponse
     {
         /// <summary>
         /// Category
@@ -31,14 +30,29 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         public string? NextPageCursor { get; set; }
         /// <summary>
-        /// Data list
-        /// </summary>
-        public IEnumerable<T> List { get; set; } = Array.Empty<T>();
-        /// <summary>
         /// Data updated time
         /// </summary>
         [JsonProperty("updatedTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? UpdateTime { get; set; }
+    }
+
+    /// <summary>
+    /// Bybit response info
+    /// </summary>
+    /// <typeparam name="T">Type of the response data</typeparam>
+    public class BybitResponse<T> : BybitBaseResponse
+    {
+        /// <summary>
+        /// Data list
+        /// </summary>
+        public IEnumerable<T> List { get; set; } = Array.Empty<T>();
+
+        [JsonProperty("rows")]
+        internal IEnumerable<T> Rows
+        {
+            get => List;
+            set => List = value;
+        }
     }
 }

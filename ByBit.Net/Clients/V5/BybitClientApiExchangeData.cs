@@ -1,6 +1,7 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
+using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc />
-    public class BybitClientApiExchangeData
+    public class BybitClientApiExchangeData : IBybitClientApiExchangeData
     {
         private BybitClientApi _baseClient;
 
@@ -40,6 +41,17 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
 
             return await _baseClient.SendRequestAsync<BybitResponse<BybitAnnouncement>>(_baseClient.GetUrl("v5/announcements/index"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Server Time
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default)
+        {
+            // V5 doesn't have it's own server time endpoint (yet)
+            return await _baseClient.SendRequestAsync<BybitTime>(_baseClient.GetUrl("v3/public/time"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
 
         #endregion
@@ -209,7 +221,7 @@ namespace Bybit.Net.Clients.V5
             };
             parameters.AddOptionalParameter("symbol", symbol);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitSpotTicker>>(_baseClient.GetUrl("v5/market/tickers"), HttpMethod.Get, ct, parameters).ConfigureAwait(false); 
+            return await _baseClient.SendRequestAsync<BybitResponse<BybitSpotTicker>>(_baseClient.GetUrl("v5/market/tickers"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -378,7 +390,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Delivery Price
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Category category, string? symbol = null, string? baseAsset = null, int? limit = null, string cursor = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Category category, string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
             if (category != Category.Linear && category != Category.Inverse)
                 throw new ArgumentException("Invalid category; should be Linear or Inverse");

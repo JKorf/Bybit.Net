@@ -40,8 +40,8 @@ namespace Bybit.Net.Clients
         public IBybitClientCopyTradingApi CopyTradingApi { get; }
         /// <inheritdoc />
         public IBybitClientDerivativesApi DerivativesApi { get; }
-
-        public V5.BybitClientApi V5Api { get; }
+        /// <inheritdoc />
+        public Interfaces.Clients.V5.IBybitClientApi V5Api { get; }
 
         #region constructor/destructor
         /// <summary>
@@ -89,6 +89,7 @@ namespace Bybit.Net.Clients
             GeneralApi.SetApiCredentials(credentials);
             CopyTradingApi.SetApiCredentials(credentials);
             DerivativesApi.SetApiCredentials(credentials);
+            V5Api.SetApiCredentials(credentials);
         }
     }
 }

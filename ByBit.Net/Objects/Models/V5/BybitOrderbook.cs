@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Order book entry
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitOrderbookEntry
+    public class BybitOrderbookEntry : ISymbolOrderBookEntry
     {
         /// <summary>
         /// Price of the entry

@@ -279,6 +279,22 @@ namespace Bybit.Net.Objects
             set => _contractStreamsOptions = new BybitSocketApiClientOptions(_contractStreamsOptions, value);
         }
 
+        private BybitSocketApiClientOptions _v5StreamOptions = new BybitSocketApiClientOptions(BybitApiAddresses.Default.V5PublicSocketClientAddress, BybitApiAddresses.Default.V5PrivateSocketClientAddress)
+        {
+            SocketSubscriptionsCombineTarget = 10,
+            PingInterval = TimeSpan.FromSeconds(20)
+        };
+
+        /// <summary>
+        /// V5 streams options
+        /// </summary>
+        public BybitSocketApiClientOptions V5StreamsOptions
+        {
+            get => _v5StreamOptions;
+            set => _v5StreamOptions = new BybitSocketApiClientOptions(_v5StreamOptions, value);
+        }
+
+
         /// <summary>
         /// ctor
         /// </summary>
@@ -303,6 +319,7 @@ namespace Bybit.Net.Objects
             DerivativesPublicStreamsOptions = new BybitDerivativesSocketApiClientOptions(baseOn.DerivativesPublicStreamsOptions, null);
             UnifiedMarginStreamsOptions = new BybitSocketApiClientOptions(baseOn.UnifiedMarginStreamsOptions, null);
             ContractStreamsOptions = new BybitSocketApiClientOptions(baseOn.ContractStreamsOptions, null);
+            V5StreamsOptions = new BybitSocketApiClientOptions(baseOn.V5StreamsOptions, null);
         }
     }
 
