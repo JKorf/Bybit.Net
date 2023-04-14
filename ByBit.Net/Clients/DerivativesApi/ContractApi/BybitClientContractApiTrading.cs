@@ -50,8 +50,8 @@ namespace Bybit.Net.Clients.DerivativesApi.ContractApi
             parameters.AddOptionalParameter("tpTriggerBy", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("slTriggerBy", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
 
-            parameters.AddOptionalParameter("reduceOnly", reduceOnly?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("closeOnTrigger", closeOnTrigger?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("reduceonly", reduceOnly?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("closeontrigger", closeOnTrigger?.ToString(CultureInfo.InvariantCulture));
 
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 

@@ -42,13 +42,24 @@ namespace Bybit.UnitTests
             var assembly = Assembly.GetAssembly(typeof(BybitSocketClient));
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBybitSocketClient"));
 
-            foreach (var clientInterface in clientInterfaces)
+            foreach (var clientInterface in clientInterfaces.Where(t => t.Name != "IBybitSocketClientBaseStreams"))
             {
-                var implementation = assembly.GetTypes().Single(t => t.IsAssignableTo(clientInterface) && t != clientInterface);
+                var implementation = assembly.GetTypes().First(t => t.IsAssignableTo(clientInterface) && t != clientInterface);
                 int methods = 0;
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task<CallResult<UpdateSubscription>>))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
+                    if (interfaceMethod == null)
+                    {
+                        var interfaces = clientInterface.GetInterfaces();
+                        foreach(var inf in interfaces)
+                        {
+                            interfaceMethod = inf.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
+                            if (interfaceMethod != null)
+                                break;
+                        }
+                    }
+                    
                     Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.Name}");
                     methods++;
                 }
