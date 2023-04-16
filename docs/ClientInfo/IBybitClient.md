@@ -33,3 +33,6 @@ has_children: true
 ***
 *USD perpetual API endpoints*  
 **[IBybitClientUsdPerpetualApi](UsdPerpetualApi/IBybitClientUsdPerpetualApi.html) UsdPerpetualApi { get; }**  
+***
+*V5 API endpoints*  
+**V5.IBybitClientApi V5Api { get; }**  

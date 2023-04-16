@@ -36,3 +36,15 @@ has_children: true
 ***
 *USD perpetual streams*  
 **[IBybitSocketClientUsdPerpetualStreams](UsdPerpetualApi/IBybitSocketClientUsdPerpetualStreams.html) UsdPerpetualStreams { get; }**  
+***
+*V5 Linear streams*  
+**[IBybitSocketClientLinearStreams](LinearApi/IBybitSocketClientLinearStreams.html) V5LinearStreams { get; }**  
+***
+*V5 Option streams*  
+**[IBybitSocketClientOptionStreams](OptionApi/IBybitSocketClientOptionStreams.html) V5OptionsStreams { get; }**  
+***
+*V5 Private streams*  
+**[IBybitSocketClientPrivateStreams](PrivateApi/IBybitSocketClientPrivateStreams.html) V5PrivateStreams { get; }**  
+***
+*V5 Spot streams*  
+**[IBybitSocketClientSpotStreams](SpotApi/IBybitSocketClientSpotStreams.html) V5SpotStreams { get; }**  

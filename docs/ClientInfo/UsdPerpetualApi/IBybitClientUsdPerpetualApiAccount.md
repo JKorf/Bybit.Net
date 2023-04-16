@@ -6,7 +6,7 @@ grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitClient > UsdPerpetualApi > Account`  
-*Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
+*Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and changing account settings*
   
 
 ***
