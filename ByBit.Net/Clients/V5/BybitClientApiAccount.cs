@@ -424,7 +424,7 @@ namespace Bybit.Net.Clients.V5
                 { "fromAccountType", EnumConverter.GetString(fromAccountType) },
                 { "toAccountType", EnumConverter.GetString(toAccountType) },
                 { "coin", asset },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "transferId", transferId ?? Guid.NewGuid().ToString() }
             };
 
