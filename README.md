@@ -28,6 +28,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 2.0.1 - 25 Apr 2023
+    * Fixed V5.Account.CreateInternalTransfer endpoint
+
 * Version 2.0.0 - 14 Apr 2023
     * Added V5 API implementation
     * Fixed contract PlaceOrder parameters
