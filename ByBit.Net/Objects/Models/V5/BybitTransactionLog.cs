@@ -40,7 +40,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Quantity
         /// </summary>
         [JsonProperty("qty")]
-        public decimal Quantity { get; set; }
+        public decimal? Quantity { get; set; }
         /// <summary>
         /// Size
         /// </summary>

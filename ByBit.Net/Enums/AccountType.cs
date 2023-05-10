@@ -39,6 +39,11 @@ namespace Bybit.Net.Enums
         /// Funding account
         /// </summary>
         [Map("FUND")]
-        Fund
+        Fund,
+        /// <summary>
+        /// Unified account
+        /// </summary>
+        [Map("UNIFIED")]
+        Unified,
     }
 }

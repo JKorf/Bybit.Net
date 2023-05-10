@@ -235,7 +235,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitAccountInfo>>> GetTransactionHistoryAsync(AccountType? accountType = null, Category? category = null, string? asset = null, string? baseAsset = null, TransactionLogType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitTransactionLog>>> GetTransactionHistoryAsync(AccountType? accountType = null, Category? category = null, string? asset = null, string? baseAsset = null, TransactionLogType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a list of transferable assets between accounts
