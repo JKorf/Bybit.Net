@@ -193,7 +193,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="triggerBy">Trigger by</param>
         /// <param name="orderIv">Order implied volatility</param>
         /// <param name="timeInForce">Time in force</param>
-        /// <param name="positionMode">Position mode</param>
+        /// <param name="positionIdx">Position idx</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="takeProfit">Take profit price</param>
         /// <param name="stopLoss">Stop loss price</param>
@@ -204,7 +204,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="marketMakerProtection">Market maker protection</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = null, bool? isLeverage = null, TriggerDirection? triggerDirection = null, OrderFilter? orderFilter = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, TimeInForce? timeInForce = null, Enums.V5.PositionMode? positionMode = null, string? clientOrderId = null, decimal? takeProfit = null, decimal? stopLoss = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, bool? reduceOnly = null, bool? closeOnTrigger = null, bool? marketMakerProtection = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = null, bool? isLeverage = null, TriggerDirection? triggerDirection = null, OrderFilter? orderFilter = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, TimeInForce? timeInForce = null, Enums.V5.PositionIdx? positionIdx = null, string? clientOrderId = null, decimal? takeProfit = null, decimal? stopLoss = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, bool? reduceOnly = null, bool? closeOnTrigger = null, bool? marketMakerProtection = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set cancel all timeout on websocket disconnect
