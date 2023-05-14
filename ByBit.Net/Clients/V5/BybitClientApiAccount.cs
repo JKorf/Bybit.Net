@@ -673,7 +673,7 @@ namespace Bybit.Net.Clients.V5
                 { "coin", asset },
                 { "chain", network },
                 { "address", toAddress },
-                { "coin", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "timestamp", DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow) }
             };
 
