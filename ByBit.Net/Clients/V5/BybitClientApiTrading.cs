@@ -41,7 +41,7 @@ namespace Bybit.Net.Clients.V5
             TriggerType? triggerBy = null,
             decimal? orderIv = null,
             TimeInForce? timeInForce = null,
-            Enums.V5.PositionMode? positionMode = null,
+            Enums.V5.PositionIdx? positionIdx = null,
             string? clientOrderId = null,
             decimal? takeProfit = null,
             decimal? stopLoss = null,
@@ -70,7 +70,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("triggerBy", EnumConverter.GetString(triggerBy));
             parameters.AddOptionalParameter("orderIv", orderIv?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForce", EnumConverter.GetString(timeInForce));
-            parameters.AddOptionalParameter("positionMode", positionMode == null ? null : (int)positionMode);
+            parameters.AddOptionalParameter("positionIdx", positionIdx == null ? null : (int)positionIdx);
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("takeProfit", takeProfit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopLoss", stopLoss?.ToString(CultureInfo.InvariantCulture));
