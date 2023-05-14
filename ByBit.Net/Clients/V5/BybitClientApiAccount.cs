@@ -275,7 +275,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Transaction History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<BybitAccountInfo>>> GetTransactionHistoryAsync(
+        public async Task<WebCallResult<BybitResponse<BybitTransactionLog>>> GetTransactionHistoryAsync(
             AccountType? accountType = null,
             Category? category = null,
             string? asset = null,
@@ -298,7 +298,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitAccountInfo>>(_baseClient.GetUrl("v5/account/transaction-log"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitResponse<BybitTransactionLog>>(_baseClient.GetUrl("v5/account/transaction-log"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
