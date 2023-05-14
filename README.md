@@ -33,11 +33,6 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
     * Fixed V5 Account Withdraw incorrect parameter name
     * Fixed V5 Trading PlaceOrder incorrect position parameter
 
-* Version 2.0.2 - 14 May 2023
-    * Fixed V5 GetTransactionHistory response model
-    * Fixed V5 Account Withdraw incorrect parameter name
-    * Fixed V5 Trading PlaceOrder incorrect position parameter
-
 * Version 2.0.1 - 25 Apr 2023
     * Fixed V5.Account.CreateInternalTransfer endpoint
 
