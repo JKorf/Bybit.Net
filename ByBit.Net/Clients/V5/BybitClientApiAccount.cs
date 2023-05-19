@@ -253,6 +253,10 @@ namespace Bybit.Net.Clients.V5
         {
             var parameters = new Dictionary<string, object>();
 
+            if (category != Category.Undefined)
+            {
+                parameters.AddOptionalParameter("category", EnumConverter.GetString(category));
+            }
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("baseCoin", baseAsset);
 
