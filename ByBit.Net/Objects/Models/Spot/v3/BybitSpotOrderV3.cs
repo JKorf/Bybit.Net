@@ -68,7 +68,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Creation time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonProperty("createTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Last update time
