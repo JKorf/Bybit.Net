@@ -75,7 +75,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Delivery fee rate
         /// </summary>
-        public decimal DeliveryFeeRate { get; set; }
+        public decimal? DeliveryFeeRate { get; set; }
         /// <summary>
         /// Delivery time
         /// </summary>
@@ -111,11 +111,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Basis rate
         /// </summary>
-        public decimal BasisRate { get; set; }
+        public decimal? BasisRate { get; set; }
         /// <summary>
         /// Basis
         /// </summary>
-        public decimal Basis { get; set; }
+        public decimal? Basis { get; set; }
         /// <summary>
         /// Predicted delivery price
         /// </summary>
