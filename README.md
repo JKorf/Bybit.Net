@@ -28,6 +28,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 2.0.4 - 02 Jun 2023
+    * Fixed deserialization error on V5 Inverse ticker model
+    * Fixed V5 GetOrder incorrect validation check
+
 * Version 2.0.3 - 22 May 2023
     * Fixed category parameter not being send on V5 GetFreeRateAsync
     * Fixed CreateTime deserialization on Spot V3 order model
