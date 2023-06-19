@@ -84,15 +84,15 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Open interest
         /// </summary>
-        public decimal OpenInterest { get; set; }
+        public decimal? OpenInterest { get; set; }
         /// <summary>
         /// Open interest value
         /// </summary>
-        public decimal OpenInterestValue { get; set; }
+        public decimal? OpenInterestValue { get; set; }
         /// <summary>
         /// Funding rate
         /// </summary>
-        public decimal FundingRate { get; set; }
+        public decimal? FundingRate { get; set; }
         /// <summary>
         /// Next funding time
         /// </summary>
