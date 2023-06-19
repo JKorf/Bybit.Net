@@ -483,6 +483,11 @@ namespace Bybit.Net.Clients.V5
             decimal? activePrice = null,
             decimal? takeProfitQuantity = null,
             decimal? stopLossQuantity = null,
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
+            decimal? takeProfitLimitPrice = null,
+            decimal? stopLossLimitPrice = null,
+            OrderType? takeProfitOrderType = null,
+            OrderType? stopLossOrderType = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
@@ -500,6 +505,12 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("activePrice", activePrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tpSize", takeProfitQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("slSize", stopLossQuantity?.ToString(CultureInfo.InvariantCulture));
+
+            parameters.AddOptionalParameter("tpslMode", EnumConverter.GetString(stopLossTakeProfitMode));
+            parameters.AddOptionalParameter("tpLimitPrice", takeProfitLimitPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("slLimitPrice", stopLossLimitPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("tpOrderType", EnumConverter.GetString(takeProfitOrderType));
+            parameters.AddOptionalParameter("slOrderType", EnumConverter.GetString(stopLossOrderType));
 
             return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/position/trading-stop"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }

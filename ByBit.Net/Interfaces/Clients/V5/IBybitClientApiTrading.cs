@@ -230,9 +230,31 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="activePrice">Active price</param>
         /// <param name="takeProfitQuantity">Take profit quantity</param>
         /// <param name="stopLossQuantity">Stop loss quantity</param>
+        /// <param name="stopLossTakeProfitMode">StopLoss/TakeProfit mode</param>
+        /// <param name="takeProfitLimitPrice">Take profit order limit price</param>
+        /// <param name="stopLossLimitPrice">Stop loss order price</param>
+        /// <param name="takeProfitOrderType">Take profit order type</param>
+        /// <param name="stopLossOrderType">Stop loss order type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SetTradingStopAsync(Category category, string symbol, PositionIdx positionIdx, decimal? takeProfit = null, decimal? stopLoss = null, decimal? trailingStop = null, TriggerType? takeProfitTrigger = null, TriggerType? stopLossTrigger = null, decimal? activePrice = null, decimal? takeProfitQuantity = null, decimal? stopLossQuantity = null, CancellationToken ct = default);
+        Task<WebCallResult> SetTradingStopAsync(
+            Category category, 
+            string symbol, 
+            PositionIdx positionIdx, 
+            decimal? takeProfit = null, 
+            decimal? stopLoss = null, 
+            decimal? trailingStop = null, 
+            TriggerType? takeProfitTrigger = null, 
+            TriggerType? stopLossTrigger = null,
+            decimal? activePrice = null,
+            decimal? takeProfitQuantity = null, 
+            decimal? stopLossQuantity = null,
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
+            decimal? takeProfitLimitPrice = null,
+            decimal? stopLossLimitPrice = null,
+            OrderType? takeProfitOrderType = null,
+            OrderType? stopLossOrderType = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get closed profit and loss
