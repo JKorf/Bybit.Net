@@ -31,6 +31,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonConverter(typeof(EnumConverter))]
         public SymbolStatus Status { get; set; }
         /// <summary>
+        /// Marging trade status
+        /// </summary>
+        [JsonConverter(typeof(EnumConverter))]
+        public MarginTrading MarginTading { get; set; }
+        /// <summary>
         /// Is innovation
         /// </summary>
         [JsonConverter(typeof(BoolConverter))]

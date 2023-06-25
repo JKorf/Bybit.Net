@@ -3,52 +3,57 @@ title: Getting started
 nav_order: 2
 ---
 
-
 ## Creating client
-There are 2 clients available to interact with the Bybit API, the `BybitClient` and `BybitSocketClient`.
+There are 2 clients available to interact with the Bybit API, the `BybitRestClient` and `BybitSocketClient`. They can be created manually on the fly or be added to the dotnet DI using the `AddBybit` extension method.
 
 *Create a new rest client*
 ```csharp
-var bybitClient = new BybitClient(new BybitClientOptions()
+var bybitRestClient = new BybitRestClient(options =>
+{
+	// Set options here for this client
+});
+
+var bybitSocketClient = new BybitSocketClient(options =
 {
 	// Set options here for this client
 });
 ```
 
-*Create a new socket client*
+*Using dotnet dependency inject*
 ```csharp
-var bybitSocketClient = new BybitSocketClient(new BybitSocketClientOptions()
-{
-	// Set options here for this client
-});
+services.AddBybit(
+	restOptions => {
+		// set options for the rest client
+	},
+	socketClientOptions => {
+		// set options for the socket client
+	});	
+	
+// IBybitRestClient, IBybitSocketClient and IBybitOrderBookFactory are now available for injecting
 ```
 
 Different options are available to set on the clients, see this example
 ```csharp
-var bybitClient = new BybitClient(new BybitClientOptions()
+var bybitRestClient = new BybitRestClient(options =>
 {
-	ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET"),
-	LogLevel = LogLevel.Trace,
-	InverseFuturesApiOptions = new RestApiClientOptions
-	{
-		ApiCredentials = new ApiCredentials("FUTURES-API-KEY", "FUTURES-API-SECRET"),
-		AutoTimestamp = false,
-		RequestTimeout = TimeSpan.FromSeconds(60)
-	}
+	options.ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET");
+	// override options just for the InverseFuturesOptions api
+	options.InverseFuturesOptions.ApiCredentials = new ApiCredentials("FUTURES-API-KEY", "FUTURES-API-SECRET");
+	options.InverseFuturesOptions.RequestTimeout  = TimeSpan.FromSeconds(60);
 });
 ```
-Alternatively, options can be provided before creating clients by using `SetDefaultOptions`:
+Alternatively, options can be provided before creating clients by using `SetDefaultOptions` or during the registration in the DI container: 
 ```csharp
-BybitClient.SetDefaultOptions(new BybitClientOptions{
+BybitRestClient.SetDefaultOptions(options => {
 	// Set options here for all new clients
 });
-var bybitClient = new BybitClient();
+var bybitClient = new BybitRestClient();
 ```
 More info on the specific options can be found in the [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net/Options.html)
 
 These clients can be used to communicate with the Bybit exchange. See [Examples](Examples.html) for examples on basic operations
 
 ### Dependency injection
-See the [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net/Clients.html#dependency-injection)
+See [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net/Dependency%20Injection.html)
 
 

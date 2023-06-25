@@ -1,4 +1,6 @@
-﻿namespace Bybit.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Stream category of Symbol to subscribe for Derivatives public streams
@@ -9,18 +11,22 @@
         /// <summary>
         /// USDT perpetual
         /// </summary>
+        [Map("contract/usdt")]
         USDTPerp,
         /// <summary>
         /// USDC perpetual
         /// </summary>
+        [Map("contract/usdc")]
         USDCPerp,
         /// <summary>
         /// USDC option
         /// </summary>
+        [Map("option/usdc")]
         USDCOption,
         /// <summary>
         /// Inverse
         /// </summary>
+        [Map("contract/inverse")]
         Inverse
     }
 }

@@ -21,6 +21,8 @@ using Bybit.Net.Interfaces.Clients.DerivativesApi;
 using CryptoExchange.Net.Authentication;
 using Bybit.Net.Clients.V5;
 using Bybit.Net.Interfaces.Clients.V5;
+using Microsoft.Extensions.Logging;
+using Bybit.Net.Objects.Options;
 
 namespace Bybit.Net.Clients
 {
@@ -28,93 +30,106 @@ namespace Bybit.Net.Clients
     public class BybitSocketClient : BaseSocketClient, IBybitSocketClient
     {
         /// <inheritdoc />
-        public IBybitSocketClientUsdPerpetualStreams UsdPerpetualStreams { get; }
+        public IBybitSocketClientUsdPerpetualApi UsdPerpetualApi { get; }
         /// <inheritdoc />
-        public IBybitSocketClientInversePerpetualStreams InversePerpetualStreams { get; }
+        public IBybitSocketClientInversePerpetualApi InversePerpetualApi { get; }
         /// <inheritdoc />
-        public IBybitSocketClientSpotStreamsV1 SpotStreamsV1 { get; }
+        public IBybitSocketClientSpotApiV1 SpotV1Api { get; }
         /// <inheritdoc />
-        public IBybitSocketClientSpotStreamsV2 SpotStreamsV2 { get; }
+        public IBybitSocketClientSpotApiV2 SpotV2Api { get; }
         /// <inheritdoc />
-        public IBybitSocketClientSpotStreamsV3 SpotStreamsV3 { get; }
+        public IBybitSocketClientSpotApiV3 SpotV3Api { get; }
 
         /// <inheritdoc />
-        public IBybitSocketClientCopyTradingStreams CopyTrading { get; }
+        public IBybitSocketClientCopyTradingApi CopyTradingApi { get; }
 
         /// <inheritdoc />
-        public IBybitSocketClientDerivativesPublicStreams DerivativesPublic { get; }
+        public IBybitSocketClientDerivativesPublicApi DerivativesApi { get; }
         /// <inheritdoc />
-        public IBybitSocketClientUnifiedMarginStreams UnifiedMarginPrivate { get; }
+        public IBybitSocketClientUnifiedMarginApi UnifiedMarginApi { get; }
         /// <inheritdoc />
-        public IBybitSocketClientContractStreams ContractPrivate { get; }
+        public IBybitSocketClientContractApi ContractApi { get; }
         /// <inheritdoc />
-        public IBybitSocketClientSpotStreams V5SpotStreams { get; }
+        public IBybitSocketClientSpotApi V5SpotApi { get; }
         /// <inheritdoc />
-        public IBybitSocketClientLinearStreams V5LinearStreams { get; }
+        public IBybitSocketClientLinearApi V5LinearApi { get; }
         /// <inheritdoc />
-        public IBybitSocketClientOptionStreams V5OptionsStreams { get; }
+        public IBybitSocketClientOptionApi V5OptionsApi { get; }
         /// <inheritdoc />
-        public IBybitSocketClientPrivateStreams V5PrivateStreams { get; }
+        public IBybitSocketClientPrivateApi V5PrivateApi { get; }
 
         /// <summary>
-        /// Create a new instance of BybitSocketClientFutures using the default options
+        /// Create a new instance of the BybitSocketClient
         /// </summary>
-        public BybitSocketClient() : this(BybitSocketClientOptions.Default)
+        /// <param name="loggerFactory">The logger factory</param>
+        public BybitSocketClient(ILoggerFactory? loggerFactory = null) : this((x) => { }, loggerFactory)
         {
         }
 
         /// <summary>
-        /// Create a new instance of BybitSocketClient using provided options
+        /// Create a new instance of the BybitSocketClient
         /// </summary>
-        /// <param name="options">The options to use for this client</param>
-        public BybitSocketClient(BybitSocketClientOptions options) : base("Bybit", options)
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        public BybitSocketClient(Action<BybitSocketOptions> optionsDelegate) : this(optionsDelegate, null)
         {
-            if (options == null)
-                throw new ArgumentException("Cant pass null options, use empty constructor for default");
+        }
 
-            UsdPerpetualStreams = AddApiClient(new BybitSocketClientUsdPerpetualStreams(log, this, options));
-            InversePerpetualStreams = AddApiClient(new BybitSocketClientInversePerpetualStreams(log, options));
-            SpotStreamsV1 = AddApiClient(new BybitSocketClientSpotStreamsV1(log, options));
-            SpotStreamsV2 = AddApiClient(new BybitSocketClientSpotStreamsV2(log, options));
-            SpotStreamsV3 = AddApiClient(new BybitSocketClientSpotStreamsV3(log, options));
+        /// <summary>
+        /// Create a new instance of the BybitSocketClient
+        /// </summary>
+        /// <param name="loggerFactory">The logger factory</param>
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        public BybitSocketClient(Action<BybitSocketOptions> optionsDelegate, ILoggerFactory? loggerFactory = null) : base(loggerFactory, "Bybit")
+        {
+            var options = BybitSocketOptions.Default.Copy();
+            optionsDelegate(options);
+            Initialize(options);
 
-            CopyTrading = AddApiClient(new BybitSocketClientCopyTradingStreams(log, options));
+            UsdPerpetualApi = AddApiClient(new BybitSocketClientUsdPerpetualApi(_logger, options));
+            InversePerpetualApi = AddApiClient(new BybitSocketClientInversePerpetualApi(_logger, options));
+            SpotV1Api = AddApiClient(new BybitSocketClientSpotApiV1(_logger, options));
+            SpotV2Api = AddApiClient(new BybitSocketClientSpotApiV2(_logger, options));
+            SpotV3Api = AddApiClient(new BybitSocketClientSpotApiV3(_logger, options));
 
-            DerivativesPublic = AddApiClient(new BybitSocketClientDerivativesPublicStreams(log, options));
-            UnifiedMarginPrivate = AddApiClient(new BybitSocketClientUnifiedMarginStreams(log, options));
-            ContractPrivate = AddApiClient(new BybitSocketClientContractStreams(log, options));
+            CopyTradingApi = AddApiClient(new BybitSocketClientCopyTradingApi(_logger, options));
 
-            V5SpotStreams = AddApiClient(new BybitSocketClientSpotStreams(log, options));
-            V5LinearStreams = AddApiClient(new BybitSocketClientLinearStreams(log, options));
-            V5OptionsStreams = AddApiClient(new BybitSocketClientOptionStreams(log, options));
-            V5PrivateStreams = AddApiClient(new BybitSocketClientPrivateStreams(log, options));
+            DerivativesApi = AddApiClient(new BybitSocketClientDerivativesPublicApi(_logger, options));
+            UnifiedMarginApi = AddApiClient(new BybitSocketClientUnifiedMarginApi(_logger, options));
+            ContractApi = AddApiClient(new BybitSocketClientContractApi(_logger, options));
+
+            V5SpotApi = AddApiClient(new BybitSocketClientSpotApi(_logger, options));
+            V5LinearApi = AddApiClient(new BybitSocketClientLinearApi(_logger, options));
+            V5OptionsApi = AddApiClient(new BybitSocketClientOptionApi(_logger, options));
+            V5PrivateApi = AddApiClient(new BybitSocketClientPrivateApi(_logger, options));
         }
 
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
-        /// <param name="options"></param>
-        public static void SetDefaultOptions(BybitSocketClientOptions options)
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        public static void SetDefaultOptions(Action<BybitSocketOptions> optionsDelegate)
         {
-            BybitSocketClientOptions.Default = options;
+            var options = BybitSocketOptions.Default.Copy();
+            optionsDelegate(options);
+            BybitSocketOptions.Default = options;
         }
 
         /// <inheritdoc />
         public void SetApiCredentials(ApiCredentials credentials)
         {
-            UsdPerpetualStreams.SetApiCredentials(credentials);
-            InversePerpetualStreams.SetApiCredentials(credentials);
-            SpotStreamsV1.SetApiCredentials(credentials);
-            SpotStreamsV2.SetApiCredentials(credentials);
-            SpotStreamsV3.SetApiCredentials(credentials);
-            CopyTrading.SetApiCredentials(credentials);
-            DerivativesPublic.SetApiCredentials(credentials);
-            UnifiedMarginPrivate.SetApiCredentials(credentials);
-            ContractPrivate.SetApiCredentials(credentials);
-            V5LinearStreams.SetApiCredentials(credentials);
-            V5OptionsStreams.SetApiCredentials(credentials);
-            V5PrivateStreams.SetApiCredentials(credentials);
-            V5SpotStreams.SetApiCredentials(credentials);
+            UsdPerpetualApi.SetApiCredentials(credentials);
+            InversePerpetualApi.SetApiCredentials(credentials);
+            SpotV1Api.SetApiCredentials(credentials);
+            SpotV2Api.SetApiCredentials(credentials);
+            SpotV3Api.SetApiCredentials(credentials);
+            CopyTradingApi.SetApiCredentials(credentials);
+            DerivativesApi.SetApiCredentials(credentials);
+            UnifiedMarginApi.SetApiCredentials(credentials);
+            ContractApi.SetApiCredentials(credentials);
+            V5LinearApi.SetApiCredentials(credentials);
+            V5OptionsApi.SetApiCredentials(credentials);
+            V5PrivateApi.SetApiCredentials(credentials);
+            V5SpotApi.SetApiCredentials(credentials);
         }
     }
 }

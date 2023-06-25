@@ -12,35 +12,19 @@ namespace Bybit.Net.UnitTests
     [TestFixture]
     public class JsonTests
     {
-        private JsonToObjectComparer<BybitClient> _comparer = new JsonToObjectComparer<BybitClient>((json) => TestHelpers.CreateResponseClient(json, new BybitClientOptions()
+        private JsonToObjectComparer<BybitRestClient> _comparer = new JsonToObjectComparer<BybitRestClient>((json) => TestHelpers.CreateResponseClient(json, x =>
         {
-            ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"),
-            LogLevel = Microsoft.Extensions.Logging.LogLevel.Trace,
-            SpotApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
-            {
-                RateLimiters = new List<IRateLimiter>(),
-                OutputOriginalData = true
-            },
-            InverseFuturesApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
-            {
-                RateLimiters = new List<IRateLimiter>(),
-                OutputOriginalData = true
-            },
-            InversePerpetualApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
-            {
-                RateLimiters = new List<IRateLimiter>(),
-                OutputOriginalData = true
-            },
-            UsdPerpetualApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
-            {
-                RateLimiters = new List<IRateLimiter>(),
-                OutputOriginalData = true
-            },
-            DerivativesApiOptions = new CryptoExchange.Net.Objects.RestApiClientOptions
-            {
-                RateLimiters = new List<IRateLimiter>(),
-                OutputOriginalData = true
-            }
+            x.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123");
+            x.SpotOptions.RateLimiters = new List<IRateLimiter>();
+            x.SpotOptions.OutputOriginalData = true;
+            x.InverseFuturesOptions.RateLimiters = new List<IRateLimiter>();
+            x.InverseFuturesOptions.OutputOriginalData = true;
+            x.InversePerpetualOptions.RateLimiters = new List<IRateLimiter>();
+            x.InversePerpetualOptions.OutputOriginalData = true;
+            x.UsdPerpetualOptions.RateLimiters = new List<IRateLimiter>();
+            x.UsdPerpetualOptions.OutputOriginalData = true;
+            x.DerivativesOptions.RateLimiters = new List<IRateLimiter>();
+            x.DerivativesOptions.OutputOriginalData = true;
         },
             System.Net.HttpStatusCode.OK));
 

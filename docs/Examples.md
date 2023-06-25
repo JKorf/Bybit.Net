@@ -76,7 +76,7 @@ var userTradesResult = await bybitClient.SpotApi.Trading.GetUserTradesAsync();
 
 ### Subscribing to market data updates
 ```csharp
-var subscribeResult = await bybitSocketClient.SpotStreams.SubscribeToTickerUpdatesAsync("BTCUSDT", data =>
+var subscribeResult = await bybitSocketClient.SpotApi.SubscribeToTickerUpdatesAsync("BTCUSDT", data =>
 {
 	// Handle ticker data
 });
@@ -84,7 +84,7 @@ var subscribeResult = await bybitSocketClient.SpotStreams.SubscribeToTickerUpdat
 
 ### Subscribing to order updates
 ```csharp
-await bybitSocketClient.SpotStreams.SubscribeToAccountUpdatesAsync(
+await bybitSocketClient.SpotApi.SubscribeToAccountUpdatesAsync(
 	accountUpdate =>
 	{
 		// Handle balance or permissions update
@@ -168,7 +168,7 @@ var userTradesResult = await bybitClient.UsdPerpetualApi.Trading.GetUserTradesAs
 
 ### Subscribing to position updates
 ```csharp
-await bybitSocketClient.UsdPerpetualStreams.SubscribeToPositionUpdatesAsync(
+await bybitSocketClient.UsdPerpetualApi.SubscribeToPositionUpdatesAsync(
 	data =>
 	{
 		// Handle position update
@@ -309,7 +309,7 @@ var userTradesResult = await bybitClient.InversePerpetualApi.Trading.GetUserTrad
 
 ### Subscribing to position updates
 ```csharp
-await bybitSocketClient.InversePerpetualStreams.SubscribeToPositionUpdatesAsync(
+await bybitSocketClient.InversePerpetualApi.SubscribeToPositionUpdatesAsync(
 	data =>
 	{
 		// Handle position update

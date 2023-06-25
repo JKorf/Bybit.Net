@@ -1,26 +1,18 @@
 ﻿using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Logging;
 using Moq;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CryptoExchange.Net.Sockets;
-using Microsoft.Extensions.Logging;
 using System.Collections;
-using Newtonsoft.Json;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net;
-using Bybit.Net.Objects;
 using Bybit.Net.Clients;
+using Bybit.Net.Objects.Options;
 
 namespace Bybit.Net.Testing
 {
@@ -66,10 +58,10 @@ namespace Bybit.Net.Testing
             return self == to;
         }
 
-        public static BybitClient CreateClient(BybitClientOptions options = null)
+        public static BybitRestClient CreateClient(Action<BybitRestOptions> options = null)
         {
-            BybitClient client;
-            client = options != null ? new BybitClient(options) : new BybitClient();
+            BybitRestClient client;
+            client = options != null ? new BybitRestClient(options) : new BybitRestClient();
             client.SpotApiV1.RequestFactory = Mock.Of<IRequestFactory>();
             client.SpotApiV3.RequestFactory = Mock.Of<IRequestFactory>();
             client.CopyTradingApi.RequestFactory = Mock.Of<IRequestFactory>();
@@ -81,14 +73,14 @@ namespace Bybit.Net.Testing
             return client;
         }
 
-        public static BybitClient CreateResponseClient(string response, BybitClientOptions options = null, HttpStatusCode code = HttpStatusCode.OK)
+        public static BybitRestClient CreateResponseClient(string response, Action<BybitRestOptions> options = null, HttpStatusCode code = HttpStatusCode.OK)
         {
-            var client = (BybitClient)CreateClient(options);
+            var client = (BybitRestClient)CreateClient(options);
             SetResponse(client, response, code);
             return client;
         }
 
-        public static Mock<IRequest> SetResponse(BybitClient client, string responseData, HttpStatusCode code = HttpStatusCode.OK)
+        public static Mock<IRequest> SetResponse(BybitRestClient client, string responseData, HttpStatusCode code = HttpStatusCode.OK)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
             var responseStream = new MemoryStream();
