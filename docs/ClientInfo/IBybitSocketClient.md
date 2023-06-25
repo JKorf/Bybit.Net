@@ -8,43 +8,43 @@ has_children: true
   
 ***
 *Contract private streams*  
-**[IBybitSocketClientContractStreams](ContractApi/IBybitSocketClientContractStreams.html) ContractPrivate { get; }**  
+**[IBybitSocketClientContractApi](ContractApi/IBybitSocketClientContractApi.html) ContractApi { get; }**  
 ***
 *Copy trading streams*  
-**[IBybitSocketClientCopyTradingStreams](CopyTradingApi/IBybitSocketClientCopyTradingStreams.html) CopyTrading { get; }**  
+**[IBybitSocketClientCopyTradingApi](CopyTradingApi/IBybitSocketClientCopyTradingApi.html) CopyTradingApi { get; }**  
 ***
 *Derivatives public streams*  
-**[IBybitSocketClientDerivativesPublicStreams](DerivativesPublicApi/IBybitSocketClientDerivativesPublicStreams.html) DerivativesPublic { get; }**  
+**[IBybitSocketClientDerivativesPublicApi](DerivativesPublicApi/IBybitSocketClientDerivativesPublicApi.html) DerivativesApi { get; }**  
 ***
 *Inverse perpetual streams*  
-**[IBybitSocketClientInversePerpetualStreams](InversePerpetualApi/IBybitSocketClientInversePerpetualStreams.html) InversePerpetualStreams { get; }**  
+**[IBybitSocketClientInversePerpetualApi](InversePerpetualApi/IBybitSocketClientInversePerpetualApi.html) InversePerpetualApi { get; }**  
 ***
 *Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.*  
 **void SetApiCredentials(ApiCredentials credentials);**  
 ***
 *Spot streams v1*  
-**[IBybitSocketClientSpotStreamsV1](IBybitSocketClientSpotStreamsV1.html) SpotStreamsV1 { get; }**  
+**[IBybitSocketClientSpotApiV1](IBybitSocketClientSpotApiV1.html) SpotV1Api { get; }**  
 ***
 *Spot streams v2*  
-**[IBybitSocketClientSpotStreamsV2](IBybitSocketClientSpotStreamsV2.html) SpotStreamsV2 { get; }**  
+**[IBybitSocketClientSpotApiV2](IBybitSocketClientSpotApiV2.html) SpotV2Api { get; }**  
 ***
 *Spot streams v3*  
-**[IBybitSocketClientSpotStreamsV3](IBybitSocketClientSpotStreamsV3.html) SpotStreamsV3 { get; }**  
+**[IBybitSocketClientSpotApiV3](IBybitSocketClientSpotApiV3.html) SpotV3Api { get; }**  
 ***
 *Unified margin private streams*  
-**[IBybitSocketClientUnifiedMarginStreams](UnifiedMarginApi/IBybitSocketClientUnifiedMarginStreams.html) UnifiedMarginPrivate { get; }**  
+**[IBybitSocketClientUnifiedMarginApi](UnifiedMarginApi/IBybitSocketClientUnifiedMarginApi.html) UnifiedMarginApi { get; }**  
 ***
 *USD perpetual streams*  
-**[IBybitSocketClientUsdPerpetualStreams](UsdPerpetualApi/IBybitSocketClientUsdPerpetualStreams.html) UsdPerpetualStreams { get; }**  
+**[IBybitSocketClientUsdPerpetualApi](UsdPerpetualApi/IBybitSocketClientUsdPerpetualApi.html) UsdPerpetualApi { get; }**  
 ***
 *V5 Linear streams*  
-**[IBybitSocketClientLinearStreams](LinearApi/IBybitSocketClientLinearStreams.html) V5LinearStreams { get; }**  
+**[IBybitSocketClientLinearApi](LinearApi/IBybitSocketClientLinearApi.html) V5LinearApi { get; }**  
 ***
 *V5 Option streams*  
-**[IBybitSocketClientOptionStreams](OptionApi/IBybitSocketClientOptionStreams.html) V5OptionsStreams { get; }**  
+**[IBybitSocketClientOptionApi](OptionApi/IBybitSocketClientOptionApi.html) V5OptionsApi { get; }**  
 ***
 *V5 Private streams*  
-**[IBybitSocketClientPrivateStreams](PrivateApi/IBybitSocketClientPrivateStreams.html) V5PrivateStreams { get; }**  
+**[IBybitSocketClientPrivateApi](PrivateApi/IBybitSocketClientPrivateApi.html) V5PrivateApi { get; }**  
 ***
 *V5 Spot streams*  
-**[IBybitSocketClientSpotStreams](SpotApi/IBybitSocketClientSpotStreams.html) V5SpotStreams { get; }**  
+**[IBybitSocketClientSpotApi](SpotApi/IBybitSocketClientSpotApi.html) V5SpotApi { get; }**  
