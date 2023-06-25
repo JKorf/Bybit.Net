@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -20,7 +20,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>3.0.0 - Updated CryptoExchange.Net to version 6.0.0, Renamed BybitClient to BybitRestClient, Renamed **Streams to **Api on the BybitSocketClient, Updated endpoints to consistently use a base url without any path as basis to make switching environments/base urls clearer, Added IBybitOrderBookFactory and implementation for creating order books, Updated dependency injection register method (AddBybit), Updated V5 socket API kline update topic to include the interval, Added CopyTrading SetTradingStopAsync endpoint, Fixed V5 GetMarginAccountInfoAsync endpoint</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bybit.Net.xml</DocumentationFile>
