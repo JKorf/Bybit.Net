@@ -10,25 +10,25 @@ There are 2 clients available to interact with the Bybit API, the `BybitRestClie
 ```csharp
 var bybitRestClient = new BybitRestClient(options =>
 {
-	// Set options here for this client
+    // Set options here for this client
 });
 
 var bybitSocketClient = new BybitSocketClient(options =
 {
-	// Set options here for this client
+    // Set options here for this client
 });
 ```
 
 *Using dotnet dependency inject*
 ```csharp
 services.AddBybit(
-	restOptions => {
-		// set options for the rest client
-	},
-	socketClientOptions => {
-		// set options for the socket client
-	});	
-	
+    restOptions => {
+        // set options for the rest client
+    },
+    socketClientOptions => {
+        // set options for the socket client
+    }); 
+    
 // IBybitRestClient, IBybitSocketClient and IBybitOrderBookFactory are now available for injecting
 ```
 
@@ -36,16 +36,16 @@ Different options are available to set on the clients, see this example
 ```csharp
 var bybitRestClient = new BybitRestClient(options =>
 {
-	options.ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET");
-	// override options just for the InverseFuturesOptions api
-	options.InverseFuturesOptions.ApiCredentials = new ApiCredentials("FUTURES-API-KEY", "FUTURES-API-SECRET");
-	options.InverseFuturesOptions.RequestTimeout  = TimeSpan.FromSeconds(60);
+    options.ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET");
+    // override options just for the InverseFuturesOptions api
+    options.InverseFuturesOptions.ApiCredentials = new ApiCredentials("FUTURES-API-KEY", "FUTURES-API-SECRET");
+    options.InverseFuturesOptions.RequestTimeout  = TimeSpan.FromSeconds(60);
 });
 ```
 Alternatively, options can be provided before creating clients by using `SetDefaultOptions` or during the registration in the DI container: 
 ```csharp
 BybitRestClient.SetDefaultOptions(options => {
-	// Set options here for all new clients
+    // Set options here for all new clients
 });
 var bybitClient = new BybitRestClient();
 ```
