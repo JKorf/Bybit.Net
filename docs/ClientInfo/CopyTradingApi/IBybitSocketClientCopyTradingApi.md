@@ -1,10 +1,10 @@
 ---
 title: IBybitSocketClientCopyTradingApi
 has_children: true
-parent: Rest API documentation
+parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > CopyTradingApi`  
+`BybitSocketClient > CopyTradingApi`  
 *Bybit copy trading streams*
   
 
@@ -18,7 +18,7 @@ parent: Rest API documentation
 *Subscribe to user balance updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.CopyTradingApi.SubscribeToBalanceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -43,7 +43,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 *Subscribe to user order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.CopyTradingApi.SubscribeToOrderUpdatesAsync(/* parameters */);  
 ```  
 
@@ -68,7 +68,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 *Subscribe to user position updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.CopyTradingApi.SubscribeToPositionUpdatesAsync(/* parameters */);  
 ```  
 
@@ -93,7 +93,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 *Subscribe to user trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.CopyTradingApi.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
 ```  
 

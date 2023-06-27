@@ -1,10 +1,10 @@
 ---
 title: IBybitSocketClientInversePerpetualApi
 has_children: true
-parent: Rest API documentation
+parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > InversePerpetualApi`  
+`BybitSocketClient > InversePerpetualApi`  
 *Bybit inverse perpetual streams*
   
 
@@ -18,7 +18,7 @@ parent: Rest API documentation
 *Subscribe to user balance updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToBalanceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -43,7 +43,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 *Subscribe to insurance fund updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToInsurancesUpdatesAsync(/* parameters */);  
 ```  
 
@@ -68,7 +68,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsurancesUpdatesAsync(Action<Da
 *Subscribe to insurance fund updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToInsuranceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -94,7 +94,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(string sym
 *Subscribe to insurance fund updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToInsuranceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -120,7 +120,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToInsuranceUpdatesAsync(IEnumerabl
 *Subscribe to kline (candlestick) updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToKlinesUpdatesAsync(/* parameters */);  
 ```  
 
@@ -146,7 +146,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(KlineInterval
 *Subscribe to kline (candlestick) updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -173,7 +173,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribe to kline (candlestick) updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -200,7 +200,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 *Subscribe to liquidation order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToLiquidationsUpdatesAsync(/* parameters */);  
 ```  
 
@@ -225,7 +225,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationsUpdatesAsync(Action<
 *Subscribe to liquidation order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
@@ -251,7 +251,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 *Subscribe to liquidation order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
@@ -278,7 +278,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 *Subscribe to orderbook updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToOrderBooksUpdatesAsync(/* parameters */);  
 ```  
 
@@ -306,7 +306,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(int limit
 *Subscribe to orderbook updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -335,7 +335,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 *Subscribe to orderbook updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -363,7 +363,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerabl
 *Subscribe to user order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToOrderUpdatesAsync(/* parameters */);  
 ```  
 
@@ -388,7 +388,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 *Subscribe to user position updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToPositionUpdatesAsync(/* parameters */);  
 ```  
 
@@ -413,7 +413,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 *Subscribe to user stop order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToStopOrderUpdatesAsync(/* parameters */);  
 ```  
 
@@ -439,7 +439,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToStopOrderUpdatesAsync(Action<Dat
 *properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToTickersUpdatesAsync(/* parameters */);  
 ```  
 
@@ -465,7 +465,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(Action<DataE
 *properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -492,7 +492,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 *properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -518,7 +518,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToTradesUpdatesAsync(/* parameters */);  
 ```  
 
@@ -543,7 +543,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(Action<DataEv
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -569,7 +569,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -595,7 +595,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 *Subscribe to user trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.InversePerpetualApi.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
 ```  
 

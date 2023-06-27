@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientCopyTradingApiExchangeData
 has_children: false
-parent: IBybitClientCopyTradingApi
+parent: IBybitRestClientCopyTradingApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > CopyTradingApi > IBybitRestClientExchangeData`  
+`BybitRestClient > CopyTradingApi > ExchangeData`  
 *Bybit Copy Trading exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Retrieve the server timestamp*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientExchangeData.GetServerTimeAsync();  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.ExchangeData.GetServerTimeAsync();  
 ```  
 
 ```csharp  
@@ -43,8 +43,8 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 *Get a list of supported symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientExchangeData.GetSymbolsAsync();  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.ExchangeData.GetSymbolsAsync();  
 ```  
 
 ```csharp  

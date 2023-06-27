@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientGeneralApiWithdrawDeposit
 has_children: false
-parent: IBybitClientGeneralApi
+parent: IBybitRestClientGeneralApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > GeneralApi > IBybitRestClientWithdrawDeposit`  
+`BybitRestClient > GeneralApi > WithdrawDeposit`  
 *Bybit withdrawal and deposit endpoints*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel withdrawal*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientWithdrawDeposit.CancelWithdrawalAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.WithdrawDeposit.CancelWithdrawalAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -45,8 +45,8 @@ Task<WebCallResult> CancelWithdrawalAsync(string withdrawalId, long? receiveWind
 *Get account info*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientWithdrawDeposit.GetAccountInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.WithdrawDeposit.GetAccountInfoAsync();  
 ```  
 
 ```csharp  
@@ -72,8 +72,8 @@ Task<WebCallResult<Dictionary<string, BybitGeneralAccountStatus>>> GetAccountInf
 *Get asset information regarding withdrawal/deposits*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientWithdrawDeposit.GetAssetInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.WithdrawDeposit.GetAssetInfoAsync();  
 ```  
 
 ```csharp  
@@ -98,8 +98,8 @@ Task<WebCallResult<IEnumerable<BybitAssetInfo>>> GetAssetInfoAsync(string? asset
 *Get deposit addresses for an asset*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientWithdrawDeposit.GetDepositAddressesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.WithdrawDeposit.GetDepositAddressesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -124,8 +124,8 @@ Task<WebCallResult<BybitDepositAddress>> GetDepositAddressesAsync(string asset, 
 *Get deposit history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientWithdrawDeposit.GetDepositHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.WithdrawDeposit.GetDepositHistoryAsync();  
 ```  
 
 ```csharp  
@@ -155,8 +155,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitDeposit>>>> GetDepositHistor
 *Get deposit information*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientWithdrawDeposit.GetSupportedDepositMethodsAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.WithdrawDeposit.GetSupportedDepositMethodsAsync();  
 ```  
 
 ```csharp  
@@ -184,8 +184,8 @@ Task<WebCallResult<IEnumerable<BybitDepositConfig>>> GetSupportedDepositMethodsA
 *Get withdrawal history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientWithdrawDeposit.GetWithdrawalHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.WithdrawDeposit.GetWithdrawalHistoryAsync();  
 ```  
 
 ```csharp  
@@ -216,8 +216,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitWithdraw>>>> GetWithdrawalHi
 *Create a withdrawal request*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientWithdrawDeposit.WithdrawAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.WithdrawDeposit.WithdrawAsync(/* parameters */);  
 ```  
 
 ```csharp  

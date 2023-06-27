@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientUnifiedMarginApiAccount
 has_children: false
-parent: IBybitClientDerivativesApi\UnifiedMarginApi
+parent: IBybitRestClientDerivativesApi\UnifiedMarginApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi\UnifiedMarginApi > IBybitRestClientUnifiedMarginApiAccount`  
+`BybitRestClient > DerivativesApi\UnifiedMarginApi > UnifiedMarginApiAccount`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Exchange Coins*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.ExchangeCoinsAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.ExchangeCoinsAsync();  
 ```  
 
 ```csharp  
@@ -46,8 +46,8 @@ Task<WebCallResult<IEnumerable<BybitUnifiedMarginCoinExchangeResult>>> ExchangeC
 *Get Borrow History*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.GetBorrowHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.GetBorrowHistoryAsync();  
 ```  
 
 ```csharp  
@@ -77,8 +77,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUnifiedMarginBorrowRecord>>>
 *Get borrow rate*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.GetBorrowRateAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.GetBorrowRateAsync();  
 ```  
 
 ```csharp  
@@ -103,8 +103,8 @@ Task<WebCallResult<IEnumerable<BybitUnifiedMarginBorrowRate>>> GetBorrowRateAsyn
 *Get user positions*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.GetPositionAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.GetPositionAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -134,8 +134,8 @@ Task<WebCallResult<BybitDerivativesCursorPage<IEnumerable<BybitUnifiedMarginPosi
 *Get 7-day Trading History*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.GetProfitAndLossHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.GetProfitAndLossHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -171,8 +171,8 @@ Task<WebCallResult<BybitDerivativesCursorPage<IEnumerable<BybitUnifiedMarginPnlE
 *Query trading history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.GetTransactionLogAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.GetTransactionLogAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -203,8 +203,8 @@ Task<WebCallResult<BybitDerivativesCursorPage<IEnumerable<BybitUnifiedMarginTran
 *Query wallet balance*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.GetWalletBalance();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.GetWalletBalance();  
 ```  
 
 ```csharp  
@@ -228,8 +228,8 @@ Task<WebCallResult<BybitUnifiedMarginBalance>> GetWalletBalance(string? asset = 
 *Check, if Unified Margin Account enabled for current credentials*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.IsUMAEnabled();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.IsUMAEnabled();  
 ```  
 
 ```csharp  
@@ -251,8 +251,8 @@ Task<WebCallResult<bool>> IsUMAEnabled();
 *Switch between full or partial Stop loss/Take profit mode*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.SetFullPartialPositionModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.SetFullPartialPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -279,8 +279,8 @@ Task<WebCallResult> SetFullPartialPositionModeAsync(Category category, string sy
 *Modify leverage*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.SetLeverageAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.SetLeverageAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -308,8 +308,8 @@ Task<WebCallResult> SetLeverageAsync(Category category, string symbol, decimal b
 *Set position risk*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.SetRiskLimitAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.SetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -336,8 +336,8 @@ Task<WebCallResult> SetRiskLimitAsync(Category category, string symbol, long ris
 *Set position TP/SL and trailing stop.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.SetSlTpAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.SetSlTpAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -371,8 +371,8 @@ Task<WebCallResult> SetSlTpAsync(Category category, string symbol, decimal? take
 *Fund transfer between accounts*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiAccount.TransferFundsAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiAccount.TransferFundsAsync(/* parameters */);  
 ```  
 
 ```csharp  

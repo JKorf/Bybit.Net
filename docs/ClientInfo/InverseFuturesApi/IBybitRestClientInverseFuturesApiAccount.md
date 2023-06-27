@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientInverseFuturesApiAccount
 has_children: false
-parent: IBybitClientInverseFuturesApi
+parent: IBybitRestClientInverseFuturesApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > InverseFuturesApi > IBybitRestClientAccount`  
+`BybitRestClient > InverseFuturesApi > Account`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Change margin*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.ChangeMarginAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.ChangeMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -47,8 +47,8 @@ Task<WebCallResult<decimal>> ChangeMarginAsync(string symbol, PositionMode mode,
 *Get Api key info*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetApiKeyInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetApiKeyInfoAsync();  
 ```  
 
 ```csharp  
@@ -72,8 +72,8 @@ Task<WebCallResult<IEnumerable<ByBitApiKeyInfo>>> GetApiKeyInfoAsync(long? recei
 *Get asset exchange history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetAssetExchangeHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetAssetExchangeHistoryAsync();  
 ```  
 
 ```csharp  
@@ -100,8 +100,8 @@ Task<WebCallResult<IEnumerable<BybitExchangeHistoryEntry>>> GetAssetExchangeHist
 *Get wallet balances*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetBalancesAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetBalancesAsync();  
 ```  
 
 ```csharp  
@@ -126,8 +126,8 @@ Task<WebCallResult<Dictionary<string, BybitBalance>>> GetBalancesAsync(string? a
 *Get user positions for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetPositionAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetPositionAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -152,8 +152,8 @@ Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionAsync(string symbol, 
 *Get user positions*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetPositionsAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetPositionsAsync();  
 ```  
 
 ```csharp  
@@ -177,8 +177,8 @@ Task<WebCallResult<IEnumerable<BybitPosition>>> GetPositionsAsync(long? receiveW
 *Get user's profit and loss records*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetProfitAndLossHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetProfitAndLossHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -208,8 +208,8 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitPnlEntry>>>> GetProfitAndLossHisto
 *Get position risk limit*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetRiskLimitAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetRiskLimitAsync();  
 ```  
 
 ```csharp  
@@ -234,8 +234,8 @@ Task<WebCallResult<IEnumerable<BybitRiskLimit>>> GetRiskLimitAsync(string? symbo
 *Get wallet fund endpoints*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetWalletFundHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetWalletFundHistoryAsync();  
 ```  
 
 ```csharp  
@@ -265,8 +265,8 @@ Task<WebCallResult<IEnumerable<BybitWalletFundRecord>>> GetWalletFundHistoryAsyn
 *Get withdrawal history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.GetWithdrawalHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.GetWithdrawalHistoryAsync();  
 ```  
 
 ```csharp  
@@ -296,8 +296,8 @@ Task<WebCallResult<IEnumerable<BybitWithdrawal>>> GetWithdrawalHistoryAsync(stri
 *Switch between full or partial Stop loss/Take profit mode*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.SetFullPartialPositionModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.SetFullPartialPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -323,8 +323,8 @@ Task<WebCallResult<BybitTpSlMode>> SetFullPartialPositionModeAsync(string symbol
 *Switch between cross and isolated mode.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.SetIsolatedPositionModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.SetIsolatedPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -352,8 +352,8 @@ Task<WebCallResult> SetIsolatedPositionModeAsync(string symbol, bool isIsolated,
 *Set leerage*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.SetLeverageAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.SetLeverageAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -382,8 +382,8 @@ Task<WebCallResult<int?>> SetLeverageAsync(string symbol, decimal buyLeverage, d
 *If you are in Hedge Mode, you can open both Buy and Sell side positions simultaneously.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.SetPositionModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.SetPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -410,8 +410,8 @@ Task<WebCallResult> SetPositionModeAsync(string symbol, string asset, bool hedge
 *Set position risk*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientAccount.SetRiskLimitAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Account.SetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  

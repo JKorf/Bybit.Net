@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientCopyTradingApiTrading
 has_children: false
-parent: IBybitClientCopyTradingApi
+parent: IBybitRestClientCopyTradingApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > CopyTradingApi > IBybitRestClientTrading`  
+`BybitRestClient > CopyTradingApi > Trading`  
 *Bybit trading endpoints, placing and managing positions.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel an active order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientTrading.CancelOrderAsync();  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Trading.CancelOrderAsync();  
 ```  
 
 ```csharp  
@@ -45,8 +45,8 @@ Task<WebCallResult<BybitCopyTradingId>> CancelOrderAsync(string? orderId = defau
 *Close an order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientTrading.CloseOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Trading.CloseOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -73,8 +73,8 @@ Task<WebCallResult<BybitCopyTradingId>> CloseOrderAsync(string symbol, string? c
 *Close a position*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientTrading.ClosePositionAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Trading.ClosePositionAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -99,8 +99,8 @@ Task<WebCallResult> ClosePositionAsync(string symbol, PositionMode positionMode,
 *Get orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientTrading.GetOrdersAsync();  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Trading.GetOrdersAsync();  
 ```  
 
 ```csharp  
@@ -127,8 +127,8 @@ Task<WebCallResult<IEnumerable<BybitCopyTradingOrder>>> GetOrdersAsync(string? s
 *Get your positions*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientTrading.GetPositionsAsync();  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Trading.GetPositionsAsync();  
 ```  
 
 ```csharp  
@@ -152,8 +152,8 @@ Task<WebCallResult<IEnumerable<BybitCopyTradingPosition>>> GetPositionsAsync(str
 *Place an order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientTrading.PlaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Trading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -186,8 +186,8 @@ Task<WebCallResult<BybitCopyTradingId>> PlaceOrderAsync(string symbol, OrderSide
 *Set leverage*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientTrading.SetLeverageAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Trading.SetLeverageAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -213,8 +213,8 @@ Task<WebCallResult> SetLeverageAsync(string symbol, decimal buyLeverage, decimal
 *Set trading stop parameters for an existing order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientTrading.SetTradingStopAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Trading.SetTradingStopAsync(/* parameters */);  
 ```  
 
 ```csharp  

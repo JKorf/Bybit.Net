@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientInverseFuturesApiExchangeData
 has_children: false
-parent: IBybitClientInverseFuturesApi
+parent: IBybitRestClientInverseFuturesApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > InverseFuturesApi > IBybitRestClientExchangeData`  
+`BybitRestClient > InverseFuturesApi > ExchangeData`  
 *Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *The API announcements for the last 30 days*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetAnnouncementsAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetAnnouncementsAsync();  
 ```  
 
 ```csharp  
@@ -43,8 +43,8 @@ Task<WebCallResult<IEnumerable<BybitAnnouncement>>> GetAnnouncementsAsync(Cancel
 *Get index price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetIndexPriceKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetIndexPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -71,8 +71,8 @@ Task<WebCallResult<IEnumerable<BybitIndexPriceKline>>> GetIndexPriceKlinesAsync(
 *Get price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -99,8 +99,8 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(string symbol, Kline
 *Get long/short ratio*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetLongShortRatioAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetLongShortRatioAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -126,8 +126,8 @@ Task<WebCallResult<IEnumerable<BybitAccountRatio>>> GetLongShortRatioAsync(strin
 *Get mark price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetMarkPriceKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetMarkPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -154,8 +154,8 @@ Task<WebCallResult<IEnumerable<BybitMarkPriceKline>>> GetMarkPriceKlinesAsync(st
 *Gets the total amount of unsettled contracts. In other words, the total number of contracts held in open positions.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetOpenInterestAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetOpenInterestAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -181,8 +181,8 @@ Task<WebCallResult<IEnumerable<BybitOpenInterest>>> GetOpenInterestAsync(string 
 *Get the current order book for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetOrderBookAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetOrderBookAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -206,8 +206,8 @@ Task<WebCallResult<IEnumerable<BybitOrderBookEntry>>> GetOrderBookAsync(string s
 *Obtain filled orders worth more than 500,000 USD within the last 24h.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetRecentBigTradesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetRecentBigTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -232,8 +232,8 @@ Task<WebCallResult<IEnumerable<BybitBigTrade>>> GetRecentBigTradesAsync(string s
 *Get the server time*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetServerTimeAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetServerTimeAsync();  
 ```  
 
 ```csharp  
@@ -256,8 +256,8 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 *Get all supported symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetSymbolsAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetSymbolsAsync();  
 ```  
 
 ```csharp  
@@ -280,8 +280,8 @@ Task<WebCallResult<IEnumerable<BybitSymbol>>> GetSymbolsAsync(CancellationToken 
 *The ticker info for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetTickerAsync();  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetTickerAsync();  
 ```  
 
 ```csharp  
@@ -305,8 +305,8 @@ Task<WebCallResult<IEnumerable<BybitTicker>>> GetTickerAsync(string? symbol = de
 *Get public trade history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientExchangeData.GetTradeHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.ExchangeData.GetTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  

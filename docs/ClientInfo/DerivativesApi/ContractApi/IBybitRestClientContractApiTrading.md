@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientContractApiTrading
 has_children: false
-parent: IBybitClientDerivativesApi\ContractApi
+parent: IBybitRestClientDerivativesApi\ContractApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi\ContractApi > IBybitRestClientContractApiTrading`  
+`BybitRestClient > DerivativesApi\ContractApi > ContractApiTrading`  
 *Bybit trading endpoints, placing and managing orders.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel all orders that are unfilled or partially filled. Fully filled orders cannot be cancelled.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiTrading.CancelAllOrdersAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiTrading.CancelAllOrdersAsync();  
 ```  
 
 ```csharp  
@@ -46,8 +46,8 @@ Task<WebCallResult<IEnumerable<BybitDerivativesOrderId>>> CancelAllOrdersAsync(s
 *Cancel an order, either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiTrading.CancelOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiTrading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -74,8 +74,8 @@ Task<WebCallResult<BybitDerivativesOrderId>> CancelOrderAsync(string symbol, str
 *Query real-time order information*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiTrading.GetOpenOrdersRealTimeAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiTrading.GetOpenOrdersRealTimeAsync();  
 ```  
 
 ```csharp  
@@ -106,8 +106,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitContractOrder>>>> GetOpenOrd
 *Get orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiTrading.GetOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiTrading.GetOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -138,8 +138,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitContractOrder>>>> GetOrdersA
 *Place a new order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiTrading.PlaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiTrading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -177,8 +177,8 @@ Task<WebCallResult<BybitDerivativesOrderId>> PlaceOrderAsync(string symbol, Orde
 *Change an exising order. Either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiTrading.ReplaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiTrading.ReplaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -212,8 +212,8 @@ Task<WebCallResult<BybitDerivativesOrderId>> ReplaceOrderAsync(string symbol, st
 *Set take profit, stop loss, and trailing stop for your open position. If using partial mode, TP/SL/TS orders will not close your entire position.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiTrading.SetTradingStop(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiTrading.SetTradingStop(/* parameters */);  
 ```  
 
 ```csharp  

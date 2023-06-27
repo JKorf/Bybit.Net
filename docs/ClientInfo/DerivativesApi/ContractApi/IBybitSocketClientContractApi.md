@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientContractApi
 has_children: true
-parent: IBybitClientDerivativesApi\ContractApi
-grand_parent: Rest API documentation
+parent: IBybitSocketClientDerivativesApi\ContractApi
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi\ContractApi > ContractApi`  
+`BybitSocketClient > DerivativesApi\ContractApi > ContractApi`  
 *Bybit Contract streams*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to user balance updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\ContractApi.ContractApi.SubscribeToBalanceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -44,7 +44,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 *Subscribe to user order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\ContractApi.ContractApi.SubscribeToOrderUpdatesAsync(/* parameters */);  
 ```  
 
@@ -69,7 +69,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 *Subscribe to user position updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\ContractApi.ContractApi.SubscribeToPositionUpdatesAsync(/* parameters */);  
 ```  
 
@@ -94,7 +94,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 *Subscribe to user trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\ContractApi.ContractApi.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
 ```  
 

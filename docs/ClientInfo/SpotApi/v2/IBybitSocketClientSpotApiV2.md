@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientSpotApiV2
 has_children: false
-parent: IBybitClientSpotApi\v2
-grand_parent: Rest API documentation
+parent: IBybitSocketClientSpotApi\v2
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi\v2 > SpotApiV2`  
+`BybitSocketClient > SpotApi\v2 > SpotApiV2`  
 *Bybit spot streams*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to account data updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v2.SpotApiV2.SubscribeToAccountUpdatesAsync(/* parameters */);  
 ```  
 
@@ -47,7 +47,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataE
 *Subscribe to book price updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v2.SpotApiV2.SubscribeToBookPriceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -73,7 +73,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBookPriceUpdatesAsync(string sym
 *Subscribe to kline updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v2.SpotApiV2.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -100,7 +100,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribe to order book updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v2.SpotApiV2.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -126,7 +126,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v2.SpotApiV2.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -152,7 +152,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v2.SpotApiV2.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 

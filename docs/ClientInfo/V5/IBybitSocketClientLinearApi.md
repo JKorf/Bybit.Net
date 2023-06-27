@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientLinearApi
 has_children: true
-parent: IBybitClientV5
-grand_parent: Rest API documentation
+parent: IBybitSocketClientV5
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > LinearApi`  
+`BybitSocketClient > V5 > LinearApi`  
 *Bybit linear data streams*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.LinearApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -45,7 +45,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.LinearApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 

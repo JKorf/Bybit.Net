@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientCopyTradingApiAccount
 has_children: false
-parent: IBybitClientCopyTradingApi
+parent: IBybitRestClientCopyTradingApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > CopyTradingApi > IBybitRestClientAccount`  
+`BybitRestClient > CopyTradingApi > Account`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Get the current wallet balance*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientAccount.GetBalancesAsync();  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Account.GetBalancesAsync();  
 ```  
 
 ```csharp  
@@ -43,8 +43,8 @@ Task<WebCallResult<BybitCopyTradingBalance>> GetBalancesAsync(CancellationToken 
 *Transfer to or from the Copy Trading account*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.CopyTradingApi.IBybitRestClientAccount.TransferAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.CopyTradingApi.Account.TransferAsync(/* parameters */);  
 ```  
 
 ```csharp  

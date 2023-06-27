@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientContractApiAccount
 has_children: false
-parent: IBybitClientDerivativesApi\ContractApi
+parent: IBybitRestClientDerivativesApi\ContractApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi\ContractApi > IBybitRestClientContractApiAccount`  
+`BybitRestClient > DerivativesApi\ContractApi > ContractApiAccount`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Get wallet balances*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.GetBalancesAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.GetBalancesAsync();  
 ```  
 
 ```csharp  
@@ -45,8 +45,8 @@ Task<WebCallResult<IEnumerable<BybitContractBalance>>> GetBalancesAsync(string? 
 *Get user positions*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.GetPositionAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.GetPositionAsync();  
 ```  
 
 ```csharp  
@@ -72,8 +72,8 @@ Task<WebCallResult<BybitDerivativesCursorPage<IEnumerable<BybitContractPosition>
 *Get user's closed profit and loss records. The results are ordered in descending order (the first item is the latest).*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.GetProfitAndLossHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.GetProfitAndLossHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -102,8 +102,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitContractClosedPnlEntry>>>> G
 *Get user trading fee rate*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.GetTradingFeeRate();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.GetTradingFeeRate();  
 ```  
 
 ```csharp  
@@ -128,8 +128,8 @@ Task<WebCallResult<IEnumerable<BybitContractTradingFeeRate>>> GetTradingFeeRate(
 *Get executed user trades*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.GetUserTradesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.GetUserTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -160,8 +160,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitContractUserTrade>>>> GetUse
 *Get user trading fee rate*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.GetWalletFundRecords();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.GetWalletFundRecords();  
 ```  
 
 ```csharp  
@@ -191,8 +191,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitContractWalletFundRecord>>>>
 *Set auto add margin switch*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.SetAutoAddMarginAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.SetAutoAddMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -220,8 +220,8 @@ Task<WebCallResult> SetAutoAddMarginAsync(string symbol, OrderSide side, bool au
 *Switch between full or partial Stop loss/Take profit mode*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.SetFullPartialPositionModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.SetFullPartialPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -247,8 +247,8 @@ Task<WebCallResult> SetFullPartialPositionModeAsync(string symbol, StopLossTakeP
 *Set leverage*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.SetLeverageAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.SetLeverageAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -275,8 +275,8 @@ Task<WebCallResult> SetLeverageAsync(string symbol, decimal buyLeverage, decimal
 *Get user trading fee rate*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.SetMarginMode(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.SetMarginMode(/* parameters */);  
 ```  
 
 ```csharp  
@@ -302,8 +302,8 @@ Task<WebCallResult> SetMarginMode(MarginMode marginMode, long? receiveWindow = d
 *If you are in Hedge Mode, you can open both Buy and Sell side positions simultaneously.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.SetPositionModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.SetPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -330,8 +330,8 @@ Task<WebCallResult> SetPositionModeAsync(PositionMode hedgeMode, string? symbol 
 *Set position risk*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.SetRiskLimitAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.SetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -358,8 +358,8 @@ Task<WebCallResult> SetRiskLimitAsync(string symbol, long riskId, PositionMode? 
 *Switch cross margin mode/isolated margin mode*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\ContractApi.IBybitRestClientContractApiAccount.SetTradeModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\ContractApi.ContractApiAccount.SetTradeModeAsync(/* parameters */);  
 ```  
 
 ```csharp  

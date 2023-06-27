@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientInverseFuturesApiTrading
 has_children: false
-parent: IBybitClientInverseFuturesApi
+parent: IBybitRestClientInverseFuturesApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > InverseFuturesApi > IBybitRestClientTrading`  
+`BybitRestClient > InverseFuturesApi > Trading`  
 *Bybit trading endpoints, placing and managing orders.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel all active conditional orders for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.CancelAllConditionalOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.CancelAllConditionalOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -45,8 +45,8 @@ Task<WebCallResult<IEnumerable<BybitCanceledConditionalOrder>>> CancelAllConditi
 *Cancel all active orders for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.CancelAllOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.CancelAllOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -71,8 +71,8 @@ Task<WebCallResult<IEnumerable<BybitCanceledOrder>>> CancelAllOrdersAsync(string
 *Cancel a conditional order, either stopOrderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.CancelConditionalOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.CancelConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -99,8 +99,8 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 *Cancel an order, either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.CancelOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -127,8 +127,8 @@ Task<WebCallResult<BybitInverseOrder>> CancelOrderAsync(string symbol, string? o
 *Get a list of conditional orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.GetConditionalOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.GetConditionalOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -157,8 +157,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrder>>>> GetCond
 *Get conditional order information. Either stopOrderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.GetOpenConditionalOrderRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.GetOpenConditionalOrderRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -185,8 +185,8 @@ Task<WebCallResult<BybitConditionalOrder>> GetOpenConditionalOrderRealTimeAsync(
 *Get order information for up to 10 conditional orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.GetOpenConditionalOrdersRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.GetOpenConditionalOrdersRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -211,8 +211,8 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrder>>> GetOpenConditionalOrders
 *Get order information. Either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.GetOpenOrderRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.GetOpenOrderRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -239,8 +239,8 @@ Task<WebCallResult<BybitInverseOrder>> GetOpenOrderRealTimeAsync(string symbol, 
 *Get order information for up to 500 orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.GetOpenOrdersRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.GetOpenOrdersRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -265,8 +265,8 @@ Task<WebCallResult<IEnumerable<BybitInverseOrder>>> GetOpenOrdersRealTimeAsync(s
 *Get orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.GetOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.GetOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -295,8 +295,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInverseOrder>>>> GetOrdersAs
 *Get executed user trades*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.GetUserTradesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.GetUserTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -325,8 +325,8 @@ Task<WebCallResult<IEnumerable<BybitUserTrade>>> GetUserTradesAsync(string symbo
 *Change an exising order. Either stopOrderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.ModifyConditionalOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.ModifyConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -360,8 +360,8 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 *Change an exising order. Either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.ModifyOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.ModifyOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -394,8 +394,8 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, string? orderI
 *Place a new conditional order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.PlaceConditionalOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.PlaceConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -435,8 +435,8 @@ Task<WebCallResult<BybitConditionalOrder>> PlaceConditionalOrderAsync(string sym
 *Place a new order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.PlaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -474,8 +474,8 @@ Task<WebCallResult<BybitInverseOrder>> PlaceOrderAsync(string symbol, OrderSide 
 *Set take profit, stop loss, and trailing stop for your open position*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.InverseFuturesApi.IBybitRestClientTrading.SetTradingStopAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.InverseFuturesApi.Trading.SetTradingStopAsync(/* parameters */);  
 ```  
 
 ```csharp  

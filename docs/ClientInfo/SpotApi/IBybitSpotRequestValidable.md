@@ -1,11 +1,11 @@
 ---
 title: IBybitSpotRequestValidable
 has_children: false
-parent: IBybitClientSpotApi
+parent: IBybitRestClientSpotApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi > IBybitSpotRequestValidable`  
+`BybitRestClient > SpotApi > IBybitSpotRequestValidable`  
 *Base for spot websocket request/response processing*
   
 ***

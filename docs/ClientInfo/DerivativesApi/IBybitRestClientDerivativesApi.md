@@ -1,19 +1,18 @@
 ---
 title: IBybitRestClientDerivativesApi
 has_children: true
-parent: IBybitClientDerivativesApi
-grand_parent: Rest API documentation
+parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi > IBybitRestClient`  
+`BybitRestClient > DerivativesApi`  
 *Bybit Derivatives v3 endpoints*
   
 ***
 *Bybit Contract endpoints*  
-**IBybitRestClientContractApi ContractApi { get; }**  
+**[IBybitRestClientContractApi](ContractApi/IBybitRestClientContractApi.html) ContractApi { get; }**  
 ***
 *Endpoints related to retrieving market and system data*  
-**IBybitRestClientDerivativesApiExchangeData ExchangeData { get; }**  
+**[IBybitRestClientDerivativesApiExchangeData](IBybitRestClientDerivativesApiExchangeData.html) ExchangeData { get; }**  
 ***
 *Bybit Unified Margin endpoints*  
-**IBybitRestClientUnifiedMarginApi UnifiedMarginApi { get; }**  
+**[IBybitRestClientUnifiedMarginApi](UnifiedMarginApi/IBybitRestClientUnifiedMarginApi.html) UnifiedMarginApi { get; }**  

@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientUnifiedMarginApi
 has_children: true
-parent: IBybitClientDerivativesApi\UnifiedMarginApi
-grand_parent: Rest API documentation
+parent: IBybitSocketClientDerivativesApi\UnifiedMarginApi
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi\UnifiedMarginApi > UnifiedMarginApi`  
+`BybitSocketClient > DerivativesApi\UnifiedMarginApi > UnifiedMarginApi`  
 *Bybit Unified margin streams*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to user balance updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApi.SubscribeToBalanceUpdatesAsync(/* parameters */);  
 ```  
 
@@ -44,7 +44,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataE
 *Subscribe to greeks update*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApi.SubscribeToGreeksUpdatesAsync(/* parameters */);  
 ```  
 
@@ -69,7 +69,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToGreeksUpdatesAsync(Action<DataEv
 *Subscribe to user order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApi.SubscribeToOrderUpdatesAsync(/* parameters */);  
 ```  
 
@@ -94,7 +94,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 *Subscribe to user position updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApi.SubscribeToPositionUpdatesAsync(/* parameters */);  
 ```  
 
@@ -119,7 +119,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 *Subscribe to user trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApi.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
 ```  
 
