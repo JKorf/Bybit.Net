@@ -76,9 +76,9 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("stopLoss", stopLoss?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tpTriggerBy", EnumConverter.GetString(takeProfitTriggerBy));
             parameters.AddOptionalParameter("slTriggerBy", EnumConverter.GetString(stopLossTriggerBy));
-            parameters.AddOptionalParameter("reduceOnly", reduceOnly);
-            parameters.AddOptionalParameter("closeOnTrigger", closeOnTrigger);
-            parameters.AddOptionalParameter("mmp", marketMakerProtection);
+            parameters.AddOptionalParameter("reduceOnly", reduceOnly?.ToString().ToLowerInvariant());
+            parameters.AddOptionalParameter("closeOnTrigger", closeOnTrigger?.ToString().ToLowerInvariant());
+            parameters.AddOptionalParameter("mmp", marketMakerProtection?.ToString().ToLowerInvariant());
 
             return await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
