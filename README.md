@@ -28,6 +28,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 3.0.1 - 11 Jul 2023
+    * Fixed invalid V5 GetOrderHistory endpoint check
+    * Fixed bool parameters V5 PlaceOrder
+    * Removed Liquidation stream from V5 SpotApi
+
 * Version 3.0.0 - 25 Jun 2023
     * Updated CryptoExchange.Net to version 6.0.0
     * Renamed BybitClient to BybitRestClient
