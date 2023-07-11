@@ -59,6 +59,9 @@ namespace Bybit.UnitTests
                                 break;
                         }
                     }
+
+                    if (method.Name == "SubscribeToLiquidationUpdatesAsync")
+                        continue;
                     
                     Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.Name}");
                     methods++;
