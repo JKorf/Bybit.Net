@@ -65,58 +65,6 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 
 ***
 
-## SubscribeToLiquidationUpdatesAsync  
-
-[https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation](https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation)  
-<p>
-
-*Subscribe to liquidation updates*  
-
-```csharp  
-var client = new BybitSocketClient();  
-var result = await client.V5.BaseApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|symbols|The symbols to subscribe|
-|handler|Data handler|
-|_[Optional]_ ct|Cancellation token. Cancelling will cancel the subscription|
-
-</p>
-
-***
-
-## SubscribeToLiquidationUpdatesAsync  
-
-[https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation](https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation)  
-<p>
-
-*Subscribe to liquidation updates*  
-
-```csharp  
-var client = new BybitSocketClient();  
-var result = await client.V5.BaseApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|symbol|The symbol to subscribe|
-|handler|Data handler|
-|_[Optional]_ ct|Cancellation token. Cancelling will cancel the subscription|
-
-</p>
-
-***
-
 ## SubscribeToOrderbookUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/v5/websocket/public/orderbook](https://bybit-exchange.github.io/docs/v5/websocket/public/orderbook)  
