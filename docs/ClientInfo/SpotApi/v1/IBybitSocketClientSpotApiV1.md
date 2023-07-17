@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientSpotApiV1
 has_children: false
-parent: IBybitClientSpotApi\v1
-grand_parent: Rest API documentation
+parent: IBybitSocketClientSpotApi\v1
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi\v1 > SpotApiV1`  
+`BybitSocketClient > SpotApi\v1 > SpotApiV1`  
 *Bybit spot streams*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to kline updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v1.SpotApiV1.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -46,7 +46,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 *Subscribe to leverage token net value updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v1.SpotApiV1.SubscribeToLeverageTokenUpdatesAsync(/* parameters */);  
 ```  
 
@@ -72,7 +72,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLeverageTokenUpdatesAsync(string
 *Subscribe to diff of order book updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v1.SpotApiV1.SubscribeToOrderBookDiffUpdatesAsync(/* parameters */);  
 ```  
 
@@ -98,7 +98,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookDiffUpdatesAsync(string
 *Subscribe to aggregated order book updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v1.SpotApiV1.SubscribeToOrderBookMergedUpdatesAsync(/* parameters */);  
 ```  
 
@@ -125,7 +125,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookMergedUpdatesAsync(stri
 *Subscribe to order book updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v1.SpotApiV1.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -151,7 +151,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v1.SpotApiV1.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -177,7 +177,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.SpotApi\v1.SpotApiV1.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 

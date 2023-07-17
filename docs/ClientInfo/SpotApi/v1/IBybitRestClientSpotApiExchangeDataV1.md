@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientSpotApiExchangeDataV1
 has_children: false
-parent: IBybitClientSpotApi\v1
+parent: IBybitRestClientSpotApi\v1
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi\v1 > IBybitRestClientSpotApiExchangeDataV1`  
+`BybitRestClient > SpotApi\v1 > SpotApiExchangeDataV1`  
 *Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Get the best ask/bid price for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetBookPriceAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetBookPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -44,8 +44,8 @@ Task<WebCallResult<BybitSpotBookPriceV1>> GetBookPriceAsync(string symbol, Cance
 *Get the best ask/bid prices for all symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetBookPricesAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetBookPricesAsync();  
 ```  
 
 ```csharp  
@@ -67,8 +67,8 @@ Task<WebCallResult<IEnumerable<BybitSpotBookPriceV1>>> GetBookPricesAsync(Cancel
 *Get borrow info*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetBorrowInterestAndQuotaAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetBorrowInterestAndQuotaAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -92,8 +92,8 @@ Task<WebCallResult<BybitBorrowInfoV1>> GetBorrowInterestAndQuotaAsync(string ass
 *Get price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -121,8 +121,8 @@ Task<WebCallResult<IEnumerable<BybitSpotKlineV1>>> GetKlinesAsync(string symbol,
 *Get merged order book based on the scale*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetMergedOrderBookAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetMergedOrderBookAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -148,8 +148,8 @@ Task<WebCallResult<BybitSpotOrderBook>> GetMergedOrderBookAsync(string symbol, i
 *Get the current order book for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetOrderBookAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetOrderBookAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -174,8 +174,8 @@ Task<WebCallResult<BybitSpotOrderBook>> GetOrderBookAsync(string symbol, int? li
 *Get the last trade price of a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetPriceAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -199,8 +199,8 @@ Task<WebCallResult<BybitSpotPrice>> GetPriceAsync(string symbol, CancellationTok
 *Get the last trade price of all symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetPricesAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetPricesAsync();  
 ```  
 
 ```csharp  
@@ -223,8 +223,8 @@ Task<WebCallResult<IEnumerable<BybitSpotPrice>>> GetPricesAsync(CancellationToke
 *Get the server time*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetServerTimeAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetServerTimeAsync();  
 ```  
 
 ```csharp  
@@ -247,8 +247,8 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 *Get all supported symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetSymbolsAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetSymbolsAsync();  
 ```  
 
 ```csharp  
@@ -271,8 +271,8 @@ Task<WebCallResult<IEnumerable<BybitSpotSymbolV1>>> GetSymbolsAsync(Cancellation
 *The ticker info for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetTickerAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetTickerAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -296,8 +296,8 @@ Task<WebCallResult<BybitSpotTickerV1>> GetTickerAsync(string symbol, Cancellatio
 *The ticker info for all symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetTickersAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetTickersAsync();  
 ```  
 
 ```csharp  
@@ -320,8 +320,8 @@ Task<WebCallResult<IEnumerable<BybitSpotTickerV1>>> GetTickersAsync(Cancellation
 *Get public trade history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiExchangeDataV1.GetTradeHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiExchangeDataV1.GetTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  

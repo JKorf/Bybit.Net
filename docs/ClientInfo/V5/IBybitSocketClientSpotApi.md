@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientSpotApi
 has_children: true
-parent: IBybitClientV5
-grand_parent: Rest API documentation
+parent: IBybitSocketClientV5
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > SpotApi`  
+`BybitSocketClient > V5 > SpotApi`  
 *Bybit spot data streams*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to leveraged token kline updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.SpotApi.SubscribeToLeveragedTokenKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -46,7 +46,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenKlineUpdatesAsync(
 *Subscribe to leveraged token kline updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.SpotApi.SubscribeToLeveragedTokenKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -73,7 +73,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenKlineUpdatesAsync(
 *Subscribe to leveraged token NAV updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.SpotApi.SubscribeToLeveragedTokenNavUpdatesAsync(/* parameters */);  
 ```  
 
@@ -99,7 +99,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenNavUpdatesAsync(IE
 *Subscribe to leveraged token NAV updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.SpotApi.SubscribeToLeveragedTokenNavUpdatesAsync(/* parameters */);  
 ```  
 
@@ -125,7 +125,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenNavUpdatesAsync(st
 *Subscribe to leveraged token ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.SpotApi.SubscribeToLeveragedTokenTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -151,7 +151,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenTickerUpdatesAsync
 *Subscribe to leveraged token ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.SpotApi.SubscribeToLeveragedTokenTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -177,7 +177,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenTickerUpdatesAsync
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.SpotApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -203,7 +203,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.SpotApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 

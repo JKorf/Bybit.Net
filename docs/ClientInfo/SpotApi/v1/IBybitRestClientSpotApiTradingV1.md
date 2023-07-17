@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientSpotApiTradingV1
 has_children: false
-parent: IBybitClientSpotApi\v1
+parent: IBybitRestClientSpotApi\v1
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi\v1 > IBybitRestClientSpotApiTradingV1`  
+`BybitRestClient > SpotApi\v1 > SpotApiTradingV1`  
 *Bybit trading endpoints, placing and managing orders.*
   
 
@@ -18,8 +18,8 @@ grand_parent: Rest API documentation
 *Cancel multiple orders based on the provided parameters*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.CancelMultipleOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.CancelMultipleOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -46,8 +46,8 @@ Task<WebCallResult> CancelMultipleOrderAsync(string symbol, OrderSide? side = de
 *Cancel an active order. Either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.CancelOrderAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.CancelOrderAsync();  
 ```  
 
 ```csharp  
@@ -73,8 +73,8 @@ Task<WebCallResult<BybitSpotOrderPlaced>> CancelOrderAsync(long? orderId = defau
 *Get borrow records*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.GetBorrowRecordsAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.GetBorrowRecordsAsync();  
 ```  
 
 ```csharp  
@@ -103,8 +103,8 @@ Task<WebCallResult<IEnumerable<BybitBorrowRecord>>> GetBorrowRecordsAsync(DateTi
 *Get open orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.GetOpenOrdersAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.GetOpenOrdersAsync();  
 ```  
 
 ```csharp  
@@ -131,8 +131,8 @@ Task<WebCallResult<IEnumerable<BybitSpotOrderV1>>> GetOpenOrdersAsync(string? sy
 *Get order, either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.GetOrderAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.GetOrderAsync();  
 ```  
 
 ```csharp  
@@ -158,8 +158,8 @@ Task<WebCallResult<BybitSpotOrderV1>> GetOrderAsync(long? orderId = default, str
 *Get orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.GetOrdersAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.GetOrdersAsync();  
 ```  
 
 ```csharp  
@@ -186,8 +186,8 @@ Task<WebCallResult<IEnumerable<BybitSpotOrderV1>>> GetOrdersAsync(string? symbol
 *Get repayment records*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.GetRepayRecordsAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.GetRepayRecordsAsync();  
 ```  
 
 ```csharp  
@@ -215,8 +215,8 @@ Task<WebCallResult<IEnumerable<BybitRepayRecord>>> GetRepayRecordsAsync(DateTime
 *Get user trade history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.GetUserTradesAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.GetUserTradesAsync();  
 ```  
 
 ```csharp  
@@ -244,8 +244,8 @@ Task<WebCallResult<IEnumerable<BybitSpotUserTradeV1>>> GetUserTradesAsync(string
 *Place a new borrow order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.PlaceBorrowOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.PlaceBorrowOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -271,8 +271,8 @@ Task<WebCallResult<long>> PlaceBorrowOrderAsync(string asset, decimal quantity, 
 *Place a new order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.PlaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -303,8 +303,8 @@ Task<WebCallResult<BybitSpotOrderPlaced>> PlaceOrderAsync(string symbol, OrderSi
 *Place a new borrow order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiTradingV1.PlaceRepayOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiTradingV1.PlaceRepayOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  

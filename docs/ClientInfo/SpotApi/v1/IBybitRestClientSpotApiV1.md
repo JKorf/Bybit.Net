@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientSpotApiV1
 has_children: false
-parent: IBybitClientSpotApi\v1
+parent: IBybitRestClientSpotApi\v1
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi\v1 > IBybitRestClientSpotApiV1`  
+`BybitRestClient > SpotApi\v1 > SpotApiV1`  
 *Bybit spot API endpoints (v1)*
   
 ***
@@ -13,10 +13,10 @@ grand_parent: Rest API documentation
 **ISpotClient CommonSpotClient { get; }**  
 ***
 *Endpoints related to account settings, info or actions*  
-**IBybitRestClientSpotApiAccountV1 Account { get; }**  
+**[IBybitRestClientSpotApiAccountV1](IBybitRestClientSpotApiAccountV1.html) Account { get; }**  
 ***
 *Endpoints related to retrieving market and system data*  
-**IBybitRestClientSpotApiExchangeDataV1 ExchangeData { get; }**  
+**[IBybitRestClientSpotApiExchangeDataV1](IBybitRestClientSpotApiExchangeDataV1.html) ExchangeData { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**IBybitRestClientSpotApiTradingV1 Trading { get; }**  
+**[IBybitRestClientSpotApiTradingV1](IBybitRestClientSpotApiTradingV1.html) Trading { get; }**  

@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientBaseApi
 has_children: true
-parent: IBybitClientV5
-grand_parent: Rest API documentation
+parent: IBybitSocketClientV5
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > BaseApi`  
+`BybitSocketClient > V5 > BaseApi`  
 *Bybit streaming data subscriptions*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to kline updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.BaseApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -46,7 +46,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<st
 *Subscribe to kline updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.BaseApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -65,58 +65,6 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
 
 ***
 
-## SubscribeToLiquidationUpdatesAsync  
-
-[https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation](https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation)  
-<p>
-
-*Subscribe to liquidation updates*  
-
-```csharp  
-var client = new BybitClient();  
-var result = await client.V5.BaseApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|symbols|The symbols to subscribe|
-|handler|Data handler|
-|_[Optional]_ ct|Cancellation token. Cancelling will cancel the subscription|
-
-</p>
-
-***
-
-## SubscribeToLiquidationUpdatesAsync  
-
-[https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation](https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation)  
-<p>
-
-*Subscribe to liquidation updates*  
-
-```csharp  
-var client = new BybitClient();  
-var result = await client.V5.BaseApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
-```  
-
-```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default);  
-```  
-
-|Parameter|Description|
-|---|---|
-|symbol|The symbol to subscribe|
-|handler|Data handler|
-|_[Optional]_ ct|Cancellation token. Cancelling will cancel the subscription|
-
-</p>
-
-***
-
 ## SubscribeToOrderbookUpdatesAsync  
 
 [https://bybit-exchange.github.io/docs/v5/websocket/public/orderbook](https://bybit-exchange.github.io/docs/v5/websocket/public/orderbook)  
@@ -125,7 +73,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 *Subscribe to order book updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.BaseApi.SubscribeToOrderbookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -153,7 +101,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerabl
 *Subscribe to order book updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.BaseApi.SubscribeToOrderbookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -181,7 +129,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string sym
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.BaseApi.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -207,7 +155,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<st
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.BaseApi.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 

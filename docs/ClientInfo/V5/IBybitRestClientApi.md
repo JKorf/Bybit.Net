@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientApi
 has_children: true
-parent: IBybitClientV5
+parent: IBybitRestClientV5
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > IBybitRestClientApi`  
+`BybitRestClient > V5 > Api`  
 *Bybit V5 API endpoints*
   
 ***

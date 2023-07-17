@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientApiExchangeData
 has_children: false
-parent: IBybitClientV5
+parent: IBybitRestClientV5
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > IBybitRestClientApiExchangeData`  
+`BybitRestClient > V5 > ApiExchangeData`  
 *Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Get server announcements*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetAnnouncementsAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetAnnouncementsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -48,8 +48,8 @@ Task<WebCallResult<BybitResponse<BybitAnnouncement>>> GetAnnouncementsAsync(stri
 *Get delivery price*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetDeliveryPriceAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetDeliveryPriceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -77,8 +77,8 @@ Task<WebCallResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Cat
 *Get funding rate history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetFundingRateHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetFundingRateHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -106,8 +106,8 @@ Task<WebCallResult<BybitResponse<BybitFundingHistory>>> GetFundingRateHistoryAsy
 *Get historical volatility*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetHistoricalVolatilityAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetHistoricalVolatilityAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -137,8 +137,8 @@ Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatil
 *Get index price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetIndexPriceKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetIndexPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -167,8 +167,8 @@ Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetIndexPriceKlinesAsync(Cat
 *Get insurance pool data*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetInsuranceAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetInsuranceAsync();  
 ```  
 
 ```csharp  
@@ -192,8 +192,8 @@ Task<WebCallResult<BybitResponse<BybitInsurance>>> GetInsuranceAsync(string? ass
 *Get klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -222,8 +222,8 @@ Task<WebCallResult<BybitResponse<BybitKline>>> GetKlinesAsync(Category category,
 *Get linear/inverse symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetLinearInverseSymbolsAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetLinearInverseSymbolsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -251,8 +251,8 @@ Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSym
 *Get linear/inverse tickers*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetLinearInverseTickersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetLinearInverseTickersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -279,8 +279,8 @@ Task<WebCallResult<BybitResponse<BybitLinearInverseTicker>>> GetLinearInverseTic
 *Get mark price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetMarkPriceKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetMarkPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -309,8 +309,8 @@ Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetMarkPriceKlinesAsync(Cate
 *Get open interest*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetOpenInterestAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetOpenInterestAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -340,8 +340,8 @@ Task<WebCallResult<BybitResponse<BybitOpenInterest>>> GetOpenInterestAsync(Categ
 *Get option symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetOptionSymbolsAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetOptionSymbolsAsync();  
 ```  
 
 ```csharp  
@@ -368,8 +368,8 @@ Task<WebCallResult<BybitResponse<BybitOptionSymbol>>> GetOptionSymbolsAsync(stri
 *Get option tickers*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetOptionTickersAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetOptionTickersAsync();  
 ```  
 
 ```csharp  
@@ -395,8 +395,8 @@ Task<WebCallResult<BybitResponse<BybitOptionTicker>>> GetOptionTickersAsync(stri
 *Get order book*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetOrderbookAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetOrderbookAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -422,8 +422,8 @@ Task<WebCallResult<BybitOrderbook>> GetOrderbookAsync(Category category, string 
 *Get premium index klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetPremiumIndexPriceKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetPremiumIndexPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -451,8 +451,8 @@ Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetPremiumIndexPriceKlinesAs
 *Get risk limits*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetRiskLimitAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -477,8 +477,8 @@ Task<WebCallResult<BybitResponse<BybitRiskLimit>>> GetRiskLimitAsync(Category ca
 *Get server time*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetServerTimeAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetServerTimeAsync();  
 ```  
 
 ```csharp  
@@ -501,8 +501,8 @@ Task<WebCallResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default
 *Get spot symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetSpotSymbolsAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetSpotSymbolsAsync();  
 ```  
 
 ```csharp  
@@ -526,8 +526,8 @@ Task<WebCallResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? 
 *Spot tickers*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetSpotTickersAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetSpotTickersAsync();  
 ```  
 
 ```csharp  
@@ -551,8 +551,8 @@ Task<WebCallResult<BybitResponse<BybitSpotTicker>>> GetSpotTickersAsync(string? 
 *Get trade history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiExchangeData.GetTradeHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  

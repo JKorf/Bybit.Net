@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientApiAccount
 has_children: false
-parent: IBybitClientV5
+parent: IBybitRestClientV5
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > IBybitRestClientApiAccount`  
+`BybitRestClient > V5 > ApiAccount`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and changing account settings*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel a withdrawal*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.CancelWithdrawalAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.CancelWithdrawalAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -44,8 +44,8 @@ Task<WebCallResult<BybitOperationResult>> CancelWithdrawalAsync(string id, Cance
 *Create an internal transfer between different account types*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.CreateInternalTransferAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.CreateInternalTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -73,8 +73,8 @@ Task<WebCallResult<BybitTransferId>> CreateInternalTransferAsync(string asset, d
 *Transfer between main/sub accounts*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.CreateUniversalTransferAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.CreateUniversalTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -104,8 +104,8 @@ Task<WebCallResult<BybitTransferId>> CreateUniversalTransferAsync(string asset, 
 *Get all balances*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetAllAssetBalancesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetAllAssetBalancesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -132,8 +132,8 @@ Task<WebCallResult<BybitAssetBalances>> GetAllAssetBalancesAsync(AccountType acc
 *Get allowed deposit asset info*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetAllowedDepositAssetInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetAllowedDepositAssetInfoAsync();  
 ```  
 
 ```csharp  
@@ -160,8 +160,8 @@ Task<WebCallResult<BybitAllowedDepositInfoResponse>> GetAllowedDepositAssetInfoA
 *Get api key info for the current api key*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetApiKeyInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetApiKeyInfoAsync();  
 ```  
 
 ```csharp  
@@ -184,8 +184,8 @@ Task<WebCallResult<BybitApiKeyInfo>> GetApiKeyInfoAsync(CancellationToken ct = d
 *Get asset balance*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetAssetBalanceAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetAssetBalanceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -212,8 +212,8 @@ Task<WebCallResult<BybitAssetBalances>> GetAssetBalanceAsync(AccountType account
 *Get current account greek info*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetAssetGreeksAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetAssetGreeksAsync();  
 ```  
 
 ```csharp  
@@ -237,8 +237,8 @@ Task<WebCallResult<BybitResponse<BybitGreeks>>> GetAssetGreeksAsync(string? base
 *Get coin info including chain info and withdrawal and deposit status*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetAssetInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetAssetInfoAsync();  
 ```  
 
 ```csharp  
@@ -262,8 +262,8 @@ Task<WebCallResult<BybitUserAssetInfos>> GetAssetInfoAsync(string? asset = defau
 *Get asset information*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetAssetInfoAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetAssetInfoAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -288,8 +288,8 @@ Task<WebCallResult<BybitAccountAssetInfo>> GetAssetInfoAsync(AccountType account
 *Get wallet balance and account info*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetBalancesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetBalancesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -314,8 +314,8 @@ Task<WebCallResult<BybitResponse<BybitBalance>>> GetBalancesAsync(AccountType ac
 *Get borrow history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetBorrowHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetBorrowHistoryAsync();  
 ```  
 
 ```csharp  
@@ -343,8 +343,8 @@ Task<WebCallResult<BybitResponse<BybitBorrowHistory>>> GetBorrowHistoryAsync(str
 *Get the collateral information of the current unified margin account, including loan interest rate, loanable amount, collateral conversion rate, whether it can be mortgaged as margin, etc.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetCollateralInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetCollateralInfoAsync();  
 ```  
 
 ```csharp  
@@ -368,8 +368,8 @@ Task<WebCallResult<BybitResponse<BybitCollateralInfo>>> GetCollateralInfoAsync(s
 *Get delayed withdrawal amount*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetDelayedWithdrawQuantityAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetDelayedWithdrawQuantityAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -393,8 +393,8 @@ Task<WebCallResult<BybitDelayedWithdrawal>> GetDelayedWithdrawQuantityAsync(stri
 *Get the master deposit address for an asset*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetDepositAddressAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetDepositAddressAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -419,8 +419,8 @@ Task<WebCallResult<BybitDepositAddress>> GetDepositAddressAsync(string asset, st
 *Get list of deposits*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetDepositsAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetDepositsAsync();  
 ```  
 
 ```csharp  
@@ -448,8 +448,8 @@ Task<WebCallResult<BybitDeposits>> GetDepositsAsync(string? asset = default, Dat
 *Get fee rates*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetFeeRateAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetFeeRateAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -475,8 +475,8 @@ Task<WebCallResult<BybitResponse<BybitFeeRate>>> GetFeeRateAsync(Category catego
 *Get internal transfer history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetInternalTransfersAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetInternalTransfersAsync();  
 ```  
 
 ```csharp  
@@ -506,8 +506,8 @@ Task<WebCallResult<BybitResponse<BybitTransfer>>> GetInternalTransfersAsync(stri
 *Get margin configuration info*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetMarginAccountInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetMarginAccountInfoAsync();  
 ```  
 
 ```csharp  
@@ -530,8 +530,8 @@ Task<WebCallResult<BybitAccountInfo>> GetMarginAccountInfoAsync(CancellationToke
 *Get transaction logs in Unified account.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetTransactionHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetTransactionHistoryAsync();  
 ```  
 
 ```csharp  
@@ -563,8 +563,8 @@ Task<WebCallResult<BybitResponse<BybitTransactionLog>>> GetTransactionHistoryAsy
 *Get a list of transferable assets between accounts*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetTransferableAssetsAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetTransferableAssetsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -589,8 +589,8 @@ Task<WebCallResult<BybitResponse<string>>> GetTransferableAssetsAsync(AccountTyp
 *Get universal transfer history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetUniversalTransfersAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetUniversalTransfersAsync();  
 ```  
 
 ```csharp  
@@ -620,8 +620,8 @@ Task<WebCallResult<BybitResponse<BybitTransfer>>> GetUniversalTransfersAsync(str
 *Get withdrawal history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.GetWithdrawalsAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetWithdrawalsAsync();  
 ```  
 
 ```csharp  
@@ -651,8 +651,8 @@ Task<WebCallResult<BybitResponse<BybitWithdrawal>>> GetWithdrawalsAsync(string? 
 *Set auto add margin*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.SetAutoAddMarginAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SetAutoAddMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -679,8 +679,8 @@ Task<WebCallResult> SetAutoAddMarginAsync(Category category, string symbol, bool
 *Set the account deposits are credited to*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.SetDepositAccountAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SetDepositAccountAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -704,8 +704,8 @@ Task<WebCallResult<BybitOperationResult>> SetDepositAccountAsync(AccountType acc
 *Set leverage*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.SetLeverageAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SetLeverageAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -732,8 +732,8 @@ Task<WebCallResult> SetLeverageAsync(Category category, string symbol, decimal b
 *Set the margin mode*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.SetMarginModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SetMarginModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -757,8 +757,8 @@ Task<WebCallResult<BybitSetMarginModeResult>> SetMarginModeAsync(MarginMode marg
 *Set the risk limit*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.SetRiskLimitAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -785,8 +785,8 @@ Task<WebCallResult<BybitSetRiskLimit>> SetRiskLimitAsync(Category category, stri
 *Set take profit/stop loss mode*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.SetTakeProfitStopLossModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SetTakeProfitStopLossModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -812,8 +812,8 @@ Task<WebCallResult<BybitTakeProfitStopLossMode>> SetTakeProfitStopLossModeAsync(
 *Switch cross or isolated margin mode*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.SwitchCrossIsolatedMarginAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SwitchCrossIsolatedMarginAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -841,8 +841,8 @@ Task<WebCallResult> SwitchCrossIsolatedMarginAsync(Category category, string sym
 *Switch position mode*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.SwitchPositionModeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SwitchPositionModeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -869,8 +869,8 @@ Task<WebCallResult> SwitchPositionModeAsync(Category category, Enums.V5.Position
 *Withdraw funds*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiAccount.WithdrawAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.WithdrawAsync(/* parameters */);  
 ```  
 
 ```csharp  

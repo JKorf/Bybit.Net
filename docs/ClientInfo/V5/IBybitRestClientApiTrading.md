@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientApiTrading
 has_children: false
-parent: IBybitClientV5
+parent: IBybitRestClientV5
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > IBybitRestClientApiTrading`  
+`BybitRestClient > V5 > ApiTrading`  
 *Bybit trading endpoints, placing and managing orders.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel all orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.CancelAllOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.CancelAllOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -48,8 +48,8 @@ Task<WebCallResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(Category ca
 *Cancel order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.CancelOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -77,8 +77,8 @@ Task<WebCallResult<BybitOrderId>> CancelOrderAsync(Category category, string sym
 *Edit an order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.EditOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.EditOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -114,8 +114,8 @@ Task<WebCallResult<BybitOrderId>> EditOrderAsync(Category category, string symbo
 *Get asset exchange history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetAssetExchangeHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetAssetExchangeHistoryAsync();  
 ```  
 
 ```csharp  
@@ -142,8 +142,8 @@ Task<WebCallResult<IEnumerable<BybitAssetExchange>>> GetAssetExchangeHistoryAsyn
 *Get spot borrow quota*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetBorrowQuotaAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetBorrowQuotaAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -169,8 +169,8 @@ Task<WebCallResult<BybitBorrowQuota>> GetBorrowQuotaAsync(Category category, str
 *Get closed profit and loss*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetClosedProfitLossAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetClosedProfitLossAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -199,8 +199,8 @@ Task<WebCallResult<BybitResponse<BybitClosedPnl>>> GetClosedProfitLossAsync(Cate
 *Get delivery history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetDeliveryHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetDeliveryHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -228,8 +228,8 @@ Task<WebCallResult<BybitResponse<BybitDeliveryRecord>>> GetDeliveryHistoryAsync(
 *Get order history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetOrderHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetOrderHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -261,8 +261,8 @@ Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category cat
 *Get real-time open orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -295,8 +295,8 @@ Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrdersAsync(Category category,
 *Get positions*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetPositionsAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetPositionsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -325,8 +325,8 @@ Task<WebCallResult<BybitResponse<BybitPosition>>> GetPositionsAsync(Category cat
 *Get settlement history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetSettlementHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetSettlementHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -353,8 +353,8 @@ Task<WebCallResult<BybitResponse<BybitSettlementRecord>>> GetSettlementHistoryAs
 *Get user trade history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.GetUserTradesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.GetUserTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -387,8 +387,8 @@ Task<WebCallResult<BybitResponse<BybitUserTrade>>> GetUserTradesAsync(Category c
 *Place an order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.PlaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -433,8 +433,8 @@ Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symb
 *Set cancel all timeout on websocket disconnect*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.SetDisconnectCancelAllAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.SetDisconnectCancelAllAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -458,8 +458,8 @@ Task<WebCallResult<BybitBorrowQuota>> SetDisconnectCancelAllAsync(int windowSeco
 *Set trading stop parameters*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.V5.IBybitRestClientApiTrading.SetTradingStopAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.SetTradingStopAsync(/* parameters */);  
 ```  
 
 ```csharp  

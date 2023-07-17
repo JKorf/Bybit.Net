@@ -1,16 +1,16 @@
 ---
 title: IBybitRestClientContractApi
 has_children: true
-parent: IBybitClientDerivativesApi\ContractApi
+parent: IBybitRestClientDerivativesApi\ContractApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi\ContractApi > IBybitRestClientContractApi`  
+`BybitRestClient > DerivativesApi\ContractApi > ContractApi`  
 *Bybit contract API endpoints*
   
 ***
 *Endpoints related to account settings, info or actions*  
-**IBybitRestClientContractApiAccount Account { get; }**  
+**[IBybitRestClientContractApiAccount](IBybitRestClientContractApiAccount.html) Account { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**IBybitRestClientContractApiTrading Trading { get; }**  
+**[IBybitRestClientContractApiTrading](IBybitRestClientContractApiTrading.html) Trading { get; }**  

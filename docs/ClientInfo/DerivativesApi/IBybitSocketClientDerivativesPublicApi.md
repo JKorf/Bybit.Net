@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientDerivativesPublicApi
 has_children: true
-parent: IBybitClientDerivativesApi
-grand_parent: Rest API documentation
+parent: IBybitSocketClientDerivativesApi
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi > DerivativesPublicApi`  
+`BybitSocketClient > DerivativesApi > DerivativesPublicApi`  
 *Bybit public Derivatives streams*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to kline (candlestick) updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi.DerivativesPublicApi.SubscribeToKlinesUpdatesAsync(/* parameters */);  
 ```  
 
@@ -47,7 +47,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlinesUpdatesAsync(StreamDerivat
 *Subscribe to kline (candlestick) updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi.DerivativesPublicApi.SubscribeToKlineUpdatesAsync(/* parameters */);  
 ```  
 
@@ -75,7 +75,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(StreamDerivati
 *Subscribe to orderbook updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi.DerivativesPublicApi.SubscribeToOrderBooksUpdatesAsync(/* parameters */);  
 ```  
 
@@ -104,7 +104,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(StreamDer
 *Subscribe to orderbook updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi.DerivativesPublicApi.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
@@ -134,7 +134,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(StreamDeri
 *properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi.DerivativesPublicApi.SubscribeToTickersUpdatesAsync(/* parameters */);  
 ```  
 
@@ -163,7 +163,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(StreamDeriva
 *properties which have changed. If a property in the update is `null` it isn't changed and should be ignored.*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi.DerivativesPublicApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -191,7 +191,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(StreamDerivat
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi.DerivativesPublicApi.SubscribeToTradesUpdatesAsync(/* parameters */);  
 ```  
 
@@ -218,7 +218,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradesUpdatesAsync(StreamDerivat
 *Subscribe to public trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.DerivativesApi.DerivativesPublicApi.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 

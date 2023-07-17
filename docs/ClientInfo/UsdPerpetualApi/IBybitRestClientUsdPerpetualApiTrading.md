@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientUsdPerpetualApiTrading
 has_children: false
-parent: IBybitClientUsdPerpetualApi
+parent: IBybitRestClientUsdPerpetualApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > UsdPerpetualApi > IBybitRestClientTrading`  
+`BybitRestClient > UsdPerpetualApi > Trading`  
 *Bybit trading endpoints, placing and managing orders.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel all active conditional orders for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.CancelAllConditionalOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.CancelAllConditionalOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -45,8 +45,8 @@ Task<WebCallResult<IEnumerable<string>>> CancelAllConditionalOrdersAsync(string 
 *Cancel all active orders for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.CancelAllOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.CancelAllOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -71,8 +71,8 @@ Task<WebCallResult<IEnumerable<string>>> CancelAllOrdersAsync(string symbol, lon
 *Cancel a conditional order, either stopOrderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.CancelConditionalOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.CancelConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -99,8 +99,8 @@ Task<WebCallResult<BybitStopOrderId>> CancelConditionalOrderAsync(string symbol,
 *Cancel an order, either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.CancelOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -127,8 +127,8 @@ Task<WebCallResult<BybitOrderId>> CancelOrderAsync(string symbol, string? orderI
 *Get a list of conditional orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.GetConditionalOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.GetConditionalOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -159,8 +159,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitConditionalOrderUsd>>>> GetC
 *Get conditional order information. Either stopOrderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.GetOpenConditionalOrderRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.GetOpenConditionalOrderRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -187,8 +187,8 @@ Task<WebCallResult<BybitConditionalOrderUsd>> GetOpenConditionalOrderRealTimeAsy
 *Get order information for up to 10 conditional orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.GetOpenConditionalOrdersRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.GetOpenConditionalOrdersRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -213,8 +213,8 @@ Task<WebCallResult<IEnumerable<BybitConditionalOrderUsd>>> GetOpenConditionalOrd
 *Get order information. Either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.GetOpenOrderRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.GetOpenOrderRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -241,8 +241,8 @@ Task<WebCallResult<BybitUsdPerpetualOrder>> GetOpenOrderRealTimeAsync(string sym
 *Get order information for up to 500 orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.GetOpenOrdersRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.GetOpenOrdersRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -267,8 +267,8 @@ Task<WebCallResult<IEnumerable<BybitUsdPerpetualOrder>>> GetOpenOrdersRealTimeAs
 *Get orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.GetOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.GetOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -299,8 +299,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUsdPerpetualOrder>>>> GetOrd
 *Get executed user trades*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.GetUserTradesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.GetUserTradesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -330,8 +330,8 @@ Task<WebCallResult<BybitPage<IEnumerable<BybitUserTrade>>>> GetUserTradesAsync(s
 *Change an exising order. Either stopOrderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.ModifyConditionalOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.ModifyConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -365,8 +365,8 @@ Task<WebCallResult<BybitStopOrderId>> ModifyConditionalOrderAsync(string symbol,
 *Change an exising order. Either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.ModifyOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.ModifyOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -399,8 +399,8 @@ Task<WebCallResult<BybitOrderId>> ModifyOrderAsync(string symbol, string? orderI
 *Place a new conditional order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.PlaceConditionalOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.PlaceConditionalOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -441,8 +441,8 @@ Task<WebCallResult<BybitConditionalOrderUsd>> PlaceConditionalOrderAsync(string 
 *Place a new order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.PlaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -480,8 +480,8 @@ Task<WebCallResult<BybitUsdPerpetualOrder>> PlaceOrderAsync(string symbol, Order
 *Set take profit, stop loss, and trailing stop for your open position*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.UsdPerpetualApi.IBybitRestClientTrading.SetTradingStopAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.UsdPerpetualApi.Trading.SetTradingStopAsync(/* parameters */);  
 ```  
 
 ```csharp  

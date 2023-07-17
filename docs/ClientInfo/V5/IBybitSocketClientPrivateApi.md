@@ -1,11 +1,11 @@
 ---
 title: IBybitSocketClientPrivateApi
 has_children: true
-parent: IBybitClientV5
-grand_parent: Rest API documentation
+parent: IBybitSocketClientV5
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > PrivateApi`  
+`BybitSocketClient > V5 > PrivateApi`  
 *Bybit user data streams*
   
 
@@ -19,7 +19,7 @@ grand_parent: Rest API documentation
 *Subscribe to Greek updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.PrivateApi.SubscribeToGreekUpdatesAsync(/* parameters */);  
 ```  
 
@@ -44,7 +44,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEve
 *Subscribe to order updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.PrivateApi.SubscribeToOrderUpdatesAsync(/* parameters */);  
 ```  
 
@@ -69,7 +69,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 *Subscribe to position updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.PrivateApi.SubscribeToPositionUpdatesAsync(/* parameters */);  
 ```  
 
@@ -94,7 +94,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<Data
 *Subscribe to trade updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.PrivateApi.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
 ```  
 
@@ -119,7 +119,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<Dat
 *Subscribe to wallet balance updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.PrivateApi.SubscribeToWalletUpdatesAsync(/* parameters */);  
 ```  
 

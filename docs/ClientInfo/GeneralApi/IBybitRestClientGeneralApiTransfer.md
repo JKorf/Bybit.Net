@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientGeneralApiTransfer
 has_children: false
-parent: IBybitClientGeneralApi
+parent: IBybitRestClientGeneralApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > GeneralApi > IBybitRestClientTransfer`  
+`BybitRestClient > GeneralApi > Transfer`  
 *Bybit asset transfer endpoints*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Create a new transfer from one account type to the other*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.CreateInternalTransferAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.CreateInternalTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -49,8 +49,8 @@ Task<WebCallResult<BybitTransfer>> CreateInternalTransferAsync(string transferId
 *Create a new transfer for a subaccount*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.CreateSubAccountTransferAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.CreateSubAccountTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -79,8 +79,8 @@ Task<WebCallResult<BybitTransfer>> CreateSubAccountTransferAsync(string transfer
 *Enable universal transfers between sub accounts*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.EnableSubaccountsUniversalTransferAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.EnableSubaccountsUniversalTransferAsync();  
 ```  
 
 ```csharp  
@@ -105,8 +105,8 @@ Task<WebCallResult> EnableSubaccountsUniversalTransferAsync(IEnumerable<string>?
 *Coin balance for an account type including Earn*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.GetAssetBalanceAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.GetAssetBalanceAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -132,8 +132,8 @@ Task<WebCallResult<CoinBalanceQuery>> GetAssetBalanceAsync(AccountType accountTy
 *Get a list of subaccount ids*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.GetSubAccountsAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.GetSubAccountsAsync();  
 ```  
 
 ```csharp  
@@ -157,8 +157,8 @@ Task<WebCallResult<BybitSubAccountList>> GetSubAccountsAsync(long? receiveWindow
 *Get history of sub account transfers*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.GetSubAccountTransferHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.GetSubAccountTransferHistoryAsync();  
 ```  
 
 ```csharp  
@@ -190,8 +190,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitSubAccountTransferDetails>>>
 *Get history of transfers*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.GetTransferHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.GetTransferHistoryAsync();  
 ```  
 
 ```csharp  
@@ -223,8 +223,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitInternalTransferDetails>>>> 
 *Get history of universal account transfers*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.GetUniversalTransferHistoryAsync();  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.GetUniversalTransferHistoryAsync();  
 ```  
 
 ```csharp  
@@ -256,8 +256,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitUniversalTransfer>>>> GetUni
 *Create a new universal transfer*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.GeneralApi.IBybitRestClientTransfer.UniversalTransferAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.GeneralApi.Transfer.UniversalTransferAsync(/* parameters */);  
 ```  
 
 ```csharp  

@@ -15,22 +15,22 @@ namespace Bybit.Net.Objects.Models.V5
         /// Best bid price
         /// </summary>
         [JsonProperty("bid1Price")]
-        public decimal BestBidPrice { get; set; }
+        public decimal? BestBidPrice { get; set; }
         /// <summary>
         /// Best bid quantity
         /// </summary>
         [JsonProperty("bid1Size")]
-        public decimal BestBidQuantity { get; set; }
+        public decimal? BestBidQuantity { get; set; }
         /// <summary>
         /// Best ask price
         /// </summary>
         [JsonProperty("ask1Price")]
-        public decimal BestAskPrice { get; set; }
+        public decimal? BestAskPrice { get; set; }
         /// <summary>
         /// Best ask quantity
         /// </summary>
         [JsonProperty("ask1Size")]
-        public decimal BestAskQuantity { get; set; }
+        public decimal? BestAskQuantity { get; set; }
         /// <summary>
         /// Last trade price
         /// </summary>

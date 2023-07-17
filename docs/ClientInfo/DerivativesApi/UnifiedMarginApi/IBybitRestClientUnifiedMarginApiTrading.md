@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientUnifiedMarginApiTrading
 has_children: false
-parent: IBybitClientDerivativesApi\UnifiedMarginApi
+parent: IBybitRestClientDerivativesApi\UnifiedMarginApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi\UnifiedMarginApi > IBybitRestClientUnifiedMarginApiTrading`  
+`BybitRestClient > DerivativesApi\UnifiedMarginApi > UnifiedMarginApiTrading`  
 *Bybit trading endpoints, placing and managing orders.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Cancel all active orders for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiTrading.CancelAllOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiTrading.CancelAllOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -49,8 +49,8 @@ Task<WebCallResult<IEnumerable<BybitUnifiedMarginCancelledOrder>>> CancelAllOrde
 *Cancel an order, either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiTrading.CancelOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiTrading.CancelOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -79,8 +79,8 @@ Task<WebCallResult<BybitDerivativesOrderId>> CancelOrderAsync(Category category,
 *Get orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiTrading.GetOpenOrdersRealTimeAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiTrading.GetOpenOrdersRealTimeAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -113,8 +113,8 @@ Task<WebCallResult<BybitDerivativesCursorPage<IEnumerable<BybitUnifiedMarginOrde
 *Get orders*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiTrading.GetOrdersAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiTrading.GetOrdersAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -148,8 +148,8 @@ Task<WebCallResult<BybitDerivativesCursorPage<IEnumerable<BybitUnifiedMarginOrde
 *Place a new order*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiTrading.PlaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiTrading.PlaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -193,8 +193,8 @@ Task<WebCallResult<BybitDerivativesOrderId>> PlaceOrderAsync(Category category, 
 *Change an exising order. Either orderId or clientOrderId should be provided*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi\UnifiedMarginApi.IBybitRestClientUnifiedMarginApiTrading.ReplaceOrderAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi\UnifiedMarginApi.UnifiedMarginApiTrading.ReplaceOrderAsync(/* parameters */);  
 ```  
 
 ```csharp  

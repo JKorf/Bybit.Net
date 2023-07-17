@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientDerivativesApiExchangeData
 has_children: false
-parent: IBybitClientDerivativesApi
+parent: IBybitRestClientDerivativesApi
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > DerivativesApi > IBybitRestClientExchangeData`  
+`BybitRestClient > DerivativesApi > ExchangeData`  
 *Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Get funding rate history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetFundingRateAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetFundingRateAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -48,8 +48,8 @@ Task<WebCallResult<IEnumerable<BybitDerivativesFundingRate>>> GetFundingRateAsyn
 *Get index price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetIndexPriceKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetIndexPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -78,8 +78,8 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetIndexPriceKlinesAsync(Category c
 *Get price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -108,8 +108,8 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetKlinesAsync(Category category, s
 *Get mark price klines*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetMarkPriceKlinesAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetMarkPriceKlinesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -138,8 +138,8 @@ Task<WebCallResult<IEnumerable<BybitKline>>> GetMarkPriceKlinesAsync(Category ca
 *Gets the total amount of unsettled contracts. In other words, the total number of contracts held in open positions.*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetOpenInterestAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetOpenInterestAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -169,8 +169,8 @@ Task<WebCallResult<IEnumerable<BybitDerivativesOpenInterest>>> GetOpenInterestAs
 *Get option delivery price*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetOptionDeliveryPriceAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetOptionDeliveryPriceAsync();  
 ```  
 
 ```csharp  
@@ -198,8 +198,8 @@ Task<WebCallResult<BybitCursorPage<IEnumerable<BybitDerivativesOptionDeliveryPri
 *Get the current order book for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetOrderBookAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetOrderBookAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -225,8 +225,8 @@ Task<WebCallResult<BybitDerivativesOrderBookEntry>> GetOrderBookAsync(string sym
 *Get Risk Limit*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetRiskLimitAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetRiskLimitAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -251,8 +251,8 @@ Task<WebCallResult<IEnumerable<BybitDerivativesRiskLimit>>> GetRiskLimitAsync(Ca
 *Get the server time*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetServerTimeAsync();  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetServerTimeAsync();  
 ```  
 
 ```csharp  
@@ -275,8 +275,8 @@ Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
 *Get all supported symbols*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetSymbolsAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetSymbolsAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -305,8 +305,8 @@ Task<WebCallResult<BybitDerivativesCursorPage<IEnumerable<BybitDerivativesSymbol
 *The ticker info for a symbol*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetTickerAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetTickerAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -331,8 +331,8 @@ Task<WebCallResult<IEnumerable<BybitDerivativesTicker>>> GetTickerAsync(Category
 *Get Trade history*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.DerivativesApi.IBybitRestClientExchangeData.GetTradeHistoryAsync(/* parameters */);  
+var client = new BybitRestClient();  
+var result = await client.DerivativesApi.ExchangeData.GetTradeHistoryAsync(/* parameters */);  
 ```  
 
 ```csharp  

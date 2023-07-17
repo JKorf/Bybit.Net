@@ -1,13 +1,65 @@
 ---
 title: IBybitSocketClientLinearApi
 has_children: true
-parent: IBybitClientV5
-grand_parent: Rest API documentation
+parent: IBybitSocketClientV5
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitClient > V5 > LinearApi`  
+`BybitSocketClient > V5 > LinearApi`  
 *Bybit linear data streams*
   
+
+***
+
+## SubscribeToLiquidationUpdatesAsync  
+
+[https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation](https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation)  
+<p>
+
+*Subscribe to liquidation updates*  
+
+```csharp  
+var client = new BybitSocketClient();  
+var result = await client.V5.LinearApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbols|The symbols to subscribe|
+|handler|Data handler|
+|_[Optional]_ ct|Cancellation token. Cancelling will cancel the subscription|
+
+</p>
+
+***
+
+## SubscribeToLiquidationUpdatesAsync  
+
+[https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation](https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation)  
+<p>
+
+*Subscribe to liquidation updates*  
+
+```csharp  
+var client = new BybitSocketClient();  
+var result = await client.V5.LinearApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|symbol|The symbol to subscribe|
+|handler|Data handler|
+|_[Optional]_ ct|Cancellation token. Cancelling will cancel the subscription|
+
+</p>
 
 ***
 
@@ -19,7 +71,7 @@ grand_parent: Rest API documentation
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.LinearApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
@@ -45,7 +97,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 *Subscribe to ticker updates*  
 
 ```csharp  
-var client = new BybitClient();  
+var client = new BybitSocketClient();  
 var result = await client.V5.LinearApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 

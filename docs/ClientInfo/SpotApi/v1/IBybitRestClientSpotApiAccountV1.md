@@ -1,11 +1,11 @@
 ---
 title: IBybitRestClientSpotApiAccountV1
 has_children: false
-parent: IBybitClientSpotApi\v1
+parent: IBybitRestClientSpotApi\v1
 grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
-`BybitClient > SpotApi\v1 > IBybitRestClientSpotApiAccountV1`  
+`BybitRestClient > SpotApi\v1 > SpotApiAccountV1`  
 *Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
@@ -19,8 +19,8 @@ grand_parent: Rest API documentation
 *Get wallet balances*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiAccountV1.GetBalancesAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiAccountV1.GetBalancesAsync();  
 ```  
 
 ```csharp  
@@ -43,8 +43,8 @@ Task<WebCallResult<IEnumerable<BybitSpotBalance>>> GetBalancesAsync(long? receiv
 *Get margin account info*  
 
 ```csharp  
-var client = new BybitClient();  
-var result = await client.SpotApi\v1.IBybitRestClientSpotApiAccountV1.GetMarginAccountInfoAsync();  
+var client = new BybitRestClient();  
+var result = await client.SpotApi\v1.SpotApiAccountV1.GetMarginAccountInfoAsync();  
 ```  
 
 ```csharp  
