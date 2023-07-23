@@ -38,7 +38,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Wallet balance
         /// </summary>
-        public decimal WalletBalance { get; set; }
+        public decimal? WalletBalance { get; set; }
         /// <summary>
         /// Transfer balance
         /// </summary>
