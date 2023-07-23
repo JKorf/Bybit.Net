@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Bybit.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>3.0.1</PackageVersion>
-    <AssemblyVersion>3.0.1</AssemblyVersion>
-    <FileVersion>3.0.1</FileVersion>
+    <PackageVersion>3.0.2</PackageVersion>
+    <AssemblyVersion>3.0.2</AssemblyVersion>
+    <FileVersion>3.0.2</FileVersion>
     <Description>Bybit.Net is a .Net wrapper for the Bybit API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Bybit Bybit.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>3.0.1 - Fixed invalid V5 GetOrderHistory endpoint check, Fixed bool parameters V5 PlaceOrder, Removed Liquidation stream from V5 SpotApi</PackageReleaseNotes>
+    <PackageReleaseNotes>3.0.2 - Fixed AveragePrice not set on V5 position update, Fixed multiple decimal field nullability, Fixed V5 spot symbol MarginTrading incorrect property name, Added missing tpslMode on V5 PlaceOrder, Fixed typo in Deactivated V5 order status mapping, Fixed incorrect filter types in V5 LinearInverse symbol model</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bybit.Net.xml</DocumentationFile>
