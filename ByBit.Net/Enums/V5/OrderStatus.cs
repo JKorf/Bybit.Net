@@ -55,7 +55,7 @@ namespace Bybit.Net.Enums.V5
         /// <summary>
         /// Deactivated
         /// </summary>
-        [Map("Dactiviated")]
+        [Map("Deactivated")]
         Deactivated,
         /// <summary>
         /// Order has been triggered and the new active order has been successfully placed. Is the final state of a successful conditional order
