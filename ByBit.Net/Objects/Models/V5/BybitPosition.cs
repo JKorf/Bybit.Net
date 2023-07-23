@@ -44,6 +44,14 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("avgPrice")]
         public decimal AveragePrice { get; set; }
+
+        [JsonProperty("entryPrice")]
+        private decimal EntryPrice
+        {
+            get => AveragePrice;
+            set => AveragePrice = value;
+        }
+
         /// <summary>
         /// Position value
         /// </summary>
