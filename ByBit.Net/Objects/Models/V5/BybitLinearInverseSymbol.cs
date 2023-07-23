@@ -72,11 +72,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Lot size order filter
         /// </summary>
-        public BybitOptionLotSizeFilter? LotSizeFilter { get; set; }
+        public BybitLinearInverseLotSizeFilter? LotSizeFilter { get; set; }
         /// <summary>
         /// Price order filter
         /// </summary>
-        public BybitOptionPriceFilter? PriceFilter { get; set; }
+        public BybitLinearInversePriceFilter? PriceFilter { get; set; }
         /// <summary>
         /// Leverage
         /// </summary>
