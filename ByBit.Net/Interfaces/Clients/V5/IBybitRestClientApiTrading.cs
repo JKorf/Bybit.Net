@@ -202,9 +202,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="reduceOnly">Is reduce only</param>
         /// <param name="closeOnTrigger">Close on trigger</param>
         /// <param name="marketMakerProtection">Market maker protection</param>
+        /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = null, bool? isLeverage = null, TriggerDirection? triggerDirection = null, OrderFilter? orderFilter = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, TimeInForce? timeInForce = null, Enums.V5.PositionIdx? positionIdx = null, string? clientOrderId = null, decimal? takeProfit = null, decimal? stopLoss = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, bool? reduceOnly = null, bool? closeOnTrigger = null, bool? marketMakerProtection = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = null, bool? isLeverage = null, TriggerDirection? triggerDirection = null, OrderFilter? orderFilter = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, TimeInForce? timeInForce = null, Enums.V5.PositionIdx? positionIdx = null, string? clientOrderId = null, decimal? takeProfit = null, decimal? stopLoss = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, bool? reduceOnly = null, bool? closeOnTrigger = null, bool? marketMakerProtection = null, StopLossTakeProfitMode? stopLossTakeProfitMode = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set cancel all timeout on websocket disconnect

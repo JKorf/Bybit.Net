@@ -50,6 +50,7 @@ namespace Bybit.Net.Clients.V5
             bool? reduceOnly = null,
             bool? closeOnTrigger = null,
             bool? marketMakerProtection = null,
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
@@ -79,6 +80,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("reduceOnly", reduceOnly?.ToString().ToLowerInvariant());
             parameters.AddOptionalParameter("closeOnTrigger", closeOnTrigger?.ToString().ToLowerInvariant());
             parameters.AddOptionalParameter("mmp", marketMakerProtection?.ToString().ToLowerInvariant());
+            parameters.AddOptionalParameter("tpslMode", EnumConverter.GetString(stopLossTakeProfitMode));
 
             return await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
