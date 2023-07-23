@@ -34,7 +34,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Marging trade status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
-        public MarginTrading MarginTading { get; set; }
+        public MarginTrading MarginTrading { get; set; }
         /// <summary>
         /// Is innovation
         /// </summary>
