@@ -19,6 +19,11 @@ namespace Bybit.Net.Enums
         /// Portfolio margin
         /// </summary>
         [Map("PORTFOLIO_MARGIN")]
-        PortfolioMargin
+        PortfolioMargin,
+        /// <summary>
+        /// Isolated margin
+        /// </summary>
+        [Map("ISOLATED_MARGIN")]
+        IsolatedMargin
     }
 }
