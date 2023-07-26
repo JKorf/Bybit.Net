@@ -126,11 +126,13 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="status">Filter by status</param>
         /// <param name="orderFilter">Order filter</param>
+        /// <param name="startTime">Query Start Time</param>
+        /// <param name="endTime">Query End Time</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category category, string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, Enums.V5.OrderStatus? status = null, OrderFilter? orderFilter = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category category, string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, Enums.V5.OrderStatus? status = null, OrderFilter? orderFilter = null, long? startTime = null, long? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get positions
