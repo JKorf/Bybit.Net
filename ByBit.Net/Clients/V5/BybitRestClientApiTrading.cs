@@ -43,10 +43,12 @@ namespace Bybit.Net.Clients.V5
             TimeInForce? timeInForce = null,
             Enums.V5.PositionIdx? positionIdx = null,
             string? clientOrderId = null,
-            decimal? takeProfit = null,
             OrderType takeProfitOrderType = OrderType.Limit,
-            decimal? stopLoss = null,
+            decimal? takeProfit = null,
+            decimal? takeProfitLimitPrice = null,
             OrderType stopLossOrderType = OrderType.Market,
+            decimal? stopLoss = null,
+            decimal? stopLossLimitPrice = null,
             TriggerType? takeProfitTriggerBy = null,
             TriggerType? stopLossTriggerBy = null,
             bool? reduceOnly = null,
@@ -86,6 +88,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("tpslMode", EnumConverter.GetString(stopLossTakeProfitMode));
             parameters.AddOptionalParameter("tpOrderType", EnumConverter.GetString(takeProfitOrderType ));
             parameters.AddOptionalParameter("slOrderType", EnumConverter.GetString(stopLossOrderType));
+            parameters.AddOptionalParameter("tpLimitPrice", takeProfitLimitPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("slLimitPrice", stopLossLimitPrice?.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
