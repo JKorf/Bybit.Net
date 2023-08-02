@@ -56,7 +56,7 @@ namespace Bybit.Net.Objects.Models
         /// Liquidation price
         /// </summary>
         [JsonProperty("liq_price")]
-        public decimal LiquidationPrice { get; set; }
+        public decimal? LiquidationPrice { get; set; }
         /// <summary>
         /// Bankruptcy price
         /// </summary>

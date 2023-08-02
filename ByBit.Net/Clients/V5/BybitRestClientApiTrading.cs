@@ -43,15 +43,20 @@ namespace Bybit.Net.Clients.V5
             TimeInForce? timeInForce = null,
             Enums.V5.PositionIdx? positionIdx = null,
             string? clientOrderId = null,
+            OrderType takeProfitOrderType = OrderType.Limit,
             decimal? takeProfit = null,
+            decimal? takeProfitLimitPrice = null,
+            OrderType stopLossOrderType = OrderType.Market,
             decimal? stopLoss = null,
+            decimal? stopLossLimitPrice = null,
             TriggerType? takeProfitTriggerBy = null,
             TriggerType? stopLossTriggerBy = null,
             bool? reduceOnly = null,
             bool? closeOnTrigger = null,
             bool? marketMakerProtection = null,
-            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
-            CancellationToken ct = default)
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,            
+            CancellationToken ct = default
+        )
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -81,6 +86,10 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("closeOnTrigger", closeOnTrigger?.ToString().ToLowerInvariant());
             parameters.AddOptionalParameter("mmp", marketMakerProtection?.ToString().ToLowerInvariant());
             parameters.AddOptionalParameter("tpslMode", EnumConverter.GetString(stopLossTakeProfitMode));
+            parameters.AddOptionalParameter("tpOrderType", EnumConverter.GetString(takeProfitOrderType ));
+            parameters.AddOptionalParameter("slOrderType", EnumConverter.GetString(stopLossOrderType));
+            parameters.AddOptionalParameter("tpLimitPrice", takeProfitLimitPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("slLimitPrice", stopLossLimitPrice?.ToString(CultureInfo.InvariantCulture));
 
             return await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
@@ -515,6 +524,11 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("slOrderType", EnumConverter.GetString(stopLossOrderType));
 
             return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/position/trading-stop"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        public Task<WebCallResult<BybitOrderId>?> PlaceOrderAsync(Category linear, string symbolName, OrderSide orderSide, NewOrderType value1, decimal quantity, decimal price, bool v, object value2, object value3, object value4, object value5, object value6, TimeInForce postOnly, PositionIdx positionMode, string orderId, decimal takeProfit, object stopLoss, TriggerType lastPrice1, TriggerType lastPrice2, object value7, object value8, object value9, StopLossTakeProfitMode partial, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
