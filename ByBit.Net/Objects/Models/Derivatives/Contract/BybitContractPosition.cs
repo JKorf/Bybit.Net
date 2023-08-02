@@ -30,7 +30,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.Contract
         /// Liquidation price
         /// </summary>
         [JsonProperty("liqPrice")]
-        public decimal LiquidationPrice { get; set; }
+        public decimal? LiquidationPrice { get; set; }
 
         /// <summary>
         /// Bankruptcy price
