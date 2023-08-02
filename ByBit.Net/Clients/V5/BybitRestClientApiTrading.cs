@@ -524,11 +524,6 @@ namespace Bybit.Net.Clients.V5
             return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/position/trading-stop"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
-        public Task<WebCallResult<BybitOrderId>?> PlaceOrderAsync(Category linear, string symbolName, OrderSide orderSide, NewOrderType value1, decimal quantity, decimal price, bool v, object value2, object value3, object value4, object value5, object value6, TimeInForce postOnly, PositionIdx positionMode, string orderId, decimal takeProfit, object stopLoss, TriggerType lastPrice1, TriggerType lastPrice2, object value7, object value8, object value9, StopLossTakeProfitMode partial, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }
