@@ -33,7 +33,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Position side
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
-        public PositionSide Side { get; set; }
+        public PositionSide? Side { get; set; }
         /// <summary>
         /// Position size
         /// </summary>

@@ -30,7 +30,7 @@ namespace Bybit.Net.Clients.DerivativesApi.ContractApi
         #region PlaceOrderAsync
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitDerivativesOrderId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool? reduceOnly = null, bool? closeOnTrigger = null, decimal? price = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitDerivativesOrderId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool? reduceOnly = null, bool? closeOnTrigger = null, decimal? price = null, string? clientOrderId = null, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, PositionMode? positionMode = null, StopLossTakeProfitMode? stopLossTakeProfitMode = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -49,6 +49,7 @@ namespace Bybit.Net.Clients.DerivativesApi.ContractApi
             parameters.AddOptionalParameter("stopLoss", stopLossPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tpTriggerBy", takeProfitTriggerType == null ? null : JsonConvert.SerializeObject(takeProfitTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("slTriggerBy", stopLossTriggerType == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
+            parameters.AddOptionalParameter("tpslMode", EnumConverter.GetString(stopLossTakeProfitMode));
 
             parameters.AddOptionalParameter("reduceonly", reduceOnly?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("closeontrigger", closeOnTrigger?.ToString(CultureInfo.InvariantCulture));
@@ -182,7 +183,7 @@ namespace Bybit.Net.Clients.DerivativesApi.ContractApi
         #region SetTradingStop
 
         /// <inheritdoc />
-        public async Task<WebCallResult> SetTradingStop(string symbol, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, decimal? activePrice = null, decimal? trailingStop = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, decimal? stopLossSize = null, decimal? takeProfitSize = null, PositionMode? positionMode = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult> SetTradingStop(string symbol, decimal? takeProfitPrice = null, decimal? stopLossPrice = null, decimal? activePrice = null, decimal? trailingStop = null, TriggerType? takeProfitTriggerType = null, TriggerType? stopLossTriggerType = null, decimal? stopLossSize = null, decimal? takeProfitSize = null, PositionMode? positionMode = null, StopLossTakeProfitMode? stopLossTakeProfitMode = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -197,6 +198,7 @@ namespace Bybit.Net.Clients.DerivativesApi.ContractApi
             parameters.AddOptionalParameter("slTriggerBy", positionMode == null ? null : JsonConvert.SerializeObject(stopLossTriggerType, new TriggerTypeConverter(false)));
             parameters.AddOptionalParameter("slSize", stopLossSize?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("tpSize", takeProfitSize?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("tpslMode", EnumConverter.GetString(stopLossTakeProfitMode));
             parameters.AddOptionalParameter("positionIdx", positionMode == null ? null : JsonConvert.SerializeObject(positionMode, new PositionModeConverter(false)));
             parameters.AddOptionalParameter("recv_window", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
