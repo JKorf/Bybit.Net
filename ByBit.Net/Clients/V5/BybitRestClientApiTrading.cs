@@ -27,7 +27,7 @@ namespace Bybit.Net.Clients.V5
         #region Place order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<Objects.Models.V5.BybitOrderId>> PlaceOrderAsync(
+        public async Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(
             Category category,
             string symbol,
             OrderSide side,
@@ -41,12 +41,12 @@ namespace Bybit.Net.Clients.V5
             TriggerType? triggerBy = null,
             decimal? orderIv = null,
             TimeInForce? timeInForce = null,
-            Enums.V5.PositionIdx? positionIdx = null,
+            PositionIdx? positionIdx = null,
             string? clientOrderId = null,
-            OrderType takeProfitOrderType = OrderType.Limit,
+            OrderType? takeProfitOrderType = null,
             decimal? takeProfit = null,
             decimal? takeProfitLimitPrice = null,
-            OrderType stopLossOrderType = OrderType.Market,
+            OrderType? stopLossOrderType = null,
             decimal? stopLoss = null,
             decimal? stopLossLimitPrice = null,
             TriggerType? takeProfitTriggerBy = null,
@@ -91,7 +91,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("tpLimitPrice", takeProfitLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("slLimitPrice", stopLossLimitPrice?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
