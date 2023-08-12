@@ -243,8 +243,8 @@ namespace Bybit.Net.Clients.V5
             string? cursor = null,
             CancellationToken ct = default)
         {
-            //if (orderId == null && clientOrderId == null)
-            //    throw new ArgumentException("One of orderId or clientOrderId should be provided");
+            if (orderId != null && clientOrderId != null)
+                throw new ArgumentException("One of orderId or clientOrderId should be provided");
 
             var parameters = new Dictionary<string, object>()
             {
