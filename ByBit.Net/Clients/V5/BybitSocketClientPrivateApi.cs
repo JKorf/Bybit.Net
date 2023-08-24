@@ -30,7 +30,7 @@ namespace Bybit.Net.Clients.V5
 
             SendPeriodic("Ping", options.V5Options.PingInterval, (connection) =>
             {
-                return new BybitV5RequestMessage("ping", Array.Empty<object>(), NextId().ToString());
+                return new BybitV5RequestMessage("ping", Array.Empty<object>(), ExchangeHelpers.NextId().ToString());
             });
             AddGenericHandler("Heartbeat", (evnt) => { }); 
         }
@@ -56,7 +56,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                 BaseAddress.AppendPath("/v5/private"),
-                new BybitV5RequestMessage("subscribe", new[] { "position" }, NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", new[] { "position" }, ExchangeHelpers.NextId().ToString()),
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -81,7 +81,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                 BaseAddress.AppendPath("/v5/private"),
-                new BybitV5RequestMessage("subscribe", new[] { "execution" }, NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", new[] { "execution" }, ExchangeHelpers.NextId().ToString()),
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -106,7 +106,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                 BaseAddress.AppendPath("/v5/private"),
-                new BybitV5RequestMessage("subscribe", new[] { "order" }, NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", new[] { "order" }, ExchangeHelpers.NextId().ToString()),
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -131,7 +131,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                 BaseAddress.AppendPath("/v5/private"),
-                new BybitV5RequestMessage("subscribe", new[] { "wallet" }, NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", new[] { "wallet" }, ExchangeHelpers.NextId().ToString()),
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -156,7 +156,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                 BaseAddress.AppendPath("/v5/private"),
-                new BybitV5RequestMessage("subscribe", new[] { "greeks" }, NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", new[] { "greeks" }, ExchangeHelpers.NextId().ToString()),
                 null, true, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -183,7 +183,7 @@ namespace Bybit.Net.Clients.V5
 
             var result = false;
             var error = "unspecified error";
-            await socketConnection.SendAndWaitAsync(authRequest, ClientOptions.RequestTimeout, null, data =>
+            await socketConnection.SendAndWaitAsync(authRequest, ClientOptions.RequestTimeout, null, 1, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;
@@ -302,10 +302,10 @@ namespace Bybit.Net.Clients.V5
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {
             var requestParams = ((BybitV5RequestMessage)subscriptionToUnsub.Request!).Parameters;
-            var message = new BybitV5RequestMessage("unsubscribe", requestParams, NextId().ToString());
+            var message = new BybitV5RequestMessage("unsubscribe", requestParams, ExchangeHelpers.NextId().ToString());
 
             var result = false;
-            await connection.SendAndWaitAsync(message, ClientOptions.RequestTimeout, null, data =>
+            await connection.SendAndWaitAsync(message, ClientOptions.RequestTimeout, null, 1, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;
