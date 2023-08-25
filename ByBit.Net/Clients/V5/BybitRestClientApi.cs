@@ -50,7 +50,7 @@ namespace Bybit.Net.Clients.V5
             ExchangeData = new BybitRestClientApiExchangeData(this);
             Trading = new BybitRestClientApiTrading(this);
 
-            requestBodyFormat = RequestBodyFormat.FormData;
+            requestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
