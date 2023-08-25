@@ -233,7 +233,7 @@ var result = await client.V5.ApiTrading.GetOrderHistoryAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category category, string? symbol = default, string? baseAsset = default, string? orderId = default, string? clientOrderId = default, Enums.V5.OrderStatus? status = default, OrderFilter? orderFilter = default, int? limit = default, string? cursor = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category category, string? symbol = default, string? baseAsset = default, string? orderId = default, string? clientOrderId = default, Enums.V5.OrderStatus? status = default, OrderFilter? orderFilter = default, DateTime? startTime = default, DateTime? endTime = default, int? limit = default, string? cursor = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -245,6 +245,8 @@ Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category cat
 |_[Optional]_ clientOrderId|Filter by client order id|
 |_[Optional]_ status|Filter by status|
 |_[Optional]_ orderFilter|Order filter|
+|_[Optional]_ startTime|Filter by start time|
+|_[Optional]_ endTime|Filter by end time|
 |_[Optional]_ limit|Number of results per page|
 |_[Optional]_ cursor|Pagination cursor|
 |_[Optional]_ ct|Cancellation token|
@@ -392,7 +394,7 @@ var result = await client.V5.ApiTrading.PlaceOrderAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = default, bool? isLeverage = default, TriggerDirection? triggerDirection = default, OrderFilter? orderFilter = default, decimal? triggerPrice = default, TriggerType? triggerBy = default, decimal? orderIv = default, TimeInForce? timeInForce = default, Enums.V5.PositionIdx? positionIdx = default, string? clientOrderId = default, decimal? takeProfit = default, decimal? stopLoss = default, TriggerType? takeProfitTriggerBy = default, TriggerType? stopLossTriggerBy = default, bool? reduceOnly = default, bool? closeOnTrigger = default, bool? marketMakerProtection = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = default, bool? isLeverage = default, TriggerDirection? triggerDirection = default, OrderFilter? orderFilter = default, decimal? triggerPrice = default, TriggerType? triggerBy = default, decimal? orderIv = default, TimeInForce? timeInForce = default, PositionIdx? positionIdx = default, string? clientOrderId = default, OrderType? takeProfitOrderType = default, decimal? takeProfit = default, decimal? takeProfitLimitPrice = default, OrderType? stopLossOrderType = default, decimal? stopLoss = default, decimal? stopLossLimitPrice = default, TriggerType? takeProfitTriggerBy = default, TriggerType? stopLossTriggerBy = default, bool? reduceOnly = default, bool? closeOnTrigger = default, bool? marketMakerProtection = default, StopLossTakeProfitMode? stopLossTakeProfitMode = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -412,13 +414,18 @@ Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symb
 |_[Optional]_ timeInForce|Time in force|
 |_[Optional]_ positionIdx|Position idx|
 |_[Optional]_ clientOrderId|Client order id|
+|_[Optional]_ takeProfitOrderType||
 |_[Optional]_ takeProfit|Take profit price|
+|_[Optional]_ takeProfitLimitPrice||
+|_[Optional]_ stopLossOrderType||
 |_[Optional]_ stopLoss|Stop loss price|
+|_[Optional]_ stopLossLimitPrice||
 |_[Optional]_ takeProfitTriggerBy|Take profit trigger|
 |_[Optional]_ stopLossTriggerBy|Stop loss trigger|
 |_[Optional]_ reduceOnly|Is reduce only|
 |_[Optional]_ closeOnTrigger|Close on trigger|
 |_[Optional]_ marketMakerProtection|Market maker protection|
+|_[Optional]_ stopLossTakeProfitMode|StopLoss / TakeProfit mode|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
