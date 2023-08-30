@@ -52,7 +52,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
         public StopOrderType? StopOrderType { get; set; }
-        /// <summary>Qua
+        /// <summary>
         /// Fee paid
         /// </summary>
         [JsonProperty("execFee")]
