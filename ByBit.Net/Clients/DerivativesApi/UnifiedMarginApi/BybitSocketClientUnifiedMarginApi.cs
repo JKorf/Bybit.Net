@@ -190,7 +190,7 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
 
             var result = false;
             var error = "unspecified error";
-            await socketConnection.SendAndWaitAsync(authRequest, ClientOptions.RequestTimeout, null, data =>
+            await socketConnection.SendAndWaitAsync(authRequest, ClientOptions.RequestTimeout, null, 1, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;
@@ -308,7 +308,7 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
             var message = new BybitRequestMessage { Operation = "unsubscribe", Parameters = requestParams };
 
             var result = false;
-            await connection.SendAndWaitAsync(message, ClientOptions.RequestTimeout, null, data =>
+            await connection.SendAndWaitAsync(message, ClientOptions.RequestTimeout, null, 1, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;

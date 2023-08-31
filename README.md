@@ -1,11 +1,14 @@
 # Bybit.Net
-[![.NET](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml) ![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Bybit.Net.svg)
+[![.NET](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml) []![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)(https://www.nuget.org/packages/Bybit.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Bybit.Net.svg)](https://www.nuget.org/packages/Bybit.Net)
  
 Bybit.Net is a wrapper around the Bybit API as described on [Bybit](https://bybit-exchange.github.io/docs/spot/#t-introduction), including all features the API provides using clear and readable objects, both for the REST  as the websocket API's.
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Bybit.Net/issues)**
 
 [Documentation](https://jkorf.github.io/Bybit.Net/)
+
+## Installation
+`dotnet add package Bybit.Net`
 
 ## Support the project
 I develop and maintain this package on my own for free in my spare time, any support is greatly appreciated.
@@ -27,6 +30,22 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 3.0.7 - 25 Aug 2023
+    * Updated CryptoExchange.Net
+
+* Version 3.0.6 - 25 Aug 2023
+    * Changed V5 API body content type from formdata to json
+
+* Version 3.0.5 - 05 Aug 2023
+    * Fixed default values V5 PlaceOrder parameters
+
+* Version 3.0.4 - 02 Aug 2023
+    * Removed incorrect checks for order id parameters in V5 trading endpoints
+    * Added Start/Endtime to V5 order history
+    * Added SL/TP parameters to V5 PlaceOrder endpoint
+    * Added SL/TP parameters to contract PlaceOrder endpoint
+    * Fixed nullability of position models
+
 * Version 3.0.3 - 25 Jul 2023
     * Added missing MarginMode enum value
     * Fix for position V5 deserialization

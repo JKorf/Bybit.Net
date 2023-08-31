@@ -143,7 +143,7 @@ var result = await client.DerivativesApi\ContractApi.ContractApiTrading.PlaceOrd
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitDerivativesOrderId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool? reduceOnly = default, bool? closeOnTrigger = default, decimal? price = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitDerivativesOrderId>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, TimeInForce timeInForce, bool? reduceOnly = default, bool? closeOnTrigger = default, decimal? price = default, string? clientOrderId = default, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, PositionMode? positionMode = default, StopLossTakeProfitMode? stopLossTakeProfitMode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -162,6 +162,7 @@ Task<WebCallResult<BybitDerivativesOrderId>> PlaceOrderAsync(string symbol, Orde
 |_[Optional]_ takeProfitTriggerType|Take profit trigger price type, default: LastPrice|
 |_[Optional]_ stopLossTriggerType|Stop loss trigger price type, default: LastPrice|
 |_[Optional]_ positionMode|Position mode|
+|_[Optional]_ stopLossTakeProfitMode|StopLoss / TakeProfit mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 
@@ -217,7 +218,7 @@ var result = await client.DerivativesApi\ContractApi.ContractApiTrading.SetTradi
 ```  
 
 ```csharp  
-Task<WebCallResult> SetTradingStop(string symbol, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, decimal? activePrice = default, decimal? trailingStop = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, decimal? stopLossSize = default, decimal? takeProfitSize = default, PositionMode? positionMode = default, long? receiveWindow = default, CancellationToken ct = default);  
+Task<WebCallResult> SetTradingStop(string symbol, decimal? takeProfitPrice = default, decimal? stopLossPrice = default, decimal? activePrice = default, decimal? trailingStop = default, TriggerType? takeProfitTriggerType = default, TriggerType? stopLossTriggerType = default, decimal? stopLossSize = default, decimal? takeProfitSize = default, PositionMode? positionMode = default, StopLossTakeProfitMode? stopLossTakeProfitMode = default, long? receiveWindow = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -232,6 +233,7 @@ Task<WebCallResult> SetTradingStop(string symbol, decimal? takeProfitPrice = def
 |_[Optional]_ stopLossSize|Stop loss quantity|
 |_[Optional]_ takeProfitSize|Take profit quantity|
 |_[Optional]_ positionMode|Position mode|
+|_[Optional]_ stopLossTakeProfitMode|StopLoss / TakeProfit mode|
 |_[Optional]_ receiveWindow|The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request|
 |_[Optional]_ ct|Cancellation token|
 

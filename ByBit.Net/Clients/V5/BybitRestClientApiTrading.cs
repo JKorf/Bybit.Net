@@ -27,7 +27,7 @@ namespace Bybit.Net.Clients.V5
         #region Place order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<Objects.Models.V5.BybitOrderId>> PlaceOrderAsync(
+        public async Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(
             Category category,
             string symbol,
             OrderSide side,
@@ -41,17 +41,22 @@ namespace Bybit.Net.Clients.V5
             TriggerType? triggerBy = null,
             decimal? orderIv = null,
             TimeInForce? timeInForce = null,
-            Enums.V5.PositionIdx? positionIdx = null,
+            PositionIdx? positionIdx = null,
             string? clientOrderId = null,
+            OrderType? takeProfitOrderType = null,
             decimal? takeProfit = null,
+            decimal? takeProfitLimitPrice = null,
+            OrderType? stopLossOrderType = null,
             decimal? stopLoss = null,
+            decimal? stopLossLimitPrice = null,
             TriggerType? takeProfitTriggerBy = null,
             TriggerType? stopLossTriggerBy = null,
             bool? reduceOnly = null,
             bool? closeOnTrigger = null,
             bool? marketMakerProtection = null,
-            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
-            CancellationToken ct = default)
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,            
+            CancellationToken ct = default
+        )
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -81,8 +86,12 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("closeOnTrigger", closeOnTrigger?.ToString().ToLowerInvariant());
             parameters.AddOptionalParameter("mmp", marketMakerProtection?.ToString().ToLowerInvariant());
             parameters.AddOptionalParameter("tpslMode", EnumConverter.GetString(stopLossTakeProfitMode));
+            parameters.AddOptionalParameter("tpOrderType", EnumConverter.GetString(takeProfitOrderType ));
+            parameters.AddOptionalParameter("slOrderType", EnumConverter.GetString(stopLossOrderType));
+            parameters.AddOptionalParameter("tpLimitPrice", takeProfitLimitPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("slLimitPrice", stopLossLimitPrice?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -106,9 +115,6 @@ namespace Bybit.Net.Clients.V5
             TriggerType? stopLossTriggerBy = null,
             CancellationToken ct = default)
         {
-            if (orderId == null != (clientOrderId == null))
-                throw new ArgumentException("One of orderId or clientOrderId should be provided");
-
             var parameters = new Dictionary<string, object>()
             {
                 { "category", EnumConverter.GetString(category) },
@@ -237,15 +243,12 @@ namespace Bybit.Net.Clients.V5
             string? clientOrderId = null,
             Enums.V5.OrderStatus? status = null,
             OrderFilter? orderFilter = null,
-            long? startTime = null,
-            long? endTime = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
             int? limit = null,
             string? cursor = null,
             CancellationToken ct = default)
         {
-            if (orderId != null && clientOrderId != null)
-                throw new ArgumentException("One of orderId or clientOrderId should be provided");
-
             var parameters = new Dictionary<string, object>()
             {
                 { "category", EnumConverter.GetString(category) }
@@ -257,8 +260,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("orderFilter", EnumConverter.GetString(orderFilter));
             parameters.AddOptionalParameter("orderStatus", EnumConverter.GetString(status));
-            parameters.AddOptionalParameter("startTime", startTime);
-            parameters.AddOptionalParameter("endTime", endTime);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 

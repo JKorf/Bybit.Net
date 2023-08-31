@@ -126,13 +126,13 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="status">Filter by status</param>
         /// <param name="orderFilter">Order filter</param>
-        /// <param name="startTime">Query Start Time</param>
-        /// <param name="endTime">Query End Time</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category category, string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, Enums.V5.OrderStatus? status = null, OrderFilter? orderFilter = null, long? startTime = null, long? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category category, string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, Enums.V5.OrderStatus? status = null, OrderFilter? orderFilter = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get positions
@@ -197,8 +197,12 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="timeInForce">Time in force</param>
         /// <param name="positionIdx">Position idx</param>
         /// <param name="clientOrderId">Client order id</param>
+        /// <param name="takeProfitOrderType"></param>
         /// <param name="takeProfit">Take profit price</param>
+        /// <param name="takeProfitLimitPrice"></param>        
+        /// <param name="stopLossOrderType"></param>
         /// <param name="stopLoss">Stop loss price</param>
+        /// <param name="stopLossLimitPrice"></param>        
         /// <param name="takeProfitTriggerBy">Take profit trigger</param>
         /// <param name="stopLossTriggerBy">Stop loss trigger</param>
         /// <param name="reduceOnly">Is reduce only</param>
@@ -207,7 +211,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = null, bool? isLeverage = null, TriggerDirection? triggerDirection = null, OrderFilter? orderFilter = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, TimeInForce? timeInForce = null, Enums.V5.PositionIdx? positionIdx = null, string? clientOrderId = null, decimal? takeProfit = null, decimal? stopLoss = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, bool? reduceOnly = null, bool? closeOnTrigger = null, bool? marketMakerProtection = null, StopLossTakeProfitMode? stopLossTakeProfitMode = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = null, bool? isLeverage = null, TriggerDirection? triggerDirection = null, OrderFilter? orderFilter = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, TimeInForce? timeInForce = null, PositionIdx? positionIdx = null, string? clientOrderId = null, OrderType? takeProfitOrderType = null, decimal? takeProfit = null, decimal? takeProfitLimitPrice = null, OrderType? stopLossOrderType = null, decimal? stopLoss = null, decimal? stopLossLimitPrice = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, bool? reduceOnly = null, bool? closeOnTrigger = null, bool? marketMakerProtection = null, StopLossTakeProfitMode? stopLossTakeProfitMode = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set cancel all timeout on websocket disconnect
