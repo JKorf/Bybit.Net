@@ -68,7 +68,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="withBonus">Include bonus</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitAssetBalances>> GetAllAssetBalancesAsync(AccountType accountType, string? memberId = null, string? asset = null, bool? withBonus = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitAllAssetBalances>> GetAllAssetBalancesAsync(AccountType accountType, string? memberId = null, string? asset = null, bool? withBonus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get allowed deposit asset info
@@ -100,7 +100,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="withBonus">Include bonus</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitAssetBalances>> GetAssetBalanceAsync(AccountType accountType, string asset, string? memberId = null, bool? withBonus = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitSingleAssetBalance>> GetAssetBalanceAsync(AccountType accountType, string asset, string? memberId = null, bool? withBonus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get current account greek info

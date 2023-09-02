@@ -349,7 +349,7 @@ namespace Bybit.Net.Clients.V5
         #region Get All Asset Balances
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitAssetBalances>> GetAllAssetBalancesAsync(
+        public async Task<WebCallResult<BybitAllAssetBalances>> GetAllAssetBalancesAsync(
             AccountType accountType,
             string? memberId = null,
             string? asset = null,
@@ -364,7 +364,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("memberId", memberId);
             parameters.AddOptionalParameter("withBonus", withBonus == true ? "1" : "0");
 
-            return await _baseClient.SendRequestAsync<BybitAssetBalances>(_baseClient.GetUrl("v5/asset/transfer/query-account-coins-balance"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitAllAssetBalances>(_baseClient.GetUrl("v5/asset/transfer/query-account-coins-balance"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -372,7 +372,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Asset Balance
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitAssetBalances>> GetAssetBalanceAsync(
+        public async Task<WebCallResult<BybitSingleAssetBalance>> GetAssetBalanceAsync(
             AccountType accountType,
             string asset,
             string? memberId = null,
@@ -387,7 +387,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("memberId", memberId);
             parameters.AddOptionalParameter("withBonus", withBonus == true ? "1" : "0");
 
-            return await _baseClient.SendRequestAsync<BybitAssetBalances>(_baseClient.GetUrl("v5/asset/transfer/query-account-coin-balance"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitSingleAssetBalance>(_baseClient.GetUrl("v5/asset/transfer/query-account-coin-balance"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
