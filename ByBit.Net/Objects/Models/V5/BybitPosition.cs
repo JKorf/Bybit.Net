@@ -139,5 +139,15 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("updatedTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
+        /// <summary>
+        /// Whether to add margin automatically
+        /// </summary>
+        [JsonProperty("autoAddMargin")]
+        public bool AutoAddMargin { get; set; }
+        /// <summary>
+        /// Position margin
+        /// </summary>
+        [JsonProperty("positionBalance")]
+        public decimal? PositionBalance { get; set; }
     }
 }

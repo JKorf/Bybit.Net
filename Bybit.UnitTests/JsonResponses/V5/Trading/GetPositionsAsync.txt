@@ -1,0 +1,41 @@
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "positionIdx": 0,
+                "riskId": 1,
+                "riskLimitValue": "150",
+                "symbol": "BTCUSD",
+                "side": "Sell",
+                "size": "299",
+                "avgPrice": "30004.5006751",
+                "positionValue": "0.00996518",
+                "tradeMode": 0,
+                "positionStatus": "Normal",
+                "autoAddMargin": 1,
+                "adlRankIndicator": 2,
+                "leverage": "10",
+                "positionBalance": "0.00100189",
+                "markPrice": "26926.00",
+                "liqPrice": "999999.00",
+                "bustPrice": "999999.00",
+                "positionMM": "0.0000015",
+                "positionIM": "0.00009965",
+                "tpslMode": "Full",
+                "takeProfit": "0.00",
+                "stopLoss": "0.00",
+                "trailingStop": "0.00",
+                "unrealisedPnl": "0.00113932",
+                "cumRealisedPnl": "-0.00121275",
+                "createdTime": "1676538056258",
+                "updatedTime": "1684742400015"
+            }
+        ],
+        "nextPageCursor": "",
+        "category": "inverse"
+    },
+    "retExtInfo": {},
+    "time": 1684767531904
+}

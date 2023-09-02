@@ -6,7 +6,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
     /// <summary>
     /// Bybit V5 API endpoints
     /// </summary>
-    public interface IBybitRestClientApi : IBaseApiClient
+    public interface IBybitRestClientApi : IBaseApiClient, IRestApiClient
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions
