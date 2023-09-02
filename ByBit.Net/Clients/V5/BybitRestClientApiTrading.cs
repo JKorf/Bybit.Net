@@ -11,6 +11,8 @@ using Bybit.Net.Objects.Models.V5;
 using System.Globalization;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Enums.V5;
+using Bybit.Net.Objects.Internal;
+using System.Linq;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -96,6 +98,45 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Place multiple orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> PlaceMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitPlaceOrderRequest> orderRequests,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "request", orderRequests }
+            };
+
+            var result = await _baseClient.SendRequestFullResponseAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(_baseClient.GetUrl("v5/order/create-batch"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
+
+            if (result.Data.ReturnCode != 0)
+                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+
+            var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
+            int index = 0;
+            foreach (var item in result.Data.ExtInfo.List)
+            {
+                var resultItems = result.Data.Result.List.ToArray();
+                resultList.Add(new BybitBatchResult<BybitBatchOrderId>
+                {
+                    Code = item.Code,
+                    Message = item.Message,
+                    Data = resultItems[index++]
+                });
+            }
+
+            return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);
+        }
+
+        #endregion
+
         #region Edit order
 
         /// <inheritdoc />
@@ -138,6 +179,45 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Edit multiple orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> EditMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitEditOrderRequest> orderRequests,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "request", orderRequests }
+            };
+
+            var result = await _baseClient.SendRequestFullResponseAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(_baseClient.GetUrl("v5/order/amend-batch"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
+
+            if (result.Data.ReturnCode != 0)
+                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+
+            var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
+            int index = 0;
+            foreach (var item in result.Data.ExtInfo.List)
+            {
+                var resultItems = result.Data.Result.List.ToArray();
+                resultList.Add(new BybitBatchResult<BybitBatchOrderId>
+                {
+                    Code = item.Code,
+                    Message = item.Message,
+                    Data = resultItems[index++]
+                });
+            }
+
+            return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);
+        }
+
+        #endregion
+
         #region Cancel order
 
         /// <inheritdoc />
@@ -163,6 +243,45 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("orderFilter", EnumConverter.GetString(orderFilter));
 
             return await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Cancel multiple orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> CancelMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitCancelOrderRequest> orderRequests,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "request", orderRequests }
+            };
+
+            var result = await _baseClient.SendRequestFullResponseAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(_baseClient.GetUrl("v5/order/cancel-batch"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
+
+            if (result.Data.ReturnCode != 0)
+                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+
+            var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
+            int index = 0;
+            foreach (var item in result.Data.ExtInfo.List)
+            {
+                var resultItems = result.Data.Result.List.ToArray();
+                resultList.Add(new BybitBatchResult<BybitBatchOrderId>
+                {
+                    Code = item.Code,
+                    Message = item.Message,
+                    Data = resultItems[index++]
+                });
+            }
+
+            return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);
         }
 
         #endregion
