@@ -19,7 +19,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Network
         /// </summary>
-        [JsonProperty("network")]
+        [JsonProperty("chain")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
@@ -51,13 +51,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("createdTime")]
+        [JsonProperty("createTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("updatedTime")]
+        [JsonProperty("updateTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
