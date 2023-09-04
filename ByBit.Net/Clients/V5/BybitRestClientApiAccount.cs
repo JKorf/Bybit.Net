@@ -483,7 +483,7 @@ namespace Bybit.Net.Clients.V5
                 { "coin", asset },
                 { "fromMemberId", fromMemberId },
                 { "toMemberId", toMemberId },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "transferId", transferId ?? Guid.NewGuid().ToString() }
             };
 
