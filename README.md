@@ -30,6 +30,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 3.1.0 - 05 Sep 2023
+    * Added V5 Trading.PlaceMultipleOrdersAsync, V5 Trading.EditMultipleOrdersAsync and V5 Trading.CancelMultipleOrdersAsync endpoints
+    * Fixed V5 Account.CreateUniversalTransferAsync parameter
+    * Fixed V5 Account.GetWithdrawalsAsync deserialization
+
 * Version 3.0.8 - 02 Sep 2023
     * Fixed V5.Account.GetAssetBalanceAsync deserialization
     * Added missing V5 Position model properties
