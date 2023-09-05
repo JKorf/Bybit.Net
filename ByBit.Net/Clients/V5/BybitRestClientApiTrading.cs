@@ -114,7 +114,12 @@ namespace Bybit.Net.Clients.V5
 
             var result = await _baseClient.SendRequestFullResponseAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(_baseClient.GetUrl("v5/order/create-batch"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (!result || result.Data == null)
+            {
+                if (result.Error?.Code == 404)
+                    return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(404, "Received 404 response; make sure your account is UTA PRO"));
+
                 return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
+            }
 
             if (result.Data.ReturnCode != 0)
                 return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
