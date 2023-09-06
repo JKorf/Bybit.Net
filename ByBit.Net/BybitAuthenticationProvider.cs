@@ -10,6 +10,7 @@ using System.Globalization;
 using Bybit.Net.Clients.V5;
 using System.Text;
 using Newtonsoft.Json;
+using Bybit.Net.Objects.Options;
 
 namespace Bybit.Net
 {
@@ -31,12 +32,13 @@ namespace Bybit.Net
                 return;
 
             var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters : bodyParameters;
-            var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
+            var timestampOffset = (apiClient.ClientOptions as BybitRestOptions)?.TimestampOffset.TotalMilliseconds ?? -1000;
+            var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(timestampOffset)).Value.ToString(CultureInfo.InvariantCulture);
             if (apiClient is BybitRestClientCopyTradingApi || apiClient is BybitRestClientApi)
             {
                 var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : apiClient.requestBodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : JsonConvert.SerializeObject(parameters);
                 var key = _credentials.Key!.GetString();
-                var recvWindow = 5000;
+                var recvWindow = (apiClient.ClientOptions as BybitRestOptions)?.ReceiveWindow.TotalMilliseconds ?? 5000;
                 var payload = timestamp + key + recvWindow + signPayload;
 
                 string sign;
