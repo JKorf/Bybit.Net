@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset balances
     /// </summary>
-    public class BybitAssetBalances
+    public class BybitAllAssetBalances
     {
         /// <summary>
         /// Account type
@@ -23,6 +23,26 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("balance")]
         public IEnumerable<BybitAssetAccountBalance> Balances { get; set; } = Array.Empty<BybitAssetAccountBalance>();
+    }
+
+    /// <summary>
+    /// Asset balances
+    /// </summary>
+    public class BybitSingleAssetBalance
+    {
+        /// <summary>
+        /// Account type
+        /// </summary>
+        public AccountType AccountType { get; set; }
+        /// <summary>
+        /// Member id
+        /// </summary>
+        public string? MemberId { get; set; }
+        /// <summary>
+        /// Balances
+        /// </summary>
+        [JsonProperty("balance")]
+        public BybitAssetAccountBalance Balances { get; set; } = null!;
     }
 
     /// <summary>

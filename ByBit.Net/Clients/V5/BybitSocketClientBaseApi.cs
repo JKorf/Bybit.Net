@@ -64,7 +64,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                  BaseAddress + _baseEndpoint,
-                new BybitV5RequestMessage("subscribe", symbols.Select(s => "publicTrade." + s).ToArray(), NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", symbols.Select(s => "publicTrade." + s).ToArray(), ExchangeHelpers.NextId().ToString()),
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -96,7 +96,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                  BaseAddress + _baseEndpoint,
-                new BybitV5RequestMessage("subscribe", symbols.Select(s => $"orderbook.{depth}.{s}").ToArray(), NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", symbols.Select(s => $"orderbook.{depth}.{s}").ToArray(), ExchangeHelpers.NextId().ToString()),
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -126,7 +126,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                  BaseAddress + _baseEndpoint,
-                new BybitV5RequestMessage("subscribe", symbols.Select(s => $"kline.{EnumConverter.GetString(interval)}.{s}").ToArray(), NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", symbols.Select(s => $"kline.{EnumConverter.GetString(interval)}.{s}").ToArray(), ExchangeHelpers.NextId().ToString()),
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
 
@@ -155,7 +155,7 @@ namespace Bybit.Net.Clients.V5
 
             return await SubscribeAsync(
                  BaseAddress + _baseEndpoint,
-                new BybitV5RequestMessage("subscribe", symbols.Select(s => $"liquidation.{s}").ToArray(), NextId().ToString()),
+                new BybitV5RequestMessage("subscribe", symbols.Select(s => $"liquidation.{s}").ToArray(), ExchangeHelpers.NextId().ToString()),
                 null, false, internalHandler, ct).ConfigureAwait(false);
         }
     }

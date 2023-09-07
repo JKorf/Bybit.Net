@@ -1,11 +1,14 @@
 # Bybit.Net
-[![.NET](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml) ![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/Bybit.Net.svg)
+[![.NET](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml) []![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)(https://www.nuget.org/packages/Bybit.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Bybit.Net.svg)](https://www.nuget.org/packages/Bybit.Net)
  
 Bybit.Net is a wrapper around the Bybit API as described on [Bybit](https://bybit-exchange.github.io/docs/spot/#t-introduction), including all features the API provides using clear and readable objects, both for the REST  as the websocket API's.
 
 **If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Bybit.Net/issues)**
 
 [Documentation](https://jkorf.github.io/Bybit.Net/)
+
+## Installation
+`dotnet add package Bybit.Net`
 
 ## Support the project
 I develop and maintain this package on my own for free in my spare time, any support is greatly appreciated.
@@ -27,6 +30,21 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 3.1.0 - 05 Sep 2023
+    * Added V5 Trading.PlaceMultipleOrdersAsync, V5 Trading.EditMultipleOrdersAsync and V5 Trading.CancelMultipleOrdersAsync endpoints
+    * Fixed V5 Account.CreateUniversalTransferAsync parameter
+    * Fixed V5 Account.GetWithdrawalsAsync deserialization
+
+* Version 3.0.8 - 02 Sep 2023
+    * Fixed V5.Account.GetAssetBalanceAsync deserialization
+    * Added missing V5 Position model properties
+
+* Version 3.0.7 - 25 Aug 2023
+    * Updated CryptoExchange.Net
+
+* Version 3.0.6 - 25 Aug 2023
+    * Changed V5 API body content type from formdata to json
+
 * Version 3.0.5 - 05 Aug 2023
     * Fixed default values V5 PlaceOrder parameters
 

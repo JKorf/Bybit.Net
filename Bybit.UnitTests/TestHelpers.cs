@@ -70,6 +70,7 @@ namespace Bybit.Net.Testing
             client.InversePerpetualApi.RequestFactory = Mock.Of<IRequestFactory>();
             client.UsdPerpetualApi.RequestFactory = Mock.Of<IRequestFactory>();
             client.DerivativesApi.RequestFactory = Mock.Of<IRequestFactory>();
+            client.V5Api.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
         }
 
@@ -119,6 +120,9 @@ namespace Bybit.Net.Testing
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
             factory = Mock.Get(client.DerivativesApi.RequestFactory);
+            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
+                .Returns(request.Object);
+            factory = Mock.Get(client.V5Api.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
             return request;

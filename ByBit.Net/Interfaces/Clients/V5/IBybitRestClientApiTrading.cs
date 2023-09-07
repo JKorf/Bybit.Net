@@ -276,5 +276,44 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitResponse<BybitClosedPnl>>> GetClosedProfitLossAsync(Category category, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// 
+        /// <para><a href="" /></para>
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="orderRequests"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> PlaceMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitPlaceOrderRequest> orderRequests,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// 
+        /// <para><a href="" /></para>
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="orderRequests"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> CancelMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitCancelOrderRequest> orderRequests,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// 
+        /// <para><a href="" /></para>
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="orderRequests"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> EditMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitEditOrderRequest> orderRequests,
+            CancellationToken ct = default);
     }
 }

@@ -50,7 +50,7 @@ namespace Bybit.Net.Clients.V5
             ExchangeData = new BybitRestClientApiExchangeData(this);
             Trading = new BybitRestClientApiTrading(this);
 
-            requestBodyFormat = RequestBodyFormat.FormData;
+            requestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
@@ -86,6 +86,17 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public override TimeSpan? GetTimeOffset()
             => _timeSyncState.TimeOffset;
+
+        internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRequestFullResponseAsync<T,U>(
+             Uri uri,
+             HttpMethod method,
+             CancellationToken cancellationToken,
+             Dictionary<string, object>? parameters = null,
+             bool signed = false,
+             JsonSerializer? deserializer = null)
+        {
+            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+        }
 
         internal async Task<WebCallResult<T>> SendRequestAsync<T>(
              Uri uri,
