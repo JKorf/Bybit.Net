@@ -109,7 +109,7 @@ var result = await client.V5.ApiAccount.GetAllAssetBalancesAsync(/* parameters *
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitAssetBalances>> GetAllAssetBalancesAsync(AccountType accountType, string? memberId = default, string? asset = default, bool? withBonus = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitAllAssetBalances>> GetAllAssetBalancesAsync(AccountType accountType, string? memberId = default, string? asset = default, bool? withBonus = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -189,7 +189,7 @@ var result = await client.V5.ApiAccount.GetAssetBalanceAsync(/* parameters */);
 ```  
 
 ```csharp  
-Task<WebCallResult<BybitAssetBalances>> GetAssetBalanceAsync(AccountType accountType, string asset, string? memberId = default, bool? withBonus = default, CancellationToken ct = default);  
+Task<WebCallResult<BybitSingleAssetBalance>> GetAssetBalanceAsync(AccountType accountType, string asset, string? memberId = default, bool? withBonus = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

@@ -93,7 +93,17 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("tpLimitPrice", takeProfitLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("slLimitPrice", stopLossLimitPrice?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (result)
+            {
+                _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
+                {
+                    Id = result.Data.OrderId,
+                    SourceObject = result.Data
+                });
+            }
+
+            return result;
         }
 
         #endregion
@@ -129,12 +139,22 @@ namespace Bybit.Net.Clients.V5
             foreach (var item in result.Data.ExtInfo.List)
             {
                 var resultItems = result.Data.Result.List.ToArray();
+                var resultItem = resultItems[index++];
                 resultList.Add(new BybitBatchResult<BybitBatchOrderId>
                 {
                     Code = item.Code,
                     Message = item.Message,
-                    Data = resultItems[index++]
-                });
+                    Data = resultItem
+                });;
+
+                if (item.Code == 0)
+                {
+                    _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
+                    {
+                        Id = resultItem.OrderId,
+                        SourceObject = result.Data
+                    });
+                }
             }
 
             return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);
@@ -247,7 +267,17 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("orderFilter", EnumConverter.GetString(orderFilter));
 
-            return await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<Objects.Models.V5.BybitOrderId>(_baseClient.GetUrl("v5/order/cancel"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);        
+            if (result)
+            {
+                _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
+                {
+                    Id = result.Data.OrderId,
+                    SourceObject = result.Data
+                });
+            }
+
+            return result;
         }
 
         #endregion
@@ -278,12 +308,22 @@ namespace Bybit.Net.Clients.V5
             foreach (var item in result.Data.ExtInfo.List)
             {
                 var resultItems = result.Data.Result.List.ToArray();
+                var resultItem = resultItems[index++];
                 resultList.Add(new BybitBatchResult<BybitBatchOrderId>
                 {
                     Code = item.Code,
                     Message = item.Message,
-                    Data = resultItems[index++]
+                    Data = resultItem
                 });
+
+                if (item.Code == 0)
+                {
+                    _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
+                    {
+                        Id = resultItem.OrderId,
+                        SourceObject = result.Data
+                    });
+                }
             }
 
             return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);

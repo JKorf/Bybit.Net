@@ -40,6 +40,32 @@ Task<WebCallResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(Category ca
 
 ***
 
+## CancelMultipleOrdersAsync  
+
+[]()  
+<p>
+
+**  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.CancelMultipleOrdersAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> CancelMultipleOrdersAsync(Category category, IEnumerable<BybitCancelOrderRequest> orderRequests, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|category||
+|orderRequests||
+|_[Optional]_ ct||
+
+</p>
+
+***
+
 ## CancelOrderAsync  
 
 [https://bybit-exchange.github.io/docs/v5/order/cancel-order](https://bybit-exchange.github.io/docs/v5/order/cancel-order)  
@@ -64,6 +90,32 @@ Task<WebCallResult<BybitOrderId>> CancelOrderAsync(Category category, string sym
 |_[Optional]_ clientOrderId|Cancel by client order id|
 |_[Optional]_ orderFilter|Order filter|
 |_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## EditMultipleOrdersAsync  
+
+[]()  
+<p>
+
+**  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.EditMultipleOrdersAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> EditMultipleOrdersAsync(Category category, IEnumerable<BybitEditOrderRequest> orderRequests, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|category||
+|orderRequests||
+|_[Optional]_ ct||
 
 </p>
 
@@ -376,6 +428,32 @@ Task<WebCallResult<BybitResponse<BybitUserTrade>>> GetUserTradesAsync(Category c
 |_[Optional]_ limit|Number of results per page|
 |_[Optional]_ cursor|Pagination cursor|
 |_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## PlaceMultipleOrdersAsync  
+
+[]()  
+<p>
+
+**  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiTrading.PlaceMultipleOrdersAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> PlaceMultipleOrdersAsync(Category category, IEnumerable<BybitPlaceOrderRequest> orderRequests, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|category||
+|orderRequests||
+|_[Optional]_ ct||
 
 </p>
 
