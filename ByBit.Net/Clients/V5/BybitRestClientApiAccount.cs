@@ -715,5 +715,29 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Add Or Reduce Margin
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitPosition>> AddOrReduceMarginAsync(
+            Category category,
+            string symbol,
+            decimal margin,
+            PositionIdx? positionIdx = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "symbol", symbol },
+                { "margin", margin.ToString(CultureInfo.InvariantCulture) },
+            };
+
+            parameters.AddOptionalParameter("positionIdx", EnumConverter.GetString(positionIdx));
+
+            return await _baseClient.SendRequestAsync<BybitPosition>(_baseClient.GetUrl("v5/position/add-margin"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

@@ -381,5 +381,22 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitId>> WithdrawAsync(string asset, string network, string toAddress, decimal quantity, string? tag = null, bool? forceNetwork = null, AccountType? accountType = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Manually add or reduce margin for isolated margin position
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/position/manual-add-margin" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="margin">Margin. Positive for adding, negative for reducing</param>
+        /// <param name="positionIdx">Position idx</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitPosition>> AddOrReduceMarginAsync(
+            Category category,
+            string symbol,
+            decimal margin,
+            PositionIdx? positionIdx = null,
+            CancellationToken ct = default);
     }
 }
