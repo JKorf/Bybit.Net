@@ -3,6 +3,7 @@ using Bybit.Net.Enums.V5;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -398,5 +399,41 @@ namespace Bybit.Net.Interfaces.Clients.V5
             decimal margin,
             PositionIdx? positionIdx = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Set the user's maximum leverage in spot cross margin
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/set-leverage" /></para>
+        /// </summary>
+        /// <param name="leverage">New leverage</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetSpotMarginLeverageAsync(decimal leverage, CancellationToken ct = default);
+
+        /// <summary>
+        /// Query the Spot margin status and leverage of Unified account
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/status" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitSpotMarginLeverageStatus>> GetSpotMarginStatusAndLeverageAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Turn on / off spot margin trade
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/status" /></para>
+        /// </summary>
+        /// <param name="spotMarginMode">True to enable, false to disable</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitSpotMarginStatus>> SetSpotMarginTradeModeAsync(bool spotMarginMode, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spot margin data
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/vip-margin" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="vipLevel">Filter by VIP level</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitSpotMarginVipMarginList>>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default);
     }
 }

@@ -739,5 +739,64 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Set Spot Margin Leverage
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> SetSpotMarginLeverageAsync(decimal leverage, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "leverage", leverage.ToString(CultureInfo.InvariantCulture) }
+            };
+
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/spot-margin-trade/set-leverage"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Spot Margin Status And Leverage
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpotMarginLeverageStatus>> GetSpotMarginStatusAndLeverageAsync(CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            return await _baseClient.SendRequestAsync<BybitSpotMarginLeverageStatus>(_baseClient.GetUrl("v5/spot-margin-trade/state"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Set Spot Margin Trade Mode
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpotMarginStatus>> SetSpotMarginTradeModeAsync(bool spotMarginMode, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "spotMarginMode", spotMarginMode ? "1" : "0" }
+            };
+
+            return await _baseClient.SendRequestAsync<BybitSpotMarginStatus>(_baseClient.GetUrl("v5/spot-margin-trade/switch-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Spot Margin Data
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitSpotMarginVipMarginList>>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("currency", asset);
+            parameters.AddOptionalParameter("vipLevel", vipLevel);
+
+            var result = await _baseClient.SendRequestAsync<BybitSpotMarginVipMarginData>(_baseClient.GetUrl("v5/spot-margin-trade/data"), HttpMethod.Get, ct, parameters, false).ConfigureAwait(false);
+            if (!result)
+                return result.As< IEnumerable<BybitSpotMarginVipMarginList>>(default);
+
+            return result.As(result.Data.VipCoinList);
+        }
+
+        #endregion
     }
 }
