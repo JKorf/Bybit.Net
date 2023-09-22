@@ -1,0 +1,31 @@
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "category": "inverse",
+        "symbol": "ETHUSD",
+        "positionIdx": 0,
+        "riskId": 11,
+        "riskLimitValue": "500",
+        "size": "200",
+        "positionValue": "0.11033265",
+        "avgPrice": "1812.70004844",
+        "liqPrice": "1550.80",
+        "bustPrice": "1544.20",
+        "markPrice": "1812.90",
+        "leverage": "12",
+        "autoAddMargin": 0,
+        "positionStatus": "Normal",
+        "positionIM": "0.01926611",
+        "positionMM": "0",
+        "unrealisedPnl": "0.00001217",
+        "cumRealisedPnl": "-0.04618929",
+        "stopLoss": "0.00",
+        "takeProfit": "0.00",
+        "trailingStop": "0.00",
+        "createdTime": "1672737740039",
+        "updatedTime": "1684234363788"
+    },
+    "retExtInfo": {},
+    "time": 1684234363789
+}
