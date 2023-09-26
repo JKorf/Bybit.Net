@@ -62,6 +62,10 @@ namespace Bybit.Net.Interfaces.Clients
         /// </summary>
         public IBybitSocketClientLinearApi V5LinearApi { get; }
         /// <summary>
+        /// V5 Inverse contract streams
+        /// </summary>
+        public IBybitSocketClientInverseApi V5InverseApi { get; }
+        /// <summary>
         /// V5 Option streams
         /// </summary>
         public IBybitSocketClientOptionApi V5OptionsApi { get; }
