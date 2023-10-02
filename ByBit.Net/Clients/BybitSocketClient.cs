@@ -54,6 +54,8 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public IBybitSocketClientLinearApi V5LinearApi { get; }
         /// <inheritdoc />
+        public IBybitSocketClientInverseApi V5InverseApi { get; }
+        /// <inheritdoc />
         public IBybitSocketClientOptionApi V5OptionsApi { get; }
         /// <inheritdoc />
         public IBybitSocketClientPrivateApi V5PrivateApi { get; }
@@ -98,6 +100,7 @@ namespace Bybit.Net.Clients
             ContractApi = AddApiClient(new BybitSocketClientContractApi(_logger, options));
 
             V5SpotApi = AddApiClient(new BybitSocketClientSpotApi(_logger, options));
+            V5InverseApi = AddApiClient(new BybitSocketClientInverseApi(_logger, options));
             V5LinearApi = AddApiClient(new BybitSocketClientLinearApi(_logger, options));
             V5OptionsApi = AddApiClient(new BybitSocketClientOptionApi(_logger, options));
             V5PrivateApi = AddApiClient(new BybitSocketClientPrivateApi(_logger, options));
