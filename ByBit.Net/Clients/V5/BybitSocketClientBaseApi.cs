@@ -131,11 +131,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default)
             => SubscribeToLiquidationUpdatesAsync(new string[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {
@@ -143,7 +143,7 @@ namespace Bybit.Net.Clients.V5
                 if (internalData == null)
                     return;
 
-                var desResult = Deserialize<IEnumerable<BybitLiquidation>>(internalData);
+                var desResult = Deserialize<BybitLiquidation>(internalData);
                 if (!desResult)
                 {
                     _logger.Log(LogLevel.Warning, $"Failed to deserialize {nameof(BybitLiquidation)} object: " + desResult.Error);

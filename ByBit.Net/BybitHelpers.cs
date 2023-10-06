@@ -59,6 +59,7 @@ namespace Bybit.Net
 
             services.AddSingleton<IBybitOrderBookFactory, BybitOrderBookFactory>();
             services.AddTransient<IBybitRestClient, BybitRestClient>();
+            services.AddTransient(x => x.GetRequiredService<IBybitRestClient>().V5Api.CommonSpotClient);
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBybitSocketClient, BybitSocketClient>();
             else

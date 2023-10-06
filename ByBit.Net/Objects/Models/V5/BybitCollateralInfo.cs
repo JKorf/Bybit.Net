@@ -26,7 +26,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Free borrow amount
         /// </summary>
         [JsonProperty("freeBorrowingAmount")]
-        public decimal FreeBorrowAmount { get; set; }
+        public decimal? FreeBorrowAmount { get; set; }
         /// <summary>
         /// Borrow amount
         /// </summary>
