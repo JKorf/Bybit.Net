@@ -10,6 +10,7 @@ using System.Globalization;
 using Bybit.Net.Clients.V5;
 using System.Text;
 using Newtonsoft.Json;
+using Bybit.Net.Objects.Options;
 
 namespace Bybit.Net
 {
@@ -36,7 +37,7 @@ namespace Bybit.Net
             {
                 var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : apiClient.requestBodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : JsonConvert.SerializeObject(parameters);
                 var key = _credentials.Key!.GetString();
-                var recvWindow = 5000;
+                var recvWindow = ((BybitRestOptions)apiClient.ClientOptions).ReceiveWindow.TotalMilliseconds;
                 var payload = timestamp + key + recvWindow + signPayload;
 
                 string sign;
