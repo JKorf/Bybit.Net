@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Models
