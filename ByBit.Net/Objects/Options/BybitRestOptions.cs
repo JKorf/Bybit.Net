@@ -18,9 +18,9 @@ namespace Bybit.Net.Objects.Options
         };
 
         /// <summary>
-        /// A referer, will be sent in the x-referer header
+        /// A referer, will be sent in the Referer header
         /// </summary>
-        public string? Referer { get; set; } = "JKorf";
+        public string? Referer { get; set; }
 
         /// <summary>
         /// The default receive window for requests

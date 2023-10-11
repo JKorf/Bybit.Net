@@ -24,6 +24,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         public string ApiKey { get; set; } = string.Empty;
         /// <summary>
+        /// Secret (when creating new API key)
+        /// </summary>
+        public string? Secret { get; set; }
+        /// <summary>
         /// Is read only
         /// </summary>
         [JsonConverter(typeof(BoolConverter))]

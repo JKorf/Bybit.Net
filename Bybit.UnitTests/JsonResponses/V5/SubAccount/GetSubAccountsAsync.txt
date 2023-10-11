@@ -1,0 +1,26 @@
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {
+        "subMembers": [
+            {
+                "uid": "53888001",
+                "username": "xxx001",
+                "memberType": 1,
+                "status": 1,
+                "remark": "test",
+                "accountMode": 3
+            },
+            {
+                "uid": "53888002",
+                "username": "xxx002",
+                "memberType": 6,
+                "status": 1,
+                "remark": "",
+                "accountMode": 1
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1676430319452
+}

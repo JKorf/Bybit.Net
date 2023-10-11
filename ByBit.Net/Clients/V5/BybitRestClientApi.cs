@@ -37,32 +37,34 @@ namespace Bybit.Net.Clients.V5
         public new BybitRestOptions ClientOptions => (BybitRestOptions)base.ClientOptions;
 
         /// <inheritdoc />
-        public BybitRestClientApiAccount Account { get; }
+        public IBybitRestClientApiAccount Account { get; }
         /// <inheritdoc />
-        public BybitRestClientApiExchangeData ExchangeData { get; }
+        public IBybitRestClientApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
-        public BybitRestClientApiTrading Trading { get; }
+        public IBybitRestClientApiTrading Trading { get; }
+        /// <inheritdoc />
+        public IBybitRestClientApiSubAccounts SubAccount { get; }
 
         /// <inheritdoc />
         public string ExchangeName => "Bybit";
+
+        private string _referer = "Zx000356";
 
         #region ctor
         internal BybitRestClientApi(ILogger logger, HttpClient? httpClient, BybitRestOptions options) :
             base(logger, httpClient, options.Environment.RestBaseAddress, options, options.V5Options)
         {
-            if (!string.IsNullOrEmpty(options.Referer))
+            StandardRequestHeaders = new Dictionary<string, string>
             {
-                StandardRequestHeaders = new Dictionary<string, string>
-                {
-                    { "x-referer", options.Referer! }
-                };
-            }
+                { "Referer", !string.IsNullOrEmpty(options.Referer) ? options.Referer : _referer }
+            };
 
             manualParseError = true;
 
             Account = new BybitRestClientApiAccount(this);
             ExchangeData = new BybitRestClientApiExchangeData(this);
             Trading = new BybitRestClientApiTrading(this);
+            SubAccount = new BybitRestClientApiSubAccounts(this);
 
             requestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;

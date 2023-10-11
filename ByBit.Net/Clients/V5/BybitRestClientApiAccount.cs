@@ -716,6 +716,85 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Edit Api Key
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitApiKeyInfo>> EditApiKeyAsync(
+            bool? readOnly = null,
+            string? ipRestrictions = null,
+            bool? permissionContractTradeOrder = null,
+            bool? permissionContractTradePosition = null,
+            bool? permissionSpotTrade = null,
+            bool? permissionWalletTransfer = null,
+            bool? permissionWalletSubAccountTransfer = null,
+            bool? permissionOptionsTrade = null,
+            bool? permissionCopyTrading = null,
+            bool? permissionBlockTrading = null,
+            bool? permissionExchangeHistory = null,
+            bool? permissionNftProductList = null,
+            bool? permissionAffiliate = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            if (readOnly.HasValue)
+                parameters.AddOptionalParameter("readOnly", readOnly.Value ? 1 : 0);
+            parameters.AddOptionalParameter("ips", ipRestrictions);
+
+            var permissions = new Dictionary<string, List<string>>();
+            AddPermission(permissions, permissionContractTradeOrder, "ContractTrade", "Order");
+            AddPermission(permissions, permissionContractTradePosition, "ContractTrade", "Position");
+            AddPermission(permissions, permissionSpotTrade, "Spot", "SpotTrade");
+            AddPermission(permissions, permissionWalletTransfer, "Wallet", "AccountTransfer");
+            AddPermission(permissions, permissionWalletSubAccountTransfer, "Wallet", "SubMemberTransferList");
+            AddPermission(permissions, permissionOptionsTrade, "Options", "OptionsTrade");
+            AddPermission(permissions, permissionBlockTrading, "BlockTrade", "BlockTrade");
+            AddPermission(permissions, permissionCopyTrading, "CopyTrading", "CopyTrading");
+            AddPermission(permissions, permissionExchangeHistory, "Exchange", "ExchangeHistory");
+            AddPermission(permissions, permissionNftProductList, "NFT", "NFTQueryProductList");
+            AddPermission(permissions, permissionAffiliate, "Affiliate", "Affiliate");
+            parameters.Add("permissions", permissions);
+            return await _baseClient.SendRequestAsync<BybitApiKeyInfo>(_baseClient.GetUrl("v5/user/update-api"), HttpMethod.Post, ct, null, true).ConfigureAwait(false);
+        }
+
+        private void AddPermission(Dictionary<string, List<string>> dict, bool? hasPermission, string key, string value)
+        {
+            if (hasPermission != true)
+                return;
+
+            if (!dict.ContainsKey(key))
+                dict[key] = new List<string>();
+            dict[key].Add(value);
+        }
+        #endregion
+
+        #region Delete Api Key
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> DeleteApiKeyAsync(CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/user/delete-api"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Account Types
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitAcountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            if (subAccountIds != null)
+                parameters.AddOptionalParameter("memberIds", string.Join(",", subAccountIds));
+            var result = await _baseClient.SendRequestAsync<BybitAccountTypeInfoWrapper>(_baseClient.GetUrl("v5/user/get-member-type"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitAcountTypeInfo>>(default);
+
+            return result.As(result.Data.Accounts);
+        }
+
+        #endregion
+
         #region Add Or Reduce Margin
 
         /// <inheritdoc />

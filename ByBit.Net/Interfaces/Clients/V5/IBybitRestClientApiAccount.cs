@@ -92,6 +92,58 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<BybitApiKeyInfo>> GetApiKeyInfoAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Edit master API key settings
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/user/modify-master-apikey" /></para>
+        /// </summary>
+        /// <param name="readOnly">Readonly</param>
+        /// <param name="ipRestrictions">IP restrictions, comma seperated</param>
+        /// <param name="permissionContractTradeOrder">Has contract order permission</param>
+        /// <param name="permissionContractTradePosition">Has contract position permission</param>
+        /// <param name="permissionSpotTrade">Has spot trade permission</param>
+        /// <param name="permissionWalletTransfer">Has wallet transfer permission</param>
+        /// <param name="permissionWalletSubAccountTransfer">Has permission wallet subaccount transfer permission</param>
+        /// <param name="permissionOptionsTrade">Has option trade permission</param>
+        /// <param name="permissionExchangeHistory">Has exchange history permission</param>
+        /// <param name="permissionCopyTrading">Has copy trade permission</param>
+        /// <param name="permissionBlockTrading">Has block trade permission</param>
+        /// <param name="permissionNftProductList">Has NFT product list permission</param>
+        /// <param name="permissionAffiliate">Has affiliate permission</param>
+        /// <param name="ct">Cancelation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitApiKeyInfo>> EditApiKeyAsync(
+            bool? readOnly = null,
+            string? ipRestrictions = null,
+            bool? permissionContractTradeOrder = null,
+            bool? permissionContractTradePosition = null,
+            bool? permissionSpotTrade = null,
+            bool? permissionWalletTransfer = null,
+            bool? permissionWalletSubAccountTransfer = null,
+            bool? permissionOptionsTrade = null,
+            bool? permissionCopyTrading = null,
+            bool? permissionBlockTrading = null,
+            bool? permissionExchangeHistory = null,
+            bool? permissionNftProductList = null,
+            bool? permissionAffiliate = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Delete the current API Key
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/user/rm-master-apikey" /></para>
+        /// </summary>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult> DeleteApiKeyAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get account types
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/user/wallet-type" /></para>
+        /// </summary>
+        /// <param name="subAccountIds">Master id can request subaccount info</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitAcountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get asset balance
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/account-coin-balance" /></para>
         /// </summary>

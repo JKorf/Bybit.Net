@@ -1,0 +1,13 @@
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {
+        "uid": "53888000",
+        "username": "xxxxx",
+        "memberType": 1,
+        "status": 1,
+        "remark": "test"
+    },
+    "retExtInfo": {},
+    "time": 1676429344734
+}
