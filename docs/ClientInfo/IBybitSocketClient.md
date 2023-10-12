@@ -37,6 +37,9 @@ has_children: true
 *USD perpetual streams*  
 **[IBybitSocketClientUsdPerpetualApi](UsdPerpetualApi/IBybitSocketClientUsdPerpetualApi.html) UsdPerpetualApi { get; }**  
 ***
+*V5 Inverse contract streams*  
+**[IBybitSocketClientInverseApi](InverseApi/IBybitSocketClientInverseApi.html) V5InverseApi { get; }**  
+***
 *V5 Linear streams*  
 **[IBybitSocketClientLinearApi](LinearApi/IBybitSocketClientLinearApi.html) V5LinearApi { get; }**  
 ***

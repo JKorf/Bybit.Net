@@ -1,12 +1,12 @@
 ---
-title: IBybitSocketClientLinearApi
+title: IBybitSocketClientInverseApi
 has_children: true
 parent: IBybitSocketClientV5
 grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
-`BybitSocketClient > V5 > LinearApi`  
-*Bybit linear data streams*
+`BybitSocketClient > V5 > InverseApi`  
+*Bybit inverse contract data streams*
   
 
 ***
@@ -20,7 +20,7 @@ grand_parent: Socket API documentation
 
 ```csharp  
 var client = new BybitSocketClient();  
-var result = await client.V5.LinearApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
+var result = await client.V5.InverseApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -46,7 +46,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumera
 
 ```csharp  
 var client = new BybitSocketClient();  
-var result = await client.V5.LinearApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
+var result = await client.V5.InverseApi.SubscribeToLiquidationUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -72,7 +72,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string s
 
 ```csharp  
 var client = new BybitSocketClient();  
-var result = await client.V5.LinearApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
+var result = await client.V5.InverseApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -98,7 +98,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<s
 
 ```csharp  
 var client = new BybitSocketClient();  
-var result = await client.V5.LinearApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
+var result = await client.V5.InverseApi.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  

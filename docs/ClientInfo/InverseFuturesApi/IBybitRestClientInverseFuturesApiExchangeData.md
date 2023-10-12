@@ -6,7 +6,7 @@ grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitRestClient > InverseFuturesApi > ExchangeData`  
-*Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
+*[DEPRECATED, WILL STOP WORKING ON 16 OCTOBER, USE V5 API INSTEAD] Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.*
   
 
 ***

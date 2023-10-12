@@ -6,7 +6,7 @@ grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitRestClient > SpotApi\v1 > SpotApiV1`  
-*Bybit spot API endpoints (v1)*
+*[DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit spot API endpoints (v1)*
   
 ***
 *Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.*  

@@ -5,7 +5,7 @@ parent: Socket API documentation
 ---
 *[generated documentation]*  
 `BybitSocketClient > UsdPerpetualApi`  
-*Bybit usd perpetual streams*
+*[DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit usd perpetual streams*
   
 
 ***

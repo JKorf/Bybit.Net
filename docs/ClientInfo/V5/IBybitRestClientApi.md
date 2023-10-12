@@ -9,11 +9,17 @@ grand_parent: Rest API documentation
 *Bybit V5 API endpoints*
   
 ***
+*Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.*  
+**ISpotClient CommonSpotClient { get; }**  
+***
 *Endpoints related to account settings, info or actions*  
-**BybitRestClientApiAccount Account { get; }**  
+**[IBybitRestClientApiAccount](IBybitRestClientApiAccount.html) Account { get; }**  
 ***
 *Endpoints related to retrieving market and system data*  
-**BybitRestClientApiExchangeData ExchangeData { get; }**  
+**[IBybitRestClientApiExchangeData](IBybitRestClientApiExchangeData.html) ExchangeData { get; }**  
+***
+*Endpoint for managing sub accounts*  
+**[IBybitRestClientApiSubAccounts](IBybitRestClientApiSubAccounts.html) SubAccount { get; }**  
 ***
 *Endpoints related to orders and trades*  
-**BybitRestClientApiTrading Trading { get; }**  
+**[IBybitRestClientApiTrading](IBybitRestClientApiTrading.html) Trading { get; }**  

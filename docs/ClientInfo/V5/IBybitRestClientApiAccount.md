@@ -11,6 +11,34 @@ grand_parent: Rest API documentation
 
 ***
 
+## AddOrReduceMarginAsync  
+
+[https://bybit-exchange.github.io/docs/v5/position/manual-add-margin](https://bybit-exchange.github.io/docs/v5/position/manual-add-margin)  
+<p>
+
+*Manually add or reduce margin for isolated margin position*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.AddOrReduceMarginAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BybitPosition>> AddOrReduceMarginAsync(Category category, string symbol, decimal margin, PositionIdx? positionIdx = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|category|Category|
+|symbol|Symbol|
+|margin|Margin. Positive for adding, negative for reducing|
+|_[Optional]_ positionIdx|Position idx|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## CancelWithdrawalAsync  
 
 [https://bybit-exchange.github.io/docs/v5/asset/cancel-withdraw](https://bybit-exchange.github.io/docs/v5/asset/cancel-withdraw)  
@@ -91,6 +119,92 @@ Task<WebCallResult<BybitTransferId>> CreateUniversalTransferAsync(string asset, 
 |toAccountType|To account type|
 |_[Optional]_ transferId|Client id|
 |_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## DeleteApiKeyAsync  
+
+[https://bybit-exchange.github.io/docs/v5/user/rm-master-apikey](https://bybit-exchange.github.io/docs/v5/user/rm-master-apikey)  
+<p>
+
+*Delete the current API Key*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.DeleteApiKeyAsync();  
+```  
+
+```csharp  
+Task<WebCallResult> DeleteApiKeyAsync(CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ ct||
+
+</p>
+
+***
+
+## EditApiKeyAsync  
+
+[https://bybit-exchange.github.io/docs/v5/user/modify-master-apikey](https://bybit-exchange.github.io/docs/v5/user/modify-master-apikey)  
+<p>
+
+*Edit master API key settings*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.EditApiKeyAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BybitApiKeyInfo>> EditApiKeyAsync(bool? readOnly = default, string? ipRestrictions = default, bool? permissionContractTradeOrder = default, bool? permissionContractTradePosition = default, bool? permissionSpotTrade = default, bool? permissionWalletTransfer = default, bool? permissionWalletSubAccountTransfer = default, bool? permissionOptionsTrade = default, bool? permissionCopyTrading = default, bool? permissionBlockTrading = default, bool? permissionExchangeHistory = default, bool? permissionNftProductList = default, bool? permissionAffiliate = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ readOnly|Readonly|
+|_[Optional]_ ipRestrictions|IP restrictions, comma seperated|
+|_[Optional]_ permissionContractTradeOrder|Has contract order permission|
+|_[Optional]_ permissionContractTradePosition|Has contract position permission|
+|_[Optional]_ permissionSpotTrade|Has spot trade permission|
+|_[Optional]_ permissionWalletTransfer|Has wallet transfer permission|
+|_[Optional]_ permissionWalletSubAccountTransfer|Has permission wallet subaccount transfer permission|
+|_[Optional]_ permissionOptionsTrade|Has option trade permission|
+|_[Optional]_ permissionCopyTrading|Has copy trade permission|
+|_[Optional]_ permissionBlockTrading|Has block trade permission|
+|_[Optional]_ permissionExchangeHistory|Has exchange history permission|
+|_[Optional]_ permissionNftProductList|Has NFT product list permission|
+|_[Optional]_ permissionAffiliate|Has affiliate permission|
+|_[Optional]_ ct|Cancelation token|
+
+</p>
+
+***
+
+## GetAccountTypesAsync  
+
+[https://bybit-exchange.github.io/docs/v5/user/wallet-type](https://bybit-exchange.github.io/docs/v5/user/wallet-type)  
+<p>
+
+*Get account types*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetAccountTypesAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BybitAcountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ subAccountIds|Master id can request subaccount info|
+|_[Optional]_ ct||
 
 </p>
 
@@ -522,6 +636,56 @@ Task<WebCallResult<BybitAccountInfo>> GetMarginAccountInfoAsync(CancellationToke
 
 ***
 
+## GetSpotMarginDataAsync  
+
+[https://bybit-exchange.github.io/docs/v5/spot-margin-uta/vip-margin](https://bybit-exchange.github.io/docs/v5/spot-margin-uta/vip-margin)  
+<p>
+
+*Get spot margin data*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetSpotMarginDataAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BybitSpotMarginVipMarginList>>> GetSpotMarginDataAsync(string? asset = default, string? vipLevel = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ asset|Filter by asset|
+|_[Optional]_ vipLevel|Filter by VIP level|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetSpotMarginStatusAndLeverageAsync  
+
+[https://bybit-exchange.github.io/docs/v5/spot-margin-uta/status](https://bybit-exchange.github.io/docs/v5/spot-margin-uta/status)  
+<p>
+
+*Query the Spot margin status and leverage of Unified account*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.GetSpotMarginStatusAndLeverageAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<BybitSpotMarginLeverageStatus>> GetSpotMarginStatusAndLeverageAsync(CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetTransactionHistoryAsync  
 
 [https://bybit-exchange.github.io/docs/v5/account/transaction-log](https://bybit-exchange.github.io/docs/v5/account/transaction-log)  
@@ -771,6 +935,56 @@ Task<WebCallResult<BybitSetRiskLimit>> SetRiskLimitAsync(Category category, stri
 |symbol|Symbol|
 |riskId|Risk id|
 |_[Optional]_ positionIdx|Position idx|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## SetSpotMarginLeverageAsync  
+
+[https://bybit-exchange.github.io/docs/v5/spot-margin-uta/set-leverage](https://bybit-exchange.github.io/docs/v5/spot-margin-uta/set-leverage)  
+<p>
+
+*Set the user's maximum leverage in spot cross margin*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SetSpotMarginLeverageAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult> SetSpotMarginLeverageAsync(decimal leverage, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|leverage|New leverage|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## SetSpotMarginTradeModeAsync  
+
+[https://bybit-exchange.github.io/docs/v5/spot-margin-uta/status](https://bybit-exchange.github.io/docs/v5/spot-margin-uta/status)  
+<p>
+
+*Turn on / off spot margin trade*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiAccount.SetSpotMarginTradeModeAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BybitSpotMarginStatus>> SetSpotMarginTradeModeAsync(bool spotMarginMode, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|spotMarginMode|True to enable, false to disable|
 |_[Optional]_ ct|Cancellation token|
 
 </p>
