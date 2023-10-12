@@ -356,6 +356,7 @@ namespace Bybit.Net.UnitTests
             await _comparer.ProcessSubject("V5/Trading", c => c.V5Api.Trading,
                 useNestedJsonPropertyForCompare: new Dictionary<string, string>
                 {
+                    { "GetLeverageTokenOrderHistoryAsync", "list" }
                 },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {

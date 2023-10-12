@@ -1,0 +1,23 @@
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "list": [
+            {
+                "amount": "222.90757477",
+                "fee": "0",
+                "ltCoin": "EOS3L",
+                "ltOrderStatus": "1",
+                "ltOrderType": "1",
+                "orderId": "2611",
+                "orderTime": "1672737465000",
+                "serialNo": "pruchase-002",
+                "updateTime": "1672737478000",
+                "value": "95.13860435",
+                "valueCoin": "USDT"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672294446137
+}

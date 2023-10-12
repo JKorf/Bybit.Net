@@ -4,7 +4,7 @@ using System;
 namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 {
     /// <summary>
-    /// Bybit inverse futures API endpoints
+    /// [DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit inverse futures API endpoints
     /// </summary>
     public interface IBybitRestClientInverseFuturesApi : IRestApiClient, IDisposable
     {

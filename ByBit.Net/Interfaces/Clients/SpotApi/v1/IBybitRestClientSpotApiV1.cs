@@ -5,7 +5,7 @@ using System;
 namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 {
     /// <summary>
-    /// Bybit spot API endpoints (v1)
+    /// [DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit spot API endpoints (v1)
     /// </summary>
     public interface IBybitRestClientSpotApiV1 : IRestApiClient, IDisposable
     {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.SpotApi.v2
 {
     /// <summary>
-    /// Bybit spot streams
+    /// [DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit spot streams
     /// </summary>
     public interface IBybitSocketClientSpotApiV2 : ISocketApiClient
     {

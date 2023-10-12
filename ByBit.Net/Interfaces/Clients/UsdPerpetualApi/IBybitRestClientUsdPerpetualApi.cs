@@ -4,7 +4,7 @@ using System;
 namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 {
     /// <summary>
-    /// Bybit USD perpetual API endpoints
+    /// [DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit USD perpetual API endpoints
     /// </summary>
     public interface IBybitRestClientUsdPerpetualApi : IRestApiClient, IDisposable
     {
