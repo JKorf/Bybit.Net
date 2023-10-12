@@ -56,7 +56,7 @@ namespace Bybit.Net.Clients.V5
         {
             StandardRequestHeaders = new Dictionary<string, string>
             {
-                { "Referer", !string.IsNullOrEmpty(options.Referer) ? options.Referer : _referer }
+                { "Referer", !string.IsNullOrEmpty(options.Referer) ? options.Referer! : _referer }
             };
 
             manualParseError = true;
