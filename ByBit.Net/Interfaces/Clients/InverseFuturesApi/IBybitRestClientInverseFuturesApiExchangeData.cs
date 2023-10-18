@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 {
     /// <summary>
-    /// Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+    /// [DEPRECATED, WILL STOP WORKING ON 16 OCTOBER, USE V5 API INSTEAD] Bybit exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
     /// </summary>
     public interface IBybitRestClientInverseFuturesApiExchangeData
     {

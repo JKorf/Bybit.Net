@@ -5,7 +5,7 @@ parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitRestClient > UsdPerpetualApi`  
-*Bybit USD perpetual API endpoints*
+*[DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit USD perpetual API endpoints*
   
 ***
 *Endpoints related to account settings, info or actions*  

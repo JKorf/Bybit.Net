@@ -253,5 +253,23 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitResponse<BybitTradeHistory>>> GetTradeHistoryAsync(Category category, string symbol, string? baseAsset = null, OptionType? optionType = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get leverage token info
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/lt/leverage-token-info" /></para>
+        /// </summary>
+        /// <param name="leverageToken">Filter by token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitLeverageToken>>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get leveraged token market info
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/lt/leverage-token-reference" /></para>
+        /// </summary>
+        /// <param name="leverageToken">Token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitLeverageTokenMarket>> GetLeverageTokenMarketAsync(string leverageToken, CancellationToken ct = default);
     }
 }

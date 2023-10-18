@@ -214,6 +214,56 @@ Task<WebCallResult<BybitResponse<BybitKline>>> GetKlinesAsync(Category category,
 
 ***
 
+## GetLeverageTokenMarketAsync  
+
+[https://bybit-exchange.github.io/docs/v5/lt/leverage-token-reference](https://bybit-exchange.github.io/docs/v5/lt/leverage-token-reference)  
+<p>
+
+*Get leveraged token market info*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetLeverageTokenMarketAsync(/* parameters */);  
+```  
+
+```csharp  
+Task<WebCallResult<BybitLeverageTokenMarket>> GetLeverageTokenMarketAsync(string leverageToken, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|leverageToken|Token|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
+## GetLeverageTokensAsync  
+
+[https://bybit-exchange.github.io/docs/v5/lt/leverage-token-info](https://bybit-exchange.github.io/docs/v5/lt/leverage-token-info)  
+<p>
+
+*Get leverage token info*  
+
+```csharp  
+var client = new BybitRestClient();  
+var result = await client.V5.ApiExchangeData.GetLeverageTokensAsync();  
+```  
+
+```csharp  
+Task<WebCallResult<IEnumerable<BybitLeverageToken>>> GetLeverageTokensAsync(string? leverageToken = default, CancellationToken ct = default);  
+```  
+
+|Parameter|Description|
+|---|---|
+|_[Optional]_ leverageToken|Filter by token|
+|_[Optional]_ ct|Cancellation token|
+
+</p>
+
+***
+
 ## GetLinearInverseSymbolsAsync  
 
 [https://bybit-exchange.github.io/docs/v5/market/instrument](https://bybit-exchange.github.io/docs/v5/market/instrument)  

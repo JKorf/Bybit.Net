@@ -6,7 +6,7 @@ grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
 `BybitSocketClient > SpotApi\v2 > SpotApiV2`  
-*Bybit spot streams*
+*[DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit spot streams*
   
 
 ***

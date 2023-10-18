@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 {
     /// <summary>
-    /// Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+    /// [DEPRECATED, WILL STOP WORKING ON 30 OCTOBER, USE V5 API INSTEAD] Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
     /// </summary>
     public interface IBybitRestClientInversePerpetualApiAccount
     {

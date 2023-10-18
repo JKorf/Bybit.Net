@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.SpotApi.v1
 {
     /// <summary>
-    /// Bybit spot streams
+    /// [DEPRECATED, WILL STOP WORKING ON 16 OCTOBER, USE V5 API INSTEAD] Bybit spot streams
     /// </summary>
     public interface IBybitSocketClientSpotApiV1 : ISocketApiClient
     {

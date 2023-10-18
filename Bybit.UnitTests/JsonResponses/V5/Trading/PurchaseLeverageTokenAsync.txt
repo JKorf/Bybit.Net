@@ -1,0 +1,16 @@
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "amount": "200",
+        "execAmt": "",
+        "execQty": "",
+        "ltCoin": "EOS3L",
+        "ltOrderStatus": "2",
+        "purchaseId": "2611",
+        "serialNo": "purchase-001",
+        "valueCoin": "USDT"
+    },
+    "retExtInfo": {},
+    "time": 1672293867729
+}

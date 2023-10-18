@@ -6,7 +6,7 @@ grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `BybitRestClient > InversePerpetualApi > Account`  
-*Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
+*[DEPRECATED, WILL STOP WORKING ON 30 OCTOBER, USE V5 API INSTEAD] Bybit account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings*
   
 
 ***

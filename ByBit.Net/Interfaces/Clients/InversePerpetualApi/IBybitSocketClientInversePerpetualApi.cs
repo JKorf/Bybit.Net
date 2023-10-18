@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 {
     /// <summary>
-    /// Bybit inverse perpetual streams
+    /// [DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit inverse perpetual streams
     /// </summary>
     public interface IBybitSocketClientInversePerpetualApi : ISocketApiClient
     {

@@ -24,7 +24,7 @@ var result = await client.V5.OptionApi.SubscribeToLiquidationUpdatesAsync(/* par
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -50,7 +50,7 @@ var result = await client.V5.OptionApi.SubscribeToLiquidationUpdatesAsync(/* par
 ```  
 
 ```csharp  
-Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitLiquidation>>> handler, CancellationToken ct = default);  
+Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|

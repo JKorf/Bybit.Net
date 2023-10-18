@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.InverseFuturesApi
 {
     /// <summary>
-    /// Bybit trading endpoints, placing and managing orders.
+    /// [DEPRECATED, WILL STOP WORKING ON 30 OCTOBER, USE V5 API INSTEAD] Bybit trading endpoints, placing and managing orders.
     /// </summary>
     public interface IBybitRestClientInverseFuturesApiTrading
     {

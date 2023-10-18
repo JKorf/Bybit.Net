@@ -405,5 +405,37 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Get Leverage Token Info
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitLeverageToken>>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("ltCoin", leverageToken);
+
+            var result = await _baseClient.SendRequestAsync<BybitLeverageTokenWrapper>(_baseClient.GetUrl("v5/spot-lever-token/info"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitLeverageToken>>(default);
+
+            return result.As(result.Data.List);
+        }
+
+        #endregion
+
+        #region Get Leverage Token Market 
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitLeverageTokenMarket>> GetLeverageTokenMarketAsync(string leverageToken, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "ltCoin", leverageToken }
+            };
+
+            return await _baseClient.SendRequestAsync<BybitLeverageTokenMarket>(_baseClient.GetUrl("v5/spot-lever-token/reference"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

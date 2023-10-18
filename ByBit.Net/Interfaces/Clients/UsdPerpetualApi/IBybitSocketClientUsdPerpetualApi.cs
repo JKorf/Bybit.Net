@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Interfaces.Clients.UsdPerpetualApi
 {
     /// <summary>
-    /// Bybit usd perpetual streams
+    /// [DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit usd perpetual streams
     /// </summary>
     public interface IBybitSocketClientUsdPerpetualApi : ISocketApiClient
     {

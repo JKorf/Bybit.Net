@@ -4,7 +4,7 @@ using System;
 namespace Bybit.Net.Interfaces.Clients.InversePerpetualApi
 {
     /// <summary>
-    /// Bybit inverse perpetual API endpoints
+    /// [DEPRECATED, WILL STOP WORKING ON 16/30 OCTOBER, USE V5 API INSTEAD] Bybit inverse perpetual API endpoints
     /// </summary>
     public interface IBybitRestClientInversePerpetualApi : IRestApiClient, IDisposable
     {

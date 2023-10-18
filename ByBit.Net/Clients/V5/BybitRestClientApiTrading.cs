@@ -612,7 +612,6 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-
         #region Get Closed Profit And Loss
 
         /// <inheritdoc />
@@ -691,6 +690,65 @@ namespace Bybit.Net.Clients.V5
         public Task<WebCallResult<BybitOrderId>?> PlaceOrderAsync(Category linear, string symbolName, OrderSide orderSide, NewOrderType value1, decimal quantity, decimal price, bool v, object value2, object value3, object value4, object value5, object value6, TimeInForce postOnly, PositionIdx positionMode, string orderId, decimal takeProfit, object stopLoss, TriggerType lastPrice1, TriggerType lastPrice2, object value7, object value8, object value9, StopLossTakeProfitMode partial, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Purchase Leverage Token
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitLeverageTokenRecord>> PurchaseLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "ltCoin", token },
+                { "ltAmount", quantity.ToString(CultureInfo.InvariantCulture) },
+            };
+
+            parameters.AddOptionalParameter("serialNo", clientOrderId);
+
+            return await _baseClient.SendRequestAsync<BybitLeverageTokenRecord>(_baseClient.GetUrl("v5/position/spot-lever-token/purchase"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Redeem Leverage Token
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitLeverageTokenRecord>> RedeemLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "ltCoin", token },
+                { "ltAmount", quantity.ToString(CultureInfo.InvariantCulture) },
+            };
+
+            parameters.AddOptionalParameter("serialNo", clientOrderId);
+
+            return await _baseClient.SendRequestAsync<BybitLeverageTokenRecord>(_baseClient.GetUrl("v5/position/spot-lever-token/redeem"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get leverage Token Order History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitLeverageTokenHistory>>> GetLeverageTokenOrderHistoryAsync(string? token = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, LeverageTokenRecordType? type = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("serialNo", clientOrderId);
+            parameters.AddOptionalParameter("ltOrderType", type == LeverageTokenRecordType.Redeem ? 2 : type == LeverageTokenRecordType.Purchase ? 1 : null);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("ltCoin", token);
+
+            var result = await _baseClient.SendRequestAsync<BybitResponse<BybitLeverageTokenHistory>>(_baseClient.GetUrl("v5/position/spot-lever-token/order-record"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<BybitLeverageTokenHistory>>(default);
+
+            return result.As(result.Data.List);
         }
 
         #endregion
