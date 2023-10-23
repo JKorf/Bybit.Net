@@ -169,7 +169,7 @@ namespace Bybit.Net.Clients.SpotApi
             var clientType = GetType();
             if (clientType == typeof(BybitSocketClientSpotApiV1))
             {
-                var bRequest = ((BybitSpotRequestMessageV1)subscriptionToUnsub.Request!);
+                var bRequest = ((BybitSpotRequestMessageV1)subscriptionToUnsub.Subscription!);
                 message = new BybitSpotRequestMessageV1
                 {
                     Operation = bRequest.Operation,
@@ -180,7 +180,7 @@ namespace Bybit.Net.Clients.SpotApi
             else if (clientType == typeof(BybitSocketClientSpotApiV2))
             {
                 isCheckable = true;
-                var bRequest = ((BybitSpotRequestMessageV2)subscriptionToUnsub.Request!);
+                var bRequest = ((BybitSpotRequestMessageV2)subscriptionToUnsub.Subscription!);
                 message = new BybitSpotRequestMessageV2
                 {
                     Operation = bRequest.Operation,

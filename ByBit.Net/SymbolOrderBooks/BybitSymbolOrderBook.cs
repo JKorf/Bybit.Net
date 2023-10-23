@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
-using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Clients;
@@ -10,6 +9,7 @@ using System.Threading;
 using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Bybit.Net.SymbolOrderBooks
 {

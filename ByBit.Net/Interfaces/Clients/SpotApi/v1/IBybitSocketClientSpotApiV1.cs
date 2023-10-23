@@ -2,7 +2,7 @@
 using Bybit.Net.Objects.Models.Socket.Spot;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

@@ -15,6 +15,7 @@ using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Objects.Models.CopyTrading;
 using CryptoExchange.Net.Converters;
 using Bybit.Net.Objects.Options;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Bybit.Net.Clients.InversePerpetualApi
 {
@@ -272,7 +273,7 @@ namespace Bybit.Net.Clients.InversePerpetualApi
         /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {           
-            var requestParams = ((BybitRequestMessage)subscriptionToUnsub.Request!).Parameters;
+            var requestParams = ((BybitRequestMessage)subscriptionToUnsub.Subscription!).Parameters;
             var message = new BybitRequestMessage { Operation = "unsubscribe", Parameters = requestParams };
 
             var result = false;

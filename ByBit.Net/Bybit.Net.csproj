@@ -54,6 +54,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CryptoExchange.Net" Version="6.2.3" />
+    <ProjectReference Include="..\..\CryptoExchange.Net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
   </ItemGroup>
 </Project>

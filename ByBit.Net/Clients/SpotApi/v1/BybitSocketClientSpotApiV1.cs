@@ -1,7 +1,6 @@
 ﻿using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
@@ -14,6 +13,7 @@ using Bybit.Net.Converters;
 using Bybit.Net.Interfaces.Clients.SpotApi.v1;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Bybit.Net.Clients.SpotApi.v1
 {

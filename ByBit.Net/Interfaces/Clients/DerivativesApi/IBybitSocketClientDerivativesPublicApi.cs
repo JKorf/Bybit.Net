@@ -3,7 +3,7 @@ using Bybit.Net.Objects.Models.Derivatives;
 using Bybit.Net.Objects.Models.Socket.Derivatives;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Threading;

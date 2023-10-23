@@ -7,6 +7,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
@@ -71,7 +72,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         protected override bool HandleQueryResponse<T>(SocketConnection socketConnection, object request, JToken data, out CallResult<T> callResult) => throw new NotImplementedException();
         /// <inheritdoc />
-        protected override bool HandleSubscriptionResponse(SocketConnection socketConnection, SocketSubscription subscription, object request, JToken data, out CallResult<object>? callResult)
+        protected override bool HandleSubscriptionResponse(SocketConnection socketConnection, SocketSubscriptionListener subscription, object request, JToken data, out CallResult<object>? callResult)
         {
             callResult = null;
             if (data.Type != JTokenType.Object)
@@ -156,9 +157,9 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
+        protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscriptionListener subscriptionToUnsub)
         {
-            var requestParams = ((BybitV5RequestMessage)subscriptionToUnsub.Request!).Parameters;
+            var requestParams = ((BybitV5RequestMessage)subscriptionToUnsub.Subscription!).Parameters;
             var message = new BybitV5RequestMessage("unsubscribe", requestParams, ExchangeHelpers.NextId().ToString());
 
             var result = false;

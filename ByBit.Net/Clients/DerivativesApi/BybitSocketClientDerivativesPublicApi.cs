@@ -10,6 +10,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -312,7 +313,7 @@ namespace Bybit.Net.Clients.DerivativesApi
         /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {
-            var requestParams = ((BybitRequestMessage)subscriptionToUnsub.Request!).Parameters;
+            var requestParams = ((BybitRequestMessage)subscriptionToUnsub.Subscription!).Parameters;
             var message = new BybitRequestMessage { Operation = "unsubscribe", Parameters = requestParams };
 
             var result = false;

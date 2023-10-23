@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
-using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net.Objects;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Options;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Bybit.Net.Clients.V5
 {
