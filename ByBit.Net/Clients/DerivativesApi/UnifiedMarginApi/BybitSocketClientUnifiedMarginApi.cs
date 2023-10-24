@@ -174,8 +174,9 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
                 return new CallResult<bool>(new NoApiCredentialsError());
 
             var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(30))!;
-            var key = ((BybitAuthenticationProvider)socketConnection.ApiClient.AuthenticationProvider).GetApiKey();
-            var sign = socketConnection.ApiClient.AuthenticationProvider.Sign($"GET/realtime{expireTime}");
+            var bybitAuthProvider = (BybitAuthenticationProvider)socketConnection.ApiClient.AuthenticationProvider;
+            var key = bybitAuthProvider.GetApiKey();
+            var sign = bybitAuthProvider.Sign($"GET/realtime{expireTime}");
 
             var authRequest = new BybitRequestMessage()
             {

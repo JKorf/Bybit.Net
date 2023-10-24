@@ -67,7 +67,7 @@ namespace Bybit.Net
             }
         }
 
-        public override string Sign(string toSign) => SignHMACSHA256(toSign);
+        public string Sign(string toSign) => SignHMACSHA256(toSign);
     }
 
     internal class BybitComparer : IComparer<string>
