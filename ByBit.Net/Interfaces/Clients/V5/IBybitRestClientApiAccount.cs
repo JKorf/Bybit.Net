@@ -141,7 +141,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="subAccountIds">Master id can request subaccount info</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitAcountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitAccountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get asset balance

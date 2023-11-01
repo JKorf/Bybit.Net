@@ -14,11 +14,11 @@ namespace Bybit.Net.Enums
         /// Market price rises to triggerPrice
         /// </summary>
         [Map("1")]
-        Rise,
+        Rise = 1,
         /// <summary>
         /// Market price falls to triggerPrice
         /// </summary>
         [Map("2")]
-        Fall
+        Fall = 2
     }
 }

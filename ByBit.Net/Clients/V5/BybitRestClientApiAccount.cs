@@ -781,14 +781,14 @@ namespace Bybit.Net.Clients.V5
         #region Get Account Types
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitAcountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitAccountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             if (subAccountIds != null)
                 parameters.AddOptionalParameter("memberIds", string.Join(",", subAccountIds));
             var result = await _baseClient.SendRequestAsync<BybitAccountTypeInfoWrapper>(_baseClient.GetUrl("v5/user/get-member-type"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<BybitAcountTypeInfo>>(default);
+                return result.As<IEnumerable<BybitAccountTypeInfo>>(default);
 
             return result.As(result.Data.Accounts);
         }

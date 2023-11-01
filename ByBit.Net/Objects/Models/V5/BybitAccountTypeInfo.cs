@@ -7,13 +7,13 @@ namespace Bybit.Net.Objects.Models.V5
 {
     internal class BybitAccountTypeInfoWrapper
     {
-        public IEnumerable<BybitAcountTypeInfo> Accounts { get; set; } = Array.Empty<BybitAcountTypeInfo>();
+        public IEnumerable<BybitAccountTypeInfo> Accounts { get; set; } = Array.Empty<BybitAccountTypeInfo>();
     }
 
     /// <summary>
     /// Account type
     /// </summary>
-    public class BybitAcountTypeInfo
+    public class BybitAccountTypeInfo
     {
         /// <summary>
         /// User id
