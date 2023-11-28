@@ -26,6 +26,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Client order id
         /// </summary>
+        [JsonProperty("orderLinkId")]
         public string? ClientOrderId { get; set; }
         /// <summary>
         /// Creation time
