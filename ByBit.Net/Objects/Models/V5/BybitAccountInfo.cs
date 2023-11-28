@@ -11,10 +11,10 @@ namespace Bybit.Net.Objects.Models.V5
     public class BybitAccountInfo
     {
         /// <summary>
-        /// Account status
+        /// Unified margin status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
-        public UnifiedMarginStatus AccountStatus { get; set; }
+        public UnifiedMarginStatus UnifiedMarginStatus { get; set; }
         /// <summary>
         /// Margin info
         /// </summary>

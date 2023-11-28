@@ -21,6 +21,11 @@ namespace Bybit.Net.Enums
         /// Unified trade account, can trade linear perpetual, options and spot
         /// </summary>
         [Map("3")]
-        UnifiedTradeAccount
+        UnifiedTradeAccount,
+        /// <summary>
+        /// Unified trade account pro, can trade bulk order api endpoints
+        /// </summary>
+        [Map("4")]
+        UnifiedTradeAccountPro
     }
 }
