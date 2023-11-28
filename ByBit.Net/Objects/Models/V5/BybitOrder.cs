@@ -98,10 +98,10 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("cumExecFee")]
         public decimal? ExecutedFee { get; set; }
        /// <summary>
-        /// Trading fee currency for Spot only.
+        /// Trading fee asset. for Spot only.
         /// </summary>
         [JsonProperty("feeCurrency")]
-        public string? FeeCurrency { get; set; }   
+        public string? FeeAsset { get; set; }   
         /// <summary>
         /// Time in force
         /// </summary>
