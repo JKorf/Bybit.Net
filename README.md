@@ -30,6 +30,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 3.2.3 - 28 Nov 2023
+    * Added missing FeeAsset property order updates
+    * Fixed UnifiedMarginStatus deserialization AccountInfo
+    * Fixed ClientOrderId deserialization batch order results
+
 * Version 3.2.2 - 30 Oct 2023
     * Fixed triggerDirection parameter serialization on V5 PlaceOrder endpoint
     * Fixed typo in BybitAccountTypeInfo model name
