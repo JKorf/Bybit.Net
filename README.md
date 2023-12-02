@@ -30,6 +30,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 3.2.4 - 02 Dec 2023
+    * Added missing SelfMatchPreventType parameter to V5.Trading.PlaceOrderAsync
+    * Fixed deserialization issue in V5 UserTrade subscription
+
 * Version 3.2.3 - 28 Nov 2023
     * Added missing FeeAsset property order updates
     * Fixed UnifiedMarginStatus deserialization AccountInfo
