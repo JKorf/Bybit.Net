@@ -56,7 +56,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Fee paid
         /// </summary>
         [JsonProperty("execFee")]
-        public decimal Fee { get; set; }
+        public decimal? Fee { get; set; }
         /// <summary>
         /// Trade id
         /// </summary>
