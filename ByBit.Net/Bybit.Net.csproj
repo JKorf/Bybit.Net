@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -54,6 +54,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CryptoExchange.Net" Version="6.2.0" />
+    <PackageReference Include="CryptoExchange.Net" Version="6.2.3" />
   </ItemGroup>
 </Project>
