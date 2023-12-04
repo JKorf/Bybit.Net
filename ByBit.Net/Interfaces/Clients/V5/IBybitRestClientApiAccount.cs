@@ -431,9 +431,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="tag">Tag</param>
         /// <param name="forceNetwork">Force on-chain withdrawal</param>
         /// <param name="accountType">Account type to withdraw from</param>
+        /// <param name="feeType">Handling fee option</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitId>> WithdrawAsync(string asset, string network, string toAddress, decimal quantity, string? tag = null, bool? forceNetwork = null, AccountType? accountType = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitId>> WithdrawAsync(string asset, string network, string toAddress, decimal quantity, string? tag = null, bool? forceNetwork = null, AccountType? accountType = null, bool? feeType = null, CancellationToken ct = default);
 
         /// <summary>
         /// Manually add or reduce margin for isolated margin position
