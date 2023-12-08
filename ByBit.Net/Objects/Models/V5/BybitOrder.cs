@@ -97,6 +97,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("cumExecFee")]
         public decimal? ExecutedFee { get; set; }
+       /// <summary>
+        /// Trading fee asset. for Spot only.
+        /// </summary>
+        [JsonProperty("feeCurrency")]
+        public string? FeeAsset { get; set; }   
         /// <summary>
         /// Time in force
         /// </summary>

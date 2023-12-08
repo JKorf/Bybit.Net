@@ -209,9 +209,39 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="closeOnTrigger">Close on trigger</param>
         /// <param name="marketMakerProtection">Market maker protection</param>
         /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
+        /// <param name="selfMatchPreventionType">Self match prevention type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(Category category, string symbol, OrderSide side, NewOrderType type, decimal quantity, decimal? price = null, bool? isLeverage = null, TriggerDirection? triggerDirection = null, OrderFilter? orderFilter = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, TimeInForce? timeInForce = null, PositionIdx? positionIdx = null, string? clientOrderId = null, OrderType? takeProfitOrderType = null, decimal? takeProfit = null, decimal? takeProfitLimitPrice = null, OrderType? stopLossOrderType = null, decimal? stopLoss = null, decimal? stopLossLimitPrice = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, bool? reduceOnly = null, bool? closeOnTrigger = null, bool? marketMakerProtection = null, StopLossTakeProfitMode? stopLossTakeProfitMode = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(
+            Category category, 
+            string symbol, 
+            OrderSide side,
+            NewOrderType type,
+            decimal quantity,
+            decimal? price = null,
+            bool? isLeverage = null,
+            TriggerDirection? triggerDirection = null,
+            OrderFilter? orderFilter = null,
+            decimal? triggerPrice = null,
+            TriggerType? triggerBy = null,
+            decimal? orderIv = null,
+            TimeInForce? timeInForce = null,
+            PositionIdx? positionIdx = null,
+            string? clientOrderId = null,
+            OrderType? takeProfitOrderType = null,
+            decimal? takeProfit = null,
+            decimal? takeProfitLimitPrice = null,
+            OrderType? stopLossOrderType = null,
+            decimal? stopLoss = null,
+            decimal? stopLossLimitPrice = null,
+            TriggerType? takeProfitTriggerBy = null,
+            TriggerType? stopLossTriggerBy = null,
+            bool? reduceOnly = null,
+            bool? closeOnTrigger = null,
+            bool? marketMakerProtection = null,
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
+            SelfMatchPreventionType? selfMatchPreventionType = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Set cancel all timeout on websocket disconnect
