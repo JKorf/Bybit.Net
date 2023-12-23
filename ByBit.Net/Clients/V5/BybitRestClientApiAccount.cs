@@ -669,6 +669,7 @@ namespace Bybit.Net.Clients.V5
             string? tag = null,
             bool? forceNetwork = null,
             AccountType? accountType = null,
+            bool? feeType = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
@@ -683,6 +684,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("tag", tag);
             parameters.AddOptionalParameter("accountType", EnumConverter.GetString(accountType));
             parameters.AddOptionalParameter("forceChain", forceNetwork == null ? null : forceNetwork.Value ? 1 : 0);
+            parameters.AddOptionalParameter("feeType", feeType == null ? null : feeType.Value ? 1 : 0);
 
             return await _baseClient.SendRequestAsync<BybitId>(_baseClient.GetUrl("v5/asset/withdraw/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
