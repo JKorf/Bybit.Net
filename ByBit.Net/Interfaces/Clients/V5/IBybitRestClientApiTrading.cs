@@ -210,6 +210,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="marketMakerProtection">Market maker protection</param>
         /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
         /// <param name="selfMatchPreventionType">Self match prevention type</param>
+        /// <param name="marketUnit">The unit for qty when creating spot market orders for unified trading account</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(
@@ -241,6 +242,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
             bool? marketMakerProtection = null,
             StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             SelfMatchPreventionType? selfMatchPreventionType = null,
+            MarketUnit? marketUnit = null,
             CancellationToken ct = default);
 
         /// <summary>
