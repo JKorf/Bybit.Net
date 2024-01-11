@@ -136,14 +136,15 @@ namespace Bybit.Net.Clients.V5
         #region Get Spot symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? symbol = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? symbol = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "category", EnumConverter.GetString(Category.Spot) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
-
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
             return await _baseClient.SendRequestAsync<BybitResponse<BybitSpotSymbol>>(_baseClient.GetUrl("v5/market/instruments-info"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
