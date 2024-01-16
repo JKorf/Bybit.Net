@@ -3,19 +3,19 @@
 namespace Bybit.Net.Enums.V5
 {
     /// <summary>
-    /// The unit for qty when create Spot market orders for UTA account
+    /// The unit for quantity when creating Spot market orders for UTA account
     /// </summary>
     public enum MarketUnit
     {
         /// <summary>
-        /// For example, buy BTCUSDT, then "qty" unit is BTC
+        /// For example, when buying on BTCUSDT, then "quantity" unit is BTC
         /// </summary>
         [Map("baseCoin")]
-        BaseCoin,
+        BaseAsset,
         /// <summary>
-        /// For example, sell BTCUSDT, then "qty" unit is USDT
+        /// For example, when selling on BTCUSDT, then "quantity" unit is USDT
         /// </summary>
         [Map("quoteCoin")]
-        QuoteCoin
+        QuoteAsset
     }
 }
