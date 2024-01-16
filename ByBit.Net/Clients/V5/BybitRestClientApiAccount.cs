@@ -47,6 +47,25 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Set Collateral Asset
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> SetCollateralAssetAsync(
+            string asset,
+            bool useForCollateral,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "coin", asset },
+                { "collateralSwitch", useForCollateral ? "ON" : "OFF" },
+            };
+
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/account/set-collateral-switch"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Switch Cross Isolated Margin
 
         /// <inheritdoc />

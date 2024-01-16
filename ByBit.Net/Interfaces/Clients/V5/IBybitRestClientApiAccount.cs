@@ -364,6 +364,19 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult> SetLeverageAsync(Category category, string symbol, decimal buyLeverage, decimal sellLeverage, CancellationToken ct = default);
 
         /// <summary>
+        /// Set whether an asset should be used for collateral
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/set-collateral" /></para>
+        /// </summary>
+        /// <param name="asset">The asset. USDT and USDC can't be switched off</param>
+        /// <param name="useForCollateral">Use the asset for collateral</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetCollateralAssetAsync(
+            string asset,
+            bool useForCollateral,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Set the margin mode
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/set-margin-mode" /></para>
         /// </summary>
