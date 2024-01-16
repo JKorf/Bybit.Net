@@ -116,5 +116,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("orderIv", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
         public decimal? OrderImpliedVolatility { get; set; }
+        /// <summary>
+        /// The unit for qty when creating spot market orders for unified trading account
+        /// </summary>
+        [JsonProperty("marketUnit", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public MarketUnit? MarketUnit { get; set; }
     }
 }

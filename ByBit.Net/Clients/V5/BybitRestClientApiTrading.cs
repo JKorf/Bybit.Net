@@ -58,6 +58,7 @@ namespace Bybit.Net.Clients.V5
             bool? marketMakerProtection = null,
             StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             SelfMatchPreventionType? selfMatchPreventionType = null,
+            MarketUnit? marketUnit = null,
             CancellationToken ct = default
         )
         {
@@ -95,6 +96,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("tpLimitPrice", takeProfitLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("slLimitPrice", stopLossLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("smpType", EnumConverter.GetString(selfMatchPreventionType));
+            parameters.AddOptionalParameter("marketUnit", EnumConverter.GetString(marketUnit));
 
             var result = await _baseClient.SendRequestAsync<BybitOrderId>(_baseClient.GetUrl("v5/order/create"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
             if (result)
