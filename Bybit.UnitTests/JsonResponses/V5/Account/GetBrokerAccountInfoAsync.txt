@@ -1,0 +1,19 @@
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "subAcctQty": "2",
+        "maxSubAcctQty": "20",
+        "baseFeeRebateRate": {
+            "spot": "10.0%",
+            "derivatives": "10.0%"
+        },
+        "markupFeeRebateRate": {
+            "spot": "6.00%",
+            "derivatives": "9.00%"
+        },
+        "ts": "1701395633402"
+    },
+    "retExtInfo": {},
+    "time": 1701395633403
+}

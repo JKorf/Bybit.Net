@@ -899,6 +899,16 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Broker Account Info
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitBrokerAccountInfo>> GetBrokerAccountInfoAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.SendRequestAsync<BybitBrokerAccountInfo>(_baseClient.GetUrl("v5/broker/account-info"), HttpMethod.Get, ct, null, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Broker Earnings
 
         /// <inheritdoc />
