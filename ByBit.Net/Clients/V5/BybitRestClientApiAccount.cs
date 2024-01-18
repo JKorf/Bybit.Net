@@ -898,5 +898,23 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Get Broker Earnings
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitBrokerEarnings>> GetBrokerEarningsAsync(string? bizType = null, DateTime? startTime = null, DateTime? endTime = null, string? subAccountId = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("bizType", bizType);
+            parameters.AddOptional("begin", startTime?.ToString("yyyyMMdd"));
+            parameters.AddOptional("end", endTime?.ToString("yyyyMMdd"));
+            parameters.AddOptional("uid", subAccountId);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("cursor", cursor);
+
+            return await _baseClient.SendRequestAsync<BybitBrokerEarnings>(_baseClient.GetUrl("v5/broker/earnings-info"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

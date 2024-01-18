@@ -501,5 +501,19 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BybitSpotMarginVipMarginList>>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get broker earnings
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/broker/exchange-earning" /></para>
+        /// </summary>
+        /// <param name="bizType">Filter by bizType</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="subAccountId">Filter by sub account id</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="cursor">Next page cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitBrokerEarnings>> GetBrokerEarningsAsync(string? bizType = null, DateTime? startTime = null, DateTime? endTime = null, string? subAccountId = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
     }
 }
