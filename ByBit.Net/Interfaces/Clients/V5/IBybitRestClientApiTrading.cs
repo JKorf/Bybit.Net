@@ -57,9 +57,29 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopLoss">New stop loss price</param>
         /// <param name="takeProfitTriggerBy">New take profit trigger</param>
         /// <param name="stopLossTriggerBy">New stop profit trigger</param>
+        /// <param name="stopLossTakeProfitMode">New stop loss/take profit mode</param>
+        /// <param name="takeProfitLimitPrice">New take profit limit price</param>
+        /// <param name="stopLossLimitPrice">New stop loss limit price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> EditOrderAsync(Category category, string symbol, string? orderId = null, string? clientOrderId = null, decimal? quantity = null, decimal? price = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, decimal? takeProfit = null, decimal? stopLoss = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrderId>> EditOrderAsync(
+            Category category, 
+            string symbol,
+            string? orderId = null,
+            string? clientOrderId = null,
+            decimal? quantity = null,
+            decimal? price = null,
+            decimal? triggerPrice = null,
+            TriggerType? triggerBy = null,
+            decimal? orderIv = null,
+            decimal? takeProfit = null,
+            decimal? stopLoss = null,
+            TriggerType? takeProfitTriggerBy = null,
+            TriggerType? stopLossTriggerBy = null,
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
+            decimal? takeProfitLimitPrice = null,
+            decimal? stopLossLimitPrice = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get asset exchange history
