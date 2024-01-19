@@ -30,6 +30,14 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 3.3.0 - 19 Jan 2024
+    * Added V5Api.Account.GetBrokerEarningsAsync endpoint
+    * Added V5Api.Account.GetBrokerAccountInfoAsync endpoint
+    * Added V5Api.Account.GetInternalDepositsAsync endpoint
+    * Added V5Api.Account.SetMultipleCollateralAssetsAsync endpoint
+    * Added PricePercentageFilter to V5Api.ExchangeData.GetSpotSymbolsAsync model
+    * Updated various endpoint parameters and models
+
 * Version 3.2.7 - 16 Jan 2024
     * Added V5Api.Account.SetCollateralAssetAsync endpoint
     * Added marketUnit parameter to V5Api.Trading.PlaceOrderAsync endpoint
