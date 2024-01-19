@@ -392,5 +392,16 @@ namespace Bybit.Net.UnitTests
                 useNestedJsonPropertyForAllCompare: new List<string> { "result" }
                 );
         }
+
+        [Test]
+        public async Task ValidateV5ExchangeDataCalls()
+        {
+            await _comparer.ProcessSubject("V5/ExchangeData", c => c.V5Api.ExchangeData,
+                useNestedJsonPropertyForCompare: new Dictionary<string, string> {
+                },
+                ignoreProperties: new Dictionary<string, List<string>> { },
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" }
+                );
+        }
     }
 }
