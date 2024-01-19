@@ -248,6 +248,27 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<BybitDeposits>> GetDepositsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get a list of internal deposits
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/internal-deposit-record" /></para>
+        /// </summary>
+        /// <param name="transactionId">Filter by transaction id</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max results</param>
+        /// <param name="cursor">Next page cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitResponse<BybitInternalDeposit>>> GetInternalDepositsAsync(
+            string? transactionId = null,
+            string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Get fee rates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/fee-rate" /></para>
         /// </summary>
