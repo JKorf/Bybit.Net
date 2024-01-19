@@ -399,6 +399,17 @@ namespace Bybit.Net.Interfaces.Clients.V5
             CancellationToken ct = default);
 
         /// <summary>
+        /// Set whether assets should be used for collateral
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/batch-set-collateral" /></para>
+        /// </summary>
+        /// <param name="assets">The assets configuration</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetMultipleCollateralAssetsAsync(
+            IEnumerable<BybitSetCollateralAssetRequest> assets,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Set the margin mode
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/set-margin-mode" /></para>
         /// </summary>
