@@ -23,9 +23,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="baseAsset">Filter by base asset</param>
         /// <param name="settleAsset">Filter by settle asset</param>
         /// <param name="orderFilter">Order filter</param>
+        /// <param name="stopOrderType">Stop order type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, OrderFilter? orderFilter = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, OrderFilter? orderFilter = null, StopOrderType? stopOrderType = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel order

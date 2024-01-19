@@ -390,6 +390,7 @@ namespace Bybit.Net.Clients.V5
             string? baseAsset = null,
             string? settleAsset = null,
             OrderFilter? orderFilter = null,
+            StopOrderType? stopOrderType = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
@@ -401,6 +402,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("settleCoin", settleAsset);
             parameters.AddOptionalParameter("orderFilter", EnumConverter.GetString(orderFilter));
+            parameters.AddOptionalParameter("stopOrderType", EnumConverter.GetString(stopOrderType));
 
             return await _baseClient.SendRequestAsync<BybitResponse<BybitOrderId>>(_baseClient.GetUrl("v5/order/cancel-all"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
