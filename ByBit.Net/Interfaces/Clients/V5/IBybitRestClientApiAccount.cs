@@ -326,9 +326,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
+        /// <param name="transactionId">Transaction hash ID</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitWithdrawal>>> GetWithdrawalsAsync(string? withdrawId = null, string? asset = null, WithdrawalType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitWithdrawal>>> GetWithdrawalsAsync(string? withdrawId = null, string? asset = null, WithdrawalType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, string? transactionId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set auto add margin

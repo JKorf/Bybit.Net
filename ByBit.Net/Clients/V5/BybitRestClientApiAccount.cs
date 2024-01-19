@@ -644,6 +644,7 @@ namespace Bybit.Net.Clients.V5
             DateTime? endTime = null,
             int? limit = null,
             string? cursor = null,
+            string? transactionId = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
@@ -654,6 +655,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
+            parameters.AddOptionalParameter("txID", transactionId);
 
             return await _baseClient.SendRequestAsync<BybitResponse<BybitWithdrawal>>(_baseClient.GetUrl("v5/asset/withdraw/query-record"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
