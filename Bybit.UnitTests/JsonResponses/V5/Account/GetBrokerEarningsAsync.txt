@@ -1,0 +1,49 @@
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "totalEarningCat": {
+            "spot": [],
+            "derivatives": [
+                {
+                    "coin": "USDT",
+                    "earning": "0.00027844"
+                }
+            ],
+            "options": [],
+            "total": [
+                {
+                    "coin": "USDT",
+                    "earning": "0.00027844"
+                }
+            ]
+        },
+        "details": [
+            {
+                "userId": "117894077",
+                "bizType": "DERIVATIVES",
+                "symbol": "DOGEUSDT",
+                "coin": "USDT",
+                "earning": "0.00016166",
+                "markupEarning": "0.000032332",
+                "baseFeeEarning": "0.000129328",
+                "orderId": "ec2132f2-a7e0-4a0c-9219-9f3cbcd8e878",
+                "execTime": "1701275846033"
+            },
+            {
+                "userId": "117894077",
+                "bizType": "DERIVATIVES",
+                "symbol": "TRXUSDT",
+                "coin": "USDT",
+                "earning": "0.00011678",
+                "markupEarning": "0.000023356",
+                "baseFeeEarning": "0.000093424",
+                "orderId": "28b29c2b-ba14-450e-9ce7-3cee0c1fa6da",
+                "execTime": "1701245285017"
+            }
+        ],
+        "nextPageCursor": ""
+    },
+    "retExtInfo": {},
+    "time": 1701398193964
+}

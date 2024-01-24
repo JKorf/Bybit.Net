@@ -94,10 +94,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         public bool IsMaker { get; set; }
         /// <summary>
-        /// Is leverage
+        /// Spot trading fee asset
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
-        public bool? IsLeverage { get; set; }
+        [JsonProperty("feeCurrency")]
+        public string? FeeAsset { get; set; }
         /// <summary>
         /// Fee rate
         /// </summary>
@@ -131,5 +131,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("closedSize")]
         public decimal? ClosedQuantity { get; set; }
+        /// <summary>
+        /// Cross sequence, used to associate each fill and each position update
+        /// </summary>
+        [JsonProperty("seq")]
+        public long? Sequence { get; set; }
     }
 }

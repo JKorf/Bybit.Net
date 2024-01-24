@@ -24,6 +24,16 @@ namespace Bybit.Net.Enums
         /// Spot TakeProfit/StopLoss order
         /// </summary>
         [Map("tpslOrder")]
-        TpSlOrder
+        TpSlOrder,
+        /// <summary>
+        /// Oco order
+        /// </summary>
+        [Map("OcoOrder")]
+        OcoOrder,
+        /// <summary>
+        /// Bidirectional TakeProfit/StopLoss order
+        /// </summary>
+        [Map("BidirectionalTpslOrder")]
+        BidirectionalTpslOrder
     }
 }

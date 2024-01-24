@@ -23,9 +23,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="baseAsset">Filter by base asset</param>
         /// <param name="settleAsset">Filter by settle asset</param>
         /// <param name="orderFilter">Order filter</param>
+        /// <param name="stopOrderType">Stop order type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, OrderFilter? orderFilter = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, OrderFilter? orderFilter = null, StopOrderType? stopOrderType = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel order
@@ -57,9 +58,29 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopLoss">New stop loss price</param>
         /// <param name="takeProfitTriggerBy">New take profit trigger</param>
         /// <param name="stopLossTriggerBy">New stop profit trigger</param>
+        /// <param name="stopLossTakeProfitMode">New stop loss/take profit mode</param>
+        /// <param name="takeProfitLimitPrice">New take profit limit price</param>
+        /// <param name="stopLossLimitPrice">New stop loss limit price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> EditOrderAsync(Category category, string symbol, string? orderId = null, string? clientOrderId = null, decimal? quantity = null, decimal? price = null, decimal? triggerPrice = null, TriggerType? triggerBy = null, decimal? orderIv = null, decimal? takeProfit = null, decimal? stopLoss = null, TriggerType? takeProfitTriggerBy = null, TriggerType? stopLossTriggerBy = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrderId>> EditOrderAsync(
+            Category category, 
+            string symbol,
+            string? orderId = null,
+            string? clientOrderId = null,
+            decimal? quantity = null,
+            decimal? price = null,
+            decimal? triggerPrice = null,
+            TriggerType? triggerBy = null,
+            decimal? orderIv = null,
+            decimal? takeProfit = null,
+            decimal? stopLoss = null,
+            TriggerType? takeProfitTriggerBy = null,
+            TriggerType? stopLossTriggerBy = null,
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
+            decimal? takeProfitLimitPrice = null,
+            decimal? stopLossLimitPrice = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get asset exchange history
@@ -210,6 +231,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="marketMakerProtection">Market maker protection</param>
         /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
         /// <param name="selfMatchPreventionType">Self match prevention type</param>
+        /// <param name="marketUnit">The unit for qty when creating spot market orders for unified trading account</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(
@@ -241,6 +263,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
             bool? marketMakerProtection = null,
             StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             SelfMatchPreventionType? selfMatchPreventionType = null,
+            MarketUnit? marketUnit = null,
             CancellationToken ct = default);
 
         /// <summary>

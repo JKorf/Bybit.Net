@@ -43,6 +43,16 @@ namespace Bybit.Net.Enums
         [Map("tpslOrder")]
         TpSlOrder,
         /// <summary>
+        /// MmRateClose (only from web)
+        /// </summary>
+        [Map("MmRateClose")]
+        MmRateClose,
+        /// <summary>
+        /// Spot bidirectional tpsl order
+        /// </summary>
+        [Map("BidirectionalTpslOrder")]
+        BidirectionalTpslOrder,
+        /// <summary>
         /// Unknown type
         /// </summary>
         Unknown

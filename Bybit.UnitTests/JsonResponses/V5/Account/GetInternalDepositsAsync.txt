@@ -1,0 +1,21 @@
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "rows": [
+            {
+                "id": "1103",
+                "amount": "0.1",
+                "type": 1,
+                "coin": "ETH",
+                "address": "xxxx***@gmail.com",
+                "status": 2,
+                "createdTime": "1705393280",
+                "txID": "77c37e5c-d9fa-41e5-bd13-c9b59d95"
+            }
+        ],
+        "nextPageCursor": "eyJtaW5JRCI6MTEwMywibWF4SUQiOjExMDN9"
+    },
+    "retExtInfo": {},
+    "time": 1705395632689
+}

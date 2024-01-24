@@ -248,6 +248,27 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<BybitDeposits>> GetDepositsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get a list of internal deposits
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/internal-deposit-record" /></para>
+        /// </summary>
+        /// <param name="transactionId">Filter by transaction id</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max results</param>
+        /// <param name="cursor">Next page cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitResponse<BybitInternalDeposit>>> GetInternalDepositsAsync(
+            string? transactionId = null,
+            string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Get fee rates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/fee-rate" /></para>
         /// </summary>
@@ -326,9 +347,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
+        /// <param name="transactionId">Transaction hash ID</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitWithdrawal>>> GetWithdrawalsAsync(string? withdrawId = null, string? asset = null, WithdrawalType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitWithdrawal>>> GetWithdrawalsAsync(string? withdrawId = null, string? asset = null, WithdrawalType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, string? transactionId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set auto add margin
@@ -362,6 +384,30 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> SetLeverageAsync(Category category, string symbol, decimal buyLeverage, decimal sellLeverage, CancellationToken ct = default);
+
+        /// <summary>
+        /// Set whether an asset should be used for collateral
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/set-collateral" /></para>
+        /// </summary>
+        /// <param name="asset">The asset. USDT and USDC can't be switched off</param>
+        /// <param name="useForCollateral">Use the asset for collateral</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetCollateralAssetAsync(
+            string asset,
+            bool useForCollateral,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Set whether assets should be used for collateral
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/batch-set-collateral" /></para>
+        /// </summary>
+        /// <param name="assets">The assets configuration</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetMultipleCollateralAssetsAsync(
+            IEnumerable<BybitSetCollateralAssetRequest> assets,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Set the margin mode
@@ -488,5 +534,27 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BybitSpotMarginVipMarginList>>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get broker earnings
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/broker/exchange-earning" /></para>
+        /// </summary>
+        /// <param name="bizType">Filter by bizType</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="subAccountId">Filter by sub account id</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="cursor">Next page cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitBrokerEarnings>> GetBrokerEarningsAsync(string? bizType = null, DateTime? startTime = null, DateTime? endTime = null, string? subAccountId = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get broker account info
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/broker/account-info" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitBrokerAccountInfo>> GetBrokerAccountInfoAsync(CancellationToken ct = default);
     }
 }
