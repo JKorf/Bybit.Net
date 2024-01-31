@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Clients;
 using Bybit.Net.Interfaces.Clients;
-using Bybit.Net.Objects;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;

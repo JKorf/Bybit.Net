@@ -1,15 +1,14 @@
 ﻿using Bybit.Net.Interfaces.Clients.V5;
-using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
-using CryptoExchange.Net;
+using Bybit.Net.Objects.Sockets.Queries;
+using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +20,37 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientOptionApi" />
     public class BybitSocketClientOptionApi : BybitSocketClientBaseApi, IBybitSocketClientOptionApi
     {
+        private static readonly MessagePath _typePath = MessagePath.Get().Property("type");
+        private static readonly MessagePath _successPath = MessagePath.Get().Property("data").Property("successTopics");
+        private static readonly MessagePath _failPath = MessagePath.Get().Property("data").Property("failTopics");
+        private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
+        private static readonly MessagePath _opPath = MessagePath.Get().Property("op");
+
         internal BybitSocketClientOptionApi(ILogger log, BybitSocketOptions options)
             : base(log, options, "/v5/public/option")
         {
-            SendPeriodic("Ping", options.V5Options.PingInterval, (connection) =>
+            QueryPeriodic("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitPingQuery(), x => { });
+        }
+
+        /// <inheritdoc />
+        public override string? GetListenerIdentifier(IMessageAccessor message)
+        {
+            var type = message.GetValue<string>(_typePath);
+            if (type == "COMMAND_RESP")
             {
-                return new BybitV5RequestMessage("ping", Array.Empty<object>(), ExchangeHelpers.NextId().ToString());
-            });
-            AddGenericHandler("Heartbeat", (evnt) => { });
+                var success = message.GetValues<string>(_successPath);
+                if (success == null)
+                    return null;
+
+                success.AddRange(message.GetValues<string>(_failPath));
+                return "resp" + string.Join("-", success.OrderBy(s => s));
+            }
+
+            var op = message.GetValue<string>(_opPath);
+            if (op == "pong")
+                return "pong";
+
+            return message.GetValue<string>(_topicPath);
         }
 
         /// <inheritdoc />
@@ -38,198 +60,11 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOptionTickerUpdate>> handler, CancellationToken ct = default)
         {
-            var internalHandler = new Action<DataEvent<JToken>>(data =>
-            {
-                var internalData = data.Data["data"];
-                if (internalData == null)
-                    return;
-
-                var desResult = Deserialize<BybitOptionTickerUpdate>(internalData);
-                if (!desResult)
-                {
-                    _logger.Log(LogLevel.Warning, $"Failed to deserialize {nameof(BybitLinearTickerUpdate)} object: " + desResult.Error);
-                    return;
-                }
-
-                handler(data.As(desResult.Data, data.Data["topic"]!.ToString().Split('.').Last()));
-            });
-
-            return await SubscribeAsync(
-                 BaseAddress + _baseEndpoint,
-                new BybitV5RequestMessage("subscribe", symbols.Select(s => $"tickers.{s}").ToArray(), ExchangeHelpers.NextId().ToString()),
-                null, false, internalHandler, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        protected override async Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection socketConnection)
-        {
-            if (socketConnection.ApiClient.AuthenticationProvider == null)
-                return new CallResult<bool>(new NoApiCredentialsError());
-
-            var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(30))!;
-            var bybitAuthProvider = (BybitAuthenticationProvider)socketConnection.ApiClient.AuthenticationProvider;
-            var key = bybitAuthProvider.GetApiKey();
-            var sign = bybitAuthProvider.Sign($"GET/realtime{expireTime}");
-
-            var authRequest = new BybitRequestMessage()
-            {
-                Operation = "auth",
-                Parameters = new object[]
-                {
-                    key,
-                    expireTime,
-                    sign
-                }
-            };
-
-            var result = false;
-            var error = "unspecified error";
-            await socketConnection.SendAndWaitAsync(authRequest, ClientOptions.RequestTimeout, null, 1, data =>
-            {
-                if (data.Type != JTokenType.Object)
-                    return false;
-
-                var operation = data["op"]?.ToString();
-                if (operation != "auth")
-                    return false;
-
-                result = data["success"]?.Value<bool>() == true;
-                error = data["ret_msg"]?.ToString();
-                return true;
-
-            }).ConfigureAwait(false);
-            return result ? new CallResult<bool>(result) : new CallResult<bool>(new ServerError(error));
+            var subscription = new BybitOptionsSubscription<BybitOptionTickerUpdate>(_logger, symbols.Select(x => $"tickers.{x}").ToArray(), handler);
+            return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
-        /// <inheritdoc />
-        protected override bool HandleQueryResponse<T>(SocketConnection socketConnection, object request, JToken data, out CallResult<T> callResult) => throw new NotImplementedException();
-        /// <inheritdoc />
-        protected override bool HandleSubscriptionResponse(SocketConnection socketConnection, SocketSubscription subscription, object request, JToken data, out CallResult<object>? callResult)
-        {
-            callResult = null;
-            if (data.Type != JTokenType.Object)
-                return false;
-
-            var messageRequestId = data["req_id"]?.ToString();
-            if (messageRequestId != null)
-            {
-                // Matched based on request id
-                var id = ((BybitV5RequestMessage)request).RequestId;
-                if (id != messageRequestId)
-                    return false;
-
-                var success1 = data["success"]?.Value<bool>() == true;
-                if (success1)
-                    callResult = new CallResult<object>(true);
-                else
-                    callResult = new CallResult<object>(new ServerError(data["ret_msg"]!.ToString()));
-                return true;
-            }
-
-            // No request id
-            // Check subs
-            var success = data["success"]?.Value<bool>();
-            if (success == null)
-                return false;
-
-            var topics = data["data"]?["successTopics"]?.ToObject<string[]>();
-            if (topics == null)
-                return false;
-
-            var requestTopics = ((BybitV5RequestMessage)request).Parameters;
-            if (!topics.All(requestTopics.Contains))
-                return false;
-
-            callResult = success == true ? new CallResult<object>(true) : new CallResult<object>(new ServerError(data.ToString()));
-            return true;
-        }
-
-        /// <inheritdoc />
-        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
-        {
-            if (message.Type != JTokenType.Object)
-                return false;
-
-            var topic = message["topic"]?.ToString();
-            if (topic == null)
-                return false;
-
-            var requestParams = ((BybitV5RequestMessage)request).Parameters;
-            if (requestParams.Any(p => topic == p.ToString()))
-                return true;
-
-            if (topic.Contains('.'))
-            {
-                // Some subscriptions have topics like orderbook.ETHUSDT
-                // Split on `.` to get the topic and symbol
-                var split = topic.Split('.');
-                var symbol = split.Last();
-                if (symbol.Length == 0)
-                    return false;
-
-                var mainTopic = topic.Substring(0, topic.Length - symbol.Length - 1);
-                if (requestParams.Any(p => (string)p == mainTopic + ".*"))
-                    return true;
-            }
-
-            return false;
-        }
-
-        /// <inheritdoc />
-        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
-        {
-            if (identifier == "Heartbeat")
-            {
-                if (message.Type != JTokenType.Object)
-                    return false;
-
-                var ret = message["ret_msg"] ?? message["op"];
-                if (ret == null)
-                    return false;
-
-                var isPing = ret.ToString() == "pong";
-                if (!isPing)
-                    return false;
-
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <inheritdoc />
-        protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
-        {
-            var requestParams = ((BybitV5RequestMessage)subscriptionToUnsub.Subscription!).Parameters;
-            var message = new BybitV5RequestMessage("unsubscribe", requestParams, ExchangeHelpers.NextId().ToString());
-
-            var result = false;
-            await connection.SendAndWaitAsync(message, ClientOptions.RequestTimeout, null, 1, data =>
-            {
-                if (data.Type != JTokenType.Object)
-                    return false;
-
-                var messageRequestId = data["req_id"]?.ToString();
-                if (messageRequestId != null)
-                {
-                    // Matched based on request id
-                    var id = message.RequestId;
-                    if (id != messageRequestId)
-                        return false;
-
-                    return true;
-                }
-
-                // No request id
-                var success = data["success"]?.Value<bool>();
-                if (success == null)
-                    return false;
-
-                return true;
-            }).ConfigureAwait(false);
-            return result;
-        }
     }
 }

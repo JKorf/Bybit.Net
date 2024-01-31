@@ -1,7 +1,5 @@
 ﻿using CryptoExchange.Net.Objects.Options;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Options
 {

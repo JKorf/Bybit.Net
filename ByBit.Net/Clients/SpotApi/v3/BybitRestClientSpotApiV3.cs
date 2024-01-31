@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
-using Bybit.Net.Objects;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;

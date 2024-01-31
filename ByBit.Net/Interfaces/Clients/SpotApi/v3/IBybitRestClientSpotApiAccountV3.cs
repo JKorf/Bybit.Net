@@ -1,5 +1,4 @@
 ﻿using Bybit.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using System.Collections.Generic;
 using System.Threading;
