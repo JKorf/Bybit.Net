@@ -7,6 +7,7 @@ using System.Net;
 using Bybit.Net.Objects.Options;
 using Bybit.Net.Interfaces;
 using Bybit.Net.SymbolOrderBooks;
+using CryptoExchange.Net.Clients;
 
 namespace Bybit.Net
 {
@@ -56,8 +57,8 @@ namespace Bybit.Net
                 return handler;
             });
 
+            services.AddTransient<ICryptoExchangeClient, CryptoExchangeClient>();
             services.AddSingleton<IBybitOrderBookFactory, BybitOrderBookFactory>();
-            services.AddTransient<IBybitRestClient, BybitRestClient>();
             services.AddTransient(x => x.GetRequiredService<IBybitRestClient>().V5Api.CommonSpotClient);
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBybitSocketClient, BybitSocketClient>();
