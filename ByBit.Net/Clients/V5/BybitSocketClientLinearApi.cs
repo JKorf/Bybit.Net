@@ -29,7 +29,6 @@ namespace Bybit.Net.Clients.V5
             QueryPeriodic("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
         }
 
-
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
         {

@@ -1,8 +1,5 @@
-﻿using Bybit.Net.Objects.Internal.Socket;
-using Bybit.Net.Objects;
-using CryptoExchange.Net.Objects;
+﻿using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

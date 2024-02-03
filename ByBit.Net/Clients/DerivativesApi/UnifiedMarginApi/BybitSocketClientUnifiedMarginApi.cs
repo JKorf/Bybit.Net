@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
 using Bybit.Net.Objects;
-using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects.Models.Derivatives.UnifiedMargin;
 using Bybit.Net.Objects.Models.Socket;
 using Bybit.Net.Objects.Models.Socket.Derivatives;

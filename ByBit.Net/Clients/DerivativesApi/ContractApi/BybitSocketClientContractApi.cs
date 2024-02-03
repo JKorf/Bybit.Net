@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi;
 using Bybit.Net.Objects;
-using Bybit.Net.Objects.Internal.Socket;
 using Bybit.Net.Objects.Models.Socket.Derivatives.Contract;
 using Bybit.Net.Objects.Options;
 using Bybit.Net.Objects.Sockets.Queries;

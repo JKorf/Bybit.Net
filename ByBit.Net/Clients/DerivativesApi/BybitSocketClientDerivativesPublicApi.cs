@@ -1,8 +1,6 @@
 ﻿using Bybit.Net.Converters;
 using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.DerivativesApi;
-using Bybit.Net.Objects.Internal.Socket;
-using Bybit.Net.Objects.Models;
 using Bybit.Net.Objects.Models.Derivatives;
 using Bybit.Net.Objects.Models.Socket.Derivatives;
 using Bybit.Net.Objects.Options;
