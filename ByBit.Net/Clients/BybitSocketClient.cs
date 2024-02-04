@@ -67,13 +67,7 @@ namespace Bybit.Net.Clients
             optionsDelegate(options);
             Initialize(options);
 
-            //UsdPerpetualApi = AddApiClient(new BybitSocketClientUsdPerpetualApi(_logger, options));
-            //InversePerpetualApi = AddApiClient(new BybitSocketClientInversePerpetualApi(_logger, options));
-            //SpotV1Api = AddApiClient(new BybitSocketClientSpotApiV1(_logger, options));
-            //SpotV2Api = AddApiClient(new BybitSocketClientSpotApiV2(_logger, options));
             SpotV3Api = AddApiClient(new BybitSocketClientSpotApiV3(_logger, options));
-
-            //CopyTradingApi = AddApiClient(new BybitSocketClientCopyTradingApi(_logger, options));
 
             DerivativesApi = AddApiClient(new BybitSocketClientDerivativesPublicApi(_logger, options));
             UnifiedMarginApi = AddApiClient(new BybitSocketClientUnifiedMarginApi(_logger, options));

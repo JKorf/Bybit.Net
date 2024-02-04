@@ -15,8 +15,7 @@ namespace Bybit.Net.Objects.Options
         {
             Environment = BybitEnvironment.Live,
             SocketSubscriptionsCombineTarget = 10,
-            SocketNoDataTimeout = TimeSpan.FromSeconds(30),
-            MaxConcurrentResubscriptionsPerSocket = 1
+            SocketNoDataTimeout = TimeSpan.FromSeconds(30)
         };
 
         /// <summary>
