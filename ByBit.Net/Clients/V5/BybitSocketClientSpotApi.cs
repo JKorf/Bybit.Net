@@ -28,7 +28,7 @@ namespace Bybit.Net.Clients.V5
         internal BybitSocketClientSpotApi(ILogger logger, BybitSocketOptions options)
             : base(logger, options, "/v5/public/spot")
         {
-            QueryPeriodic("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
+            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
         }
 
         /// <inheritdoc />

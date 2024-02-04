@@ -29,7 +29,7 @@ namespace Bybit.Net.Clients.V5
         internal BybitSocketClientOptionApi(ILogger log, BybitSocketOptions options)
             : base(log, options, "/v5/public/option")
         {
-            QueryPeriodic("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitPingQuery(), x => { });
+            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitPingQuery(), x => { });
         }
 
         /// <inheritdoc />

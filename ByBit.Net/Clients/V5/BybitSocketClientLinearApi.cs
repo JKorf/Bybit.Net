@@ -26,7 +26,7 @@ namespace Bybit.Net.Clients.V5
         internal BybitSocketClientLinearApi(ILogger log, BybitSocketOptions options)
             : base(log, options, "/v5/public/linear")
         {
-            QueryPeriodic("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
+            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
         }
 
         /// <inheritdoc />

@@ -36,7 +36,7 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
         {
             KeepAliveInterval = TimeSpan.Zero;
 
-            QueryPeriodic("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitPingQuery(), x => { });
+            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitPingQuery(), x => { });
         }
 
         /// <inheritdoc />

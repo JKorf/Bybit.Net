@@ -30,9 +30,9 @@ namespace Bybit.Net.Clients.SpotApi.v3
         internal BybitSocketClientSpotApiV3(ILogger logger, BybitSocketOptions options)
             : base(logger, options.Environment.SocketBaseAddress, options, options.SpotV3Options)
         {
-            KeepAliveInterval = TimeSpan.Zero; 
+            KeepAliveInterval = TimeSpan.Zero;
 
-            QueryPeriodic("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
+            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
         }
 
         /// <inheritdoc />
