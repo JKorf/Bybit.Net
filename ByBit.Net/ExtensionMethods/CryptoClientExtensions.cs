@@ -1,11 +1,7 @@
 ﻿using Bybit.Net.Clients;
 using Bybit.Net.Interfaces.Clients;
-using CryptoExchange.Net.Interfaces.CommonClients;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CryptoExchange.Net.Clients
+namespace CryptoExchange.Net.Interfaces
 {
     /// <summary>
     /// Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces

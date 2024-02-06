@@ -1,20 +1,20 @@
 ﻿using Bybit.Net.Clients;
-using Bybit.Net.Interfaces.Clients;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net.Http;
-using System.Net;
-using Bybit.Net.Objects.Options;
 using Bybit.Net.Interfaces;
+using Bybit.Net.Interfaces.Clients;
+using Bybit.Net.Objects.Options;
 using Bybit.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Interfaces;
+using System;
+using System.Net;
+using System.Net.Http;
 
-namespace Bybit.Net
+namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// Helpers
+    /// Extensions for DI
     /// </summary>
-    public static class BybitHelpers
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Add the IBybitClient and IBybitSocketClient to the sevice collection so they can be injected
