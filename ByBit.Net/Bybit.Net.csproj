@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Bybit.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>3.3.0</PackageVersion>
-    <AssemblyVersion>3.3.0</AssemblyVersion>
-    <FileVersion>3.3.0</FileVersion>
+    <PackageVersion>3.4.0-beta1</PackageVersion>
+    <AssemblyVersion>3.4.0-beta1</AssemblyVersion>
+    <FileVersion>3.4.0-beta1</FileVersion>
     <Description>Bybit.Net is a .Net wrapper for the Bybit API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Bybit Bybit.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -21,7 +21,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>3.3.0 - Added V5Api.Account.GetBrokerEarningsAsync endpoint, Added V5Api.Account.GetBrokerAccountInfoAsync endpoint, Added V5Api.Account.GetInternalDepositsAsync endpoint, Added V5Api.Account.SetMultipleCollateralAssetsAsync endpoint, Added PricePercentageFilter to V5Api.ExchangeData.GetSpotSymbolsAsync model, Updated various endpoint parameters and models</PackageReleaseNotes>
+    <PackageReleaseNotes>3.4.0-beta1 - Updated CryptoExchange.Net and implemented reworked websocket message handling. For release notes for the CryptoExchange.Net base library see: https://github.com/JKorf/CryptoExchange.Net/tree/beta?tab=readme-ov-file#release-notes, Fixed issue in DI registration causing http client to not be correctly injected, Combined update and snapshot handlers for orderbook updates in favor of the UpdateType in the DataEvent wrapper, Removed excessive constructor overload for BybitRestClient, Removed deprecated socket APIs</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bybit.Net.xml</DocumentationFile>

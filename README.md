@@ -30,6 +30,13 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 3.4.0-beta1 - 06 Feb 2024
+    * Updated CryptoExchange.Net and implemented reworked websocket message handling. For release notes for the CryptoExchange.Net base library see: https://github.com/JKorf/CryptoExchange.Net/tree/beta?tab=readme-ov-file#release-notes
+    * Fixed issue in DI registration causing http client to not be correctly injected
+    * Combined update and snapshot handlers for orderbook updates in favor of the UpdateType in the DataEvent wrapper
+    * Removed excessive constructor overload for BybitRestClient
+    * Removed deprecated socket APIs
+
 * Version 3.3.0 - 19 Jan 2024
     * Added V5Api.Account.GetBrokerEarningsAsync endpoint
     * Added V5Api.Account.GetBrokerAccountInfoAsync endpoint
