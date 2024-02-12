@@ -1,4 +1,4 @@
-# ![.Bybit.Net](https://github.com/JKorf/Bybit.Net/blob/beta/Bitfinex.Net/Icon/icon.png?raw=true) Bybit.Net
+# ![.Bybit.Net](https://github.com/JKorf/Bybit.Net/blob/master/ByBit.Net/Icon/icon.png?raw=true) Bybit.Net
 
 [![.NET](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml)
  
@@ -7,6 +7,8 @@ Bybit.Net is a wrapper around the Bybit API as described on [Bybit](https://bybi
 ## Get the library
 Available on Nuget  
 [![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)](https://www.nuget.org/packages/Bybit.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Bybit.Net.svg)](https://www.nuget.org/packages/Bybit.Net)
+
+`dotnet add package Bybit.Net`
 
 ## How to use
 Simplest usage
