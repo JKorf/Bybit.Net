@@ -1,4 +1,4 @@
-# ![.Bybit.Net](https://github.com/JKorf/Bybit.Net/blob/master/ByBit.Net/Icon/icon.png?raw=true) Bybit.Net
+# ![.Bybit.Net](https://github.com/JKorf/Bybit.Net/blob/main/ByBit.Net/Icon/icon.png?raw=true) Bybit.Net
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bybit.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
  
@@ -29,7 +29,7 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 	var restClient = new BybitRestClient();
 	var tickerResult = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
 	var lastPrice = tickerResult.Data.List.First().LastPrice;
-```
+	```
 * Websocket streams
 	```csharp
 	// Subscribe to ETH/USDT ticker updates via the websocket API
