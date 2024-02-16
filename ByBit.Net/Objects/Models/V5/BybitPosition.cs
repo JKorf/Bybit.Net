@@ -132,7 +132,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("createdTime")]
         [JsonConverter(typeof(DateTimeConverter))]
-        public DateTime CreateTime { get; set; }
+        public DateTime? CreateTime { get; set; }
         /// <summary>
         /// Updated timestamp
         /// </summary>
