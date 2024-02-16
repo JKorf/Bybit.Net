@@ -13,6 +13,10 @@ namespace Bybit.Net.Objects.Models.V5
     public class BybitTransactionLog
     {
         /// <summary>
+        /// Unique id
+        /// </summary>
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
         /// Symbol
         /// </summary>
         public string Symbol { get; set; } = string.Empty;
