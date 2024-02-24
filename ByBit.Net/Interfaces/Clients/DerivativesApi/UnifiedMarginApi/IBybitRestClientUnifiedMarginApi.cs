@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces;
-
-namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
+﻿namespace Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi
 {
     /// <summary>
     /// Bybit Unified Margin API endpoints

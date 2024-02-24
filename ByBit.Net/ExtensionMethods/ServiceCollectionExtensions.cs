@@ -1,20 +1,20 @@
 ﻿using Bybit.Net.Clients;
-using Bybit.Net.Interfaces.Clients;
-using Bybit.Net.Objects;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net.Http;
-using System.Net;
-using Bybit.Net.Objects.Options;
 using Bybit.Net.Interfaces;
+using Bybit.Net.Interfaces.Clients;
+using Bybit.Net.Objects.Options;
 using Bybit.Net.SymbolOrderBooks;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Interfaces;
+using System;
+using System.Net;
+using System.Net.Http;
 
-namespace Bybit.Net
+namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// Helpers
+    /// Extensions for DI
     /// </summary>
-    public static class BybitHelpers
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Add the IBybitClient and IBybitSocketClient to the sevice collection so they can be injected
@@ -57,8 +57,9 @@ namespace Bybit.Net
                 return handler;
             });
 
+            services.AddTransient<ICryptoRestClient, CryptoRestClient>();
+            services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddSingleton<IBybitOrderBookFactory, BybitOrderBookFactory>();
-            services.AddTransient<IBybitRestClient, BybitRestClient>();
             services.AddTransient(x => x.GetRequiredService<IBybitRestClient>().V5Api.CommonSpotClient);
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBybitSocketClient, BybitSocketClient>();

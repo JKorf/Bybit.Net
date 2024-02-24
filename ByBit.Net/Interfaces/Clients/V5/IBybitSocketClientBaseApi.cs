@@ -2,7 +2,7 @@
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -43,11 +43,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="symbols">The symbols to subscribe</param>
         /// <param name="depth">The order book depth</param>
-        /// <param name="snapshotHandler">Handler for a snapshot update. Snapshot updates contain the full order book</param>
-        /// <param name="updateHandler">Handler for updates. These will only contain the changed entries</param>
+        /// <param name="updateHandler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> snapshotHandler, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to order book updates
@@ -55,11 +54,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="symbol">The symbol to subscribe</param>
         /// <param name="depth">The order book depth</param>
-        /// <param name="snapshotHandler">Handler for a snapshot update. Snapshot updates contain the full order book</param>
-        /// <param name="updateHandler">Handler for updates. These will only contain the changed entries</param>
+        /// <param name="updateHandler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> snapshotHandler, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to public trade updates

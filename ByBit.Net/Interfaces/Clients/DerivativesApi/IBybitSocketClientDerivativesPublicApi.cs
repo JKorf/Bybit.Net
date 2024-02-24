@@ -3,7 +3,7 @@ using Bybit.Net.Objects.Models.Derivatives;
 using Bybit.Net.Objects.Models.Socket.Derivatives;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -22,12 +22,11 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
         /// </summary>
         /// <param name="category">Asset category</param>
         /// <param name="limit">The amount of rows to receive updates for. Either 1, 25, 50, 100, 200.</param>
-        /// <param name="snapshotHandler">The event handler for the snapshot messages</param>
-        /// <param name="deltaHandler">The event handler for the update messages</param>
+        /// <param name="handler">The event handler for the messages</param>
         /// <param name="symbol">The symbol to receive updates for</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(StreamDerivativesCategory category, string symbol, int limit, Action<DataEvent<BybitDerivativesOrderBookEntry>> snapshotHandler, Action<DataEvent<BybitDerivativesOrderBookEntry>> deltaHandler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(StreamDerivativesCategory category, string symbol, int limit, Action<DataEvent<BybitDerivativesOrderBookEntry>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to orderbook updates
@@ -35,12 +34,11 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
         /// </summary>
         /// <param name="category">Asset category</param>
         /// <param name="limit">The amount of rows to receive updates for. Either 1, 25, 50, 100, 200.</param>
-        /// <param name="snapshotHandler">The event handler for the snapshot messages</param>
-        /// <param name="deltaHandler">The event handler for the update messages</param>
+        /// <param name="handler">The event handler for the messages</param>
         /// <param name="symbols">List of symbols to receive updates for</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(StreamDerivativesCategory category, IEnumerable<string> symbols, int limit, Action<DataEvent<BybitDerivativesOrderBookEntry>> snapshotHandler, Action<DataEvent<BybitDerivativesOrderBookEntry>> deltaHandler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToOrderBooksUpdatesAsync(StreamDerivativesCategory category, IEnumerable<string> symbols, int limit, Action<DataEvent<BybitDerivativesOrderBookEntry>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to public trade updates
@@ -71,11 +69,10 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
         /// </summary>
         /// <param name="category">Asset category</param>
         /// <param name="symbol">The symbol to receive updates for</param>
-        /// <param name="snapshotHandler"> Snapshot handler</param>
-        /// <param name="updateHandler"> Update handler</param>
+        /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(StreamDerivativesCategory category, string symbol, Action<DataEvent<BybitDerivativesTicker>> snapshotHandler, Action<DataEvent<BybitDerivativesTickerUpdate>> updateHandler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(StreamDerivativesCategory category, string symbol, Action<DataEvent<BybitDerivativesTicker>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to ticker updates. Note that for a symbol the first update is a snapshot, containing all info. After that only partial updates are given for 
@@ -84,11 +81,10 @@ namespace Bybit.Net.Interfaces.Clients.DerivativesApi
         /// </summary>
         /// <param name="category">Asset category</param>
         /// <param name="symbols">List of symbols to receive updates for</param>
-        /// <param name="snapshotHandler"> Snapshot handler</param>
-        /// <param name="updateHandler"> Update handler</param>
+        /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(StreamDerivativesCategory category, IEnumerable<string> symbols, Action<DataEvent<BybitDerivativesTicker>> snapshotHandler, Action<DataEvent<BybitDerivativesTickerUpdate>> updateHandler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTickersUpdatesAsync(StreamDerivativesCategory category, IEnumerable<string> symbols, Action<DataEvent<BybitDerivativesTicker>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline (candlestick) updates

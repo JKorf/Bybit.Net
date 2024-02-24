@@ -51,14 +51,7 @@ namespace Bybit.Net.Clients
         /// Create a new instance of the BybitRestClient using provided options
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BybitRestClient(Action<BybitRestOptions> optionsDelegate) : this(null, null, optionsDelegate)
-        {
-        }
-
-        /// <summary>
-        /// Create a new instance of the BybitRestClient using default options
-        /// </summary>
-        public BybitRestClient(ILoggerFactory? loggerFactory = null, HttpClient? httpClient = null) : this(httpClient, loggerFactory, null)
+        public BybitRestClient(Action<BybitRestOptions>? optionsDelegate = null) : this(null, null, optionsDelegate)
         {
         }
 

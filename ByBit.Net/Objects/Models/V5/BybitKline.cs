@@ -1,6 +1,5 @@
 ﻿using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
 
 namespace Bybit.Net.Objects.Models.V5
 {

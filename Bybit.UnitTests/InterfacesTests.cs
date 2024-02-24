@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Bybit.Net.Clients;
 using Bybit.Net.Clients.SpotApi;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 using NUnit.Framework;
 
 namespace Bybit.UnitTests

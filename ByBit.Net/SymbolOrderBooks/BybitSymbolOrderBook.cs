@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.OrderBook;
-using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Clients;
@@ -10,6 +9,7 @@ using System.Threading;
 using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Bybit.Net.SymbolOrderBooks
 {
@@ -68,11 +68,11 @@ namespace Bybit.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> result;
             if (_category == Category.Spot)
-                result = await _socketClient.V5SpotApi.SubscribeToOrderbookUpdatesAsync(Symbol, _depth, ProcessSnapshotUpdate, ProcessPartialUpdate).ConfigureAwait(false);
-            else if(_category == Category.Option)
-                result = await _socketClient.V5OptionsApi.SubscribeToOrderbookUpdatesAsync(Symbol, _depth, ProcessSnapshotUpdate, ProcessPartialUpdate).ConfigureAwait(false);
+                result = await _socketClient.V5SpotApi.SubscribeToOrderbookUpdatesAsync(Symbol, _depth, ProcessUpdate).ConfigureAwait(false);
+            else if (_category == Category.Option)
+                result = await _socketClient.V5OptionsApi.SubscribeToOrderbookUpdatesAsync(Symbol, _depth, ProcessUpdate).ConfigureAwait(false);
             else
-                result = await _socketClient.V5LinearApi.SubscribeToOrderbookUpdatesAsync(Symbol, _depth, ProcessSnapshotUpdate, ProcessPartialUpdate).ConfigureAwait(false);
+                result = await _socketClient.V5LinearApi.SubscribeToOrderbookUpdatesAsync(Symbol, _depth, ProcessUpdate).ConfigureAwait(false);
 
             if (!result)
                 return result;
@@ -83,7 +83,7 @@ namespace Bybit.Net.SymbolOrderBooks
                 return result.AsError<UpdateSubscription>(new CancellationRequestedError());
             }
             Status = OrderBookStatus.Syncing;
-            
+
             var setResult = await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
             return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
         }
@@ -93,14 +93,12 @@ namespace Bybit.Net.SymbolOrderBooks
         {
         }
 
-        private void ProcessSnapshotUpdate(DataEvent<BybitOrderbook> data)
+        private void ProcessUpdate(DataEvent<BybitOrderbook> data)
         {
-            SetInitialOrderBook(data.Data.UpdateId, data.Data.Bids, data.Data.Asks);
-        }
-
-        private void ProcessPartialUpdate(DataEvent<BybitOrderbook> data)
-        {
-            UpdateOrderBook(data.Data.UpdateId, data.Data.Bids, data.Data.Asks);          
+            if (data.UpdateType == SocketUpdateType.Snapshot)
+                SetInitialOrderBook(data.Data.UpdateId, data.Data.Bids, data.Data.Asks);
+            else
+                UpdateOrderBook(data.Data.UpdateId, data.Data.Bids, data.Data.Asks);
         }
 
         /// <inheritdoc />

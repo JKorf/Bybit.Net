@@ -3,7 +3,6 @@ using Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
-using Bybit.Net.Objects;
 using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net;

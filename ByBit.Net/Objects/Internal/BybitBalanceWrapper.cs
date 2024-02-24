@@ -1,5 +1,4 @@
-﻿using Bybit.Net.Objects.Models;
-using Bybit.Net.Objects.Models.Spot;
+﻿using Bybit.Net.Objects.Models.Spot;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
