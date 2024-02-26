@@ -78,6 +78,10 @@
         /// </summary>
         CancelByDCP,
         /// <summary>
+        /// Cancel by Self match prevention
+        /// </summary>
+        CancelBySmp,
+        /// <summary>
         /// Unknown
         /// </summary>
         Unknown

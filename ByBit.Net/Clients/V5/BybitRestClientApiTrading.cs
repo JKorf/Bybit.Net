@@ -345,7 +345,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Open Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<Objects.Models.V5.BybitOrder>>> GetOrdersAsync(
+        public async Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrdersAsync(
             Category category,
             string? symbol = null,
             string? baseAsset = null,
