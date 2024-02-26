@@ -10,77 +10,80 @@ namespace Bybit.Net.Objects.Models.Spot
     public class BybitSpotUserTradeV3
     {
         /// <summary>
-        /// Trade id
+        /// Transaction id
         /// </summary>
+        [JsonProperty("id")]
         public long Id { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonProperty("symbol")]
         public string Symbol { get; set; } = string.Empty;
-        /// <summary>
-        /// Symbol name
-        /// </summary>
-        public string SymbolName { get; set; } = string.Empty;
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonProperty("orderId")]
         public long OrderId { get; set; }
         /// <summary>
-        /// Matching order id
+        /// Order id
         /// </summary>
+        [JsonProperty("tradeId")]
+        public long TradeId { get; set; }
+        /// <summary>
+        /// Order id
+        /// </summary>
+        [JsonProperty("matchOrderId")]
         public long MatchOrderId { get; set; }
         /// <summary>
         /// Trade price
         /// </summary>
+        [JsonProperty("orderPrice")]
         public decimal Price { get; set; }
         /// <summary>
         /// Trade quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonProperty("orderQty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Fee
         /// </summary>
-        [JsonProperty("commission")]
+        [JsonProperty("execFee")]
         public decimal Fee { get; set; }
         /// <summary>
         /// Fee asset
         /// </summary>
-        [JsonProperty("commissionAsset")]
+        [JsonProperty("feeTokenId")]
         public string FeeAsset { get; set; } = string.Empty;
+        /// <summary>
+        /// Create time
+        /// </summary>
+        [JsonProperty("creatTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime CreateTime { get; set; }
         /// <summary>
         /// Trade time
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("executionTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TradeTime { get; set; }
         /// <summary>
         /// Is buyer
         /// </summary>
-        public bool IsBuyer { get; set; }
+        [JsonConverter(typeof(BoolConverter))]
         [JsonProperty("isBuyer")]
-        private int isBuyer { get => IsBuyer ? 1 : 0; set => IsBuyer = value == 1; }
+        public bool IsBuyer { get; set; }
         /// <summary>
         /// Is maker
         /// </summary>
-        public bool IsMaker { get; set; }
+        [JsonConverter(typeof(BoolConverter))]
         [JsonProperty("isMaker")]
-        private int isMaker { get => IsMaker ? 1 : 0; set => IsMaker = value == 1; }
-        /// <summary>
-        /// Fee details
-        /// </summary>
-        [JsonProperty("fee")]
-        public BybitTradeFee FeeDetails { get; set; } = default!;
-        /// <summary>
-        /// Fee otken id
-        /// </summary>
-        public string FeeTokenId { get; set; } = string.Empty;
-        /// <summary>
-        /// Trading fee
-        /// </summary>
-        public decimal FeeAmount { get; set; }
+        public bool IsMaker { get; set; }
         /// <summary>
         /// Maker rebate
         /// </summary>
+        [JsonProperty("makerRebate")]
         public decimal MakerRebate { get; set; }
+        /// <summary>
+        /// Block trade id
+        /// </summary>
+        public string? BlockTradeId { get; set; } = string.Empty;
     }
 }
