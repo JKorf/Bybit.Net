@@ -63,30 +63,4 @@ namespace Bybit.Net.Objects.Internal
         [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
         public Category Category { get; set; } = Category.Undefined;
     }
-
-    /// <summary>
-    /// Cursor paged data wrapper
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class BybitPage<T> : BybitData<T>
-    {
-        /// <summary>
-        /// Current page
-        /// </summary>
-        [JsonProperty("current_page")]
-        public int CurrentPage { get; set; }
-    }
-
-    internal class BybitPositionData : BybitData<BybitPosition>
-    {
-        [JsonProperty("is_valid")]
-        public bool IsValid { get; set; }
-    }
-
-    internal class BybitPositionUsdData : BybitData<BybitPositionUsd>
-    {
-        [JsonProperty("is_valid")]
-        public bool IsValid { get; set; }
-    }
-
 }

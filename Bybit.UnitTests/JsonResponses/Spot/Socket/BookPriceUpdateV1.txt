@@ -1,8 +1,0 @@
-﻿{
-    "symbol": "BTCUSDT",
-    "bidPrice": "9797.79",
-    "bidQty": "0.177976",
-    "askPrice": "9799",
-    "askQty": "0.65",
-    "time": 1582001830346
-  }

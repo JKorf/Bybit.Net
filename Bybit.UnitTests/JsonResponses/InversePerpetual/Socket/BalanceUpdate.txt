@@ -1,7 +1,0 @@
-[
-        {
-            "coin": "BTC",
-            "available_balance": "1.50121026",
-            "wallet_balance": "1.50121261"
-        }
-    ]

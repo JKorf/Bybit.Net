@@ -1,7 +1,0 @@
-{
-        "symbol":"ETHUSD",
-        "side":"Sell",
-        "price":"3384.15",
-        "qty":"3655",
-        "time":1631608881954
-    }
