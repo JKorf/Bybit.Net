@@ -33,7 +33,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Order id
         /// </summary>
         [JsonProperty("orderId")]
-        public string OrderId { get; set; } = string.Empty;
+        public string Id { get; set; } = string.Empty;
 
         /// <summary>
         /// Order price
@@ -84,14 +84,14 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// </summary>
         [JsonProperty("orderType")]
         [JsonConverter(typeof(OrderTypeSpotConverter))]
-        public OrderType OrderType { get; set; }
+        public OrderType Type { get; set; }
 
         /// <summary>
         /// Order side
         /// </summary>
         [JsonProperty("side")]
         [JsonConverter(typeof(OrderSideConverter))]
-        public OrderSide OrderSide { get; set; }
+        public OrderSide Side { get; set; }
 
         /// <summary>
         /// Stop price
@@ -109,7 +109,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
         /// Create time
         /// </summary>
         [JsonProperty("createTime"), JsonConverter(typeof(DateTimeConverter))]
-        public DateTime? CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// Update time

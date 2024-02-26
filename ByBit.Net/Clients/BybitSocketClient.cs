@@ -1,7 +1,6 @@
 ﻿using CryptoExchange.Net;
 using System;
 using Bybit.Net.Interfaces.Clients;
-using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi;

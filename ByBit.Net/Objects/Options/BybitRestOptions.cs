@@ -28,21 +28,6 @@ namespace Bybit.Net.Objects.Options
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
         /// <summary>
-        /// Options for the Inverse Futures API
-        /// </summary>
-        public RestApiOptions InverseFuturesOptions { get; private set; } = new RestApiOptions();
-
-        /// <summary>
-        /// Options for the Inverse Perpetual API
-        /// </summary>
-        public RestApiOptions InversePerpetualOptions { get; private set; } = new RestApiOptions();
-
-        /// <summary>
-        /// Options for the Usd Perpetual API
-        /// </summary>
-        public RestApiOptions UsdPerpetualOptions { get; private set; } = new RestApiOptions();
-
-        /// <summary>
         /// Options for the Spot API
         /// </summary>
         public RestApiOptions SpotOptions { get; private set; } = new RestApiOptions();
@@ -67,9 +52,6 @@ namespace Bybit.Net.Objects.Options
             var options = Copy<BybitRestOptions>();
             options.Referer = Referer;
             options.ReceiveWindow = ReceiveWindow;
-            options.InverseFuturesOptions = InverseFuturesOptions.Copy<RestApiOptions>();
-            options.InversePerpetualOptions = InversePerpetualOptions.Copy<RestApiOptions>();
-            options.UsdPerpetualOptions = UsdPerpetualOptions.Copy<RestApiOptions>();
             options.SpotOptions = SpotOptions.Copy<RestApiOptions>();
             options.CopyTradingOptions = CopyTradingOptions.Copy<RestApiOptions>();
             options.DerivativesOptions = DerivativesOptions.Copy<RestApiOptions>();
