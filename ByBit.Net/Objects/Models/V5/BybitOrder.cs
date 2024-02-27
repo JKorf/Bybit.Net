@@ -51,7 +51,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Position mode
         /// </summary>
         [JsonProperty("positionIdx")]
-        public Enums.V5.PositionMode? PositionMode { get; set; }
+        public PositionIdx? PositionIdx { get; set; }
         /// <summary>
         /// Order status
         /// </summary>
