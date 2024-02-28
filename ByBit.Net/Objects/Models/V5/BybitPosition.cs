@@ -158,11 +158,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// When IsReduceOnly = true: the timestamp when the MMR will be forcibly adjusted by the system. When IsReduceOnly = false: the timestamp when the MMR had been adjusted by system
         /// </summary>
         [JsonProperty("mmrSysUpdatedTime")]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? MaintenanceMarginUpdateTime { get; set; }
         /// <summary>
         /// When IsReduceOnly = true: the timestamp when the leverage will be forcibly adjusted by the system. When IsReduceOnly = false: the timestamp when the leverage had been adjusted by system
         /// </summary>
         [JsonProperty("leverageSysUpdatedTime")]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? LeverageUpdateTime { get; set; }
         /// <summary>
         /// Cross sequence, used to associate each fill and each position update
