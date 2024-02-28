@@ -127,6 +127,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.5.2 - 28 Feb 2024
+    * Fixed V5Api.Trading.GetPositionAsync model deserialization
+
 * Version 3.5.1 - 27 Feb 2024
     * Updated V5 Linear/Inverse Symbol model
     * Fixed PositionIdx property in V5 order updates
