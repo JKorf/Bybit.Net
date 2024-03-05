@@ -75,10 +75,9 @@ namespace Bybit.Net.Clients.CopyTradingApi
              HttpMethod method,
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null) where T : class
+             bool signed = false) where T : class
         {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
             if (!result)
                 return result.As<BybitResult<T>>(default);
 
@@ -94,10 +93,9 @@ namespace Bybit.Net.Clients.CopyTradingApi
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
              bool signed = false,
-             JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false)
         {
-            var result = await base.SendRequestAsync<BybitCopyTradingResult<BybitList<T>>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitCopyTradingResult<BybitList<T>>>(uri, method, cancellationToken, parameters, signed, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<T>>(default);
 
@@ -113,10 +111,9 @@ namespace Bybit.Net.Clients.CopyTradingApi
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
              bool signed = false,
-             JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false)
         {
-            var result = await base.SendRequestAsync<BybitCopyTradingResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitCopyTradingResult<T>>(uri, method, cancellationToken, parameters, signed, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 

@@ -58,8 +58,6 @@ namespace Bybit.Net.Clients.V5
                 { "Referer", !string.IsNullOrEmpty(options.Referer) ? options.Referer! : _referer }
             };
 
-            manualParseError = true;
-
             Account = new BybitRestClientApiAccount(this);
             ExchangeData = new BybitRestClientApiExchangeData(this);
             Trading = new BybitRestClientApiTrading(this);
@@ -107,10 +105,9 @@ namespace Bybit.Net.Clients.V5
              HttpMethod method,
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null)
+             bool signed = false)
         {
-            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
         }
 
         internal async Task<WebCallResult<T>> SendRequestAsync<T>(
@@ -118,10 +115,9 @@ namespace Bybit.Net.Clients.V5
              HttpMethod method,
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null)
+             bool signed = false)
         {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
@@ -136,10 +132,9 @@ namespace Bybit.Net.Clients.V5
              HttpMethod method,
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null)
+             bool signed = false)
         {
-            var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
             if (!result)
                 return result.AsDataless();
 

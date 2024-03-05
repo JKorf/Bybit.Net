@@ -49,8 +49,6 @@ namespace Bybit.Net.Clients.SpotApi
         internal BybitRestClientBaseSpotApi(ILogger logger, HttpClient? httpClient, string baseAddress, BybitRestOptions options, RestApiOptions apiOptions)
             : base(logger, httpClient, baseAddress, options, apiOptions)
         {
-            manualParseError = true;
-
             requestBodyFormat = RequestBodyFormat.FormData;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
@@ -70,18 +68,18 @@ namespace Bybit.Net.Clients.SpotApi
             return new Uri(BaseAddress.AppendPath(endpoint));
         }
 
-        /// <inheritdoc />
-        protected override Task<ServerError?> TryParseErrorAsync(JToken data)
-        {
-            var responseCode = data["ret_code"];
-            if (responseCode != null && responseCode.ToString() != "0")
-            {
-                var errorMessage = data["ret_msg"];
-                return Task.FromResult(new ServerError(responseCode.Value<int>(), errorMessage!.ToString()))!;
-            }
+        ///// <inheritdoc />
+        //protected override Task<ServerError?> TryParseErrorAsync(JToken data)
+        //{
+        //    var responseCode = data["ret_code"];
+        //    if (responseCode != null && responseCode.ToString() != "0")
+        //    {
+        //        var errorMessage = data["ret_msg"];
+        //        return Task.FromResult(new ServerError(responseCode.Value<int>(), errorMessage!.ToString()))!;
+        //    }
 
-            return Task.FromResult<ServerError?>(null);
-        }
+        //    return Task.FromResult<ServerError?>(null);
+        //}
 
         internal async Task<WebCallResult<T>> SendRequestAsync<T>(
              Uri uri,
@@ -89,10 +87,9 @@ namespace Bybit.Net.Clients.SpotApi
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
              bool signed = false,
-             JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false)
         {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
