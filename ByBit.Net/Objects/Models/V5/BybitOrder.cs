@@ -1,5 +1,5 @@
-﻿using Bybit.Net.Converters;
-using Bybit.Net.Enums;
+﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums.V5;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
@@ -51,7 +51,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Position mode
         /// </summary>
         [JsonProperty("positionIdx")]
-        public PositionMode? PositionMode { get; set; }
+        public PositionIdx? PositionIdx { get; set; }
         /// <summary>
         /// Order status
         /// </summary>
@@ -179,5 +179,46 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("updatedTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
+        /// <summary>
+        /// Order create type
+        /// </summary>
+        [JsonProperty("createType")]
+        public string? CreateType { get; set; }
+        /// <summary>
+        /// Market unit for quantity
+        /// </summary>
+        [JsonProperty("marketUnit"), JsonConverter(typeof(EnumConverter))]
+        public MarketUnit? MarketUnit { get; set; }
+        /// <summary>
+        /// Oco trigger type
+        /// </summary>
+        [JsonProperty("ocoTriggerType"), JsonConverter(typeof(EnumConverter))]
+        public OcoTriggerType? OcoTriggerType { get; set; }
+        /// <summary>
+        /// Take profit limit price
+        /// </summary>
+        [JsonProperty("tpLimitPrice")]
+        public decimal? TakeProfitLimitPrice { get; set; }
+        /// <summary>
+        /// Stop loss limit price
+        /// </summary>
+        [JsonProperty("slLimitPrice")]
+        public decimal? StopLossLimitPrice { get; set; }
+
+        /// <summary>
+        /// Self match prevention type
+        /// </summary>
+        [JsonProperty("smpType"), JsonConverter(typeof(EnumConverter))]
+        public SelfMatchPreventionType? SelfMatchPreventionType { get; set; }
+        /// <summary>
+        /// Self match prevention group, 0 by default
+        /// </summary>
+        [JsonProperty("smpGroup")]
+        public int? SelfMatchPreventionGroup { get; set; }
+        /// <summary>
+        /// The counterparty's orderID which triggers this SMP execution
+        /// </summary>
+        [JsonProperty("smpOrderId")]
+        public string? SelfMatchPreventionOrderId { get; set; }
     }
 }

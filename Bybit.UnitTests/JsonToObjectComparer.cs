@@ -61,49 +61,53 @@ namespace Bybit.Net.UnitTests
                     continue;
                 }
 
-                FileStream file = null;
-                try
+                for (var i = 0; i < 5; i++)
                 {
-                    var filePath = Path.Combine(path, $"{method.Name}.txt");
-                    file = File.OpenRead(filePath);
-                    unusedJsonFiles.Remove(filePath);
+                    FileStream file = null;
+                    try
+                    {
+                        var filePath = Path.Combine(path, $"{method.Name}{(i == 0 ? "" : i.ToString())}.txt");
+                        file = File.OpenRead(filePath);
+                        unusedJsonFiles.Remove(filePath);
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        if (i == 0)
+                            skippedMethods.Add(method.Name);
+                        continue;
+                    }
+
+                    var buffer = new byte[file.Length];
+                    await file.ReadAsync(buffer, 0, buffer.Length);
+                    file.Close();
+
+                    var json = Encoding.UTF8.GetString(buffer);
+                    var client = _clientFunc(json);
+
+                    var parameters = method.GetParameters();
+                    var input = new List<object>();
+                    foreach (var parameter in parameters)
+                    {
+                        if (parametersToSetNull?.Contains(parameter.Name) == true && parameter.ParameterType != typeof(int))
+                            input.Add(null);
+                        else
+                            input.Add(TestHelpers.GetTestValue(parameter.ParameterType, 1));
+                    }
+
+                    // act
+                    var result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
+
+                    // asset
+                    Assert.Null(result.Error, method.Name);
+
+                    var resultProp = result.GetType().GetProperty("Data", BindingFlags.Public | BindingFlags.Instance);
+                    if (resultProp == null)
+                        // No result
+                        continue;
+
+                    var resultData = resultProp.GetValue(result);
+                    ProcessData(method.Name, resultData, json, useNestedJsonPropertyForCompare, useNestedJsonPropertyForAllCompare, ignoreProperties, takeFirstItemForCompare);
                 }
-                catch (FileNotFoundException)
-                {
-                    skippedMethods.Add(method.Name);
-                    continue;
-                }
-
-                var buffer = new byte[file.Length];
-                await file.ReadAsync(buffer, 0, buffer.Length);
-                file.Close();
-
-                var json = Encoding.UTF8.GetString(buffer);
-                var client = _clientFunc(json);
-
-                var parameters = method.GetParameters();
-                var input = new List<object>();
-                foreach (var parameter in parameters)
-                {
-                    if (parametersToSetNull?.Contains(parameter.Name) == true && parameter.ParameterType != typeof(int))
-                        input.Add(null);
-                    else
-                        input.Add(TestHelpers.GetTestValue(parameter.ParameterType, 1));
-                }
-
-                // act
-                var result = (CallResult)await TestHelpers.InvokeAsync(method, getSubject(client), input.ToArray());
-
-                // asset
-                Assert.Null(result.Error, method.Name);
-
-                var resultProp = result.GetType().GetProperty("Data", BindingFlags.Public | BindingFlags.Instance);
-                if (resultProp == null)
-                    // No result
-                    continue;
-
-                var resultData = resultProp.GetValue(result);
-                ProcessData(method.Name, resultData, json, useNestedJsonPropertyForCompare, useNestedJsonPropertyForAllCompare, ignoreProperties, takeFirstItemForCompare);
             }
 
             if (unusedJsonFiles.Any())

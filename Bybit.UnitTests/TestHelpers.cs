@@ -62,13 +62,8 @@ namespace Bybit.Net.Testing
         {
             BybitRestClient client;
             client = options != null ? new BybitRestClient(options) : new BybitRestClient();
-            client.SpotApiV1.RequestFactory = Mock.Of<IRequestFactory>();
             client.SpotApiV3.RequestFactory = Mock.Of<IRequestFactory>();
             client.CopyTradingApi.RequestFactory = Mock.Of<IRequestFactory>();
-            client.GeneralApi.RequestFactory = Mock.Of<IRequestFactory>();
-            client.InverseFuturesApi.RequestFactory = Mock.Of<IRequestFactory>();
-            client.InversePerpetualApi.RequestFactory = Mock.Of<IRequestFactory>();
-            client.UsdPerpetualApi.RequestFactory = Mock.Of<IRequestFactory>();
             client.DerivativesApi.RequestFactory = Mock.Of<IRequestFactory>();
             client.V5Api.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
@@ -98,25 +93,10 @@ namespace Bybit.Net.Testing
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
             request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
 
-            var factory = Mock.Get(client.SpotApiV1.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-             factory = Mock.Get(client.SpotApiV3.RequestFactory);
+            var factory = Mock.Get(client.SpotApiV3.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
             factory = Mock.Get(client.CopyTradingApi.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-            factory = Mock.Get(client.GeneralApi.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-            factory = Mock.Get(client.InverseFuturesApi.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-            factory = Mock.Get(client.InversePerpetualApi.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-            factory = Mock.Get(client.UsdPerpetualApi.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
             factory = Mock.Get(client.DerivativesApi.RequestFactory);

@@ -1,6 +1,4 @@
-﻿using Bybit.Net.Converters;
-using Bybit.Net.Enums;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
 {

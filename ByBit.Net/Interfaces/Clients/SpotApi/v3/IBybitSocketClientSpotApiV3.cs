@@ -1,12 +1,12 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.Socket.Spot;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Bybit.Net.Objects.Models.Spot.v3;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Bybit.Net.Interfaces.Clients.SpotApi.v3
 {

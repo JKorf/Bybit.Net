@@ -1,7 +1,0 @@
-[
-        {
-            "currency": "BTC",
-            "timestamp": "2020-01-11T20:00:00Z",
-            "wallet_balance": 98786916569
-        }
-    ]

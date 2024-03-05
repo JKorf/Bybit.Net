@@ -2,17 +2,17 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>Bybit.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>3.3.0</PackageVersion>
-    <AssemblyVersion>3.3.0</AssemblyVersion>
-    <FileVersion>3.3.0</FileVersion>
-    <Description>Bybit.Net is a .Net wrapper for the Bybit API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
+    <PackageVersion>3.5.2</PackageVersion>
+    <AssemblyVersion>3.5.2</AssemblyVersion>
+    <FileVersion>3.5.2</FileVersion>
+    <Description>Bybit.Net is a client library for accessing the Bybit REST and Websocket API. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageTags>Bybit Bybit.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
+    <PackageTags>Bybit;Bybit.Net;Bybit Client;Bybit API;CryptoCurrency;CryptoCurrency Exchange</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/JKorf/Bybit.Net.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/JKorf/Bybit.Net</PackageProjectUrl>
@@ -21,7 +21,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>3.3.0 - Added V5Api.Account.GetBrokerEarningsAsync endpoint, Added V5Api.Account.GetBrokerAccountInfoAsync endpoint, Added V5Api.Account.GetInternalDepositsAsync endpoint, Added V5Api.Account.SetMultipleCollateralAssetsAsync endpoint, Added PricePercentageFilter to V5Api.ExchangeData.GetSpotSymbolsAsync model, Updated various endpoint parameters and models</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/JKorf/Bybit.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bybit.Net.xml</DocumentationFile>
@@ -48,12 +48,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
+    <PackageReference Include="CryptoExchange.Net" Version="7.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CryptoExchange.Net" Version="6.2.5" />
   </ItemGroup>
 </Project>

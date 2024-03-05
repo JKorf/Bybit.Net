@@ -1,28 +1,19 @@
-﻿using Bybit.Net.Objects;
-using CryptoExchange.Net;
+﻿using CryptoExchange.Net;
 using System;
 using Bybit.Net.Interfaces.Clients;
-using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
-using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
-using Bybit.Net.Clients.InversePerpetualApi;
-using Bybit.Net.Clients.UsdPerpetualApi;
-using Bybit.Net.Clients.SpotApi.v1;
-using Bybit.Net.Clients.SpotApi.v2;
-using Bybit.Net.Clients.SpotApi.v3;
-using Bybit.Net.Interfaces.Clients.SpotApi.v1;
-using Bybit.Net.Interfaces.Clients.SpotApi.v2;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi;
-using Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi;
-using Bybit.Net.Clients.DerivativesApi.ContractApi;
-using Bybit.Net.Clients.DerivativesApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi;
 using CryptoExchange.Net.Authentication;
 using Bybit.Net.Clients.V5;
 using Bybit.Net.Interfaces.Clients.V5;
 using Microsoft.Extensions.Logging;
 using Bybit.Net.Objects.Options;
+using Bybit.Net.Clients.DerivativesApi;
+using Bybit.Net.Clients.DerivativesApi.ContractApi;
+using Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi;
+using Bybit.Net.Clients.SpotApi.v3;
 
 namespace Bybit.Net.Clients
 {
@@ -30,19 +21,7 @@ namespace Bybit.Net.Clients
     public class BybitSocketClient : BaseSocketClient, IBybitSocketClient
     {
         /// <inheritdoc />
-        public IBybitSocketClientUsdPerpetualApi UsdPerpetualApi { get; }
-        /// <inheritdoc />
-        public IBybitSocketClientInversePerpetualApi InversePerpetualApi { get; }
-        /// <inheritdoc />
-        public IBybitSocketClientSpotApiV1 SpotV1Api { get; }
-        /// <inheritdoc />
-        public IBybitSocketClientSpotApiV2 SpotV2Api { get; }
-        /// <inheritdoc />
         public IBybitSocketClientSpotApiV3 SpotV3Api { get; }
-
-        /// <inheritdoc />
-        public IBybitSocketClientCopyTradingApi CopyTradingApi { get; }
-
         /// <inheritdoc />
         public IBybitSocketClientDerivativesPublicApi DerivativesApi { get; }
         /// <inheritdoc />
@@ -87,13 +66,7 @@ namespace Bybit.Net.Clients
             optionsDelegate(options);
             Initialize(options);
 
-            UsdPerpetualApi = AddApiClient(new BybitSocketClientUsdPerpetualApi(_logger, options));
-            InversePerpetualApi = AddApiClient(new BybitSocketClientInversePerpetualApi(_logger, options));
-            SpotV1Api = AddApiClient(new BybitSocketClientSpotApiV1(_logger, options));
-            SpotV2Api = AddApiClient(new BybitSocketClientSpotApiV2(_logger, options));
             SpotV3Api = AddApiClient(new BybitSocketClientSpotApiV3(_logger, options));
-
-            CopyTradingApi = AddApiClient(new BybitSocketClientCopyTradingApi(_logger, options));
 
             DerivativesApi = AddApiClient(new BybitSocketClientDerivativesPublicApi(_logger, options));
             UnifiedMarginApi = AddApiClient(new BybitSocketClientUnifiedMarginApi(_logger, options));
@@ -120,12 +93,7 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public void SetApiCredentials(ApiCredentials credentials)
         {
-            UsdPerpetualApi.SetApiCredentials(credentials);
-            InversePerpetualApi.SetApiCredentials(credentials);
-            SpotV1Api.SetApiCredentials(credentials);
-            SpotV2Api.SetApiCredentials(credentials);
             SpotV3Api.SetApiCredentials(credentials);
-            CopyTradingApi.SetApiCredentials(credentials);
             DerivativesApi.SetApiCredentials(credentials);
             UnifiedMarginApi.SetApiCredentials(credentials);
             ContractApi.SetApiCredentials(credentials);

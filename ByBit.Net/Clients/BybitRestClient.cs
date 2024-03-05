@@ -1,17 +1,7 @@
 ﻿using Bybit.Net.Clients.CopyTradingApi;
-using Bybit.Net.Clients.GeneralApi;
-using Bybit.Net.Clients.InverseFuturesApi;
-using Bybit.Net.Clients.InversePerpetualApi;
-using Bybit.Net.Clients.UsdPerpetualApi;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Interfaces.Clients.CopyTradingApi;
-using Bybit.Net.Interfaces.Clients.GeneralApi;
-using Bybit.Net.Interfaces.Clients.InverseFuturesApi;
-using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
-using Bybit.Net.Interfaces.Clients.SpotApi.v1;
-using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using CryptoExchange.Net;
-using Bybit.Net.Clients.SpotApi.v1;
 using Bybit.Net.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.DerivativesApi;
@@ -28,17 +18,7 @@ namespace Bybit.Net.Clients
     public class BybitRestClient : BaseRestClient, IBybitRestClient
     {
         /// <inheritdoc />
-        public IBybitRestClientGeneralApi GeneralApi { get; }
-        /// <inheritdoc />
-        public IBybitRestClientSpotApiV1 SpotApiV1 { get; }
-        /// <inheritdoc />
         public IBybitRestClientSpotApiV3 SpotApiV3 { get; }
-        /// <inheritdoc />
-        public IBybitRestClientInversePerpetualApi InversePerpetualApi { get; }
-        /// <inheritdoc />
-        public IBybitRestClientInverseFuturesApi InverseFuturesApi { get; }
-        /// <inheritdoc />
-        public IBybitRestClientUsdPerpetualApi UsdPerpetualApi { get; }
         /// <inheritdoc />
         public IBybitRestClientCopyTradingApi CopyTradingApi { get; }
         /// <inheritdoc />
@@ -51,14 +31,7 @@ namespace Bybit.Net.Clients
         /// Create a new instance of the BybitRestClient using provided options
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BybitRestClient(Action<BybitRestOptions> optionsDelegate) : this(null, null, optionsDelegate)
-        {
-        }
-
-        /// <summary>
-        /// Create a new instance of the BybitRestClient using default options
-        /// </summary>
-        public BybitRestClient(ILoggerFactory? loggerFactory = null, HttpClient? httpClient = null) : this(httpClient, loggerFactory, null)
+        public BybitRestClient(Action<BybitRestOptions>? optionsDelegate = null) : this(null, null, optionsDelegate)
         {
         }
 
@@ -76,12 +49,7 @@ namespace Bybit.Net.Clients
                 optionsDelegate(options);
             Initialize(options);
 
-            InversePerpetualApi = AddApiClient(new BybitRestClientInversePerpetualApi(_logger, httpClient, options));
-            InverseFuturesApi = AddApiClient(new BybitRestClientInverseFuturesApi(_logger, httpClient, options));
-            UsdPerpetualApi = AddApiClient(new BybitRestClientUsdPerpetualApi(_logger, httpClient, options));
-            SpotApiV1 = AddApiClient(new BybitRestClientSpotApiV1(_logger, httpClient, options));
             SpotApiV3 = AddApiClient(new BybitRestClientSpotApiV3(_logger, httpClient, options));
-            GeneralApi = AddApiClient(new BybitRestClientGeneralApi(_logger, this, httpClient, options));
             CopyTradingApi = AddApiClient(new BybitRestClientCopyTradingApi(_logger, httpClient, options));
             DerivativesApi = AddApiClient(new BybitRestClientDerivativesApi(_logger, httpClient, options));
             V5Api = AddApiClient(new V5.BybitRestClientApi(_logger, httpClient, options));
@@ -103,12 +71,7 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public void SetApiCredentials(ApiCredentials credentials)
         {
-            InversePerpetualApi.SetApiCredentials(credentials);
-            InverseFuturesApi.SetApiCredentials(credentials);
-            UsdPerpetualApi.SetApiCredentials(credentials);
-            SpotApiV1.SetApiCredentials(credentials);
             SpotApiV3.SetApiCredentials(credentials);
-            GeneralApi.SetApiCredentials(credentials);
             CopyTradingApi.SetApiCredentials(credentials);
             DerivativesApi.SetApiCredentials(credentials);
             V5Api.SetApiCredentials(credentials);

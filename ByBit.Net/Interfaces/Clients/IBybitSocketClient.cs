@@ -1,11 +1,7 @@
 ﻿using Bybit.Net.Interfaces.Clients.DerivativesApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
-using Bybit.Net.Interfaces.Clients.InversePerpetualApi;
-using Bybit.Net.Interfaces.Clients.SpotApi.v1;
-using Bybit.Net.Interfaces.Clients.SpotApi.v2;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
-using Bybit.Net.Interfaces.Clients.UsdPerpetualApi;
 using Bybit.Net.Interfaces.Clients.V5;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
@@ -18,29 +14,9 @@ namespace Bybit.Net.Interfaces.Clients
     public interface IBybitSocketClient : ISocketClient
     {
         /// <summary>
-        /// USD perpetual streams
-        /// </summary>
-        public IBybitSocketClientUsdPerpetualApi UsdPerpetualApi { get; }
-        /// <summary>
-        /// Spot streams v1
-        /// </summary>
-        public IBybitSocketClientSpotApiV1 SpotV1Api { get; }
-        /// <summary>
-        /// Spot streams v2
-        /// </summary>
-        public IBybitSocketClientSpotApiV2 SpotV2Api { get; }
-        /// <summary>
         /// Spot streams v3
         /// </summary>
         public IBybitSocketClientSpotApiV3 SpotV3Api { get; }
-        /// <summary>
-        /// Inverse perpetual streams
-        /// </summary>
-        public IBybitSocketClientInversePerpetualApi InversePerpetualApi { get; }
-        /// <summary>
-        /// Copy trading streams
-        /// </summary>
-        public IBybitSocketClientCopyTradingApi CopyTradingApi { get; }
         /// <summary>
         /// Derivatives public streams
         /// </summary>

@@ -1,0 +1,45 @@
+{
+"retCode": 0,
+"retMsg": "OK",
+"result": {
+"nextPageCursor": "",
+"category": "linear",
+"list": [
+{
+"symbol": "BTCPERP",
+"leverage": "10",
+"autoAddMargin": 0,
+"avgPrice": "",
+"liqPrice": "",
+"riskLimitValue": "100000",
+"takeProfit": "",
+"positionValue": "",
+"tpslMode": "",
+"isReduceOnly": false,
+"riskId": 10001,
+"trailingStop": "",
+"unrealisedPnl": "",
+"markPrice": "",
+"adlRankIndicator": 0,
+"cumRealisedPnl": "",
+"positionMM": "",
+"createdTime": "",
+"positionIdx": 0,
+"positionIM": "",
+"seq": -1,
+"updatedTime": "",
+"side": "",
+"bustPrice": "",
+"positionBalance": "",
+"leverageSysUpdatedTime": "",
+"size": "0",
+"positionStatus": "",
+"mmrSysUpdatedTime": "",
+"stopLoss": "",
+"tradeMode": 0
+}
+]
+},
+"retExtInfo": {},
+"time": 1708114419364
+}

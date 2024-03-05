@@ -1,5 +1,4 @@
-﻿using Bybit.Net.Converters;
-using Bybit.Net.Enums;
+﻿using Bybit.Net.Enums;
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
@@ -68,6 +67,21 @@ namespace Bybit.Net.Objects.Models.V5
         /// Funding interval in minutes
         /// </summary>
         public int FundingInterval { get; set; }
+        /// <summary>
+        /// Copy trading support
+        /// </summary>
+        [JsonProperty("copyTrading"), JsonConverter(typeof(EnumConverter))]
+        public CopyTradeType CopyTrading { get; set; }
+        /// <summary>
+        /// Upper limit of funding date
+        /// </summary>
+        [JsonProperty("upperFundingRate")]
+        public decimal UpperFundingRate { get; set; }
+        /// <summary>
+        /// Lower limit of funding data
+        /// </summary>
+        [JsonProperty("lowerFundingRate")]
+        public decimal LowerFundingRate { get; set; }
 
         /// <summary>
         /// Lot size order filter
@@ -108,11 +122,6 @@ namespace Bybit.Net.Objects.Models.V5
     public class BybitLinearInverseLotSizeFilter
     {
         /// <summary>
-        /// Post only max order quantity
-        /// </summary>
-        [JsonProperty("postOnlyMaxOrderQty")]
-        public decimal PostOnlyMaxOrderQuantity { get; set; }
-        /// <summary>
         /// Quantity step
         /// </summary>
         [JsonProperty("qtyStep")]
@@ -127,6 +136,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("maxOrderQty")]
         public decimal MaxOrderQuantity { get; set; }
+        /// <summary>
+        /// Max market order quantity
+        /// </summary>
+        [JsonProperty("maxMktOrderQty")]
+        public decimal MaxMarketOrderQuantity { get; set; }
     }
 
     /// <summary>

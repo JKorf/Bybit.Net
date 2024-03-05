@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Bybit.Net.Enums
+﻿namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Cancel type
@@ -81,6 +77,10 @@ namespace Bybit.Net.Enums
         /// Cancel by DCP
         /// </summary>
         CancelByDCP,
+        /// <summary>
+        /// Cancel by Self match prevention
+        /// </summary>
+        CancelBySmp,
         /// <summary>
         /// Unknown
         /// </summary>
