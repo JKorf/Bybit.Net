@@ -3,6 +3,7 @@ using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;

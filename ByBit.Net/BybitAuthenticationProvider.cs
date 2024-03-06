@@ -11,6 +11,7 @@ using Bybit.Net.Clients.V5;
 using System.Text;
 using Newtonsoft.Json;
 using Bybit.Net.Objects.Options;
+using CryptoExchange.Net.Clients;
 
 namespace Bybit.Net
 {

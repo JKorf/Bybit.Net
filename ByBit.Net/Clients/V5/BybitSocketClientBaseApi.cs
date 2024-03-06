@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,7 @@ using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Objects.Sockets;
 using Bybit.Net.Objects.Sockets.Subscriptions;
+using CryptoExchange.Net.Clients;
 
 namespace Bybit.Net.Clients.V5
 {

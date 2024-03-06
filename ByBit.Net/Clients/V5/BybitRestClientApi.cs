@@ -14,6 +14,7 @@ using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.CommonObjects;
 using System.Linq;
+using CryptoExchange.Net.Clients;
 
 namespace Bybit.Net.Clients.V5
 {

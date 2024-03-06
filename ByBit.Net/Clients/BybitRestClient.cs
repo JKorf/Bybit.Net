@@ -1,7 +1,6 @@
 ﻿using Bybit.Net.Clients.CopyTradingApi;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Interfaces.Clients.CopyTradingApi;
-using CryptoExchange.Net;
 using Bybit.Net.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.DerivativesApi;
@@ -11,6 +10,7 @@ using System.Net.Http;
 using Bybit.Net.Objects.Options;
 using System;
 using Microsoft.Extensions.Logging;
+using CryptoExchange.Net.Clients;
 
 namespace Bybit.Net.Clients
 {

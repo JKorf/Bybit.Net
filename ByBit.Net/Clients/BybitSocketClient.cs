@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net;
-using System;
+﻿using System;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Interfaces.Clients.SpotApi.v3;
 using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
@@ -14,6 +13,7 @@ using Bybit.Net.Clients.DerivativesApi;
 using Bybit.Net.Clients.DerivativesApi.ContractApi;
 using Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi;
 using Bybit.Net.Clients.SpotApi.v3;
+using CryptoExchange.Net.Clients;
 
 namespace Bybit.Net.Clients
 {
