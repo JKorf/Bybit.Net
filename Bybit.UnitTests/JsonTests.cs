@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Interfaces;
 using Bybit.Net.UnitTests;
-using Bybit.Net.Testing;
 using Bybit.Net.Objects;
 using Bybit.Net.Clients;
+using Bybit.UnitTests;
 
 namespace Bybit.Net.UnitTests
 {

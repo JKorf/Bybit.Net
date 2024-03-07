@@ -14,7 +14,7 @@ using System.Collections;
 using Bybit.Net.Clients;
 using Bybit.Net.Objects.Options;
 
-namespace Bybit.Net.Testing
+namespace Bybit.UnitTests
 {
     public class TestHelpers
     {
@@ -71,7 +71,7 @@ namespace Bybit.Net.Testing
 
         public static BybitRestClient CreateResponseClient(string response, Action<BybitRestOptions> options = null, HttpStatusCode code = HttpStatusCode.OK)
         {
-            var client = (BybitRestClient)CreateClient(options);
+            var client = CreateClient(options);
             SetResponse(client, response, code);
             return client;
         }
@@ -123,7 +123,7 @@ namespace Bybit.Net.Testing
                 return (decimal?)(i / 100m);
 
             if (type == typeof(int))
-                return i+1;
+                return i + 1;
 
             if (type == typeof(int?))
                 return (int?)i;
@@ -160,7 +160,7 @@ namespace Bybit.Net.Testing
                 return result;
             }
 
-            if (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(List<>)))
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
             {
                 var result = (IList)Activator.CreateInstance(type)!;
                 result.Add(GetTestValue(type.GetGenericArguments()[0], 0));

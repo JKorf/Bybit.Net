@@ -15,6 +15,8 @@ using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.CommonObjects;
 using System.Linq;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Interfaces;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -143,6 +145,23 @@ namespace Bybit.Net.Clients.V5
                 return result.AsDatalessError(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             return result.AsDataless();
+        }
+
+        /// <inheritdoc />
+        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        {
+            if (!accessor.IsJson)
+                return new ServerError(accessor.GetOriginalString());
+
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("retMsg"));
+            if (msg == null)
+                return new ServerError(accessor.GetOriginalString());
+
+            if (code == null)
+                return new ServerError(msg);
+
+            return new ServerError(code.Value, msg);
         }
 
         internal void InvokeOrderPlaced(OrderId id)
