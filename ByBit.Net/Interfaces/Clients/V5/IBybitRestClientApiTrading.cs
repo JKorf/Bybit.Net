@@ -283,7 +283,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="windowSeconds">Time after which to cancel all orders</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBorrowQuota>> SetDisconnectCancelAllAsync(int windowSeconds, CancellationToken ct = default);
+        Task<WebCallResult> SetDisconnectCancelAllAsync(int windowSeconds, CancellationToken ct = default);
 
         /// <summary>
         /// Set trading stop parameters

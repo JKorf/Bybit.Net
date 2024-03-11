@@ -474,7 +474,7 @@ namespace Bybit.Net.Clients.V5
         #region Set Disconnect Cancel All
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitBorrowQuota>> SetDisconnectCancelAllAsync(
+        public async Task<WebCallResult> SetDisconnectCancelAllAsync(
             int windowSeconds,
             CancellationToken ct = default)
         {
@@ -483,7 +483,7 @@ namespace Bybit.Net.Clients.V5
                 { "timeWindow", windowSeconds },
             };
 
-            return await _baseClient.SendRequestAsync<BybitBorrowQuota>(_baseClient.GetUrl("v5/order/disconnected-cancel-all"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/order/disconnected-cancel-all"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
