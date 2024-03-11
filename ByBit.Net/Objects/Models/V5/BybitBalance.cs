@@ -156,5 +156,20 @@ namespace Bybit.Net.Objects.Models.V5
         /// [Unified] Bonus
         /// </summary>
         public decimal? Bonus { get; set; }
+        /// <summary>
+        /// [Unified] The spot asset quantity that is used to hedge in the portfolio margin, truncate to 8 decimals and "0" by default
+        /// </summary>
+        [JsonProperty("spotHedgingQty")]
+        public decimal? SpotHedgingQuantity { get; set; }
+        /// <summary>
+        /// Whether it can be used as a margin collateral currency
+        /// </summary>
+        [JsonProperty("collateralSwitch")]
+        public bool CollateralSwitch { get; set; }
+        /// <summary>
+        /// Whether the collateral is turned on by user (user)
+        /// </summary>
+        [JsonProperty("marginCollateral")]
+        public bool MarginCollateral { get; set; }
     }
 }
