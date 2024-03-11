@@ -70,5 +70,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("orderIv", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
         public decimal? OrderImpliedVolatility { get; set; }
+        /// <summary>
+        /// Take profit/Stop loss mode
+        /// </summary>
+        [JsonProperty("tpslMode", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
     }
 }
