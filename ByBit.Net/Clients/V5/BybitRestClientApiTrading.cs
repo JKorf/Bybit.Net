@@ -603,6 +603,8 @@ namespace Bybit.Net.Clients.V5
             Category category,
             string? symbol = null,
             DateTime? expiryDate = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
             int? limit = null,
             string? cursor = null,
             CancellationToken ct = default)
@@ -612,6 +614,8 @@ namespace Bybit.Net.Clients.V5
                 { "category", EnumConverter.GetString(category) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("expDate", DateTimeConverter.ConvertToMilliseconds(expiryDate));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
