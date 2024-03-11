@@ -170,6 +170,16 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<BybitResponse<BybitPosition>>> GetPositionsAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Confirm risk limit after being marked as only reducing positions
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/position/confirm-mmr" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> ConfirmRiskLimitAsync(Category category, string symbol, CancellationToken ct = default);
+
+        /// <summary>
         /// Get settlement history
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/settlement" /></para>
         /// </summary>

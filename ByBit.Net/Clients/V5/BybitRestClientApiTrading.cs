@@ -552,6 +552,25 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Positions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> ConfirmRiskLimitAsync(
+            Category category,
+            string symbol,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "symbol", symbol }
+            };
+
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/position/confirm-pending-mmr"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Asset Exchange History
 
         /// <inheritdoc />
