@@ -41,6 +41,11 @@ namespace Bybit.Net.Enums.V5
         /// Blockchain confirmed
         /// </summary>
         [Map("BlockchainConfirmed")]
-        BlockchainConfirmed
+        BlockchainConfirmed,
+        /// <summary>
+        /// More information required
+        /// </summary>
+        [Map("MoreInformationRequired")]
+        MoreInformationRequired
     }
 }

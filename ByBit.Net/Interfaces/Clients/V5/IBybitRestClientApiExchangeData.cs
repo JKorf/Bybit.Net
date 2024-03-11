@@ -271,5 +271,17 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitLeverageTokenMarket>> GetLeverageTokenMarketAsync(string leverageToken, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get long/short ratio history
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/long-short-ratio" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="period">Data recording period</param>
+        /// <param name="limit">Limit for data size per page</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitLongShortRatio>>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, int? limit = null, CancellationToken ct = default);
     }
 }

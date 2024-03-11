@@ -474,7 +474,7 @@ namespace Bybit.Net.Clients.V5
         #region Set Disconnect Cancel All
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitBorrowQuota>> SetDisconnectCancelAllAsync(
+        public async Task<WebCallResult> SetDisconnectCancelAllAsync(
             int windowSeconds,
             CancellationToken ct = default)
         {
@@ -483,7 +483,7 @@ namespace Bybit.Net.Clients.V5
                 { "timeWindow", windowSeconds },
             };
 
-            return await _baseClient.SendRequestAsync<BybitBorrowQuota>(_baseClient.GetUrl("v5/order/disconnected-cancel-all"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/order/disconnected-cancel-all"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -552,6 +552,25 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Positions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> ConfirmRiskLimitAsync(
+            Category category,
+            string symbol,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "symbol", symbol }
+            };
+
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/position/confirm-pending-mmr"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Asset Exchange History
 
         /// <inheritdoc />
@@ -584,6 +603,8 @@ namespace Bybit.Net.Clients.V5
             Category category,
             string? symbol = null,
             DateTime? expiryDate = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
             int? limit = null,
             string? cursor = null,
             CancellationToken ct = default)
@@ -593,6 +614,8 @@ namespace Bybit.Net.Clients.V5
                 { "category", EnumConverter.GetString(category) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("expDate", DateTimeConverter.ConvertToMilliseconds(expiryDate));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
@@ -608,6 +631,8 @@ namespace Bybit.Net.Clients.V5
         public async Task<WebCallResult<BybitResponse<BybitSettlementRecord>>> GetSettlementHistoryAsync(
             Category category,
             string? symbol = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
             int? limit = null,
             string? cursor = null,
             CancellationToken ct = default)
@@ -617,6 +642,8 @@ namespace Bybit.Net.Clients.V5
                 { "category", EnumConverter.GetString(category) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 

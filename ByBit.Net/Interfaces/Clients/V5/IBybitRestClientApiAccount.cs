@@ -556,5 +556,23 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitBrokerAccountInfo>> GetBrokerAccountInfoAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Set spot hedging mode
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/set-spot-hedge" /></para>
+        /// </summary>
+        /// <param name="spotHedgingMode">Hedging mode on or not</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetSpotHedgingModeAsync(bool spotHedgingMode, CancellationToken ct = default);
+
+        /// <summary>
+        /// Manually repay the liabilities of Unified account
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/repay-liability" /></para>
+        /// </summary>
+        /// <param name="asset">Only repay this asset; if null repay all assets</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitLiabilityRepayment>>> RepayLiabilitiesAsync(string? asset = null, CancellationToken ct = default);
     }
 }

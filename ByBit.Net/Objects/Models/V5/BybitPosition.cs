@@ -123,6 +123,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("cumRealisedPnl")]
         public decimal? RealizedPnl { get; set; }
         /// <summary>
+        /// The realised PnL for the current holding position
+        /// </summary>
+        [JsonProperty("curRealisedPnl")]
+        public decimal? CurrentRealizedPnl { get; set; }
+        /// <summary>
         /// Auto deleverage rank indicator
         /// </summary>
         [JsonProperty("adlRankIndicator")]
@@ -171,5 +176,31 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("seq")]
         public long Sequence { get; set; }
+
+        /// <summary>
+        /// USDC contract session average price, it is the same figure as avg entry price shown in the web UI
+        /// </summary>
+        [JsonProperty("sessionAvgPrice")]
+        public decimal? SessionAveragePrice { get; set; }
+        /// <summary>
+        /// Delta, unique field for option
+        /// </summary>
+        [JsonProperty("delta")]
+        public decimal? Delta { get; set; }
+        /// <summary>
+        /// Gamma, unique field for option
+        /// </summary>
+        [JsonProperty("gamma")]
+        public decimal? Gamma { get; set; }
+        /// <summary>
+        /// Vega, unique field for option
+        /// </summary>
+        [JsonProperty("vega")]
+        public decimal? Vega { get; set; }
+        /// <summary>
+        /// Theta, unique field for option
+        /// </summary>
+        [JsonProperty("theta")]
+        public decimal? Theta { get; set; }
     }
 }

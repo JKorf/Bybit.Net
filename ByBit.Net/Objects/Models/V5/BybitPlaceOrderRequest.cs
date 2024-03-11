@@ -121,5 +121,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("marketUnit", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
         public MarketUnit? MarketUnit { get; set; }
+        /// <summary>
+        /// Close on trigger, can only reduce the position
+        /// </summary>
+        [JsonProperty("closeOnTrigger", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? CloseOnTrigger { get; set; }
     }
 }

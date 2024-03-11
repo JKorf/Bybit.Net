@@ -68,6 +68,11 @@ namespace Bybit.Net.Enums
         [Map("CURRENCY_BUY")]
         CurrencyBuy,
         /// <summary>
+        /// Currency sell
+        /// </summary>
+        [Map("CURRENCY_SELL")]
+        CurrencySell,
+        /// <summary>
         /// </summary>
         [Map("BORROWED_AMOUNT_INS_LOAN")]
         BorrowedAmountInsLoan,
@@ -134,6 +139,34 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// </summary>
         [Map("FIXED_STAKING_SUBSCRIPTION")]
-        FixedStakingSubscription
+        FixedStakingSubscription,
+        /// <summary>
+        /// </summary>
+        [Map("PREMARKET_TRANSFER_OUT")]
+        PreMarketTransferOut,
+        /// <summary>
+        /// </summary>
+        [Map("PREMARKET_DELIVERY_SELL_NEW_COIN")]
+        PreMarketDeliverySellNewAsset,
+        /// <summary>
+        /// </summary>
+        [Map("PREMARKET_DELIVERY_BUY_NEW_COIN")]
+        PreMarketDeliveryBuyNewAsset,
+        /// <summary>
+        /// </summary>
+        [Map("PREMARKET_DELIVERY_PLEDGE_PAY_SELLER")]
+        PreMarketDeliveryPledgePaySeller,
+        /// <summary>
+        /// </summary>
+        [Map("PREMARKET_DELIVERY_PLEDGE_BACK")]
+        PreMarketDeliveryPledgeBack,
+        /// <summary>
+        /// </summary>
+        [Map("PREMARKET_ROLLBACK_PLEDGE_BACK")]
+        PreMarketRollbackPledgeBack,
+        /// <summary>
+        /// </summary>
+        [Map("PREMARKET_ROLLBACK_PLEDGE_PENALTY_TO_BUYER")]
+        PreMarketRollbackPledgePenaltyToBuyer,
     }
 }

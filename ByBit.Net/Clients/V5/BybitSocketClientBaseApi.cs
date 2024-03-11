@@ -34,6 +34,7 @@ namespace Bybit.Net.Clients.V5
 
             UnhandledMessageExpected = true;
             KeepAliveInterval = TimeSpan.Zero;
+            HandleMessageBeforeConfirmation = true;
         }
 
         /// <inheritdoc />

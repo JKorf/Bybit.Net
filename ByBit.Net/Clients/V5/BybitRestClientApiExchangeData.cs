@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
@@ -435,6 +436,32 @@ namespace Bybit.Net.Clients.V5
 
             return await _baseClient.SendRequestAsync<BybitLeverageTokenMarket>(_baseClient.GetUrl("v5/spot-lever-token/reference"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
+
+        #endregion
+
+        #region Get Long Short Ratio
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitLongShortRatio>>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, int? limit = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddEnum("category", category);
+            parameters.AddEnum("period", period);
+            parameters.AddOptional("limit", limit);
+
+            var result = await _baseClient.SendRequestAsync<BybitList<BybitLongShortRatio>>(_baseClient.GetUrl("v5/market/account-ratio"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitLongShortRatio>>(default);
+
+            if (result.Data.List == null)
+                return result.As<IEnumerable<BybitLongShortRatio>>(Array.Empty<BybitLongShortRatio>());
+
+            return result.As(result.Data.List);
+        }
+
 
         #endregion
     }

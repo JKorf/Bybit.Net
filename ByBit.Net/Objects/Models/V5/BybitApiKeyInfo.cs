@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -91,6 +92,24 @@ namespace Bybit.Net.Objects.Models.V5
         /// Is master
         /// </summary>
         public bool IsMaster { get; set; }
+
+        /// <summary>
+        /// Parent Uid, 0 if main account
+        /// </summary>
+        [JsonProperty("parentUid")]
+        public string? ParentUid { get; set; }
+
+        /// <summary>
+        /// Parent Uid, 0 if main account
+        /// </summary>
+        [JsonProperty("kycLevel"), JsonConverter(typeof(EnumConverter))]
+        public KycLevel? KycLevel { get; set; }
+
+        /// <summary>
+        /// Parent Uid, 0 if main account
+        /// </summary>
+        [JsonProperty("kycRegion")]
+        public string? KycRegion { get; set; }
         /// <summary>
         /// Permissions
         /// </summary>

@@ -43,6 +43,11 @@ namespace Bybit.Net.Enums
         [Map("tpslOrder")]
         TpSlOrder,
         /// <summary>
+        /// Oco Order
+        /// </summary>
+        [Map("OcoOrder")]
+        OcoOrder,
+        /// <summary>
         /// MmRateClose (only from web)
         /// </summary>
         [Map("MmRateClose")]

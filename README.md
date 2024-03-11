@@ -23,22 +23,24 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 	dotnet add package Bybit.Net
 
 ## How to use
-* REST Endpoints
-	```csharp
-	// Get the ETH/USDT ticker via rest request
-	var restClient = new BybitRestClient();
-	var tickerResult = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
-	var lastPrice = tickerResult.Data.List.First().LastPrice;
-	```
-* Websocket streams
-	```csharp
-	// Subscribe to ETH/USDT ticker updates via the websocket API
-	var socketClient = new BybitSocketClient();
-	var tickerSubscriptionResult = socketClient.V5SpotApi.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) =>
-	{
-		var lastPrice = update.Data.LastPrice;
-	});
-	```
+*REST Endpoints*  
+
+```csharp
+// Get the ETH/USDT ticker via rest request
+var restClient = new BybitRestClient();
+var tickerResult = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var lastPrice = tickerResult.Data.List.First().LastPrice;
+```
+*Websocket streams*  
+
+```csharp
+// Subscribe to ETH/USDT ticker updates via the websocket API
+var socketClient = new BybitSocketClient();
+var tickerSubscriptionResult = socketClient.V5SpotApi.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) =>
+{
+	var lastPrice = update.Data.LastPrice;
+});
+```
 
 For information on the clients, dependency injection, response processing and more see the [documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Bybit.Net/tree/main/Examples) and [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
@@ -77,9 +79,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 |Asset|✓|`restClient.V5Api.Account`|
 |Spot Leverage Token|✓|`restClient.V5Api.ExchangeData` / `restClient.V5Api.Trading`|
 |Spot Margin Trade (UTA)|✓|`restClient.V5Api.Account`|
-|Spot Margin Trade (Classic)|X||
 |Institutional Loan|X||
-|C2C Lending|X||
 |Broken|✓|`restClient.V5Api.Account`|
 |Websocket Stream Public|✓|`socketClient.V5SpotApi` / `socketClient.V5LinearApi` / `socketClient.V5InverseApi` / `socketClient.V5OptionsApi`|
 |Websocket Stream Private|✓|`socketClient.V5PrivateApi`|
@@ -127,6 +127,21 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.6.1 - 11 Mar 2024
+    * Fixed V5Api websocket subscription missing initial snapshot updates
+
+* Version 3.6.0 - 11 Mar 2024
+    * Added V5Api.ExchangeData.GetLongShortRatioAsync endpoint
+    * Added V5Api.Trading.ConfirmRiskLimitAsync endpoint
+    * Added V5Api.Account.SetSpotHedgingModeAsync endpoint
+    * Added V5Api.Account.RepayLiabilitiesAsync endpoint
+    * Added TakeProfitStopLossMode parameter to V5Api.Trading.EditMultipleOrdersAsync endpoint
+    * Added CloseOnTrigger parameter to V5Api.Trading.PlaceMultipleOrdersAsync endpoint
+    * Added startTime/endTime parameters to V5Api.Trading.GetSettlementHistoryAsync and V5Api.Trading.GetDeliveryHistoryAsync endpoints
+    * Updated BybitApiKeyInfo, BybitBorrowHistory, BybitBorrowQuota, BybitBalance, BybitPosition model
+    * Updated StopOrderType, TradeType, TransactionLogType, WithdrawalStatus enum values
+    * Fixed incorrect response model V5Api.Trading.SetDisconnectCancelAllAsync endpoint
+
 * Version 3.5.2 - 28 Feb 2024
     * Fixed V5Api.Trading.GetPositionAsync model deserialization
 
