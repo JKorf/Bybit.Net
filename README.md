@@ -127,6 +127,18 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.6.0 - 11 Mar 2024
+    * Added V5Api.ExchangeData.GetLongShortRatioAsync endpoint
+    * Added V5Api.Trading.ConfirmRiskLimitAsync endpoint
+    * Added V5Api.Account.SetSpotHedgingModeAsync endpoint
+    * Added V5Api.Account.RepayLiabilitiesAsync endpoint
+    * Added TakeProfitStopLossMode parameter to V5Api.Trading.EditMultipleOrdersAsync endpoint
+    * Added CloseOnTrigger parameter to V5Api.Trading.PlaceMultipleOrdersAsync endpoint
+    * Added startTime/endTime parameters to V5Api.Trading.GetSettlementHistoryAsync and V5Api.Trading.GetDeliveryHistoryAsync endpoints
+    * Updated BybitApiKeyInfo, BybitBorrowHistory, BybitBorrowQuota, BybitBalance, BybitPosition model
+    * Updated StopOrderType, TradeType, TransactionLogType, WithdrawalStatus enum values
+    * Fixed incorrect response model V5Api.Trading.SetDisconnectCancelAllAsync endpoint
+
 * Version 3.5.2 - 28 Feb 2024
     * Fixed V5Api.Trading.GetPositionAsync model deserialization
 
