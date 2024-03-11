@@ -36,6 +36,16 @@ namespace Bybit.Net.Enums
         /// Delivery
         /// </summary>
         [Map("Delivery")]
-        Delivery
+        Delivery,
+        /// <summary>
+        /// Block trade
+        /// </summary>
+        [Map("BlockTrade")]
+        BlockTrade,
+        /// <summary>
+        /// Move position
+        /// </summary>
+        [Map("MovePosition")]
+        MovePosition
     }
 }
