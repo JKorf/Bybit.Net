@@ -79,9 +79,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 |Asset|✓|`restClient.V5Api.Account`|
 |Spot Leverage Token|✓|`restClient.V5Api.ExchangeData` / `restClient.V5Api.Trading`|
 |Spot Margin Trade (UTA)|✓|`restClient.V5Api.Account`|
-|Spot Margin Trade (Classic)|X||
 |Institutional Loan|X||
-|C2C Lending|X||
 |Broken|✓|`restClient.V5Api.Account`|
 |Websocket Stream Public|✓|`socketClient.V5SpotApi` / `socketClient.V5LinearApi` / `socketClient.V5InverseApi` / `socketClient.V5OptionsApi`|
 |Websocket Stream Private|✓|`socketClient.V5PrivateApi`|
