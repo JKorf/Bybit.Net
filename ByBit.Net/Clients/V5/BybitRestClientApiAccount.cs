@@ -11,6 +11,7 @@ using Bybit.Net.Enums.V5;
 using CryptoExchange.Net.Converters;
 using System.Globalization;
 using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Objects.Internal;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -982,6 +983,25 @@ namespace Bybit.Net.Clients.V5
             };
 
             return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/account/set-hedging-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Repay Liabilities
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitLiabilityRepayment>>> RepayLiabilitiesAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("coin", asset);
+            var result = await _baseClient.SendRequestAsync<BybitList<BybitLiabilityRepayment>>(_baseClient.GetUrl("v5/account/quick-repayment"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result || result.Data == null)
+                return result.As<IEnumerable<BybitLiabilityRepayment>>(default);
+
+            if (result.Data.List == null)
+                return result.As<IEnumerable<BybitLiabilityRepayment>>(Array.Empty<BybitLiabilityRepayment>());
+
+            return result.As(result.Data.List);
         }
 
         #endregion
