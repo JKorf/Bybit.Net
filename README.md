@@ -127,6 +127,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.6.1 - 11 Mar 2024
+    * Fixed V5Api websocket subscription missing initial snapshot updates
+
 * Version 3.6.0 - 11 Mar 2024
     * Added V5Api.ExchangeData.GetLongShortRatioAsync endpoint
     * Added V5Api.Trading.ConfirmRiskLimitAsync endpoint
