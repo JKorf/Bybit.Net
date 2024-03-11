@@ -970,5 +970,20 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Set Spot Hedging Mode
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> SetSpotHedgingModeAsync(bool spotHedgingMode, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "setHedgingMode", spotHedgingMode ? "ON" : "OFF" }
+            };
+
+            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/account/set-hedging-mode"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

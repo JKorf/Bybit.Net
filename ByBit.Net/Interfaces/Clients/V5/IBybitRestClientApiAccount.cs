@@ -556,5 +556,14 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitBrokerAccountInfo>> GetBrokerAccountInfoAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Set spot hedging mode
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/set-spot-hedge" /></para>
+        /// </summary>
+        /// <param name="spotHedgingMode">Hedging mode on or not</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetSpotHedgingModeAsync(bool spotHedgingMode, CancellationToken ct = default);
     }
 }
