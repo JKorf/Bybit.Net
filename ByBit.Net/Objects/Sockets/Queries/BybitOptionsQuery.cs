@@ -17,12 +17,12 @@ namespace Bybit.Net.Objects.Sockets.Queries
             ListenerIdentifiers = new HashSet<string>() { "resp" + string.Join("-", args.OrderBy(a => a)) };
         }
 
-        public override Task<CallResult<BybitOptionsQueryResponse>> HandleMessageAsync(SocketConnection connection, DataEvent<BybitOptionsQueryResponse> message)
+        public override CallResult<BybitOptionsQueryResponse> HandleMessage(SocketConnection connection, DataEvent<BybitOptionsQueryResponse> message)
         {
             if (!message.Data.Success)
-                return Task.FromResult(new CallResult<BybitOptionsQueryResponse>(new ServerError(message.Data.Message)));
+                return new CallResult<BybitOptionsQueryResponse>(new ServerError(message.Data.Message));
 
-            return Task.FromResult(new CallResult<BybitOptionsQueryResponse>(message.Data));
+            return new CallResult<BybitOptionsQueryResponse>(message.Data);
         }
     }
 }
