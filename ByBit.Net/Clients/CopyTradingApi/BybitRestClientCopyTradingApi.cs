@@ -52,7 +52,7 @@ namespace Bybit.Net.Clients.CopyTradingApi
             ExchangeData = new BybitRestClientCopyTradingApiExchangeData(this);
             Trading = new BybitRestClientCopyTradingApiTrading(this);
 
-            requestBodyFormat = RequestBodyFormat.FormData;
+            RequestBodyFormat = RequestBodyFormat.FormData;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion

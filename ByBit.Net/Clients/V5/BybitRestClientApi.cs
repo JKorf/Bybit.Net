@@ -66,7 +66,7 @@ namespace Bybit.Net.Clients.V5
             Trading = new BybitRestClientApiTrading(this);
             SubAccount = new BybitRestClientApiSubAccounts(this);
 
-            requestBodyFormat = RequestBodyFormat.Json;
+            RequestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion

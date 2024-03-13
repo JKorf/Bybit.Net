@@ -59,7 +59,7 @@ namespace Bybit.Net.Clients.DerivativesApi
             ContractApi = new BybitRestClientContractApi(this);
             UnifiedMarginApi = new BybitRestClientUnifiedMarginApi(this);
 
-            requestBodyFormat = RequestBodyFormat.FormData;
+            RequestBodyFormat = RequestBodyFormat.FormData;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion

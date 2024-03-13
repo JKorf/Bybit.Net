@@ -50,7 +50,7 @@ namespace Bybit.Net.Clients.SpotApi
         internal BybitRestClientBaseSpotApi(ILogger logger, HttpClient? httpClient, string baseAddress, BybitRestOptions options, RestApiOptions apiOptions)
             : base(logger, httpClient, baseAddress, options, apiOptions)
         {
-            requestBodyFormat = RequestBodyFormat.FormData;
+            RequestBodyFormat = RequestBodyFormat.FormData;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
