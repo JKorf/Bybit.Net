@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using Bybit.Net.Clients.CopyTradingApi;
-using CryptoExchange.Net.Converters;
 using System.Globalization;
 using Bybit.Net.Clients.V5;
 using System.Text;
@@ -23,7 +22,7 @@ namespace Bybit.Net
         {
         }
 
-        public override void AuthenticateRequest(RestApiClient apiClient, Uri uri, HttpMethod method, Dictionary<string, object> providedParameters, bool auth, ArrayParametersSerialization arraySerialization, HttpMethodParameterPosition parameterPosition, out SortedDictionary<string, object> uriParameters, out SortedDictionary<string, object> bodyParameters, out Dictionary<string, string> headers)
+        public override void AuthenticateRequest(RestApiClient apiClient, Uri uri, HttpMethod method, Dictionary<string, object> providedParameters, bool auth, ArrayParametersSerialization arraySerialization, HttpMethodParameterPosition parameterPosition, RequestBodyFormat bodyFormat, out SortedDictionary<string, object> uriParameters, out SortedDictionary<string, object> bodyParameters, out Dictionary<string, string> headers)
         {
             uriParameters = parameterPosition == HttpMethodParameterPosition.InUri ? new SortedDictionary<string, object>(providedParameters, new BybitComparer()) : new SortedDictionary<string, object>();
             bodyParameters = parameterPosition == HttpMethodParameterPosition.InBody ? new SortedDictionary<string, object>(providedParameters, new BybitComparer()) : new SortedDictionary<string, object>();
@@ -36,7 +35,7 @@ namespace Bybit.Net
             var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
             if (apiClient is BybitRestClientCopyTradingApi || apiClient is BybitRestClientApi)
             {
-                var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : apiClient.RequestBodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : JsonConvert.SerializeObject(parameters);
+                var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : bodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : JsonConvert.SerializeObject(parameters);
                 var key = _credentials.Key!.GetString();
                 var recvWindow = ((BybitRestOptions)apiClient.ClientOptions).ReceiveWindow.TotalMilliseconds;
                 var payload = timestamp + key + recvWindow + signPayload;
