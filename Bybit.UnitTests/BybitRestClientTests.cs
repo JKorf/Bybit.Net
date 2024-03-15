@@ -2,6 +2,7 @@
 using Bybit.Net.Objects.Internal;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +30,10 @@ namespace Bybit.UnitTests
             var result = await client.V5Api.ExchangeData.GetSpotSymbolsAsync();
 
             // assert
-            Assert.IsFalse(result.Success);
-            Assert.IsNotNull(result.Error);
-            Assert.IsTrue(result.Error!.Code == 400001);
-            Assert.IsTrue(result.Error.Message == "Error occured");
+            ClassicAssert.IsFalse(result.Success);
+            ClassicAssert.IsNotNull(result.Error);
+            Assert.That(result.Error!.Code == 400001);
+            Assert.That(result.Error.Message == "Error occured");
         }
 
         [TestCase()]
@@ -46,8 +47,8 @@ namespace Bybit.UnitTests
             var result = await client.V5Api.ExchangeData.GetSpotSymbolsAsync();
 
             // assert
-            Assert.IsFalse(result.Success);
-            Assert.IsNotNull(result.Error);
+            ClassicAssert.IsFalse(result.Success);
+            ClassicAssert.IsNotNull(result.Error);
         }
 
         [TestCase()]
@@ -67,10 +68,10 @@ namespace Bybit.UnitTests
             var result = await client.V5Api.ExchangeData.GetSpotSymbolsAsync();
 
             // assert
-            Assert.IsFalse(result.Success);
-            Assert.IsNotNull(result.Error);
-            Assert.IsTrue(result.Error!.Code == 400001);
-            Assert.IsTrue(result.Error.Message == "Error occured");
+            ClassicAssert.IsFalse(result.Success);
+            ClassicAssert.IsNotNull(result.Error);
+            Assert.That(result.Error!.Code == 400001);
+            Assert.That(result.Error.Message == "Error occured");
         }
     }
 }
