@@ -69,19 +69,6 @@ namespace Bybit.Net.Clients.SpotApi
             return new Uri(BaseAddress.AppendPath(endpoint));
         }
 
-        ///// <inheritdoc />
-        //protected override Task<ServerError?> TryParseErrorAsync(JToken data)
-        //{
-        //    var responseCode = data["ret_code"];
-        //    if (responseCode != null && responseCode.ToString() != "0")
-        //    {
-        //        var errorMessage = data["ret_msg"];
-        //        return Task.FromResult(new ServerError(responseCode.Value<int>(), errorMessage!.ToString()))!;
-        //    }
-
-        //    return Task.FromResult<ServerError?>(null);
-        //}
-
         internal async Task<WebCallResult<T>> SendRequestAsync<T>(
              Uri uri,
              HttpMethod method,
