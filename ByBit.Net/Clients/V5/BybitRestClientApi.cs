@@ -14,6 +14,9 @@ using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.CommonObjects;
 using System.Linq;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Interfaces;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -58,14 +61,12 @@ namespace Bybit.Net.Clients.V5
                 { "Referer", !string.IsNullOrEmpty(options.Referer) ? options.Referer! : _referer }
             };
 
-            manualParseError = true;
-
             Account = new BybitRestClientApiAccount(this);
             ExchangeData = new BybitRestClientApiExchangeData(this);
             Trading = new BybitRestClientApiTrading(this);
             SubAccount = new BybitRestClientApiSubAccounts(this);
 
-            requestBodyFormat = RequestBodyFormat.Json;
+            RequestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
@@ -107,10 +108,9 @@ namespace Bybit.Net.Clients.V5
              HttpMethod method,
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null)
+             bool signed = false)
         {
-            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
         }
 
         internal async Task<WebCallResult<T>> SendRequestAsync<T>(
@@ -118,10 +118,9 @@ namespace Bybit.Net.Clients.V5
              HttpMethod method,
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null)
+             bool signed = false)
         {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
@@ -136,10 +135,9 @@ namespace Bybit.Net.Clients.V5
              HttpMethod method,
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
-             bool signed = false,
-             JsonSerializer? deserializer = null)
+             bool signed = false)
         {
-            var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
             if (!result)
                 return result.AsDataless();
 
@@ -147,6 +145,23 @@ namespace Bybit.Net.Clients.V5
                 return result.AsDatalessError(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             return result.AsDataless();
+        }
+
+        /// <inheritdoc />
+        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        {
+            if (!accessor.IsJson)
+                return new ServerError(accessor.GetOriginalString());
+
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("retMsg"));
+            if (msg == null)
+                return new ServerError(accessor.GetOriginalString());
+
+            if (code == null)
+                return new ServerError(msg);
+
+            return new ServerError(code.Value, msg);
         }
 
         internal void InvokeOrderPlaced(OrderId id)

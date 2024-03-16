@@ -7,6 +7,7 @@ using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -58,7 +59,7 @@ namespace Bybit.Net.Clients.DerivativesApi
             ContractApi = new BybitRestClientContractApi(this);
             UnifiedMarginApi = new BybitRestClientUnifiedMarginApi(this);
 
-            requestBodyFormat = RequestBodyFormat.FormData;
+            RequestBodyFormat = RequestBodyFormat.FormData;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
@@ -83,10 +84,9 @@ namespace Bybit.Net.Clients.DerivativesApi
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
              bool signed = false,
-             JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false) where T : class
         {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<BybitResult<T>>(default);
 
@@ -102,10 +102,9 @@ namespace Bybit.Net.Clients.DerivativesApi
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
              bool signed = false,
-             JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false)
         {
-            var result = await base.SendRequestAsync<BybitCopyTradingResult<BybitList<T>>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitCopyTradingResult<BybitList<T>>>(uri, method, cancellationToken, parameters, signed, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<T>>(default);
 
@@ -121,10 +120,9 @@ namespace Bybit.Net.Clients.DerivativesApi
              CancellationToken cancellationToken,
              Dictionary<string, object>? parameters = null,
              bool signed = false,
-             JsonSerializer? deserializer = null,
              bool ignoreRatelimit = false)
         {
-            var result = await base.SendRequestAsync<BybitCopyTradingResult<T>>(uri, method, cancellationToken, parameters, signed, deserializer: deserializer, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitCopyTradingResult<T>>(uri, method, cancellationToken, parameters, signed, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 

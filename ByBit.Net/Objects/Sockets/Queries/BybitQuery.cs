@@ -17,12 +17,12 @@ namespace Bybit.Net.Objects.Sockets.Queries
             ListenerIdentifiers = new HashSet<string>() { ((BybitRequestMessage)Request).RequestId };
         }
 
-        public override Task<CallResult<BybitQueryResponse>> HandleMessageAsync(SocketConnection connection, DataEvent<BybitQueryResponse> message)
+        public override CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DataEvent<BybitQueryResponse> message)
         {
             if (!message.Data.Success)
-                return Task.FromResult(new CallResult<BybitQueryResponse>(new ServerError(message.Data.Message)));
+                return new CallResult<BybitQueryResponse>(new ServerError(message.Data.Message));
 
-            return Task.FromResult(new CallResult<BybitQueryResponse>(message.Data));
+            return new CallResult<BybitQueryResponse>(message.Data);
         }
     }
 }

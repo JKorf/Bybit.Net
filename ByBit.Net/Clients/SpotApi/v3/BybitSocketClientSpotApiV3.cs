@@ -13,11 +13,12 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Authentication;
 using Bybit.Net.Objects.Sockets.Queries;
-using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
-using CryptoExchange.Net.Sockets.MessageParsing;
 using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Clients;
 
 namespace Bybit.Net.Clients.SpotApi.v3
 {

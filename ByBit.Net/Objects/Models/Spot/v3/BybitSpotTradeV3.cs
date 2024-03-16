@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-using DateTimeConverter = CryptoExchange.Net.Converters.DateTimeConverter;
-
 namespace Bybit.Net.Objects.Models.Spot.v3
 {
     /// <summary>
