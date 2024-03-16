@@ -2,7 +2,7 @@
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bybit.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
  
-Bybit.Net is a client library for accessing the [Bybit REST and Websocket API](https://bybit-exchange.github.io/docs/spot/#t-introduction). All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.
+Bybit.Net is a strongly typed client library for accessing the [Bybit REST and Websocket API](https://bybit-exchange.github.io/docs/spot/#t-introduction). All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.
 
 ## Supported Frameworks
 The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility
@@ -129,7 +129,6 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 ## Release notes
 * Version 3.7.0 - 16 Mar 2024
     * Updated CryptoExchange.Net to 7.1.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-    * Updated unit test package dependencies and updated tests accordingly
 	
 * Version 3.6.1 - 11 Mar 2024
     * Fixed V5Api websocket subscription missing initial snapshot updates
