@@ -46,8 +46,8 @@ namespace Bybit.Net.SymbolOrderBooks
         public BybitSymbolOrderBook(string symbol,
             Category category,
             Action<BybitOrderBookOptions>? optionsDelegate,
-            ILogger<BybitSymbolOrderBook>? logger,
-            IBybitSocketClient? socketClient) : base(logger, "Bybit", symbol)
+            ILoggerFactory? logger,
+            IBybitSocketClient? socketClient) : base(logger, "Bybit", "V5", symbol)
         {
             var options = BybitOrderBookOptions.Default.Copy();
             if (optionsDelegate != null)

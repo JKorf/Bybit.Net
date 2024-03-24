@@ -28,7 +28,7 @@ namespace Bybit.Net.SymbolOrderBooks
             => new BybitSymbolOrderBook(symbol,
                                         Enums.Category.Spot,
                                         options,
-                                        _serviceProvider.GetRequiredService<ILogger<BybitSymbolOrderBook>>(),
+                                        _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                         _serviceProvider.GetRequiredService<IBybitSocketClient>());
 
         /// <inheritdoc />
@@ -36,7 +36,7 @@ namespace Bybit.Net.SymbolOrderBooks
             => new BybitSymbolOrderBook(symbol,
                                         Enums.Category.Option,
                                         options,
-                                        _serviceProvider.GetRequiredService<ILogger<BybitSymbolOrderBook>>(),
+                                        _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                         _serviceProvider.GetRequiredService<IBybitSocketClient>());
 
         /// <inheritdoc />
@@ -44,7 +44,7 @@ namespace Bybit.Net.SymbolOrderBooks
             => new BybitSymbolOrderBook(symbol,
                                         Enums.Category.Linear,
                                         options,
-                                        _serviceProvider.GetRequiredService<ILogger<BybitSymbolOrderBook>>(),
+                                        _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                         _serviceProvider.GetRequiredService<IBybitSocketClient>());
 
         /// <inheritdoc />
@@ -52,7 +52,7 @@ namespace Bybit.Net.SymbolOrderBooks
             => new BybitSymbolOrderBook(symbol,
                                         category,
                                         options,
-                                        _serviceProvider.GetRequiredService<ILogger<BybitSymbolOrderBook>>(),
+                                        _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                         _serviceProvider.GetRequiredService<IBybitSocketClient>());
     }
 }
