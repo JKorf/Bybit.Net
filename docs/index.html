@@ -268,13 +268,13 @@ var result = await bybitClient.V5Api.Trading.CancelOrderAsync(Bybit.Net.Enums.Ca
 var result = await bybitClient.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(Bybit.Net.Enums.Category.Linear);</code></pre>
 		  
 		  <b id="idocs_example_symbols">Get Symbol Ticker</b><br />
-		  <p>Get the 24h price ticker of a spot symbol</p>
+		  <p>Get the 24h price ticker of a futures symbol</p>
 		  <pre><code>var bybitClient = new BybitRestClient();
 
 var result = await bybitClient.V5Api.ExchangeData.GetLinearInverseTickersAsync(Bybit.Net.Enums.Category.Linear, "ETHUSDT");</code></pre>
 
 		  <b id="idocs_example_symbols">Get Recent Trades</b><br />
-		  <p>Get the most recent trades for a spot symbol</p>
+		  <p>Get the most recent trades for a futures symbol</p>
 		  <pre><code>var bybitClient = new BybitRestClient();
 
 var result = await bybitClient.V5Api.ExchangeData.GetTradeHistoryAsync(Bybit.Net.Enums.Category.Linear, "ETHUSDT");</code></pre>
