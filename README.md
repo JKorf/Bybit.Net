@@ -42,7 +42,7 @@ var tickerSubscriptionResult = socketClient.V5SpotApi.SubscribeToTickerUpdatesAs
 });
 ```
 
-For information on the clients, dependency injection, response processing and more see the [documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Bybit.Net/tree/main/Examples) and [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
+For information on the clients, dependency injection, response processing and more see the [Bybit.Net documentation](https://jkorf.github.io/Bybit.Net), [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Bybit.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
 ## CryptoExchange.Net
 Bybit.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
