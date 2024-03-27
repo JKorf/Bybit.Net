@@ -48,8 +48,11 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
         public override string? GetListenerIdentifier(IMessageAccessor message)
         {
             var type = message.GetValue<string>(_typePath);
-            if (type == "COMMAND_RESP" || type == "AUTH_RESP")
+            if (string.Equals(type, "COMMAND_RESP", StringComparison.Ordinal)
+                || string.Equals(type, "AUTH_RESP", StringComparison.Ordinal))
+            {
                 return type;
+            }
 
             return message.GetValue<string>(_opPath);
         }

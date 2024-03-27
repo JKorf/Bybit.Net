@@ -2,6 +2,7 @@
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
 
         public BybitUnifiedQuery(string op, params object[] args) : base(new BybitRequestMessage { RequestId = ExchangeHelpers.NextId().ToString(), Operation = op, Args = args?.ToList() }, false, 1)
         {
-            if (op == "auth")
+            if (string.Equals(op, "auth", StringComparison.Ordinal))
                 ListenerIdentifiers = new HashSet<string>() { "AUTH_RESP" };
             else
                 ListenerIdentifiers = new HashSet<string>() { "COMMAND_RESP" };

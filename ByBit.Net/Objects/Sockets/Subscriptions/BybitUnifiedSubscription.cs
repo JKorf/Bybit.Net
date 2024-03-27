@@ -26,7 +26,7 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
         public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
             var data = (BybitSpotSocketEvent<T>)message.Data;
-            _handler?.Invoke(message.As(data.Data, data.Topic, data.Type == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
+            _handler?.Invoke(message.As(data.Data, data.Topic, string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
             return new CallResult(null);
         }
 

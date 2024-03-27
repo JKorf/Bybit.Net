@@ -74,9 +74,9 @@ namespace Bybit.Net
     {
         public int Compare(string x, string y)
         {
-            if (x == "sign")
+            if (string.Equals(x, "sign", StringComparison.Ordinal))
                 return 1;
-            if (y == "sign")
+            if (string.Equals(y, "sign", StringComparison.Ordinal))
                 return -1;
 
             return x.CompareTo(y);

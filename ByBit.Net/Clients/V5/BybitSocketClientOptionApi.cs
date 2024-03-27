@@ -36,7 +36,7 @@ namespace Bybit.Net.Clients.V5
         public override string? GetListenerIdentifier(IMessageAccessor message)
         {
             var type = message.GetValue<string>(_typePath);
-            if (type == "COMMAND_RESP")
+            if (string.Equals(type, "COMMAND_RESP", StringComparison.Ordinal))
             {
                 var success = message.GetValues<string>(_successPath);
                 if (success == null)
@@ -47,7 +47,7 @@ namespace Bybit.Net.Clients.V5
             }
 
             var op = message.GetValue<string>(_opPath);
-            if (op == "pong")
+            if (string.Equals(op, "pong", StringComparison.Ordinal))
                 return "pong";
 
             return message.GetValue<string>(_topicPath);
