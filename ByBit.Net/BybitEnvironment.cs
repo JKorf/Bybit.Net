@@ -43,6 +43,22 @@ namespace Bybit.Net
                                      BybitApiAddresses.TestNet.SocketBaseAddress);
 
         /// <summary>
+        /// Live environment for users from The Netherlands
+        /// </summary>
+        public static BybitEnvironment Netherlands { get; }
+            = new BybitEnvironment(TradeEnvironmentNames.Live,
+                                     BybitApiAddresses.Netherlands.RestBaseAddress,
+                                     BybitApiAddresses.Netherlands.SocketBaseAddress);
+
+        /// <summary>
+        /// Live environment for users from HongKong
+        /// </summary>
+        public static BybitEnvironment HongKong { get; }
+            = new BybitEnvironment(TradeEnvironmentNames.Live,
+                                     BybitApiAddresses.HongKong.RestBaseAddress,
+                                     BybitApiAddresses.HongKong.SocketBaseAddress);
+
+        /// <summary>
         /// Create a custom environment
         /// </summary>
         /// <param name="name"></param>
