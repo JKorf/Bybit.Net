@@ -419,6 +419,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<BybitSetMarginModeResult>> SetMarginModeAsync(MarginMode marginMode, CancellationToken ct = default);
 
         /// <summary>
+        /// DEPRECATED, SEE https://announcements.bybit.com/en/article/risk-limit-update-transitioning-from-manual-to-auto-adjustment-bltf0fa535064561d9d/
         /// Set the risk limit
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/position/set-risk-limit" /></para>
         /// </summary>
