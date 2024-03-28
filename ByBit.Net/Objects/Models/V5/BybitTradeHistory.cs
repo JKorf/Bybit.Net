@@ -43,5 +43,25 @@ namespace Bybit.Net.Objects.Models.V5
         /// 
         /// </summary>
         public bool IsBlockTrade { get; set; }
+        /// <summary>
+        /// [Option only] Mark price
+        /// </summary>
+        [JsonProperty("mP")]
+        public decimal? MarkPrice { get; set; }
+        /// <summary>
+        /// [Option only] Index price
+        /// </summary>
+        [JsonProperty("iP")]
+        public decimal? IndexPrice { get; set; }
+        /// <summary>
+        /// [Option only] Mark iv
+        /// </summary>
+        [JsonProperty("mIv")]
+        public decimal? MarkIv { get; set; }
+        /// <summary>
+        /// [Option only] Index iv
+        /// </summary>
+        [JsonProperty("iv")]
+        public decimal? IndexIv { get; set; }
     }
 }
