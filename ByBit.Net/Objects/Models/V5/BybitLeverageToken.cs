@@ -75,12 +75,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// Funding fee charged daily for users holding leveraged token
         /// </summary>
         [JsonProperty("fundFee")]
-        public decimal FundingFee { get; set; }
+        public decimal? FundingFee { get; set; }
         /// <summary>
         /// The time to charge funding fee
         /// </summary>
         [JsonProperty("fundFeeTime"), JsonConverter(typeof(DateTimeConverter))]
-        public DateTime FundingFeeTime { get; set; }
+        public DateTime? FundingFeeTime { get; set; }
         /// <summary>
         /// Management fee rate
         /// </summary>
@@ -97,10 +97,10 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("value")]
         public decimal Value { get; set; }
         /// <summary>
-        /// 	Net value
+        /// Net value
         /// </summary>
         [JsonProperty("netValue")]
-        public decimal NetValue { get; set; }
+        public decimal? NetValue { get; set; }
         /// <summary>
         /// Total purchase upper limit
         /// </summary>
