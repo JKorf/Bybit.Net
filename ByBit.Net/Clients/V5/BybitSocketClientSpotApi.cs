@@ -87,5 +87,17 @@ namespace Bybit.Net.Clients.V5
             var subscription = new BybitSubscription<BybitLeveragedTokenNav>(_logger, symbols.Select(x => $"lt.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitTrade>>> handler, CancellationToken ct = default)
+            => SubscribeToTradeUpdatesAsync(new string[] { symbol }, handler, ct);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitTrade>>> handler, CancellationToken ct = default)
+        {
+            var subscription = new BybitSubscription<IEnumerable<BybitTrade>>(_logger, symbols.Select(s => $"publicTrade.{s}").ToArray(), handler);
+            return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
+        }
+
     }
 }
