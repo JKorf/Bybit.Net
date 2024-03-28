@@ -129,6 +129,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.8.0 - 28 Mar 2024
+    * Added HongKong and The Netherlands environments and API addresses
+    * Added PublishTime to V5Api.ExchangeData.GetAnnouncementsAsync model
+    * Updated websocket V5OptionsApi.SubscribeToTradeUpdatesAsync and rest V5Api.ExchangeData.GetTradeHistoryAsync models
+    * Marked V5Api.Account.SetRiskLimitAsync as deprecated
+    * Fixed V5Api.ExchangeData.GetLeverageTokensAsync deserialization issue
+    * Fixed V5Api options websocket subscriptions
+
 * Version 3.7.1 - 24 Mar 2024
 	* Updated CryptoExchange.Net to 7.2.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
 
