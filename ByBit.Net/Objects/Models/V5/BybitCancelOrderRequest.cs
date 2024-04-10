@@ -14,10 +14,15 @@ namespace Bybit.Net.Objects.Models.V5
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// The order id to cancel
+        /// The order id to cancel, either this or ClientOrderId should be provided
         /// </summary>
-        [JsonProperty("orderId")]
-        public string OrderId { get; set; } = string.Empty;
+        [JsonProperty("orderId", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string? OrderId { get; set; }
+        /// <summary>
+        /// The client order id to cancel, either this or OrderId should be provided
+        /// </summary>
+        [JsonProperty("orderLinkId", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string? ClientOrderId { get; set; }
 
     }
 }
