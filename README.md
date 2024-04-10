@@ -129,6 +129,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.8.1 - 10 Apr 2024
+    * Added ClientOrderId to BybitCancelOrderRequest model
+    * Changed Quantity property in BybitEditOrderRequest model to be nullable
+
 * Version 3.8.0 - 28 Mar 2024
     * Added HongKong and The Netherlands environments and API addresses
     * Added PublishTime to V5Api.ExchangeData.GetAnnouncementsAsync model
