@@ -77,7 +77,7 @@ namespace Bybit.Net.Clients.SpotApi
              bool signed = false,
              bool ignoreRatelimit = false)
         {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
