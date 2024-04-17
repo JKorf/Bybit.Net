@@ -141,6 +141,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("maxMktOrderQty")]
         public decimal MaxMarketOrderQuantity { get; set; }
+        /// <summary>
+        /// Minimal notional value of an order
+        /// </summary>
+        [JsonProperty("minNotionalValue")]
+        public decimal MinNotionalValue { get; set; }
     }
 
     /// <summary>
