@@ -15,7 +15,7 @@ namespace Bybit.Net.UnitTests
         private JsonToObjectComparer<BybitRestClient> _comparer = new JsonToObjectComparer<BybitRestClient>((json) => TestHelpers.CreateResponseClient(json, x =>
         {
             x.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123");
-            x.RatelimiterEnabled = false;
+            x.RateLimiterEnabled = false;
             x.SpotOptions.OutputOriginalData = true;
             x.DerivativesOptions.OutputOriginalData = true;
             x.V5Options.OutputOriginalData = true;
