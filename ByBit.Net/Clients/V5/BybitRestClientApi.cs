@@ -110,7 +110,7 @@ namespace Bybit.Net.Clients.V5
              Dictionary<string, object>? parameters = null,
              bool signed = false)
         {
-            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
+            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
         }
 
         internal async Task<WebCallResult<T>> SendRequestAsync<T>(
@@ -120,7 +120,7 @@ namespace Bybit.Net.Clients.V5
              Dictionary<string, object>? parameters = null,
              bool signed = false)
         {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
@@ -137,7 +137,7 @@ namespace Bybit.Net.Clients.V5
              Dictionary<string, object>? parameters = null,
              bool signed = false)
         {
-            var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed).ConfigureAwait(false);
+            var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
             if (!result)
                 return result.AsDataless();
 

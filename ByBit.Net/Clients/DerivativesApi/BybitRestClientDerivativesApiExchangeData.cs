@@ -253,7 +253,7 @@ namespace Bybit.Net.Clients.DerivativesApi
         /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.SendRequestWrapperAsync<BybitDerivativesServerTime>(_baseClient.GetUrl("/v3/public/time"), HttpMethod.Get, ct, null, ignoreRatelimit: true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestWrapperAsync<BybitDerivativesServerTime>(_baseClient.GetUrl("/v3/public/time"), HttpMethod.Get, ct, null).ConfigureAwait(false);
             if (!result)
                 return result.As<DateTime>(default);
 
