@@ -129,6 +129,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.8.2 - 18 Apr 2024
+    * Updated CryptoExchange.Net to 7.3.1, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+    * Added MinNotionalValue to V5Api.ExchangeData.GetLinearInverseSymbolsAsync response model
+    * Changed BestBid and BestAsk properties to be nullable in BybitLinearInverseTicker model
+
 * Version 3.8.1 - 10 Apr 2024
     * Added ClientOrderId to BybitCancelOrderRequest model
     * Changed Quantity property in BybitEditOrderRequest model to be nullable
