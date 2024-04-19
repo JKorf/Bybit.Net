@@ -59,13 +59,21 @@ namespace Bybit.Net
                                      BybitApiAddresses.HongKong.SocketBaseAddress);
 
         /// <summary>
+        /// Demo trading environment, needs seperate API key. See https://bybit-exchange.github.io/docs/v5/demo
+        /// </summary>
+        public static BybitEnvironment DemoTrading { get; }
+            = new BybitEnvironment(TradeEnvironmentNames.Live,
+                                     BybitApiAddresses.DemoTrading.RestBaseAddress,
+                                     BybitApiAddresses.DemoTrading.SocketBaseAddress);
+
+        /// <summary>
         /// Create a custom environment
         /// </summary>
         /// <param name="name"></param>
         /// <param name="restAddress"></param>
         /// <param name="socketAddress"></param>
         /// <returns></returns>
-        public static TradeEnvironment CreateCustom(
+        public static BybitEnvironment CreateCustom(
                         string name,
                         string restAddress,
                         string socketAddress)

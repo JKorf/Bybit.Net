@@ -49,5 +49,14 @@
             RestBaseAddress = "https://api.bybit.com.hk",
             SocketBaseAddress = "wss://stream.bybit.com" // As per Telegram support, normal address should be used for websockets
         };
+
+        /// <summary>
+        /// The addresses to connect to the Bybit demo trading environment
+        /// </summary>
+        public static BybitApiAddresses DemoTrading = new BybitApiAddresses
+        {
+            RestBaseAddress = "https://api-demo.bybit.com",
+            SocketBaseAddress = "wss://stream-demo.bybit.com"
+        };
     }
 }
