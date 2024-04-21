@@ -49,7 +49,7 @@ namespace Bybit.Net.Clients.V5
         public async Task<WebCallResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
             // V5 doesn't have it's own server time endpoint (yet)
-            return await _baseClient.SendRequestAsync<BybitTime>(_baseClient.GetUrl("v3/public/time"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitTime>(_baseClient.GetUrl("v5/market/time"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
 
         #endregion
