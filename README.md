@@ -129,6 +129,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.8.3 - 23 Apr 2024
+    * Updated V5Api.ExchangeData.GetServerTimeAsync to V5 endpoint
+    * Fixed typo in InternalDepositStatus enum value
+    * Updated CryptoExchange.Net to 7.3.3, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+
 * Version 3.8.2 - 18 Apr 2024
     * Updated CryptoExchange.Net to 7.3.1, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
     * Added MinNotionalValue to V5Api.ExchangeData.GetLinearInverseSymbolsAsync response model
