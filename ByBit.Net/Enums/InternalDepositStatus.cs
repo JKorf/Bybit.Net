@@ -16,7 +16,7 @@ namespace Bybit.Net.Enums
         /// Success
         /// </summary>
         [Map("2")]
-        Succes,
+        Success,
         /// <summary>
         /// Failed
         /// </summary>
