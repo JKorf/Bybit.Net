@@ -75,6 +75,9 @@ namespace Bybit.Net.Clients.V5
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
 
+        /// <inheritdoc />
+        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
         /// <summary>
         /// Get url for an endpoint
         /// </summary>
@@ -102,6 +105,18 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public override TimeSpan? GetTimeOffset()
             => _timeSyncState.TimeOffset;
+
+        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
+        {
+            var result = await base.SendAsync<BybitResult<object>>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            if (!result)
+                return result.AsDataless();
+
+            if (result.Data.ReturnCode != 0)
+                return result.AsDatalessError(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+
+            return result.AsDataless();
+        }
 
         internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRequestFullResponseAsync<T,U>(
              Uri uri,
