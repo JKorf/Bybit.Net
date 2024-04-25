@@ -12,12 +12,15 @@ using CryptoExchange.Net.Converters;
 using System.Globalization;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Internal;
+using System.Linq;
 
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc />
     public class BybitRestClientApiAccount : IBybitRestClientApiAccount
     {
+        private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
+
         private BybitRestClientApi _baseClient;
 
         internal BybitRestClientApiAccount(BybitRestClientApi baseClient)
@@ -1002,6 +1005,20 @@ namespace Bybit.Net.Clients.V5
                 return result.As<IEnumerable<BybitLiabilityRepayment>>(Array.Empty<BybitLiabilityRepayment>());
 
             return result.As(result.Data.List);
+        }
+
+        #endregion
+
+        #region Request Demo Funds
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> RequestDemoFundsAsync(Dictionary<string, decimal> funds, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalParameter("utaDemoApplyMoney", funds.Select(f => new { coin = f.Key, amountStr = f.Value.ToString(CultureInfo.InvariantCulture) }));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/demo-apply-money", true);
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
