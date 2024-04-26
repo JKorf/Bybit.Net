@@ -129,6 +129,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.8.4 - 26 Apr 2024
+    * Fix deserialization issue in V5Api.ExchangeData.GetLinearInverseSymbolsAsync
+
 * Version 3.8.3 - 23 Apr 2024
     * Updated V5Api.ExchangeData.GetServerTimeAsync to V5 endpoint
     * Fixed typo in InternalDepositStatus enum value
