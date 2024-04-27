@@ -13,6 +13,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
+        /// Symbols
+        /// </summary>
+        [JsonProperty("symbols")]
+        public string Symbols { get; set; } = string.Empty;
+        /// <summary>
         /// Balance
         /// </summary>
         public decimal Balance { get; set; }
