@@ -575,5 +575,14 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BybitLiabilityRepayment>>> RepayLiabilitiesAsync(string? asset = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Request funds for demo trading
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/demo#request-demo-trading-funds" /></para>
+        /// </summary>
+        /// <param name="funds">Dictionary of the asset and amount you want to receive. Only BTC, ETH, USDT or USDC supported</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> RequestDemoFundsAsync(Dictionary<string, decimal> funds, CancellationToken ct = default);
     }
 }

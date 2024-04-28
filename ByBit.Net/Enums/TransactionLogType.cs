@@ -38,6 +38,11 @@ namespace Bybit.Net.Enums
         [Map("LIQUIDATION")]
         Liquidation,
         /// <summary>
+        /// Auto deleveraging
+        /// </summary>
+        [Map("ADL")]
+        Adl,
+        /// <summary>
         /// Airdrop
         /// </summary>
         [Map("AIRDROP")]
@@ -168,5 +173,33 @@ namespace Bybit.Net.Enums
         /// </summary>
         [Map("PREMARKET_ROLLBACK_PLEDGE_PENALTY_TO_BUYER")]
         PreMarketRollbackPledgePenaltyToBuyer,
+        /// <summary>
+        /// </summary>
+        [Map("CUSTODY_NETWORK_FEE")]
+        CustodyNetworkFee,
+        /// <summary>
+        /// </summary>
+        [Map("CUSTODY_SETTLE_FEE")]
+        CustodySettleFee,
+        /// <summary>
+        /// </summary>
+        [Map("CUSTODY_LOCK")]
+        CustodyLock,
+        /// <summary>
+        /// </summary>
+        [Map("CUSTODY_UNLOCK")]
+        CustodyUnlock,
+        /// <summary>
+        /// </summary>
+        [Map("CUSTODY_UNLOCK_REFUND")]
+        CustodyUnlockRefund,
+        /// <summary>
+        /// </summary>
+        [Map("LOANS_BORROW_FUNDS")]
+        LoansBorrowFunds,
+        /// <summary>
+        /// </summary>
+        [Map("LOANS_ASSET_REDEMPTION")]
+        LoansAssetRedemption,
     }
 }

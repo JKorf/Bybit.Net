@@ -3,6 +3,7 @@ using Bybit.Net.Interfaces;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.OrderBook;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,6 +15,15 @@ namespace Bybit.Net.SymbolOrderBooks
     {
         private readonly IServiceProvider _serviceProvider;
 
+        /// <inheritdoc />
+        public IOrderBookFactory<BybitOrderBookOptions> Spot { get; }
+
+        /// <inheritdoc />
+        public IOrderBookFactory<BybitOrderBookOptions> Options { get; }
+
+        /// <inheritdoc />
+        public IOrderBookFactory<BybitOrderBookOptions> LinearInverse { get; }
+
         /// <summary>
         /// ctor
         /// </summary>
@@ -21,6 +31,10 @@ namespace Bybit.Net.SymbolOrderBooks
         public BybitOrderBookFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+
+            Spot = new OrderBookFactory<BybitOrderBookOptions>((symbol, options) => CreateSpot(symbol, options), (baseAsset, quoteAsset, options) => CreateSpot(baseAsset + quoteAsset, options));
+            Options = new OrderBookFactory<BybitOrderBookOptions>((symbol, options) => CreateOption(symbol, options), (baseAsset, quoteAsset, options) => CreateOption(baseAsset + quoteAsset, options));
+            LinearInverse = new OrderBookFactory<BybitOrderBookOptions>((symbol, options) => CreateLinearInverse(symbol, options), (baseAsset, quoteAsset, options) => CreateLinearInverse(baseAsset + quoteAsset, options));
         }
 
         /// <inheritdoc />

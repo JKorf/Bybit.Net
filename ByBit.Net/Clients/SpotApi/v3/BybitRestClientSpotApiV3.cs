@@ -43,6 +43,9 @@ namespace Bybit.Net.Clients.SpotApi.v3
         }
         #endregion
 
+        /// <inheritdoc />
+        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
         #region Common interface
 
         /// <inheritdoc />

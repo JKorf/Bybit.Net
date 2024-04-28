@@ -59,7 +59,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
-            services.AddSingleton<IBybitOrderBookFactory, BybitOrderBookFactory>();
+            services.AddTransient<IBybitOrderBookFactory, BybitOrderBookFactory>();
             services.AddTransient(x => x.GetRequiredService<IBybitRestClient>().V5Api.CommonSpotClient);
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBybitSocketClient, BybitSocketClient>();

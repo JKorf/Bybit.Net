@@ -68,6 +68,9 @@ namespace Bybit.Net.Clients.DerivativesApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
 
+        /// <inheritdoc />
+        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
         /// <summary>
         /// Get url for an endpoint
         /// </summary>

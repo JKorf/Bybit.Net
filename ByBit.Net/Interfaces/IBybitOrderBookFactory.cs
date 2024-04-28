@@ -11,6 +11,21 @@ namespace Bybit.Net.Interfaces
     public interface IBybitOrderBookFactory
     {
         /// <summary>
+        /// Spot order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BybitOrderBookOptions> Spot { get; }
+
+        /// <summary>
+        /// Options order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BybitOrderBookOptions> Options { get; }
+
+        /// <summary>
+        /// Linear/Inverse order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BybitOrderBookOptions> LinearInverse { get; }
+
+        /// <summary>
         /// Create a SymbolOrderBook specifying the category
         /// </summary>
         /// <param name="symbol">The symbol</param>
