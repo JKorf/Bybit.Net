@@ -129,6 +129,15 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.8.5 - 28 Apr 2024
+    * Added V5Api.Account.RequestDemoFundsAsync endpoint
+    * Added missing TransactionLogType enum values
+    * Added Symbols to V5Api.ExchangeData.GetInsuranceAsync response model
+    * Added BybitExchange static info class
+    * Added BybitOrderBookFactory book creation method
+    * Fixed BybitOrderBookFactory injection issue
+    * Updated CryptoExchange.Net to v7.4.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+
 * Version 3.8.4 - 26 Apr 2024
     * Fix deserialization issue in V5Api.ExchangeData.GetLinearInverseSymbolsAsync
 
