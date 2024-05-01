@@ -129,6 +129,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.8.6 - 01 May 2024
+    * Updated CryptoExchange.Net to v7.5.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
+
 * Version 3.8.5 - 28 Apr 2024
     * Added V5Api.Account.RequestDemoFundsAsync endpoint
     * Added missing TransactionLogType enum values
