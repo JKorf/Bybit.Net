@@ -1,0 +1,20 @@
+GET
+/v5/market/delivery-price
+false
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "category": "option",
+        "nextPageCursor": "",
+        "list": [
+            {
+                "symbol": "ETH-26DEC22-1400-C",
+                "deliveryPrice": "1220.728594450",
+                "deliveryTime": "1672041600000"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672055336993
+}

@@ -33,7 +33,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Cost exemption
         /// </summary>
-        public decimal CostExcemption { get; set; }
+        public decimal CostExemption { get; set; }
         /// <summary>
         /// Total borrow quantity
         /// </summary>

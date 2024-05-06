@@ -1,0 +1,23 @@
+GET
+/v5/market/recent-trade
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "category": "spot",
+        "list": [
+            {
+                "execId": "2100000000007764263",
+                "symbol": "BTCUSDT",
+                "price": "16618.49",
+                "size": "0.00012",
+                "side": "Buy",
+                "time": "1672052955758",
+                "isBlockTrade": false
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672053054358
+}

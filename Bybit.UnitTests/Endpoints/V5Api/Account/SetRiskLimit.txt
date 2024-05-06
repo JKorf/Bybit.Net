@@ -1,0 +1,14 @@
+POST
+/v5/position/set-risk-limit
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "riskId": 4,
+        "riskLimitValue": "8000000",
+        "category": "linear"
+    },
+    "retExtInfo": {},
+    "time": 1672282270571
+}

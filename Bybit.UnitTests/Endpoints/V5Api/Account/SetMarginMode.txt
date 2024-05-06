@@ -1,0 +1,15 @@
+POST
+/v5/account/set-margin-mode
+true
+{
+    "retCode": 3400045,
+    "retMsg": "Set margin mode failed",
+    "result": {
+        "reasons": [
+            {
+                "reasonCode": "3400000",
+                "reasonMsg": "Equity needs to be equal to or greater than 1000 USDC"
+            }
+        ]
+    }
+}

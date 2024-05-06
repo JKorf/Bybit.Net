@@ -1,0 +1,12 @@
+POST
+/v5/position/set-tpsl-mode
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "tpSlMode": "Full"
+    },
+    "retExtInfo": {},
+    "time": 1672279322666
+}

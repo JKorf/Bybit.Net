@@ -12,7 +12,8 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Symbol

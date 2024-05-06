@@ -1,0 +1,10 @@
+POST
+/v5/account/set-collateral-switch
+true
+{
+    "retCode": 0,
+    "retMsg": "SUCCESS",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1690515818656
+}

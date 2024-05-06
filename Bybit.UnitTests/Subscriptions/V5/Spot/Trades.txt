@@ -1,0 +1,20 @@
+> { "req_id": "|1|", "op": "subscribe", "args": [ "publicTrade.BTCUSDT" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "topic": "publicTrade.BTCUSDT",
+    "type": "snapshot",
+    "ts": 1672304486868,
+    "data": [
+        {
+            "T": 1672304486865,
+            "s": "BTCUSDT",
+            "S": "Buy",
+            "v": "0.001",
+            "p": "16578.50",
+            "L": "PlusTick",
+            "i": "20f43950-d8dd-5b31-9112-a178eb6023af",
+            "BT": false
+        }
+    ]
+}

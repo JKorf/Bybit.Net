@@ -1,0 +1,25 @@
+GET
+/v5/spot-margin-trade/data
+false
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "vipCoinList": [
+            {
+                "list": [
+                    {
+                        "borrowable": true,
+                        "collateralRatio": "0.95",
+                        "currency": "BTC",
+                        "hourlyBorrowRate": "0.0000015021220000",
+                        "liquidationOrder": "11",
+                        "marginCollateral": true,
+                        "maxBorrowingAmount": "3"
+                    }
+                ],
+                "vipLevel": "No VIP"
+            }
+        ]
+    }
+}

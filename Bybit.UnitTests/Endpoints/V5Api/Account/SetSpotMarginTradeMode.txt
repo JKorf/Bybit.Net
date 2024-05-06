@@ -1,0 +1,12 @@
+POST
+/v5/spot-margin-trade/switch-mode
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "spotMarginMode": "0"
+    },
+    "retExtInfo": {},
+    "time": 1672297795542
+}

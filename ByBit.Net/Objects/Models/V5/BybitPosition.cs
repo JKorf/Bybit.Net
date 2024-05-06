@@ -12,6 +12,12 @@ namespace Bybit.Net.Objects.Models.V5
     public class BybitPosition
     {
         /// <summary>
+        /// Category
+        /// </summary>
+        [JsonProperty("category")]
+        [JsonConverter(typeof(EnumConverter))]
+        public Category Category { get; set; }
+        /// <summary>
         /// Position mode
         /// </summary>
         [JsonProperty("positionIdx")]

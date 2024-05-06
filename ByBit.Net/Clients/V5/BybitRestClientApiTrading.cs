@@ -732,7 +732,7 @@ namespace Bybit.Net.Clients.V5
         #region Purchase Leverage Token
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitLeverageTokenRecord>> PurchaseLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitLeverageTokenPurchase>> PurchaseLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -742,7 +742,7 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("serialNo", clientOrderId);
 
-            return await _baseClient.SendRequestAsync<BybitLeverageTokenRecord>(_baseClient.GetUrl("v5/position/spot-lever-token/purchase"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitLeverageTokenPurchase>(_baseClient.GetUrl("v5/spot-lever-token/purchase"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -750,7 +750,7 @@ namespace Bybit.Net.Clients.V5
         #region Redeem Leverage Token
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitLeverageTokenRecord>> RedeemLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitLeverageTokenRedemption>> RedeemLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -760,7 +760,7 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("serialNo", clientOrderId);
 
-            return await _baseClient.SendRequestAsync<BybitLeverageTokenRecord>(_baseClient.GetUrl("v5/position/spot-lever-token/redeem"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitLeverageTokenRedemption>(_baseClient.GetUrl("v5/spot-lever-token/redeem"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         #endregion
@@ -779,7 +779,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("ltCoin", token);
 
-            var result = await _baseClient.SendRequestAsync<BybitResponse<BybitLeverageTokenHistory>>(_baseClient.GetUrl("v5/position/spot-lever-token/order-record"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.SendRequestAsync<BybitResponse<BybitLeverageTokenHistory>>(_baseClient.GetUrl("v5/spot-lever-token/order-record"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitLeverageTokenHistory>>(default);
 

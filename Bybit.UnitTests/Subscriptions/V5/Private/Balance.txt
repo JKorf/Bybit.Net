@@ -1,0 +1,47 @@
+> { "req_id": "|5|", "op": "auth", "args": [ "|4|", "|2|", "|3|" ] }
+< { "success": true, "ret_msg": "", "op": "auth", "conn_id": "cejreaspqfh3sjdnldmg-p", "req_id": "|5|" }
+> { "req_id": "|1|", "op": "subscribe", "args": [ "wallet" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "id": "592324d2bce751-ad38-48eb-8f42-4671d1fb4d4e",
+    "topic": "wallet",
+    "creationTime": 1700034722104,
+    "data": [
+        {
+            "accountIMRate": "0",
+            "accountMMRate": "0",
+            "totalEquity": "10262.91335023",
+            "totalWalletBalance": "9684.46297164",
+            "totalMarginBalance": "9684.46297164",
+            "totalAvailableBalance": "9556.6056555",
+            "totalPerpUPL": "0",
+            "totalInitialMargin": "0",
+            "totalMaintenanceMargin": "0",
+            "coin": [
+                {
+                    "coin": "BTC",
+                    "equity": "0.00102964",
+                    "usdValue": "36.70759517",
+                    "walletBalance": "0.00102964",
+                    "availableToWithdraw": "0.00102964",
+                    "availableToBorrow": "",
+                    "borrowAmount": "0",
+                    "accruedInterest": "0",
+                    "totalOrderIM": "",
+                    "totalPositionIM": "",
+                    "totalPositionMM": "",
+                    "unrealisedPnl": "0",
+                    "cumRealisedPnl": "-0.00000973",
+                    "bonus": "0",
+                    "collateralSwitch": true,
+                    "marginCollateral": true,
+                    "locked": "0",
+                    "spotHedgingQty": "0.01592413"
+                }
+            ],
+            "accountLTV": "0",
+            "accountType": "UNIFIED"
+        }
+    ]
+}

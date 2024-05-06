@@ -1,0 +1,23 @@
+GET
+/v5/asset/exchange/order-record
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "orderBody": [
+            {
+                "fromCoin": "BTC",
+                "fromAmount": "0.100000000000000000",
+                "toCoin": "ETH",
+                "toAmount": "1.385866230000000000",
+                "exchangeRate": "13.858662380000000000",
+                "createdTime": "1672197760",
+                "exchangeTxId": "145102533285208544812654440448"
+            }
+        ],
+        "nextPageCursor": "173341:1672197760"
+    },
+    "retExtInfo": {},
+    "time": 1672990464021
+}

@@ -1,0 +1,33 @@
+GET
+/v5/spot-lever-token/info
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "fundFee": "299.70622821",
+                "fundFeeTime": "1672992000000",
+                "ltCoin": "BTC3L",
+                "ltName": "3X Long",
+                "ltStatus": "1",
+                "manageFeeRate": "0.00005",
+                "manageFeeTime": "1673053200000",
+                "maxPurchase": "10000",
+                "maxPurchaseDaily": "200000",
+                "maxRedeem": "14434",
+                "maxRedeemDaily": "2100000",
+                "minPurchase": "100",
+                "minRedeem": "144",
+                "netValue": "0.376482201140738147",
+                "purchaseFeeRate": "0.0005",
+                "redeemFeeRate": "0.0005",
+                "total": "5000000",
+                "value": "49464463114.022994974075443169"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672991427073
+}

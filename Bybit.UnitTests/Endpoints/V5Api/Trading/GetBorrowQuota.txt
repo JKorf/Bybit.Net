@@ -1,0 +1,18 @@
+GET
+/v5/order/spot-borrow-check
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "symbol": "BTCUSDT",
+        "maxTradeQty": "6.6065",
+        "side": "Buy",
+        "spotMaxTradeAmount": "9004.75628594",
+        "maxTradeAmount": "218014.01330797",
+        "borrowCoin": "USDT",
+        "spotMaxTradeQty": "0.2728"
+    },
+    "retExtInfo": {},
+    "time": 1698895841534
+}

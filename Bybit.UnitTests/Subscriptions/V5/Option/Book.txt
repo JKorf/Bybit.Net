@@ -1,0 +1,34 @@
+> { "req_id": "|1|", "op": "subscribe", "args": [ "orderbook.25.BTCUSDT" ] }
+< { "success": true, "conn_id": "aa01fbfffe80af37-00000001-000b37b9-7147f432704fd28c-00e1c172", "data": { "failTopics": [], "successTopics": [ "tickers.BTC" ] }, "type": "COMMAND_RESP" }
+= 
+{
+    "topic": "orderbook.25.BTCUSDT",
+    "type": "snapshot",
+    "ts": 1672304484978,
+    "data": {
+        "s": "BTCUSDT",
+        "b": [
+            [
+                "16493.50",
+                "0.006"
+            ],
+            [
+                "16493.00",
+                "0.100"
+            ]
+        ],
+        "a": [
+            [
+                "16611.00",
+                "0.029"
+            ],
+            [
+                "16612.00",
+                "0.213"
+            ]
+        ],
+        "u": 18521288,
+        "seq": 7961638724
+    },
+    "cts": 1672304484976
+}

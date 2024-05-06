@@ -1,0 +1,10 @@
+POST
+/v5/user/delete-api
+true
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1676431577675
+}

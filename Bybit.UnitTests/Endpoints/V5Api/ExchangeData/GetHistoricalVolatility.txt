@@ -1,0 +1,15 @@
+GET
+/v5/market/historical-volatility
+false
+{
+    "retCode": 0,
+    "retMsg": "SUCCESS",
+    "category": "option",
+    "result": [
+        {
+            "period": 30,
+            "value": "0.45024716",
+            "time": "1672052400000"
+        }
+    ]
+}

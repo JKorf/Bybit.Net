@@ -1,0 +1,48 @@
+> { "req_id": "|5|", "op": "auth", "args": [ "|4|", "|2|", "|3|" ] }
+< { "success": true, "ret_msg": "", "op": "auth", "conn_id": "cejreaspqfh3sjdnldmg-p", "req_id": "|5|" }
+> { "req_id": "|1|", "op": "subscribe", "args": [ "position" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "id": "1003076014fb7eedb-c7e6-45d6-a8c1-270f0169171a",
+    "topic": "position",
+    "creationTime": 1697682317044,
+    "data": [
+        {
+            "positionIdx": 2,
+            "tradeMode": 0,
+            "riskId": 1,
+            "riskLimitValue": "2000000",
+            "symbol": "BTCUSDT",
+            "side": "",
+            "size": "0",
+            "entryPrice": "0",
+            "leverage": "10",
+            "positionValue": "0",
+            "positionBalance": "0",
+            "markPrice": "28184.5",
+            "positionIM": "0",
+            "positionMM": "0",
+            "takeProfit": "0",
+            "stopLoss": "0",
+            "trailingStop": "0",
+            "unrealisedPnl": "0",
+            "curRealisedPnl": "1.26",
+            "cumRealisedPnl": "-25.06579337",
+            "sessionAvgPrice": "0",
+            "createdTime": "1694402496913",
+            "updatedTime": "1697682317038",
+            "tpslMode": "Full",
+            "liqPrice": "0",
+            "bustPrice": "",
+            "category": "linear",
+            "positionStatus": "Normal",
+            "adlRankIndicator": 0,
+            "autoAddMargin": 0,
+            "leverageSysUpdatedTime": "",
+            "mmrSysUpdatedTime": "",
+            "seq": 8327597863,
+            "isReduceOnly": false
+        }
+    ]
+}

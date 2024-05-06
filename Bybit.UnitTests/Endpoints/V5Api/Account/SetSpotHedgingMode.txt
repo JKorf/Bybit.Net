@@ -1,0 +1,7 @@
+POST
+/v5/account/set-hedging-mode
+true
+{
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+}

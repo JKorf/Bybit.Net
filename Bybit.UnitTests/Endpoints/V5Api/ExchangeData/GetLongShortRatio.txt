@@ -1,0 +1,19 @@
+GET
+/v5/market/account-ratio
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "symbol": "BTCUSDT",
+                "buyRatio": "0.5777",
+                "sellRatio": "0.4223",
+                "timestamp": "1695772800000"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1695785131028
+}

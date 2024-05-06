@@ -1,0 +1,24 @@
+GET
+/v5/asset/withdraw/withdrawable-amount
+true
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "limitAmountUsd": "52853.5551",
+        "withdrawableAmount": {
+            "FUND": {
+                "coin": "USDT",
+                "withdrawableAmount": "11135.0596",
+                "availableBalance": "11135.0596"
+            },
+            "SPOT": {
+                "coin": "USDT",
+                "withdrawableAmount": "0",
+                "availableBalance": "0"
+            }
+        }
+    },
+    "retExtInfo": {},
+    "time": 1677565632151
+}

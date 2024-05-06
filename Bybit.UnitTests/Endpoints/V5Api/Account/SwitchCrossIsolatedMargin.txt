@@ -1,0 +1,10 @@
+POST
+/v5/position/switch-isolated
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1675248433635
+}

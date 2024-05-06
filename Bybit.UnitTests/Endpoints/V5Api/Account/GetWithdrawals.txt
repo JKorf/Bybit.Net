@@ -1,0 +1,42 @@
+GET
+/v5/asset/withdraw/query-record
+true
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "rows": [
+            {
+                "coin": "USDT",
+                "chain": "ETH",
+                "amount": "77",
+                "txID": "",
+                "status": "SecurityCheck",
+                "toAddress": "0x99ced129603abc771c0dabe935c326ff6c86645d",
+                "tag": "",
+                "withdrawFee": "10",
+                "createTime": "1670922217000",
+                "updateTime": "1670922217000",
+                "withdrawId": "9976",
+                "withdrawType": 0
+            },
+            {
+                "coin": "USDT",
+                "chain": "internalAddressChain",
+                "amount": "20.1234",
+                "txID": "",
+                "status": "success",
+                "toAddress": "999805",
+                "tag": "",
+                "withdrawFee": "0",
+                "createTime": "1698889833000",
+                "updateTime": "1698889846000",
+                "withdrawId": "13310",
+                "withdrawType": 1
+            }
+        ],
+        "nextPageCursor": "eyJtaW5JRCI6OTgwMSwibWF4SUQiOjk5NzZ9"
+    },
+    "retExtInfo": {},
+    "time": 1672194949928
+}

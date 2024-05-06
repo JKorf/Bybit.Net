@@ -1,0 +1,36 @@
+POST
+/v5/order/amend-batch
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "category": "option",
+                "symbol": "ETH-30DEC22-500-C",
+                "orderId": "b551f227-7059-4fb5-a6a6-699c04dbd2f2",
+                "orderLinkId": ""
+            },
+            {
+                "category": "option",
+                "symbol": "ETH-30DEC22-700-C",
+                "orderId": "fa6a595f-1a57-483f-b9d3-30e9c8235a52",
+                "orderLinkId": ""
+            }
+        ]
+    },
+    "retExtInfo": {
+        "list": [
+            {
+                "code": 0,
+                "msg": "OK"
+            },
+            {
+                "code": 0,
+                "msg": "OK"
+            }
+        ]
+    },
+    "time": 1672222808060
+}

@@ -1,0 +1,23 @@
+GET
+/v5/market/risk-limit
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "category": "inverse",
+        "list": [
+            {
+                "id": 1,
+                "symbol": "BTCUSD",
+                "riskLimitValue": "150",
+                "maintenanceMargin": "0.5",
+                "initialMargin": "1",
+                "isLowestRisk": 1,
+                "maxLeverage": "100.00"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672054488010
+}

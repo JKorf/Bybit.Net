@@ -1,0 +1,25 @@
+GET
+/v5/account/borrow-history
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "nextPageCursor": "2671153%3A1%2C2671153%3A1",
+        "list": [
+            {
+                "borrowAmount": "1.06333265702840778",
+                "costExemption": "0",
+                "freeBorrowedAmount": "0",
+                "createdTime": 1697439900204,
+                "InterestBearingBorrowSize": "1.06333265702840778",
+                "currency": "BTC",
+                "unrealisedLoss": "0",
+                "hourlyBorrowRate": "0.000001216904",
+                "borrowCost": "0.00000129"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1697442206478
+}

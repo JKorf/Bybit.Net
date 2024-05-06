@@ -1,0 +1,17 @@
+GET
+/v5/spot-lever-token/reference
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "basket": "-132.460000082171973364",
+        "circulation": "30097.901900052619091704",
+        "leverage": "-2.666924651755770729",
+        "ltCoin": "BTC3S",
+        "nav": "27.692082719770373048",
+        "navTime": "1672991679858"
+    },
+    "retExtInfo": {},
+    "time": 1672991679937
+}

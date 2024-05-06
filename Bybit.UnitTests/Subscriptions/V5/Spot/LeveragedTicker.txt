@@ -1,0 +1,16 @@
+> { "req_id": "|1|", "op": "subscribe", "args": [ "tickers_lt.BTCUSDT" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "topic": "tickers_lt.BTCUSDT",
+    "ts": 1672325446847,
+    "type": "snapshot",
+    "data": {
+        "symbol": "EOS3LUSDT",
+        "lastPrice": "0.41477848043290448",
+        "highPrice24h": "0.435285472510871305",
+        "lowPrice24h": "0.394601507960931382",
+        "prevPrice24h": "0.431502290172376349",
+        "price24hPcnt": "-0.0388"
+    }
+}

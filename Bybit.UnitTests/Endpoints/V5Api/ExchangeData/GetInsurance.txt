@@ -1,0 +1,44 @@
+GET
+/v5/market/insurance
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "updatedTime": "1714003200000",
+        "list": [
+            {
+                "coin": "USDT",
+                "symbols": "MERLUSDT,10000000AIDOGEUSDT,ZEUSUSDT",
+                "balance": "902178.57602476",
+                "value": "901898.0963091522"
+            },
+            {
+                "coin": "USDT",
+                "symbols": "SOLUSDT,OMNIUSDT,ALGOUSDT",
+                "balance": "14454.51626125",
+                "value": "14449.515598975464"
+            },
+            {
+                "coin": "USDT",
+                "symbols": "XLMUSDT,WUSDT",
+                "balance": "23.45018235",
+                "value": "22.992864174376344"
+            },
+            {
+                "coin": "USDT",
+                "symbols": "AGIUSDT,WIFUSDT",
+                "balance": "10002",
+                "value": "9998.896846613574"
+            },
+            {
+                "coin": "USDT",
+                "symbols": "",
+                "balance": "10148045273.618073",
+                "value": "10144896808.587431"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1714028451228
+}

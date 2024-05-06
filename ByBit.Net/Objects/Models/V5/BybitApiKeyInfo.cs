@@ -110,6 +110,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("kycRegion")]
         public string? KycRegion { get; set; }
+
+        /// <summary>
+        /// The type of api key. 1：personal, 2：connected to the third-party app
+        /// </summary>
+        [JsonProperty("type")]
+        public int ApiKeyType { get; set; }
         /// <summary>
         /// Permissions
         /// </summary>
@@ -157,5 +163,9 @@ namespace Bybit.Net.Objects.Models.V5
         /// NFT permissions
         /// </summary>
         public IEnumerable<string> NFT { get; set; } = Array.Empty<string>();
+        /// <summary>
+        /// Affiliate permissions
+        /// </summary>
+        public IEnumerable<string> Affiliate { get; set; } = Array.Empty<string>();
     }
 }

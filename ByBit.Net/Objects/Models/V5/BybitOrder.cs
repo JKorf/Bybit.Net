@@ -220,5 +220,16 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("smpOrderId")]
         public string? SelfMatchPreventionOrderId { get; set; }
+        /// <summary>
+        /// Take profit/stop loss mode
+        /// </summary>
+        [JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("tpslMode")]
+        public StopLossTakeProfitMode? TpSlMode { get; set; }
+        /// <summary>
+        /// Place type (option only)
+        /// </summary>
+        [JsonProperty("placeType")]
+        public string? PlaceType { get; set; }
     }
 }

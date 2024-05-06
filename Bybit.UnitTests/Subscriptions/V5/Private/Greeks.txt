@@ -1,0 +1,19 @@
+> { "req_id": "|5|", "op": "auth", "args": [ "|4|", "|2|", "|3|" ] }
+< { "success": true, "ret_msg": "", "op": "auth", "conn_id": "cejreaspqfh3sjdnldmg-p", "req_id": "|5|" }
+> { "req_id": "|1|", "op": "subscribe", "args": [ "greeks" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "id": "592324fa945a30-2603-49a5-b865-21668c29f2a6",
+    "topic": "greeks",
+    "creationTime": 1672364262482,
+    "data": [
+        {
+            "baseCoin": "ETH",
+            "totalDelta": "0.06999986",
+            "totalGamma": "-0.00000001",
+            "totalVega": "-0.00000024",
+            "totalTheta": "0.00001314"
+        }
+    ]
+}

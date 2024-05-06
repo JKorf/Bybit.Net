@@ -392,7 +392,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="clientOrderId">Custom order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitLeverageTokenRecord>> PurchaseLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitLeverageTokenPurchase>> PurchaseLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Redeem a leverage token
@@ -403,7 +403,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="clientOrderId">Custom order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitLeverageTokenRecord>> RedeemLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitLeverageTokenRedemption>> RedeemLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get leverage token order history

@@ -1,0 +1,20 @@
+GET
+/v5/asset/coin-greeks
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "baseCoin": "BTC",
+                "totalDelta": "0.00004001",
+                "totalGamma": "-0.00000009",
+                "totalVega": "-0.00039689",
+                "totalTheta": "0.01243824"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672287887942
+}

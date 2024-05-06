@@ -1,0 +1,10 @@
+POST
+/v5/position/set-auto-add-margin
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1675255135069
+}

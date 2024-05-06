@@ -1,0 +1,19 @@
+POST
+/v5/spot-lever-token/redeem
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "execAmt": "",
+        "execQty": "150",
+        "ltCoin": "EOS3L",
+        "ltOrderStatus": "2",
+        "quantity": "",
+        "redeemId": "2619",
+        "serialNo": "redeem-001",
+        "valueCoin": "EOS3L"
+    },
+    "retExtInfo": {},
+    "time": 1672296417363
+}

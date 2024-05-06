@@ -1,0 +1,36 @@
+POST
+/v5/order/cancel-batch
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "category": "spot",
+                "symbol": "BTCUSDT",
+                "orderId": "1666800494330512128",
+                "orderLinkId": "spot-btc-03"
+            },
+            {
+                "category": "spot",
+                "symbol": "ATOMUSDT",
+                "orderId": "",
+                "orderLinkId": "1666800494330512129"
+            }
+        ]
+    },
+    "retExtInfo": {
+        "list": [
+            {
+                "code": 0,
+                "msg": "OK"
+            },
+            {
+                "code": 170213,
+                "msg": "Order does not exist."
+            }
+        ]
+    },
+    "time": 1713434299047
+}

@@ -1,0 +1,10 @@
+POST
+/v5/position/switch-mode
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1675249072814
+}

@@ -1,0 +1,50 @@
+GET
+/v5/market/instruments-info
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "category": "linear",
+        "list": [
+            {
+                "symbol": "BTCUSDT",
+                "contractType": "LinearPerpetual",
+                "status": "Trading",
+                "baseCoin": "BTC",
+                "quoteCoin": "USDT",
+                "launchTime": "1585526400000",
+                "deliveryTime": "0",
+                "deliveryFeeRate": "",
+                "priceScale": "2",
+                "leverageFilter": {
+                    "minLeverage": "1",
+                    "maxLeverage": "100.00",
+                    "leverageStep": "0.01"
+                },
+                "priceFilter": {
+                    "minPrice": "0.10",
+                    "maxPrice": "199999.80",
+                    "tickSize": "0.10"
+                },
+                "lotSizeFilter": {
+                    "maxOrderQty": "100.000",
+                    "maxMktOrderQty": "100.000",
+                    "minOrderQty": "0.001",
+                    "qtyStep": "0.001",
+                    "postOnlyMaxOrderQty": "1000.000",
+                    "minNotionalValue": "5"
+                },
+                "unifiedMarginTrade": true,
+                "fundingInterval": 480,
+                "settleCoin": "USDT",
+                "copyTrading": "both",
+                "upperFundingRate": "0.00375",
+                "lowerFundingRate": "-0.00375"
+            }
+        ],
+        "nextPageCursor": ""
+    },
+    "retExtInfo": {},
+    "time": 1707186451514
+}

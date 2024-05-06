@@ -1,0 +1,25 @@
+GET
+/v5/asset/delivery-record
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "nextPageCursor": "132791%3A0%2C132791%3A0",
+        "category": "option",
+        "list": [
+            {
+                "symbol": "BTC-29DEC22-16000-P",
+                "side": "Buy",
+                "deliveryTime": 1672300800860,
+                "strike": "16000",
+                "fee": "0.00000000",
+                "position": "0.01",
+                "deliveryPrice": "16541.86369547",
+                "deliveryRpl": "3.5"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672362116184
+}

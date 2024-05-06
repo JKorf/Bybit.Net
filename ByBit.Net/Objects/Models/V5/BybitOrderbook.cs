@@ -37,6 +37,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("u")]
         public int UpdateId { get; set; }
+        /// <summary>
+        /// Cross sequence
+        /// </summary>
+        [JsonProperty("seq")]
+        public long? Sequence { get; set; }
     }
 
     /// <summary>

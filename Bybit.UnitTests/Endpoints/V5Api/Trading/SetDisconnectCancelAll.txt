@@ -1,0 +1,7 @@
+POST
+/v5/order/disconnected-cancel-all
+true
+{
+    "retCode": 0,
+    "retMsg": "success"
+}

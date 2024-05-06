@@ -1,0 +1,56 @@
+> { "req_id": "|5|", "op": "auth", "args": [ "|4|", "|2|", "|3|" ] }
+< { "success": true, "ret_msg": "", "op": "auth", "conn_id": "cejreaspqfh3sjdnldmg-p", "req_id": "|5|" }
+> { "req_id": "|1|", "op": "subscribe", "args": [ "order" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "id": "5923240c6880ab-c59f-420b-9adb-3639adc9dd90",
+    "topic": "order",
+    "creationTime": 1672364262474,
+    "data": [
+        {
+            "symbol": "ETH-30DEC22-1400-C",
+            "orderId": "5cf98598-39a7-459e-97bf-76ca765ee020",
+            "side": "Sell",
+            "orderType": "Market",
+            "cancelType": "UNKNOWN",
+            "price": "72.5",
+            "qty": "1",
+            "orderIv": "",
+            "timeInForce": "IOC",
+            "orderStatus": "Filled",
+            "orderLinkId": "",
+            "lastPriceOnCreated": "",
+            "reduceOnly": false,
+            "leavesQty": "",
+            "leavesValue": "",
+            "cumExecQty": "1",
+            "cumExecValue": "75",
+            "avgPrice": "75",
+            "blockTradeId": "",
+            "positionIdx": 0,
+            "cumExecFee": "0.358635",
+            "createdTime": "1672364262444",
+            "updatedTime": "1672364262457",
+            "rejectReason": "EC_NoError",
+            "stopOrderType": "",
+            "tpslMode": "",
+            "triggerPrice": "",
+            "takeProfit": "",
+            "stopLoss": "",
+            "tpTriggerBy": "",
+            "slTriggerBy": "",
+            "tpLimitPrice": "",
+            "slLimitPrice": "",
+            "triggerDirection": 0,
+            "triggerBy": "",
+            "closeOnTrigger": false,
+            "category": "option",
+            "placeType": "price",
+            "smpType": "None",
+            "smpGroup": 0,
+            "smpOrderId": "",
+            "feeCurrency": ""
+        }
+    ]
+}

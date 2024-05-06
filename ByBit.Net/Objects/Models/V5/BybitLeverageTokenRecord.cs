@@ -33,12 +33,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Purchase amount
         /// </summary>
         [JsonProperty("amount")]
-        public decimal Quantity { get; set; }
-        /// <summary>
-        /// Purchase id
-        /// </summary>
-        [JsonProperty("purchaseId")]
-        public string PurchaseId { get; set; } = string.Empty;
+        public decimal? Quantity { get; set; }
         /// <summary>
         /// Serial number
         /// </summary>
@@ -49,5 +44,29 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("valueCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
+    }
+
+    /// <summary>
+    /// Purchase record
+    /// </summary>
+    public class BybitLeverageTokenPurchase : BybitLeverageTokenRecord
+    {
+        /// <summary>
+        /// Purchase id
+        /// </summary>
+        [JsonProperty("purchaseId")]
+        public string PurchaseId { get; set; } = string.Empty;
+    }
+
+    /// <summary>
+    /// Purchase record
+    /// </summary>
+    public class BybitLeverageTokenRedemption : BybitLeverageTokenRecord
+    {
+        /// <summary>
+        /// Redeem id
+        /// </summary>
+        [JsonProperty("redeemId")]
+        public string RedeemId { get; set; } = string.Empty;
     }
 }

@@ -1,0 +1,38 @@
+POST
+/v5/order/create-batch
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "category": "spot",
+                "symbol": "BTCUSDT",
+                "orderId": "1666800494330512128",
+                "orderLinkId": "spot-btc-03",
+                "createAt": "1713434102752"
+            },
+            {
+                "category": "spot",
+                "symbol": "ATOMUSDT",
+                "orderId": "1666800494330512129",
+                "orderLinkId": "spot-atom-03",
+                "createAt": "1713434102752"
+            }
+        ]
+    },
+    "retExtInfo": {
+        "list": [
+            {
+                "code": 0,
+                "msg": "OK"
+            },
+            {
+                "code": 0,
+                "msg": "OK"
+            }
+        ]
+    },
+    "time": 1713434102753
+}

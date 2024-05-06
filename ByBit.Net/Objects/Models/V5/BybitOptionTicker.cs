@@ -24,7 +24,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Best bid IV
         /// </summary>
-        [JsonProperty("bid1lv")]
+        [JsonProperty("bid1Iv")]
         public decimal BestBidIv { get; set; }
         /// <summary>
         /// Best ask price
@@ -39,7 +39,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Best ask IV
         /// </summary>
-        [JsonProperty("ask1lv")]
+        [JsonProperty("ask1Iv")]
         public decimal BestAskIv { get; set; }
         /// <summary>
         /// Last trade price

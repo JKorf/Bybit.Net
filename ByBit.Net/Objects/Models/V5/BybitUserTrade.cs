@@ -94,6 +94,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         public bool IsMaker { get; set; }
         /// <summary>
+        /// Whether to borrow. Unified spot only
+        /// </summary>
+        public bool? IsLeverage { get; set; }
+        /// <summary>
         /// Spot trading fee asset
         /// </summary>
         [JsonProperty("feeCurrency")]

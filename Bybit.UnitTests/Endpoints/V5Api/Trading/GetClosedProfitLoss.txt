@@ -1,0 +1,34 @@
+GET
+/v5/position/closed-pnl
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "nextPageCursor": "5a373bfe-188d-4913-9c81-d57ab5be8068%3A1672214887231423699%2C5a373bfe-188d-4913-9c81-d57ab5be8068%3A1672214887231423699",
+        "category": "linear",
+        "list": [
+            {
+                "symbol": "ETHPERP",
+                "orderType": "Market",
+                "leverage": "3",
+                "updatedTime": "1672214887236",
+                "side": "Sell",
+                "orderId": "5a373bfe-188d-4913-9c81-d57ab5be8068",
+                "closedPnl": "-47.4065323",
+                "avgEntryPrice": "1194.97516667",
+                "qty": "3",
+                "cumEntryValue": "3584.9255",
+                "createdTime": "1672214887231423699",
+                "orderPrice": "1122.95",
+                "closedSize": "3",
+                "avgExitPrice": "1180.59833333",
+                "execType": "Trade",
+                "fillCount": "4",
+                "cumExitValue": "3541.795"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672284129153
+}

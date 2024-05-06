@@ -1,0 +1,15 @@
+> { "req_id": "|1|", "op": "subscribe", "args": [ "liquidation.BTCUSDT" ] }
+< { "success": true, "conn_id": "aa01fbfffe80af37-00000001-000b37b9-7147f432704fd28c-00e1c172", "data": { "failTopics": [], "successTopics": [ "tickers.BTC" ] }, "type": "COMMAND_RESP" }
+= 
+{
+    "topic": "liquidation.BTCUSDT",
+    "type": "snapshot",
+    "ts": 1703485237953,
+    "data": {
+        "updatedTime": 1703485237953,
+        "symbol": "BTCUSDT",
+        "side": "Sell",
+        "size": "0.003",
+        "price": "43511.70"
+    }
+}

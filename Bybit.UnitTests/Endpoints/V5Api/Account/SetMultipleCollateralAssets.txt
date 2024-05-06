@@ -1,0 +1,29 @@
+POST
+/v5/account/set-collateral-switch-batch
+true
+{
+    "retCode": 0,
+    "retMsg": "SUCCESS",
+    "result": {
+        "list": [
+            {
+                "coin": "MATIC",
+                "collateralSwitch": "OFF"
+            },
+            {
+                "coin": "BTC",
+                "collateralSwitch": "OFF"
+            },
+            {
+                "coin": "ETH",
+                "collateralSwitch": "OFF"
+            },
+            {
+                "coin": "SOL",
+                "collateralSwitch": "OFF"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1704782042913
+}

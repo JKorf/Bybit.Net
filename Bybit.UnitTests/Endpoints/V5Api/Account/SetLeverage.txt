@@ -1,0 +1,10 @@
+POST
+/v5/position/set-leverage
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1672281607343
+}

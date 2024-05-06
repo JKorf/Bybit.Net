@@ -1,0 +1,14 @@
+GET
+/v5/spot-margin-trade/state
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "spotLeverage": "10",
+        "spotMarginMode": "1",
+        "effectiveLeverage": "1"
+    },
+    "retExtInfo": {},
+    "time": 1692696841231
+}

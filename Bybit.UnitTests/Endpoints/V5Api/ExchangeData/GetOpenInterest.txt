@@ -1,0 +1,24 @@
+GET
+/v5/market/open-interest
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "symbol": "BTCUSD",
+        "category": "inverse",
+        "list": [
+            {
+                "openInterest": "461134384.00000000",
+                "timestamp": "1669571400000"
+            },
+            {
+                "openInterest": "461134292.00000000",
+                "timestamp": "1669571100000"
+            }
+        ],
+        "nextPageCursor": ""
+    },
+    "retExtInfo": {},
+    "time": 1672053548579
+}

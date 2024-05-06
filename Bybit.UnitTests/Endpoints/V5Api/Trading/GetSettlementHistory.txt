@@ -1,0 +1,24 @@
+GET
+/v5/asset/settlement-record
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "nextPageCursor": "116952%3A1%2C116952%3A1",
+        "category": "linear",
+        "list": [
+            {
+                "realisedPnl": "-71.28",
+                "symbol": "BTCPERP",
+                "side": "Buy",
+                "markPrice": "16620",
+                "size": "1.5",
+                "createdTime": "1672214400000",
+                "sessionAvgPrice": "16620"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672284884285
+}

@@ -1,0 +1,22 @@
+GET
+/v5/market/mark-price-kline
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "symbol": "BTCUSDT",
+        "category": "linear",
+        "list": [
+            [
+            "1670608800000",
+            "17164.16",
+            "17164.16",
+            "17121.5",
+            "17131.64"
+            ]
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672026361839
+}

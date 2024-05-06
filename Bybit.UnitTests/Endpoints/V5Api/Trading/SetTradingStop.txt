@@ -1,0 +1,10 @@
+POST
+/v5/position/trading-stop
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1672283125359
+}

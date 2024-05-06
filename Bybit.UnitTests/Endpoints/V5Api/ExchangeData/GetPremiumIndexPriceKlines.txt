@@ -1,0 +1,29 @@
+GET
+/v5/market/premium-index-price-kline
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "symbol": "BTCUSDT",
+        "category": "linear",
+        "list": [
+            [
+                "1652486400000",
+                "-0.000587",
+                "-0.000344",
+                "-0.000480",
+                "-0.000344"
+            ],
+            [
+                "1652400000000",
+                "-0.000989",
+                "-0.000561",
+                "-0.000587",
+                "-0.000587"
+            ]
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672765216291
+}

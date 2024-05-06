@@ -1,0 +1,28 @@
+GET
+/v5/account/collateral-info
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "availableToBorrow": "3",
+                "freeBorrowingAmount": "",
+                "freeBorrowAmount": "0",
+                "maxBorrowingAmount": "3",
+                "hourlyBorrowRate": "0.00000147",
+                "borrowUsageRate": "0",
+                "collateralSwitch": true,
+                "borrowAmount": "0",
+                "borrowable": true,
+                "currency": "BTC",
+                "marginCollateral": true,
+                "freeBorrowingLimit": "0",
+                "collateralRatio": "0.95"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1691565901952
+}

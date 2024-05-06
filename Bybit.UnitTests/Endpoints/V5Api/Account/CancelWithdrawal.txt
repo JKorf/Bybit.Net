@@ -1,0 +1,12 @@
+POST
+/v5/asset/withdraw/cancel
+true
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "status": 1
+    },
+    "retExtInfo": {},
+    "time": 1672197228408
+}

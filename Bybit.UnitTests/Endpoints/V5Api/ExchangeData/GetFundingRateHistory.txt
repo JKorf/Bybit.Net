@@ -1,0 +1,19 @@
+GET
+/v5/market/funding/history
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "category": "linear",
+        "list": [
+            {
+                "symbol": "ETHPERP",
+                "fundingRate": "0.0001",
+                "fundingRateTimestamp": "1672041600000"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1672051897447
+}

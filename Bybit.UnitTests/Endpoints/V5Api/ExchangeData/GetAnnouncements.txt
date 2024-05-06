@@ -1,0 +1,30 @@
+GET
+/v5/announcements/index
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "total": 735,
+        "list": [
+            {
+                "title": "New Listing: Arbitrum (ARB) — Deposit, Trade and Stake ARB to Share a 400,000 USDT Prize Pool!",
+                "description": "Bybit is excited to announce the listing of ARB on our trading platform!",
+                "type": {
+                    "title": "New Listings",
+                    "key": "new_crypto"
+                },
+                "tags": [
+                    "Spot",
+                    "Spot Listings"
+                ],
+                "url": "https://announcements.bybit.com/en-US/article/new-listing-arbitrum-arb-deposit-trade-and-stake-arb-to-share-a-400-000-usdt-prize-pool--bltf662314c211a8616/",
+                "dateTimestamp": 1679045608000,
+                "startDateTimestamp": 1679045608000,
+                "endDateTimestamp": 1679045608000
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1679415136117
+}
