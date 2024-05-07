@@ -129,7 +129,7 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
-* Version 3.8.7 - 07 May 2024
+* Version 3.8.8 - 07 May 2024
     * Updated CryptoExchange.Net to v7.5.2, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
 
 * Version 3.8.7 - 06 May 2024
