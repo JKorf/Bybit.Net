@@ -24,6 +24,11 @@ namespace Bybit.Net.Enums
         /// Failed
         /// </summary>
         [Map("FAILED")]
-        Failed
+        Failed,
+        /// <summary>
+        /// Unknown
+        /// </summary>
+        [Map("STATUS_UNKNOWN")]
+        Unknown
     }
 }
