@@ -129,6 +129,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.8.9 - 02 Jun 2024
+    * Added missing StopLossTakeProfitMode enum value
+    * Added Status property to V5Api.Account.CreateUniversalTransfer response model
+    * Added cursor parameter to V5Api.ExchangeData.GetRiskLimitAsync
+
 * Version 3.8.8 - 07 May 2024
     * Updated CryptoExchange.Net to v7.5.2, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
 
