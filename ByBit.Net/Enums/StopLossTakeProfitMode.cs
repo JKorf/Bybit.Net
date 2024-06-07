@@ -16,6 +16,11 @@ namespace Bybit.Net.Enums
         /// Partial take profit/stop loss mode (multiple TP and SL orders can be placed, covering portions of the position)
         /// </summary>
         [Map("Partial")]
-        Partial
+        Partial,
+        /// <summary>
+        /// Unknown, when placed on the website
+        /// </summary>
+        [Map("UNKNOWN")]
+        Unknown
     }
 }

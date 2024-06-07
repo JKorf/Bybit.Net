@@ -219,9 +219,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol</param>
+        /// <param name="cursor">Next page cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitRiskLimit>>> GetRiskLimitAsync(Category category, string? symbol = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitRiskLimit>>> GetRiskLimitAsync(Category category, string? symbol = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spot symbols

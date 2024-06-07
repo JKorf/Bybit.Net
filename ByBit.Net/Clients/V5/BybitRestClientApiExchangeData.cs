@@ -369,7 +369,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Risk Limit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<BybitRiskLimit>>> GetRiskLimitAsync(Category category, string? symbol = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitResponse<BybitRiskLimit>>> GetRiskLimitAsync(Category category, string? symbol = null, string? cursor = null, CancellationToken ct = default)
         {
             if (category != Category.Linear && category != Category.Inverse)
                 throw new ArgumentException("Invalid category; should be Linear or Inverse");
@@ -379,6 +379,7 @@ namespace Bybit.Net.Clients.V5
                 { "category", EnumConverter.GetString(category) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("cursor", cursor);
 
             return await _baseClient.SendRequestAsync<BybitResponse<BybitRiskLimit>>(_baseClient.GetUrl("v5/market/risk-limit"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }

@@ -345,7 +345,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<BybitResponse<BybitClosedPnl>>> GetClosedProfitLossAsync(Category category, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Place multiple orders
+        /// Place multiple orders. Note that a successful response doesn't mean all orders were correctly processed; check the order results in the call response.
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/batch-place" /></para>
         /// </summary>
         /// <param name="category">The category</param>
@@ -358,7 +358,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
             CancellationToken ct = default);
 
         /// <summary>
-        /// Cancel multiple orders
+        /// Cancel multiple orders. Note that a successful response doesn't mean all orders were correctly processed; check the order results in the call response.
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/batch-cancel" /></para>
         /// </summary>
         /// <param name="category">The category</param>
@@ -371,7 +371,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
             CancellationToken ct = default);
 
         /// <summary>
-        /// Edit multiple orders
+        /// Edit multiple orders. Note that a successful response doesn't mean all orders were correctly processed; check the order results in the call response.
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/batch-amend" /></para>
         /// </summary>
         /// <param name="category">The category</param>
