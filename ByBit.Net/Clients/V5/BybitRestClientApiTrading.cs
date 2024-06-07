@@ -237,10 +237,10 @@ namespace Bybit.Net.Clients.V5
                 return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
+            var resultItems = result.Data.Result.List.ToArray();
             int index = 0;
             foreach (var item in result.Data.ExtInfo.List)
             {
-                var resultItems = result.Data.Result.List.ToArray();
                 resultList.Add(new BybitBatchResult<BybitBatchOrderId>
                 {
                     Code = item.Code,
@@ -315,10 +315,10 @@ namespace Bybit.Net.Clients.V5
                 return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
+            var resultItems = result.Data.Result.List.ToArray(); 
             int index = 0;
             foreach (var item in result.Data.ExtInfo.List)
             {
-                var resultItems = result.Data.Result.List.ToArray();
                 var resultItem = resultItems[index++];
                 resultList.Add(new BybitBatchResult<BybitBatchOrderId>
                 {
