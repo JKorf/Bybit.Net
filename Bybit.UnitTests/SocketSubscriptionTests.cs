@@ -62,6 +62,7 @@ namespace Bybit.Net.UnitTests
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Private", "https://api.binance.com", "data", stjCompare: false);
             await tester.ValidateAsync<IEnumerable<BybitPositionUpdate>>((client, handler) => client.V5PrivateApi.SubscribeToPositionUpdatesAsync(handler), "Position", ignoreProperties: new List<string> { "entryPrice" });
             await tester.ValidateAsync<IEnumerable<BybitUserTradeUpdate>>((client, handler) => client.V5PrivateApi.SubscribeToUserTradeUpdatesAsync(handler), "UserTrades");
+            await tester.ValidateAsync<IEnumerable<BybitMinimalUserTradeUpdate>>((client, handler) => client.V5PrivateApi.SubscribeToMinimalUserTradeUpdatesAsync(handler), "MinimalUserTrades");
             await tester.ValidateAsync<IEnumerable<BybitOrderUpdate>>((client, handler) => client.V5PrivateApi.SubscribeToOrderUpdatesAsync(handler), "Order");
             await tester.ValidateAsync<IEnumerable<BybitBalance>>((client, handler) => client.V5PrivateApi.SubscribeToWalletUpdatesAsync(handler), "Balance");
             await tester.ValidateAsync<IEnumerable<BybitGreeks>>((client, handler) => client.V5PrivateApi.SubscribeToGreekUpdatesAsync(handler), "Greeks");

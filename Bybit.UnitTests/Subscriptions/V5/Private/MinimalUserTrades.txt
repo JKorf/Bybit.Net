@@ -1,0 +1,23 @@
+> { "req_id": "|5|", "op": "auth", "args": [ "|4|", "|2|", "|3|" ] }
+< { "success": true, "ret_msg": "", "op": "auth", "conn_id": "cejreaspqfh3sjdnldmg-p", "req_id": "|5|" }
+> { "req_id": "|1|", "op": "subscribe", "args": [ "execution.fast" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "topic": "execution.fast",
+    "creationTime": 1716800399338,
+    "data": [
+        {
+            "category": "linear",
+            "symbol": "ICPUSDT",
+            "execId": "3510f361-0add-5c7b-a2e7-9679810944fc",
+            "execPrice": "12.015",
+            "execQty": "3000",
+            "orderId": "443d63fa-b4c3-4297-b7b1-23bca88b04dc",
+            "orderLinkId": "test-00001",
+            "side": "Sell",
+            "execTime": "1716800399334",
+            "seq": 34771365464
+        }
+    ]
+}
