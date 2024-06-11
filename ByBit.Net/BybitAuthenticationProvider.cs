@@ -22,16 +22,26 @@ namespace Bybit.Net
         {
         }
 
-        public override void AuthenticateRequest(RestApiClient apiClient, Uri uri, HttpMethod method, IDictionary<string, object> uriParams, IDictionary<string, object> bodyParams, Dictionary<string, string> headers, bool auth, ArrayParametersSerialization arraySerialization, HttpMethodParameterPosition parameterPosition, RequestBodyFormat bodyFormat)
+        public override void AuthenticateRequest(
+            RestApiClient apiClient,
+            Uri uri,
+            HttpMethod method,
+            IDictionary<string, object> uriParameters,
+            IDictionary<string, object> bodyParameters,
+            Dictionary<string, string> headers,
+            bool auth,
+            ArrayParametersSerialization arraySerialization,
+            HttpMethodParameterPosition parameterPosition,
+            RequestBodyFormat requestBodyFormat)
         {
             if (!auth)
                 return;
 
-            var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParams : bodyParams;
+            var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters : bodyParameters;
             var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
             if (apiClient is BybitRestClientCopyTradingApi || apiClient is BybitRestClientApi)
             {
-                var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : bodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : JsonConvert.SerializeObject(parameters);
+                var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : requestBodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : JsonConvert.SerializeObject(parameters);
                 var key = _credentials.Key!.GetString();
                 var recvWindow = ((BybitRestOptions)apiClient.ClientOptions).ReceiveWindow.TotalMilliseconds;
                 var payload = timestamp + key + recvWindow + signPayload;
