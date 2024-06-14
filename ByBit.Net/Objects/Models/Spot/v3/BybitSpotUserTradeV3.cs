@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// User trade info
     /// </summary>
-    public class BybitSpotUserTradeV3
+    public record BybitSpotUserTradeV3
     {
         /// <summary>
         /// Transaction id

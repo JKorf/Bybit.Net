@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
-    internal class BybitAssetExchageWrapper : BybitBaseResponse
+    internal record BybitAssetExchageWrapper : BybitBaseResponse
     {
         public IEnumerable<BybitAssetExchange> OrderBody { get; set; } = Array.Empty<BybitAssetExchange>();
     }
@@ -13,7 +13,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset exchange info
     /// </summary>
-    public class BybitAssetExchange
+    public record BybitAssetExchange
     {
         /// <summary>
         /// From asset

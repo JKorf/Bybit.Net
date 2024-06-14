@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Marging status and leverage info
     /// </summary>
-    public class BybitSpotMarginLeverageStatus
+    public record BybitSpotMarginLeverageStatus
     {
         /// <summary>
         /// The leverage

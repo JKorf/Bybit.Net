@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
     /// <summary>
     /// Kline data
     /// </summary>
-    public class BybitSpotKlineV3
+    public record BybitSpotKlineV3
     {
         /// <summary>
         /// Candle open time

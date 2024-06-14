@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Margin account info
     /// </summary>
-    public class BybitMarginAccountInfo
+    public record BybitMarginAccountInfo
     {
         /// <summary>
         /// Account status
@@ -41,7 +41,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Loan account info
     /// </summary>
-    public class BybitLoanAccount
+    public record BybitLoanAccount
     {
         /// <summary>
         /// Asset name

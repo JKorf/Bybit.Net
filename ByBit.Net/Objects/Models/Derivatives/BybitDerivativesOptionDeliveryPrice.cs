@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Get option delivery price
     /// </summary>
-    public class BybitDerivativesOptionDeliveryPrice
+    public record BybitDerivativesOptionDeliveryPrice
     {
         /// <summary>
         /// Derivatives products category. If category is not passed, then return ""For now, linear inverse including inverse futures are available

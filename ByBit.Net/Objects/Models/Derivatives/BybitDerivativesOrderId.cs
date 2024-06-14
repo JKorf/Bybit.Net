@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Order id
     /// </summary>
-    public class BybitDerivativesOrderId
+    public record BybitDerivativesOrderId
     {
         /// <summary>
         /// Order id

@@ -3,7 +3,7 @@
     /// <summary>
     /// Price info
     /// </summary>
-    public class BybitSpotPrice
+    public record BybitSpotPrice
     {
         /// <summary>
         /// Symbol

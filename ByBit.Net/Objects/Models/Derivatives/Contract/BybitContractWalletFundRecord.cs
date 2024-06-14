@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.Contract
     /// <summary>
     /// Position info
     /// </summary>
-    public class BybitContractWalletFundRecord
+    public record BybitContractWalletFundRecord
     {
         /// <summary>
         /// Coin

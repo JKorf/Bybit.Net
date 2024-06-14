@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Account info
     /// </summary>
-    public class BybitAccountInfo
+    public record BybitAccountInfo
     {
         /// <summary>
         /// Unified margin status

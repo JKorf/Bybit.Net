@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
-    internal class BybitAssetInfoWrapper
+    internal record BybitAssetInfoWrapper
     {
         public BybitAccountAssetInfo Spot { get; set; } = null!;
     }
@@ -12,7 +12,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Account asset info
     /// </summary>
-    public class BybitAccountAssetInfo
+    public record BybitAccountAssetInfo
     {
         /// <summary>
         /// Account status
@@ -27,7 +27,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset info
     /// </summary>
-    public class BybitAssetInfo
+    public record BybitAssetInfo
     {
         /// <summary>
         /// Asset name

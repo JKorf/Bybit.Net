@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Spot order info
     /// </summary>
-    public class BybitSpotOrderPlaced: BybitSpotOrderBase
+    public record BybitSpotOrderPlaced: BybitSpotOrderBase
     {
         /// <summary>
         /// Timestamp

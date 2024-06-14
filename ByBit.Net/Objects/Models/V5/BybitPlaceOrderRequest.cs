@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Request info
     /// </summary>
-    public class BybitPlaceOrderRequest
+    public record BybitPlaceOrderRequest
     {
         /// <summary>
         /// The symbol
@@ -153,7 +153,7 @@ namespace Bybit.Net.Objects.Models.V5
         public int? IsLeverage { get; set; }
     }
 
-    internal class BybitSocketPlaceOrderRequest : BybitPlaceOrderRequest
+    internal record BybitSocketPlaceOrderRequest : BybitPlaceOrderRequest
     {
         [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
         public Category Category { get; set; }

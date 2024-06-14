@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Open interest at a time
     /// </summary>
-    public class BybitOpenInterest
+    public record BybitOpenInterest
     {
         /// <summary>
         /// Open interest

@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
     /// <summary>
     /// Borrow info
     /// </summary>
-    public class BybitBorrowInfoV3
+    public record BybitBorrowInfoV3
     {
         /// <summary>
         /// Asset

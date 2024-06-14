@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// Mark price klines entry
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitUnifiedMarginMarkPriceKlineEntry
+    public record BybitUnifiedMarginMarkPriceKlineEntry
     {
         /// <summary>
         /// Start

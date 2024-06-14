@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
     /// <summary>
     /// Symbol info
     /// </summary>
-    public class BybitSpotSymbolV3
+    public record BybitSpotSymbolV3
     {
         /// <summary>
         /// Name of the symbol

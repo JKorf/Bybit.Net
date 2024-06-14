@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Socket
     /// <summary>
     /// Kline update
     /// </summary>
-    public class BybitKlineUpdate
+    public record BybitKlineUpdate
     {
         /// <summary>
         /// Open time of the kline

@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Settlement record
     /// </summary>
-    public class BybitSettlementRecord
+    public record BybitSettlementRecord
     {
         /// <summary>
         /// Symbol

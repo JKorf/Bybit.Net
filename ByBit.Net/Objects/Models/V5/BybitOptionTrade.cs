@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Options trade
     /// </summary>
-    public class BybitOptionTrade : BybitTrade
+    public record BybitOptionTrade : BybitTrade
     {
         /// <summary>
         /// Mark price

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Server time info
     /// </summary>
-    public class BybitTime
+    public record BybitTime
     {
         /// <summary>
         /// Seconds timestamp

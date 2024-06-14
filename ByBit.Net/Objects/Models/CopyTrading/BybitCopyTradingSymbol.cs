@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.CopyTrading
     /// <summary>
     /// Copy trading symbol
     /// </summary>
-    public class BybitCopyTradingSymbol
+    public record BybitCopyTradingSymbol
     {
         /// <summary>
         /// Symbol name
@@ -54,7 +54,7 @@ namespace Bybit.Net.Objects.Models.CopyTrading
     /// <summary>
     /// Leverage rules
     /// </summary>
-    public class BybitCopyTradingLeverageFilter
+    public record BybitCopyTradingLeverageFilter
     {
         /// <summary>
         /// Minimal leverage
@@ -73,7 +73,7 @@ namespace Bybit.Net.Objects.Models.CopyTrading
     /// <summary>
     /// Price rules
     /// </summary>
-    public class BybitCopyTradingPriceFilter
+    public record BybitCopyTradingPriceFilter
     {
         /// <summary>
         /// Minimal price
@@ -92,7 +92,7 @@ namespace Bybit.Net.Objects.Models.CopyTrading
     /// <summary>
     /// Lot size rules
     /// </summary>
-    public class BybitCopyTradingLotSizeFilter
+    public record BybitCopyTradingLotSizeFilter
     {
         /// <summary>
         /// Minimal quantity

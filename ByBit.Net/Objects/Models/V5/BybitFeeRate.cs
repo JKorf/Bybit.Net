@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Fee info
     /// </summary>
-    public class BybitFeeRate
+    public record BybitFeeRate
     {
         /// <summary>
         /// Symbol

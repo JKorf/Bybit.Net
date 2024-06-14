@@ -3,7 +3,7 @@
     /// <summary>
     /// Ids
     /// </summary>
-    public class BybitCopyTradingId
+    public record BybitCopyTradingId
     {
         /// <summary>
         /// Order id

@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models
     /// <summary>
     /// Kline info
     /// </summary>
-    public class BybitKline: BybitKlineBase
+    public record BybitKline: BybitKlineBase
     {
         /// <summary>
         /// Interval of the kline

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Risk limit info
     /// </summary>
-    public class BybitDerivativesRiskLimit
+    public record BybitDerivativesRiskLimit
     {
         /// <summary>
         /// Risk id

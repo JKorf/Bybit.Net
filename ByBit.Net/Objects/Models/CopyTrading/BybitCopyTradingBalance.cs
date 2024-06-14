@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.CopyTrading
     /// <summary>
     /// Balance info
     /// </summary>
-    public class BybitCopyTradingBalance
+    public record BybitCopyTradingBalance
     {
         /// <summary>
         /// Asset

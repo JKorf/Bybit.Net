@@ -23,7 +23,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
             if (message.Data.ReturnCode != 0)
                 return new CallResult<T>(new ServerError(message.Data.ReturnCode, message.Data.ReturnMessage));
 
-            return new CallResult<T>(message.Data.Data);
+            return new CallResult<T>(message.Data.Data!);
         }
     }
 }

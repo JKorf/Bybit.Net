@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Order
     /// </summary>
-    public abstract class BybitDerivativesOrder
+    public abstract record BybitDerivativesOrder
     {
         /// <summary>
         /// Order id

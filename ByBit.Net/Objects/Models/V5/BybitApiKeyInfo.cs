@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Api key info
     /// </summary>
-    public class BybitApiKeyInfo
+    public record BybitApiKeyInfo
     {
         /// <summary>
         /// Id
@@ -125,7 +125,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Permission info
     /// </summary>
-    public class BybitPermissions
+    public record BybitPermissions
     {
         /// <summary>
         /// Contract trade permissions

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Funding history
     /// </summary>
-    public class BybitFundingHistory
+    public record BybitFundingHistory
     {
         /// <summary>
         /// The symbol

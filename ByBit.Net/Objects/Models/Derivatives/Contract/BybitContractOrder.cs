@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Contract
     /// <summary>
     /// Contract Order info
     /// </summary>
-    public class BybitContractOrder : BybitDerivativesOrder
+    public record BybitContractOrder : BybitDerivativesOrder
     {
         /// <summary>
         /// Price of last fill

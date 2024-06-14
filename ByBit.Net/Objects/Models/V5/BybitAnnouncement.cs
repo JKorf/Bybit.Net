@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Announcmeent
     /// </summary>
-    public class BybitAnnouncement
+    public record BybitAnnouncement
     {
         /// <summary>
         /// Title

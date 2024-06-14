@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Balance info
     /// </summary>
-    public class BybitBalance
+    public record BybitBalance
     {
         /// <summary>
         /// Account type
@@ -75,7 +75,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset balance info
     /// </summary>
-    public class BybitAssetBalance
+    public record BybitAssetBalance
     {
         /// <summary>
         /// Asset name

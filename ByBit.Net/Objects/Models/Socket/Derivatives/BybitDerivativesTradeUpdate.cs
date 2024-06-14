@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives
     /// <summary>
     /// Trade update
     /// </summary>
-    public class BybitDerivativesTradeUpdate
+    public record BybitDerivativesTradeUpdate
     {
         /// <summary>
         /// Update timestamp

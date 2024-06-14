@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Withdrawal info
     /// </summary>
-    public class BybitWithdrawal
+    public record BybitWithdrawal
     {
         /// <summary>
         /// Asset

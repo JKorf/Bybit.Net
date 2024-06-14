@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Request info
     /// </summary>
-    public class BybitEditOrderRequest
+    public record BybitEditOrderRequest
     {
         /// <summary>
         /// Edit by order id
@@ -87,7 +87,7 @@ namespace Bybit.Net.Objects.Models.V5
         public TriggerType? TakeProfitTriggerBy { get; set; }
     }
 
-    internal class BybitSocketEditOrderRequest : BybitEditOrderRequest
+    internal record BybitSocketEditOrderRequest : BybitEditOrderRequest
     {
         [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
         public Category Category { get; set; }

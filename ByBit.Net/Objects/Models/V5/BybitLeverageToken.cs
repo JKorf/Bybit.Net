@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
-    internal class BybitLeverageTokenWrapper
+    internal record BybitLeverageTokenWrapper
     {
         public IEnumerable<BybitLeverageToken> List { get; set; } = Array.Empty<BybitLeverageToken>();
     }
@@ -14,7 +14,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leverage token info
     /// </summary>
-    public class BybitLeverageToken
+    public record BybitLeverageToken
     {
         /// <summary>
         /// Token abbreviation

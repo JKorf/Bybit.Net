@@ -4,7 +4,7 @@ using System;
 
 namespace Bybit.Net.Objects.Models.Spot
 {
-    internal class BybitSpotTime
+    internal record BybitSpotTime
     {
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ServerTime { get; set; }

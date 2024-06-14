@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
-    internal class BybitAccountTypeInfoWrapper
+    internal record BybitAccountTypeInfoWrapper
     {
         public IEnumerable<BybitAccountTypeInfo> Accounts { get; set; } = Array.Empty<BybitAccountTypeInfo>();
     }
@@ -12,7 +12,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Account type
     /// </summary>
-    public class BybitAccountTypeInfo
+    public record BybitAccountTypeInfo
     {
         /// <summary>
         /// User id

@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset info
     /// </summary>
-    public class BybitUserAssetInfos : BybitBaseResponse
+    public record BybitUserAssetInfos : BybitBaseResponse
     {
         /// <summary>
         /// Assets
@@ -20,7 +20,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset info for user
     /// </summary>
-    public class BybitUserAssetInfo
+    public record BybitUserAssetInfo
     {
         /// <summary>
         /// Name
@@ -46,7 +46,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset network info
     /// </summary>
-    public class BybitAssetNetworkInfo
+    public record BybitAssetNetworkInfo
     {
         /// <summary>
         /// Network type

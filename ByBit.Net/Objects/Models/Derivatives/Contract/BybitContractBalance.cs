@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.Contract
     /// <summary>
     /// Balance info
     /// </summary>
-    public class BybitContractBalance
+    public record BybitContractBalance
     {
         /// <summary>
         /// Asset name

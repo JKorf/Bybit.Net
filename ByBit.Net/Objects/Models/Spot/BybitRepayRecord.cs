@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Repay record
     /// </summary>
-    public class BybitRepayRecord
+    public record BybitRepayRecord
     {
         /// <summary>
         /// Order id
@@ -58,7 +58,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Repayment ids
     /// </summary>
-    public class BybitRepayIds
+    public record BybitRepayIds
     {
         /// <summary>
         /// Transaction id

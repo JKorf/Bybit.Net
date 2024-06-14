@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
     /// <summary>
     /// Wallet info
     /// </summary>
-    public class BybitUnifiedMarginBalance
+    public record BybitUnifiedMarginBalance
     {
         /// <summary>
         /// Initial margin rate: Account Total Initial Margin Base Coin / Account Margin Balance Base Coin
@@ -70,7 +70,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
     /// <summary>
     /// Unified margin asset info
     /// </summary>
-    public class BybitUnifiedMarginAsset
+    public record BybitUnifiedMarginAsset
     {
         /// <summary>
         /// Name of coin in wallet, such as BTC, ETH, USDT, and USDC.

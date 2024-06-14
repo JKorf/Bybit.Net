@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Request info
     /// </summary>
-    public class BybitCancelOrderRequest
+    public record BybitCancelOrderRequest
     {
         /// <summary>
         /// The symbol
@@ -31,7 +31,7 @@ namespace Bybit.Net.Objects.Models.V5
         public OrderFilter? OrderFilter { get; set; }
     }
 
-    internal class BybitSocketCancelOrderRequest: BybitCancelOrderRequest
+    internal record BybitSocketCancelOrderRequest: BybitCancelOrderRequest
     {
         [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
         public Category Category { get; set; }

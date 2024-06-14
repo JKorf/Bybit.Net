@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Bybit response
     /// </summary>
-    public class BybitBaseResponse
+    public record BybitBaseResponse
     {
         /// <summary>
         /// Category
@@ -40,7 +40,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Bybit response info
     /// </summary>
     /// <typeparam name="T">Type of the response data</typeparam>
-    public class BybitResponse<T> : BybitBaseResponse
+    public record BybitResponse<T> : BybitBaseResponse
     {
         /// <summary>
         /// Data list

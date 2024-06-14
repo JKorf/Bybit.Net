@@ -7,9 +7,9 @@ using System;
 namespace Bybit.Net.Objects.Models.Socket.Derivatives
 {
     /// <summary>
-    /// Base class for user trade updates
+    /// Base record for user trade updates
     /// </summary>
-    public class BybitDerivativesUserTradeUpdate
+    public record BybitDerivativesUserTradeUpdate
     {
         /// <summary>
         /// Order id

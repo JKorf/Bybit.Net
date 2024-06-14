@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Symbol info
     /// </summary>
-    public class BybitDerivativesSymbol
+    public record BybitDerivativesSymbol
     {
         /// <summary>
         /// Symbol
@@ -102,7 +102,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Leverage rules
     /// </summary>
-    public class BybitUnifiedMarginLeverageFilter
+    public record BybitUnifiedMarginLeverageFilter
     {
         /// <summary>
         /// Minimal leverage
@@ -121,7 +121,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Price rules
     /// </summary>
-    public class BybitUnifiedMarginPriceFilter
+    public record BybitUnifiedMarginPriceFilter
     {
         /// <summary>
         /// Minimal price
@@ -140,7 +140,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Lot size rules
     /// </summary>
-    public class BybitUnifiedMarginLotSizeFilter
+    public record BybitUnifiedMarginLotSizeFilter
     {
         /// <summary>
         /// Minimal quantity

@@ -3,7 +3,7 @@
     /// <summary>
     /// Trade update
     /// </summary>
-    public class BybitContractUserTradeUpdate : BybitDerivativesUserTradeUpdate
+    public record BybitContractUserTradeUpdate : BybitDerivativesUserTradeUpdate
     {
         /// <summary>
         /// Quantity to close

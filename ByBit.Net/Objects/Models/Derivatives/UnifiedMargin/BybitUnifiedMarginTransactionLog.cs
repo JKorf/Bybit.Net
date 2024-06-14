@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
     /// <summary>
     /// Transaction log info
     /// </summary>
-    public class BybitUnifiedMarginTransactionLog
+    public record BybitUnifiedMarginTransactionLog
     {
         /// <summary>
         /// Trade ID

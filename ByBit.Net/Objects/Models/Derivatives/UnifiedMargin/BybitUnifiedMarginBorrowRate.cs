@@ -3,7 +3,7 @@
     /// <summary>
     /// Borrow rate
     /// </summary>
-    public class BybitUnifiedMarginBorrowRate
+    public record BybitUnifiedMarginBorrowRate
     {
         /// <summary>
         /// Only for UDDC, USDT.If not passed, USDT-USDC interests are returned.You could pass multiple currency separated by comma, e.a USDC, USDT.

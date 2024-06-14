@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Long/short ratio
     /// </summary>
-    public class BybitLongShortRatio
+    public record BybitLongShortRatio
     {
         /// <summary>
         /// Symbol name

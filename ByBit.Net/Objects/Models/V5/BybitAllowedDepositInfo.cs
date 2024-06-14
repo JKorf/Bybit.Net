@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Allowed deposit response
     /// </summary>
-    public class BybitAllowedDepositInfoResponse : BybitBaseResponse
+    public record BybitAllowedDepositInfoResponse : BybitBaseResponse
     {
         /// <summary>
         /// Asset list
@@ -19,7 +19,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Deposit info
     /// </summary>
-    public class BybitAllowedDepositInfo
+    public record BybitAllowedDepositInfo
     {
         /// <summary>
         /// Asset

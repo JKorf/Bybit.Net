@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Linear/Inverse symbol
     /// </summary>
-    public class BybitLinearInverseSymbol
+    public record BybitLinearInverseSymbol
     {
         /// <summary>
         /// Symbol name
@@ -100,7 +100,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leverage filter info
     /// </summary>
-    public class BybitLinearInverseLeveragefilter
+    public record BybitLinearInverseLeveragefilter
     {
         /// <summary>
         /// Min leverage
@@ -119,7 +119,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Lot size filter info
     /// </summary>
-    public class BybitLinearInverseLotSizeFilter
+    public record BybitLinearInverseLotSizeFilter
     {
         /// <summary>
         /// Quantity step
@@ -151,7 +151,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Price filter info
     /// </summary>
-    public class BybitLinearInversePriceFilter
+    public record BybitLinearInversePriceFilter
     {
         /// <summary>
         /// Tick size

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leveraged token nav info
     /// </summary>
-    public class BybitLeveragedTokenNav
+    public record BybitLeveragedTokenNav
     {
         /// <summary>
         /// Timestamp

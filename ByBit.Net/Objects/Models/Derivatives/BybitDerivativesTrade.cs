@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Trade info
     /// </summary>
-    public class BybitDerivativesTrade
+    public record BybitDerivativesTrade
     {
         /// <summary>
         /// Trade id

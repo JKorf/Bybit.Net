@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
     /// Book price info
     /// </summary>
     /// <remarks> In some methods of v3 they changed naming, in some they changed type. Not very logic, but.. </remarks>
-    public class BybitSpotBookPriceV3
+    public record BybitSpotBookPriceV3
     {
         /// <summary>
         /// The symbol

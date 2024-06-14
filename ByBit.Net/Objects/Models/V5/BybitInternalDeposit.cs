@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Internal deposit info
     /// </summary>
-    public class BybitInternalDeposit
+    public record BybitInternalDeposit
     {
         /// <summary>
         /// Id

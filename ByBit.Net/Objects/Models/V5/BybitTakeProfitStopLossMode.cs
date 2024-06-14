@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Tp/Sl mode
     /// </summary>
-    public class BybitTakeProfitStopLossMode
+    public record BybitTakeProfitStopLossMode
     {
         /// <summary>
         /// Tpsl mode

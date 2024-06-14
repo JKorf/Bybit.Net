@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.Contract
     /// <summary>
     /// Order info
     /// </summary>
-    public class BybitContractOrderUpdate : BybitContractOrder
+    public record BybitContractOrderUpdate : BybitContractOrder
     {
         /// <summary>
         /// Quantity to close

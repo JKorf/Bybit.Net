@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Delivery price info
     /// </summary>
-    public class BybitDeliveryPrice
+    public record BybitDeliveryPrice
     {
         /// <summary>
         /// Symbol

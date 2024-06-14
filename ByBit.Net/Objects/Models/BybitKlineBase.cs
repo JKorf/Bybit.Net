@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models
     /// <summary>
     /// Kline info
     /// </summary>
-    public class BybitKlineBase
+    public record BybitKlineBase
     {
         /// <summary>
         /// Symbol

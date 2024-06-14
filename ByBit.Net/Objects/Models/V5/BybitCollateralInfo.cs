@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Collateral info
     /// </summary>
-    public class BybitCollateralInfo
+    public record BybitCollateralInfo
     {
         /// <summary>
         /// Asset

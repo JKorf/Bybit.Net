@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Position info
     /// </summary>
-    public abstract class BybitDerivativesPosition
+    public abstract record BybitDerivativesPosition
     {
         /// <summary>
         /// Position mode

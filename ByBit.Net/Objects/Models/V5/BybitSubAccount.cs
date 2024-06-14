@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
-    internal class BybitSubAccountWrapper
+    internal record BybitSubAccountWrapper
     {
         [JsonProperty("subMembers")]
         public List<BybitSubAccount> SubMembers { get; set; } = new List<BybitSubAccount>();
@@ -14,7 +14,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Sub account info
     /// </summary>
-    public class BybitSubAccount
+    public record BybitSubAccount
     {
         /// <summary>
         /// User id

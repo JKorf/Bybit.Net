@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
     /// <summary>
     /// Ticker info
     /// </summary>
-    public class BybitSpotTickerV3
+    public record BybitSpotTickerV3
     {
         /// <summary>
         /// Timestamp of the data

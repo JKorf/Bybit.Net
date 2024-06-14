@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Ticker info
     /// </summary>
-    public class BybitSpotTicker
+    public record BybitSpotTicker
     {
         /// <summary>
         /// Symbol

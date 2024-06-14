@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// User order update
     /// </summary>
-    public class BybitOrderUpdate : BybitOrder
+    public record BybitOrderUpdate : BybitOrder
     {
         /// <summary>
         /// Category

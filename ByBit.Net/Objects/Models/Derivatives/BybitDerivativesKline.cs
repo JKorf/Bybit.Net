@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// Kline entry
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitDerivativesKlineEntry
+    public record BybitDerivativesKlineEntry
     {
         /// <summary>
         /// Start

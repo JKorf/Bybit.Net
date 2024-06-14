@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.CopyTrading
     /// <summary>
     /// Position info
     /// </summary>
-    public class BybitCopyTradingPosition
+    public record BybitCopyTradingPosition
     {
         /// <summary>
         /// The symbol

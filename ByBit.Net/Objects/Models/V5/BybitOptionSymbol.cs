@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Option symbol
     /// </summary>
-    public class BybitOptionSymbol
+    public record BybitOptionSymbol
     {
         /// <summary>
         /// Symbol name
@@ -68,7 +68,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Lot size filter info
     /// </summary>
-    public class BybitOptionLotSizeFilter
+    public record BybitOptionLotSizeFilter
     {
         /// <summary>
         /// Quantity step
@@ -90,7 +90,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Price filter info
     /// </summary>
-    public class BybitOptionPriceFilter
+    public record BybitOptionPriceFilter
     {
         /// <summary>
         /// Tick size

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
     /// <summary>
     /// Ticker info
     /// </summary>
-    public class BybitSpotTickerUpdate
+    public record BybitSpotTickerUpdate
     {
         /// <summary>
         /// Timestamp of the data

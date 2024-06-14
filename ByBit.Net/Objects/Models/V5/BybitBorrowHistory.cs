@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Borrow history info
     /// </summary>
-    public class BybitBorrowHistory
+    public record BybitBorrowHistory
     {
         /// <summary>
         /// Asset

@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Order info
     /// </summary>
-    public class BybitOrder
+    public record BybitOrder
     {
         /// <summary>
         /// Order id

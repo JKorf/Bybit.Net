@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
     /// <summary>
     /// Borrow order place responce
     /// </summary>
-    public class BybitBorrowOrderV3
+    public record BybitBorrowOrderV3
     {
         /// <summary>
         /// Borrow order transaction id

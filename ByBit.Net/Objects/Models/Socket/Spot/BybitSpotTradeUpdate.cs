@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
     /// <summary>
     /// Trade update
     /// </summary>
-    public class BybitSpotTradeUpdate
+    public record BybitSpotTradeUpdate
     {
         /// <summary>
         /// Transaction id

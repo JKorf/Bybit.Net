@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// Order book entry
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitSpotOrderBookEntry: ISymbolOrderBookEntry
+    public record BybitSpotOrderBookEntry: ISymbolOrderBookEntry
     {
         /// <summary>
         /// Price

@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
     /// <summary>
     /// Spot trade info
     /// </summary>
-    public class BybitSpotTradeV3
+    public record BybitSpotTradeV3
     {
         /// <summary>
         /// Trade price

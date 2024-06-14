@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.Contract
     /// <summary>
     /// Balance update info
     /// </summary>
-    public class BybitContractBalanceUpdate
+    public record BybitContractBalanceUpdate
     {
         /// <summary>
         /// Asset name

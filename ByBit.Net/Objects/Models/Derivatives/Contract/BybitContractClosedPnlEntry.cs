@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.Contract
     /// <summary>
     /// Profit and loss entry
     /// </summary>
-    public class BybitContractClosedPnlEntry
+    public record BybitContractClosedPnlEntry
     {
         /// <summary>
         /// Order ID of the closing order

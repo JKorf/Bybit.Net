@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Spot.v3
     /// <summary>
     /// Spot order info
     /// </summary>
-    public class BybitSpotOrderV3
+    public record BybitSpotOrderV3
     {
         /// <summary>
         /// Account id

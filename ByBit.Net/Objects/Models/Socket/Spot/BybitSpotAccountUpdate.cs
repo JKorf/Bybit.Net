@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
     /// <summary>
     /// Account update
     /// </summary>
-    public class BybitSpotAccountUpdate: BybitSocketEvent
+    public record BybitSpotAccountUpdate: BybitSocketEvent
     {
         /// <summary>
         /// Allow trading
@@ -34,7 +34,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
     /// <summary>
     /// Account balance
     /// </summary>
-    public class BybitSpotAccountBalance
+    public record BybitSpotAccountBalance
     {
         /// <summary>
         /// Asset

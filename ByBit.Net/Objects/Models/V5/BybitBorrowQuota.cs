@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Borrow quota info
     /// </summary>
-    public class BybitBorrowQuota
+    public record BybitBorrowQuota
     {
         /// <summary>
         /// Symbol

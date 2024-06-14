@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leverage token purchase record
     /// </summary>
-    public class BybitLeverageTokenRecord
+    public record BybitLeverageTokenRecord
     {
         /// <summary>
         /// Token abbreviation
@@ -49,7 +49,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Purchase record
     /// </summary>
-    public class BybitLeverageTokenPurchase : BybitLeverageTokenRecord
+    public record BybitLeverageTokenPurchase : BybitLeverageTokenRecord
     {
         /// <summary>
         /// Purchase id
@@ -61,7 +61,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Purchase record
     /// </summary>
-    public class BybitLeverageTokenRedemption : BybitLeverageTokenRecord
+    public record BybitLeverageTokenRedemption : BybitLeverageTokenRecord
     {
         /// <summary>
         /// Redeem id

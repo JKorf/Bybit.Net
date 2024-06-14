@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.UnifiedMargin
     /// <summary>
     /// Position update
     /// </summary>
-    public class BybitUnifiedMarginPositionUpdate : BybitDerivativesPositionUpdate
+    public record BybitUnifiedMarginPositionUpdate : BybitDerivativesPositionUpdate
     {
         /// <summary>
         /// Position margin

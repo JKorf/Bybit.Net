@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.UnifiedMargin
     /// <summary>
     /// Position info
     /// </summary>
-    public class BybitUnifiedMarginPosition : BybitDerivativesPosition
+    public record BybitUnifiedMarginPosition : BybitDerivativesPosition
     {
         /// <summary>
         /// Type of derivatives product: linear or option.

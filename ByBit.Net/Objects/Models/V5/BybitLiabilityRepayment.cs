@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Liability repayment info
     /// </summary>
-    public class BybitLiabilityRepayment
+    public record BybitLiabilityRepayment
     {
         /// <summary>
         /// Asset name

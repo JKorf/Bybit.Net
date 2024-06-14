@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Ticker update
     /// </summary>
-    public class BybitLinearTickerUpdate
+    public record BybitLinearTickerUpdate
     {
         /// <summary>
         /// Symbol

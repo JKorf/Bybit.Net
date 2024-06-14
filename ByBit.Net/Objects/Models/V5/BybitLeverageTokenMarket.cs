@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leverage token market info
     /// </summary>
-    public class BybitLeverageTokenMarket
+    public record BybitLeverageTokenMarket
     {
         /// <summary>
         /// Basket

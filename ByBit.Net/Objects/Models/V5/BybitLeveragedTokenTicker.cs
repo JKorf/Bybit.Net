@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leveraged token info
     /// </summary>
-    public class BybitLeveragedTokenTicker
+    public record BybitLeveragedTokenTicker
     {
         /// <summary>
         /// Symbol

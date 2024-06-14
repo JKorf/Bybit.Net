@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Borrow record
     /// </summary>
-    public class BybitBorrowRecord
+    public record BybitBorrowRecord
     {
         /// <summary>
         /// Borrow id

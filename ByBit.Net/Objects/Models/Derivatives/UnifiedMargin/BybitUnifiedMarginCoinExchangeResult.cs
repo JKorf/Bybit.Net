@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
     /// <summary>
     /// Coin exchange result
     /// </summary>
-    public class BybitUnifiedMarginCoinExchangeResult
+    public record BybitUnifiedMarginCoinExchangeResult
     {
         /// <summary>
         /// Exchange transaction id

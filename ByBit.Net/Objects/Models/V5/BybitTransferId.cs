@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Transfer id
     /// </summary>
-    public class BybitTransferId
+    public record BybitTransferId
     {
         /// <summary>
         /// Transfer id

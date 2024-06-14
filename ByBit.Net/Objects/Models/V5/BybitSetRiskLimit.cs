@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Set risk limit info
     /// </summary>
-    public class BybitSetRiskLimit
+    public record BybitSetRiskLimit
     {
         /// <summary>
         /// The risk id

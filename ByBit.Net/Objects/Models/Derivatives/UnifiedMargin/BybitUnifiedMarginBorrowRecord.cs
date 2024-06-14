@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
     /// <summary>
     /// Borrow record
     /// </summary>
-    public class BybitUnifiedMarginBorrowRecord
+    public record BybitUnifiedMarginBorrowRecord
     {
         /// <summary>
         /// USDC, USDT, BTC, and ETH

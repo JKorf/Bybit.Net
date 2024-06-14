@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
     /// <summary>
     /// Cancelled order info
     /// </summary>
-    public class BybitUnifiedMarginCancelledOrder : BybitDerivativesOrderId
+    public record BybitUnifiedMarginCancelledOrder : BybitDerivativesOrderId
     {
         /// <summary>
         /// Derivatives products category. If category is not passed, then return ""For now, linear option are available

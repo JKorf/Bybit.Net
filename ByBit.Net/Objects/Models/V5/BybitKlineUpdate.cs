@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Kline update
     /// </summary>
-    public class BybitKlineUpdate
+    public record BybitKlineUpdate
     {
         /// <summary>
         /// Kline start time

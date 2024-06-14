@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Delayed withdrawal info
     /// </summary>
-    public class BybitDelayedWithdrawal
+    public record BybitDelayedWithdrawal
     {
         /// <summary>
         /// Limit quantity usd
@@ -22,7 +22,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Delayed withdrawal account info
     /// </summary>
-    public class BybitDelayedWithdrawalQuantities
+    public record BybitDelayedWithdrawalQuantities
     {
         /// <summary>
         /// Spot account
@@ -37,7 +37,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Delayed withdrawal account quantity
     /// </summary>
-    public class BybitDelayedWithdrawalQuantity
+    public record BybitDelayedWithdrawalQuantity
     {
         /// <summary>
         /// Asset

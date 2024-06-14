@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Deposit address info
     /// </summary>
-    public class BybitDepositAddress
+    public record BybitDepositAddress
     {
         /// <summary>
         /// Asset
@@ -24,7 +24,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Deposit address
     /// </summary>
-    public class BybitDepositChainAddress
+    public record BybitDepositChainAddress
     {
         /// <summary>
         /// Network type

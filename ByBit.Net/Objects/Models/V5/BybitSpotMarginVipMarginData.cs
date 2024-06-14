@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Margin data
     /// </summary>
-    internal class BybitSpotMarginVipMarginData
+    internal record BybitSpotMarginVipMarginData
     {
         [JsonProperty("vipCoinList")]
         public IEnumerable<BybitSpotMarginVipMarginList> VipCoinList { get; set; } = null!;
@@ -16,7 +16,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Margin data
     /// </summary>
-    public class BybitSpotMarginVipMarginList
+    public record BybitSpotMarginVipMarginList
     {
         /// <summary>
         /// VIP level
@@ -33,7 +33,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Margin item
     /// </summary>
-    public class BybitSpotMarginVipMarginItem
+    public record BybitSpotMarginVipMarginItem
     {
         /// <summary>
         /// Whether the asset is allowed to be borrowed

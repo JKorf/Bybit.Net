@@ -3,7 +3,7 @@
     /// <summary>
     /// Id
     /// </summary>
-    public class BybitId
+    public record BybitId
     {
         /// <summary>
         /// Id

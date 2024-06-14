@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Batch item result
     /// </summary>
-    public class BybitBatchResult
+    public record BybitBatchResult
     {
         /// <summary>
         /// Result code
@@ -23,7 +23,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Batch item result
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BybitBatchResult<T> : BybitBatchResult
+    public record BybitBatchResult<T> : BybitBatchResult
     {
         /// <summary>
         /// Response data

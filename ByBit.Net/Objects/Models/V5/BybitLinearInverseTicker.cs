@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Linear/Inverse ticker
     /// </summary>
-    public class BybitLinearInverseTicker
+    public record BybitLinearInverseTicker
     {
         /// <summary>
         /// Symbol

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
     /// <summary>
     /// Kline data update
     /// </summary>
-    public class BybitSpotKlineUpdate
+    public record BybitSpotKlineUpdate
     {
         /// <summary>
         /// Candle open time

@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Option ticker update
     /// </summary>
-    public class BybitOptionTickerUpdate
+    public record BybitOptionTickerUpdate
     {
         /// <summary>
         /// Symbol

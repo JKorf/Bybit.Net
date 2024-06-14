@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Server time record
     /// </summary>
-    public class BybitDerivativesServerTime
+    public record BybitDerivativesServerTime
     {
         /// <summary>
         /// ServerTime

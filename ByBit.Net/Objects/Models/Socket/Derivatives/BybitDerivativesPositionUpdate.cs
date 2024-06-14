@@ -7,9 +7,9 @@ using System;
 namespace Bybit.Net.Objects.Models.Socket.Derivatives
 {
     /// <summary>
-    /// Base class for position update
+    /// Base record for position update
     /// </summary>
-    public abstract class BybitDerivativesPositionUpdate
+    public abstract record BybitDerivativesPositionUpdate
     {
         /// <summary>
         /// Position mode

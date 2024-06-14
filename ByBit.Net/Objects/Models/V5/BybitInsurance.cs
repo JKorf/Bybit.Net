@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Insurance pool info
     /// </summary>
-    public class BybitInsurance
+    public record BybitInsurance
     {
         /// <summary>
         /// The asset

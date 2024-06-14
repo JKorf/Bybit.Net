@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Order ids
     /// </summary>
-    public class BybitOrderId
+    public record BybitOrderId
     {
         /// <summary>
         /// The order id

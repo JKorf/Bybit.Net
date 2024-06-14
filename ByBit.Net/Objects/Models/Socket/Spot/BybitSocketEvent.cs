@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
     /// <summary>
     /// Socket update
     /// </summary>
-    public abstract class BybitSocketEvent
+    public abstract record BybitSocketEvent
     {
         /// <summary>
         /// Event type

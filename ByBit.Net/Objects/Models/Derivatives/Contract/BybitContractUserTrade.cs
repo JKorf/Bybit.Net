@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.Contract
     /// <summary>
     /// User trade info
     /// </summary>
-    public class BybitContractUserTrade
+    public record BybitContractUserTrade
     {
         /// <summary>
         /// Symbol

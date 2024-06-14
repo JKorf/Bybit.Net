@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.Contract
     /// <summary>
     /// Position update
     /// </summary>
-    public class BybitContractPositionUpdate : BybitDerivativesPositionUpdate
+    public record BybitContractPositionUpdate : BybitDerivativesPositionUpdate
     {
         /// <summary>
         /// Position balance

@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.CopyTrading
     /// <summary>
     /// Copy trading order info
     /// </summary>
-    public class BybitCopyTradingOrderUpdate
+    public record BybitCopyTradingOrderUpdate
     {
         /// <summary>
         /// Order id

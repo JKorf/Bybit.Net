@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Funding rate info
     /// </summary>
-    public class BybitDerivativesFundingRate
+    public record BybitDerivativesFundingRate
     {
         /// <summary>
         /// Derivatives products category. If category is not passed, then return ""For now, linear inverse are available

@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Order book for Unified Margin
     /// </summary>
-    public class BybitDerivativesOrderBookEntry
+    public record BybitDerivativesOrderBookEntry
     {
         /// <summary>
         /// Id for continuity of data
@@ -46,7 +46,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// Order book entry
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitUnifiedMarginOrderBookItem : ISymbolOrderBookEntry
+    public record BybitUnifiedMarginOrderBookItem : ISymbolOrderBookEntry
     {
         /// <summary>
         /// Price

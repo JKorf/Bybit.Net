@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Marging status
     /// </summary>
-    public class BybitSpotMarginStatus
+    public record BybitSpotMarginStatus
     {
         /// <summary>
         /// Is spot margin mode activated

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// User trade info
     /// </summary>
-    public class BybitUserTradeUpdate : BybitUserTrade
+    public record BybitUserTradeUpdate : BybitUserTrade
     {
         /// <summary>
         /// Category

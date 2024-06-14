@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Socket.Spot
     /// <summary>
     /// Order book update
     /// </summary>
-    public class BybitSpotOrderBookUpdate
+    public record BybitSpotOrderBookUpdate
     {
         /// <summary>
         /// Symbol

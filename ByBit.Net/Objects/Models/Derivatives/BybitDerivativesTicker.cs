@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Ticker
     /// </summary>
-    public class BybitDerivativesTicker
+    public record BybitDerivativesTicker
     {
         /// <summary>
         /// Symbol

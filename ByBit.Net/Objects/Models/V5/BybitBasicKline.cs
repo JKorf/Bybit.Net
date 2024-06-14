@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Mark price kline info
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitBasicKline
+    public record BybitBasicKline
     {
         /// <summary>
         /// Kline open time

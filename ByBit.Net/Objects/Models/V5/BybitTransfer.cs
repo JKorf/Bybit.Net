@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Transfer info
     /// </summary>
-    public class BybitTransfer
+    public record BybitTransfer
     {
         /// <summary>
         /// Transfer id

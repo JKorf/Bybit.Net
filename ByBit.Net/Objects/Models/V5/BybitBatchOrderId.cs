@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Order ids
     /// </summary>
-    public class BybitBatchOrderId
+    public record BybitBatchOrderId
     {
         /// <summary>
         /// Category

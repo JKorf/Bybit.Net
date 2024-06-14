@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Kline info
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitKline: BybitBasicKline
+    public record BybitKline: BybitBasicKline
     {
         /// <summary>
         /// Volume

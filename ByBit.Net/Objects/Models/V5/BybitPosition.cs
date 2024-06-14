@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Position info
     /// </summary>
-    public class BybitPosition
+    public record BybitPosition
     {
         /// <summary>
         /// Category

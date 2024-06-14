@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leverage token order record
     /// </summary>
-    public class BybitLeverageTokenHistory
+    public record BybitLeverageTokenHistory
     {
         /// <summary>
         /// Token abbreviation

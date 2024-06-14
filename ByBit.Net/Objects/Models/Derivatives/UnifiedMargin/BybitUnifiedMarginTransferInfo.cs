@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
     /// <summary>
     /// Transfer between two accounts info
     /// </summary>
-    public class BybitUnifiedMarginTransferInfo
+    public record BybitUnifiedMarginTransferInfo
     {
         /// <summary>
         /// UUID, globally unique

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Trade info
     /// </summary>
-    public class BybitTrade
+    public record BybitTrade
     {
         /// <summary>
         /// Trade timestamp

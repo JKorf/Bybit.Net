@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Derivatives
     /// <summary>
     /// Open interest item
     /// </summary>
-    public class BybitDerivativesOpenInterest
+    public record BybitDerivativesOpenInterest
     {
         /// <summary>
         /// Open interest value

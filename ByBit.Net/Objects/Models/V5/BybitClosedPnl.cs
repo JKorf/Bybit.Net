@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Closed profit and loss info
     /// </summary>
-    public class BybitClosedPnl
+    public record BybitClosedPnl
     {
         /// <summary>
         /// Symbol

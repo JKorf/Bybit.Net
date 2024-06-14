@@ -3,7 +3,7 @@
     /// <summary>
     /// User trading fee rate
     /// </summary>
-    public class BybitContractTradingFeeRate
+    public record BybitContractTradingFeeRate
     {
         /// <summary>
         /// Symbol

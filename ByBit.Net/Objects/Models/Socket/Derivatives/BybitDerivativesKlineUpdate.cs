@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives
     /// <summary>
     /// Kline update
     /// </summary>
-    public class BybitDerivativesKlineUpdate : BybitKlineUpdate
+    public record BybitDerivativesKlineUpdate : BybitKlineUpdate
     {
         /// <summary>
         /// Data refresh interval

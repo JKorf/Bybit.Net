@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Order book info
     /// </summary>
-    public class BybitSpotOrderBook
+    public record BybitSpotOrderBook
     {
         /// <summary>
         /// Timestamp of the data

@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.Socket.Derivatives.UnifiedMargin
     /// <summary>
     /// Order info
     /// </summary>
-    public class BybitUnifiedMarginOrderUpdate : BybitUnifiedMarginOrder
+    public record BybitUnifiedMarginOrderUpdate : BybitUnifiedMarginOrder
     {
         /// <summary>
         /// Type of trigger price, latest market price by default.

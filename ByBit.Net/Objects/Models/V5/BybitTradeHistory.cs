@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Trade history info
     /// </summary>
-    public class BybitTradeHistory
+    public record BybitTradeHistory
     {
         /// <summary>
         /// Trade id

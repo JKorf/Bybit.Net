@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Request info
     /// </summary>
-    public class BybitSetCollateralAssetRequest
+    public record BybitSetCollateralAssetRequest
     {
         /// <summary>
         /// The asset

@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Balance info
     /// </summary>
-    public class BybitSpotBalance
+    public record BybitSpotBalance
     {
         /// <summary>
         /// Asset

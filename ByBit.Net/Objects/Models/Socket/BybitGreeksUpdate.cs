@@ -5,7 +5,7 @@ namespace Bybit.Net.Objects.Models.Socket
     /// <summary>
     /// Greeks update
     /// </summary>
-    public class BybitGreeksUpdate
+    public record BybitGreeksUpdate
     {
         /// <summary>
         /// Base currency

@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Models.Spot
     /// <summary>
     /// Spot order info
     /// </summary>
-    public class BybitSpotOrderBase
+    public record BybitSpotOrderBase
     {
         /// <summary>
         /// Order id

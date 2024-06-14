@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Transaction info
     /// </summary>
-    public class BybitTransactionLog
+    public record BybitTransactionLog
     {
         /// <summary>
         /// Unique id

@@ -3,7 +3,7 @@
     /// <summary>
     /// Transfer id
     /// </summary>
-    public class BybitCopyTradingTransfer
+    public record BybitCopyTradingTransfer
     {
         /// <summary>
         /// Transfer id

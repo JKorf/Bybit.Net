@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// User trade info
     /// </summary>
-    public class BybitUserTrade
+    public record BybitUserTrade
     {
         /// <summary>
         /// Symbol

@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Order book info
     /// </summary>
-    public class BybitOrderbook
+    public record BybitOrderbook
     {
         /// <summary>
         /// Symbol
@@ -48,7 +48,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Order book entry
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BybitOrderbookEntry : ISymbolOrderBookEntry
+    public record BybitOrderbookEntry : ISymbolOrderBookEntry
     {
         /// <summary>
         /// Price of the entry

@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.Derivatives.UnifiedMargin
     /// <summary>
     /// Profit and loss entry
     /// </summary>
-    public class BybitUnifiedMarginPnlEntry
+    public record BybitUnifiedMarginPnlEntry
     {
         /// <summary>
         /// Trading id

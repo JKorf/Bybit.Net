@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Liquidation info
     /// </summary>
-    public class BybitLiquidation
+    public record BybitLiquidation
     {
         /// <summary>
         /// Price
