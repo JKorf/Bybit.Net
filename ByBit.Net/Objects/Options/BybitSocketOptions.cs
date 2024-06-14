@@ -19,6 +19,11 @@ namespace Bybit.Net.Objects.Options
         };
 
         /// <summary>
+        /// A referer, will be sent in the Referer header
+        /// </summary>
+        public string? Referer { get; set; }
+
+        /// <summary>
         /// Options for the Spot V3 API
         /// </summary>
         public BybitSocketApiOptions SpotV3Options { get; private set; } = new BybitSocketApiOptions();
@@ -42,6 +47,7 @@ namespace Bybit.Net.Objects.Options
         internal BybitSocketOptions Copy()
         {
             var options = Copy<BybitSocketOptions>();
+            options.Referer = Referer;
             options.SpotV3Options = SpotV3Options.Copy();
             options.DerivativesPublicOptions = DerivativesPublicOptions.Copy();
             options.UnifiedMarginOptions = UnifiedMarginOptions.Copy();

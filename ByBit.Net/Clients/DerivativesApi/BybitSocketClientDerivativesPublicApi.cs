@@ -38,7 +38,6 @@ namespace Bybit.Net.Clients.DerivativesApi
         {
             UnhandledMessageExpected = true;
             KeepAliveInterval = TimeSpan.Zero;
-            HandleMessageBeforeConfirmation = true;
 
             RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
         }

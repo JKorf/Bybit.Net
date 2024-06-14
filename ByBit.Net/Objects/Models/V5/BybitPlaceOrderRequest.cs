@@ -20,7 +20,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Type of order
         /// </summary>
         [JsonProperty("orderType"), JsonConverter(typeof(EnumConverter))]
-        public OrderType OrderType { get; set; }
+        public NewOrderType OrderType { get; set; }
         /// <summary>
         /// Side of the order
         /// </summary>
@@ -126,5 +126,36 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("closeOnTrigger", NullValueHandling = NullValueHandling.Ignore)]
         public bool? CloseOnTrigger { get; set; }
+        /// <summary>
+        /// Self match prevention type
+        /// </summary>
+        [JsonProperty("smpType", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public SelfMatchPreventionType? StpType { get; set; }
+        /// <summary>
+        /// Stop loss trigger by
+        /// </summary>
+        [JsonProperty("slTriggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public TriggerType? StopLossTriggerBy { get; set; }
+        /// <summary>
+        /// Take profit trigger by
+        /// </summary>
+        [JsonProperty("tpTriggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public TriggerType? TakeProfitTriggerBy { get; set; }
+        /// <summary>
+        /// Order filter
+        /// </summary>
+        [JsonProperty("orderFilter", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public OrderFilter? OrderFilter { get; set; }
+        /// <summary>
+        /// Whether to borrow. Valid for Unified spot only. 1 for true
+        /// </summary>
+        [JsonProperty("isLeverage", NullValueHandling = NullValueHandling.Ignore)]
+        public int? IsLeverage { get; set; }
+    }
+
+    internal class BybitSocketPlaceOrderRequest : BybitPlaceOrderRequest
+    {
+        [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
+        public Category Category { get; set; }
     }
 }

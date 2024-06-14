@@ -75,5 +75,21 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("tpslMode", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
         public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
+        /// <summary>
+        /// Stop Loss Trigger price type
+        /// </summary>
+        [JsonProperty("slTriggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public TriggerType? StopLossTriggerBy { get; set; }
+        /// <summary>
+        /// Take Profit Trigger price type
+        /// </summary>
+        [JsonProperty("tpTriggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public TriggerType? TakeProfitTriggerBy { get; set; }
+    }
+
+    internal class BybitSocketEditOrderRequest : BybitEditOrderRequest
+    {
+        [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
+        public Category Category { get; set; }
     }
 }

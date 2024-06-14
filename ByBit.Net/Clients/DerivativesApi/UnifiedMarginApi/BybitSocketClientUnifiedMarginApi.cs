@@ -61,7 +61,7 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
         }
 
         /// <inheritdoc />
-        protected override Query? GetAuthenticationRequest()
+        protected override Query? GetAuthenticationRequest(SocketConnection connection)
         {
             var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(30))!;
             var authProvider = (BybitAuthenticationProvider)AuthenticationProvider!;

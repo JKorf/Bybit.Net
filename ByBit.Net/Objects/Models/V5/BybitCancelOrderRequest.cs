@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bybit.Net.Enums;
+using Newtonsoft.Json;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -23,6 +24,16 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("orderLinkId", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string? ClientOrderId { get; set; }
+        /// <summary>
+        /// Order filter
+        /// </summary>
+        [JsonProperty("orderFilter", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        public OrderFilter? OrderFilter { get; set; }
+    }
 
+    internal class BybitSocketCancelOrderRequest: BybitCancelOrderRequest
+    {
+        [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
+        public Category Category { get; set; }
     }
 }
