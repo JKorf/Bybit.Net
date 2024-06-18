@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Objects.Models.V5;
+﻿using Bybit.Net.Enums;
+using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -67,5 +68,14 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<IEnumerable<BybitBalance>>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to disconnect cancel all topics. It doesn't provide updates, but works with the <see href="https://bybit-exchange.github.io/docs/v5/order/dcp">DisconnectCancelAll</see> configuration
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/private/dcp" /></para>
+        /// </summary>
+        /// <param name="productType">Product type</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToDisconnectCancelAllTopicAsync(ProductType productType, CancellationToken ct = default);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Interfaces.Clients.V5;
+﻿using Bybit.Net.Enums;
+using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
 using Bybit.Net.Objects.Sockets.Queries;
@@ -106,6 +107,14 @@ namespace Bybit.Net.Clients.V5
         public async Task<CallResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEvent<IEnumerable<BybitGreeks>>> handler, CancellationToken ct = default)
         {
             var subscription = new BybitSubscription<IEnumerable<BybitGreeks>>(_logger, new[] { "greeks" }, handler, true);
+            return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToDisconnectCancelAllTopicAsync(ProductType productType, CancellationToken ct = default)
+        {
+            var product = productType == ProductType.Spot ? "spot" : productType == ProductType.Options ? "option" : "future";
+            var subscription = new BybitSubscription<object>(_logger, new[] { "dcp." + product }, x => { }, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
     }
