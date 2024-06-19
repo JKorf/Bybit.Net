@@ -311,6 +311,13 @@ namespace Bybit.Net.Clients.V5
             });
 
             return await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
+		}
+		
+        public async Task<CallResult<UpdateSubscription>> SubscribeToDisconnectCancelAllTopicAsync(ProductType productType, CancellationToken ct = default)
+        {
+            var product = productType == ProductType.Spot ? "spot" : productType == ProductType.Options ? "option" : "future";
+            var subscription = new BybitSubscription<object>(_logger, new[] { "dcp." + product }, x => { }, true);
+            return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
     }
 }
