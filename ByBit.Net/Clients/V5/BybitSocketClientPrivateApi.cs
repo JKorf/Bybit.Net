@@ -40,7 +40,9 @@ namespace Bybit.Net.Clients.V5
 
             _referer = !string.IsNullOrEmpty(options.Referer) ? options.Referer! : "Zx000356";
 
-            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), GetPingQuery, x => { });
+            RegisterPeriodicQuery("Heartbeat", options.V5Options.PingInterval, GetPingQuery, x => { });
+
+            SetDedicatedConnection(BaseAddress.AppendPath("/v5/trade"), true);
         }
 
         private Query GetPingQuery(SocketConnection connection)
