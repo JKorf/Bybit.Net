@@ -476,14 +476,27 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult> SetDisconnectCancelAllAsync(
             int windowSeconds,
+            ProductType? productType = null,
             CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection
             {
                 { "timeWindow", windowSeconds },
             };
+            parameters.AddOptionalEnum("product", productType);
 
             return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/order/disconnected-cancel-all"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Disconnect Cancel All
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitDcpStatus>>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default)
+        {
+            var result = await _baseClient.SendRequestAsync<BybitDcpStatusWrapper>(_baseClient.GetUrl("v5/account/query-dcp-info"), HttpMethod.Get, ct, null, true).ConfigureAwait(false);
+            return result.As<IEnumerable<BybitDcpStatus>>(result.Data?.Infos);
         }
 
         #endregion

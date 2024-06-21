@@ -285,9 +285,18 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/dcp" /></para>
         /// </summary>
         /// <param name="windowSeconds">Time after which to cancel all orders</param>
+        /// <param name="productType">Type of product, defaults to Options</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SetDisconnectCancelAllAsync(int windowSeconds, CancellationToken ct = default);
+        Task<WebCallResult> SetDisconnectCancelAllAsync(int windowSeconds, ProductType? productType = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get DiconnectCancelAll/dcp configuration
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/dcp-info" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitDcpStatus>>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Set trading stop parameters
