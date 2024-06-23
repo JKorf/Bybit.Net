@@ -130,6 +130,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.10.0 - 23 Jun 2024
+    * Updated CryptoExchange.Net to version 7.7.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.0
+    * Added V5 websocket order placement API
+    * Updated response models from classes to records
+    * Added and updated DCP endpoints end subscription
+    * Added dedicated connection configuration; a websocket connection can now be established before making the first request by calling `bybitSocketClient.SpotApi.PrepareConnectionsAsync();`
+
 * Version 3.9.0 - 11 Jun 2024
     * Added socketClient.V5PrivateApi.SubscribeToMinimalUserTradeUpdatesAsync private subscription
     * Updated CryptoExchange.Net to v7.6.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
