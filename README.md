@@ -135,7 +135,7 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
     * Added V5 websocket order placement API
     * Updated response models from classes to records
     * Added and updated DCP endpoints end subscription
-    * Added dedicated connection configuration; a websocket connection can now be established before making the first request by calling `bybitSocketClient.SpotApi.PrepareConnectionsAsync();`
+    * Added dedicated connection configuration; a websocket connection can now be established before making the first request by calling `bybitSocketClient.V5PrivateApi.PrepareConnectionsAsync();`
 
 * Version 3.9.0 - 11 Jun 2024
     * Added socketClient.V5PrivateApi.SubscribeToMinimalUserTradeUpdatesAsync private subscription
