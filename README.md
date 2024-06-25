@@ -131,7 +131,7 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 
 ## Release notes
 * Version 3.10.1 - 25 Jun 2024
-    * Updated CryptoExchange.Net to 7.7.2
+    * Updated CryptoExchange.Net to 7.7.2, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.2
     * Fixed deserialization issue BybitPosition model
 
 * Version 3.10.0 - 23 Jun 2024
