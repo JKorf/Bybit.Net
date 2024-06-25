@@ -30,7 +30,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Risk limit value
         /// </summary>
-        public decimal RiskLimitValue { get; set; }
+        public decimal? RiskLimitValue { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
