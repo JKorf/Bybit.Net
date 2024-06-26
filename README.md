@@ -130,6 +130,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.10.2 - 26 Jun 2024
+    * Fixed OrderBook model deserialization when updateId is too large for integer
+
 * Version 3.10.1 - 25 Jun 2024
     * Updated CryptoExchange.Net to 7.7.2, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.2
     * Fixed deserialization issue BybitPosition model
