@@ -130,6 +130,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.10.3 - 02 Jul 2024
+    * Updated CryptoExchange.Net to V7.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.8.0
+    * Added Turkey environment
+    * Added prelisting properties to V5 linear/inverse tickers and symbols response models
+
 * Version 3.10.2 - 26 Jun 2024
     * Fixed OrderBook model deserialization when updateId is too large for integer
 
