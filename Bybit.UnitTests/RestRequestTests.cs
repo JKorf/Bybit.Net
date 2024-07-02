@@ -75,6 +75,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpotSymbolsAsync(), "GetSpotSymbols");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetOptionSymbolsAsync(), "GetOptionSymbols");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(Enums.Category.Inverse), "GetLinearInverseSymbols", ignoreProperties: new List<string> { "postOnlyMaxOrderQty" });
+            await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(Enums.Category.Inverse), "GetLinearInverseSymbolsPreListing", ignoreProperties: new List<string> { "postOnlyMaxOrderQty", "endTime" });
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetOrderbookAsync(Enums.Category.Spot, "ETHUSDT"), "GetOrderbook");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT"), "GetSpotTickers");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetOptionTickersAsync("ETHUSDT"), "GetOptionTickers");

@@ -2,6 +2,8 @@
 using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -82,6 +84,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("lowerFundingRate")]
         public decimal LowerFundingRate { get; set; }
+        /// <summary>
+        /// Whether the contract is a pre-market contract
+        /// </summary>
+        [JsonProperty("isPreListing")]
+        public bool IsPrelisting { get; set; }
+
+        /// <summary>
+        /// Prelisting information
+        /// </summary>
+        [JsonProperty("preListingInfo")]
+        public BybitPrelistingInfo? PrelistingInfo { get; set; }
 
         /// <summary>
         /// Lot size order filter
@@ -95,6 +108,74 @@ namespace Bybit.Net.Objects.Models.V5
         /// Leverage
         /// </summary>
         public BybitLinearInverseLeveragefilter? LeverageFilter { get; set; }
+    }
+
+    /// <summary>
+    /// Prelisting info
+    /// </summary>
+    public record BybitPrelistingInfo
+    {
+        /// <summary>
+        /// Current auction phase
+        /// </summary>
+        [JsonProperty("curAuctionPhase"), JsonConverter(typeof(EnumConverter))]
+        public AuctionPhase CurrentPhase { get; set; }
+
+        /// <summary>
+        /// Phases
+        /// </summary>
+        [JsonProperty("phases")]
+        public IEnumerable<BybitPrelistingPhase> Phases { get; set; } = Array.Empty<BybitPrelistingPhase>();
+
+        /// <summary>
+        /// Fee info
+        /// </summary>
+        [JsonProperty("auctionFeeInfo")]
+        public BybitPrelistingFees Fees { get; set; } = null!;
+    }
+
+    /// <summary>
+    /// Prelisting fee info
+    /// </summary>
+    public record BybitPrelistingFees
+    {
+        /// <summary>
+        /// The trading fee rate during auction phase
+        /// </summary>
+        [JsonProperty("auctionFeeRate")]
+        public decimal AuctionFeeRate { get; set; }
+        /// <summary>
+        /// The taker fee rate during continues trading phase
+        /// </summary>
+        [JsonProperty("takerFeeRate")]
+        public decimal TakerFeeRate { get; set; }
+        /// <summary>
+        /// The maker fee rate during continues trading phase
+        /// </summary>
+        [JsonProperty("makerFeeRate")]
+        public decimal MakerFeeRate { get; set; }
+    }
+
+    /// <summary>
+    /// Prelisting phase
+    /// </summary>
+    public record BybitPrelistingPhase
+    {
+        /// <summary>
+        /// Phase
+        /// </summary>
+        [JsonProperty("phase"), JsonConverter(typeof(EnumConverter))]
+        public AuctionPhase Phase { get; set; }
+        /// <summary>
+        /// Phase start time
+        /// </summary>
+        [JsonProperty("startTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime StartTime { get; set; }
+        /// <summary>
+        /// Phase end time
+        /// </summary>
+        [JsonProperty("endTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime EndTime { get; set; }
     }
 
     /// <summary>

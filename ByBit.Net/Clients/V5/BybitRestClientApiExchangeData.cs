@@ -172,15 +172,23 @@ namespace Bybit.Net.Clients.V5
         #region Get Option symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(Category category, string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(
+            Category category,
+            string? symbol = null,
+            string? baseAsset = null,
+            SymbolStatus? status = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
         {
             if (category != Category.Linear && category != Category.Inverse)
                 throw new ArgumentException("Invalid category; should be Linear or Inverse");
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) }
             };
+            parameters.AddOptionalEnum("status", status);
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("limit", limit);

@@ -119,11 +119,19 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol</param>
         /// <param name="baseAsset">Base asset</param>
+        /// <param name="status">Filter by status</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(Category category, string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(
+            Category category,
+            string? symbol = null,
+            string? baseAsset = null,
+            SymbolStatus? status = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get linear/inverse tickers

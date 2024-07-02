@@ -59,6 +59,14 @@ namespace Bybit.Net
                                      BybitApiAddresses.HongKong.SocketBaseAddress);
 
         /// <summary>
+        /// Live environment for users from Turkey
+        /// </summary>
+        public static BybitEnvironment Turkey { get; }
+            = new BybitEnvironment(TradeEnvironmentNames.Live,
+                                     BybitApiAddresses.Turkey.RestBaseAddress,
+                                     BybitApiAddresses.Turkey.SocketBaseAddress);
+
+        /// <summary>
         /// Demo trading environment, needs seperate API key. See https://bybit-exchange.github.io/docs/v5/demo
         /// </summary>
         public static BybitEnvironment DemoTrading { get; }

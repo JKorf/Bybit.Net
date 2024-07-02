@@ -1,0 +1,81 @@
+GET
+/v5/market/instruments-info
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "category": "linear",
+        "list": [
+            {
+                "symbol": "PRE02ZROUSDT",
+                "contractType": "LinearPerpetual",
+                "status": "PreLaunch",
+                "baseCoin": "PRE02ZRO",
+                "quoteCoin": "USDT",
+                "launchTime": "1718610229000",
+                "deliveryTime": "0",
+                "deliveryFeeRate": "",
+                "priceScale": "3",
+                "leverageFilter": {
+                    "minLeverage": "1",
+                    "maxLeverage": "5.00",
+                    "leverageStep": "0.01"
+                },
+                "priceFilter": {
+                    "minPrice": "0.001",
+                    "maxPrice": "1999.998",
+                    "tickSize": "0.001"
+                },
+                "lotSizeFilter": {
+                    "maxOrderQty": "10000.0",
+                    "minOrderQty": "0.1",
+                    "qtyStep": "0.1",
+                    "postOnlyMaxOrderQty": "10000.0",
+                    "maxMktOrderQty": "2000.0",
+                    "minNotionalValue": "5"
+                },
+                "unifiedMarginTrade": true,
+                "fundingInterval": 480,
+                "settleCoin": "USDT",
+                "copyTrading": "none",
+                "upperFundingRate": "0.03",
+                "lowerFundingRate": "-0.03",
+                "isPreListing": true,
+                "preListingInfo": {
+                    "curAuctionPhase": "ContinuousTrading",
+                    "phases": [
+                        {
+                            "phase": "CallAuction",
+                            "startTime": "1718621400000",
+                            "endTime": "1718707200000"
+                        },
+                        {
+                            "phase": "CallAuctionNoCancel",
+                            "startTime": "1718707200000",
+                            "endTime": "1718707500000"
+                        },
+                        {
+                            "phase": "CrossMatching",
+                            "startTime": "1718707500000",
+                            "endTime": "1718707800000"
+                        },
+                        {
+                            "phase": "ContinuousTrading",
+                            "startTime": "1718707800000",
+                            "endTime": ""
+                        }
+                    ],
+                    "auctionFeeInfo": {
+                        "auctionFeeRate": "0",
+                        "takerFeeRate": "0.001",
+                        "makerFeeRate": "0.0004"
+                    }
+                }
+            }
+        ],
+        "nextPageCursor": ""
+    },
+    "retExtInfo": {},
+    "time": 1719455285151
+}

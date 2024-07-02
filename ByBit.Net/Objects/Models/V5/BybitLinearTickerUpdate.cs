@@ -115,5 +115,20 @@ namespace Bybit.Net.Objects.Models.V5
         /// [InverseFutures] Predicted delivery price
         /// </summary>
         public decimal? PredictedDeliveryPrice { get; set; }
+        /// <summary>
+        /// Estimated pre-market contract open price
+        /// </summary>
+        [JsonProperty("preOpenPrice")]
+        public decimal? PreOpenPrice { get; set; }
+        /// <summary>
+        /// Estimated pre-market contract open qty
+        /// </summary>
+        [JsonProperty("preQty")]
+        public decimal? PreOpenQuantity { get; set; }
+        /// <summary>
+        /// The current pre-market contract phase
+        /// </summary>
+        [JsonProperty("curPreListingPhase")]
+        public AuctionPhase? PreListingPhase { get; set; }
     }
 }
