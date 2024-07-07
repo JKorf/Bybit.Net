@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.CopyTradingApi
 {
     /// <inheritdoc />
-    public class BybitRestClientCopyTradingApiExchangeData : IBybitRestClientCopyTradingApiExchangeData
+    internal class BybitRestClientCopyTradingApiExchangeData : IBybitRestClientCopyTradingApiExchangeData
     {
         private BybitRestClientCopyTradingApi _baseClient;
 

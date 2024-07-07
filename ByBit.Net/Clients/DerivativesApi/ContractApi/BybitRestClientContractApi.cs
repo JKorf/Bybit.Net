@@ -3,7 +3,7 @@
 namespace Bybit.Net.Clients.DerivativesApi.ContractApi
 {
     /// <inheritdoc cref="IBybitRestClientContractApi" />
-    public class BybitRestClientContractApi : IBybitRestClientContractApi
+    internal class BybitRestClientContractApi : IBybitRestClientContractApi
     {
         /// <inheritdoc />
         public IBybitRestClientContractApiAccount Account { get; }

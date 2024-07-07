@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
 {
     /// <inheritdoc />
-    public class BybitRestClientUnifiedMarginApiTrading : IBybitRestClientUnifiedMarginApiTrading
+    internal class BybitRestClientUnifiedMarginApiTrading : IBybitRestClientUnifiedMarginApiTrading
     {
         private readonly BybitRestClientDerivativesApi _baseClient;
 

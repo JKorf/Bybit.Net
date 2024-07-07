@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientLinearApi" />
-    public class BybitSocketClientInverseApi : BybitSocketClientBaseApi, IBybitSocketClientInverseApi
+    internal class BybitSocketClientInverseApi : BybitSocketClientBaseApi, IBybitSocketClientInverseApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");

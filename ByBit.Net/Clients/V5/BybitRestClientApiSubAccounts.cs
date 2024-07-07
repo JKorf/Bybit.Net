@@ -11,7 +11,7 @@ using CryptoExchange.Net.Converters;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc />
-    public class BybitRestClientApiSubAccounts : IBybitRestClientApiSubAccounts
+    internal class BybitRestClientApiSubAccounts : IBybitRestClientApiSubAccounts
     {
         private BybitRestClientApi _baseClient;
 

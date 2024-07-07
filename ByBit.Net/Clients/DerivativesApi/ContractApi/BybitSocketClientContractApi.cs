@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.DerivativesApi.ContractApi
 {
     /// <inheritdoc cref="IBybitSocketClientContractApi" />
-    public class BybitSocketClientContractApi : SocketApiClient, IBybitSocketClientContractApi
+    internal class BybitSocketClientContractApi : SocketApiClient, IBybitSocketClientContractApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");

@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 namespace Bybit.Net.Clients.SpotApi.v3
 {
     /// <inheritdoc cref="IBybitRestClientSpotApiV3" />
-    public class BybitRestClientSpotApiV3 : BybitRestClientBaseSpotApi, IBybitRestClientSpotApiV3
+    internal class BybitRestClientSpotApiV3 : BybitRestClientBaseSpotApi, IBybitRestClientSpotApiV3
     {
         /// <inheritdoc />
         public IBybitRestClientSpotApiAccountV3 Account { get; }

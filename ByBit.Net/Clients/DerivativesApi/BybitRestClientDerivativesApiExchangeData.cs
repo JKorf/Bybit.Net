@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.DerivativesApi
 {
     /// <inheritdoc />
-    public class BybitRestClientDerivativesApiExchangeData : IBybitRestClientDerivativesApiExchangeData
+    internal class BybitRestClientDerivativesApiExchangeData : IBybitRestClientDerivativesApiExchangeData
     {
         private readonly BybitRestClientDerivativesApi _baseClient;
 

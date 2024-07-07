@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc />
-    public class BybitRestClientApiExchangeData : IBybitRestClientApiExchangeData
+    internal class BybitRestClientApiExchangeData : IBybitRestClientApiExchangeData
     {
         private BybitRestClientApi _baseClient;
 

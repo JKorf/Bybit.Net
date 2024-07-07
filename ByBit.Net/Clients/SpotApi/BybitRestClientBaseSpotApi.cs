@@ -22,7 +22,7 @@ namespace Bybit.Net.Clients.SpotApi
     /// <summary>
     /// Base client for the Bybit rest spot API
     /// </summary>
-    public abstract class BybitRestClientBaseSpotApi : RestApiClient, ISpotClient
+    internal abstract class BybitRestClientBaseSpotApi : RestApiClient, ISpotClient
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 

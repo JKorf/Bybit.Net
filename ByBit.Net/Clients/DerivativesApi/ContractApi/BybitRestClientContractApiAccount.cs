@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.DerivativesApi.ContractApi
 {
     /// <inheritdoc />
-    public class BybitClientUnifiedMarginApiAccount : IBybitRestClientContractApiAccount
+    internal class BybitClientUnifiedMarginApiAccount : IBybitRestClientContractApiAccount
     {
         private readonly BybitRestClientDerivativesApi _baseClient;
 

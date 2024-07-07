@@ -17,7 +17,7 @@ using CryptoExchange.Net.Clients;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientBaseApi" />
-    public abstract class BybitSocketClientBaseApi : SocketApiClient, IBybitSocketClientBaseApi
+    internal abstract class BybitSocketClientBaseApi : SocketApiClient, IBybitSocketClientBaseApi
     {
         /// <inheritdoc />
         public new BybitSocketOptions ClientOptions => (BybitSocketOptions)base.ClientOptions;

@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientPrivateApi" />
-    public class BybitSocketClientPrivateApi : SocketApiClient, IBybitSocketClientPrivateApi
+    internal class BybitSocketClientPrivateApi : SocketApiClient, IBybitSocketClientPrivateApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _reqId2Path = MessagePath.Get().Property("reqId");

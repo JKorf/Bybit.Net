@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
 {
     /// <inheritdoc cref="IBybitSocketClientUnifiedMarginApi" />
-    public class BybitSocketClientUnifiedMarginApi : SocketApiClient, IBybitSocketClientUnifiedMarginApi
+    internal class BybitSocketClientUnifiedMarginApi : SocketApiClient, IBybitSocketClientUnifiedMarginApi
     {
         private static readonly MessagePath _typePath = MessagePath.Get().Property("type");
         private static readonly MessagePath _opPath = MessagePath.Get().Property("op");

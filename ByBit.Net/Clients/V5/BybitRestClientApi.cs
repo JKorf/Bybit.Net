@@ -21,7 +21,7 @@ using CryptoExchange.Net.Interfaces;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitRestClientApi"/>
-    public class BybitRestClientApi : RestApiClient, IBybitRestClientApi, ISpotClient
+    internal class BybitRestClientApi : RestApiClient, IBybitRestClientApi, ISpotClient
     {
         internal TimeSyncState _timeSyncState = new TimeSyncState("Bybit V5 API");
 

@@ -17,7 +17,7 @@ using System.Linq;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc />
-    public class BybitRestClientApiTrading : IBybitRestClientApiTrading
+    internal class BybitRestClientApiTrading : IBybitRestClientApiTrading
     {
         private readonly BybitRestClientApi _baseClient;
 

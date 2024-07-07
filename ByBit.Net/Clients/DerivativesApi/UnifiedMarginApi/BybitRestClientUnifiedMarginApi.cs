@@ -3,7 +3,7 @@
 namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
 {
     /// <inheritdoc cref="IBybitRestClientUnifiedMarginApi" />
-    public class BybitRestClientUnifiedMarginApi : IBybitRestClientUnifiedMarginApi
+    internal class BybitRestClientUnifiedMarginApi : IBybitRestClientUnifiedMarginApi
     {
         /// <inheritdoc />
         public IBybitRestClientUnifiedMarginApiAccount Account { get; }

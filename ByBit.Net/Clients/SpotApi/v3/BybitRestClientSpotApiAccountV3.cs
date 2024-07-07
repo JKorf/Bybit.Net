@@ -13,7 +13,7 @@ using System;
 namespace Bybit.Net.Clients.SpotApi.v3
 {
     /// <inheritdoc />
-    public class BybitRestClientSpotApiAccountV3 : IBybitRestClientSpotApiAccountV3
+    internal class BybitRestClientSpotApiAccountV3 : IBybitRestClientSpotApiAccountV3
     {
         private BybitRestClientBaseSpotApi _baseClient;
 

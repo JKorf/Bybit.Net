@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientOptionApi" />
-    public class BybitSocketClientOptionApi : BybitSocketClientBaseApi, IBybitSocketClientOptionApi
+    internal class BybitSocketClientOptionApi : BybitSocketClientBaseApi, IBybitSocketClientOptionApi
     {
         private static readonly MessagePath _typePath = MessagePath.Get().Property("type");
         private static readonly MessagePath _successPath = MessagePath.Get().Property("data").Property("successTopics");

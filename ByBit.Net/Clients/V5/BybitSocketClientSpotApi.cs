@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientSpotApi" />
-    public class BybitSocketClientSpotApi : BybitSocketClientBaseApi, IBybitSocketClientSpotApi
+    internal class BybitSocketClientSpotApi : BybitSocketClientBaseApi, IBybitSocketClientSpotApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");

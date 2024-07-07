@@ -17,7 +17,7 @@ using System.Linq;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc />
-    public class BybitRestClientApiAccount : IBybitRestClientApiAccount
+    internal class BybitRestClientApiAccount : IBybitRestClientApiAccount
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

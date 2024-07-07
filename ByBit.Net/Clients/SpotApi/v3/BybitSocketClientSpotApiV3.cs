@@ -23,7 +23,7 @@ using CryptoExchange.Net.Clients;
 namespace Bybit.Net.Clients.SpotApi.v3
 {
     /// <inheritdoc cref="IBybitSocketClientSpotApiV3"/>
-    public class BybitSocketClientSpotApiV3 : SocketApiClient, IBybitSocketClientSpotApiV3
+    internal class BybitSocketClientSpotApiV3 : SocketApiClient, IBybitSocketClientSpotApiV3
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");

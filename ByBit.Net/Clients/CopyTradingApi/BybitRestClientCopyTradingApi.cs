@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.CopyTradingApi
 {
     /// <inheritdoc cref="IBybitRestClientCopyTradingApi" />
-    public class BybitRestClientCopyTradingApi : RestApiClient, IBybitRestClientCopyTradingApi
+    internal class BybitRestClientCopyTradingApi : RestApiClient, IBybitRestClientCopyTradingApi
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("CopyTrade Api");
 

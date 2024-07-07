@@ -18,7 +18,7 @@ using Bybit.Net.Objects.Internal;
 namespace Bybit.Net.Clients.SpotApi.v3
 {
     /// <inheritdoc />
-    public class BybitRestClientSpotApiExchangeDataV3 : IBybitRestClientSpotApiExchangeDataV3
+    internal class BybitRestClientSpotApiExchangeDataV3 : IBybitRestClientSpotApiExchangeDataV3
     {
         private BybitRestClientBaseSpotApi _baseClient;
 

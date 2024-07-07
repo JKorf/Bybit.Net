@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.DerivativesApi
 {
     /// <inheritdoc cref="IBybitRestClientDerivativesApi" />
-    public class BybitRestClientDerivativesApi : RestApiClient, IBybitRestClientDerivativesApi
+    internal class BybitRestClientDerivativesApi : RestApiClient, IBybitRestClientDerivativesApi
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Derivatives Api");
         /// <summary>

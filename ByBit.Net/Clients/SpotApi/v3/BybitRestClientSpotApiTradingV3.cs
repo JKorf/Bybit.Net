@@ -20,7 +20,7 @@ using Bybit.Net.Objects.Internal;
 namespace Bybit.Net.Clients.SpotApi.v3
 {
     /// <inheritdoc />
-    public class BybitRestClientSpotApiTradingV3 : IBybitRestClientSpotApiTradingV3
+    internal class BybitRestClientSpotApiTradingV3 : IBybitRestClientSpotApiTradingV3
     {
         private readonly BybitRestClientBaseSpotApi _baseClient;
 
