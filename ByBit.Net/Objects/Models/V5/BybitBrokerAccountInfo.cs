@@ -52,5 +52,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("derivatives")]
         public string Derivatives { get; set; } = string.Empty;
+        /// <summary>
+        /// Convert rebate rate
+        /// </summary>
+        [JsonProperty("convert")]
+        public string? Convert { get; set; }
     }
 }
