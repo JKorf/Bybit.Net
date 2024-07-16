@@ -1,0 +1,76 @@
+GET
+/v5/asset/exchange/query-coin-list
+true
+{
+    "retCode": 0,
+    "retMsg": "ok",
+    "result": {
+        "coins": [
+            {
+                "coin": "BTC",
+                "fullName": "BTC",
+                "icon": "https://t1.bycsi.com/app/assets/token/0717b8c28c2373bf714c964195411d0f.svg",
+                "iconNight": "https://t1.bycsi.com/app/assets/token/9504b4c841194cc38f04041003ffbfdb.svg",
+                "accuracyLength": 8,
+                "coinType": "crypto",
+                "balance": "0",
+                "uBalance": "0",
+                "timePeriod": 0,
+                "singleFromMinLimit": "0.001",
+                "singleFromMaxLimit": "1",
+                "singleToMinLimit": "0",
+                "singleToMaxLimit": "0",
+                "dailyFromMinLimit": "0",
+                "dailyFromMaxLimit": "0",
+                "dailyToMinLimit": "0",
+                "dailyToMaxLimit": "0",
+                "disableFrom": false,
+                "disableTo": false
+            },
+            {
+                "coin": "SOL",
+                "fullName": "SOL",
+                "icon": "https://s1.bycsi.com/app/assets/token/87ca5f1ca7229bdf0d9a16435653007c.svg",
+                "iconNight": "https://t1.bycsi.com/app/assets/token/383a834046655ffe5ef1be1a025791cc.svg",
+                "accuracyLength": 8,
+                "coinType": "crypto",
+                "balance": "18.05988133",
+                "uBalance": "2458.46990211775033220586588327",
+                "timePeriod": 0,
+                "singleFromMinLimit": "0.1",
+                "singleFromMaxLimit": "1250",
+                "singleToMinLimit": "0",
+                "singleToMaxLimit": "0",
+                "dailyFromMinLimit": "0",
+                "dailyFromMaxLimit": "0",
+                "dailyToMinLimit": "0",
+                "dailyToMaxLimit": "0",
+                "disableFrom": false,
+                "disableTo": false
+            },
+            {
+                "coin": "ETH",
+                "fullName": "ETH",
+                "icon": "https://s1.bycsi.com/app/assets/token/d6c17c9e767e1810875c702d86ac9f32.svg",
+                "iconNight": "https://t1.bycsi.com/app/assets/token/9613ac8e7d62081f4ca20488ae5b168d.svg",
+                "accuracyLength": 8,
+                "coinType": "crypto",
+                "balance": "0.80264489",
+                "uBalance": "2596.09751650032773106431534138",
+                "timePeriod": 0,
+                "singleFromMinLimit": "0.01",
+                "singleFromMaxLimit": "250",
+                "singleToMinLimit": "0",
+                "singleToMaxLimit": "0",
+                "dailyFromMinLimit": "0",
+                "dailyFromMaxLimit": "0",
+                "dailyToMinLimit": "0",
+                "dailyToMaxLimit": "0",
+                "disableFrom": false,
+                "disableTo": false
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1720064061736
+}

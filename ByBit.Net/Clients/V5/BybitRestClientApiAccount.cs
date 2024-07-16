@@ -1022,5 +1022,85 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Get Convert Assets
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitConvertAsset>>> GetConvertAssetsAsync(ConvertAccountType accountType, string? asset = null, ConvertAssetSide? side = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection
+            {
+                { "accountType", EnumConverter.GetString(accountType) }
+            };
+            parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalEnum("side", side);
+
+            var result = await _baseClient.SendRequestAsync<BybitConvertAssetWrapper>(_baseClient.GetUrl("v5/asset/exchange/query-coin-list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result.As<IEnumerable<BybitConvertAsset>>(result.Data?.Assets);
+        }
+
+        #endregion
+        
+        #region Get Convert Assets
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitConvertQuote>> GetConvertQuoteAsync(ConvertAccountType accountType, string fromAsset, string toAsset, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("accountType", accountType);
+            parameters.Add("fromCoin", fromAsset);
+            parameters.Add("toCoin", toAsset);
+            parameters.Add("requestCoin", fromAsset);
+            parameters.AddString("requestAmount", quantity);
+            parameters.AddOptional("requestId", clientOrderId);
+
+            return await _baseClient.SendRequestAsync<BybitConvertQuote>(_baseClient.GetUrl("v5/asset/exchange/quote-apply"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Convert Confirm Quote
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitConvertTransactionResult>> ConvertConfirmQuoteAsync(string quoteTransactionId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("quoteTxId", quoteTransactionId);
+
+            return await _baseClient.SendRequestAsync<BybitConvertTransactionResult>(_baseClient.GetUrl("v5/asset/exchange/convert-execute"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Convert Confirm Quote
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitConvertTransaction>> GetConvertStatusAsync(ConvertAccountType accountType, string quoteTransactionId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("quoteTxId", quoteTransactionId);
+            parameters.AddEnum("accountType", accountType);
+
+            var result = await _baseClient.SendRequestAsync<BybitConvertTransactionWrapper>(_baseClient.GetUrl("v5/asset/exchange/convert-result-query"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result.As<BybitConvertTransaction>(result.Data?.Result);
+        }
+
+        #endregion
+
+        #region Get Convert History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitConvertTransaction>>> GetConvertHistoryAsync(ConvertAccountType? accountType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalEnum("accountType", accountType);
+            parameters.AddOptional("index", page);
+            parameters.AddOptional("limit", pageSize);
+
+            var result = await _baseClient.SendRequestAsync<BybitConvertTransactionListWrapper>(_baseClient.GetUrl("v5/asset/exchange/query-convert-history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result.As<IEnumerable<BybitConvertTransaction>>(result.Data?.List);
+        }
+
+        #endregion
     }
 }

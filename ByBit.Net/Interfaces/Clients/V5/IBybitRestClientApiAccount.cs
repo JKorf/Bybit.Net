@@ -584,5 +584,59 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> RequestDemoFundsAsync(Dictionary<string, decimal> funds, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get convert assets list
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert/convert-coin-list" /></para>
+        /// </summary>
+        /// <param name="accountType">Account type</param>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="side">Request side, from or to list</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitConvertAsset>>> GetConvertAssetsAsync(ConvertAccountType accountType, string? asset = null, ConvertAssetSide? side = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a convert quote for 2 assets
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert/apply-quote" /></para>
+        /// </summary>
+        /// <param name="accountType">Account type</param>
+        /// <param name="fromAsset">From asset (selling)</param>
+        /// <param name="toAsset">To asset (buying)</param>
+        /// <param name="quantity">Quantity to sell</param>
+        /// <param name="clientOrderId">Request id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitConvertQuote>> GetConvertQuoteAsync(ConvertAccountType accountType, string fromAsset, string toAsset, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Confirm a convert quote and start the conversion
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert/confirm-quote" /></para>
+        /// </summary>
+        /// <param name="quoteTransactionId">The quote transaction id to confirm</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitConvertTransactionResult>> ConvertConfirmQuoteAsync(string quoteTransactionId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get status of a convert transaction
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert/get-convert-result" /></para>
+        /// </summary>
+        /// <param name="accountType">Account type</param>
+        /// <param name="quoteTransactionId">Transaction id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitConvertTransaction>> GetConvertStatusAsync(ConvertAccountType accountType, string quoteTransactionId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get convert history
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert/get-convert-history" /></para>
+        /// </summary>
+        /// <param name="accountType">Filter by account type</param>
+        /// <param name="page">Page</param>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitConvertTransaction>>> GetConvertHistoryAsync(ConvertAccountType? accountType = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
     }
 }

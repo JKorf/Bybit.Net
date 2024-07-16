@@ -1,0 +1,21 @@
+POST
+/v5/asset/exchange/quote-apply
+true
+{
+    "retCode": 0,
+    "retMsg": "ok",
+    "result": {
+        "quoteTxId": "10100108106409340067234418688",
+        "exchangeRate": "0.053517914861880000",
+        "fromCoin": "ETH",
+        "fromCoinType": "crypto",
+        "toCoin": "BTC",
+        "toCoinType": "crypto",
+        "fromAmount": "0.1",
+        "toAmount": "0.005351791486188000",
+        "expiredTime": "1720071092225",
+        "requestId": "test-00002"
+    },
+    "retExtInfo": {},
+    "time": 1720071077265
+}

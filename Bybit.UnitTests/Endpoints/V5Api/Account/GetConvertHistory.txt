@@ -1,0 +1,43 @@
+GET
+/v5/asset/exchange/query-convert-history
+true
+{
+    "retCode": 0,
+    "retMsg": "ok",
+    "result": {
+        "list": [
+            {
+                "accountType": "eb_convert_funding",
+                "exchangeTxId": "10100108106409343501030232064",
+                "userId": "XXXXX",
+                "fromCoin": "ETH",
+                "fromCoinType": "crypto",
+                "fromAmount": "0.1",
+                "toCoin": "BTC",
+                "toCoinType": "crypto",
+                "toAmount": "0.00534882723991",
+                "exchangeStatus": "success",
+                "extInfo": {},
+                "convertRate": "0.0534882723991",
+                "createdAt": "1720071899995"
+            },
+            {
+                "accountType": "eb_convert_uta",
+                "exchangeTxId": "23070eb_convert_uta408933875189391360",
+                "userId": "XXXXX",
+                "fromCoin": "BTC",
+                "fromCoinType": "crypto",
+                "fromAmount": "0.1",
+                "toCoin": "ETH",
+                "toCoinType": "crypto",
+                "toAmount": "1.773938248611074",
+                "exchangeStatus": "success",
+                "extInfo": {},
+                "convertRate": "17.73938248611074",
+                "createdAt": "1719974243256"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1720074457715
+}

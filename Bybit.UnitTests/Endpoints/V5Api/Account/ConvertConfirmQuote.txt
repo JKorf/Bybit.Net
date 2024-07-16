@@ -1,0 +1,13 @@
+POST
+/v5/asset/exchange/convert-execute
+true
+{
+    "retCode": 0,
+    "retMsg": "ok",
+    "result": {
+        "exchangeStatus": "processing",
+        "quoteTxId": "10100108106409343501030232064"
+    },
+    "retExtInfo": {},
+    "time": 1720071900529
+}
