@@ -38,6 +38,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("spot")]
         public IEnumerable<BybitBrokerEarning> Spot { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
+        /// Convert earnings
+        /// </summary>
+        [JsonProperty("convert")]
+        public IEnumerable<BybitBrokerEarning> Convert { get; set; } = Array.Empty<BybitBrokerEarning>();
+        /// <summary>
         /// Derivatives earnings
         /// </summary>
         [JsonProperty("derivatives")]
