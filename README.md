@@ -130,6 +130,16 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.11.0 - 16 Jul 2024
+    * Updated CryptoExchange.Net to version 7.9.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.9.0
+    * Updated internal classes to internal access modifier
+    * Added V5Api.Account.GetConvertAssetsAsync
+    * Added V5Api.Account.GetConvertQuoteAsync
+    * Added V5Api.Account.ConvertConfirmQuoteAsync
+    * Added V5Api.Account.GetConvertStatusAsync
+    * Added V5Api.Account.GetConvertHistoryAsync
+    * Added Convert property to V5Api.Account.GetBrokerAccountInfoAsync and GetBrokerEarningsAsync response models
+
 * Version 3.10.3 - 02 Jul 2024
     * Updated CryptoExchange.Net to V7.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.8.0
     * Added Turkey environment
