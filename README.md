@@ -2,7 +2,15 @@
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bybit.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
  
-Bybit.Net is a strongly typed client library for accessing the [Bybit REST and Websocket API](https://bybit-exchange.github.io/docs/spot/#t-introduction). All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.
+Bybit.Net is a strongly typed client library for accessing the [Bybit REST and Websocket API](https://bybit-exchange.github.io/docs/spot/#t-introduction).
+## Features
+* Response data is mapped to descriptive models
+* Input parameters and response values are mapped to discriptive enum values where possible
+* Automatic websocket (re)connection management 
+* Cient side order book implementation
+* Extensive logging
+* Support for different environments (production, testnet, Hongkong, The Netherlands, Turkey, ..)
+* Easy integration with other exchange client based on the CryptoExchange.Net base library
 
 ## Supported Frameworks
 The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility
