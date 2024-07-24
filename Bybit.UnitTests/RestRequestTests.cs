@@ -88,7 +88,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetFundingRateHistoryAsync(Enums.Category.Inverse, "ETHUSDT"), "GetFundingRateHistory");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetTradeHistoryAsync(Enums.Category.Inverse, "ETHUSDT"), "GetTradeHistory");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetOpenInterestAsync(Enums.Category.Inverse, "ETHUSDT", Enums.OpenInterestInterval.OneDay), "GetOpenInterest");
-            await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetHistoricalVolatilityAsync(Enums.Category.Option, "ETHUSDT"), "GetHistoricalVolatility");
+            await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetHistoricalVolatilityAsync("ETHUSDT"), "GetHistoricalVolatility");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetInsuranceAsync(), "GetInsurance");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetRiskLimitAsync(Enums.Category.Inverse), "GetRiskLimit");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetDeliveryPriceAsync(Enums.Category.Inverse), "GetDeliveryPrice");
@@ -115,7 +115,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Trading.GetOrdersAsync(Enums.Category.Option, "ETHUSDT"), "GetOrders");
             await tester.ValidateAsync(client => client.V5Api.Trading.CancelAllOrderAsync(Enums.Category.Option, "ETHUSDT"), "CancelAllOrder", ignoreProperties: new List<string> { "success" });
             await tester.ValidateAsync(client => client.V5Api.Trading.GetOrderHistoryAsync(Enums.Category.Option, "ETHUSDT"), "GetOrderHistory");
-            await tester.ValidateAsync(client => client.V5Api.Trading.GetBorrowQuotaAsync(Enums.Category.Spot, "ETHUSDT", Enums.OrderSide.Buy), "GetBorrowQuota");
+            await tester.ValidateAsync(client => client.V5Api.Trading.GetBorrowQuotaAsync("ETHUSDT", Enums.OrderSide.Buy), "GetBorrowQuota");
             await tester.ValidateAsync(client => client.V5Api.Trading.SetDisconnectCancelAllAsync(10), "SetDisconnectCancelAll");
             await tester.ValidateAsync(client => client.V5Api.Trading.GetUserTradesAsync(Enums.Category.Option), "GetUserTrades");
             await tester.ValidateAsync(client => client.V5Api.Trading.GetPositionsAsync(Enums.Category.Option), "GetPositions", ignoreProperties: new List<string> { "mmrSysUpdateTime" });

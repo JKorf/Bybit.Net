@@ -451,17 +451,13 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitBorrowQuota>> GetBorrowQuotaAsync(
-            Category category,
             string symbol,
             OrderSide side,
             CancellationToken ct = default)
         {
-            if (category != Category.Spot)
-                throw new ArgumentException("Category should be spot");
-
             var parameters = new Dictionary<string, object>()
             {
-                { "category", EnumConverter.GetString(category) },
+                { "category", EnumConverter.GetString(Category.Spot) },
                 { "symbol", symbol },
                 { "side", EnumConverter.GetString(side) },
             };
@@ -565,7 +561,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Get Positions
+        #region Confirm Risk Limit
 
         /// <inheritdoc />
         public async Task<WebCallResult> ConfirmRiskLimitAsync(

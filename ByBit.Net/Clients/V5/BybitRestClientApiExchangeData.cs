@@ -48,7 +48,6 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            // V5 doesn't have it's own server time endpoint (yet)
             return await _baseClient.SendRequestAsync<BybitTime>(_baseClient.GetUrl("v5/market/time"), HttpMethod.Get, ct, null).ConfigureAwait(false);
         }
 
@@ -169,7 +168,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Get Option symbols
+        #region Get Linear Inverse symbols
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(
@@ -339,17 +338,14 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Get Historic Volatility
+        #region Get Historical Volatility
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(Category category, string? baseAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
-            if (category != Category.Option)
-                throw new ArgumentException("Invalid category; should be Option");
-
             var parameters = new Dictionary<string, object>()
             {
-                { "category", EnumConverter.GetString(category) },
+                { "category", EnumConverter.GetString(Category.Option) },
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
