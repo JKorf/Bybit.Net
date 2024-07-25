@@ -66,6 +66,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// Borrow usage rate
         /// </summary>
         [JsonProperty("borrowUsageRate")]
-        public decimal BorrowUsageRate { get; set; }
+        public decimal? BorrowUsageRate { get; set; }
     }
 }
