@@ -98,12 +98,11 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get spot borrow quota
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/spot-borrow-quota" /></para>
         /// </summary>
-        /// <param name="category">Category</param>
         /// <param name="symbol">Symbol</param>
         /// <param name="side">Side</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBorrowQuota>> GetBorrowQuotaAsync(Category category, string symbol, OrderSide side, CancellationToken ct = default);
+        Task<WebCallResult<BybitBorrowQuota>> GetBorrowQuotaAsync(string symbol, OrderSide side, CancellationToken ct = default);
 
         /// <summary>
         /// Get delivery history

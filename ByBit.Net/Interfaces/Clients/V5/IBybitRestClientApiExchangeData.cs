@@ -64,7 +64,6 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get historical volatility
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/iv" /></para>
         /// </summary>
-        /// <param name="category">Category</param>
         /// <param name="baseAsset">Filter by base asset</param>
         /// <param name="period">Period</param>
         /// <param name="startTime">Fitler by start time</param>
@@ -73,7 +72,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(Category category, string? baseAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get index price klines

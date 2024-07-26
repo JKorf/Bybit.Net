@@ -304,7 +304,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Get Account Info
+        #region Get Margin Account Info
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitAccountInfo>> GetMarginAccountInfoAsync(CancellationToken ct = default)
@@ -1041,7 +1041,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
         
-        #region Get Convert Assets
+        #region Get Convert Quote
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitConvertQuote>> GetConvertQuoteAsync(ConvertAccountType accountType, string fromAsset, string toAsset, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
