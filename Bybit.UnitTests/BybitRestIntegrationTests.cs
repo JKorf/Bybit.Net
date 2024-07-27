@@ -63,6 +63,7 @@ namespace Bybit.Net.UnitTests
             await RunAndCheckResult(client => client.V5Api.Account.GetAccountTypesAsync(default, default), true);
             await RunAndCheckResult(client => client.V5Api.Account.GetSpotMarginStatusAndLeverageAsync(default), true);
             await RunAndCheckResult(client => client.V5Api.Account.GetSpotMarginDataAsync(default, default, default), true);
+            await RunAndCheckResult(client => client.V5Api.Account.GetSpotMarginInterestRateHistoryAsync("ETH", default, default, default, default), true);
             await RunAndCheckResult(client => client.V5Api.Account.GetConvertAssetsAsync(Enums.ConvertAccountType.ConvertUta, default, default, default), true);
             await RunAndCheckResult(client => client.V5Api.Account.GetConvertHistoryAsync(Enums.ConvertAccountType.ConvertUta, default, default, default), true);
 

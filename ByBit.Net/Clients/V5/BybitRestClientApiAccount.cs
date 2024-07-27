@@ -947,6 +947,23 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Spot Margin Interest Rate History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitSpotMarginBorrowRate>>> GetSpotMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("currency", asset);
+            parameters.AddOptional("vipLevel", vipLevel);
+            parameters.AddOptionalMilliseconds("startTime", startTime);
+            parameters.AddOptionalMilliseconds("endTime", endTime);
+
+            var result = await _baseClient.SendRequestAsync<BybitResponse<BybitSpotMarginBorrowRate>>(_baseClient.GetUrl("v5/spot-margin-trade/interest-rate-history"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return result.As<IEnumerable<BybitSpotMarginBorrowRate>>(result.Data?.List);
+        }
+
+        #endregion
+
         #region Get Broker Account Info
 
         /// <inheritdoc />

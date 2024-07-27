@@ -537,6 +537,18 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<IEnumerable<BybitSpotMarginVipMarginList>>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get spot margin interest rate history
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/vip-margin" /></para>
+        /// </summary>
+        /// <param name="asset">The asset</param>
+        /// <param name="vipLevel">VIP level. If not set uses the account VIP level</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BybitSpotMarginBorrowRate>>> GetSpotMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get broker earnings
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/broker/exchange-earning" /></para>
         /// </summary>

@@ -1,0 +1,37 @@
+GET
+/v5/spot-margin-trade/interest-rate-history
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "timestamp": 1721469600000,
+                "currency": "USDC",
+                "hourlyBorrowRate": "0.000014621596",
+                "vipLevel": "No VIP"
+            },
+            {
+                "timestamp": 1721466000000,
+                "currency": "USDC",
+                "hourlyBorrowRate": "0.000014621596",
+                "vipLevel": "No VIP"
+            },
+            {
+                "timestamp": 1721462400000,
+                "currency": "USDC",
+                "hourlyBorrowRate": "0.000014621596",
+                "vipLevel": "No VIP"
+            },
+            {
+                "timestamp": 1721458800000,
+                "currency": "USDC",
+                "hourlyBorrowRate": "0.000014621596",
+                "vipLevel": "No VIP"
+            }
+        ]
+    },
+    "retExtInfo": "{}",
+    "time": 1721899048991
+}

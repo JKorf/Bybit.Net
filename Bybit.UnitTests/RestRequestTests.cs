@@ -52,6 +52,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Account.GetSpotMarginStatusAndLeverageAsync(), "GetSpotMarginStatusAndLeverage", ignoreProperties: new List<string> { "spotMarginMode" });
             await tester.ValidateAsync(client => client.V5Api.Account.SetSpotMarginTradeModeAsync(true), "SetSpotMarginTradeMode");
             await tester.ValidateAsync(client => client.V5Api.Account.GetSpotMarginDataAsync(), "GetSpotMarginData", "result.vipCoinList");
+            await tester.ValidateAsync(client => client.V5Api.Account.GetSpotMarginInterestRateHistoryAsync("ETH"), "GetSpotMarginInterestRateHistory", "result.list");
             await tester.ValidateAsync(client => client.V5Api.Account.GetBrokerAccountInfoAsync(), "GetBrokerAccountInfo");
             await tester.ValidateAsync(client => client.V5Api.Account.GetBrokerEarningsAsync(), "GetBrokerEarnings");
             await tester.ValidateAsync(client => client.V5Api.Account.SetSpotHedgingModeAsync(true), "SetSpotHedgingMode");
