@@ -44,6 +44,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("execId")]
         public string TradeId { get; set; } = string.Empty;
         /// <summary>
+        /// Is maker trade
+        /// </summary>
+        [JsonProperty("isMaker")]
+        public bool IsMaker { get; set; }
+        /// <summary>
         /// Trade price
         /// </summary>
         [JsonProperty("execPrice")]
