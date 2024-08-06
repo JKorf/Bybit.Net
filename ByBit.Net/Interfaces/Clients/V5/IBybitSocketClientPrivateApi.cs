@@ -75,7 +75,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/trade/guideline" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="side">Order side</param>
         /// <param name="type">Order type</param>
         /// <param name="quantity">Quantity</param>
@@ -141,7 +141,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/trade/guideline" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id of the order to edit</param>
         /// <param name="clientOrderId">Client order id of the order to edit</param>
         /// <param name="quantity">New quantity</param>
@@ -181,7 +181,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/trade/guideline" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Cancel by order id</param>
         /// <param name="clientOrderId">Cancel by client order id</param>
         /// <param name="orderFilter">Order filter</param>

@@ -39,8 +39,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/delivery-price" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
-        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
@@ -52,7 +52,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/history-fund-rate" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Fitler by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results</param>
@@ -64,7 +64,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get historical volatility
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/iv" /></para>
         /// </summary>
-        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
         /// <param name="period">Period</param>
         /// <param name="startTime">Fitler by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -79,7 +79,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/index-kline" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="startTime">Fitler by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -92,7 +92,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get insurance pool data
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/insurance" /></para>
         /// </summary>
-        /// <param name="asset">Asset</param>
+        /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitResponse<BybitInsurance>>> GetInsuranceAsync(string? asset = null, CancellationToken ct = default);
@@ -102,7 +102,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/kline" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="startTime">Fitler by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -116,8 +116,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/instrument" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="baseAsset">Base asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Base asset, for example `ETH`</param>
         /// <param name="status">Filter by status</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
@@ -137,8 +137,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/tickers" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="baseAsset">Base asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Base asset, for example `ETH`</param>
         /// <param name="expirationDate">Expiration date</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -149,7 +149,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/mark-kline" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="startTime">Fitler by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -163,7 +163,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/open-interest" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interestInterval">Interval</param>
         /// <param name="startTime">Fitler by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -177,8 +177,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get option symbols
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/instrument" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="baseAsset">Base asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Base asset, for example `ETH`</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
@@ -189,8 +189,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get option tickers
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/tickers" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
-        /// <param name="baseAsset">Filter by asset</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Filter by asset, for example `ETH`</param>
         /// <param name="expirationDate">Expiration date</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -201,7 +201,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/orderbook" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Limit of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -212,7 +212,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/preimum-index-kline" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="startTime">Fitler by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -225,7 +225,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get risk limits
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="cursor">Next page cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -235,7 +235,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get spot symbols
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/instrument" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? symbol = null, CancellationToken ct = default);
@@ -244,7 +244,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Spot tickers
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/tickers" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitResponse<BybitSpotTicker>>> GetSpotTickersAsync(string? symbol = null, CancellationToken ct = default);
@@ -254,8 +254,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/recent-trade" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="baseAsset">Base asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Base asset, for example `ETH`</param>
         /// <param name="optionType">Option type</param>
         /// <param name="limit">Limit of results</param>
         /// <param name="ct">Cancellation token</param>
@@ -285,7 +285,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/long-short-ratio" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="period">Data recording period</param>
         /// <param name="limit">Limit for data size per page</param>
         /// <param name="ct">Cancellation token</param>

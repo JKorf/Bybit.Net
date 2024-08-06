@@ -19,8 +19,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/cancel-all" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
-        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
         /// <param name="settleAsset">Filter by settle asset</param>
         /// <param name="orderFilter">Order filter</param>
         /// <param name="stopOrderType">Stop order type</param>
@@ -33,7 +33,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/cancel-order" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Cancel by order id</param>
         /// <param name="clientOrderId">Cancel by client order id</param>
         /// <param name="orderFilter">Order filter</param>
@@ -46,7 +46,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/amend-order" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id of the order to edit</param>
         /// <param name="clientOrderId">Client order id of the order to edit</param>
         /// <param name="quantity">New quantity</param>
@@ -98,7 +98,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get spot borrow quota
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/spot-borrow-quota" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="side">Side</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -109,7 +109,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/delivery" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="expiryDate">Filter by expiry date</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -124,9 +124,9 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/open-order" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
-        /// <param name="baseAsset">Filter by base asset</param>
-        /// <param name="settleAsset">Filter by settle asset</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
+        /// <param name="settleAsset">Filter by settle asset, for example `USDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="openOnly">Open only</param>
@@ -142,8 +142,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/order-list" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
-        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="status">Filter by status</param>
@@ -161,9 +161,9 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/position" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
-        /// <param name="baseAsset">Filter by base asset</param>
-        /// <param name="settleAsset">Filter by settle asset</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
+        /// <param name="settleAsset">Filter by settle asset, for example `USDT`</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
@@ -175,7 +175,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/position/confirm-mmr" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> ConfirmRiskLimitAsync(Category category, string symbol, CancellationToken ct = default);
@@ -185,7 +185,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/settlement" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results per page</param>
@@ -199,8 +199,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/position/execution" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
-        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="startTime">Filter by start time</param>
@@ -217,7 +217,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/create-order" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="side">Order side</param>
         /// <param name="type">Order type</param>
         /// <param name="quantity">Quantity</param>
@@ -302,7 +302,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/position/trading-stop" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="positionIdx">Position idx</param>
         /// <param name="takeProfit">Take profit price</param>
         /// <param name="stopLoss">Stop loss price</param>
@@ -343,7 +343,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/position/close-pnl" /></para>
         /// </summary>
         /// <param name="category">Category</param>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results per page</param>

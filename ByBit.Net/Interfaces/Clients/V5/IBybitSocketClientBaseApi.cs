@@ -19,7 +19,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to kline updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/kline" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe</param>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
@@ -30,7 +30,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to kline updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/kline" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
@@ -41,7 +41,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to order book updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/orderbook" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe</param>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="depth">The order book depth</param>
         /// <param name="updateHandler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
@@ -52,7 +52,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to order book updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/orderbook" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="depth">The order book depth</param>
         /// <param name="updateHandler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>

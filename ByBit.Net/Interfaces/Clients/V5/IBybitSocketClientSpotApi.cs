@@ -18,7 +18,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to leveraged token kline updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/etp-kline" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe</param>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
@@ -29,7 +29,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to leveraged token kline updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/etp-kline" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
@@ -40,7 +40,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to leveraged token NAV updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/etp-nav" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe</param>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
@@ -50,7 +50,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to leveraged token NAV updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/etp-nav" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
@@ -60,7 +60,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to leveraged token ticker updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/etp-ticker" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe</param>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
@@ -70,7 +70,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to leveraged token ticker updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/etp-ticker" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
@@ -80,7 +80,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to ticker updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/ticker" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe</param>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
@@ -90,7 +90,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to ticker updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/ticker" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
@@ -100,7 +100,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to public trade updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/trade" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe</param>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
@@ -110,7 +110,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Subscribe to public trade updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
