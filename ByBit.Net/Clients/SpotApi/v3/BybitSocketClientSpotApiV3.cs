@@ -58,7 +58,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         {
             var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(30))!;
             var authProvider = (BybitAuthenticationProvider)AuthenticationProvider!;
-            var key = authProvider.GetApiKey();
+            var key = authProvider.ApiKey;
             var sign = authProvider.Sign($"GET/realtime{expireTime}");
 
             return new BybitQuery("auth", new object[]
