@@ -71,7 +71,7 @@ namespace Bybit.Net.Clients.V5
                 // Auth subscription
                 var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(30))!;
                 var authProvider = (BybitAuthenticationProvider)AuthenticationProvider!;
-                var key = authProvider.GetApiKey();
+                var key = authProvider.ApiKey;
                 var sign = authProvider.Sign($"GET/realtime{expireTime}");
 
                 return new BybitQuery("auth", new object[]
@@ -86,7 +86,7 @@ namespace Bybit.Net.Clients.V5
                 // Trading
                 var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(30))!;
                 var authProvider = (BybitAuthenticationProvider)AuthenticationProvider!;
-                var key = authProvider.GetApiKey();
+                var key = authProvider.ApiKey;
                 var sign = authProvider.Sign($"GET/realtime{expireTime}");
 
                 return new BybitRequestQuery<object>("auth", null, new object[]
