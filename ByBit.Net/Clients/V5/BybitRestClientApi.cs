@@ -17,11 +17,12 @@ using System.Linq;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.SharedApis.Interfaces;
 
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitRestClientApi"/>
-    internal class BybitRestClientApi : RestApiClient, IBybitRestClientApi, ISpotClient
+    internal partial class BybitRestClientApi : RestApiClient, IBybitRestClientApi, ISpotClient
     {
         internal TimeSyncState _timeSyncState = new TimeSyncState("Bybit V5 API");
 
@@ -32,6 +33,7 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         public ISpotClient CommonSpotClient => this;
+        public ISharedClient SharedClient => this;
 
         /// <summary>
         /// Options
@@ -76,7 +78,7 @@ namespace Bybit.Net.Clients.V5
             => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         /// <summary>
         /// Get url for an endpoint
