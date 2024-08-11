@@ -6,11 +6,11 @@ using System.Text;
 namespace Bybit.Net.Interfaces.Clients
 {
     public interface IBybitRestClientApiShared :
-        ITickerClient,
-        ISpotSymbolClient,
-        IFuturesSymbolClient,
-        IKlineClient,
-        ITradeClient
+        ITickerRestClient,
+        ISpotSymbolRestClient,
+        IFuturesSymbolRestClient,
+        IKlineRestClient,
+        ITradeRestClient
     {
     }
 }

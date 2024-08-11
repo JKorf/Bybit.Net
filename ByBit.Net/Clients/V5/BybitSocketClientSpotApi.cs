@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+﻿using Binance.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
@@ -20,7 +21,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientSpotApi" />
-    internal class BybitSocketClientSpotApi : BybitSocketClientBaseApi, IBybitSocketClientSpotApi
+    internal partial class BybitSocketClientSpotApi : BybitSocketClientBaseApi, IBybitSocketClientSpotApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
@@ -33,6 +34,8 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
+
+        public IBybitSocketClientSpotApiShared SharedClient => this;
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)

@@ -18,7 +18,7 @@ namespace Bybit.Net.Clients.V5
     {
         public string Exchange => BybitExchange.ExchangeName;
 
-        async Task<WebCallResult<IEnumerable<SharedKline>>> IKlineClient.GetKlinesAsync(KlineRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval.TotalSeconds;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
@@ -51,7 +51,7 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
         {
             var result = await ExchangeData.GetSpotSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
@@ -69,7 +69,7 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
         {
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
 
@@ -89,7 +89,37 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<SharedTicker>> ITickerClient.GetTickerAsync(TickerRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(SharedRequest request, CancellationToken ct)
+        {
+            if (request.ApiType == ApiType.Spot)
+            {
+                var result = await ExchangeData.GetSpotTickersAsync(ct: ct).ConfigureAwait(false);
+                if (!result)
+                    return result.As<IEnumerable<SharedTicker>>(default);
+
+                return result.As<IEnumerable<SharedTicker>>(result.Data.List.Select(x => new SharedTicker
+                {
+                    HighPrice = x.HighPrice24h,
+                    LastPrice = x.LastPrice,
+                    LowPrice = x.LowPrice24h,
+                }));
+            }
+            else
+            {
+                var result = await ExchangeData.GetLinearInverseTickersAsync(request.ApiType == ApiType.InverseFutures ? Enums.Category.Inverse : Enums.Category.Linear, ct: ct).ConfigureAwait(false);
+                if (!result)
+                    return result.As<IEnumerable<SharedTicker>>(default);
+                
+                return result.As<IEnumerable<SharedTicker>>(result.Data.List.Select(x => new SharedTicker
+                {
+                    HighPrice = x.HighPrice24h,
+                    LastPrice = x.LastPrice,
+                    LowPrice = x.LowPrice24h,
+                }));
+            }
+        }
+
+        async Task<WebCallResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
             if (request.ApiType == ApiType.Spot)
             {
@@ -100,6 +130,7 @@ namespace Bybit.Net.Clients.V5
                 var ticker = result.Data.List.Single();
                 return result.As(new SharedTicker
                 {
+                    Symbol = ticker.Symbol,
                     HighPrice = ticker.HighPrice24h,
                     LastPrice = ticker.LastPrice,
                     LowPrice = ticker.LowPrice24h,
@@ -117,6 +148,7 @@ namespace Bybit.Net.Clients.V5
                 var ticker = result.Data.List.Single();
                 return result.As(new SharedTicker
                 {
+                    Symbol = ticker.Symbol,
                     HighPrice = ticker.HighPrice24h,
                     LastPrice = ticker.LastPrice,
                     LowPrice = ticker.LowPrice24h,
@@ -124,7 +156,7 @@ namespace Bybit.Net.Clients.V5
             }
         }
 
-        async Task<WebCallResult<IEnumerable<SharedTrade>>> ITradeClient.GetTradesAsync(TradeRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedTrade>>> ITradeRestClient.GetTradesAsync(GetTradesRequest request, CancellationToken ct)
         {
             if (request.StartTime != null || request.EndTime != null)
                 return new WebCallResult<IEnumerable<SharedTrade>>(new ArgumentError("Start/EndTime filtering not supported"));

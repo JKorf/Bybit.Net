@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+﻿using Binance.Net.Interfaces.Clients.SpotApi;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -14,6 +15,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
     /// </summary>
     public interface IBybitSocketClientSpotApi : IBybitSocketClientBaseApi
     {
+        IBybitSocketClientSpotApiShared SharedClient { get; }
+
         /// <summary>
         /// Subscribe to leveraged token kline updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/etp-kline" /></para>
