@@ -3,6 +3,7 @@ using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis.Interfaces;
+using CryptoExchange.Net.SharedApis.Models.Rest;
 using CryptoExchange.Net.SharedApis.RequestModels;
 using CryptoExchange.Net.SharedApis.ResponseModels;
 using System;
@@ -40,15 +41,7 @@ namespace Bybit.Net.Clients.V5
                 return result.As<IEnumerable<SharedKline>>(default);
 
             // Reverse as data is returned in desc order instead of standard asc
-            return result.As(result.Data.List.Select(x => new SharedKline
-            {
-                BaseVolume = x.Volume,
-                ClosePrice = x.ClosePrice,
-                HighPrice = x.HighPrice,
-                LowPrice = x.LowPrice,
-                OpenPrice = x.OpenPrice,
-                OpenTime = x.StartTime
-            }));
+            return result.As(result.Data.List.Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)));
         }
 
         async Task<WebCallResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
@@ -57,11 +50,8 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.As<IEnumerable<SharedSpotSymbol>>(default);
 
-            return result.As(result.Data.List.Select(s => new SharedSpotSymbol
+            return result.As(result.Data.List.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
             {
-                BaseAsset = s.BaseAsset,
-                QuoteAsset = s.QuoteAsset,
-                Name = s.Name,
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
                 QuantityStep = s.LotSizeFilter?.BasePrecision,
@@ -77,11 +67,8 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.As<IEnumerable<SharedFuturesSymbol>>(default);
 
-            return result.As(result.Data.List.Select(s => new SharedFuturesSymbol
+            return result.As(result.Data.List.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
             {
-                BaseAsset = s.BaseAsset,
-                QuoteAsset = s.QuoteAsset,
-                Name = s.Name,
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
                 QuantityStep = s.LotSizeFilter?.QuantityStep,
@@ -97,12 +84,7 @@ namespace Bybit.Net.Clients.V5
                 if (!result)
                     return result.As<IEnumerable<SharedTicker>>(default);
 
-                return result.As<IEnumerable<SharedTicker>>(result.Data.List.Select(x => new SharedTicker
-                {
-                    HighPrice = x.HighPrice24h,
-                    LastPrice = x.LastPrice,
-                    LowPrice = x.LowPrice24h,
-                }));
+                return result.As<IEnumerable<SharedTicker>>(result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h)));
             }
             else
             {
@@ -110,12 +92,7 @@ namespace Bybit.Net.Clients.V5
                 if (!result)
                     return result.As<IEnumerable<SharedTicker>>(default);
                 
-                return result.As<IEnumerable<SharedTicker>>(result.Data.List.Select(x => new SharedTicker
-                {
-                    HighPrice = x.HighPrice24h,
-                    LastPrice = x.LastPrice,
-                    LowPrice = x.LowPrice24h,
-                }));
+                return result.As<IEnumerable<SharedTicker>>(result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h)));
             }
         }
 
@@ -128,13 +105,7 @@ namespace Bybit.Net.Clients.V5
                     return result.As<SharedTicker>(default);
 
                 var ticker = result.Data.List.Single();
-                return result.As(new SharedTicker
-                {
-                    Symbol = ticker.Symbol,
-                    HighPrice = ticker.HighPrice24h,
-                    LastPrice = ticker.LastPrice,
-                    LowPrice = ticker.LowPrice24h,
-                });
+                return result.As(new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h));
             }
             else
             {
@@ -146,13 +117,7 @@ namespace Bybit.Net.Clients.V5
                     return result.As<SharedTicker>(default);
 
                 var ticker = result.Data.List.Single();
-                return result.As(new SharedTicker
-                {
-                    Symbol = ticker.Symbol,
-                    HighPrice = ticker.HighPrice24h,
-                    LastPrice = ticker.LastPrice,
-                    LowPrice = ticker.LowPrice24h,
-                });
+                return result.As(new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h));
             }
         }
 
@@ -171,12 +136,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.As<IEnumerable<SharedTrade>>(default);
 
-            return result.As(result.Data.List.Select(x => new SharedTrade
-            {
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Timestamp = x.Timestamp
-            }));
+            return result.As(result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)));
         }
     }
 }
