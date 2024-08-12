@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+﻿using Binance.Net.Interfaces.Clients.V5;
+using Bybit.Net.Enums;
 using Bybit.Net.Enums.V5;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
@@ -24,7 +25,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientPrivateApi" />
-    internal class BybitSocketClientPrivateApi : SocketApiClient, IBybitSocketClientPrivateApi
+    internal partial class BybitSocketClientPrivateApi : SocketApiClient, IBybitSocketClientPrivateApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _reqId2Path = MessagePath.Get().Property("reqId");
@@ -62,6 +63,8 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+        public IBybitSocketClientPrivateApiShared SharedClient => this;
 
         /// <inheritdoc />
         protected override Query? GetAuthenticationRequest(SocketConnection connection)

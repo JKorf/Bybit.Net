@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+﻿using Binance.Net.Interfaces.Clients.V5;
+using Bybit.Net.Enums;
 using Bybit.Net.Enums.V5;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Interfaces;
@@ -16,6 +17,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
     /// </summary>
     public interface IBybitSocketClientPrivateApi : ISocketApiClient
     {
+        IBybitSocketClientPrivateApiShared SharedClient { get; }
+
         /// <summary>
         /// Subscribe to Greek updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/private/greek" /></para>

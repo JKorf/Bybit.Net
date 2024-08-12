@@ -5,10 +5,9 @@ using System.Text;
 
 namespace Binance.Net.Interfaces.Clients.V5
 {
-    public interface IBybitSocketClientSpotApiShared :
-        ITickerSocketClient,
-        ITradeSocketClient,
-        IBookTickerSocketClient
+    public interface IBybitSocketClientPrivateApiShared :
+        IBalanceSocketClient,
+        ISpotOrderSocketClient
     {
     }
 }

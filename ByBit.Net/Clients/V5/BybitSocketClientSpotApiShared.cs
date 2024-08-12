@@ -59,5 +59,6 @@ namespace Bybit.Net.Clients.V5
 
             return result;
         }
+
     }
 }
