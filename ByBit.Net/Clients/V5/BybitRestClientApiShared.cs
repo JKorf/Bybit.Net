@@ -138,5 +138,18 @@ namespace Bybit.Net.Clients.V5
 
             return result.As(result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)));
         }
+
+        async Task<WebCallResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(SharedRequest request, CancellationToken ct)
+        {
+            // Assume unified account
+            // Inverse futures uses CONTRACT, other UNIFIED
+            var accountType = request.ApiType == ApiType.InverseFutures ? Enums.AccountType.Contract : Enums.AccountType.Unified;
+
+            var result = await Account.GetBalancesAsync(accountType, ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<SharedBalance>>(default);
+
+            return result.As(result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))));
+        }
     }
 }

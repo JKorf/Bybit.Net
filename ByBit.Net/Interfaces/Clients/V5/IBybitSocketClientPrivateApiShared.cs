@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Binance.Net.Interfaces.Clients.V5
+namespace Bybit.Net.Interfaces.Clients.V5
 {
     public interface IBybitSocketClientPrivateApiShared :
         IBalanceSocketClient,
-        ISpotOrderSocketClient
+        ISpotOrderSocketClient,
+        ISpotUserTradeSocketClient
     {
     }
 }

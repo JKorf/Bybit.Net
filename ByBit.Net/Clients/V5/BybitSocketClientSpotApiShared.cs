@@ -1,4 +1,4 @@
-﻿using Binance.Net.Interfaces.Clients.SpotApi;
+﻿using Bybit.Net.Interfaces.Clients.V5;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis.Interfaces.Socket;
