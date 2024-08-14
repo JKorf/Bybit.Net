@@ -65,6 +65,7 @@ namespace Bybit.Net.Clients.V5
             var result = await SubscribeToUserTradeUpdatesAsync(
                 update => handler(update.As(update.Data.Select(x =>
                     new SharedUserTrade(
+                        x.Symbol,
                         x.OrderId.ToString(),
                         x.TradeId.ToString(),
                         x.Quantity,

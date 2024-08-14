@@ -175,7 +175,7 @@ namespace Bybit.Net.Clients.V5
             return result.As(result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))));
         }
 
-        async Task<WebCallResult<SharedOrderId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotPlaceOrderRequest request, CancellationToken ct)
+        async Task<WebCallResult<SharedOrderId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
         {
             if (request.OrderType == SharedOrderType.Other)
                 throw new ArgumentException("OrderType can't be `Other`", nameof(request.OrderType));
@@ -230,7 +230,7 @@ namespace Bybit.Net.Clients.V5
             });
         }
 
-        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetSpotOpenOrdersRequest request, CancellationToken ct)
         {
             string? symbol = null;
             if (request.BaseAsset != null && request.QuoteAsset != null)
@@ -262,7 +262,7 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetClosedOrdersRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, CancellationToken ct)
         {
             var orders = await Trading.GetOrderHistoryAsync(Category.Spot, 
                 FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
