@@ -4,6 +4,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces.Socket;
+using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Models.Socket;
 using CryptoExchange.Net.SharedApis.RequestModels;
 using CryptoExchange.Net.SharedApis.ResponseModels;
@@ -21,16 +22,16 @@ namespace Bybit.Net.Clients.V5
     {
         public string Exchange => BybitExchange.ExchangeName;
 
-        async Task<CallResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
         {
             var result = await SubscribeToWalletUpdatesAsync(
                 update => handler(update.As(update.Data.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.Free ?? 0, x.Equity ?? 0))))),
                 ct: ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToOrderUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToOrderUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
         {
             var result = await SubscribeToOrderUpdatesAsync(
                 update => handler(update.As<IEnumerable<SharedSpotOrder>>(update.Data.Select(x =>
@@ -57,10 +58,10 @@ namespace Bybit.Net.Clients.V5
                 ))),
                 ct: ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> ISpotUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedUserTrade>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedUserTrade>>> handler, CancellationToken ct)
         {
             var result = await SubscribeToUserTradeUpdatesAsync(
                 update => handler(update.As(update.Data.Select(x =>
@@ -79,7 +80,7 @@ namespace Bybit.Net.Clients.V5
                 ))),
                 ct: ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
     }
 }

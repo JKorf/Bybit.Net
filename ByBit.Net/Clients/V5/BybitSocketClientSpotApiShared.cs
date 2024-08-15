@@ -2,6 +2,7 @@
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis.Interfaces.Socket;
+using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Models.Socket;
 using CryptoExchange.Net.SharedApis.RequestModels;
 using CryptoExchange.Net.SharedApis.ResponseModels;
@@ -19,23 +20,23 @@ namespace Bybit.Net.Clients.V5
     {
         public string Exchange => BybitExchange.ExchangeName;
 
-        async Task<CallResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(TickerSubscribeRequest request, Action<DataEvent<SharedTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(TickerSubscribeRequest request, Action<DataEvent<SharedTicker>> handler, CancellationToken ct)
         {
             var symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType);
             var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.As(new SharedTicker(update.Data.Symbol, update.Data.HighPrice24h, update.Data.LastPrice, update.Data.LowPrice24h))), ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(TradeSubscribeRequest request, Action<DataEvent<IEnumerable<SharedTrade>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(TradeSubscribeRequest request, Action<DataEvent<IEnumerable<SharedTrade>>> handler, CancellationToken ct)
         {
             var symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType);
             var result = await SubscribeToTradeUpdatesAsync(symbol, update => handler(update.As(update.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)))), ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(BookTickerSubscribeRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(BookTickerSubscribeRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
         {
             decimal bestAskPrice = 0, bestAskQuantity = 0, bestBidPrice = 0, bestBidQuantity = 0;
             var symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType);
@@ -57,7 +58,7 @@ namespace Bybit.Net.Clients.V5
                 handler(update.As(new SharedBookTicker(bestAskPrice, bestAskQuantity, bestBidPrice, bestBidQuantity)));
             }, ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
     }

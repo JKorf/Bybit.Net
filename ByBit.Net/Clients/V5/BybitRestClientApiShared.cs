@@ -4,6 +4,7 @@ using Bybit.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces;
+using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Models.Rest;
 using CryptoExchange.Net.SharedApis.RequestModels;
 using CryptoExchange.Net.SharedApis.ResponseModels;
@@ -42,11 +43,11 @@ namespace Bybit.Net.Clients.V5
                 SharedQuantityType.Both,
                 SharedQuantityType.Both);
 
-        async Task<WebCallResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, CancellationToken ct)
         {
-            var interval = (Enums.KlineInterval)request.Interval.TotalSeconds;
+            var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
-                return new WebCallResult<IEnumerable<SharedKline>>(new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, new ArgumentError("Interval not supported"));
 
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
 
@@ -61,19 +62,19 @@ namespace Bybit.Net.Clients.V5
                 ).ConfigureAwait(false);
 
             if (!result)
-                return result.As<IEnumerable<SharedKline>>(default);
+                return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, default);
 
             // Reverse as data is returned in desc order instead of standard asc
-            return result.As(result.Data.List.Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)));
+            return result.AsExchangeResult(Exchange, result.Data.List.Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
         {
             var result = await ExchangeData.GetSpotSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<SharedSpotSymbol>>(default);
+                return result.AsExchangeResult<IEnumerable<SharedSpotSymbol>>(Exchange, default);
 
-            return result.As(result.Data.List.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
+            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
@@ -82,15 +83,15 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
         {
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
 
             var result = await ExchangeData.GetLinearInverseSymbolsAsync(category, ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<SharedFuturesSymbol>>(default);
+                return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
 
-            return result.As(result.Data.List.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
+            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
@@ -99,36 +100,36 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(SharedRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(SharedRequest request, CancellationToken ct)
         {
             if (request.ApiType == ApiType.Spot)
             {
                 var result = await ExchangeData.GetSpotTickersAsync(ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.As<IEnumerable<SharedTicker>>(default);
+                    return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, default);
 
-                return result.As<IEnumerable<SharedTicker>>(result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h)));
+                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h)));
             }
             else
             {
                 var result = await ExchangeData.GetLinearInverseTickersAsync(request.ApiType == ApiType.InverseFutures ? Enums.Category.Inverse : Enums.Category.Linear, ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.As<IEnumerable<SharedTicker>>(default);
+                    return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, default);
                 
-                return result.As<IEnumerable<SharedTicker>>(result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h)));
+                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h)));
             }
         }
 
-        async Task<WebCallResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
             if (request.ApiType == ApiType.Spot)
             {
                 var result = await ExchangeData.GetSpotTickersAsync(FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType), ct).ConfigureAwait(false);
                 if (!result)
-                    return result.As<SharedTicker>(default);
+                    return result.AsExchangeResult<SharedTicker>(Exchange, default);
 
                 var ticker = result.Data.List.Single();
-                return result.As(new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h));
+                return result.AsExchangeResult(Exchange, new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h));
             }
             else
             {
@@ -137,17 +138,17 @@ namespace Bybit.Net.Clients.V5
                     FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
                     ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.As<SharedTicker>(default);
+                    return result.AsExchangeResult<SharedTicker>(Exchange, default);
 
                 var ticker = result.Data.List.Single();
-                return result.As(new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h));
+                return result.AsExchangeResult(Exchange, new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h));
             }
         }
 
-        async Task<WebCallResult<IEnumerable<SharedTrade>>> ITradeRestClient.GetTradesAsync(GetTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> ITradeRestClient.GetTradesAsync(GetTradesRequest request, CancellationToken ct)
         {
             if (request.StartTime != null || request.EndTime != null)
-                return new WebCallResult<IEnumerable<SharedTrade>>(new ArgumentError("Start/EndTime filtering not supported"));
+                return new ExchangeWebResult<IEnumerable<SharedTrade>>(Exchange, new ArgumentError("Start/EndTime filtering not supported"));
 
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
 
@@ -157,12 +158,12 @@ namespace Bybit.Net.Clients.V5
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<SharedTrade>>(default);
+                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, default);
 
-            return result.As(result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)));
+            return result.AsExchangeResult(Exchange, result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(SharedRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(SharedRequest request, CancellationToken ct)
         {
             // Assume unified account
             // Inverse futures uses CONTRACT, other UNIFIED
@@ -170,12 +171,12 @@ namespace Bybit.Net.Clients.V5
 
             var result = await Account.GetBalancesAsync(accountType, ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<SharedBalance>>(default);
+                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, default);
 
-            return result.As(result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))));
+            return result.AsExchangeResult(Exchange, result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))));
         }
 
-        async Task<WebCallResult<SharedOrderId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedOrderId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
         {
             if (request.OrderType == SharedOrderType.Other)
                 throw new ArgumentException("OrderType can't be `Other`", nameof(request.OrderType));
@@ -193,22 +194,22 @@ namespace Bybit.Net.Clients.V5
                 ).ConfigureAwait(false);
 
             if (!result)
-                return result.As<SharedOrderId>(default);
+                return result.AsExchangeResult<SharedOrderId>(Exchange, default);
 
-            return result.As(new SharedOrderId(result.Data.OrderId));
+            return result.AsExchangeResult(Exchange, new SharedOrderId(result.Data.OrderId));
         }
 
-        async Task<WebCallResult<SharedSpotOrder>> ISpotOrderRestClient.GetOrderAsync(GetOrderRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedSpotOrder>> ISpotOrderRestClient.GetOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var orders = await Trading.GetOrdersAsync(Category.Spot, orderId: request.OrderId).ConfigureAwait(false);
             if (!orders)
-                return orders.As<SharedSpotOrder>(default);
+                return orders.AsExchangeResult<SharedSpotOrder>(Exchange, default);
 
             if (!orders.Data.List.Any())
-                return new WebCallResult<SharedSpotOrder>(new ServerError("Order not found"));
+                return new ExchangeWebResult<SharedSpotOrder>(Exchange, new ServerError("Order not found"));
 
             var order = orders.Data.List.Single();
-            return orders.As(new SharedSpotOrder(
+            return orders.AsExchangeResult(Exchange, new SharedSpotOrder(
                 order.Symbol,
                 order.OrderId.ToString(),
                 ParseOrderType(order.OrderType),
@@ -230,7 +231,7 @@ namespace Bybit.Net.Clients.V5
             });
         }
 
-        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetSpotOpenOrdersRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetSpotOpenOrdersRequest request, CancellationToken ct)
         {
             string? symbol = null;
             if (request.BaseAsset != null && request.QuoteAsset != null)
@@ -238,9 +239,9 @@ namespace Bybit.Net.Clients.V5
 
             var orders = await Trading.GetOrdersAsync(Category.Spot, symbol, openOnly: 0).ConfigureAwait(false);
             if (!orders)
-                return orders.As<IEnumerable<SharedSpotOrder>>(default);
+                return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
 
-            return orders.As(orders.Data.List.Select(x => new SharedSpotOrder(
+            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedSpotOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -262,7 +263,7 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, CancellationToken ct)
         {
             var orders = await Trading.GetOrderHistoryAsync(Category.Spot, 
                 FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
@@ -271,9 +272,9 @@ namespace Bybit.Net.Clients.V5
                 limit: request.Limit
                 ).ConfigureAwait(false);
             if (!orders)
-                return orders.As<IEnumerable<SharedSpotOrder>>(default);
+                return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
 
-            return orders.As(orders.Data.List.Select(x => new SharedSpotOrder(
+            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedSpotOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -295,13 +296,13 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
             var trades = await Trading.GetUserTradesAsync(Category.Spot, orderId: request.OrderId).ConfigureAwait(false);
             if (!trades)
-                return trades.As<IEnumerable<SharedUserTrade>>(default);
+                return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
 
-            return trades.As(trades.Data.List.Select(x => new SharedUserTrade(
+            return trades.AsExchangeResult(Exchange, trades.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -315,16 +316,16 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, CancellationToken ct)
         {
             var trades = await Trading.GetUserTradesAsync(Category.Spot,
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit).ConfigureAwait(false);
             if (!trades)
-                return trades.As<IEnumerable<SharedUserTrade>>(default);
+                return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
 
-            return trades.As(trades.Data.List.Select(x => new SharedUserTrade(
+            return trades.AsExchangeResult(Exchange, trades.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -338,13 +339,13 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<WebCallResult<SharedOrderId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedOrderId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var order = await Trading.CancelOrderAsync(Category.Spot, FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType), request.OrderId).ConfigureAwait(false);
             if (!order)
-                return order.As<SharedOrderId>(default);
+                return order.AsExchangeResult<SharedOrderId>(Exchange, default);
 
-            return order.As(new SharedOrderId(order.Data.OrderId));
+            return order.AsExchangeResult(Exchange, new SharedOrderId(order.Data.OrderId));
         }
 
         private SharedOrderStatus ParseOrderStatus(Enums.V5.OrderStatus status)
