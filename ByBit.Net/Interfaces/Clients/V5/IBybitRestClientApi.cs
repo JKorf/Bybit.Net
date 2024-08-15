@@ -32,6 +32,6 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <returns></returns>
         public ISpotClient CommonSpotClient { get; }
-        public ISharedClient SharedClient { get; }
+        public IBybitRestClientApiShared SharedClient { get; }
     }
 }

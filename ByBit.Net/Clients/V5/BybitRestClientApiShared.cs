@@ -43,29 +43,41 @@ namespace Bybit.Net.Clients.V5
                 SharedQuantityType.Both,
                 SharedQuantityType.Both);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, new ArgumentError("Interval not supported"));
 
+            // Determine page token
+            DateTime? fromTimestamp = null;
+            if (pageToken is DateTimeToken dateTimeToken)
+                fromTimestamp = dateTimeToken.LastTime;
+            
+            // Get data
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
-
             var result = await ExchangeData.GetKlinesAsync(
                 category,
-                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
+                request.GetSymbol(FormatSymbol),
                 interval,
-                request.StartTime,
+                fromTimestamp ?? request.StartTime,
                 request.EndTime,
-                request.Limit,
+                request.Limit ?? 1000,
                 ct: ct
                 ).ConfigureAwait(false);
 
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, default);
 
+            // Get next token
+            DateTimeToken? nextToken = null;
+            if (result.Data.List.Count() == (request.Limit ?? 1000))
+                nextToken = new DateTimeToken(result.Data.List.Max(o => o.StartTime).AddSeconds((int)interval));
+            if (nextToken?.LastTime >= request.EndTime || nextToken?.LastTime >= DateTime.UtcNow.AddSeconds(-(int)interval))
+                nextToken = null;
+
             // Reverse as data is returned in desc order instead of standard asc
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)));
+            return result.AsExchangeResult(Exchange, result.Data.List.Reverse().Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)), nextToken);
         }
 
         async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
@@ -124,7 +136,7 @@ namespace Bybit.Net.Clients.V5
         {
             if (request.ApiType == ApiType.Spot)
             {
-                var result = await ExchangeData.GetSpotTickersAsync(FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType), ct).ConfigureAwait(false);
+                var result = await ExchangeData.GetSpotTickersAsync(request.GetSymbol(FormatSymbol), ct).ConfigureAwait(false);
                 if (!result)
                     return result.AsExchangeResult<SharedTicker>(Exchange, default);
 
@@ -135,7 +147,7 @@ namespace Bybit.Net.Clients.V5
             {
                 var result = await ExchangeData.GetLinearInverseTickersAsync(
                     request.ApiType == ApiType.InverseFutures ? Enums.Category.Inverse : Enums.Category.Linear,
-                    FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
+                    request.GetSymbol(FormatSymbol),
                     ct: ct).ConfigureAwait(false);
                 if (!result)
                     return result.AsExchangeResult<SharedTicker>(Exchange, default);
@@ -151,7 +163,7 @@ namespace Bybit.Net.Clients.V5
 
             var result = await ExchangeData.GetTradeHistoryAsync(
                 category,
-                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
+                request.GetSymbol(FormatSymbol),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -180,7 +192,7 @@ namespace Bybit.Net.Clients.V5
 
             var result = await Trading.PlaceOrderAsync(
                 Category.Spot,
-                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
+                request.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 request.OrderType == SharedOrderType.Market ? NewOrderType.Market : NewOrderType.Limit,
                 quantity: request.Quantity ?? request.QuoteQuantity ?? 0,
@@ -260,16 +272,27 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var orders = await Trading.GetOrderHistoryAsync(Category.Spot, 
-                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
+            // Determine page token
+            string? cursor = null;
+            if (pageToken is CursorToken token)
+                cursor = token.Cursor;
+
+            // Get data
+            var orders = await Trading.GetOrderHistoryAsync(Category.Spot,
+                request.GetSymbol(FormatSymbol),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit
                 ).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
+
+            // Get next token
+            CursorToken? nextToken = null;
+            if (!string.IsNullOrWhiteSpace(orders.Data.NextPageCursor))
+                nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
             return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedSpotOrder(
                 x.Symbol,
@@ -290,7 +313,7 @@ namespace Bybit.Net.Clients.V5
                 QuoteQuantity = x.MarketUnit == Enums.V5.MarketUnit.QuoteAsset ? x.Quantity : null,
                 QuoteQuantityFilled = x.ValueFilled,
                 AveragePrice = x.AveragePrice
-            }));
+            }), nextToken);
         }
 
         async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)

@@ -18,6 +18,7 @@ using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.SharedApis.Interfaces;
+using Bybit.Net.Interfaces.Clients;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -33,7 +34,7 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         public ISpotClient CommonSpotClient => this;
-        public ISharedClient SharedClient => this;
+        public IBybitRestClientApiShared SharedClient => this;
 
         /// <summary>
         /// Options
