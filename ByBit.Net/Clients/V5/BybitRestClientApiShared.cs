@@ -145,11 +145,8 @@ namespace Bybit.Net.Clients.V5
             }
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> ITradeRestClient.GetTradesAsync(GetTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
-            if (request.StartTime != null || request.EndTime != null)
-                return new ExchangeWebResult<IEnumerable<SharedTrade>>(Exchange, new ArgumentError("Start/EndTime filtering not supported"));
-
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
 
             var result = await ExchangeData.GetTradeHistoryAsync(
@@ -316,14 +313,26 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
+            // Determine page token
+            string? cursor = null;
+            if (pageToken is CursorToken token)
+                cursor = token.Cursor;
+
+            // Get data
             var trades = await Trading.GetUserTradesAsync(Category.Spot,
                 startTime: request.StartTime,
                 endTime: request.EndTime,
-                limit: request.Limit).ConfigureAwait(false);
+                limit: request.Limit,
+                cursor: cursor).ConfigureAwait(false);
             if (!trades)
                 return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
+
+            // Get next token
+            CursorToken? nextToken = null;
+            if (!string.IsNullOrWhiteSpace(trades.Data.NextPageCursor))
+                nextToken = new CursorToken(trades.Data.NextPageCursor!);
 
             return trades.AsExchangeResult(Exchange, trades.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
@@ -336,7 +345,7 @@ namespace Bybit.Net.Clients.V5
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
-            }));
+            }), nextToken);
         }
 
         async Task<ExchangeWebResult<SharedOrderId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, CancellationToken ct)

@@ -196,7 +196,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
 
         /// <summary>
         /// Get user trade history
-        /// <para><a href="https://bybit-exchange.github.io/docs/v5/position/execution" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/execution" /></para>
         /// </summary>
         /// <param name="category">Category</param>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>

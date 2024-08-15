@@ -10,7 +10,7 @@ namespace Bybit.Net.Interfaces.Clients
         ISpotSymbolRestClient,
         IFuturesSymbolRestClient,
         IKlineRestClient,
-        ITradeRestClient,
+        IRecentTradeRestClient,
         IBalanceRestClient,
         ISpotOrderRestClient
     {
