@@ -53,16 +53,29 @@ namespace Bybit.Net.Clients.V5
             DateTime? fromTimestamp = null;
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTimestamp = dateTimeToken.LastTime;
-            
+
+            var startTime = request.Filter?.StartTime;
+            var endTime = request.Filter?.EndTime?.AddSeconds(-1);
+            var apiLimit = 1000;
+
+            if (request.Filter?.StartTime != null)
+            {
+                // Not paginated, check if the data will fit
+                var seconds = apiLimit * (int)request.Interval;
+                var maxEndTime = (fromTimestamp ?? request.Filter.StartTime).Value.AddSeconds(seconds - 1);
+                if (maxEndTime < endTime)
+                    endTime = maxEndTime;
+            }
+
             // Get data
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetKlinesAsync(
                 category,
                 request.GetSymbol(FormatSymbol),
                 interval,
-                fromTimestamp ?? request.StartTime,
-                request.EndTime,
-                request.Limit ?? 1000,
+                fromTimestamp ?? request.Filter?.StartTime,
+                endTime,
+                request.Filter?.Limit ?? apiLimit,
                 ct: ct
                 ).ConfigureAwait(false);
 
@@ -71,10 +84,12 @@ namespace Bybit.Net.Clients.V5
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (result.Data.List.Count() == (request.Limit ?? 1000))
-                nextToken = new DateTimeToken(result.Data.List.Max(o => o.StartTime).AddSeconds((int)interval));
-            if (nextToken?.LastTime >= request.EndTime || nextToken?.LastTime >= DateTime.UtcNow.AddSeconds(-(int)interval))
-                nextToken = null;
+            if (request.Filter?.StartTime != null && result.Data.List.Any())
+            {
+                var maxOpenTime = result.Data.List.Max(x => x.StartTime);
+                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                    nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
+            }
 
             // Reverse as data is returned in desc order instead of standard asc
             return result.AsExchangeResult(Exchange, result.Data.List.Reverse().Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)), nextToken);
@@ -282,9 +297,9 @@ namespace Bybit.Net.Clients.V5
             // Get data
             var orders = await Trading.GetOrderHistoryAsync(Category.Spot,
                 request.GetSymbol(FormatSymbol),
-                startTime: request.StartTime,
-                endTime: request.EndTime,
-                limit: request.Limit
+                startTime: request.Filter?.StartTime,
+                endTime: request.Filter?.EndTime,
+                limit: request.Filter?.Limit
                 ).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
@@ -345,9 +360,9 @@ namespace Bybit.Net.Clients.V5
 
             // Get data
             var trades = await Trading.GetUserTradesAsync(Category.Spot,
-                startTime: request.StartTime,
-                endTime: request.EndTime,
-                limit: request.Limit,
+                startTime: request.Filter?.StartTime,
+                endTime: request.Filter?.EndTime,
+                limit: request.Filter?.Limit,
                 cursor: cursor).ConfigureAwait(false);
             if (!trades)
                 return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
