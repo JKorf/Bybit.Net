@@ -95,7 +95,7 @@ namespace Bybit.Net.Clients.V5
             return result.AsExchangeResult(Exchange, result.Data.List.Reverse().Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)), nextToken);
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSpotSymbolsAsync(SharedRequest request, CancellationToken ct)
         {
             var result = await ExchangeData.GetSpotSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
@@ -200,7 +200,7 @@ namespace Bybit.Net.Clients.V5
             return result.AsExchangeResult(Exchange, result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))));
         }
 
-        async Task<ExchangeWebResult<SharedOrderId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
         {
             if (request.OrderType == SharedOrderType.Other)
                 throw new ArgumentException("OrderType can't be `Other`", nameof(request.OrderType));
@@ -218,9 +218,9 @@ namespace Bybit.Net.Clients.V5
                 ).ConfigureAwait(false);
 
             if (!result)
-                return result.AsExchangeResult<SharedOrderId>(Exchange, default);
+                return result.AsExchangeResult<SharedId>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, new SharedOrderId(result.Data.OrderId));
+            return result.AsExchangeResult(Exchange, new SharedId(result.Data.OrderId));
         }
 
         async Task<ExchangeWebResult<SharedSpotOrder>> ISpotOrderRestClient.GetOrderAsync(GetOrderRequest request, CancellationToken ct)
@@ -386,13 +386,13 @@ namespace Bybit.Net.Clients.V5
             }), nextToken);
         }
 
-        async Task<ExchangeWebResult<SharedOrderId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var order = await Trading.CancelOrderAsync(Category.Spot, FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType), request.OrderId).ConfigureAwait(false);
             if (!order)
-                return order.AsExchangeResult<SharedOrderId>(Exchange, default);
+                return order.AsExchangeResult<SharedId>(Exchange, default);
 
-            return order.AsExchangeResult(Exchange, new SharedOrderId(order.Data.OrderId));
+            return order.AsExchangeResult(Exchange, new SharedId(order.Data.OrderId));
         }
 
         private SharedOrderStatus ParseOrderStatus(Enums.V5.OrderStatus status)
