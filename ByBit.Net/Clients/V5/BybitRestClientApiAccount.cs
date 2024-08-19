@@ -1029,9 +1029,10 @@ namespace Bybit.Net.Clients.V5
         #region Request Demo Funds
 
         /// <inheritdoc />
-        public async Task<WebCallResult> RequestDemoFundsAsync(Dictionary<string, decimal> funds, CancellationToken ct = default)
+        public async Task<WebCallResult> RequestDemoFundsAsync(Dictionary<string, decimal> funds, bool? addOrReduce = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
+            parameters.AddOptional("adjustType", addOrReduce == null ? null : addOrReduce == true ? 0 : 1);
             parameters.AddOptionalParameter("utaDemoApplyMoney", funds.Select(f => new { coin = f.Key, amountStr = f.Value.ToString(CultureInfo.InvariantCulture) }));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/demo-apply-money", true);
