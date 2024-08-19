@@ -1071,6 +1071,8 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("requestCoin", fromAsset);
             parameters.AddString("requestAmount", quantity);
             parameters.AddOptional("requestId", clientOrderId);
+            parameters.Add("paramType", "opFrom");
+            parameters.Add("paramValue", _baseClient._referer);
 
             return await _baseClient.SendRequestAsync<BybitConvertQuote>(_baseClient.GetUrl("v5/asset/exchange/quote-apply"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
