@@ -6,13 +6,17 @@ using System.Text;
 namespace Bybit.Net.Interfaces.Clients
 {
     public interface IBybitRestClientApiShared :
-        ITickerRestClient,
-        ISpotSymbolRestClient,
-        IFuturesSymbolRestClient,
-        IKlineRestClient,
-        IRecentTradeRestClient,
+        IAssetRestClient,
         IBalanceRestClient,
-        ISpotOrderRestClient
+        IDepositRestClient,
+        IKlineRestClient,
+        IOrderBookRestClient,
+        IRecentTradeRestClient,
+        ISpotOrderRestClient,
+        ISpotSymbolRestClient,
+        ITickerRestClient,
+        IWithdrawalRestClient,
+        IWithdrawRestClient
     {
     }
 }

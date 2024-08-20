@@ -5,6 +5,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces;
 using CryptoExchange.Net.SharedApis.Models;
+using CryptoExchange.Net.SharedApis.Models.FilterOptions;
 using CryptoExchange.Net.SharedApis.Models.Rest;
 using CryptoExchange.Net.SharedApis.RequestModels;
 using CryptoExchange.Net.SharedApis.ResponseModels;
@@ -21,27 +22,12 @@ namespace Bybit.Net.Clients.V5
     {
         public string Exchange => BybitExchange.ExchangeName;
 
-        public IEnumerable<SharedOrderType> SupportedOrderType { get; } = new[]
-        {
-            SharedOrderType.Limit,
-            SharedOrderType.Market,
-            SharedOrderType.LimitMaker
-        };
+        #region Kline client
 
-        public IEnumerable<SharedTimeInForce> SupportedTimeInForce { get; } = new[]
+        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(true)
         {
-            SharedTimeInForce.GoodTillCanceled,
-            SharedTimeInForce.ImmediateOrCancel,
-            SharedTimeInForce.FillOrKill
+            MaxRequestDataPoints = 1000
         };
-
-        public SharedQuantitySupport OrderQuantitySupport { get; } =
-            new SharedQuantitySupport(
-#warning unclear if limit is supported
-                SharedQuantityType.Both,
-                SharedQuantityType.Both,
-                SharedQuantityType.Both,
-                SharedQuantityType.Both);
 
         async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
@@ -95,7 +81,11 @@ namespace Bybit.Net.Clients.V5
             return result.AsExchangeResult(Exchange, result.Data.List.Reverse().Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)), nextToken);
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSpotSymbolsAsync(SharedRequest request, CancellationToken ct)
+        #endregion
+
+        #region Spot Symbol client
+
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSpotSymbolsAsync(CancellationToken ct)
         {
             var result = await ExchangeData.GetSpotSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
@@ -110,26 +100,30 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
+        #endregion
+
+        //async Task<ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
+        //{
+        //    var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
+
+        //    var result = await ExchangeData.GetLinearInverseSymbolsAsync(category, ct: ct).ConfigureAwait(false);
+        //    if (!result)
+        //        return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
+
+        //    return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
+        //    {
+        //        MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
+        //        MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
+        //        QuantityStep = s.LotSizeFilter?.QuantityStep,
+        //        PriceStep = s.PriceFilter?.TickSize
+        //    }));
+        //}
+
+        #region Ticker client
+
+        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(ApiType? apiType, CancellationToken ct)
         {
-            var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
-
-            var result = await ExchangeData.GetLinearInverseSymbolsAsync(category, ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
-
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
-            {
-                MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
-                MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
-                QuantityStep = s.LotSizeFilter?.QuantityStep,
-                PriceStep = s.PriceFilter?.TickSize
-            }));
-        }
-
-        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(SharedRequest request, CancellationToken ct)
-        {
-            if (request.ApiType == ApiType.Spot)
+            if (apiType == null || apiType == ApiType.Spot)
             {
                 var result = await ExchangeData.GetSpotTickersAsync(ct: ct).ConfigureAwait(false);
                 if (!result)
@@ -139,7 +133,7 @@ namespace Bybit.Net.Clients.V5
             }
             else
             {
-                var result = await ExchangeData.GetLinearInverseTickersAsync(request.ApiType == ApiType.InverseFutures ? Enums.Category.Inverse : Enums.Category.Linear, ct: ct).ConfigureAwait(false);
+                var result = await ExchangeData.GetLinearInverseTickersAsync(apiType == ApiType.InverseFutures ? Enums.Category.Inverse : Enums.Category.Linear, ct: ct).ConfigureAwait(false);
                 if (!result)
                     return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, default);
                 
@@ -172,6 +166,12 @@ namespace Bybit.Net.Clients.V5
             }
         }
 
+        #endregion
+
+        #region Recent Trade client
+#warning spot has 60 limit, futures 1000
+        GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000);
+
         async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
@@ -187,11 +187,15 @@ namespace Bybit.Net.Clients.V5
             return result.AsExchangeResult(Exchange, result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(SharedRequest request, CancellationToken ct)
+        #endregion
+
+        #region Balance client
+
+        async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             // Assume unified account
             // Inverse futures uses CONTRACT, other UNIFIED
-            var accountType = request.ApiType == ApiType.InverseFutures ? Enums.AccountType.Contract : Enums.AccountType.Unified;
+            var accountType = apiType == ApiType.InverseFutures ? Enums.AccountType.Contract : Enums.AccountType.Unified;
 
             var result = await Account.GetBalancesAsync(accountType, ct: ct).ConfigureAwait(false);
             if (!result)
@@ -200,7 +204,31 @@ namespace Bybit.Net.Clients.V5
             return result.AsExchangeResult(Exchange, result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))));
         }
 
-        async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
+        #endregion
+
+        #region Spot Order client
+
+        PlaceSpotOrderOptions ISpotOrderRestClient.PlaceSpotOrderOptions { get; } = new PlaceSpotOrderOptions(
+            new[]
+            {
+                SharedOrderType.Limit,
+                SharedOrderType.Market,
+                SharedOrderType.LimitMaker
+            },
+            new[]
+            {
+                SharedTimeInForce.GoodTillCanceled,
+                SharedTimeInForce.ImmediateOrCancel,
+                SharedTimeInForce.FillOrKill
+            },
+            new SharedQuantitySupport(
+#warning unclear if limit is supported
+                SharedQuantityType.Both,
+                SharedQuantityType.Both,
+                SharedQuantityType.Both,
+                SharedQuantityType.Both));
+
+        async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             if (request.OrderType == SharedOrderType.Other)
                 throw new ArgumentException("OrderType can't be `Other`", nameof(request.OrderType));
@@ -223,7 +251,7 @@ namespace Bybit.Net.Clients.V5
             return result.AsExchangeResult(Exchange, new SharedId(result.Data.OrderId));
         }
 
-        async Task<ExchangeWebResult<SharedSpotOrder>> ISpotOrderRestClient.GetOrderAsync(GetOrderRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedSpotOrder>> ISpotOrderRestClient.GetOrderAsync(GetOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var orders = await Trading.GetOrdersAsync(Category.Spot, orderId: request.OrderId).ConfigureAwait(false);
             if (!orders)
@@ -255,7 +283,7 @@ namespace Bybit.Net.Clients.V5
             });
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetSpotOpenOrdersRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetSpotOpenOrdersRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             string? symbol = null;
             if (request.BaseAsset != null && request.QuoteAsset != null)
@@ -287,7 +315,7 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             // Determine page token
             string? cursor = null;
@@ -331,7 +359,7 @@ namespace Bybit.Net.Clients.V5
             }), nextToken);
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetOrderTradesAsync(GetOrderTradesRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var trades = await Trading.GetUserTradesAsync(Category.Spot, orderId: request.OrderId).ConfigureAwait(false);
             if (!trades)
@@ -351,7 +379,7 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             // Determine page token
             string? cursor = null;
@@ -386,9 +414,9 @@ namespace Bybit.Net.Clients.V5
             }), nextToken);
         }
 
-        async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var order = await Trading.CancelOrderAsync(Category.Spot, FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType), request.OrderId).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(Category.Spot, request.GetSymbol(FormatSymbol), request.OrderId).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, default);
 
@@ -430,5 +458,163 @@ namespace Bybit.Net.Clients.V5
 
             return null;
         }
+
+        #endregion
+
+        #region Asset client
+
+        async Task<ExchangeWebResult<IEnumerable<SharedAsset>>> IAssetRestClient.GetAssetsAsync(CancellationToken ct)
+        {
+            var assets = await Account.GetAssetInfoAsync(ct: ct).ConfigureAwait(false);
+            if (!assets)
+                return assets.AsExchangeResult<IEnumerable<SharedAsset>>(Exchange, default);
+
+            return assets.AsExchangeResult(Exchange, assets.Data.Assets.Select(x => new SharedAsset(x.Name)
+            {
+                Networks = x.Networks.Select(x => new SharedAssetNetwork(x.Network)
+                {
+                    MinConfirmations = x.Confirmation,
+                    DepositEnabled = x.NetworkDeposit,
+                    MinWithdrawQuantity = x.MinWithdraw,
+                    WithdrawEnabled = x.NetworkWithdraw,
+                    WithdrawFee = x.WithdrawFee 
+                })
+            }));
+        }
+
+        #endregion
+
+        #region Deposit client
+
+        async Task<ExchangeWebResult<IEnumerable<SharedDepositAddress>>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
+        {
+            var depositAddresses = await Account.GetDepositAddressAsync(request.Asset, request.Network).ConfigureAwait(false);
+            if (!depositAddresses)
+                return depositAddresses.AsExchangeResult<IEnumerable<SharedDepositAddress>>(Exchange, default);
+
+            return depositAddresses.AsExchangeResult<IEnumerable<SharedDepositAddress>>(Exchange, depositAddresses.Data.Networks.Select(x => new SharedDepositAddress(depositAddresses.Data.Asset, x.DepositAddress)
+            {
+                Tag = x.DepositTag,
+                Network = x.Network
+            }
+            ));
+        }
+
+        async Task<ExchangeWebResult<IEnumerable<SharedDeposit>>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, INextPageToken? pageToken, CancellationToken ct)
+        {
+            // Determine page token
+            string? cursor = null;
+            if (pageToken is CursorToken cursorToken)
+                cursor = cursorToken.Cursor;
+
+            // Get data
+            var deposits = await Account.GetDepositsAsync(
+                startTime: request.Filter?.StartTime,
+                endTime: request.Filter?.EndTime,
+                asset: request.Asset,
+                limit: request.Filter?.Limit ?? 100,
+                cursor: cursor,
+                ct: ct).ConfigureAwait(false);
+            if (!deposits)
+                return deposits.AsExchangeResult<IEnumerable<SharedDeposit>>(Exchange, default);
+
+            // Determine next token
+            CursorToken? nextToken = null;
+            if (!string.IsNullOrEmpty(deposits.Data.NextPageCursor))
+                nextToken = new CursorToken(deposits.Data.NextPageCursor!);
+
+            return deposits.AsExchangeResult(Exchange, deposits.Data.Deposits.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == DepositStatus.Success, x.SuccessTime ?? new DateTime())
+            {
+                Network = x.Network,
+                TransactionId = x.TransactionId,
+            }), nextToken);
+        }
+
+        #endregion
+
+        #region Order Book client
+
+        GetOrderBookOptions IOrderBookRestClient.GetOrderBookOptions { get; } = new GetOrderBookOptions(1, 500);
+        async Task<ExchangeWebResult<SharedOrderBook>> IOrderBookRestClient.GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
+        {
+            var validationError = ((IOrderBookRestClient)this).GetOrderBookOptions.Validate(request);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedOrderBook>(Exchange, validationError);
+
+            var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
+            var result = await ExchangeData.GetOrderbookAsync(
+                category,
+                request.GetSymbol(FormatSymbol),
+                limit: request.Limit,
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedOrderBook>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+        }
+
+        #endregion
+
+        #region Withdrawal client
+
+        async Task<ExchangeWebResult<IEnumerable<SharedWithdrawal>>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, INextPageToken? pageToken, CancellationToken ct)
+        {
+            // Determine page token
+            string? cursor = null;
+            if (pageToken is CursorToken cursorToken)
+                cursor = cursorToken.Cursor;
+
+            // Get data
+            var withdrawals = await Account.GetWithdrawalsAsync(
+                startTime: request.Filter?.StartTime,
+                endTime: request.Filter?.EndTime,
+                asset: request.Asset,
+                limit: request.Filter?.Limit ?? 100,
+                cursor: cursor,
+                ct: ct).ConfigureAwait(false);
+            if (!withdrawals)
+                return withdrawals.AsExchangeResult<IEnumerable<SharedWithdrawal>>(Exchange, default);
+
+            // Determine next token
+            CursorToken? nextToken = null;
+            if (!string.IsNullOrEmpty(withdrawals.Data.NextPageCursor))
+                nextToken = new CursorToken(withdrawals.Data.NextPageCursor!);
+
+            return withdrawals.AsExchangeResult(Exchange, withdrawals.Data.List.Select(x => new SharedWithdrawal(x.Asset, x.ToAddress, x.Quantity, x.Status == Enums.V5.WithdrawalStatus.Success, x.CreateTime)
+            {
+                Network = x.Network,
+                Tag = x.Tag,
+                TransactionId = x.TransactionId,
+                Fee = x.WithdrawFee
+            }));
+        }
+
+        #endregion
+
+        #region Withdraw client
+
+        WithdrawOptions IWithdrawRestClient.WithdrawOptions { get; } = new WithdrawOptions();
+#warning network is required
+        async Task<ExchangeWebResult<SharedId>> IWithdrawRestClient.WithdrawAsync(WithdrawRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IWithdrawRestClient)this).WithdrawOptions.Validate(request);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            // Get data
+            var withdrawal = await Account.WithdrawAsync(
+                request.Asset,
+                toAddress: request.Address,
+                quantity: request.Quantity,
+                network: request.Network,
+                tag: request.AddressTag,
+                ct: ct).ConfigureAwait(false);
+            if (!withdrawal)
+                return withdrawal.AsExchangeResult<SharedId>(Exchange, default);
+
+            return withdrawal.AsExchangeResult(Exchange, new SharedId(withdrawal.Data.Id));
+        }
+
+        #endregion
     }
 }
