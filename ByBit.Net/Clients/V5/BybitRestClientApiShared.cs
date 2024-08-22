@@ -24,12 +24,12 @@ namespace Bybit.Net.Clients.V5
 
         #region Kline client
 
-        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(true)
+        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(true, false)
         {
             MaxRequestDataPoints = 1000
         };
 
-        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
@@ -85,7 +85,7 @@ namespace Bybit.Net.Clients.V5
 
         #region Spot Symbol client
 
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSpotSymbolsAsync(CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSpotSymbolsAsync(ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var result = await ExchangeData.GetSpotSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
@@ -121,7 +121,7 @@ namespace Bybit.Net.Clients.V5
 
         #region Ticker client
 
-        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(ApiType? apiType, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             if (apiType == null || apiType == ApiType.Spot)
             {
@@ -141,7 +141,7 @@ namespace Bybit.Net.Clients.V5
             }
         }
 
-        async Task<ExchangeWebResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             if (request.ApiType == ApiType.Spot)
             {
@@ -172,7 +172,7 @@ namespace Bybit.Net.Clients.V5
 #warning spot has 60 limit, futures 1000
         GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
 
@@ -190,6 +190,7 @@ namespace Bybit.Net.Clients.V5
         #endregion
 
         #region Balance client
+        EndpointOptions IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions(true);
 
         async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
@@ -287,7 +288,7 @@ namespace Bybit.Net.Clients.V5
         {
             string? symbol = null;
             if (request.BaseAsset != null && request.QuoteAsset != null)
-                symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType);
+                symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, ApiType.Spot);
 
             var orders = await Trading.GetOrdersAsync(Category.Spot, symbol, openOnly: 0).ConfigureAwait(false);
             if (!orders)
@@ -462,8 +463,9 @@ namespace Bybit.Net.Clients.V5
         #endregion
 
         #region Asset client
+        EndpointOptions IAssetRestClient.GetAssetsOptions { get; } = new EndpointOptions(true);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedAsset>>> IAssetRestClient.GetAssetsAsync(CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedAsset>>> IAssetRestClient.GetAssetsAsync(ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var assets = await Account.GetAssetInfoAsync(ct: ct).ConfigureAwait(false);
             if (!assets)
@@ -486,7 +488,7 @@ namespace Bybit.Net.Clients.V5
 
         #region Deposit client
 
-        async Task<ExchangeWebResult<IEnumerable<SharedDepositAddress>>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedDepositAddress>>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var depositAddresses = await Account.GetDepositAddressAsync(request.Asset, request.Network).ConfigureAwait(false);
             if (!depositAddresses)
@@ -500,7 +502,7 @@ namespace Bybit.Net.Clients.V5
             ));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedDeposit>>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedDeposit>>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             // Determine page token
             string? cursor = null;
@@ -535,7 +537,7 @@ namespace Bybit.Net.Clients.V5
         #region Order Book client
 
         GetOrderBookOptions IOrderBookRestClient.GetOrderBookOptions { get; } = new GetOrderBookOptions(1, 500);
-        async Task<ExchangeWebResult<SharedOrderBook>> IOrderBookRestClient.GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedOrderBook>> IOrderBookRestClient.GetOrderBookAsync(GetOrderBookRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((IOrderBookRestClient)this).GetOrderBookOptions.Validate(request);
             if (validationError != null)
@@ -557,7 +559,7 @@ namespace Bybit.Net.Clients.V5
 
         #region Withdrawal client
 
-        async Task<ExchangeWebResult<IEnumerable<SharedWithdrawal>>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedWithdrawal>>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             // Determine page token
             string? cursor = null;
