@@ -35,6 +35,10 @@ namespace Bybit.Net.Clients.V5
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, new ArgumentError("Interval not supported"));
 
+            var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, validationError);
+
             // Determine page token
             DateTime? fromTimestamp = null;
             if (pageToken is DateTimeToken dateTimeToken)
@@ -85,8 +89,13 @@ namespace Bybit.Net.Clients.V5
 
         #region Spot Symbol client
 
+        EndpointOptions ISpotSymbolRestClient.GetSpotSymbolsOptions { get; } = new EndpointOptions(false);
         async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSpotSymbolsAsync(ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((ISpotSymbolRestClient)this).GetSpotSymbolsOptions.ValidateRequest(Exchange, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedSpotSymbol>>(Exchange, validationError);
+
             var result = await ExchangeData.GetSpotSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedSpotSymbol>>(Exchange, default);
@@ -121,15 +130,20 @@ namespace Bybit.Net.Clients.V5
 
         #region Ticker client
 
+        EndpointOptions ITickerRestClient.GetTickersOptions { get; } = new EndpointOptions(false);
         async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((ITickerRestClient)this).GetTickerOptions.ValidateRequest(Exchange, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedTicker>>(Exchange, validationError);
+
             if (apiType == null || apiType == ApiType.Spot)
             {
                 var result = await ExchangeData.GetSpotTickersAsync(ct: ct).ConfigureAwait(false);
                 if (!result)
                     return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h)));
+                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
             }
             else
             {
@@ -137,12 +151,18 @@ namespace Bybit.Net.Clients.V5
                 if (!result)
                     return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, default);
                 
-                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h)));
+                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
             }
         }
 
+        EndpointOptions<GetTickerRequest> ITickerRestClient.GetTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
         async Task<ExchangeWebResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+
+            var validationError = ((ITickerRestClient)this).GetTickerOptions.ValidateRequest(Exchange, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedTicker>(Exchange, validationError);
+
             if (request.ApiType == ApiType.Spot)
             {
                 var result = await ExchangeData.GetSpotTickersAsync(request.GetSymbol(FormatSymbol), ct).ConfigureAwait(false);
@@ -150,7 +170,7 @@ namespace Bybit.Net.Clients.V5
                     return result.AsExchangeResult<SharedTicker>(Exchange, default);
 
                 var ticker = result.Data.List.Single();
-                return result.AsExchangeResult(Exchange, new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h));
+                return result.AsExchangeResult(Exchange, new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h));
             }
             else
             {
@@ -162,7 +182,7 @@ namespace Bybit.Net.Clients.V5
                     return result.AsExchangeResult<SharedTicker>(Exchange, default);
 
                 var ticker = result.Data.List.Single();
-                return result.AsExchangeResult(Exchange, new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h));
+                return result.AsExchangeResult(Exchange, new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h));
             }
         }
 
@@ -170,10 +190,14 @@ namespace Bybit.Net.Clients.V5
 
         #region Recent Trade client
 #warning spot has 60 limit, futures 1000
-        GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000);
+        GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000, false);
 
         async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((IRecentTradeRestClient)this).GetRecentTradesOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedTrade>>(Exchange, validationError);
+
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
 
             var result = await ExchangeData.GetTradeHistoryAsync(
@@ -194,6 +218,10 @@ namespace Bybit.Net.Clients.V5
 
         async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedBalance>>(Exchange, validationError);
+
             // Assume unified account
             // Inverse futures uses CONTRACT, other UNIFIED
             var accountType = apiType == ApiType.InverseFutures ? Enums.AccountType.Contract : Enums.AccountType.Unified;
@@ -231,8 +259,9 @@ namespace Bybit.Net.Clients.V5
 
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            if (request.OrderType == SharedOrderType.Other)
-                throw new ArgumentException("OrderType can't be `Other`", nameof(request.OrderType));
+            var validationError = ((ISpotOrderRestClient)this).PlaceSpotOrderOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var result = await Trading.PlaceOrderAsync(
                 Category.Spot,
@@ -252,8 +281,13 @@ namespace Bybit.Net.Clients.V5
             return result.AsExchangeResult(Exchange, new SharedId(result.Data.OrderId));
         }
 
+        EndpointOptions<GetOrderRequest> ISpotOrderRestClient.GetOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true);
         async Task<ExchangeWebResult<SharedSpotOrder>> ISpotOrderRestClient.GetOrderAsync(GetOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((ISpotOrderRestClient)this).GetOrderOptions.ValidateRequest(Exchange, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedSpotOrder>(Exchange, validationError);
+
             var orders = await Trading.GetOrdersAsync(Category.Spot, orderId: request.OrderId).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<SharedSpotOrder>(Exchange, default);
@@ -284,8 +318,13 @@ namespace Bybit.Net.Clients.V5
             });
         }
 
+        EndpointOptions<GetSpotOpenOrdersRequest> ISpotOrderRestClient.GetOpenOrdersOptions { get; } = new EndpointOptions<GetSpotOpenOrdersRequest>(true);
         async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetSpotOpenOrdersRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((ISpotOrderRestClient)this).GetOpenOrdersOptions.ValidateRequest(Exchange, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedSpotOrder>>(Exchange, validationError);
+
             string? symbol = null;
             if (request.BaseAsset != null && request.QuoteAsset != null)
                 symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, ApiType.Spot);
@@ -316,8 +355,13 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
+        PaginatedEndpointOptions<GetSpotClosedOrdersRequest> ISpotOrderRestClient.GetClosedOrdersOptions { get; } = new PaginatedEndpointOptions<GetSpotClosedOrdersRequest>(true, true);
         async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((ISpotOrderRestClient)this).GetClosedOrdersOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedSpotOrder>>(Exchange, validationError);
+
             // Determine page token
             string? cursor = null;
             if (pageToken is CursorToken token)
@@ -360,8 +404,13 @@ namespace Bybit.Net.Clients.V5
             }), nextToken);
         }
 
+        EndpointOptions<GetOrderTradesRequest> ISpotOrderRestClient.GetOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true);
         async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetOrderTradesAsync(GetOrderTradesRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((ISpotOrderRestClient)this).GetOrderTradesOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
+
             var trades = await Trading.GetUserTradesAsync(Category.Spot, orderId: request.OrderId).ConfigureAwait(false);
             if (!trades)
                 return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
@@ -380,8 +429,13 @@ namespace Bybit.Net.Clients.V5
             }));
         }
 
+        PaginatedEndpointOptions<GetUserTradesRequest> ISpotOrderRestClient.GetUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(true, true);
         async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((ISpotOrderRestClient)this).GetUserTradesOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
+
             // Determine page token
             string? cursor = null;
             if (pageToken is CursorToken token)
@@ -415,8 +469,13 @@ namespace Bybit.Net.Clients.V5
             }), nextToken);
         }
 
+        EndpointOptions<CancelOrderRequest> ISpotOrderRestClient.CancelOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((ISpotOrderRestClient)this).CancelOrderOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
             var order = await Trading.CancelOrderAsync(Category.Spot, request.GetSymbol(FormatSymbol), request.OrderId).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, default);
@@ -467,6 +526,10 @@ namespace Bybit.Net.Clients.V5
 
         async Task<ExchangeWebResult<IEnumerable<SharedAsset>>> IAssetRestClient.GetAssetsAsync(ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((IAssetRestClient)this).GetAssetsOptions.ValidateRequest(Exchange, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedAsset>>(Exchange, validationError);
+
             var assets = await Account.GetAssetInfoAsync(ct: ct).ConfigureAwait(false);
             if (!assets)
                 return assets.AsExchangeResult<IEnumerable<SharedAsset>>(Exchange, default);
@@ -487,9 +550,14 @@ namespace Bybit.Net.Clients.V5
         #endregion
 
         #region Deposit client
+        EndpointOptions<GetDepositAddressesRequest> IDepositRestClient.GetDepositAddressesOptions { get; } = new EndpointOptions<GetDepositAddressesRequest>(true);
 
         async Task<ExchangeWebResult<IEnumerable<SharedDepositAddress>>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((IDepositRestClient)this).GetDepositAddressesOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedDepositAddress>>(Exchange, validationError);
+
             var depositAddresses = await Account.GetDepositAddressAsync(request.Asset, request.Network).ConfigureAwait(false);
             if (!depositAddresses)
                 return depositAddresses.AsExchangeResult<IEnumerable<SharedDepositAddress>>(Exchange, default);
@@ -502,8 +570,13 @@ namespace Bybit.Net.Clients.V5
             ));
         }
 
+        PaginatedEndpointOptions<GetDepositsRequest> IDepositRestClient.GetDepositsOptions { get; } = new PaginatedEndpointOptions<GetDepositsRequest>(true, true);
         async Task<ExchangeWebResult<IEnumerable<SharedDeposit>>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((IDepositRestClient)this).GetDepositsOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedDeposit>>(Exchange, validationError);
+
             // Determine page token
             string? cursor = null;
             if (pageToken is CursorToken cursorToken)
@@ -536,10 +609,10 @@ namespace Bybit.Net.Clients.V5
 
         #region Order Book client
 
-        GetOrderBookOptions IOrderBookRestClient.GetOrderBookOptions { get; } = new GetOrderBookOptions(1, 500);
+        GetOrderBookOptions IOrderBookRestClient.GetOrderBookOptions { get; } = new GetOrderBookOptions(1, 500, false);
         async Task<ExchangeWebResult<SharedOrderBook>> IOrderBookRestClient.GetOrderBookAsync(GetOrderBookRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IOrderBookRestClient)this).GetOrderBookOptions.Validate(request);
+            var validationError = ((IOrderBookRestClient)this).GetOrderBookOptions.ValidateRequest(Exchange, request, exchangeParameters);
             if (validationError != null)
                 return new ExchangeWebResult<SharedOrderBook>(Exchange, validationError);
 
@@ -559,8 +632,13 @@ namespace Bybit.Net.Clients.V5
 
         #region Withdrawal client
 
+        PaginatedEndpointOptions<GetWithdrawalsRequest> IWithdrawalRestClient.GetWithdrawalsOptions { get; } = new PaginatedEndpointOptions<GetWithdrawalsRequest>(true, true);
         async Task<ExchangeWebResult<IEnumerable<SharedWithdrawal>>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
+            var validationError = ((IWithdrawalRestClient)this).GetWithdrawalsOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedWithdrawal>>(Exchange, validationError);
+
             // Determine page token
             string? cursor = null;
             if (pageToken is CursorToken cursorToken)
@@ -595,11 +673,17 @@ namespace Bybit.Net.Clients.V5
 
         #region Withdraw client
 
-        WithdrawOptions IWithdrawRestClient.WithdrawOptions { get; } = new WithdrawOptions();
-#warning network is required
+        WithdrawOptions IWithdrawRestClient.WithdrawOptions { get; } = new WithdrawOptions()
+        {
+            RequiredOptionalParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription(nameof(WithdrawRequest.Network), typeof(string), "The network the withdrawal should use", "ETH")
+            }
+        };
+
         async Task<ExchangeWebResult<SharedId>> IWithdrawRestClient.WithdrawAsync(WithdrawRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IWithdrawRestClient)this).WithdrawOptions.Validate(request);
+            var validationError = ((IWithdrawRestClient)this).WithdrawOptions.ValidateRequest(Exchange, request, exchangeParameters);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
@@ -608,7 +692,7 @@ namespace Bybit.Net.Clients.V5
                 request.Asset,
                 toAddress: request.Address,
                 quantity: request.Quantity,
-                network: request.Network,
+                network: request.Network!,
                 tag: request.AddressTag,
                 ct: ct).ConfigureAwait(false);
             if (!withdrawal)
