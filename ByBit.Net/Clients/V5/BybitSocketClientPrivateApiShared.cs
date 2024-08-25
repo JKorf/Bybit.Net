@@ -22,7 +22,7 @@ namespace Bybit.Net.Clients.V5
     {
         public string Exchange => BybitExchange.ExchangeName;
 
-        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(ApiType? apiType, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
         {
             var result = await SubscribeToWalletUpdatesAsync(
                 update => handler(update.As(update.Data.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.Free ?? 0, x.Equity ?? 0))))),
@@ -31,7 +31,7 @@ namespace Bybit.Net.Clients.V5
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToOrderUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(Action<DataEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
         {
             var result = await SubscribeToOrderUpdatesAsync(
                 update => handler(update.As<IEnumerable<SharedSpotOrder>>(update.Data.Select(x =>
@@ -61,7 +61,7 @@ namespace Bybit.Net.Clients.V5
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<ExchangeResult<UpdateSubscription>> ISpotUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedUserTrade>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(ApiType? apiType, Action<DataEvent<IEnumerable<SharedUserTrade>>> handler, CancellationToken ct)
         {
             var result = await SubscribeToUserTradeUpdatesAsync(
                 update => handler(update.As(update.Data.Select(x =>
