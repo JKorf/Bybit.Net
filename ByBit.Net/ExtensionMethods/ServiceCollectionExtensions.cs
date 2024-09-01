@@ -3,6 +3,7 @@ using Bybit.Net.Interfaces;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Options;
 using Bybit.Net.SymbolOrderBooks;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using System;
@@ -61,6 +62,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBybitOrderBookFactory, BybitOrderBookFactory>();
             services.AddTransient(x => x.GetRequiredService<IBybitRestClient>().V5Api.CommonSpotClient);
+
+            services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedClient);
+            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedClient);
+            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5PrivateApi.SharedClient);
+
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBybitSocketClient, BybitSocketClient>();
             else

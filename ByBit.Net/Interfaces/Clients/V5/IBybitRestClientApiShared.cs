@@ -6,7 +6,7 @@ using System.Text;
 namespace Bybit.Net.Interfaces.Clients
 {
     public interface IBybitRestClientApiShared :
-        IAssetRestClient,
+        IAssetsRestClient,
         IBalanceRestClient,
         IDepositRestClient,
         IKlineRestClient,
