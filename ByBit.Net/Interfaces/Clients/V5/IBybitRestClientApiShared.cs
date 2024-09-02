@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.SharedApis.Interfaces;
+using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
 using System;
 using System.Collections.Generic;
 using System.Text;

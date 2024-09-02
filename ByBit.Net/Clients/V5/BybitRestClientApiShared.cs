@@ -4,6 +4,7 @@ using Bybit.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces;
+using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
 using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Models.FilterOptions;
 using CryptoExchange.Net.SharedApis.Models.Rest;
@@ -131,46 +132,46 @@ namespace Bybit.Net.Clients.V5
         #region Ticker client
 
         EndpointOptions ITickerRestClient.GetTickersOptions { get; } = new EndpointOptions("GetTickersRequest", false);
-        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotTicker>>> ITickerRestClient.GetTickersAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((ITickerRestClient)this).GetTickerOptions.ValidateRequest(Exchange, exchangeParameters);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedTicker>>(Exchange, validationError);
+                return new ExchangeWebResult<IEnumerable<SharedSpotTicker>>(Exchange, validationError);
 
             if (apiType == null || apiType == ApiType.Spot)
             {
                 var result = await ExchangeData.GetSpotTickersAsync(ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, default);
+                    return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
+                return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, result.Data.List.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
             }
             else
             {
                 var result = await ExchangeData.GetLinearInverseTickersAsync(apiType == ApiType.InverseFutures ? Enums.Category.Inverse : Enums.Category.Linear, ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, default);
+                    return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, default);
                 
-                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.List.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
+                return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, result.Data.List.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
             }
         }
 
         EndpointOptions<GetTickerRequest> ITickerRestClient.GetTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
-        async Task<ExchangeWebResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedSpotTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
 
             var validationError = ((ITickerRestClient)this).GetTickerOptions.ValidateRequest(Exchange, request, exchangeParameters);
             if (validationError != null)
-                return new ExchangeWebResult<SharedTicker>(Exchange, validationError);
+                return new ExchangeWebResult<SharedSpotTicker>(Exchange, validationError);
 
             if (request.ApiType == ApiType.Spot)
             {
                 var result = await ExchangeData.GetSpotTickersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<SharedTicker>(Exchange, default);
+                    return result.AsExchangeResult<SharedSpotTicker>(Exchange, default);
 
                 var ticker = result.Data.List.Single();
-                return result.AsExchangeResult(Exchange, new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h));
+                return result.AsExchangeResult(Exchange, new SharedSpotTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h));
             }
             else
             {
@@ -179,10 +180,10 @@ namespace Bybit.Net.Clients.V5
                     request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
                     ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<SharedTicker>(Exchange, default);
+                    return result.AsExchangeResult<SharedSpotTicker>(Exchange, default);
 
                 var ticker = result.Data.List.Single();
-                return result.AsExchangeResult(Exchange, new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h));
+                return result.AsExchangeResult(Exchange, new SharedSpotTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h));
             }
         }
 
