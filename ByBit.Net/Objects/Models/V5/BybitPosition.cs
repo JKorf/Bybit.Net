@@ -64,7 +64,7 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("positionValue")]
         public decimal? PositionValue { get; set; }
         /// <summary>
-        /// Trade mode
+        /// Trade mode. Only valid for Classic and UTA (inverse)
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
         public TradeMode TradeMode { get; set; }
