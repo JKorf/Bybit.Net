@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.SharedApis.Interfaces;
+using CryptoExchange.Net.SharedApis.Interfaces.Rest.Futures;
 using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,17 @@ namespace Bybit.Net.Interfaces.Clients
         IRecentTradeRestClient,
         ISpotOrderRestClient,
         ISpotSymbolRestClient,
-        ITickerRestClient,
+        ISpotTickerRestClient,
         IWithdrawalRestClient,
-        IWithdrawRestClient
+        IWithdrawRestClient,
+        IFuturesTickerRestClient,
+        IFuturesSymbolRestClient,
+        ILeverageRestClient,
+        IMarkPriceKlineRestClient,
+        IIndexPriceKlineRestClient,
+        IOpenInterestRestClient,
+        IFundingRateRestClient,
+        IFuturesOrderRestClient
     {
     }
 }
