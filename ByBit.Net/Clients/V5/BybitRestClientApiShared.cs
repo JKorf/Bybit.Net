@@ -134,28 +134,17 @@ namespace Bybit.Net.Clients.V5
         #region Spot Ticker client
 
         EndpointOptions ISpotTickerRestClient.GetSpotTickersOptions { get; } = new EndpointOptions("GetTickersRequest", false);
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotTicker>>> ISpotTickerRestClient.GetSpotTickersAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedSpotTicker>>> ISpotTickerRestClient.GetSpotTickersAsync(ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((ISpotTickerRestClient)this).GetSpotTickerOptions.ValidateRequest(Exchange, exchangeParameters);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedSpotTicker>>(Exchange, validationError);
 
-            if (apiType == null || apiType == ApiType.Spot)
-            {
-                var result = await ExchangeData.GetSpotTickersAsync(ct: ct).ConfigureAwait(false);
-                if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, default);
+            var result = await ExchangeData.GetSpotTickersAsync(ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, result.Data.List.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
-            }
-            else
-            {
-                var result = await ExchangeData.GetLinearInverseTickersAsync(apiType == ApiType.InverseFutures ? Enums.Category.Inverse : Enums.Category.Linear, ct: ct).ConfigureAwait(false);
-                if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, default);
-                
-                return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, result.Data.List.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
-            }
+            return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, result.Data.List.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h)));
         }
 
         EndpointOptions<GetTickerRequest> ISpotTickerRestClient.GetSpotTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
@@ -803,7 +792,12 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
+            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedFuturesSymbol(
+                s.ContractType == ContractTypeV5.LinearPerpetual ? SharedSymbolType.PerpetualLinear:
+                s.ContractType == ContractTypeV5.InversePerpetual ? SharedSymbolType.PerpetualInverse:
+                s.ContractType == ContractTypeV5.LinearFutures ? SharedSymbolType.DeliveryLinear :
+                SharedSymbolType.DeliveryInverse,
+                s.BaseAsset, s.QuoteAsset, s.Name)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 PriceStep = s.PriceFilter?.TickSize,
