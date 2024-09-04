@@ -21,6 +21,7 @@ namespace Bybit.Net.Clients.V5
     internal partial class BybitSocketClientPrivateApi : IBybitSocketClientPrivateApiShared
     {
         public string Exchange => BybitExchange.ExchangeName;
+        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.Spot, ApiType.PerpetualLinear, ApiType.PerpetualInverse, ApiType.DeliveryLinear, ApiType.DeliveryInverse };
 
         async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(ApiType? apiType, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
         {

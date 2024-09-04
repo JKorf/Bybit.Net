@@ -19,6 +19,7 @@ namespace Bybit.Net.Clients.V5
     internal partial class BybitSocketClientSpotApi : IBybitSocketClientSpotApiShared
     {
         public string Exchange => BybitExchange.ExchangeName;
+        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.Spot };
 
         async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(TickerSubscribeRequest request, Action<DataEvent<SharedSpotTicker>> handler, CancellationToken ct)
         {
