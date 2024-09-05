@@ -48,15 +48,15 @@ namespace Bybit.Net.Clients.V5
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTimestamp = dateTimeToken.LastTime;
 
-            var startTime = request.Filter?.StartTime;
-            var endTime = request.Filter?.EndTime?.AddSeconds(-1);
+            var startTime = request.StartTime;
+            var endTime = request.EndTime?.AddSeconds(-1);
             var apiLimit = 1000;
 
-            if (request.Filter?.StartTime != null)
+            if (request.StartTime != null)
             {
                 // Not paginated, check if the data will fit
                 var seconds = apiLimit * (int)request.Interval;
-                var maxEndTime = (fromTimestamp ?? request.Filter.StartTime).Value.AddSeconds(seconds - 1);
+                var maxEndTime = (fromTimestamp ?? request.StartTime).Value.AddSeconds(seconds - 1);
                 if (maxEndTime < endTime)
                     endTime = maxEndTime;
             }
@@ -67,9 +67,9 @@ namespace Bybit.Net.Clients.V5
                 category,
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
                 interval,
-                fromTimestamp ?? request.Filter?.StartTime,
+                fromTimestamp ?? request.StartTime,
                 endTime,
-                request.Filter?.Limit ?? apiLimit,
+                request.Limit ?? apiLimit,
                 ct: ct
                 ).ConfigureAwait(false);
 
@@ -78,10 +78,10 @@ namespace Bybit.Net.Clients.V5
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.Filter?.StartTime != null && result.Data.List.Any())
+            if (request.StartTime != null && result.Data.List.Any())
             {
                 var maxOpenTime = result.Data.List.Max(x => x.StartTime);
-                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
                     nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
             }
 
@@ -360,9 +360,9 @@ namespace Bybit.Net.Clients.V5
             // Get data
             var orders = await Trading.GetOrderHistoryAsync(Category.Spot,
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit
                 ).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
@@ -433,9 +433,9 @@ namespace Bybit.Net.Clients.V5
 
             // Get data
             var trades = await Trading.GetUserTradesAsync(Category.Spot,
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit,
                 cursor: cursor).ConfigureAwait(false);
             if (!trades)
                 return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
@@ -601,10 +601,10 @@ namespace Bybit.Net.Clients.V5
 
             // Get data
             var deposits = await Account.GetDepositsAsync(
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
                 asset: request.Asset,
-                limit: request.Filter?.Limit ?? 100,
+                limit: request.Limit ?? 100,
                 cursor: cursor,
                 ct: ct).ConfigureAwait(false);
             if (!deposits)
@@ -663,10 +663,10 @@ namespace Bybit.Net.Clients.V5
 
             // Get data
             var withdrawals = await Account.GetWithdrawalsAsync(
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
                 asset: request.Asset,
-                limit: request.Filter?.Limit ?? 100,
+                limit: request.Limit ?? 100,
                 cursor: cursor,
                 ct: ct).ConfigureAwait(false);
             if (!withdrawals)
@@ -832,7 +832,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedLeverage>(Exchange, default);
 
-            var position = result.Data.List.SingleOrDefault(x => x.PositionIdx == (request.Side == SharedPositionSide.Both ? Enums.V5.PositionIdx.OneWayMode : request.Side == SharedPositionSide.Short ? Enums.V5.PositionIdx.SellHedgeMode : Enums.V5.PositionIdx.BuyHedgeMode));
+            var position = result.Data.List.SingleOrDefault(x => x.PositionIdx == (request.Side == null ? Enums.V5.PositionIdx.OneWayMode : request.Side == SharedPositionSide.Short ? Enums.V5.PositionIdx.SellHedgeMode : Enums.V5.PositionIdx.BuyHedgeMode));
 
             return result.AsExchangeResult(Exchange, new SharedLeverage(position?.Leverage ?? 0)
             {
@@ -840,7 +840,7 @@ namespace Bybit.Net.Clients.V5
             });
         }
 
-        SetLeverageOptions ILeverageRestClient.SetLeverageOptions { get; } = new SetLeverageOptions(true);
+        SetLeverageOptions ILeverageRestClient.SetLeverageOptions { get; } = new SetLeverageOptions(false);
         async Task<ExchangeWebResult<SharedLeverage>> ILeverageRestClient.SetLeverageAsync(SetLeverageRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((ILeverageRestClient)this).SetLeverageOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
@@ -893,9 +893,9 @@ namespace Bybit.Net.Clients.V5
                 category,
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
                 interval,
-                fromTimestamp ?? request.Filter?.StartTime,
-                request.Filter?.EndTime,
-                request.Filter?.Limit ?? 1000,
+                fromTimestamp ?? request.StartTime,
+                request.EndTime,
+                request.Limit ?? 1000,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -903,10 +903,10 @@ namespace Bybit.Net.Clients.V5
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.Filter?.StartTime != null && result.Data.List.Any())
+            if (request.StartTime != null && result.Data.List.Any())
             {
                 var maxOpenTime = result.Data.List.Max(x => x.StartTime);
-                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
                     nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
             }
 
@@ -942,9 +942,9 @@ namespace Bybit.Net.Clients.V5
                 category,
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
                 interval,
-                fromTimestamp ?? request.Filter?.StartTime,
-                request.Filter?.EndTime,
-                request.Filter?.Limit ?? 1000,
+                fromTimestamp ?? request.StartTime,
+                request.EndTime,
+                request.Limit ?? 1000,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -952,10 +952,10 @@ namespace Bybit.Net.Clients.V5
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.Filter?.StartTime != null && result.Data.List.Any())
+            if (request.StartTime != null && result.Data.List.Any())
             {
                 var maxOpenTime = result.Data.List.Max(x => x.StartTime);
-                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
                     nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
             }
 
@@ -1055,7 +1055,7 @@ namespace Bybit.Net.Clients.V5
                 request.OrderType == SharedOrderType.Limit ? Enums.NewOrderType.Limit : Enums.NewOrderType.Market,
                 quantity: request.Quantity ?? 0,
                 price: request.Price,
-                positionIdx: request.PositionSide == SharedPositionSide.Both ? Enums.V5.PositionIdx.OneWayMode: request.PositionSide == SharedPositionSide.Long ? Enums.V5.PositionIdx.BuyHedgeMode : Enums.V5.PositionIdx.SellHedgeMode,
+                positionIdx: request.PositionSide == null ? Enums.V5.PositionIdx.OneWayMode: request.PositionSide == SharedPositionSide.Long ? Enums.V5.PositionIdx.BuyHedgeMode : Enums.V5.PositionIdx.SellHedgeMode,
                 reduceOnly: request.ReduceOnly,
                 marketUnit: request.Quantity > 0 ? Enums.V5.MarketUnit.BaseAsset : Enums.V5.MarketUnit.QuoteAsset,
                 timeInForce: GetTimeInForce(request.OrderType, request.TimeInForce),
@@ -1102,7 +1102,7 @@ namespace Bybit.Net.Clients.V5
                 QuoteQuantityFilled = order.ValueFilled,
                 TimeInForce = ParseTimeInForce(order.TimeInForce),
                 UpdateTime = order.UpdateTime,
-                PositionSide = order.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? SharedPositionSide.Both : order.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
+                PositionSide = order.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? null : order.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = order.ReduceOnly,
                 Fee = order.ExecutedFee,
                 FeeAsset = order.FeeAsset
@@ -1138,7 +1138,7 @@ namespace Bybit.Net.Clients.V5
                 QuoteQuantityFilled = x.ValueFilled,
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
-                PositionSide = x.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? SharedPositionSide.Both : x.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
+                PositionSide = x.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? null : x.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.ExecutedFee,
                 FeeAsset = x.FeeAsset
@@ -1160,9 +1160,9 @@ namespace Bybit.Net.Clients.V5
             // Get data
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetOrderHistoryAsync(category, request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 50,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 50,
                 cursor: cursor).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
@@ -1188,7 +1188,7 @@ namespace Bybit.Net.Clients.V5
                 QuoteQuantityFilled = x.ValueFilled,
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
-                PositionSide = x.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? SharedPositionSide.Both : x.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
+                PositionSide = x.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? null : x.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.ExecutedFee,
                 FeeAsset = x.FeeAsset
@@ -1237,9 +1237,9 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetUserTradesAsync(category, 
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 500,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 500,
                 cursor: cursor
                 ).ConfigureAwait(false);
             if (!orders)
@@ -1301,7 +1301,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, result.Data.List.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime ?? default)
+            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, result.Data.List.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
             {
                 UnrealizedPnl = x.UnrealizedPnl,
                 LiquidationPrice = x.LiquidationPrice,
@@ -1309,11 +1309,17 @@ namespace Bybit.Net.Clients.V5
                 MaintenanceMargin = x.MaintenanceMargin,
                 Leverage = x.Leverage,
                 InitialMargin = x.InitialMargin,
-                PositionSide = x.Side == PositionSide.None ? SharedPositionSide.Both : x.Side == PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long
+                PositionSide = x.Side == PositionSide.None ? SharedPositionSide.Long : x.Side == PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long
             }).ToList());
         }
 
-        EndpointOptions<ClosePositionRequest> IFuturesOrderRestClient.ClosePositionOptions { get; } = new EndpointOptions<ClosePositionRequest>(true);
+        EndpointOptions<ClosePositionRequest> IFuturesOrderRestClient.ClosePositionOptions { get; } = new EndpointOptions<ClosePositionRequest>(true)
+        {
+            RequiredOptionalParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription(nameof(ClosePositionRequest.Quantity), typeof(decimal), "Quantity of position to close", 1m)
+            }
+        };
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.ClosePositionAsync(ClosePositionRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).ClosePositionOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
@@ -1322,10 +1328,6 @@ namespace Bybit.Net.Clients.V5
 
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset));
-            var positions = await Trading.GetPositionsAsync(category, symbol).ConfigureAwait(false);
-            var position = positions.Data.List.SingleOrDefault(x => x.Side == (request.PositionSide == SharedPositionSide.Long ? PositionSide.Buy : PositionSide.Sell));
-            if (position == null || !(position.Quantity > 0))
-                return positions.AsExchangeError<SharedId>(Exchange, new ServerError("Position not found"));
 
             var result = await Trading.PlaceOrderAsync(
                 category,
@@ -1333,13 +1335,56 @@ namespace Bybit.Net.Clients.V5
                 request.PositionSide == SharedPositionSide.Short ? OrderSide.Buy : OrderSide.Sell,
 #warning check
                 NewOrderType.Market,
-                position.Quantity,
+                request.Quantity!.Value,
                 reduceOnly: true,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, default);
 
             return result.AsExchangeResult(Exchange, new SharedId(result.Data.OrderId.ToString()));
+        }
+        #endregion
+
+        #region Position Mode client
+
+        GetPositionModeOptions IPositionModeRestClient.GetPositionModeOptions { get; } = new GetPositionModeOptions(true);
+        async Task<ExchangeWebResult<SharedPositionModeResult>> IPositionModeRestClient.GetPositionModeAsync(GetPositionModeRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IPositionModeRestClient)this).GetPositionModeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
+
+            var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var result = await Trading.GetPositionsAsync(
+                category,
+                request.Symbol!.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                limit: 1,
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
+
+            if (!result.Data.List.Any())
+                return new ExchangeWebResult<SharedPositionModeResult>(Exchange, new ServerError("Position not found"));
+
+            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(result.Data.List.Single().PositionIdx == Enums.V5.PositionIdx.OneWayMode ? SharedPositionMode.OneWay : SharedPositionMode.LongShort));
+        }
+
+        SetPositionModeOptions IPositionModeRestClient.SetPositionModeOptions { get; } = new SetPositionModeOptions(true, true, true);
+        async Task<ExchangeWebResult<SharedPositionModeResult>> IPositionModeRestClient.SetPositionModeAsync(SetPositionModeRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IPositionModeRestClient)this).SetPositionModeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
+
+            var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var result = await Account.SwitchPositionModeAsync(
+                category,
+                symbol: request.Symbol!.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                mode: request.Mode == SharedPositionMode.LongShort ? Enums.V5.PositionMode.BothSides : Enums.V5.PositionMode.MergedSingle, ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(request.Mode));
         }
         #endregion
     }

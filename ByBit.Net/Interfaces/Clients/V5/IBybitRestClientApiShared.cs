@@ -26,7 +26,8 @@ namespace Bybit.Net.Interfaces.Clients
         IIndexPriceKlineRestClient,
         IOpenInterestRestClient,
         IFundingRateRestClient,
-        IFuturesOrderRestClient
+        IFuturesOrderRestClient,
+        IPositionModeRestClient
     {
     }
 }
