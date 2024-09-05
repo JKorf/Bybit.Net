@@ -104,7 +104,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedSpotSymbol>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
+            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
@@ -793,12 +793,17 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedFuturesSymbol(
+            var data = result.Data.List.Where(x => 
+                apiType == ApiType.PerpetualLinear ? x.ContractType == ContractTypeV5.LinearPerpetual :
+                apiType == ApiType.PerpetualInverse ? x.ContractType == ContractTypeV5.InversePerpetual :
+                apiType == ApiType.DeliveryLinear ? x.ContractType == ContractTypeV5.LinearFutures :
+                x.ContractType == ContractTypeV5.InverseFutures);
+            return result.AsExchangeResult(Exchange, data.Select(s => new SharedFuturesSymbol(
                 s.ContractType == ContractTypeV5.LinearPerpetual ? SharedSymbolType.PerpetualLinear:
                 s.ContractType == ContractTypeV5.InversePerpetual ? SharedSymbolType.PerpetualInverse:
                 s.ContractType == ContractTypeV5.LinearFutures ? SharedSymbolType.DeliveryLinear :
                 SharedSymbolType.DeliveryInverse,
-                s.BaseAsset, s.QuoteAsset, s.Name)
+                s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 PriceStep = s.PriceFilter?.TickSize,
