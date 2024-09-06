@@ -8,7 +8,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
     public interface IBybitSocketClientPrivateApiShared :
         IBalanceSocketClient,
         ISpotOrderSocketClient,
-        ISpotUserTradeSocketClient
+        IUserTradeSocketClient
     {
     }
 }

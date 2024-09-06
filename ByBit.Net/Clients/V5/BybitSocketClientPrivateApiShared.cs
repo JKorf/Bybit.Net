@@ -62,7 +62,7 @@ namespace Bybit.Net.Clients.V5
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<ExchangeResult<UpdateSubscription>> ISpotUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(ApiType? apiType, Action<DataEvent<IEnumerable<SharedUserTrade>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(ApiType? apiType, Action<DataEvent<IEnumerable<SharedUserTrade>>> handler, CancellationToken ct)
         {
             var result = await SubscribeToUserTradeUpdatesAsync(
                 update => handler(update.As(update.Data.Select(x =>
