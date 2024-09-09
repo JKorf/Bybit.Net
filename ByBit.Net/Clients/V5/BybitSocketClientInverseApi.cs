@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientLinearApi" />
-    internal class BybitSocketClientInverseApi : BybitSocketClientBaseApi, IBybitSocketClientInverseApi
+    internal partial class BybitSocketClientInverseApi : BybitSocketClientBaseApi, IBybitSocketClientInverseApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
@@ -28,6 +28,7 @@ namespace Bybit.Net.Clients.V5
         {
             RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
         }
+        public IBybitSocketClientInverseApiShared SharedClient => this;
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)

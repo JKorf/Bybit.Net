@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bybit.Net.Interfaces.Clients.V5
 {
-    public interface IBybitSocketClientSpotApiShared :
+    public interface IBybitSocketClientInverseApiShared :
         ITickerSocketClient,
         ITradeSocketClient,
         IBookTickerSocketClient,

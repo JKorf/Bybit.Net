@@ -17,10 +17,10 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.V5
 {
-    internal partial class BybitSocketClientSpotApi : IBybitSocketClientSpotApiShared
+    internal partial class BybitSocketClientLinearApi : IBybitSocketClientLinearApiShared
     {
         public string Exchange => BybitExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.Spot };
+        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.DeliveryLinear, ApiType.PerpetualLinear };
 
         #region Ticker client
         SubscriptionOptions<SubscribeTickerRequest> ITickerSocketClient.SubscribeTickerOptions { get; } = new SubscriptionOptions<SubscribeTickerRequest>(false);
@@ -30,10 +30,20 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
+            decimal lastPrice = 0, high = 0, low = 0, vol = 0;
             var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType));
             var result = await SubscribeToTickerUpdatesAsync(symbol, update =>
             {
-                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.HighPrice24h, update.Data.LastPrice, update.Data.LowPrice24h, update.Data.Volume24h)));
+                if (update.Data.LastPrice.HasValue)
+                    lastPrice = update.Data.LastPrice.Value;
+                if (update.Data.HighPrice24h.HasValue)
+                    high = update.Data.HighPrice24h.Value;
+                if (update.Data.LowPrice24h.HasValue)
+                    low = update.Data.LowPrice24h.Value;
+                if (update.Data.Volume24h.HasValue)
+                    vol = update.Data.Volume24h.Value;
+
+                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, lastPrice, high, low, vol)));
             }, ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -100,7 +110,7 @@ namespace Bybit.Net.Clients.V5
             var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType));
             var result = await SubscribeToKlineUpdatesAsync(symbol, interval, update =>
             {
-                foreach(var item in update.Data)
+                foreach (var item in update.Data)
                     handler(update.AsExchangeEvent(Exchange, new SharedKline(item.StartTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
             }, ct).ConfigureAwait(false);
 

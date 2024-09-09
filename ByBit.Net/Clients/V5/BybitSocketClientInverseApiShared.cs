@@ -17,10 +17,10 @@ using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.V5
 {
-    internal partial class BybitSocketClientSpotApi : IBybitSocketClientSpotApiShared
+    internal partial class BybitSocketClientInverseApi : IBybitSocketClientInverseApiShared
     {
         public string Exchange => BybitExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.Spot };
+        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.DeliveryInverse, ApiType.PerpetualInverse };
 
         #region Ticker client
         SubscriptionOptions<SubscribeTickerRequest> ITickerSocketClient.SubscribeTickerOptions { get; } = new SubscriptionOptions<SubscribeTickerRequest>(false);
@@ -31,10 +31,7 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType));
-            var result = await SubscribeToTickerUpdatesAsync(symbol, update =>
-            {
-                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.HighPrice24h, update.Data.LastPrice, update.Data.LowPrice24h, update.Data.Volume24h)));
-            }, ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.HighPrice24h, update.Data.LastPrice, update.Data.LowPrice24h, update.Data.Volume24h ?? 0))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -100,7 +97,7 @@ namespace Bybit.Net.Clients.V5
             var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType));
             var result = await SubscribeToKlineUpdatesAsync(symbol, interval, update =>
             {
-                foreach(var item in update.Data)
+                foreach (var item in update.Data)
                     handler(update.AsExchangeEvent(Exchange, new SharedKline(item.StartTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
             }, ct).ConfigureAwait(false);
 
