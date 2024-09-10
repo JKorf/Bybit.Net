@@ -4,6 +4,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces.Socket;
+using CryptoExchange.Net.SharedApis.Interfaces.Socket.Futures;
 using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Models.FilterOptions;
 using CryptoExchange.Net.SharedApis.Models.Socket;
@@ -78,7 +79,6 @@ namespace Bybit.Net.Clients.V5
         }
         #endregion
 
-
         #region Spot Order client
 
         SubscriptionOptions IFuturesOrderSocketClient.SubscribeFuturesOrderOptions { get; } = new SubscriptionOptions("SubscribeFuturesOrderRequest", false);
@@ -147,6 +147,31 @@ namespace Bybit.Net.Clients.V5
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
+        #endregion
+
+        #region Position client
+        SubscriptionOptions IPositionSocketClient.SubscribePositionOptions { get; } = new SubscriptionOptions("SubscribePositionRequest", true);
+        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(Action<ExchangeEvent<IEnumerable<SharedPosition>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IUserTradeSocketClient)this).SubscribeUserTradeOptions.ValidateRequest(Exchange, exchangeParameters, ApiType.Spot, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+
+            var result = await SubscribeToPositionUpdatesAsync(
+                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
+                {
+                    AverageEntryPrice = x.AveragePrice,
+                    PositionSide = x.Side == Enums.PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long,
+                    LiquidationPrice = x.LiquidationPrice,
+                    InitialMargin = x.InitialMargin,
+                    Leverage = x.Leverage,
+                    UnrealizedPnl = x.UnrealizedPnl
+                }))),
+                ct: ct).ConfigureAwait(false);
+
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
         #endregion
     }
 }
