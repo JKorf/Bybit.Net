@@ -65,7 +65,7 @@ namespace Bybit.Net.Clients.V5
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetKlinesAsync(
                 category,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 interval,
                 fromTimestamp ?? request.StartTime,
                 endTime,
@@ -158,7 +158,7 @@ namespace Bybit.Net.Clients.V5
 
             if (request.ApiType == ApiType.Spot)
             {
-                var result = await ExchangeData.GetSpotTickersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct).ConfigureAwait(false);
+                var result = await ExchangeData.GetSpotTickersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), ct).ConfigureAwait(false);
                 if (!result)
                     return result.AsExchangeResult<SharedSpotTicker>(Exchange, default);
 
@@ -169,7 +169,7 @@ namespace Bybit.Net.Clients.V5
             {
                 var result = await ExchangeData.GetLinearInverseTickersAsync(
                     (request.ApiType == ApiType.DeliveryInverse || request.ApiType == ApiType.PerpetualInverse) ? Enums.Category.Inverse : Enums.Category.Linear,
-                    request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                    request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                     ct: ct).ConfigureAwait(false);
                 if (!result)
                     return result.AsExchangeResult<SharedSpotTicker>(Exchange, default);
@@ -195,7 +195,7 @@ namespace Bybit.Net.Clients.V5
 
             var result = await ExchangeData.GetTradeHistoryAsync(
                 category,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -258,7 +258,7 @@ namespace Bybit.Net.Clients.V5
 
             var result = await Trading.PlaceOrderAsync(
                 Category.Spot,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 request.Side == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 request.OrderType == SharedOrderType.Market ? NewOrderType.Market : NewOrderType.Limit,
                 quantity: request.Quantity ?? request.QuoteQuantity ?? 0,
@@ -318,7 +318,7 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedSpotOrder>>(Exchange, validationError);
 
-            var symbol = request.Symbol?.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, ApiType.Spot));
+            var symbol = request.Symbol?.GetSymbol((baseAsset, quoteAsset, deliveryDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliveryDate));
             var orders = await Trading.GetOrdersAsync(Category.Spot, symbol, openOnly: 0).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
@@ -359,7 +359,7 @@ namespace Bybit.Net.Clients.V5
 
             // Get data
             var orders = await Trading.GetOrderHistoryAsync(Category.Spot,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit
@@ -466,7 +466,7 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var order = await Trading.CancelOrderAsync(Category.Spot, request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), request.OrderId).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(Category.Spot, request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), request.OrderId).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, default);
 
@@ -636,7 +636,7 @@ namespace Bybit.Net.Clients.V5
             var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetOrderbookAsync(
                 category,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -730,7 +730,7 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeWebResult<SharedFuturesTicker>(Exchange, validationError);
 
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
-            var resultTicker = await ExchangeData.GetLinearInverseTickersAsync(category, request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct: ct).ConfigureAwait(false);
+            var resultTicker = await ExchangeData.GetLinearInverseTickersAsync(category, request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), ct: ct).ConfigureAwait(false);
             if (!resultTicker)
                 return resultTicker.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
 
@@ -827,7 +827,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.GetPositionsAsync(
                 category,
-                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedLeverage>(Exchange, default);
@@ -852,7 +852,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Account.SetLeverageAsync(
                 category,
-                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 request.Leverage,
                 request.Leverage,
                 ct: ct).ConfigureAwait(false);
@@ -891,7 +891,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetMarkPriceKlinesAsync(
                 category,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 interval,
                 fromTimestamp ?? request.StartTime,
                 request.EndTime,
@@ -940,7 +940,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetIndexPriceKlinesAsync(
                 category,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 interval,
                 fromTimestamp ?? request.StartTime,
                 request.EndTime,
@@ -976,7 +976,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetLinearInverseTickersAsync(
                 category,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedOpenInterest>(Exchange, default);
@@ -1003,7 +1003,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetFundingRateHistoryAsync(
                 category,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: fromTime ?? request.StartTime,
                 endTime: request.EndTime,
                 limit: 1000,
@@ -1050,7 +1050,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.PlaceOrderAsync(
                 category,
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 request.OrderType == SharedOrderType.Limit ? Enums.NewOrderType.Limit : Enums.NewOrderType.Market,
                 quantity: request.Quantity ?? 0,
@@ -1117,7 +1117,7 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeWebResult<IEnumerable<SharedFuturesOrder>>(Exchange, validationError);
 
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
-            var symbol = request.Symbol?.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType));
+            var symbol = request.Symbol?.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate));
             var orders = await Trading.GetOrdersAsync(category, symbol, openOnly: 0).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
@@ -1159,7 +1159,7 @@ namespace Bybit.Net.Clients.V5
 
             // Get data
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
-            var orders = await Trading.GetOrderHistoryAsync(category, request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+            var orders = await Trading.GetOrderHistoryAsync(category, request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 50,
@@ -1236,7 +1236,7 @@ namespace Bybit.Net.Clients.V5
             // Get data
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetUserTradesAsync(category, 
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 500,
@@ -1272,7 +1272,7 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
-            var order = await Trading.CancelOrderAsync(category, request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), request.OrderId).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(category, request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), request.OrderId).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, default);
 
@@ -1295,7 +1295,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.GetPositionsAsync(
                 category,
-                symbol: request.Symbol?.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                symbol: request.Symbol?.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 exchangeParameters!.GetValue<string>(Exchange, "SettleAsset")!,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -1327,7 +1327,7 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
-            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset));
+            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate));
 
             var result = await Trading.PlaceOrderAsync(
                 category,
@@ -1357,7 +1357,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.GetPositionsAsync(
                 category,
-                request.Symbol!.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol!.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 limit: 1,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -1379,7 +1379,7 @@ namespace Bybit.Net.Clients.V5
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Account.SwitchPositionModeAsync(
                 category,
-                symbol: request.Symbol!.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                symbol: request.Symbol!.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 mode: request.Mode == SharedPositionMode.LongShort ? Enums.V5.PositionMode.BothSides : Enums.V5.PositionMode.MergedSingle, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);

@@ -80,7 +80,20 @@ namespace Bybit.Net.Clients.V5
             => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType apiType, DateTime? deliverTime = null)
+        {
+            if (apiType == ApiType.Spot)
+                return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+            if (apiType.IsLinear()) {
+                if (apiType.IsPerpetual())
+                    return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+                return baseAsset.ToUpperInvariant() + "-" + deliverTime!.Value.ToString("ddMMMyy").ToUpperInvariant();
+            }
+
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
+        }
 
         /// <summary>
         /// Get url for an endpoint
