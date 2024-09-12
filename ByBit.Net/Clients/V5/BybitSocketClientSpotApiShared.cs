@@ -33,7 +33,7 @@ namespace Bybit.Net.Clients.V5
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
             var result = await SubscribeToTickerUpdatesAsync(symbol, update =>
             {
-                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.HighPrice24h, update.Data.LastPrice, update.Data.LowPrice24h, update.Data.Volume24h)));
+                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.HighPrice24h, update.Data.LastPrice, update.Data.LowPrice24h, update.Data.Volume24h, update.Data.PricePercentage24h)));
             }, ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);

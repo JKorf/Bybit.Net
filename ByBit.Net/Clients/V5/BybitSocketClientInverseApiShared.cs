@@ -31,7 +31,23 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.HighPrice24h, update.Data.LastPrice, update.Data.LowPrice24h, update.Data.Volume24h ?? 0))), ct).ConfigureAwait(false);
+
+            decimal lastPrice = 0, high = 0, low = 0, vol = 0, change = 0;
+            var result = await SubscribeToTickerUpdatesAsync(symbol, update =>
+            {
+                if (update.Data.LastPrice.HasValue)
+                    lastPrice = update.Data.LastPrice.Value;
+                if (update.Data.HighPrice24h.HasValue)
+                    high = update.Data.HighPrice24h.Value;
+                if (update.Data.LowPrice24h.HasValue)
+                    low = update.Data.LowPrice24h.Value;
+                if (update.Data.Volume24h.HasValue)
+                    vol = update.Data.Volume24h.Value;
+                if (update.Data.PricePercentage24h.HasValue)
+                    vol = update.Data.PricePercentage24h.Value;
+
+                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, lastPrice, high, low, vol, change)));
+            }, ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
