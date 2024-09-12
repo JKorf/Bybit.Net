@@ -246,10 +246,10 @@ namespace Bybit.Net.Clients.V5
             },
             new SharedQuantitySupport(
 #warning unclear if limit is supported
-                SharedQuantityType.Both,
-                SharedQuantityType.Both,
-                SharedQuantityType.Both,
-                SharedQuantityType.Both));
+                SharedQuantityType.BaseAndQuoteAsset,
+                SharedQuantityType.BaseAndQuoteAsset,
+                SharedQuantityType.BaseAndQuoteAsset,
+                SharedQuantityType.BaseAndQuoteAsset));
 
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
@@ -1038,10 +1038,10 @@ namespace Bybit.Net.Clients.V5
             },
             new SharedQuantitySupport(
 #warning correct?
-                SharedQuantityType.Both,
-                SharedQuantityType.Both,
-                SharedQuantityType.Both,
-                SharedQuantityType.Both));
+                SharedQuantityType.BaseAndQuoteAsset,
+                SharedQuantityType.BaseAndQuoteAsset,
+                SharedQuantityType.BaseAndQuoteAsset,
+                SharedQuantityType.BaseAndQuoteAsset));
 
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
