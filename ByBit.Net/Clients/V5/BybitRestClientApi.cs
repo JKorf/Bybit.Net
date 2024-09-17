@@ -87,7 +87,12 @@ namespace Bybit.Net.Clients.V5
 
             if (apiType.IsLinear()) {
                 if (apiType.IsPerpetual())
+                {
+                    if (quoteAsset == "USDC")
+                        return baseAsset + "PERP";
+
                     return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+                }
 
                 return baseAsset.ToUpperInvariant() + "-" + deliverTime!.Value.ToString("ddMMMyy").ToUpperInvariant();
             }

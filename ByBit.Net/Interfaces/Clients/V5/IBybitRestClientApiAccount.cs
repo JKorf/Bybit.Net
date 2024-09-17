@@ -338,7 +338,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
 
         /// <summary>
         /// Get withdrawal history
-        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/withdraw-record" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/withdraw/withdraw-record" /></para>
         /// </summary>
         /// <param name="withdrawId">Filter by withdrawal id</param>
         /// <param name="asset">Filter by asset, for example `ETH`</param>

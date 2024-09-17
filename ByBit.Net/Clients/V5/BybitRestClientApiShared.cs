@@ -44,23 +44,22 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, validationError);
 
-            // Determine page token
-            DateTime? fromTimestamp = null;
+            // Determine pagination
+            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            DateTime endTime = request.EndTime ?? DateTime.UtcNow;
+            DateTime? startTime = request.StartTime;
             if (pageToken is DateTimeToken dateTimeToken)
-                fromTimestamp = dateTimeToken.LastTime;
+                endTime = dateTimeToken.LastTime;
 
-            var startTime = request.StartTime;
-            var endTime = request.EndTime?.AddSeconds(-1);
-            var apiLimit = 1000;
-
-            if (request.StartTime != null)
+            var limit = request.Limit ?? 1000;
+            if (startTime == null || startTime < endTime)
             {
-                // Not paginated, check if the data will fit
-                var seconds = apiLimit * (int)request.Interval;
-                var maxEndTime = (fromTimestamp ?? request.StartTime).Value.AddSeconds(seconds - 1);
-                if (maxEndTime < endTime)
-                    endTime = maxEndTime;
+                var offset = (int)interval * limit;
+                startTime = endTime.AddSeconds(-offset);
             }
+
+            if (startTime < request.StartTime)
+                startTime = request.StartTime;
 
             // Get data
             var category = request.Symbol.ApiType == ApiType.Spot ? Enums.Category.Spot : (request.Symbol.ApiType == ApiType.PerpetualLinear || request.Symbol.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
@@ -68,9 +67,9 @@ namespace Bybit.Net.Clients.V5
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
                 interval,
-                fromTimestamp ?? request.StartTime,
+                startTime,
                 endTime,
-                request.Limit ?? apiLimit,
+                limit,
                 ct: ct
                 ).ConfigureAwait(false);
 
@@ -79,15 +78,14 @@ namespace Bybit.Net.Clients.V5
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.StartTime != null && result.Data.List.Any())
+            if (result.Data.List.Count() == limit)
             {
-                var maxOpenTime = result.Data.List.Max(x => x.StartTime);
-                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
-                    nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
+                var minOpenTime = result.Data.List.Min(x => x.StartTime);
+                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            // Reverse as data is returned in desc order instead of standard asc
-            return result.AsExchangeResult(Exchange, result.Data.List.Reverse().Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, result.Data.List.Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 
         #endregion
@@ -105,33 +103,17 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedSpotSymbol>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
+            return result.AsExchangeResult<IEnumerable<SharedSpotSymbol>>(Exchange, result.Data.List.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
+                MinNotionalValue = s.LotSizeFilter?.MinOrderValue,
                 QuantityStep = s.LotSizeFilter?.BasePrecision,
                 PriceStep = s.PriceFilter?.TickSize
-            }));
+            }).ToArray());
         }
 
         #endregion
-
-        //async Task<ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
-        //{
-        //    var category = request.ApiType == ApiType.Spot ? Enums.Category.Spot : request.ApiType == ApiType.LinearFutures ? Enums.Category.Linear : Enums.Category.Inverse;
-
-        //    var result = await ExchangeData.GetLinearInverseSymbolsAsync(category, ct: ct).ConfigureAwait(false);
-        //    if (!result)
-        //        return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
-
-        //    return result.AsExchangeResult(Exchange, result.Data.List.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
-        //    {
-        //        MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
-        //        MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
-        //        QuantityStep = s.LotSizeFilter?.QuantityStep,
-        //        PriceStep = s.PriceFilter?.TickSize
-        //    }));
-        //}
 
         #region Spot Ticker client
 
@@ -146,7 +128,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, result.Data.List.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentag24h)));
+            return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, result.Data.List.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentag24h * 100)).ToArray());
         }
 
         EndpointOptions<GetTickerRequest> ISpotTickerRestClient.GetSpotTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
@@ -163,7 +145,7 @@ namespace Bybit.Net.Clients.V5
                     return result.AsExchangeResult<SharedSpotTicker>(Exchange, default);
 
                 var ticker = result.Data.List.Single();
-                return result.AsExchangeResult(Exchange, new SharedSpotTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h, ticker.PriceChangePercentag24h));
+                return result.AsExchangeResult(Exchange, new SharedSpotTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h, ticker.PriceChangePercentag24h * 100));
             }
             else
             {
@@ -182,7 +164,6 @@ namespace Bybit.Net.Clients.V5
         #endregion
 
         #region Recent Trade client
-#warning spot has 60 limit, futures 1000
         GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000, false);
 
         async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
@@ -201,7 +182,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)));
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray());
         }
 
         #endregion
@@ -215,15 +196,11 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedBalance>>(Exchange, validationError);
 
-            // Assume unified account
-            // Inverse futures uses CONTRACT, other UNIFIED
-            var accountType = (request.ApiType == ApiType.PerpetualInverse || request.ApiType == ApiType.DeliveryInverse) ? Enums.AccountType.Contract : Enums.AccountType.Unified;
-
-            var result = await Account.GetBalancesAsync(accountType, ct: ct).ConfigureAwait(false);
+            var result = await Account.GetBalancesAsync(AccountType.Unified, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))));
+            return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))).ToArray());
         }
 
         #endregion
@@ -244,11 +221,13 @@ namespace Bybit.Net.Clients.V5
                 SharedTimeInForce.FillOrKill
             },
             new SharedQuantitySupport(
-#warning unclear if limit is supported
-                SharedQuantityType.BaseAndQuoteAsset,
-                SharedQuantityType.BaseAndQuoteAsset,
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset,
                 SharedQuantityType.BaseAndQuoteAsset,
                 SharedQuantityType.BaseAndQuoteAsset));
+
+        SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromTrade;
+        SharedFeeAssetType ISpotOrderRestClient.SpotFeeAssetType => SharedFeeAssetType.Variable;
 
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
         {
@@ -307,7 +286,7 @@ namespace Bybit.Net.Clients.V5
                 Fee = order.ExecutedFee,
                 QuoteQuantity = order.MarketUnit == Enums.V5.MarketUnit.QuoteAsset ? order.Quantity : null,
                 QuoteQuantityFilled = order.ValueFilled,
-                AveragePrice = order.AveragePrice
+                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice
             });
         }
 
@@ -323,7 +302,7 @@ namespace Bybit.Net.Clients.V5
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
 
-            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedSpotOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, orders.Data.List.Select(x => new SharedSpotOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -341,8 +320,8 @@ namespace Bybit.Net.Clients.V5
                 Fee = x.ExecutedFee,
                 QuoteQuantity = x.MarketUnit == Enums.V5.MarketUnit.QuoteAsset ? x.Quantity : null,
                 QuoteQuantityFilled = x.ValueFilled,
-                AveragePrice = x.AveragePrice
-            }));
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice
+            }).ToArray());
         }
 
         PaginatedEndpointOptions<GetClosedOrdersRequest> ISpotOrderRestClient.GetClosedSpotOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationType.Ascending, true);
@@ -372,7 +351,7 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrWhiteSpace(orders.Data.NextPageCursor))
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
-            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedSpotOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, orders.Data.List.Select(x => new SharedSpotOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -390,8 +369,8 @@ namespace Bybit.Net.Clients.V5
                 Fee = x.ExecutedFee,
                 QuoteQuantity = x.MarketUnit == Enums.V5.MarketUnit.QuoteAsset ? x.Quantity : null,
                 QuoteQuantityFilled = x.ValueFilled,
-                AveragePrice = x.AveragePrice
-            }), nextToken);
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice
+            }).ToArray(), nextToken);
         }
 
         EndpointOptions<GetOrderTradesRequest> ISpotOrderRestClient.GetSpotOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true);
@@ -405,7 +384,7 @@ namespace Bybit.Net.Clients.V5
             if (!trades)
                 return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
 
-            return trades.AsExchangeResult(Exchange, trades.Data.List.Select(x => new SharedUserTrade(
+            return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, trades.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -416,7 +395,7 @@ namespace Bybit.Net.Clients.V5
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
-            }));
+            }).ToArray());
         }
 
         PaginatedEndpointOptions<GetUserTradesRequest> ISpotOrderRestClient.GetSpotUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationType.Ascending, true);
@@ -445,7 +424,7 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrWhiteSpace(trades.Data.NextPageCursor))
                 nextToken = new CursorToken(trades.Data.NextPageCursor!);
 
-            return trades.AsExchangeResult(Exchange, trades.Data.List.Select(x => new SharedUserTrade(
+            return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, trades.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -456,7 +435,7 @@ namespace Bybit.Net.Clients.V5
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
-            }), nextToken);
+            }).ToArray(), nextToken);
         }
 
         EndpointOptions<CancelOrderRequest> ISpotOrderRestClient.CancelSpotOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
@@ -536,7 +515,7 @@ namespace Bybit.Net.Clients.V5
                     MinWithdrawQuantity = x.MinWithdraw,
                     WithdrawEnabled = x.NetworkWithdraw,
                     WithdrawFee = x.WithdrawFee
-                })
+                }).ToArray()
             });
         }
 
@@ -551,7 +530,7 @@ namespace Bybit.Net.Clients.V5
             if (!assets)
                 return assets.AsExchangeResult<IEnumerable<SharedAsset>>(Exchange, default);
 
-            return assets.AsExchangeResult(Exchange, assets.Data.Assets.Select(x => new SharedAsset(x.Name)
+            return assets.AsExchangeResult<IEnumerable<SharedAsset>>(Exchange, assets.Data.Assets.Select(x => new SharedAsset(x.Name)
             {
                 Networks = x.Networks.Select(x => new SharedAssetNetwork(x.Network)
                 {
@@ -561,7 +540,7 @@ namespace Bybit.Net.Clients.V5
                     WithdrawEnabled = x.NetworkWithdraw,
                     WithdrawFee = x.WithdrawFee 
                 })
-            }));
+            }).ToArray());
         }
 
         #endregion
@@ -581,10 +560,10 @@ namespace Bybit.Net.Clients.V5
 
             return depositAddresses.AsExchangeResult<IEnumerable<SharedDepositAddress>>(Exchange, depositAddresses.Data.Networks.Select(x => new SharedDepositAddress(depositAddresses.Data.Asset, x.DepositAddress)
             {
-                Tag = x.DepositTag,
-                Network = x.Network
+                TagOrMemo = x.DepositTag,
+                Network = x.Network,
             }
-            ));
+            ).ToArray());
         }
 
         GetDepositsOptions IDepositRestClient.GetDepositsOptions { get; } = new GetDepositsOptions(SharedPaginationType.Descending, true);
@@ -615,11 +594,11 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrEmpty(deposits.Data.NextPageCursor))
                 nextToken = new CursorToken(deposits.Data.NextPageCursor!);
 
-            return deposits.AsExchangeResult(Exchange, deposits.Data.Deposits.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == DepositStatus.Success, x.SuccessTime ?? new DateTime())
+            return deposits.AsExchangeResult<IEnumerable<SharedDeposit>>(Exchange, deposits.Data.Deposits.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == DepositStatus.Success, x.SuccessTime ?? new DateTime())
             {
                 Network = x.Network,
                 TransactionId = x.TransactionId,
-            }), nextToken);
+            }).ToArray(), nextToken);
         }
 
         #endregion
@@ -637,7 +616,7 @@ namespace Bybit.Net.Clients.V5
             var result = await ExchangeData.GetOrderbookAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
-                limit: request.Limit,
+                limit: request.Limit ?? 20,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedOrderBook>(Exchange, default);
@@ -666,7 +645,7 @@ namespace Bybit.Net.Clients.V5
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 asset: request.Asset,
-                limit: request.Limit ?? 100,
+                limit: request.Limit ?? 50,
                 cursor: cursor,
                 ct: ct).ConfigureAwait(false);
             if (!withdrawals)
@@ -677,13 +656,14 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrEmpty(withdrawals.Data.NextPageCursor))
                 nextToken = new CursorToken(withdrawals.Data.NextPageCursor!);
 
-            return withdrawals.AsExchangeResult(Exchange, withdrawals.Data.List.Select(x => new SharedWithdrawal(x.Asset, x.ToAddress, x.Quantity, x.Status == Enums.V5.WithdrawalStatus.Success, x.CreateTime)
+            return withdrawals.AsExchangeResult<IEnumerable<SharedWithdrawal>>(Exchange, withdrawals.Data.List.Select(x => new SharedWithdrawal(x.Asset, x.ToAddress, x.Quantity, x.Status == Enums.V5.WithdrawalStatus.Success, x.CreateTime)
             {
+                Id = x.Id,
                 Network = x.Network,
                 Tag = x.Tag,
                 TransactionId = x.TransactionId,
                 Fee = x.WithdrawFee
-            }));
+            }).ToArray(), nextToken);
         }
 
         #endregion
@@ -745,7 +725,7 @@ namespace Bybit.Net.Clients.V5
                     symbol.HighPrice24h,
                     symbol.LowPrice24h,
                     symbol.Volume24h,
-                    symbol.PriceChangePercentage24h)
+                    symbol.PriceChangePercentage24h * 100)
                 {
                     IndexPrice = symbol.IndexPrice,
                     FundingRate = symbol.FundingRate,
@@ -768,14 +748,14 @@ namespace Bybit.Net.Clients.V5
                 return resultTicker.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, default);
 
             return resultTicker.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, resultTicker.Data.List.Select(x =>
-             new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentage24h)
+             new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentage24h * 100)
              {
                  FundingRate = x.FundingRate,
                  IndexPrice = x.IndexPrice,
                  MarkPrice = x.MarkPrice,
                  NextFundingTime = x.NextFundingTime
              }
-            ));
+            ).ToArray());
         }
 
         #endregion
@@ -789,17 +769,20 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>(Exchange, validationError);
 
-            var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.ApiType == null || request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetLinearInverseSymbolsAsync(category, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
 
-            var data = result.Data.List.Where(x =>
-                request.ApiType == ApiType.PerpetualLinear ? x.ContractType == ContractTypeV5.LinearPerpetual :
-                request.ApiType == ApiType.PerpetualInverse ? x.ContractType == ContractTypeV5.InversePerpetual :
-                request.ApiType == ApiType.DeliveryLinear ? x.ContractType == ContractTypeV5.LinearFutures :
-                x.ContractType == ContractTypeV5.InverseFutures);
-            return result.AsExchangeResult(Exchange, data.Select(s => new SharedFuturesSymbol(
+            var data = result.Data.List;
+            if (request.ApiType != null)
+                data = data.Where(x =>
+                    request.ApiType == ApiType.PerpetualLinear ? x.ContractType == ContractTypeV5.LinearPerpetual :
+                    request.ApiType == ApiType.PerpetualInverse ? x.ContractType == ContractTypeV5.InversePerpetual :
+                    request.ApiType == ApiType.DeliveryLinear ? x.ContractType == ContractTypeV5.LinearFutures :
+                    x.ContractType == ContractTypeV5.InverseFutures);
+
+            return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, data.Select(s => new SharedFuturesSymbol(
                 s.ContractType == ContractTypeV5.LinearPerpetual ? SharedSymbolType.PerpetualLinear:
                 s.ContractType == ContractTypeV5.InversePerpetual ? SharedSymbolType.PerpetualInverse:
                 s.ContractType == ContractTypeV5.LinearFutures ? SharedSymbolType.DeliveryLinear :
@@ -807,11 +790,12 @@ namespace Bybit.Net.Clients.V5
                 s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
+                MinNotionalValue = s.LotSizeFilter?.MinNotionalValue,
                 PriceStep = s.PriceFilter?.TickSize,
                 QuantityStep = s.LotSizeFilter?.QuantityStep,
                 DeliveryTime = s.DeliveryTime,
-                ContractSize = 1
-            }));
+                ContractSize = 1,
+            }).ToArray());
         }
 
         #endregion
@@ -869,7 +853,7 @@ namespace Bybit.Net.Clients.V5
 
         #region Mark Klines client
 
-        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationType.Ascending, false)
+        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationType.Descending, false)
         {
             MaxRequestDataPoints = 1000
         };
@@ -884,19 +868,31 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedMarkKline>>(Exchange, validationError);
 
-            // Determine page token
-            DateTime? fromTimestamp = null;
+            // Determine pagination
+            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            DateTime endTime = request.EndTime ?? DateTime.UtcNow;
+            DateTime? startTime = request.StartTime;
             if (pageToken is DateTimeToken dateTimeToken)
-                fromTimestamp = dateTimeToken.LastTime;
+                endTime = dateTimeToken.LastTime;
+
+            var limit = request.Limit ?? 1000;
+            if (startTime == null || startTime < endTime)
+            {
+                var offset = (int)interval * limit;
+                startTime = endTime.AddSeconds(-offset);
+            }
+
+            if (startTime < request.StartTime)
+                startTime = request.StartTime;
 
             var category = (request.Symbol.ApiType == ApiType.PerpetualLinear || request.Symbol.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetMarkPriceKlinesAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
                 interval,
-                fromTimestamp ?? request.StartTime,
-                request.EndTime,
-                request.Limit ?? 1000,
+                startTime,
+                endTime,
+                limit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -904,14 +900,14 @@ namespace Bybit.Net.Clients.V5
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.StartTime != null && result.Data.List.Any())
+            if (result.Data.List.Count() == limit)
             {
-                var maxOpenTime = result.Data.List.Max(x => x.StartTime);
-                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
-                    nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
+                var minOpenTime = result.Data.List.Min(x => x.StartTime);
+                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(x => new SharedMarkKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.List.Select(x => new SharedMarkKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -933,19 +929,31 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedMarkKline>>(Exchange, validationError);
 
-            // Determine page token
-            DateTime? fromTimestamp = null;
+            // Determine pagination
+            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            DateTime endTime = request.EndTime ?? DateTime.UtcNow;
+            DateTime? startTime = request.StartTime;
             if (pageToken is DateTimeToken dateTimeToken)
-                fromTimestamp = dateTimeToken.LastTime;
+                endTime = dateTimeToken.LastTime;
+
+            var limit = request.Limit ?? 1000;
+            if (startTime == null || startTime < endTime)
+            {
+                var offset = (int)interval * limit;
+                startTime = endTime.AddSeconds(-offset);
+            }
+
+            if (startTime < request.StartTime)
+                startTime = request.StartTime;
 
             var category = (request.Symbol.ApiType == ApiType.PerpetualLinear || request.Symbol.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetIndexPriceKlinesAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
                 interval,
-                fromTimestamp ?? request.StartTime,
-                request.EndTime,
-                request.Limit ?? 1000,
+                startTime,
+                endTime,
+                limit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -953,14 +961,14 @@ namespace Bybit.Net.Clients.V5
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.StartTime != null && result.Data.List.Any())
+            if (result.Data.List.Count() == limit)
             {
-                var maxOpenTime = result.Data.List.Max(x => x.StartTime);
-                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
-                    nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
+                var minOpenTime = result.Data.List.Min(x => x.StartTime);
+                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(x => new SharedMarkKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.List.Select(x => new SharedMarkKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -1002,22 +1010,23 @@ namespace Bybit.Net.Clients.V5
 
             // Get data
             var category = (request.Symbol.ApiType == ApiType.PerpetualLinear || request.Symbol.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var limit = request.Limit ?? 200;
             var result = await ExchangeData.GetFundingRateHistoryAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
-                startTime: fromTime ?? request.StartTime,
-                endTime: request.EndTime,
-                limit: 1000,
+                startTime: request.StartTime,
+                endTime: fromTime ?? request.EndTime,
+                limit: limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, default);
 
             DateTimeToken? nextToken = null;
-            if (result.Data.List.Count() == 1000)
-                nextToken = new DateTimeToken(result.Data.List.Max(x => x.Timestamp));
+            if (result.Data.List.Count() == limit)
+                nextToken = new DateTimeToken(result.Data.List.Min(x => x.Timestamp).AddMilliseconds(-1));
 
             // Return
-            return result.AsExchangeResult(Exchange, result.Data.List.Select(x => new SharedFundingRate(x.FundingRate, x.Timestamp)), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, result.Data.List.Select(x => new SharedFundingRate(x.FundingRate, x.Timestamp)).ToArray(), nextToken);
         }
         #endregion
 
@@ -1036,11 +1045,14 @@ namespace Bybit.Net.Clients.V5
                 SharedTimeInForce.FillOrKill
             },
             new SharedQuantitySupport(
-#warning correct?
-                SharedQuantityType.BaseAndQuoteAsset,
-                SharedQuantityType.BaseAndQuoteAsset,
-                SharedQuantityType.BaseAndQuoteAsset,
-                SharedQuantityType.BaseAndQuoteAsset));
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset));
+
+#warning check
+        SharedFeeDeductionType IFuturesOrderRestClient.FuturesFeeDeductionType => SharedFeeDeductionType.DeductFromTrade;
+        SharedFeeAssetType IFuturesOrderRestClient.FuturesFeeAssetType => SharedFeeAssetType.Variable;
 
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
@@ -1096,7 +1108,7 @@ namespace Bybit.Net.Clients.V5
                 order.CreateTime)
             {
                 ClientOrderId = order.ClientOrderId,
-                AveragePrice = order.AveragePrice,
+                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
                 Price = order.Price,
                 Quantity = order.Quantity,
                 QuantityFilled = order.QuantityFilled,
@@ -1123,7 +1135,7 @@ namespace Bybit.Net.Clients.V5
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
 
-            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, orders.Data.List.Select(x => new SharedFuturesOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -1132,7 +1144,7 @@ namespace Bybit.Net.Clients.V5
                 x.CreateTime)
             {
                 ClientOrderId = x.ClientOrderId,
-                AveragePrice = x.AveragePrice,
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 Price = x.Price,
                 Quantity = x.Quantity,
                 QuantityFilled = x.QuantityFilled,
@@ -1143,7 +1155,7 @@ namespace Bybit.Net.Clients.V5
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.ExecutedFee,
                 FeeAsset = x.FeeAsset
-            }));
+            }).ToArray());
         }
 
         PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationType.Ascending, true);
@@ -1173,7 +1185,7 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrEmpty(orders.Data.NextPageCursor))
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
-            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, orders.Data.List.Select(x => new SharedFuturesOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -1182,7 +1194,7 @@ namespace Bybit.Net.Clients.V5
                 x.CreateTime)
             {
                 ClientOrderId = x.ClientOrderId,
-                AveragePrice = x.AveragePrice,
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 Price = x.Price,
                 Quantity = x.Quantity,
                 QuantityFilled = x.QuantityFilled,
@@ -1193,7 +1205,7 @@ namespace Bybit.Net.Clients.V5
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.ExecutedFee,
                 FeeAsset = x.FeeAsset
-            }));
+            }).ToArray(), nextToken);
         }
 
         EndpointOptions<GetOrderTradesRequest> IFuturesOrderRestClient.GetFuturesOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true);
@@ -1208,7 +1220,7 @@ namespace Bybit.Net.Clients.V5
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
 
-            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, orders.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId,
@@ -1219,7 +1231,7 @@ namespace Bybit.Net.Clients.V5
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
-            }));
+            }).ToArray());
         }
 
         PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationType.Ascending, true);
@@ -1251,7 +1263,7 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrEmpty(orders.Data.NextPageCursor))
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
-            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, orders.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId,
@@ -1262,7 +1274,7 @@ namespace Bybit.Net.Clients.V5
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
-            }), nextToken);
+            }).ToArray(), nextToken);
         }
 
         EndpointOptions<CancelOrderRequest> IFuturesOrderRestClient.CancelFuturesOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
@@ -1289,15 +1301,19 @@ namespace Bybit.Net.Clients.V5
         };
         async Task<ExchangeWebResult<IEnumerable<SharedPosition>>> IFuturesOrderRestClient.GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, validationError);
+
+            var symbol = request.Symbol?.GetSymbol(FormatSymbol);
+            if (symbol == null && request.ExchangeParameters?.GetValue<string>(Exchange, "SettleAsset") == null)
+                return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, new ArgumentError("Either the Symbol request parameter or the SettleAsset exchange parameter is required"));
 
             var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.GetPositionsAsync(
                 category,
-                symbol: request.Symbol?.GetSymbol(FormatSymbol),
-                request.ExchangeParameters!.GetValue<string>(Exchange, "SettleAsset")!,
+                symbol: symbol,
+                symbol == null ? null :request.ExchangeParameters!.GetValue<string>(Exchange, "SettleAsset")!,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
@@ -1311,7 +1327,7 @@ namespace Bybit.Net.Clients.V5
                 Leverage = x.Leverage,
                 InitialMargin = x.InitialMargin,
                 PositionSide = x.Side == PositionSide.None ? SharedPositionSide.Long : x.Side == PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long
-            }).ToList());
+            }).ToArray());
         }
 
         EndpointOptions<ClosePositionRequest> IFuturesOrderRestClient.ClosePositionOptions { get; } = new EndpointOptions<ClosePositionRequest>(true)
@@ -1355,7 +1371,8 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
-            var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var apiType = request.Symbol?.ApiType ?? request.ApiType ?? ApiType.PerpetualLinear;
+            var category = (apiType == ApiType.PerpetualLinear || apiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.GetPositionsAsync(
                 category,
                 request.Symbol!.GetSymbol(FormatSymbol),
@@ -1377,7 +1394,8 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
-            var category = (request.ApiType == ApiType.PerpetualLinear || request.ApiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var apiType = request.Symbol?.ApiType ?? request.ApiType ?? ApiType.PerpetualLinear;
+            var category = (apiType == ApiType.PerpetualLinear || apiType == ApiType.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Account.SwitchPositionModeAsync(
                 category,
                 symbol: request.Symbol!.GetSymbol(FormatSymbol),
@@ -1422,7 +1440,7 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrEmpty(orders.Data.NextPageCursor))
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
-            return orders.AsExchangeResult(Exchange, orders.Data.List.Select(x => new SharedPositionHistory(
+            return orders.AsExchangeResult<IEnumerable<SharedPositionHistory>>(Exchange, orders.Data.List.Select(x => new SharedPositionHistory(
                 x.Symbol,
                 x.Side == OrderSide.Sell ? SharedPositionSide.Long : SharedPositionSide.Short,
                 x.AverageEntryPrice,
@@ -1433,7 +1451,7 @@ namespace Bybit.Net.Clients.V5
             {
                 Leverage = x.Leverage,
                 OrderId = x.OrderId
-            }), nextToken);
+            }).ToArray(), nextToken);
         }
         #endregion
     }
