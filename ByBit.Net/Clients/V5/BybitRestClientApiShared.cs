@@ -27,6 +27,9 @@ namespace Bybit.Net.Clients.V5
         public string Exchange => BybitExchange.ExchangeName;
         public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.Spot, ApiType.PerpetualLinear, ApiType.DeliveryLinear, ApiType.PerpetualInverse, ApiType.DeliveryInverse };
 
+        public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
+        public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+
         #region Kline client
 
         GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationType.Descending, false)
@@ -226,7 +229,7 @@ namespace Bybit.Net.Clients.V5
                 SharedQuantityType.BaseAndQuoteAsset,
                 SharedQuantityType.BaseAndQuoteAsset));
 
-        SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromTrade;
+        SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         SharedFeeAssetType ISpotOrderRestClient.SpotFeeAssetType => SharedFeeAssetType.Variable;
 
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
@@ -1051,11 +1054,12 @@ namespace Bybit.Net.Clients.V5
                 SharedQuantityType.BaseAsset));
 
 #warning check
-        SharedFeeDeductionType IFuturesOrderRestClient.FuturesFeeDeductionType => SharedFeeDeductionType.DeductFromTrade;
+        SharedFeeDeductionType IFuturesOrderRestClient.FuturesFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         SharedFeeAssetType IFuturesOrderRestClient.FuturesFeeAssetType => SharedFeeAssetType.Variable;
 
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
+#warning futures endpoints should check not ApiType spot symbol
             var validationError = ((IFuturesOrderRestClient)this).PlaceFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
@@ -1412,7 +1416,7 @@ namespace Bybit.Net.Clients.V5
         GetPositionHistoryOptions IPositionHistoryRestClient.GetPositionHistoryOptions { get; } = new GetPositionHistoryOptions(false, SharedPaginationType.Descending);
         async Task<ExchangeWebResult<IEnumerable<SharedPositionHistory>>> IPositionHistoryRestClient.GetPositionHistoryAsync(GetPositionHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((IPositionHistoryRestClient)this).GetPositionHistoryOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.ApiType!.Value, SupportedApiTypes);
+            var validationError = ((IPositionHistoryRestClient)this).GetPositionHistoryOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedPositionHistory>>(Exchange, validationError);
 
@@ -1422,7 +1426,7 @@ namespace Bybit.Net.Clients.V5
                 cursor = token.Cursor;
 
             // Get data
-            var category = (request.Symbol?.ApiType ?? request.ApiType!.Value).IsLinear() ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol?.ApiType ?? request.ApiType ?? ApiType.PerpetualLinear).IsLinear() ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetClosedProfitLossAsync(
                 category,
                 symbol: request.Symbol?.GetSymbol(FormatSymbol),
