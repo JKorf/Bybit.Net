@@ -193,7 +193,7 @@ namespace Bybit.Net.Clients.V5
                 update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
                 {
                     AverageEntryPrice = x.AveragePrice,
-                    PositionSide = x.Side == Enums.PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long,
+                    PositionSide = x.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? (x.Side == Enums.PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long) : x.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                     LiquidationPrice = x.LiquidationPrice,
                     InitialMargin = x.InitialMargin,
                     Leverage = x.Leverage,
