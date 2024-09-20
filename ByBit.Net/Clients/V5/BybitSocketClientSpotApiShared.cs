@@ -20,7 +20,7 @@ namespace Bybit.Net.Clients.V5
     internal partial class BybitSocketClientSpotApi : IBybitSocketClientSpotApiShared
     {
         public string Exchange => BybitExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.Spot };
+        public TradingMode[] SupportedApiTypes { get; } = new[] { TradingMode.Spot };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();

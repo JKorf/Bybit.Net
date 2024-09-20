@@ -20,7 +20,7 @@ namespace Bybit.Net.Clients.V5
     internal partial class BybitSocketClientLinearApi : IBybitSocketClientLinearApiShared
     {
         public string Exchange => BybitExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.DeliveryLinear, ApiType.PerpetualLinear };
+        public TradingMode[] SupportedApiTypes { get; } = new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();

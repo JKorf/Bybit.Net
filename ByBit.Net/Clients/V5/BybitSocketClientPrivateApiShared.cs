@@ -25,7 +25,7 @@ namespace Bybit.Net.Clients.V5
     internal partial class BybitSocketClientPrivateApi : IBybitSocketClientPrivateApiShared
     {
         public string Exchange => BybitExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.Spot, ApiType.PerpetualLinear, ApiType.PerpetualInverse, ApiType.DeliveryLinear, ApiType.DeliveryInverse };
+        public CryptoExchange.Net.Objects.TradingMode[] SupportedApiTypes { get; } = new[] { CryptoExchange.Net.Objects.TradingMode.Spot, CryptoExchange.Net.Objects.TradingMode.PerpetualLinear, CryptoExchange.Net.Objects.TradingMode.PerpetualInverse, CryptoExchange.Net.Objects.TradingMode.DeliveryLinear, CryptoExchange.Net.Objects.TradingMode.DeliveryInverse };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
@@ -51,7 +51,7 @@ namespace Bybit.Net.Clients.V5
         SubscriptionOptions<SubscribeSpotOrderRequest> ISpotOrderSocketClient.SubscribeSpotOrderOptions { get; } = new SubscriptionOptions<SubscribeSpotOrderRequest>(false);
         async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<ExchangeEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
         {
-            var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(Exchange, request, ApiType.Spot, SupportedApiTypes);
+            var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(Exchange, request, CryptoExchange.Net.Objects.TradingMode.Spot, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
@@ -149,7 +149,7 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var category = request.ApiType == ApiType.Spot ? Category.Spot : request.ApiType?.IsLinear() == true ? Category.Linear : Category.Inverse;
+            var category = request.ApiType == CryptoExchange.Net.Objects.TradingMode.Spot ? Category.Spot : request.ApiType?.IsLinear() == true ? Category.Linear : Category.Inverse;
             var result = await SubscribeToUserTradeUpdatesAsync(
                 update =>
                 {
@@ -195,7 +195,6 @@ namespace Bybit.Net.Clients.V5
                     AverageEntryPrice = x.AveragePrice,
                     PositionSide = x.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? (x.Side == Enums.PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long) : x.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                     LiquidationPrice = x.LiquidationPrice,
-                    InitialMargin = x.InitialMargin,
                     Leverage = x.Leverage,
                     UnrealizedPnl = x.UnrealizedPnl
                 }))),

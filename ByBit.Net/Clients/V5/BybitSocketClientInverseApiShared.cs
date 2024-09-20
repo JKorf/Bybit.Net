@@ -20,7 +20,7 @@ namespace Bybit.Net.Clients.V5
     internal partial class BybitSocketClientInverseApi : IBybitSocketClientInverseApiShared
     {
         public string Exchange => BybitExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.DeliveryInverse, ApiType.PerpetualInverse };
+        public TradingMode[] SupportedApiTypes { get; } = new[] { TradingMode.DeliveryInverse, TradingMode.PerpetualInverse };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();

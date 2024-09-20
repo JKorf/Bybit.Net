@@ -453,7 +453,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="sellLeverage">Sell leverage</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SwitchCrossIsolatedMarginAsync(Category category, string symbol, TradeMode tradeMode, decimal buyLeverage, decimal sellLeverage, CancellationToken ct = default);
+        Task<WebCallResult> SwitchCrossIsolatedMarginAsync(Category category, string symbol, Enums.TradeMode tradeMode, decimal buyLeverage, decimal sellLeverage, CancellationToken ct = default);
 
         /// <summary>
         /// Switch position mode

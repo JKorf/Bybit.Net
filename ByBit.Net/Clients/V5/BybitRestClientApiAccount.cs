@@ -93,7 +93,7 @@ namespace Bybit.Net.Clients.V5
         public async Task<WebCallResult> SwitchCrossIsolatedMarginAsync(
             Category category,
             string symbol,
-            TradeMode tradeMode,
+            Enums.TradeMode tradeMode,
             decimal buyLeverage,
             decimal sellLeverage,
             CancellationToken ct = default)
