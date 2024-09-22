@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.SharedApis.Interfaces;
+﻿using CryptoExchange.Net.SharedApis.Interfaces.Rest;
 using CryptoExchange.Net.SharedApis.Interfaces.Rest.Futures;
 using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
 using System;
