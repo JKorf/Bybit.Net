@@ -45,7 +45,7 @@ namespace Bybit.Net.Clients.V5
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, validationError);
 
@@ -67,7 +67,7 @@ namespace Bybit.Net.Clients.V5
                 startTime = request.StartTime;
 
             // Get data
-            var category = request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.Spot ? Enums.Category.Spot : (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.Spot ? Enums.Category.Spot : (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetKlinesAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
@@ -90,7 +90,7 @@ namespace Bybit.Net.Clients.V5
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, request.Symbol.ApiType, result.Data.List.Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, request.Symbol.TradingMode, result.Data.List.Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 
         #endregion
@@ -139,11 +139,11 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<GetTickerRequest> ISpotTickerRestClient.GetSpotTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
         async Task<ExchangeWebResult<SharedSpotTicker>> ISpotTickerRestClient.GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
-            var validationError = ((ISpotTickerRestClient)this).GetSpotTickerOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((ISpotTickerRestClient)this).GetSpotTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedSpotTicker>(Exchange, validationError);
 
-            if (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.Spot)
+            if (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.Spot)
             {
                 var result = await ExchangeData.GetSpotTickersAsync(request.Symbol.GetSymbol(FormatSymbol), ct).ConfigureAwait(false);
                 if (!result)
@@ -155,7 +155,7 @@ namespace Bybit.Net.Clients.V5
             else
             {
                 var result = await ExchangeData.GetLinearInverseTickersAsync(
-                    (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryInverse || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualInverse) ? Enums.Category.Inverse : Enums.Category.Linear,
+                    (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryInverse || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualInverse) ? Enums.Category.Inverse : Enums.Category.Linear,
                     request.Symbol.GetSymbol(FormatSymbol),
                     ct: ct).ConfigureAwait(false);
                 if (!result)
@@ -173,11 +173,11 @@ namespace Bybit.Net.Clients.V5
 
         async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
-            var validationError = ((IRecentTradeRestClient)this).GetRecentTradesOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((IRecentTradeRestClient)this).GetRecentTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedTrade>>(Exchange, validationError);
 
-            var category = request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.Spot ? Enums.Category.Spot : (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.Spot ? Enums.Category.Spot : (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
 
             var result = await ExchangeData.GetTradeHistoryAsync(
                 category,
@@ -187,7 +187,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, null, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.ApiType, result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray());
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray());
         }
 
         #endregion
@@ -233,8 +233,8 @@ namespace Bybit.Net.Clients.V5
             var validationError = ((ISpotOrderRestClient)this).PlaceSpotOrderOptions.ValidateRequest(
                 Exchange,
                 request,
-                request.Symbol.ApiType,
-                SupportedTradingModes,
+                request.Symbol.TradingMode,
+                new[] { TradingMode.Spot },
                 ((ISpotOrderRestClient)this).SpotSupportedOrderTypes,
                 ((ISpotOrderRestClient)this).SpotSupportedTimeInForce,
                 ((ISpotOrderRestClient)this).SpotSupportedOrderQuantity);
@@ -256,13 +256,13 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(result.Data.OrderId));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(result.Data.OrderId));
         }
 
         EndpointOptions<GetOrderRequest> ISpotOrderRestClient.GetSpotOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true);
         async Task<ExchangeWebResult<SharedSpotOrder>> ISpotOrderRestClient.GetSpotOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((ISpotOrderRestClient)this).GetSpotOrderOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((ISpotOrderRestClient)this).GetSpotOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, new[] { TradingMode.Spot });
             if (validationError != null)
                 return new ExchangeWebResult<SharedSpotOrder>(Exchange, validationError);
 
@@ -299,7 +299,7 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<GetOpenOrdersRequest> ISpotOrderRestClient.GetOpenSpotOrdersOptions { get; } = new EndpointOptions<GetOpenOrdersRequest>(true);
         async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenSpotOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
         {
-            var validationError = ((ISpotOrderRestClient)this).GetOpenSpotOrdersOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.TradingMode, SupportedTradingModes);
+            var validationError = ((ISpotOrderRestClient)this).GetOpenSpotOrdersOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, new[] { TradingMode.Spot });
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedSpotOrder>>(Exchange, validationError);
 
@@ -333,7 +333,7 @@ namespace Bybit.Net.Clients.V5
         PaginatedEndpointOptions<GetClosedOrdersRequest> ISpotOrderRestClient.GetClosedSpotOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true);
         async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedSpotOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((ISpotOrderRestClient)this).GetClosedSpotOrdersOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((ISpotOrderRestClient)this).GetClosedSpotOrdersOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, new[] { TradingMode.Spot });
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedSpotOrder>>(Exchange, validationError);
 
@@ -384,7 +384,7 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<GetOrderTradesRequest> ISpotOrderRestClient.GetSpotOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true);
         async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetSpotOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
-            var validationError = ((ISpotOrderRestClient)this).GetSpotOrderTradesOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((ISpotOrderRestClient)this).GetSpotOrderTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, new[] { TradingMode.Spot });
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
 
@@ -409,7 +409,7 @@ namespace Bybit.Net.Clients.V5
         PaginatedEndpointOptions<GetUserTradesRequest> ISpotOrderRestClient.GetSpotUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationSupport.Descending, true);
         async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetSpotUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((ISpotOrderRestClient)this).GetSpotUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((ISpotOrderRestClient)this).GetSpotUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, new[] { TradingMode.Spot });
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
 
@@ -450,7 +450,7 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<CancelOrderRequest> ISpotOrderRestClient.CancelSpotOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((ISpotOrderRestClient)this).CancelSpotOrderOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((ISpotOrderRestClient)this).CancelSpotOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, new[] { TradingMode.Spot });
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
@@ -458,7 +458,7 @@ namespace Bybit.Net.Clients.V5
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(order.Data.OrderId));
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(order.Data.OrderId));
         }
 
         private SharedOrderStatus ParseOrderStatus(Enums.V5.OrderStatus status)
@@ -617,11 +617,11 @@ namespace Bybit.Net.Clients.V5
         GetOrderBookOptions IOrderBookRestClient.GetOrderBookOptions { get; } = new GetOrderBookOptions(1, 500, false);
         async Task<ExchangeWebResult<SharedOrderBook>> IOrderBookRestClient.GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
         {
-            var validationError = ((IOrderBookRestClient)this).GetOrderBookOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((IOrderBookRestClient)this).GetOrderBookOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedOrderBook>(Exchange, validationError);
 
-            var category = request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.Spot ? Enums.Category.Spot : (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.Spot ? Enums.Category.Spot : (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetOrderbookAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
@@ -630,7 +630,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedOrderBook>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
         }
 
         #endregion
@@ -714,11 +714,11 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<GetTickerRequest> IFuturesTickerRestClient.GetFuturesTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
         async Task<ExchangeWebResult<SharedFuturesTicker>> IFuturesTickerRestClient.GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickerOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesTicker>(Exchange, validationError);
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var resultTicker = await ExchangeData.GetLinearInverseTickersAsync(category, request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
             if (!resultTicker)
                 return resultTicker.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
@@ -750,7 +750,7 @@ namespace Bybit.Net.Clients.V5
 
         async Task<ExchangeWebResult<IEnumerable<SharedFuturesTicker>>> IFuturesTickerRestClient.GetFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickersOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickersOptions.ValidateRequest(Exchange, request, request.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesTicker>>(Exchange, validationError);
 
@@ -822,11 +822,11 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<GetLeverageRequest> ILeverageRestClient.GetLeverageOptions { get; } = new EndpointOptions<GetLeverageRequest>(true);
         async Task<ExchangeWebResult<SharedLeverage>> ILeverageRestClient.GetLeverageAsync(GetLeverageRequest request, CancellationToken ct)
         {
-            var validationError = ((ILeverageRestClient)this).GetLeverageOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((ILeverageRestClient)this).GetLeverageOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedLeverage>(Exchange, validationError);
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.GetPositionsAsync(
                 category,
                 symbol: request.Symbol.GetSymbol(FormatSymbol),
@@ -836,7 +836,7 @@ namespace Bybit.Net.Clients.V5
 
             var position = result.Data.List.SingleOrDefault(x => x.PositionIdx == (request.PositionSide == null ? Enums.V5.PositionIdx.OneWayMode : request.PositionSide == SharedPositionSide.Short ? Enums.V5.PositionIdx.SellHedgeMode : Enums.V5.PositionIdx.BuyHedgeMode));
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedLeverage(position?.Leverage ?? 0)
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedLeverage(position?.Leverage ?? 0)
             {
                 Side = request.PositionSide
             });
@@ -845,11 +845,11 @@ namespace Bybit.Net.Clients.V5
         SetLeverageOptions ILeverageRestClient.SetLeverageOptions { get; } = new SetLeverageOptions();
         async Task<ExchangeWebResult<SharedLeverage>> ILeverageRestClient.SetLeverageAsync(SetLeverageRequest request, CancellationToken ct)
         {
-            var validationError = ((ILeverageRestClient)this).SetLeverageOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, SupportedTradingModes);
+            var validationError = ((ILeverageRestClient)this).SetLeverageOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedLeverage>(Exchange, validationError);
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Account.SetLeverageAsync(
                 category,
                 symbol: request.Symbol.GetSymbol(FormatSymbol),
@@ -859,7 +859,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedLeverage>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedLeverage(request.Leverage)
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedLeverage(request.Leverage)
             {
                 Side = request.Side
             });
@@ -879,7 +879,7 @@ namespace Bybit.Net.Clients.V5
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeWebResult<IEnumerable<SharedFuturesKline>>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesKline>>(Exchange, validationError);
 
@@ -900,7 +900,7 @@ namespace Bybit.Net.Clients.V5
             if (startTime < request.StartTime)
                 startTime = request.StartTime;
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetMarkPriceKlinesAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
@@ -922,7 +922,7 @@ namespace Bybit.Net.Clients.V5
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedFuturesKline>>(Exchange, request.Symbol.ApiType, result.Data.List.Select(x => new SharedFuturesKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedFuturesKline>>(Exchange, request.Symbol.TradingMode, result.Data.List.Select(x => new SharedFuturesKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -940,7 +940,7 @@ namespace Bybit.Net.Clients.V5
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeWebResult<IEnumerable<SharedFuturesKline>>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesKline>>(Exchange, validationError);
 
@@ -961,7 +961,7 @@ namespace Bybit.Net.Clients.V5
             if (startTime < request.StartTime)
                 startTime = request.StartTime;
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetIndexPriceKlinesAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
@@ -983,7 +983,7 @@ namespace Bybit.Net.Clients.V5
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedFuturesKline>>(Exchange, request.Symbol.ApiType, result.Data.List.Select(x => new SharedFuturesKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedFuturesKline>>(Exchange, request.Symbol.TradingMode, result.Data.List.Select(x => new SharedFuturesKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -993,11 +993,11 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<GetOpenInterestRequest> IOpenInterestRestClient.GetOpenInterestOptions { get; } = new EndpointOptions<GetOpenInterestRequest>(true);
         async Task<ExchangeWebResult<SharedOpenInterest>> IOpenInterestRestClient.GetOpenInterestAsync(GetOpenInterestRequest request, CancellationToken ct)
         {
-            var validationError = ((IOpenInterestRestClient)this).GetOpenInterestOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IOpenInterestRestClient)this).GetOpenInterestOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedOpenInterest>(Exchange, validationError);
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await ExchangeData.GetLinearInverseTickersAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
@@ -1005,7 +1005,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedOpenInterest>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedOpenInterest(result.Data.List.Single().OpenInterest ?? 0));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedOpenInterest(result.Data.List.Single().OpenInterest ?? 0));
         }
 
         #endregion
@@ -1015,7 +1015,7 @@ namespace Bybit.Net.Clients.V5
 
         async Task<ExchangeWebResult<IEnumerable<SharedFundingRate>>> IFundingRateRestClient.GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((IFundingRateRestClient)this).GetFundingRateHistoryOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IFundingRateRestClient)this).GetFundingRateHistoryOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFundingRate>>(Exchange, validationError);
 
@@ -1024,7 +1024,7 @@ namespace Bybit.Net.Clients.V5
                 fromTime = token.LastTime;
 
             // Get data
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var limit = request.Limit ?? 200;
             var result = await ExchangeData.GetFundingRateHistoryAsync(
                 category,
@@ -1041,7 +1041,7 @@ namespace Bybit.Net.Clients.V5
                 nextToken = new DateTimeToken(result.Data.List.Min(x => x.Timestamp).AddMilliseconds(-1));
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, request.Symbol.ApiType,result.Data.List.Select(x => new SharedFundingRate(x.FundingRate, x.Timestamp)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, request.Symbol.TradingMode,result.Data.List.Select(x => new SharedFundingRate(x.FundingRate, x.Timestamp)).ToArray(), nextToken);
         }
         #endregion
 
@@ -1064,7 +1064,7 @@ namespace Bybit.Net.Clients.V5
             var validationError = ((IFuturesOrderRestClient)this).PlaceFuturesOrderOptions.ValidateRequest(
                  Exchange,
                  request,
-                 request.Symbol.ApiType,
+                 request.Symbol.TradingMode,
                  SupportedTradingModes,
                  ((ISpotOrderRestClient)this).SpotSupportedOrderTypes,
                  ((ISpotOrderRestClient)this).SpotSupportedTimeInForce,
@@ -1072,7 +1072,7 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var category = request.Symbol.ApiType.IsLinear() ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = request.Symbol.TradingMode.IsLinear() ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.PlaceOrderAsync(
                 category,
                 request.Symbol.GetSymbol(FormatSymbol),
@@ -1090,17 +1090,17 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(result.Data.OrderId.ToString()));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(result.Data.OrderId.ToString()));
         }
 
         EndpointOptions<GetOrderRequest> IFuturesOrderRestClient.GetFuturesOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true);
         async Task<ExchangeWebResult<SharedFuturesOrder>> IFuturesOrderRestClient.GetFuturesOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesOrder>(Exchange, validationError);
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetOrdersAsync(category, symbol: request.Symbol.GetSymbol(FormatSymbol), orderId: request.OrderId, ct: ct).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
@@ -1109,7 +1109,7 @@ namespace Bybit.Net.Clients.V5
             if (order == null)
                 return orders.AsExchangeError<SharedFuturesOrder>(Exchange, new ServerError("Order not found"));
 
-            return orders.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedFuturesOrder(
+            return orders.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesOrder(
                 order.Symbol,
                 order.OrderId.ToString(),
                 ParseOrderType(order.OrderType),
@@ -1135,11 +1135,11 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<GetOpenOrdersRequest> IFuturesOrderRestClient.GetOpenFuturesOrdersOptions { get; } = new EndpointOptions<GetOpenOrdersRequest>(true);
         async Task<ExchangeWebResult<IEnumerable<SharedFuturesOrder>>> IFuturesOrderRestClient.GetOpenFuturesOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetOpenFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.TradingMode, FuturesApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).GetOpenFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesOrder>>(Exchange, validationError);
 
-            var apiType = request.Symbol?.ApiType ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
+            var apiType = request.Symbol?.TradingMode ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
             var category = (apiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || apiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
 
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
@@ -1156,7 +1156,7 @@ namespace Bybit.Net.Clients.V5
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, SupportedTradingModes ,orders.Data.List.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, apiType ,orders.Data.List.Select(x => new SharedFuturesOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -1182,7 +1182,7 @@ namespace Bybit.Net.Clients.V5
         PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true);
         async Task<ExchangeWebResult<IEnumerable<SharedFuturesOrder>>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesOrder>>(Exchange, validationError);
 
@@ -1192,7 +1192,7 @@ namespace Bybit.Net.Clients.V5
                 cursor = cursorToken.Cursor;
 
             // Get data
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetOrderHistoryAsync(category, request.Symbol.GetSymbol(FormatSymbol),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
@@ -1233,16 +1233,16 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<GetOrderTradesRequest> IFuturesOrderRestClient.GetFuturesOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true);
         async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> IFuturesOrderRestClient.GetFuturesOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderTradesOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetUserTradesAsync(category, orderId: request.OrderId, ct: ct).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, request.Symbol.ApiType,orders.Data.List.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, request.Symbol.TradingMode,orders.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId,
@@ -1259,7 +1259,7 @@ namespace Bybit.Net.Clients.V5
         PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationSupport.Descending, true);
         async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetFuturesUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).GetFuturesUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
 
@@ -1269,7 +1269,7 @@ namespace Bybit.Net.Clients.V5
                 cursor = cursorToken.Cursor;
 
             // Get data
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetUserTradesAsync(category, 
                 request.Symbol.GetSymbol(FormatSymbol),
                 startTime: request.StartTime,
@@ -1286,7 +1286,7 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrEmpty(orders.Data.NextPageCursor))
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, request.Symbol.ApiType,orders.Data.List.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, request.Symbol.TradingMode,orders.Data.List.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId,
@@ -1303,22 +1303,22 @@ namespace Bybit.Net.Clients.V5
         EndpointOptions<CancelOrderRequest> IFuturesOrderRestClient.CancelFuturesOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.CancelFuturesOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).CancelFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).CancelFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var order = await Trading.CancelOrderAsync(category, request.Symbol.GetSymbol(FormatSymbol), request.OrderId, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(order.Data.OrderId.ToString()));
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(order.Data.OrderId.ToString()));
         }
 
         EndpointOptions<GetPositionsRequest> IFuturesOrderRestClient.GetPositionsOptions { get; } = new EndpointOptions<GetPositionsRequest>(true);
         async Task<ExchangeWebResult<IEnumerable<SharedPosition>>> IFuturesOrderRestClient.GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.TradingMode, FuturesApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, validationError);
 
@@ -1326,7 +1326,7 @@ namespace Bybit.Net.Clients.V5
             if (symbol == null && ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset") == null)
                 return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, new ArgumentError("Either the Symbol request parameter or the SettleAsset exchange parameter is required"));
 
-            var apiType = request.Symbol?.ApiType ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
+            var apiType = request.Symbol?.TradingMode ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
             var category = (apiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || apiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.GetPositionsAsync(
                 category,
@@ -1336,7 +1336,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, null, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, request.Symbol == null ? SupportedTradingModes : new[] { request.Symbol.ApiType }, result.Data.List.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
+            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, request.Symbol == null ? SupportedTradingModes : new[] { request.Symbol.TradingMode }, result.Data.List.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
             {
                 UnrealizedPnl = x.UnrealizedPnl,
                 LiquidationPrice = x.LiquidationPrice,
@@ -1356,11 +1356,11 @@ namespace Bybit.Net.Clients.V5
         };
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.ClosePositionAsync(ClosePositionRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).ClosePositionOptions.ValidateRequest(Exchange, request, request.Symbol.ApiType, FuturesApiTypes);
+            var validationError = ((IFuturesOrderRestClient)this).ClosePositionOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var category = (request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.ApiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
+            var category = (request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || request.Symbol.TradingMode == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
 
             var result = await Trading.PlaceOrderAsync(
@@ -1375,7 +1375,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(result.Data.OrderId.ToString()));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(result.Data.OrderId.ToString()));
         }
         #endregion
 
@@ -1386,15 +1386,15 @@ namespace Bybit.Net.Clients.V5
         GetPositionModeOptions IPositionModeRestClient.GetPositionModeOptions { get; } = new GetPositionModeOptions();
         async Task<ExchangeWebResult<SharedPositionModeResult>> IPositionModeRestClient.GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
         {
-            var validationError = ((IPositionModeRestClient)this).GetPositionModeOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.TradingMode, FuturesApiTypes);
+            var validationError = ((IPositionModeRestClient)this).GetPositionModeOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
-            var apiType = request.Symbol?.ApiType ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
+            var apiType = request.Symbol?.TradingMode ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
             var category = (apiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || apiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Trading.GetPositionsAsync(
                 category,
-                request.Symbol.GetSymbol(FormatSymbol),
+                request.Symbol?.GetSymbol(FormatSymbol),
                 limit: 1,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -1403,17 +1403,17 @@ namespace Bybit.Net.Clients.V5
             if (!result.Data.List.Any())
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, new ServerError("Position not found"));
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedPositionModeResult(result.Data.List.Single().PositionIdx == Enums.V5.PositionIdx.OneWayMode ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode));
+            return result.AsExchangeResult(Exchange, apiType, new SharedPositionModeResult(result.Data.List.Single().PositionIdx == Enums.V5.PositionIdx.OneWayMode ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode));
         }
 
         SetPositionModeOptions IPositionModeRestClient.SetPositionModeOptions { get; } = new SetPositionModeOptions();
         async Task<ExchangeWebResult<SharedPositionModeResult>> IPositionModeRestClient.SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)
         {
-            var validationError = ((IPositionModeRestClient)this).SetPositionModeOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.TradingMode, FuturesApiTypes);
+            var validationError = ((IPositionModeRestClient)this).SetPositionModeOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
-            var apiType = request.Symbol?.ApiType ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
+            var apiType = request.Symbol?.TradingMode ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
             var category = (apiType == CryptoExchange.Net.Objects.TradingMode.PerpetualLinear || apiType == CryptoExchange.Net.Objects.TradingMode.DeliveryLinear) ? Enums.Category.Linear : Enums.Category.Inverse;
             var result = await Account.SwitchPositionModeAsync(
                 category,
@@ -1422,7 +1422,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedPositionModeResult(request.PositionMode));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedPositionModeResult(request.PositionMode));
         }
         #endregion
 
@@ -1431,7 +1431,7 @@ namespace Bybit.Net.Clients.V5
         GetPositionHistoryOptions IPositionHistoryRestClient.GetPositionHistoryOptions { get; } = new GetPositionHistoryOptions(SharedPaginationSupport.Descending);
         async Task<ExchangeWebResult<IEnumerable<SharedPositionHistory>>> IPositionHistoryRestClient.GetPositionHistoryAsync(GetPositionHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((IPositionHistoryRestClient)this).GetPositionHistoryOptions.ValidateRequest(Exchange, request, request.Symbol?.ApiType ?? request.TradingMode, FuturesApiTypes);
+            var validationError = ((IPositionHistoryRestClient)this).GetPositionHistoryOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, FuturesApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedPositionHistory>>(Exchange, validationError);
 
@@ -1441,7 +1441,8 @@ namespace Bybit.Net.Clients.V5
                 cursor = token.Cursor;
 
             // Get data
-            var category = (request.Symbol?.ApiType ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear).IsLinear() ? Enums.Category.Linear : Enums.Category.Inverse;
+            var apiType = request.Symbol?.TradingMode ?? request.TradingMode ?? CryptoExchange.Net.Objects.TradingMode.PerpetualLinear;
+            var category = apiType.IsLinear() ? Enums.Category.Linear : Enums.Category.Inverse;
             var orders = await Trading.GetClosedProfitLossAsync(
                 category,
                 symbol: request.Symbol?.GetSymbol(FormatSymbol),
@@ -1459,7 +1460,7 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrEmpty(orders.Data.NextPageCursor))
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
-            return orders.AsExchangeResult<IEnumerable<SharedPositionHistory>>(Exchange, request.Symbol.ApiType, orders.Data.List.Select(x => new SharedPositionHistory(
+            return orders.AsExchangeResult<IEnumerable<SharedPositionHistory>>(Exchange, apiType, orders.Data.List.Select(x => new SharedPositionHistory(
                 x.Symbol,
                 x.Side == OrderSide.Sell ? SharedPositionSide.Long : SharedPositionSide.Short,
                 x.AverageEntryPrice,
