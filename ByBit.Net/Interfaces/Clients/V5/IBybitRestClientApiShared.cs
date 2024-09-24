@@ -1,12 +1,10 @@
-﻿using CryptoExchange.Net.SharedApis.Interfaces.Rest;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest.Futures;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CryptoExchange.Net.SharedApis;
 
 namespace Bybit.Net.Interfaces.Clients
 {
+    /// <summary>
+    /// Shared interface for rest API usage
+    /// </summary>
     public interface IBybitRestClientApiShared :
         IAssetsRestClient,
         IBalanceRestClient,

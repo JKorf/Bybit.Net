@@ -13,6 +13,9 @@ namespace Bybit.Net.Interfaces.Clients.V5
     /// </summary>
     public interface IBybitSocketClientLinearApi : IBybitSocketClientBaseApi
     {
+        /// <summary>
+        /// Get the shared socket subscription client
+        /// </summary>
         IBybitSocketClientLinearApiShared SharedClient { get; }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using Bybit.Net.Interfaces.Clients.V5;
-using Bybit.Net.Enums;
+﻿using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -15,6 +14,9 @@ namespace Bybit.Net.Interfaces.Clients.V5
     /// </summary>
     public interface IBybitSocketClientSpotApi : IBybitSocketClientBaseApi
     {
+        /// <summary>
+        /// Get the shared socket subscription client
+        /// </summary>
         IBybitSocketClientSpotApiShared SharedClient { get; }
 
         /// <summary>

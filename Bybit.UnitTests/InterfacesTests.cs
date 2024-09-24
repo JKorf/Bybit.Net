@@ -21,7 +21,7 @@ namespace Bybit.UnitTests
         {
             var assembly = Assembly.GetAssembly(typeof(BybitRestClient));
             var ignore = new string[] { "IBybitClient" };
-            var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBybitClient") && !ignore.Contains(t.Name));
+            var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBybitClient") && !t.Name.EndsWith("Shared") && !ignore.Contains(t.Name));
 
             foreach (var clientInterface in clientInterfaces)
             {
@@ -43,7 +43,7 @@ namespace Bybit.UnitTests
             var assembly = Assembly.GetAssembly(typeof(BybitSocketClient));
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IBybitSocketClient"));
 
-            foreach (var clientInterface in clientInterfaces.Where(t => t.Name != "IBybitSocketClientBaseApi"))
+            foreach (var clientInterface in clientInterfaces.Where(t => t.Name != "IBybitSocketClientBaseApi" && !t.Name.EndsWith("Shared")))
             {
                 var implementation = assembly.GetTypes().First(t => t.IsAssignableTo(clientInterface) && t != clientInterface);
                 int methods = 0;

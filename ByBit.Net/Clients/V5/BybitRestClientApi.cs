@@ -2,7 +2,6 @@
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -17,7 +16,6 @@ using System.Linq;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.SharedApis.Interfaces;
 using Bybit.Net.Interfaces.Clients;
 
 namespace Bybit.Net.Clients.V5
