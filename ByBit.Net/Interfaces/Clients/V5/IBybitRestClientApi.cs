@@ -27,9 +27,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         IBybitRestClientApiSubAccounts SubAccount { get; }
 
         /// <summary>
-        /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+        /// DEPRECATED; use <see cref="CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
         /// </summary>
-        /// <returns></returns>
         public ISpotClient CommonSpotClient { get; }
 
         /// <summary>
