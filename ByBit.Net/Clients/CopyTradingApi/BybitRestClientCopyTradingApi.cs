@@ -58,7 +58,7 @@ namespace Bybit.Net.Clients.CopyTradingApi
         #endregion
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode apiType, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)

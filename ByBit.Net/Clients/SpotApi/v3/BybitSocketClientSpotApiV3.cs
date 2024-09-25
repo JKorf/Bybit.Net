@@ -41,7 +41,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, CryptoExchange.Net.Objects.TradingMode apiType, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)

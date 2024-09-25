@@ -40,14 +40,14 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, CryptoExchange.Net.Objects.TradingMode apiType, DateTime? deliverTime = null)
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
         {
-            if (apiType == CryptoExchange.Net.Objects.TradingMode.Spot)
+            if (tradingMode == CryptoExchange.Net.Objects.TradingMode.Spot)
                 return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
-            if (apiType.IsLinear())
+            if (tradingMode.IsLinear())
             {
-                if (apiType.IsPerpetual())
+                if (tradingMode.IsPerpetual())
                     return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
                 return baseAsset.ToUpperInvariant() + "-" + deliverTime!.Value.ToString("ddMMMyy").ToUpperInvariant();
