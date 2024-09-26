@@ -11,6 +11,7 @@ using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 
 namespace Bybit.Net.Clients.SpotApi.v3

@@ -17,6 +17,7 @@ using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Interfaces;
 using Bybit.Net.Interfaces.Clients;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bybit.Net.Clients.V5
 {

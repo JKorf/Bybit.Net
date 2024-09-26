@@ -19,6 +19,7 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bybit.Net.Clients.SpotApi.v3
 {

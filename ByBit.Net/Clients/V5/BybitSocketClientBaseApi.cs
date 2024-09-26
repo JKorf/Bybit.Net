@@ -14,6 +14,7 @@ using CryptoExchange.Net.Objects.Sockets;
 using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -42,7 +43,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
         {
-            if (tradingMode == CryptoExchange.Net.Objects.TradingMode.Spot)
+            if (tradingMode == TradingMode.Spot)
                 return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
             if (tradingMode.IsLinear())

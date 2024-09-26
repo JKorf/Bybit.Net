@@ -5,6 +5,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
