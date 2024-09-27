@@ -65,6 +65,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedClient);
+            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5LinearApi.SharedClient);
+            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5InverseApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5PrivateApi.SharedClient);
 
             if (socketClientLifeTime == null)
