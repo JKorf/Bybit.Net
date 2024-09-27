@@ -15,6 +15,11 @@ namespace Bybit.Net.Interfaces.Clients.V5
     public interface IBybitSocketClientSpotApi : IBybitSocketClientBaseApi
     {
         /// <summary>
+        /// Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// </summary>
+        IBybitSocketClientSpotApiShared SharedClient { get; }
+
+        /// <summary>
         /// Subscribe to leveraged token kline updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/etp-kline" /></para>
         /// </summary>

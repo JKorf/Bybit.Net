@@ -14,6 +14,11 @@ namespace Bybit.Net.Interfaces.Clients.V5
     public interface IBybitSocketClientLinearApi : IBybitSocketClientBaseApi
     {
         /// <summary>
+        /// Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// </summary>
+        IBybitSocketClientLinearApiShared SharedClient { get; }
+
+        /// <summary>
         /// Subscribe to ticker updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/ticker" /></para>
         /// </summary>

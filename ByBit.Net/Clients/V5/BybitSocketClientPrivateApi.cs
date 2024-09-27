@@ -1,6 +1,6 @@
-﻿using Bybit.Net.Enums;
+﻿using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Enums;
 using Bybit.Net.Enums.V5;
-using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
 using Bybit.Net.Objects.Sockets.Queries;
@@ -8,7 +8,6 @@ using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -20,11 +19,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientPrivateApi" />
-    internal class BybitSocketClientPrivateApi : SocketApiClient, IBybitSocketClientPrivateApi
+    internal partial class BybitSocketClientPrivateApi : SocketApiClient, IBybitSocketClientPrivateApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _reqId2Path = MessagePath.Get().Property("reqId");
@@ -61,7 +61,23 @@ namespace Bybit.Net.Clients.V5
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
+        {
+            if (tradingMode == TradingMode.Spot)
+                return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+            if (tradingMode.IsLinear())
+            {
+                if (tradingMode.IsPerpetual())
+                    return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+                return baseAsset.ToUpperInvariant() + "-" + deliverTime!.Value.ToString("ddMMMyy").ToUpperInvariant();
+            }
+
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
+        }
+
+        public IBybitSocketClientPrivateApiShared SharedClient => this;
 
         /// <inheritdoc />
         protected override Query? GetAuthenticationRequest(SocketConnection connection)

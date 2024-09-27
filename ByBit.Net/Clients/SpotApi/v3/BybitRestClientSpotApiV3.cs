@@ -11,6 +11,7 @@ using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 
 namespace Bybit.Net.Clients.SpotApi.v3
@@ -44,7 +45,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
         #endregion
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         #region Common interface
 

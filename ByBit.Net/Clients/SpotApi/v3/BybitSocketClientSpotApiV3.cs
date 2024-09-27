@@ -19,6 +19,7 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bybit.Net.Clients.SpotApi.v3
 {
@@ -41,7 +42,7 @@ namespace Bybit.Net.Clients.SpotApi.v3
             => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)

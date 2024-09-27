@@ -2,7 +2,6 @@
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -17,11 +16,13 @@ using System.Linq;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Interfaces;
+using Bybit.Net.Interfaces.Clients;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitRestClientApi"/>
-    internal class BybitRestClientApi : RestApiClient, IBybitRestClientApi, ISpotClient
+    internal partial class BybitRestClientApi : RestApiClient, IBybitRestClientApi, ISpotClient
     {
         internal TimeSyncState _timeSyncState = new TimeSyncState("Bybit V5 API");
 
@@ -32,6 +33,7 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         public ISpotClient CommonSpotClient => this;
+        public IBybitRestClientApiShared SharedClient => this;
 
         /// <summary>
         /// Options
@@ -77,7 +79,25 @@ namespace Bybit.Net.Clients.V5
             => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
+        {
+            if (tradingMode == TradingMode.Spot)
+                return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+            if (tradingMode.IsLinear()) {
+                if (tradingMode.IsPerpetual())
+                {
+                    if (quoteAsset == "USDC")
+                        return baseAsset + "PERP";
+
+                    return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+                }
+
+                return baseAsset.ToUpperInvariant() + "-" + deliverTime!.Value.ToString("ddMMMyy").ToUpperInvariant();
+            }
+
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
+        }
 
         /// <summary>
         /// Get url for an endpoint

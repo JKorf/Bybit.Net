@@ -13,6 +13,8 @@ using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Objects.Sockets;
 using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -37,7 +39,23 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+        /// <inheritdoc />
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
+        {
+            if (tradingMode == TradingMode.Spot)
+                return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+            if (tradingMode.IsLinear())
+            {
+                if (tradingMode.IsPerpetual())
+                    return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+                return baseAsset.ToUpperInvariant() + "-" + deliverTime!.Value.ToString("ddMMMyy").ToUpperInvariant();
+            }
+
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
+        }
 
         /// <inheritdoc />
         public virtual Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default)

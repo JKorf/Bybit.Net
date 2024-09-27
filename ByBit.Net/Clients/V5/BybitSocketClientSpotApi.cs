@@ -1,11 +1,10 @@
-﻿using Bybit.Net.Enums;
-using Bybit.Net.Interfaces.Clients.V5;
+﻿using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
 using Bybit.Net.Objects.Sockets.Queries;
 using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -20,7 +19,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientSpotApi" />
-    internal class BybitSocketClientSpotApi : BybitSocketClientBaseApi, IBybitSocketClientSpotApi
+    internal partial class BybitSocketClientSpotApi : BybitSocketClientBaseApi, IBybitSocketClientSpotApi
     {
         private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
         private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
@@ -33,6 +32,8 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
+
+        public IBybitSocketClientSpotApiShared SharedClient => this;
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
@@ -95,7 +96,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitTrade>>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitTrade>>(_logger, symbols.Select(s => $"publicTrade.{s}").ToArray(), handler);
+            var subscription = new BybitSubscription<IEnumerable<BybitTrade>>(_logger, symbols.Select(s => $"publicTrade.{s}").ToArray(), x => handler(x.WithUpdateType(SocketUpdateType.Update)));
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
 
