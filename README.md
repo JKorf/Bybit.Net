@@ -149,6 +149,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.14.0 - 27 Sep 2024
+    * Updated CryptoExchange.Net to version 8.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.0
+    * Added Shared client interfaces implementation for V5 Rest and Socket clients
+    * Updated Sourcelink package version
+    * Marked ISpotClient references as deprecated
+
 * Version 3.13.1 - 19 Aug 2024
     * Added addOrReduce parameter to V5Api.Account.RequestDemoFundsAsync endpoint
     * Added referer to V5Api.Account.GetConvertQuoteAsync endpoint
