@@ -10,6 +10,12 @@ namespace Bybit.Net.Objects.Models.V5
     public record BybitUserTradeUpdate : BybitUserTrade
     {
         /// <summary>
+        /// Profit and Loss for a position execution
+        /// </summary>
+        [JsonProperty("execPnl")]
+        public decimal? Pnl { get; set; }
+
+        /// <summary>
         /// Category
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
