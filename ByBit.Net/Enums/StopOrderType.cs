@@ -23,6 +23,11 @@ namespace Bybit.Net.Enums
         [Map("TrailingStop")]
         TrailingStop,
         /// <summary>
+        /// Trailing profit
+        /// </summary>
+        [Map("TrailingProfit")]
+        TrailingProfit,
+        /// <summary>
         /// Stop
         /// </summary>
         [Map("Stop")]
