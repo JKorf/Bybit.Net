@@ -96,7 +96,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Asset balance
         /// </summary>
         [JsonProperty("walletBalance")]
-        public decimal WalletBalance { get; set; }
+        public decimal? WalletBalance { get; set; }
         /// <summary>
         /// [Spot] Available balance
         /// </summary>
