@@ -28,7 +28,7 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await SubscribeToWalletUpdatesAsync(
-                update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.AvailableToWithdraw ?? 0, x.WalletBalance))).ToArray())),
+                update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.AvailableToWithdraw ?? 0, x.WalletBalance ?? 0))).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);

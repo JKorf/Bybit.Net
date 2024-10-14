@@ -198,7 +198,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, SupportedTradingModes, result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.Equity ?? 0))).ToArray());
+            return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, SupportedTradingModes, result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, x.WalletBalance ?? 0, x.Equity ?? 0))).ToArray());
         }
 
         #endregion
