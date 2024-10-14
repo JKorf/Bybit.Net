@@ -150,6 +150,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.14.2 - 14 Oct 2024
+    * Fixed restClient.V5Api.Account.GetBalancesAsync deserialization in demo environment without any transactions
+    * Added missing TrailingProfit value to StopOrderType Enum
+
 * Version 3.14.1 - 08 Oct 2024
     * Added ClosedPnl property to BybitOrderUpdate model
     * Added Pnl property to BybitUserTradeUpdate model
