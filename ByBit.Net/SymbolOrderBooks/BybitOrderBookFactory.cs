@@ -4,6 +4,7 @@ using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.OrderBook;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -32,9 +33,25 @@ namespace Bybit.Net.SymbolOrderBooks
         {
             _serviceProvider = serviceProvider;
 
-            Spot = new OrderBookFactory<BybitOrderBookOptions>((symbol, options) => CreateSpot(symbol, options), (baseAsset, quoteAsset, options) => CreateSpot(baseAsset + quoteAsset, options));
-            Options = new OrderBookFactory<BybitOrderBookOptions>((symbol, options) => CreateOption(symbol, options), (baseAsset, quoteAsset, options) => CreateOption(baseAsset + quoteAsset, options));
-            LinearInverse = new OrderBookFactory<BybitOrderBookOptions>((symbol, options) => CreateLinearInverse(symbol, options), (baseAsset, quoteAsset, options) => CreateLinearInverse(baseAsset + quoteAsset, options));
+            Spot = new OrderBookFactory<BybitOrderBookOptions>(
+                CreateSpot,
+                (sharedSymbol, options) => CreateSpot(BybitExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+            Options = new OrderBookFactory<BybitOrderBookOptions>(
+                CreateOption,
+                (sharedSymbol, options) => CreateOption(BybitExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+            LinearInverse = new OrderBookFactory<BybitOrderBookOptions>(
+                CreateLinearInverse, 
+                (sharedSymbol, options) => CreateLinearInverse(BybitExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+        }
+
+        /// <inheritdoc />
+        public ISymbolOrderBook Create(SharedSymbol symbol, Action<BybitOrderBookOptions>? options = null)
+        {
+            var symbolName = BybitExchange.FormatSymbol(symbol.BaseAsset, symbol.QuoteAsset, symbol.TradingMode, symbol.DeliverTime);
+            if (symbol.TradingMode == TradingMode.Spot)
+                return CreateSpot(symbolName, options);
+
+            return CreateLinearInverse(symbolName, options);
         }
 
         /// <inheritdoc />
