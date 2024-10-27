@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Interfaces;
+﻿using Bybit.Net.Clients;
+using Bybit.Net.Interfaces;
 using Bybit.Net.Interfaces.Clients;
 using CryptoExchange.Net;
 using CryptoExchange.Net.SharedApis;
@@ -13,7 +14,14 @@ namespace Bybit.Net
     /// <inheritdoc />
     public class BybitTrackerFactory : IBybitTrackerFactory
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BybitTrackerFactory()
+        {
+        }
 
         /// <summary>
         /// ctor
@@ -27,28 +35,31 @@ namespace Bybit.Net
         /// <inheritdoc />
         public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null)
         {
-            IKlineRestClient restClient;
-            IKlineSocketClient socketClient;
+            var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient();
+
+            IKlineRestClient sharedRestClient;
+            IKlineSocketClient sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                restClient = _serviceProvider.GetRequiredService<IBybitRestClient>().V5Api.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedClient;
+                sharedSocketClient = socketClient.V5SpotApi.SharedClient;
             }
             else if (symbol.TradingMode.IsLinear())
             {
-                restClient = _serviceProvider.GetRequiredService<IBybitRestClient>().V5Api.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBybitSocketClient>().V5LinearApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedClient;
+                sharedSocketClient = socketClient.V5LinearApi.SharedClient;
             }
             else
             {
-                restClient = _serviceProvider.GetRequiredService<IBybitRestClient>().V5Api.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBybitSocketClient>().V5InverseApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedClient;
+                sharedSocketClient = socketClient.V5InverseApi.SharedClient;
             }
 
             return new KlineTracker(
-                _serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
-                restClient,
-                socketClient,
+                _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
+                sharedRestClient,
+                sharedSocketClient,
                 symbol,
                 interval,
                 limit,
@@ -59,28 +70,32 @@ namespace Bybit.Net
         /// <inheritdoc />
         public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null)
         {
-            IRecentTradeRestClient? restClient = null;
-            ITradeSocketClient socketClient;
+            var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient();
+
+            IRecentTradeRestClient? sharedRestClient = null;
+            ITradeSocketClient sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                restClient = _serviceProvider.GetRequiredService<IBybitRestClient>().V5Api.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedClient;
+                sharedSocketClient = socketClient.V5SpotApi.SharedClient;
             }
             else if (symbol.TradingMode.IsLinear())
             {
-                restClient = _serviceProvider.GetRequiredService<IBybitRestClient>().V5Api.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBybitSocketClient>().V5LinearApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedClient;
+                sharedSocketClient = socketClient.V5LinearApi.SharedClient;
             }
             else
             {
-                restClient = _serviceProvider.GetRequiredService<IBybitRestClient>().V5Api.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBybitSocketClient>().V5InverseApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedClient;
+                sharedSocketClient = socketClient.V5InverseApi.SharedClient;
             }
 
             return new TradeTracker(
-                _serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(socketClient.Exchange),
-                restClient,
-                socketClient,
+                _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(socketClient.Exchange),
+                sharedRestClient,
+                null,
+                sharedSocketClient,
                 symbol,
                 limit,
                 period
