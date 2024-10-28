@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ByBit.Net\Bybit.Net.csproj" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ByBit.Net\Bybit.Net.csproj" />
+  </ItemGroup>
 
 </Project>
