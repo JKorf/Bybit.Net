@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Clients;
+﻿using Bybit.Net;
+using Bybit.Net.Clients;
 using Bybit.Net.Interfaces;
 using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Options;
@@ -61,6 +62,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBybitOrderBookFactory, BybitOrderBookFactory>();
+            services.AddTransient<IBybitTrackerFactory, BybitTrackerFactory>();
             services.AddTransient(x => x.GetRequiredService<IBybitRestClient>().V5Api.CommonSpotClient);
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedClient);
