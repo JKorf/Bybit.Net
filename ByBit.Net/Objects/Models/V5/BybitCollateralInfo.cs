@@ -38,6 +38,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonProperty("borrowAmount")]
         public decimal BorrowAmount { get; set; }
         /// <summary>
+        /// The sum of borrowing amount for other accounts under the same main account
+        /// </summary>
+        [JsonProperty("otherBorrowAmount")]
+        public decimal OtherBorrowAmount { get; set; }
+        /// <summary>
         /// Available to borrow
         /// </summary>
         [JsonProperty("availableToBorrow")]
