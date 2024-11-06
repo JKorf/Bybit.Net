@@ -312,6 +312,29 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<BybitResponse<BybitTransactionLog>>> GetTransactionHistoryAsync(AccountType? accountType = null, Category? category = null, string? asset = null, string? baseAsset = null, TransactionLogType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get classic account, contract transaction logs
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/contract-transaction-log" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
+        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="type">Filter by type</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Number of results per page</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitResponse<BybitTransactionLog>>> GetClassicContractTransactionHistoryAsync(
+            string? asset = null,
+            string? baseAsset = null,
+            TransactionLogType? type = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Get a list of transferable assets between accounts
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/transferable-coin" /></para>
         /// </summary>

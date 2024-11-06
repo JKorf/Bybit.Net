@@ -346,6 +346,33 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Transaction History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitTransactionLog>>> GetClassicContractTransactionHistoryAsync(
+            string? asset = null,
+            string? baseAsset = null,
+            TransactionLogType? type = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("currency", asset);
+            parameters.AddOptionalParameter("baseCoin", baseAsset);
+            parameters.AddOptionalParameter("type", EnumConverter.GetString(type));
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            return await _baseClient.SendRequestAsync<BybitResponse<BybitTransactionLog>>(_baseClient.GetUrl("v5/account/contract-transaction-log"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Set Margin Mode
 
         /// <inheritdoc />
