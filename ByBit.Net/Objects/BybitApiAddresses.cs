@@ -60,6 +60,15 @@
         };
 
         /// <summary>
+        /// The addresses to connect to the Bybit main net for users from Kazakhstan
+        /// </summary>
+        public static BybitApiAddresses Kazakhstan = new BybitApiAddresses
+        {
+            RestBaseAddress = "https://api.bybit.kz",
+            SocketBaseAddress = "wss://stream.bybit.kz"
+        };
+
+        /// <summary>
         /// The addresses to connect to the Bybit demo trading environment
         /// </summary>
         public static BybitApiAddresses DemoTrading = new BybitApiAddresses
