@@ -62,19 +62,19 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
         }
 
         /// <inheritdoc />
-        protected override Query? GetAuthenticationRequest(SocketConnection connection)
+        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection)
         {
             var expireTime = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddSeconds(30))!;
             var authProvider = (BybitAuthenticationProvider)AuthenticationProvider!;
             var key = authProvider.ApiKey;
             var sign = authProvider.Sign($"GET/realtime{expireTime}");
 
-            return new BybitUnifiedQuery("auth", new object[]
+            return Task.FromResult<Query?>(new BybitUnifiedQuery("auth", new object[]
             {
                 key,
                 expireTime,
                 sign
-            });
+            }));
         }
 
         /// <inheritdoc />

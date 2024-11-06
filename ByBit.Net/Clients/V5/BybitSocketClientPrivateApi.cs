@@ -80,7 +80,7 @@ namespace Bybit.Net.Clients.V5
         public IBybitSocketClientPrivateApiShared SharedClient => this;
 
         /// <inheritdoc />
-        protected override Query? GetAuthenticationRequest(SocketConnection connection)
+        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection)
         {
             if (connection.ConnectionUri.AbsolutePath.EndsWith("private"))
             {
@@ -90,12 +90,12 @@ namespace Bybit.Net.Clients.V5
                 var key = authProvider.ApiKey;
                 var sign = authProvider.Sign($"GET/realtime{expireTime}");
 
-                return new BybitQuery("auth", new object[]
+                return Task.FromResult<Query?>(new BybitQuery("auth", new object[]
                 {
                 key,
                 expireTime,
                 sign
-                });
+                }));
             }
             else
             {
@@ -105,12 +105,12 @@ namespace Bybit.Net.Clients.V5
                 var key = authProvider.ApiKey;
                 var sign = authProvider.Sign($"GET/realtime{expireTime}");
 
-                return new BybitRequestQuery<object>("auth", null, new object[]
+                return Task.FromResult<Query?>(new BybitRequestQuery<object>("auth", null, new object[]
                 {
                 key,
                 expireTime,
                 sign
-                });
+                }));
             }
         }
 
