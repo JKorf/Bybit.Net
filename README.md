@@ -151,6 +151,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.16.0 - 06 Nov 2024
+    * Updated CryptoExchange.Net to version 8.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.2.0
+    * Added OtherBorrowAmount to restClient.V5Api.Account.GetCollateralInfoAsync response model
+    * Added Kazakhstan environment urls
+    * Added restClient.V5Api.Account.GetClassicContractTransactionHistoryAsync endpoint
+
 * Version 3.15.0 - 28 Oct 2024
     * Updated CryptoExchange.Net to version 8.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.1.0
     * Moved FormatSymbol to BybitExchange class
