@@ -12,10 +12,18 @@ namespace Bybit.Net.Objects.Options
         /// <summary>
         /// Default options for the rest client
         /// </summary>
-        public static BybitRestOptions Default { get; set; } = new BybitRestOptions
+        internal static BybitRestOptions Default { get; set; } = new BybitRestOptions
         {
             Environment = BybitEnvironment.Live
         };
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BybitRestOptions()
+        {
+            Default?.Set(this);
+        }
 
         /// <summary>
         /// A referer, will be sent in the Referer header
@@ -47,16 +55,16 @@ namespace Bybit.Net.Objects.Options
         /// </summary>
         public RestApiOptions V5Options { get; private set; } = new RestApiOptions();
 
-        internal BybitRestOptions Copy()
+        internal BybitRestOptions Set(BybitRestOptions targetOptions)
         {
-            var options = Copy<BybitRestOptions>();
-            options.Referer = Referer;
-            options.ReceiveWindow = ReceiveWindow;
-            options.SpotOptions = SpotOptions.Copy<RestApiOptions>();
-            options.CopyTradingOptions = CopyTradingOptions.Copy<RestApiOptions>();
-            options.DerivativesOptions = DerivativesOptions.Copy<RestApiOptions>();
-            options.V5Options = V5Options.Copy<RestApiOptions>();
-            return options;
+            targetOptions = base.Set<BybitRestOptions>(targetOptions);
+            targetOptions.Referer = Referer;
+            targetOptions.ReceiveWindow = ReceiveWindow;
+            targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
+            targetOptions.CopyTradingOptions = CopyTradingOptions.Set(targetOptions.CopyTradingOptions);
+            targetOptions.DerivativesOptions = DerivativesOptions.Set(targetOptions.DerivativesOptions);
+            targetOptions.V5Options = V5Options.Set(targetOptions.V5Options);
+            return targetOptions;
         }
     }
 }
