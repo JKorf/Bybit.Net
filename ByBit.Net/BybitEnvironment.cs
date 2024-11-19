@@ -27,6 +27,31 @@ namespace Bybit.Net
         }
 
         /// <summary>
+        /// ctor for DI, use <see cref="CreateCustom"/> for creating a custom environment
+        /// </summary>
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        public BybitEnvironment() : base(TradeEnvironmentNames.Live)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        { }
+
+        /// <summary>
+        /// Get the Bybit environment by name
+        /// </summary>
+        public static BybitEnvironment? GetEnvironmentByName(string? name)
+         => name switch
+         {
+             TradeEnvironmentNames.Live => Live,
+             TradeEnvironmentNames.Testnet => Testnet,
+             "Netherlands" => Netherlands,
+             "Hongkong" => HongKong,
+             "Turkey" => Turkey,
+             "Demo" => DemoTrading,
+             "" => Live,
+             null => Live,
+             _ => default
+         };
+
+        /// <summary>
         /// Live environment
         /// </summary>
         public static BybitEnvironment Live { get; }
@@ -46,7 +71,7 @@ namespace Bybit.Net
         /// Live environment for users from The Netherlands
         /// </summary>
         public static BybitEnvironment Netherlands { get; }
-            = new BybitEnvironment(TradeEnvironmentNames.Live,
+            = new BybitEnvironment("Netherlands",
                                      BybitApiAddresses.Netherlands.RestBaseAddress,
                                      BybitApiAddresses.Netherlands.SocketBaseAddress);
 
@@ -54,7 +79,7 @@ namespace Bybit.Net
         /// Live environment for users from HongKong
         /// </summary>
         public static BybitEnvironment HongKong { get; }
-            = new BybitEnvironment(TradeEnvironmentNames.Live,
+            = new BybitEnvironment("HongKong",
                                      BybitApiAddresses.HongKong.RestBaseAddress,
                                      BybitApiAddresses.HongKong.SocketBaseAddress);
 
@@ -62,7 +87,7 @@ namespace Bybit.Net
         /// Live environment for users from Turkey
         /// </summary>
         public static BybitEnvironment Turkey { get; }
-            = new BybitEnvironment(TradeEnvironmentNames.Live,
+            = new BybitEnvironment("Turkey",
                                      BybitApiAddresses.Turkey.RestBaseAddress,
                                      BybitApiAddresses.Turkey.SocketBaseAddress);
 
@@ -70,7 +95,7 @@ namespace Bybit.Net
         /// Demo trading environment, needs seperate API key. See https://bybit-exchange.github.io/docs/v5/demo
         /// </summary>
         public static BybitEnvironment DemoTrading { get; }
-            = new BybitEnvironment(TradeEnvironmentNames.Live,
+            = new BybitEnvironment("Demo",
                                      BybitApiAddresses.DemoTrading.RestBaseAddress,
                                      BybitApiAddresses.DemoTrading.SocketBaseAddress);
 

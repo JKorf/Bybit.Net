@@ -13,11 +13,11 @@ namespace Bybit.Net.Objects.Options
         /// </summary>
         public TimeSpan PingInterval { get; set; } = TimeSpan.FromSeconds(20);
 
-        internal BybitSocketApiOptions Copy()
+        internal BybitSocketApiOptions Set(BybitSocketApiOptions targetOptions)
         {
-            var result = Copy<BybitSocketApiOptions>();
-            result.PingInterval = PingInterval;
-            return result;
+            targetOptions = base.Set<BybitSocketApiOptions>(targetOptions);
+            targetOptions.PingInterval = PingInterval;
+            return targetOptions;
         }
     }
 }

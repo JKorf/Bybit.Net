@@ -11,6 +11,7 @@ using Bybit.Net.Objects.Options;
 using System;
 using Microsoft.Extensions.Logging;
 using CryptoExchange.Net.Clients;
+using Microsoft.Extensions.Options;
 
 namespace Bybit.Net.Clients
 {
@@ -31,28 +32,26 @@ namespace Bybit.Net.Clients
         /// Create a new instance of the BybitRestClient using provided options
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BybitRestClient(Action<BybitRestOptions>? optionsDelegate = null) : this(null, null, optionsDelegate)
+        public BybitRestClient(Action<BybitRestOptions>? optionsDelegate = null)
+            : this(null, null, Options.Create(ApplyOptionsDelegate(optionsDelegate)))
         {
         }
 
         /// <summary>
         /// Create a new instance of the BybitRestClient
         /// </summary>
-        /// <param name="optionsDelegate">Option configuration delegate</param>
+        /// <param name="options">Option configuration delegate</param>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="httpClient">Http client for this client</param>
-        public BybitRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, Action<BybitRestOptions>? optionsDelegate = null)
+        public BybitRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, IOptions<BybitRestOptions> options)
             : base(loggerFactory, "Bybit")
         {
-            var options = BybitRestOptions.Default.Copy();
-            if (optionsDelegate != null)
-                optionsDelegate(options);
-            Initialize(options);
+            Initialize(options.Value);
 
-            SpotApiV3 = AddApiClient(new BybitRestClientSpotApiV3(_logger, httpClient, options));
-            CopyTradingApi = AddApiClient(new BybitRestClientCopyTradingApi(_logger, httpClient, options));
-            DerivativesApi = AddApiClient(new BybitRestClientDerivativesApi(_logger, httpClient, options));
-            V5Api = AddApiClient(new V5.BybitRestClientApi(_logger, httpClient, options));
+            SpotApiV3 = AddApiClient(new BybitRestClientSpotApiV3(_logger, httpClient, options.Value));
+            CopyTradingApi = AddApiClient(new BybitRestClientCopyTradingApi(_logger, httpClient, options.Value));
+            DerivativesApi = AddApiClient(new BybitRestClientDerivativesApi(_logger, httpClient, options.Value));
+            V5Api = AddApiClient(new V5.BybitRestClientApi(_logger, httpClient, options.Value));
         }
 
         #endregion
@@ -63,9 +62,7 @@ namespace Bybit.Net.Clients
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public static void SetDefaultOptions(Action<BybitRestOptions> optionsDelegate)
         {
-            var options = BybitRestOptions.Default.Copy();
-            optionsDelegate(options);
-            BybitRestOptions.Default = options;
+            BybitRestOptions.Default = ApplyOptionsDelegate(optionsDelegate);
         }
 
         /// <inheritdoc />

@@ -14,6 +14,7 @@ using Bybit.Net.Clients.DerivativesApi.ContractApi;
 using Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi;
 using Bybit.Net.Clients.SpotApi.v3;
 using CryptoExchange.Net.Clients;
+using Microsoft.Extensions.Options;
 
 namespace Bybit.Net.Clients
 {
@@ -42,16 +43,9 @@ namespace Bybit.Net.Clients
         /// <summary>
         /// Create a new instance of the BybitSocketClient
         /// </summary>
-        /// <param name="loggerFactory">The logger factory</param>
-        public BybitSocketClient(ILoggerFactory? loggerFactory = null) : this((x) => { }, loggerFactory)
-        {
-        }
-
-        /// <summary>
-        /// Create a new instance of the BybitSocketClient
-        /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BybitSocketClient(Action<BybitSocketOptions> optionsDelegate) : this(optionsDelegate, null)
+        public BybitSocketClient(Action<BybitSocketOptions>? optionsDelegate = null)
+            : this(Options.Create(ApplyOptionsDelegate(optionsDelegate)), null)
         {
         }
 
@@ -59,24 +53,22 @@ namespace Bybit.Net.Clients
         /// Create a new instance of the BybitSocketClient
         /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
-        /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BybitSocketClient(Action<BybitSocketOptions> optionsDelegate, ILoggerFactory? loggerFactory = null) : base(loggerFactory, "Bybit")
+        /// <param name="options">Option configuration</param>
+        public BybitSocketClient(IOptions<BybitSocketOptions> options, ILoggerFactory? loggerFactory = null) : base(loggerFactory, "Bybit")
         {
-            var options = BybitSocketOptions.Default.Copy();
-            optionsDelegate(options);
-            Initialize(options);
+            Initialize(options.Value);
 
-            SpotV3Api = AddApiClient(new BybitSocketClientSpotApiV3(_logger, options));
+            SpotV3Api = AddApiClient(new BybitSocketClientSpotApiV3(_logger, options.Value));
 
-            DerivativesApi = AddApiClient(new BybitSocketClientDerivativesPublicApi(_logger, options));
-            UnifiedMarginApi = AddApiClient(new BybitSocketClientUnifiedMarginApi(_logger, options));
-            ContractApi = AddApiClient(new BybitSocketClientContractApi(_logger, options));
+            DerivativesApi = AddApiClient(new BybitSocketClientDerivativesPublicApi(_logger, options.Value));
+            UnifiedMarginApi = AddApiClient(new BybitSocketClientUnifiedMarginApi(_logger, options.Value));
+            ContractApi = AddApiClient(new BybitSocketClientContractApi(_logger, options.Value));
 
-            V5SpotApi = AddApiClient(new BybitSocketClientSpotApi(_logger, options));
-            V5InverseApi = AddApiClient(new BybitSocketClientInverseApi(_logger, options));
-            V5LinearApi = AddApiClient(new BybitSocketClientLinearApi(_logger, options));
-            V5OptionsApi = AddApiClient(new BybitSocketClientOptionApi(_logger, options));
-            V5PrivateApi = AddApiClient(new BybitSocketClientPrivateApi(_logger, options));
+            V5SpotApi = AddApiClient(new BybitSocketClientSpotApi(_logger, options.Value));
+            V5InverseApi = AddApiClient(new BybitSocketClientInverseApi(_logger, options.Value));
+            V5LinearApi = AddApiClient(new BybitSocketClientLinearApi(_logger, options.Value));
+            V5OptionsApi = AddApiClient(new BybitSocketClientOptionApi(_logger, options.Value));
+            V5PrivateApi = AddApiClient(new BybitSocketClientPrivateApi(_logger, options.Value));
         }
 
         /// <summary>
@@ -85,9 +77,7 @@ namespace Bybit.Net.Clients
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public static void SetDefaultOptions(Action<BybitSocketOptions> optionsDelegate)
         {
-            var options = BybitSocketOptions.Default.Copy();
-            optionsDelegate(options);
-            BybitSocketOptions.Default = options;
+            BybitSocketOptions.Default = ApplyOptionsDelegate(optionsDelegate);
         }
 
         /// <inheritdoc />
