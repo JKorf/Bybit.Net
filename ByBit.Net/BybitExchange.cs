@@ -15,6 +15,16 @@ namespace Bybit.Net
         public static string ExchangeName => "Bybit";
 
         /// <summary>
+        /// Exchange name
+        /// </summary>
+        public static string DisplayName => "Bybit";
+
+        /// <summary>
+        /// Url to exchange image
+        /// </summary>
+        public static string ImageUrl { get; } = "https://raw.githubusercontent.com/JKorf/Bybit.Net/master/ByBit.Net/Icon/icon.png";
+
+        /// <summary>
         /// Url to the main website
         /// </summary>
         public static string Url { get; } = "https://www.bybit.com";
