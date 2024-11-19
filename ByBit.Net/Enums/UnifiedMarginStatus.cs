@@ -26,6 +26,16 @@ namespace Bybit.Net.Enums
         /// Unified trade account pro, can trade bulk order api endpoints
         /// </summary>
         [Map("4")]
-        UnifiedTradeAccountPro
+        UnifiedTradeAccountPro,
+        /// <summary>
+        /// Unified trade account 2.0 pro, can trade bulk order api endpoints
+        /// </summary>
+        [Map("5")]
+        UnifiedTradeAccount2,
+        /// <summary>
+        /// Unified trade account 2.0 pro, can trade bulk order api endpoints
+        /// </summary>
+        [Map("6")]
+        UnifiedTradeAccount2Pro
     }
 }
