@@ -52,6 +52,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonProperty("riskParameters")]
         public BybitPriceLimit? PricePercentageFilter { get; set; }
+        /// <summary>
+        /// Whether the symbol has the special treatment label
+        /// </summary>
+        [JsonProperty("stTag")]
+        public bool SpecialTreatmentLabel { get; set; }
     }
 
     /// <summary>
