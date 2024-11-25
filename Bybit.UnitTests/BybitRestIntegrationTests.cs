@@ -97,7 +97,7 @@ namespace Bybit.Net.UnitTests
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetDeliveryPriceAsync(Enums.Category.Linear, default, default, default, default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetLeverageTokensAsync(default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetLeverageTokenMarketAsync("BTC3L", default), false);
-            await RunAndCheckResult(client => client.V5Api.ExchangeData.GetLongShortRatioAsync(Enums.Category.Linear, "ETHUSDT", Enums.DataPeriod.OneDay, default, default), false);
+            await RunAndCheckResult(client => client.V5Api.ExchangeData.GetLongShortRatioAsync(Enums.Category.Linear, "ETHUSDT", Enums.DataPeriod.OneDay, default, default, default, default), false);
         }
 
         [Test]

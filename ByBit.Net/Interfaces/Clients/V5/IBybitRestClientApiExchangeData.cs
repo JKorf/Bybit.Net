@@ -287,9 +287,11 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="period">Data recording period</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Limit for data size per page</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitLongShortRatio>>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitLongShortRatio>>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
     }
 }

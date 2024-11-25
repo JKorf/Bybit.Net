@@ -447,7 +447,13 @@ namespace Bybit.Net.Clients.V5
         #region Get Long Short Ratio
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitLongShortRatio>>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitLongShortRatio>>> GetLongShortRatioAsync(
+            Category category,
+            string symbol,
+            DataPeriod period,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection()
             {
@@ -455,6 +461,8 @@ namespace Bybit.Net.Clients.V5
             };
             parameters.AddEnum("category", category);
             parameters.AddEnum("period", period);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
 
             var result = await _baseClient.SendRequestAsync<BybitList<BybitLongShortRatio>>(_baseClient.GetUrl("v5/market/account-ratio"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
