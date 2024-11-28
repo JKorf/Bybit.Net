@@ -26,7 +26,8 @@ namespace Bybit.Net.Interfaces.Clients
         IFundingRateRestClient,
         IFuturesOrderRestClient,
         IPositionModeRestClient,
-        IPositionHistoryRestClient
+        IPositionHistoryRestClient,
+        IFeeRestClient
     {
     }
 }

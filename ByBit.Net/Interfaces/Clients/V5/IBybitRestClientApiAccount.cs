@@ -226,7 +226,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
 
         /// <summary>
         /// Get the master deposit address for an asset
-        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/master-deposit-addr" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/deposit/master-deposit-addr" /></para>
         /// </summary>
         /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="networkType">Network type</param>
@@ -236,7 +236,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
 
         /// <summary>
         /// Get list of deposits
-        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/deposit-record" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/deposit/deposit-record" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="startTime">Filter by start time</param>
@@ -249,7 +249,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
 
         /// <summary>
         /// Get a list of internal deposits
-        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/internal-deposit-record" /></para>
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/deposit/internal-deposit-record" /></para>
         /// </summary>
         /// <param name="transactionId">Filter by transaction id</param>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
