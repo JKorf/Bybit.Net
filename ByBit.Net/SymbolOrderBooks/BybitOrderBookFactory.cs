@@ -47,7 +47,7 @@ namespace Bybit.Net.SymbolOrderBooks
         /// <inheritdoc />
         public ISymbolOrderBook Create(SharedSymbol symbol, Action<BybitOrderBookOptions>? options = null)
         {
-            var symbolName = BybitExchange.FormatSymbol(symbol.BaseAsset, symbol.QuoteAsset, symbol.TradingMode, symbol.DeliverTime);
+            var symbolName = symbol.GetSymbol(BybitExchange.FormatSymbol);
             if (symbol.TradingMode == TradingMode.Spot)
                 return CreateSpot(symbolName, options);
 
