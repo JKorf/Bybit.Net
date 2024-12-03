@@ -152,6 +152,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.18.1 - 03 Dec 2024
+    * Updated CryptoExchange.Net to version 8.4.3, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Fixed orderbook creation via BybitOrderBookFactory
+
 * Version 3.18.0 - 28 Nov 2024
     * Updated CryptoExchange.Net to version 8.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.4.0
     * Added GetFeesAsync Shared REST client implementations
