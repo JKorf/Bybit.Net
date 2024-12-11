@@ -312,7 +312,7 @@ namespace Bybit.Net.Clients.V5
         {
             var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
             var query = new BybitRequestQuery<BybitOrderId>(
-                "order.amend",
+                "order.cancel",
                 new Dictionary<string, string>
                 {
                     { "X-BAPI-TIMESTAMP", timestamp },
