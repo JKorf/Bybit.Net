@@ -1149,5 +1149,18 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Get Transferable
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitTransferable>> GetTransferableAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coinName", asset.ToUpperInvariant());
+
+            return await _baseClient.SendRequestAsync<BybitTransferable>(_baseClient.GetUrl("v5/account/withdrawal"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }
