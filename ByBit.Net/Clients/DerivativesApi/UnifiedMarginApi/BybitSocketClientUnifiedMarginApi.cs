@@ -38,7 +38,19 @@ namespace Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi
         {
             KeepAliveInterval = TimeSpan.Zero;
 
-            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitPingQuery(), x => { });
+            RegisterPeriodicQuery(
+                "Heartbeat",
+                TimeSpan.FromSeconds(20),
+                x => new BybitPingQuery(),
+                (connection, result) =>
+                {
+                    if (result.Error?.Message.Equals("Query timeout") == true)
+                    {
+                        // Ping timeout, reconnect
+                        _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
+                        _ = connection.TriggerReconnectAsync();
+                    }
+                });
         }
 
         /// <inheritdoc />

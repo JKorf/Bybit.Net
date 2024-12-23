@@ -34,7 +34,19 @@ namespace Bybit.Net.Clients.SpotApi.v3
         {
             KeepAliveInterval = TimeSpan.Zero;
 
-            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitQuery("ping", null), x => { });
+            RegisterPeriodicQuery(
+                "Heartbeat",
+                TimeSpan.FromSeconds(20),
+                x => new BybitQuery("ping", null) { RequestTimeout = TimeSpan.FromSeconds(5) }, 
+                (connection, result) =>
+                {
+                    if (result.Error?.Message.Equals("Query timeout") == true)
+                    {
+                        // Ping timeout, reconnect
+                        _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
+                        _ = connection.TriggerReconnectAsync();
+                    }
+                });
         }
 
         /// <inheritdoc />

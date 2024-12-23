@@ -40,7 +40,19 @@ namespace Bybit.Net.Clients.V5
 
             _referer = !string.IsNullOrEmpty(options.Referer) ? options.Referer! : "Zx000356";
 
-            RegisterPeriodicQuery("Heartbeat", options.V5Options.PingInterval, GetPingQuery, x => { });
+            RegisterPeriodicQuery(
+                "Heartbeat",
+                options.V5Options.PingInterval,
+                GetPingQuery,
+                (connection, result) =>
+                {
+                    if (result.Error?.Message.Equals("Query timeout") == true)
+                    {
+                        // Ping timeout, reconnect
+                        _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
+                        _ = connection.TriggerReconnectAsync();
+                    }
+                });
 
             SetDedicatedConnection(BaseAddress.AppendPath("/v5/trade"), true);
         }
@@ -49,7 +61,7 @@ namespace Bybit.Net.Clients.V5
         {
             if (connection.ConnectionUri.AbsolutePath.EndsWith("private"))
             {
-                return new BybitQuery("ping", null);
+                return new BybitQuery("ping", null) { RequestTimeout = TimeSpan.FromSeconds(5) };
             }
             else
             {

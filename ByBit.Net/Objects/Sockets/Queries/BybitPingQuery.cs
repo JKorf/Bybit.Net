@@ -1,5 +1,6 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Sockets;
+using System;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets.Queries
@@ -10,6 +11,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
 
         public BybitPingQuery() : base(new BybitRequestMessage { RequestId = ExchangeHelpers.NextId().ToString(), Operation = "ping", Args = null }, false, 1)
         {
+            RequestTimeout = TimeSpan.FromSeconds(5);
             ListenerIdentifiers = new HashSet<string>() { "pong" };
         }
     }

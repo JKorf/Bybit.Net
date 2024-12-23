@@ -30,7 +30,19 @@ namespace Bybit.Net.Clients.V5
         internal BybitSocketClientOptionApi(ILogger log, BybitSocketOptions options)
             : base(log, options, "/v5/public/option")
         {
-            RegisterPeriodicQuery("Heartbeat", TimeSpan.FromSeconds(20), x => new BybitPingQuery(), x => { });
+            RegisterPeriodicQuery(
+                "Heartbeat",
+                TimeSpan.FromSeconds(20),
+                x => new BybitPingQuery(),
+                (connection, result) =>
+                {
+                    if (result.Error?.Message.Equals("Query timeout") == true)
+                    {
+                        // Ping timeout, reconnect
+                        _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
+                        _ = connection.TriggerReconnectAsync();
+                    }
+                });
         }
 
         /// <inheritdoc />

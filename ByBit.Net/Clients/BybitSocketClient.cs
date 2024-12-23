@@ -15,6 +15,7 @@ using Bybit.Net.Clients.DerivativesApi.UnifiedMarginApi;
 using Bybit.Net.Clients.SpotApi.v3;
 using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Options;
+using CryptoExchange.Net.Objects.Options;
 
 namespace Bybit.Net.Clients
 {
@@ -69,6 +70,20 @@ namespace Bybit.Net.Clients
             V5LinearApi = AddApiClient(new BybitSocketClientLinearApi(_logger, options.Value));
             V5OptionsApi = AddApiClient(new BybitSocketClientOptionApi(_logger, options.Value));
             V5PrivateApi = AddApiClient(new BybitSocketClientPrivateApi(_logger, options.Value));
+        }
+
+        /// <inheritdoc />
+        public void SetOptions(UpdateOptions options)
+        {
+            SpotV3Api.SetOptions(options);
+            DerivativesApi.SetOptions(options);
+            UnifiedMarginApi.SetOptions(options);
+            ContractApi.SetOptions(options);
+            V5SpotApi.SetOptions(options);
+            V5InverseApi.SetOptions(options);
+            V5LinearApi.SetOptions(options);
+            V5OptionsApi.SetOptions(options);
+            V5PrivateApi.SetOptions(options);
         }
 
         /// <summary>

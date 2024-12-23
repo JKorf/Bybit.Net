@@ -12,6 +12,7 @@ using System;
 using Microsoft.Extensions.Logging;
 using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Options;
+using CryptoExchange.Net.Objects.Options;
 
 namespace Bybit.Net.Clients
 {
@@ -55,6 +56,15 @@ namespace Bybit.Net.Clients
         }
 
         #endregion
+
+        /// <inheritdoc />
+        public void SetOptions(UpdateOptions options)
+        {
+            SpotApiV3.SetOptions(options);
+            CopyTradingApi.SetOptions(options);
+            DerivativesApi.SetOptions(options);
+            V5Api.SetOptions(options);
+        }
 
         /// <summary>
         /// Set the default options to be used when creating new clients
