@@ -151,16 +151,28 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("ips", ipRestrictions);
 
             var permissions = new Dictionary<string, List<string>>();
-            AddPermission(permissions, permissionContractTradeOrder, "ContractTrade", "Order");
-            AddPermission(permissions, permissionContractTradePosition, "ContractTrade", "Position");
-            AddPermission(permissions, permissionSpotTrade, "Spot", "SpotTrade");
-            AddPermission(permissions, permissionWalletTransfer, "Wallet", "AccountTransfer");
-            AddPermission(permissions, permissionWalletSubAccountTransfer, "Wallet", "SubMemberTransferList");
-            AddPermission(permissions, permissionOptionsTrade, "Options", "OptionsTrade");
-            AddPermission(permissions, permissionCopyTrading, "CopyTrading", "CopyTrading");
-            AddPermission(permissions, permissionExchangeHistory, "Exchange", "ExchangeHistory");
+            EditPermission(permissions, permissionContractTradeOrder, "ContractTrade", "Order");
+            EditPermission(permissions, permissionContractTradePosition, "ContractTrade", "Position");
+            EditPermission(permissions, permissionSpotTrade, "Spot", "SpotTrade");
+            EditPermission(permissions, permissionWalletTransfer, "Wallet", "AccountTransfer");
+            EditPermission(permissions, permissionWalletSubAccountTransfer, "Wallet", "SubMemberTransferList");
+            EditPermission(permissions, permissionOptionsTrade, "Options", "OptionsTrade");
+            EditPermission(permissions, permissionCopyTrading, "CopyTrading", "CopyTrading");
+            EditPermission(permissions, permissionExchangeHistory, "Exchange", "ExchangeHistory");
             parameters.Add("permissions", permissions);
-            return await _baseClient.SendRequestAsync<BybitApiKeyInfo>(_baseClient.GetUrl("v5/user/update-sub-api"), HttpMethod.Post, ct, null, true).ConfigureAwait(false);
+            return await _baseClient.SendRequestAsync<BybitApiKeyInfo>(_baseClient.GetUrl("v5/user/update-sub-api"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        private void EditPermission(Dictionary<string, List<string>> dict, bool? hasPermission, string key, string value)
+        {
+            if (hasPermission == null)
+                return;
+
+            if (!dict.ContainsKey(key))
+                dict[key] = new List<string>();
+
+            if (hasPermission == true)
+                dict[key].Add(value);
         }
         #endregion
 

@@ -68,7 +68,7 @@ namespace Bybit.Net.Clients.V5
         Task<WebCallResult<List<BybitSubAccount>>> GetSubAccountsAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Edit API key
+        /// Edit API key. Note that permissions starting with the same topic (for example `permissionContractTradeOrder` and `permissionContractTradePosition` or `permissionWalletTransfer` and `permissionWalletSubAccountTransfer`) can not be adjusted separately and should both be set when changing one of the values.
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/user/modify-sub-apikey" /></para>
         /// </summary>
         /// <param name="apiKey">Api key, should be passed if editing from Master account, should be null if editing own API key from sub account</param>
