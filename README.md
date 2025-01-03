@@ -157,6 +157,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.19.2 - 03 Jan 2025
+    * Added RiskParameters properties to restClient.V5Api.ExchangeData.GetLinearInverseSymbolsAsync response model
+
 * Version 3.19.1 - 23 Dec 2024
     * Fixed restClient.V5Api.SubAccount.EditSubAccountApiKeyAsync parameters not getting send
 
