@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -10,12 +10,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Limit quantity usd
         /// </summary>
-        [JsonProperty("limitAmountUsd")]
+        [JsonPropertyName("limitAmountUsd")]
         public decimal LimitQuantityUsd { get; set; }
         /// <summary>
         /// Withdrawable amount per account
         /// </summary>
-        [JsonProperty("withdrawableAmount")]
+        [JsonPropertyName("withdrawableAmount")]
         public BybitDelayedWithdrawalQuantities WithdrawableQuantities { get; set; } = null!;
     }
 
@@ -27,10 +27,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Spot account
         /// </summary>
+        [JsonPropertyName("SPOT")]
         public BybitDelayedWithdrawalQuantity Spot { get; set; } = null!;
         /// <summary>
         /// Fund account
         /// </summary>
+        [JsonPropertyName("FUND")]
         public BybitDelayedWithdrawalQuantity Fund { get; set; } = null!;
     }
 
@@ -42,16 +44,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Withdrawable quantity
         /// </summary>
-        [JsonProperty("withdrawableAmount")]
+        [JsonPropertyName("withdrawableAmount")]
         public decimal WithdrwawableQuantity { get; set; }
         /// <summary>
         /// Available balance
         /// </summary>
+        [JsonPropertyName("availableBalance")]
         public decimal AvailableBalance { get; set; }
     }
 }

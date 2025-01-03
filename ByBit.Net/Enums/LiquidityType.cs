@@ -1,6 +1,5 @@
 ﻿using CryptoExchange.Net.Attributes;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Enums
 {

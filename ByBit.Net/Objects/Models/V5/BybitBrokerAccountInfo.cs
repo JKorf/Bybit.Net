@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -12,28 +11,28 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Current sub account quantity
         /// </summary>
-        [JsonProperty("subAcctQty")]
+        [JsonPropertyName("subAcctQty")]
         public int SubAccountCount { get; set; }
         /// <summary>
         /// Max sub account quantity
         /// </summary>
-        [JsonProperty("maxSubAcctQty")]
+        [JsonPropertyName("maxSubAcctQty")]
         public int MaxSubAccountCount { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("ts")]
+        [JsonPropertyName("ts")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Base fee rebate rates
         /// </summary>
-        [JsonProperty("baseFeeRebateRate")]
+        [JsonPropertyName("baseFeeRebateRate")]
         public BybitBrokerRebateRate BaseFeeRebateRates { get; set; } = null!;
         /// <summary>
         /// Markup fee rebate rates
         /// </summary>
-        [JsonProperty("markupFeeRebateRate")]
+        [JsonPropertyName("markupFeeRebateRate")]
         public BybitBrokerRebateRate MarkupFeeRebateRates { get; set; } = null!;
     }
 
@@ -45,17 +44,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Spot rebate rate
         /// </summary>
-        [JsonProperty("spot")]
+        [JsonPropertyName("spot")]
         public string Spot { get; set; } = string.Empty;
         /// <summary>
         /// Derivatives rebate rate
         /// </summary>
-        [JsonProperty("derivatives")]
+        [JsonPropertyName("derivatives")]
         public string Derivatives { get; set; } = string.Empty;
         /// <summary>
         /// Convert rebate rate
         /// </summary>
-        [JsonProperty("convert")]
+        [JsonPropertyName("convert")]
         public string? Convert { get; set; }
     }
 }

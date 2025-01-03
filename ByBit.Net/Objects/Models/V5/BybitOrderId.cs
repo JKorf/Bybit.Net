@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -10,11 +10,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// The order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Client order id
         /// </summary>
-        [JsonProperty("orderLinkId")]
+        [JsonPropertyName("orderLinkId")]
         public string? ClientOrderId { get; set; }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using Bybit.Net.Enums;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Models.V5
 {
     internal record BybitDcpStatusWrapper
     {
-        [JsonProperty("dcpInfos")]
+        [JsonPropertyName("dcpInfos")]
         public IEnumerable<BybitDcpStatus> Infos { get; set; } = Array.Empty<BybitDcpStatus>();
     }
 
@@ -20,17 +19,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Product types
         /// </summary>
-        [JsonProperty("product")]
+        [JsonPropertyName("product")]
         public ProductType Product { get; set; }
         /// <summary>
         /// Is activated
         /// </summary>
-        [JsonProperty("dcpStatus"), JsonConverter(typeof(BoolConverter))]
+        [JsonPropertyName("dcpStatus"), JsonConverter(typeof(BoolConverter))]
         public bool Activated { get; set; }
         /// <summary>
         /// Timewindow in seconds
         /// </summary>
-        [JsonProperty("timeWindow")]
+        [JsonPropertyName("timeWindow")]
         public int? TimeWindow { get; set; }
     }
 }

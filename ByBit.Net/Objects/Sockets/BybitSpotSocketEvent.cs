@@ -1,19 +1,18 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Sockets
 {
     internal class BybitSpotSocketEvent<T>
     {
-        [JsonProperty("topic")]
+        [JsonPropertyName("topic")]
         public string Topic { get; set; } = string.Empty;
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("ts")]
+        [JsonPropertyName("ts")]
         public DateTime Timestamp { get; set; }
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
     }
 }

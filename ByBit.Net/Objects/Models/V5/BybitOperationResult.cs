@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -11,7 +10,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Success
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         [JsonConverter(typeof(BoolConverter))]
         public bool Success { get; set; }
     }

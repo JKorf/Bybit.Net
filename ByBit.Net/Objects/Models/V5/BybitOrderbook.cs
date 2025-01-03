@@ -1,6 +1,6 @@
 ﻿using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -14,33 +14,33 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Symbol
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Bids
         /// </summary>
-        [JsonProperty("b")]
+        [JsonPropertyName("b")]
         public IEnumerable<BybitOrderbookEntry> Bids { get; set; } = Array.Empty<BybitOrderbookEntry>();
         /// <summary>
         /// Asks
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public IEnumerable<BybitOrderbookEntry> Asks { get; set; } = Array.Empty<BybitOrderbookEntry>();
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("ts")]
+        [JsonPropertyName("ts")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Update id
         /// </summary>
-        [JsonProperty("u")]
+        [JsonPropertyName("u")]
         public long UpdateId { get; set; }
         /// <summary>
         /// Cross sequence
         /// </summary>
-        [JsonProperty("seq")]
+        [JsonPropertyName("seq")]
         public long? Sequence { get; set; }
     }
 

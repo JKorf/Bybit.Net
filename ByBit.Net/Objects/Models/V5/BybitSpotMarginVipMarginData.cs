@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// </summary>
     internal record BybitSpotMarginVipMarginData
     {
-        [JsonProperty("vipCoinList")]
+        [JsonPropertyName("vipCoinList")]
         public IEnumerable<BybitSpotMarginVipMarginList> VipCoinList { get; set; } = null!;
     }
 
@@ -21,12 +21,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// VIP level
         /// </summary>
-        [JsonProperty("vipLevel")]
+        [JsonPropertyName("vipLevel")]
         public string VipLevel { get; set; } = string.Empty;
         /// <summary>
         /// Assets
         /// </summary>
-        [JsonProperty("list")]
+        [JsonPropertyName("list")]
         public IEnumerable<BybitSpotMarginVipMarginItem> Assets { get; set; } = Array.Empty<BybitSpotMarginVipMarginItem>();
     }
 
@@ -38,37 +38,37 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Whether the asset is allowed to be borrowed
         /// </summary>
-        [JsonProperty("borrowable")]
+        [JsonPropertyName("borrowable")]
         public bool Borrowable { get; set; }
         /// <summary>
         /// Collateral ratio
         /// </summary>
-        [JsonProperty("collateralRatio")]
+        [JsonPropertyName("collateralRatio")]
         public decimal Collateralratio { get; set; }
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Borrow interest rate per hour
         /// </summary>
-        [JsonProperty("hourlyBorrowRate")]
+        [JsonPropertyName("hourlyBorrowRate")]
         public decimal? HourlyBorrowRate { get; set; }
         /// <summary>
         /// Liquidation order
         /// </summary>
-        [JsonProperty("liquidationOrder")]
+        [JsonPropertyName("liquidationOrder")]
         public decimal LiquidationOrder { get; set; }
         /// <summary>
         /// Whether it can be used as a margin collateral asset
         /// </summary>
-        [JsonProperty("marginCollateral")]
+        [JsonPropertyName("marginCollateral")]
         public bool MarginCollateral { get; set; }
         /// <summary>
         /// Max borrow amount
         /// </summary>
-        [JsonProperty("maxBorrowingAmount")]
+        [JsonPropertyName("maxBorrowingAmount")]
         public decimal? MaxBorrowingQuantity { get; set; }
     }
 }

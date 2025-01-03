@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -11,43 +11,47 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Created time
         /// </summary>
-        [JsonProperty("createdTime")]
+        [JsonPropertyName("createdTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Interest
         /// </summary>
+        [JsonPropertyName("borrowCost")]
         public decimal BorrowCost { get; set; }
         /// <summary>
         /// Houly borrow rate
         /// </summary>
+        [JsonPropertyName("hourlyBorrowRate")]
         public decimal HourlyBorrowRate { get; set; }
         /// <summary>
         /// Interest Bearing Borrow Size
         /// </summary>
+        [JsonPropertyName("interestBearingBorrowSize")]
         public decimal InterestBearingBorrowSize { get; set; }
         /// <summary>
         /// Cost exemption
         /// </summary>
+        [JsonPropertyName("costExemption")]
         public decimal CostExemption { get; set; }
         /// <summary>
         /// Total borrow quantity
         /// </summary>
-        [JsonProperty("borrowAmount")]
+        [JsonPropertyName("borrowAmount")]
         public decimal BorrowQuantity { get; set; }
         /// <summary>
         /// Unrealized loss
         /// </summary>
-        [JsonProperty("unrealisedLoss")]
+        [JsonPropertyName("unrealisedLoss")]
         public decimal UnrealisedLoss { get; set; }
         /// <summary>
         /// The borrowed quantity for interest free
         /// </summary>
-        [JsonProperty("freeBorrowedAmount")]
+        [JsonPropertyName("freeBorrowedAmount")]
         public decimal FreeBorrowedQuantity { get; set; }
     }
 }

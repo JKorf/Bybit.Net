@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Internal
 {
     internal class BybitCopyTradingResult<T>
     {
-        [JsonProperty("retCode")]
+        [JsonPropertyName("retCode")]
         public int ReturnCode { get; set; }
-        [JsonProperty("retMsg")]
+        [JsonPropertyName("retMsg")]
         public string ReturnMessage { get; set; } = string.Empty;       
 
 #pragma warning disable 8618

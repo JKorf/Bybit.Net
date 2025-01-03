@@ -1,23 +1,21 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Sockets
 {
     internal class BybitRequestQueryResponse<T>
     {
-        [JsonProperty("reqId")]
+        [JsonPropertyName("reqId")]
         public string RequestId { get; set; } = string.Empty;
-        [JsonProperty("retCode")]
+        [JsonPropertyName("retCode")]
         public int ReturnCode { get; set; }
-        [JsonProperty("retMsg")]
+        [JsonPropertyName("retMsg")]
         public string ReturnMessage { get; set; } = string.Empty;
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public T? Data { get; set; }
-        [JsonProperty("header")]
+        [JsonPropertyName("header")]
         public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
-        [JsonProperty("connId")]
+        [JsonPropertyName("connId")]
         public string ConnectionId { get; set; } = string.Empty;
     }
 }

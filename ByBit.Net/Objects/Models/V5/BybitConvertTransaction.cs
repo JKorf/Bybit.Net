@@ -1,8 +1,7 @@
 ﻿using Bybit.Net.Enums;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -11,7 +10,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Result
         /// </summary>
-        [JsonProperty("result")]
+        [JsonPropertyName("result")]
         public BybitConvertTransaction Result { get; set; } = null!;
     }
 
@@ -20,7 +19,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// List
         /// </summary>
-        [JsonProperty("list")]
+        [JsonPropertyName("list")]
         public IEnumerable<BybitConvertTransaction> List { get; set; } = Array.Empty<BybitConvertTransaction>();
     }
 
@@ -32,62 +31,62 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Account type
         /// </summary>
-        [JsonProperty("accountType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("accountType"), JsonConverter(typeof(EnumConverter))]
         public ConvertAccountType AccountType { get; set; }
         /// <summary>
         /// Exchange transaction id
         /// </summary>
-        [JsonProperty("exchangeTxId")]
+        [JsonPropertyName("exchangeTxId")]
         public string ExchangeTransactionId { get; set; } = string.Empty;
         /// <summary>
         /// User id
         /// </summary>
-        [JsonProperty("userId")]
+        [JsonPropertyName("userId")]
         public string UserId { get; set; } = string.Empty;
         /// <summary>
         /// From asset
         /// </summary>
-        [JsonProperty("fromCoin")]
+        [JsonPropertyName("fromCoin")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
         /// From asset type
         /// </summary>
-        [JsonProperty("fromCoinType")]
+        [JsonPropertyName("fromCoinType")]
         public string FromAssetType { get; set; } = string.Empty;
         /// <summary>
         /// From quantity
         /// </summary>
-        [JsonProperty("fromAmount")]
+        [JsonPropertyName("fromAmount")]
         public decimal FromQuantity { get; set; }
         /// <summary>
         /// To asset
         /// </summary>
-        [JsonProperty("toCoin")]
+        [JsonPropertyName("toCoin")]
         public string ToAsset { get; set; } = string.Empty;
         /// <summary>
         /// To asset type
         /// </summary>
-        [JsonProperty("toCoinType")]
+        [JsonPropertyName("toCoinType")]
         public string ToAssetType { get; set; } = string.Empty;
         /// <summary>
         /// To quantity
         /// </summary>
-        [JsonProperty("toAmount")]
+        [JsonPropertyName("toAmount")]
         public decimal ToQuantity { get; set; }
         /// <summary>
         /// Exchange status
         /// </summary>
-        [JsonProperty("exchangeStatus"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("exchangeStatus"), JsonConverter(typeof(EnumConverter))]
         public ConvertTransactionStatus? ExchangeStatus { get; set; }
         /// <summary>
         /// Convert rate
         /// </summary>
-        [JsonProperty("convertRate")]
+        [JsonPropertyName("convertRate")]
         public decimal ConvertRate { get; set; }
         /// <summary>
         /// Creation time
         /// </summary>
-        [JsonProperty("createdAt"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("createdAt"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
     }
 }

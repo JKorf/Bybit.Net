@@ -4,18 +4,19 @@ using CryptoExchange.Net;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Bybit.Net.Clients.CopyTradingApi;
 using System.Globalization;
 using Bybit.Net.Clients.V5;
 using System.Text;
-using Newtonsoft.Json;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Interfaces;
 
 namespace Bybit.Net
 {
     internal class BybitAuthenticationProvider : AuthenticationProvider
     {
+        private static readonly IMessageSerializer _messageSerializer = new SystemTextJsonMessageSerializer();
+
         public BybitAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }
@@ -47,9 +48,9 @@ namespace Bybit.Net
                 parameters = bodyParameters;
             }
             var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
-            if (apiClient is BybitRestClientCopyTradingApi || apiClient is BybitRestClientApi)
+            if (apiClient is BybitRestClientApi)
             {
-                var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : requestBodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : JsonConvert.SerializeObject(parameters);
+                var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : requestBodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : _messageSerializer.Serialize(parameters);
                 var key = _credentials.Key!;
                 var recvWindow = ((BybitRestOptions)apiClient.ClientOptions).ReceiveWindow.TotalMilliseconds;
                 var payload = timestamp + key + recvWindow + signPayload;

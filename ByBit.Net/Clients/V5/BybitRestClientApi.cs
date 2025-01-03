@@ -74,6 +74,9 @@ namespace Bybit.Net.Clients.V5
         }
         #endregion
 
+        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor();
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
@@ -122,49 +125,66 @@ namespace Bybit.Net.Clients.V5
             return result.AsDataless();
         }
 
-        internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRequestFullResponseAsync<T,U>(
-             Uri uri,
-             HttpMethod method,
-             CancellationToken cancellationToken,
-             Dictionary<string, object>? parameters = null,
-             bool signed = false)
+        internal async Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         {
-            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
-        }
-
-        internal async Task<WebCallResult<T>> SendRequestAsync<T>(
-             Uri uri,
-             HttpMethod method,
-             CancellationToken cancellationToken,
-             Dictionary<string, object>? parameters = null,
-             bool signed = false)
-        {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
+            var result = await base.SendAsync<BybitResult<T>>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
             if (result.Data.ReturnCode != 0)
                 return result.AsError<T>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
-            return result.As(result.Data.Result);
+            return result.As<T>(result.Data.Result);
         }
 
-        internal async Task<WebCallResult> SendRequestAsync(
-             Uri uri,
-             HttpMethod method,
-             CancellationToken cancellationToken,
-             Dictionary<string, object>? parameters = null,
-             bool signed = false)
+        internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRawAsync<T, U>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         {
-            var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
-            if (!result)
-                return result.AsDataless();
-
-            if (result.Data.ReturnCode != 0)
-                return result.AsDatalessError(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
-
-            return result.AsDataless();
+            return await base.SendAsync<BybitExtResult<T, U>>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
         }
+
+        //internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRequestFullResponseAsync<T,U>(
+        //     Uri uri,
+        //     HttpMethod method,
+        //     CancellationToken cancellationToken,
+        //     Dictionary<string, object>? parameters = null,
+        //     bool signed = false)
+        //{
+        //    return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
+        //}
+
+        //internal async Task<WebCallResult<T>> SendRequestAsync<T>(
+        //     Uri uri,
+        //     HttpMethod method,
+        //     CancellationToken cancellationToken,
+        //     Dictionary<string, object>? parameters = null,
+        //     bool signed = false)
+        //{
+        //    var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
+        //    if (!result)
+        //        return result.As<T>(default);
+
+        //    if (result.Data.ReturnCode != 0)
+        //        return result.AsError<T>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+
+        //    return result.As(result.Data.Result);
+        //}
+
+        //internal async Task<WebCallResult> SendRequestAsync(
+        //     Uri uri,
+        //     HttpMethod method,
+        //     CancellationToken cancellationToken,
+        //     Dictionary<string, object>? parameters = null,
+        //     bool signed = false)
+        //{
+        //    var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
+        //    if (!result)
+        //        return result.AsDataless();
+
+        //    if (result.Data.ReturnCode != 0)
+        //        return result.AsDatalessError(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+
+        //    return result.AsDataless();
+        //}
 
         /// <inheritdoc />
         protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)

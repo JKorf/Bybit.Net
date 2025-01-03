@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -10,10 +10,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// The asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
 
-        [JsonProperty("collateralSwitch")]
+        [JsonPropertyName("collateralSwitch")]
         private string _useForCollateral => UseForCollateral ? "ON" : "OFF";
 
         /// <summary>

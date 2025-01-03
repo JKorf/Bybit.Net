@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -10,12 +10,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Result code
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public int Code { get; set; }
         /// <summary>
         /// Result message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
     }
     
@@ -28,6 +28,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Response data
         /// </summary>
+        [JsonPropertyName("data")]
         public T? Data { get; set; }
     }
 }

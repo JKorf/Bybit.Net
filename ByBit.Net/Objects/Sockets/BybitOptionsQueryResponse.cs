@@ -1,30 +1,30 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets
 {
     internal class BybitOptionsQueryResponse
     {
-        [JsonProperty("success")]
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
-        [JsonProperty("ret_msg")]
+        [JsonPropertyName("ret_msg")]
         public string Message { get; set; } = string.Empty;
-        [JsonProperty("conn_id")]
+        [JsonPropertyName("conn_id")]
         public string ConnectionId { get; set; } = string.Empty;
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
-        [JsonProperty("req_id")]
+        [JsonPropertyName("req_id")]
         public string RequestId { get; set; } = string.Empty;
 
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public BybitOptionsQueryData Data { get; set; } = null!;
     }
 
     internal class BybitOptionsQueryData
     {
-        [JsonProperty("failTopics")]
+        [JsonPropertyName("failTopics")]
         public List<string> FailedTopics { get; set; } = new List<string>();
-        [JsonProperty("successTopics")]
+        [JsonPropertyName("successTopics")]
         public List<string> SuccessTopics { get; set; } = new List<string>();
     }
 }

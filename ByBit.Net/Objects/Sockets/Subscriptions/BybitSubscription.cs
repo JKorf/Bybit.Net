@@ -6,7 +6,6 @@ using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Bybit.Net.Objects.Sockets.Subscriptions
 {

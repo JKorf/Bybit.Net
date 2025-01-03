@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -10,22 +10,22 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Mark price
         /// </summary>
-        [JsonProperty("mP")]
+        [JsonPropertyName("mP")]
         public decimal MarkPrice { get; set; }
         /// <summary>
         /// Index price
         /// </summary>
-        [JsonProperty("iP")]
+        [JsonPropertyName("iP")]
         public decimal IndexPrice { get; set; }
         /// <summary>
         /// Mark iv
         /// </summary>
-        [JsonProperty("mIv")]
+        [JsonPropertyName("mIv")]
         public decimal MarkIv { get; set; }
         /// <summary>
         /// Index iv
         /// </summary>
-        [JsonProperty("iv")]
+        [JsonPropertyName("iv")]
         public decimal IndexIv { get; set; }
     }
 }

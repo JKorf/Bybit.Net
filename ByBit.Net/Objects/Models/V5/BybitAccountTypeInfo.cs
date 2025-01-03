@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -6,6 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
 {
     internal record BybitAccountTypeInfoWrapper
     {
+        [JsonPropertyName("accounts")]
         public IEnumerable<BybitAccountTypeInfo> Accounts { get; set; } = Array.Empty<BybitAccountTypeInfo>();
     }
 
@@ -17,12 +18,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// User id
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonPropertyName("uid")]
         public string UserId { get; set; } = string.Empty;
         /// <summary>
         /// Account types
         /// </summary>
-        [JsonProperty("accountType")]
+        [JsonPropertyName("accountType")]
         public IEnumerable<string> AccountTypes { get; set; } = Array.Empty<string>();
     }
 }

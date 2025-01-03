@@ -6,13 +6,13 @@ using CryptoExchange.Net.Objects;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
 
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc />
     internal class BybitRestClientApiSubAccounts : IBybitRestClientApiSubAccounts
     {
+        private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
         private BybitRestClientApi _baseClient;
 
         internal BybitRestClientApiSubAccounts(BybitRestClientApi baseClient)
@@ -32,7 +32,7 @@ namespace Bybit.Net.Clients.V5
             string? note = null,
             CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "username", username },
                 { "memberType", EnumConverter.GetString(type) },
@@ -42,7 +42,9 @@ namespace Bybit.Net.Clients.V5
                 parameters.AddOptionalParameter("switch", enableQuickLogin.Value ? 1 : 0);
             parameters.AddOptionalParameter("isUta", isUta);
             parameters.AddOptionalParameter("note", note);
-            return await _baseClient.SendRequestAsync<BybitSubAccount>(_baseClient.GetUrl("v5/user/create-sub-member"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/create-sub-member", true);
+            return await _baseClient.SendAsync<BybitSubAccount>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -65,7 +67,7 @@ namespace Bybit.Net.Clients.V5
             string? note = null,
             CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "subuid", subAccountId },
                 { "readOnly", readOnly ? 1 : 0 },
@@ -83,7 +85,9 @@ namespace Bybit.Net.Clients.V5
             AddPermission(permissions, permissionExchangeHistory, "Exchange", "ExchangeHistory");
             AddPermission(permissions, permissionCopyTrading, "CopyTrading", "CopyTrading");
             parameters.Add("permissions", permissions);
-            return await _baseClient.SendRequestAsync<BybitApiKeyInfo>(_baseClient.GetUrl("v5/user/create-sub-api"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/create-sub-api", true);
+            return await _baseClient.SendAsync<BybitApiKeyInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
         private void AddPermission(Dictionary<string, List<string>> dict, bool? hasPermission, string key, string value) 
@@ -102,8 +106,8 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<List<BybitSubAccount>>> GetSubAccountsAsync(CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
-            var result = await _baseClient.SendRequestAsync<BybitSubAccountWrapper>(_baseClient.GetUrl("v5/user/query-sub-members"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/query-sub-members", true);
+            var result = await _baseClient.SendAsync<BybitSubAccountWrapper>(request, null, ct).ConfigureAwait(false);
             if (!result)
                 return result.As<List<BybitSubAccount>>(default);
 
@@ -117,12 +121,13 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult> FreezeSubAccountAsync(string subAccountId, bool freeze, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "subuid", subAccountId },
                 { "frozen", freeze ? 1 : 0 },
             };
-            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/user/frozen-sub-member"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/frozen-sub-member", true);
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -144,7 +149,7 @@ namespace Bybit.Net.Clients.V5
             bool? permissionExchangeHistory = null,
             CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("apikey", apiKey);
             if (readOnly.HasValue)
                 parameters.AddOptionalParameter("readOnly", readOnly.Value ? 1 : 0);
@@ -160,7 +165,9 @@ namespace Bybit.Net.Clients.V5
             EditPermission(permissions, permissionCopyTrading, "CopyTrading", "CopyTrading");
             EditPermission(permissions, permissionExchangeHistory, "Exchange", "ExchangeHistory");
             parameters.Add("permissions", permissions);
-            return await _baseClient.SendRequestAsync<BybitApiKeyInfo>(_baseClient.GetUrl("v5/user/update-sub-api"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/update-sub-api", true);
+            return await _baseClient.SendAsync<BybitApiKeyInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
         private void EditPermission(Dictionary<string, List<string>> dict, bool? hasPermission, string key, string value)
@@ -181,9 +188,11 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult> DeleteSubAccountApiKeyAsync(string? apiKey = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("apikey", apiKey);
-            return await _baseClient.SendRequestAsync(_baseClient.GetUrl("v5/user/delete-sub-api"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/delete-sub-api", true);
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

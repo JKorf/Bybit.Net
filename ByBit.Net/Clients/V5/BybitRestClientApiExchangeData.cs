@@ -3,7 +3,6 @@ using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
@@ -17,6 +16,7 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc />
     internal class BybitRestClientApiExchangeData : IBybitRestClientApiExchangeData
     {
+        private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
         private BybitRestClientApi _baseClient;
 
         internal BybitRestClientApiExchangeData(BybitRestClientApi baseClient)
@@ -29,7 +29,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitAnnouncement>>> GetAnnouncementsAsync(string locale, string? type = null, string? tag = null, int? page = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "locale", locale },
             };
@@ -38,7 +38,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("page", page);
             parameters.AddOptionalParameter("limit", limit);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitAnnouncement>>(_baseClient.GetUrl("v5/announcements/index"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/announcements/index", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitAnnouncement>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -48,7 +49,8 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendRequestAsync<BybitTime>(_baseClient.GetUrl("v5/market/time"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/time", false);
+            return await _baseClient.SendAsync<BybitTime>(request, null, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -58,7 +60,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitKline>>> GetKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
                 { "symbol", symbol },
@@ -68,7 +70,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("end", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitKline>>(_baseClient.GetUrl("v5/market/kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/kline", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitKline>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -78,7 +81,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetMarkPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
                 { "symbol", symbol },
@@ -88,7 +91,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("end", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitBasicKline>>(_baseClient.GetUrl("v5/market/mark-price-kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/mark-price-kline", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitBasicKline>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -98,7 +102,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetIndexPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
                 { "symbol", symbol },
@@ -108,7 +112,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("end", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitBasicKline>>(_baseClient.GetUrl("v5/market/index-price-kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/index-price-kline", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitBasicKline>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -118,7 +123,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetPremiumIndexPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
                 { "symbol", symbol },
@@ -128,7 +133,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("end", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitBasicKline>>(_baseClient.GetUrl("v5/market/premium-index-price-kline"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/premium-index-price-kline", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitBasicKline>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -138,13 +144,14 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? symbol = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(Category.Spot) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitSpotSymbol>>(_baseClient.GetUrl("v5/market/instruments-info"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitSpotSymbol>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -154,7 +161,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitOptionSymbol>>> GetOptionSymbolsAsync(string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(Category.Option) }
             };
@@ -163,7 +170,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitOptionSymbol>>(_baseClient.GetUrl("v5/market/instruments-info"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitOptionSymbol>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -193,7 +201,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitLinearInverseSymbol>>(_baseClient.GetUrl("v5/market/instruments-info"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitLinearInverseSymbol>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -203,14 +212,15 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitOrderbook>> GetOrderbookAsync(Category category, string symbol, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
                 { "symbol", symbol }
             };
             parameters.AddOptionalParameter("limit", limit);
 
-            return await _baseClient.SendRequestAsync<BybitOrderbook>(_baseClient.GetUrl("v5/market/orderbook"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/orderbook", false);
+            return await _baseClient.SendAsync<BybitOrderbook>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -220,13 +230,14 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitSpotTicker>>> GetSpotTickersAsync(string? symbol = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(Category.Spot) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitSpotTicker>>(_baseClient.GetUrl("v5/market/tickers"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitSpotTicker>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -239,7 +250,7 @@ namespace Bybit.Net.Clients.V5
             if (symbol == null && baseAsset == null)
                 throw new ArgumentException("Either symbol or baseAsset should be provided");
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(Category.Option) }
             };
@@ -247,7 +258,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("expDate", expirationDate);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitOptionTicker>>(_baseClient.GetUrl("v5/market/tickers"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitOptionTicker>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -260,7 +272,7 @@ namespace Bybit.Net.Clients.V5
             if (category != Category.Linear && category != Category.Inverse)
                 throw new ArgumentException("Invalid category; should be Linear or Inverse");
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) }
             };
@@ -268,7 +280,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("expDate", expirationDate);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitLinearInverseTicker>>(_baseClient.GetUrl("v5/market/tickers"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitLinearInverseTicker>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -281,7 +294,7 @@ namespace Bybit.Net.Clients.V5
             if (category != Category.Linear && category != Category.Inverse)
                 throw new ArgumentException("Invalid category; should be Linear or Inverse");
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
                 { "symbol", symbol }
@@ -290,7 +303,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitFundingHistory>>(_baseClient.GetUrl("v5/market/funding/history"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/funding/history", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitFundingHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -300,7 +314,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitTradeHistory>>> GetTradeHistoryAsync(Category category, string symbol, string? baseAsset = null, OptionType? optionType = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
                 { "symbol", symbol }
@@ -309,7 +323,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("optionType", EnumConverter.GetString(optionType));
             parameters.AddOptionalParameter("limit", limit);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitTradeHistory>>(_baseClient.GetUrl("v5/market/recent-trade"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/recent-trade", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitTradeHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -322,7 +337,7 @@ namespace Bybit.Net.Clients.V5
             if (category != Category.Linear && category != Category.Inverse)
                 throw new ArgumentException("Invalid category; should be Linear or Inverse");
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
                 { "symbol", symbol },
@@ -333,7 +348,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitOpenInterest>>(_baseClient.GetUrl("v5/market/open-interest"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/open-interest", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitOpenInterest>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -343,7 +359,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(Category.Option) },
             };
@@ -352,7 +368,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("period", period);
 
-            return await _baseClient.SendRequestAsync<IEnumerable<BybitHistoricalVolatility>>(_baseClient.GetUrl("v5/market/historical-volatility"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/historical-volatility", false);
+            return await _baseClient.SendAsync<IEnumerable<BybitHistoricalVolatility>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -362,10 +379,11 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitInsurance>>> GetInsuranceAsync(string? asset = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("coin", asset);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitInsurance>>(_baseClient.GetUrl("v5/market/insurance"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/insurance", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitInsurance>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -378,14 +396,15 @@ namespace Bybit.Net.Clients.V5
             if (category != Category.Linear && category != Category.Inverse)
                 throw new ArgumentException("Invalid category; should be Linear or Inverse");
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitRiskLimit>>(_baseClient.GetUrl("v5/market/risk-limit"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/risk-limit", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitRiskLimit>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -398,7 +417,7 @@ namespace Bybit.Net.Clients.V5
             if (category != Category.Linear && category != Category.Inverse)
                 throw new ArgumentException("Invalid category; should be Linear or Inverse");
 
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) }
             };
@@ -407,7 +426,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            return await _baseClient.SendRequestAsync<BybitResponse<BybitDeliveryPrice>>(_baseClient.GetUrl("v5/market/delivery-price"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/delivery-price", false);
+            return await _baseClient.SendAsync<BybitResponse<BybitDeliveryPrice>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -417,10 +437,11 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BybitLeverageToken>>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("ltCoin", leverageToken);
 
-            var result = await _baseClient.SendRequestAsync<BybitLeverageTokenWrapper>(_baseClient.GetUrl("v5/spot-lever-token/info"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/info", false);
+            var result = await _baseClient.SendAsync<BybitLeverageTokenWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitLeverageToken>>(default);
 
@@ -434,12 +455,13 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitLeverageTokenMarket>> GetLeverageTokenMarketAsync(string leverageToken, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new ParameterCollection()
             {
                 { "ltCoin", leverageToken }
             };
 
-            return await _baseClient.SendRequestAsync<BybitLeverageTokenMarket>(_baseClient.GetUrl("v5/spot-lever-token/reference"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/reference", false);
+            return await _baseClient.SendAsync<BybitLeverageTokenMarket>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -465,7 +487,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
 
-            var result = await _baseClient.SendRequestAsync<BybitList<BybitLongShortRatio>>(_baseClient.GetUrl("v5/market/account-ratio"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/account-ratio", false);
+            var result = await _baseClient.SendAsync<BybitList<BybitLongShortRatio>>(request, parameters, ct).ConfigureAwait(false);
             if (!result || result.Data == null)
                 return result.As<IEnumerable<BybitLongShortRatio>>(default);
 

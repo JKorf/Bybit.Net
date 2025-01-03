@@ -1,5 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -11,13 +11,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Transfer id
         /// </summary>
-        [JsonProperty("transferId")]
+        [JsonPropertyName("transferId")]
         public string TransferId { get; set; } = string.Empty;
 
         /// <summary>
         /// Status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public TransferStatus Status { get; set; }
     }
 }

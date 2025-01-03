@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -11,7 +10,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Is spot margin mode activated
         /// </summary>
-        [JsonProperty("spotMarginMode"), JsonConverter(typeof(BoolConverter))]
+        [JsonPropertyName("spotMarginMode"), JsonConverter(typeof(BoolConverter))]
         public bool SpotMarginMode { get; set; }
     }
 }

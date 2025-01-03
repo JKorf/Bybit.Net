@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -13,11 +12,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// Seconds timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timeSecond")]
         public DateTime TimeSecond { get; set; }
         /// <summary>
         /// Nano seconds timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timeNano")]
         public DateTime TimeNano { get; set; }
     }
 }

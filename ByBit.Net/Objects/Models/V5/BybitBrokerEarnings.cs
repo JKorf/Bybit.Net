@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -13,17 +12,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Total earnings info
         /// </summary>
-        [JsonProperty("totalEarningCat")]
+        [JsonPropertyName("totalEarningCat")]
         public BybitTotalEarnings TotalEarnings { get; set; } = null!;
         /// <summary>
         /// Earning details
         /// </summary>
-        [JsonProperty("details")]
+        [JsonPropertyName("details")]
         public IEnumerable<BybitEarningDetails> Details { get; set; } = Array.Empty<BybitEarningDetails>();
         /// <summary>
         /// Cursor which can be used for paginiation
         /// </summary>
-        [JsonProperty("nextPageCursor")]
+        [JsonPropertyName("nextPageCursor")]
         public string NextPageCursor { get; set; } = string.Empty;
     }
 
@@ -35,27 +34,27 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Spot earnings
         /// </summary>
-        [JsonProperty("spot")]
+        [JsonPropertyName("spot")]
         public IEnumerable<BybitBrokerEarning> Spot { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
         /// Convert earnings
         /// </summary>
-        [JsonProperty("convert")]
+        [JsonPropertyName("convert")]
         public IEnumerable<BybitBrokerEarning> Convert { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
         /// Derivatives earnings
         /// </summary>
-        [JsonProperty("derivatives")]
+        [JsonPropertyName("derivatives")]
         public IEnumerable<BybitBrokerEarning> Derivatives { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
         /// Options earnings
         /// </summary>
-        [JsonProperty("options")]
+        [JsonPropertyName("options")]
         public IEnumerable<BybitBrokerEarning> Options { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
         /// Total earnings
         /// </summary>
-        [JsonProperty("total")]
+        [JsonPropertyName("total")]
         public IEnumerable<BybitBrokerEarning> Total { get; set; } = Array.Empty<BybitBrokerEarning>();
     }
 
@@ -67,12 +66,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// The earned asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Earned quantity
         /// </summary>
-        [JsonProperty("earning")]
+        [JsonPropertyName("earning")]
         public decimal Earning { get; set; }
     }
 
@@ -84,48 +83,48 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// User id
         /// </summary>
-        [JsonProperty("userId")]
+        [JsonPropertyName("userId")]
         public string UserId { get; set; } = string.Empty;
         /// <summary>
         /// BizType
         /// </summary>
-        [JsonProperty("bizType")]
+        [JsonPropertyName("bizType")]
         public string BizTyp { get; set; } = string.Empty;
         /// <summary>
         /// Symbol
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Earned quantity
         /// </summary>
-        [JsonProperty("earning")]
+        [JsonPropertyName("earning")]
         public decimal Earning { get; set; }
         /// <summary>
         /// Markup earnings
         /// </summary>
-        [JsonProperty("markupEarning")]
+        [JsonPropertyName("markupEarning")]
         public decimal MarkupEarning { get; set; }
         /// <summary>
         /// Base fee earnings
         /// </summary>
-        [JsonProperty("baseFeeEarning")]
+        [JsonPropertyName("baseFeeEarning")]
         public decimal BaseFeeEarning { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
-        [JsonProperty("orderId")]
+        [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("execTime")]
+        [JsonPropertyName("execTime")]
         public DateTime Timestamp { get; set; }
     }
 }

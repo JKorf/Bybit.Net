@@ -1,8 +1,4 @@
-﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-
-namespace Bybit.Net.Objects.Models.V5
+﻿namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
     /// Category

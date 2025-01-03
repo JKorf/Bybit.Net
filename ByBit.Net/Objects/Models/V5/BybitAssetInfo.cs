@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -6,6 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
 {
     internal record BybitAssetInfoWrapper
     {
+        [JsonPropertyName("spot")]
         public BybitAccountAssetInfo Spot { get; set; } = null!;
     }
 
@@ -17,10 +18,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Account status
         /// </summary>
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Assdet info
         /// </summary>
+        [JsonPropertyName("assets")]
         public IEnumerable<BybitAssetInfo> Assets { get; set; } = Array.Empty<BybitAssetInfo>();
     }
 
@@ -32,20 +35,22 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset name
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Frozen amount
         /// </summary>
+        [JsonPropertyName("frozen")]
         public decimal Frozen { get; set; }
         /// <summary>
         /// Free amount
         /// </summary>
+        [JsonPropertyName("free")]
         public decimal Free { get; set; }
         /// <summary>
         /// Amount in withdrawing
         /// </summary>
-        [JsonProperty("withdraw")]
+        [JsonPropertyName("withdraw")]
         public decimal? Withdrawing { get; set; }
     }
 }

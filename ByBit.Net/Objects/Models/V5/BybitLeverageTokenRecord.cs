@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -12,37 +11,37 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Token abbreviation
         /// </summary>
-        [JsonProperty("ltCoin")]
+        [JsonPropertyName("ltCoin")]
         public string Token { get; set; } = string.Empty;
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("ltOrderStatus"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("ltOrderStatus"), JsonConverter(typeof(EnumConverter))]
         public LeverageTokenOrderStatus Status { get; set; }
         /// <summary>
         /// Filled quantity
         /// </summary>
-        [JsonProperty("execQty")]
+        [JsonPropertyName("execQty")]
         public decimal? QuantityFilled { get; set; }
         /// <summary>
         /// Filled quantity
         /// </summary>
-        [JsonProperty("execAmt")]
+        [JsonPropertyName("execAmt")]
         public decimal? ValueFilled { get; set; }
         /// <summary>
         /// Purchase amount
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal? Quantity { get; set; }
         /// <summary>
         /// Serial number
         /// </summary>
-        [JsonProperty("serialNo")]
+        [JsonPropertyName("serialNo")]
         public string? ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset
         /// </summary>
-        [JsonProperty("valueCoin")]
+        [JsonPropertyName("valueCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
     }
 
@@ -54,7 +53,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Purchase id
         /// </summary>
-        [JsonProperty("purchaseId")]
+        [JsonPropertyName("purchaseId")]
         public string PurchaseId { get; set; } = string.Empty;
     }
 
@@ -66,7 +65,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Redeem id
         /// </summary>
-        [JsonProperty("redeemId")]
+        [JsonPropertyName("redeemId")]
         public string RedeemId { get; set; } = string.Empty;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Enums.V5;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -14,61 +13,65 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Network
         /// </summary>
-        [JsonProperty("chain")]
+        [JsonPropertyName("chain")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("txID")]
+        [JsonPropertyName("txID")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("status")]
         public WithdrawalStatus Status { get; set; }
         /// <summary>
         /// To address
         /// </summary>
+        [JsonPropertyName("toAddress")]
         public string ToAddress { get; set; } = string.Empty;
         /// <summary>
         /// Tag
         /// </summary>
+        [JsonPropertyName("tag")]
         public string Tag { get; set; } = string.Empty;
         /// <summary>
         /// Withdrawal fee
         /// </summary>
+        [JsonPropertyName("withdrawFee")]
         public decimal? WithdrawFee { get; set; }
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("createTime")]
+        [JsonPropertyName("createTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("updateTime")]
+        [JsonPropertyName("updateTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Id
         /// </summary>
-        [JsonProperty("withdrawId")]
+        [JsonPropertyName("withdrawId")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
         /// Type
         /// </summary>
-        [JsonProperty("withdrawType")]
+        [JsonPropertyName("withdrawType")]
         [JsonConverter(typeof(EnumConverter))]
         public WithdrawalType Type { get; set; }
     }

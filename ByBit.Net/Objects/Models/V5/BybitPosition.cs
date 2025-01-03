@@ -1,7 +1,6 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Enums.V5;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -14,44 +13,48 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Category
         /// </summary>
-        [JsonProperty("category")]
+        [JsonPropertyName("category")]
         [JsonConverter(typeof(EnumConverter))]
         public Category Category { get; set; }
         /// <summary>
         /// Position mode
         /// </summary>
-        [JsonProperty("positionIdx")]
+        [JsonPropertyName("positionIdx")]
         [JsonConverter(typeof(EnumConverter))]
         public PositionIdx PositionIdx { get; set; }
         /// <summary>
         /// Risk id
         /// </summary>
+        [JsonPropertyName("riskId")]
         public int RiskId { get; set; }
         /// <summary>
         /// Risk limit value
         /// </summary>
+        [JsonPropertyName("riskLimitValue")]
         public decimal? RiskLimitValue { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Position side
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side")]
         public PositionSide? Side { get; set; }
         /// <summary>
         /// Position size
         /// </summary>
-        [JsonProperty("size")]
+        [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Average entry price
         /// </summary>
-        [JsonProperty("avgPrice")]
+        [JsonPropertyName("avgPrice")]
         public decimal? AveragePrice { get; set; }
 
-        [JsonProperty("entryPrice")]
+        [JsonPropertyName("entryPrice")]
         private decimal? EntryPrice
         {
             get => AveragePrice;
@@ -61,152 +64,160 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Position value
         /// </summary>
-        [JsonProperty("positionValue")]
+        [JsonPropertyName("positionValue")]
         public decimal? PositionValue { get; set; }
         /// <summary>
         /// Trade mode. Only valid for Classic and UTA (inverse)
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tradeMode")]
         public TradeMode TradeMode { get; set; }
         /// <summary>
         /// Position status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("positionStatus")]
         public PositionStatus? PositionStatus { get; set; }
         /// <summary>
         /// Leverage
         /// </summary>
+        [JsonPropertyName("leverage")]
         public decimal? Leverage { get; set; }
         /// <summary>
         /// Mark price
         /// </summary>
+        [JsonPropertyName("markPrice")]
         public decimal? MarkPrice { get; set; }
         /// <summary>
         /// Liquidation price
         /// </summary>
-        [JsonProperty("liqPrice")]
+        [JsonPropertyName("liqPrice")]
         public decimal? LiquidationPrice { get; set; }
         /// <summary>
         /// Bankruptcy price
         /// </summary>
+        [JsonPropertyName("bustPrice")]
         public decimal? BustPrice { get; set; }
         /// <summary>
         /// Initial margin
         /// </summary>
-        [JsonProperty("positionIM")]
+        [JsonPropertyName("positionIM")]
         public decimal? InitialMargin { get; set; }
         /// <summary>
         /// Maintenance margin
         /// </summary>
-        [JsonProperty("positionMM")]
+        [JsonPropertyName("positionMM")]
         public decimal? MaintenanceMargin { get; set; }
         /// <summary>
         /// Take profit / stop loss price
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
-        [JsonProperty("tpslMode")]
+        [JsonPropertyName("tpslMode")]
         public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
         /// <summary>
         /// Take profit price
         /// </summary>
+        [JsonPropertyName("takeProfit")]
         public decimal? TakeProfit { get; set; }
         /// <summary>
         /// Stop loss price
         /// </summary>
+        [JsonPropertyName("stopLoss")]
         public decimal? StopLoss { get; set; }
         /// <summary>
         /// Trailing stop
         /// </summary>
+        [JsonPropertyName("trailingStop")]
         public decimal? TrailingStop { get; set; }
         /// <summary>
         /// Unrealized profit and lsos
         /// </summary>
-        [JsonProperty("unrealisedPnl")]
+        [JsonPropertyName("unrealisedPnl")]
         public decimal? UnrealizedPnl { get; set; }
         /// <summary>
         /// Realized profit and loss
         /// </summary>
-        [JsonProperty("cumRealisedPnl")]
+        [JsonPropertyName("cumRealisedPnl")]
         public decimal? RealizedPnl { get; set; }
         /// <summary>
         /// The realised PnL for the current holding position
         /// </summary>
-        [JsonProperty("curRealisedPnl")]
+        [JsonPropertyName("curRealisedPnl")]
         public decimal? CurrentRealizedPnl { get; set; }
         /// <summary>
         /// Auto deleverage rank indicator
         /// </summary>
-        [JsonProperty("adlRankIndicator")]
+        [JsonPropertyName("adlRankIndicator")]
         public int AutoDeleverageRankIndicator { get; set; }
         /// <summary>
         /// Created timestamp
         /// </summary>
-        [JsonProperty("createdTime")]
+        [JsonPropertyName("createdTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? CreateTime { get; set; }
         /// <summary>
         /// Updated timestamp
         /// </summary>
-        [JsonProperty("updatedTime")]
+        [JsonPropertyName("updatedTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
         /// Whether to add margin automatically
         /// </summary>
-        [JsonProperty("autoAddMargin")]
+        [JsonPropertyName("autoAddMargin")]
         public bool AutoAddMargin { get; set; }
         /// <summary>
         /// Position margin
         /// </summary>
-        [JsonProperty("positionBalance")]
+        [JsonPropertyName("positionBalance")]
         public decimal? PositionBalance { get; set; }
         /// <summary>
         /// Is reduce only position
         /// </summary>
-        [JsonProperty("isReduceOnly")]
+        [JsonPropertyName("isReduceOnly")]
         public bool? IsReduceOnly { get; set; }
         /// <summary>
         /// When IsReduceOnly = true: the timestamp when the MMR will be forcibly adjusted by the system. When IsReduceOnly = false: the timestamp when the MMR had been adjusted by system
         /// </summary>
-        [JsonProperty("mmrSysUpdatedTime")]
+        [JsonPropertyName("mmrSysUpdatedTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? MaintenanceMarginUpdateTime { get; set; }
         /// <summary>
         /// When IsReduceOnly = true: the timestamp when the leverage will be forcibly adjusted by the system. When IsReduceOnly = false: the timestamp when the leverage had been adjusted by system
         /// </summary>
-        [JsonProperty("leverageSysUpdatedTime")]
+        [JsonPropertyName("leverageSysUpdatedTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? LeverageUpdateTime { get; set; }
         /// <summary>
         /// Cross sequence, used to associate each fill and each position update
         /// </summary>
-        [JsonProperty("seq")]
+        [JsonPropertyName("seq")]
         public long Sequence { get; set; }
 
         /// <summary>
         /// USDC contract session average price, it is the same figure as avg entry price shown in the web UI
         /// </summary>
-        [JsonProperty("sessionAvgPrice")]
+        [JsonPropertyName("sessionAvgPrice")]
         public decimal? SessionAveragePrice { get; set; }
         /// <summary>
         /// Delta, unique field for option
         /// </summary>
-        [JsonProperty("delta")]
+        [JsonPropertyName("delta")]
         public decimal? Delta { get; set; }
         /// <summary>
         /// Gamma, unique field for option
         /// </summary>
-        [JsonProperty("gamma")]
+        [JsonPropertyName("gamma")]
         public decimal? Gamma { get; set; }
         /// <summary>
         /// Vega, unique field for option
         /// </summary>
-        [JsonProperty("vega")]
+        [JsonPropertyName("vega")]
         public decimal? Vega { get; set; }
         /// <summary>
         /// Theta, unique field for option
         /// </summary>
-        [JsonProperty("theta")]
+        [JsonPropertyName("theta")]
         public decimal? Theta { get; set; }
     }
 }

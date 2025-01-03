@@ -1,7 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using Bybit.Net.Objects.Models;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Internal
 {
@@ -18,11 +16,11 @@ namespace Bybit.Net.Objects.Internal
         public T Data { get; set; }
 #pragma warning restore
 
-        [JsonProperty("list")]
+        [JsonPropertyName("list")]
         internal T ListData { set => Data = value; get => Data; }
-        [JsonProperty("dataList")]
+        [JsonPropertyName("dataList")]
         internal T ListData1 { set => Data = value; get => Data; }
-        [JsonProperty("rows")]
+        [JsonPropertyName("rows")]
         internal T RowData { set => Data = value; get => Data; }
     }
 
@@ -37,7 +35,7 @@ namespace Bybit.Net.Objects.Internal
         /// </summary>
         public string? Cursor { get; set; }
 
-        [JsonProperty("nextPageCursor")]
+        [JsonPropertyName("nextPageCursor")]
         internal string? NextPageCursor { set => Cursor = value; get => Cursor; }
 
         /// <summary>
@@ -60,7 +58,7 @@ namespace Bybit.Net.Objects.Internal
         /// <summary>
         /// Type of derivatives product
         /// </summary>
-        [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("category"), JsonConverter(typeof(EnumConverter))]
         public Category Category { get; set; } = Category.Undefined;
     }
 }

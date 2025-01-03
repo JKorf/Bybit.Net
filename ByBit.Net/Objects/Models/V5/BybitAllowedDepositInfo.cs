@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +12,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset list
         /// </summary>
-        [JsonProperty("configList")]
+        [JsonPropertyName("configList")]
         public IEnumerable<BybitAllowedDepositInfo> Assets { get; set; } = Array.Empty<BybitAllowedDepositInfo>();
     }
 
@@ -24,30 +24,32 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Network
         /// </summary>
-        [JsonProperty("chain")]
+        [JsonPropertyName("chain")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Display name
         /// </summary>
-        [JsonProperty("coinShowName")]
+        [JsonPropertyName("coinShowName")]
         public string AssetShowName { get; set; } = string.Empty;
         /// <summary>
         /// Network type
         /// </summary>
-        [JsonProperty("chainType")]
+        [JsonPropertyName("chainType")]
         public string NetworkType { get; set; } = string.Empty;
         /// <summary>
         /// Deposit confirmation number
         /// </summary>
+        [JsonPropertyName("blockConfirmNumber")]
         public int BlockConfirmNumber { get; set; }
         /// <summary>
         /// Min deposit amount
         /// </summary>
+        [JsonPropertyName("minDepositAmount")]
         public decimal MinDepositAmount { get; set; }
     }
 }

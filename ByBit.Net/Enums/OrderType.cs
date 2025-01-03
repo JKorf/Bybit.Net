@@ -10,16 +10,17 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Limit order. An order for a set (or better) price
         /// </summary>
-        [Map("Limit")]
+        [Map("Limit", "LIMIT", "LIMIT_OF_QUOTE", "LIMIT_OF_BASE")]
         Limit,
         /// <summary>
         /// Market order. An order for the best price available upon placing
         /// </summary>
-        [Map("Market")]
+        [Map("Market", "MARKET", "MARKET_OF_QUOTE", "MARKET_OF_BASE")]
         Market,
         /// <summary>
         /// Limit maker order, only available for SPOT
         /// </summary>
+        [Map("LIMIT_MAKER")]
         LimitMaker
     }
 }

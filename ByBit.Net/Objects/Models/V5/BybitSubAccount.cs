@@ -1,13 +1,12 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
     internal record BybitSubAccountWrapper
     {
-        [JsonProperty("subMembers")]
+        [JsonPropertyName("subMembers")]
         public List<BybitSubAccount> SubMembers { get; set; } = new List<BybitSubAccount>();
     }
 
@@ -19,32 +18,32 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// User id
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonPropertyName("uid")]
         public string UserId { get; set; } = string.Empty;
         /// <summary>
         /// Username
         /// </summary>
-        [JsonProperty("username")]
+        [JsonPropertyName("username")]
         public string Username { get; set; } = string.Empty;
         /// <summary>
         /// Account type
         /// </summary>
-        [JsonProperty("memberType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("memberType"), JsonConverter(typeof(EnumConverter))]
         public SubAccountType AccountType { get; set; }
         /// <summary>
         /// Account status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("status"), JsonConverter(typeof(EnumConverter))]
         public SubAccountStatus Status { get; set; }
         /// <summary>
         /// Account mode
         /// </summary>
-        [JsonProperty("accountMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("accountMode"), JsonConverter(typeof(EnumConverter))]
         public AccountMode? AccountMode { get; set; }
         /// <summary>
         /// Remark
         /// </summary>
-        [JsonProperty("remark")]
+        [JsonPropertyName("remark")]
         public string? Remark { get; set; }
     }
 }

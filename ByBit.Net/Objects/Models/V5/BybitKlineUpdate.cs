@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -13,56 +12,61 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Kline start time
         /// </summary>
-        [JsonProperty("start")]
+        [JsonPropertyName("start")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime StartTime { get; set; }
         /// <summary>
         /// Kline end time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("end")]
+        [JsonPropertyName("end")]
         public DateTime EndTime { get; set; }
         /// <summary>
         /// Interval
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("interval")]
         public KlineInterval Interval { get; set; }
         /// <summary>
         /// Open price
         /// </summary>
-        [JsonProperty("open")]
+        [JsonPropertyName("open")]
         public decimal OpenPrice { get; set; }
         /// <summary>
         /// Close price
         /// </summary>
-        [JsonProperty("close")]
+        [JsonPropertyName("close")]
         public decimal ClosePrice { get; set; }
         /// <summary>
         /// High price
         /// </summary>
-        [JsonProperty("high")]
+        [JsonPropertyName("high")]
         public decimal HighPrice { get; set; }
         /// <summary>
         /// Low price
         /// </summary>
-        [JsonProperty("low")]
+        [JsonPropertyName("low")]
         public decimal LowPrice { get; set; }
         /// <summary>
         /// Volume
         /// </summary>
+        [JsonPropertyName("volume")]
         public decimal Volume { get; set; }
         /// <summary>
         /// Turnover
         /// </summary>
+        [JsonPropertyName("turnover")]
         public decimal Turnover { get; set; }
         /// <summary>
         /// Is kline finished or still updating
         /// </summary>
+        [JsonPropertyName("confirm")]
         public bool Confirm { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 }

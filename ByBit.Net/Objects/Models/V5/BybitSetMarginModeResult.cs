@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +12,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Failure reasons. If empty it was successful
         /// </summary>
+        [JsonPropertyName("reasons")]
         public IEnumerable<BybitReason> Reasons { get; set; } = Array.Empty<BybitReason>();
     }
 
@@ -23,11 +24,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Reason code
         /// </summary>
+        [JsonPropertyName("reasonCode")]
         public string ReasonCode { get; set; } = string.Empty;
         /// <summary>
         /// Reason message
         /// </summary>
-        [JsonProperty("reasonMsg")]
+        [JsonPropertyName("reasonMsg")]
         public string ReasonMessage { get; set; } = string.Empty;
     }
 }

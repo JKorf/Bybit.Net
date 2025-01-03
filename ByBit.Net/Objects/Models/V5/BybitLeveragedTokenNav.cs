@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -13,35 +12,42 @@ namespace Bybit.Net.Objects.Models.V5
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Net asset value
         /// </summary>
+        [JsonPropertyName("nav")]
         public decimal Nav { get; set; }
         /// <summary>
         /// Basket position
         /// </summary>
+        [JsonPropertyName("baskedPosition")]
         public decimal BasketPosition { get; set; }
         /// <summary>
         /// Leverage
         /// </summary>
+        [JsonPropertyName("leverage")]
         public decimal Leverage { get; set; }
         /// <summary>
         /// Basket loan
         /// </summary>
+        [JsonPropertyName("basketLoan")]
         public decimal BasketLoan { get; set; }
         /// <summary>
         /// Circulation
         /// </summary>
+        [JsonPropertyName("circulation")]
         public decimal Circulation { get; set; }
         /// <summary>
         /// Basket
         /// </summary>
+        [JsonPropertyName("basket")]
         public decimal Basket { get; set; }
     }
 }

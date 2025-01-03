@@ -1,10 +1,4 @@
-﻿using Bybit.Net.Clients.CopyTradingApi;
-using Bybit.Net.Interfaces.Clients;
-using Bybit.Net.Interfaces.Clients.CopyTradingApi;
-using Bybit.Net.Clients.SpotApi.v3;
-using Bybit.Net.Interfaces.Clients.SpotApi.v3;
-using Bybit.Net.Interfaces.Clients.DerivativesApi;
-using Bybit.Net.Clients.DerivativesApi;
+﻿using Bybit.Net.Interfaces.Clients;
 using CryptoExchange.Net.Authentication;
 using System.Net.Http;
 using Bybit.Net.Objects.Options;
@@ -19,12 +13,6 @@ namespace Bybit.Net.Clients
     /// <inheritdoc cref="IBybitRestClient" />
     public class BybitRestClient : BaseRestClient, IBybitRestClient
     {
-        /// <inheritdoc />
-        public IBybitRestClientSpotApiV3 SpotApiV3 { get; }
-        /// <inheritdoc />
-        public IBybitRestClientCopyTradingApi CopyTradingApi { get; }
-        /// <inheritdoc />
-        public IBybitRestClientDerivativesApi DerivativesApi { get; }
         /// <inheritdoc />
         public Interfaces.Clients.V5.IBybitRestClientApi V5Api { get; }
 
@@ -49,9 +37,6 @@ namespace Bybit.Net.Clients
         {
             Initialize(options.Value);
 
-            SpotApiV3 = AddApiClient(new BybitRestClientSpotApiV3(_logger, httpClient, options.Value));
-            CopyTradingApi = AddApiClient(new BybitRestClientCopyTradingApi(_logger, httpClient, options.Value));
-            DerivativesApi = AddApiClient(new BybitRestClientDerivativesApi(_logger, httpClient, options.Value));
             V5Api = AddApiClient(new V5.BybitRestClientApi(_logger, httpClient, options.Value));
         }
 
@@ -60,9 +45,6 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public void SetOptions(UpdateOptions options)
         {
-            SpotApiV3.SetOptions(options);
-            CopyTradingApi.SetOptions(options);
-            DerivativesApi.SetOptions(options);
             V5Api.SetOptions(options);
         }
 
@@ -78,9 +60,6 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public void SetApiCredentials(ApiCredentials credentials)
         {
-            SpotApiV3.SetApiCredentials(credentials);
-            CopyTradingApi.SetApiCredentials(credentials);
-            DerivativesApi.SetApiCredentials(credentials);
             V5Api.SetApiCredentials(credentials);
         }
     }

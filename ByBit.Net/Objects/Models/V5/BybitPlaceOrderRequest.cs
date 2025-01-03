@@ -1,8 +1,6 @@
-﻿using Bybit.Net.Converters;
-using Bybit.Net.Enums;
+﻿using Bybit.Net.Enums;
 using Bybit.Net.Enums.V5;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -14,148 +12,152 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// The symbol
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Type of order
         /// </summary>
-        [JsonProperty("orderType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderType"), JsonConverter(typeof(EnumConverter))]
         public NewOrderType OrderType { get; set; }
         /// <summary>
         /// Side of the order
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side"), JsonConverter(typeof(EnumConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Order quantity
         /// </summary>
-        [JsonProperty("qty"), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("qty"), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Price if order type is not market
         /// </summary>
-        [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("price"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? Price { get; set; }
         /// <summary>
         /// Time in force, if not passed GoodTillCanceled is used by default
         /// </summary>
-        [JsonProperty("timeInForce", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("timeInForce"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public TimeInForce? TimeInForce { get; set; }
         /// <summary>
         /// Client order id. Required for Options
         /// </summary>
-        [JsonProperty("orderLinkId", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("orderLinkId"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? ClientOrderId { get; set; }
         /// <summary>
         /// Set to true so your position can only reduce in size if this order is triggered.
         /// </summary>
-        [JsonProperty("reduceOnly", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("reduceOnly"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ReduceOnly { get; set; }
         /// <summary>
         /// Take profit / stop loss mode
         /// </summary>
-        [JsonProperty("tpslMode", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpslMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
         /// <summary>
         /// Take profit price
         /// </summary>
-        [JsonProperty("takeProfit", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("takeProfit"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? TakeProfit { get; set; }
         /// <summary>
         /// Stop loss price
         /// </summary>
-        [JsonProperty("stopLoss", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("stopLoss"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? StopLoss { get; set; }
         /// <summary>
         /// Trigger direction
         /// </summary>
-        [JsonProperty("triggerDirection", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter), new object[] { true, true })]
+        [JsonPropertyName("triggerDirection"),
+            JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault),
+            JsonConverterCtor(typeof(EnumConverter), true, true)]
         public TriggerDirection? TriggerDirection { get; set; }
         /// <summary>
         /// Trigger price
         /// </summary>
-        [JsonProperty("triggerPrice", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("triggerPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? TriggerPrice { get; set; }
         /// <summary>
         /// Trigger price type
         /// </summary>
-        [JsonProperty("triggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("triggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public TriggerType? TriggerBy { get; set; }
         /// <summary>
         /// Position idx
         /// </summary>
-        [JsonProperty("positionIdx", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter), new object[] { true, true })]
+        [JsonPropertyName("positionIdx"),
+            JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault),
+            JsonConverterCtor(typeof(EnumConverter), true, true)]
         public PositionIdx? PositionIdx { get; set; }
         /// <summary>
         /// Take profit limit price
         /// </summary>
-        [JsonProperty("tpLimitPrice", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("tpLimitPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? TakeProfitLimitPrice { get; set; }
         /// <summary>
         /// Stop loss limit price
         /// </summary>
-        [JsonProperty("slLimitPrice", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("slLimitPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? StopLossLimitPrice { get; set; }
         /// <summary>
         /// Stop loss order type
         /// </summary>
-        [JsonProperty("slOrderType", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("slOrderType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public OrderType? StopLossOrderType { get; set; }
         /// <summary>
         /// Take profit order type
         /// </summary>
-        [JsonProperty("tpOrderType", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpOrderType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public OrderType? TakeProfitOrderType { get; set; }
         /// <summary>
         /// Market maker protection. option only. true means set the order as a market maker protection order
         /// </summary>
-        [JsonProperty("mmp", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("mmp"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? MarketMakerProtection { get; set; }
         /// <summary>
         /// Implied volatility. option only. Pass the real value, e.g for 10%, 0.1 should be passed. orderIv has a higher priority when price is passed as well
         /// </summary>
-        [JsonProperty("orderIv", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("orderIv"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? OrderImpliedVolatility { get; set; }
         /// <summary>
         /// The unit for qty when creating spot market orders for unified trading account
         /// </summary>
-        [JsonProperty("marketUnit", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("marketUnit"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public MarketUnit? MarketUnit { get; set; }
         /// <summary>
         /// Close on trigger, can only reduce the position
         /// </summary>
-        [JsonProperty("closeOnTrigger", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("closeOnTrigger"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CloseOnTrigger { get; set; }
         /// <summary>
         /// Self match prevention type
         /// </summary>
-        [JsonProperty("smpType", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("smpType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public SelfMatchPreventionType? StpType { get; set; }
         /// <summary>
         /// Stop loss trigger by
         /// </summary>
-        [JsonProperty("slTriggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("slTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public TriggerType? StopLossTriggerBy { get; set; }
         /// <summary>
         /// Take profit trigger by
         /// </summary>
-        [JsonProperty("tpTriggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public TriggerType? TakeProfitTriggerBy { get; set; }
         /// <summary>
         /// Order filter
         /// </summary>
-        [JsonProperty("orderFilter", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderFilter"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public OrderFilter? OrderFilter { get; set; }
         /// <summary>
         /// Whether to borrow. Valid for Unified spot only. 1 for true
         /// </summary>
-        [JsonProperty("isLeverage", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("isLeverage"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? IsLeverage { get; set; }
     }
 
     internal record BybitSocketPlaceOrderRequest : BybitPlaceOrderRequest
     {
-        [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("category"), JsonConverter(typeof(EnumConverter))]
         public Category Category { get; set; }
     }
 }

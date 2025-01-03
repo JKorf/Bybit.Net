@@ -1,9 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -15,7 +10,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Available transferable quantity
         /// </summary>
-        [JsonProperty("availableWithdrawal")]
+        [JsonPropertyName("availableWithdrawal")]
         public decimal Available { get; set; }
     }
 }

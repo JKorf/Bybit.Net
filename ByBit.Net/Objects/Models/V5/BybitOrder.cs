@@ -1,7 +1,6 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Enums.V5;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -14,33 +13,38 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Client order id
         /// </summary>
-        [JsonProperty("orderLinkId")]
+        [JsonPropertyName("orderLinkId")]
         public string? ClientOrderId { get; set; }
         /// <summary>
         /// Block trade id
         /// </summary>
+        [JsonPropertyName("blockTradeId")]
         public string? BlockTradeId { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Price
         /// </summary>
+        [JsonPropertyName("price")]
         public decimal? Price { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Order side
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Is leverage order
@@ -50,186 +54,200 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Position mode
         /// </summary>
-        [JsonProperty("positionIdx")]
+        [JsonPropertyName("positionIdx")]
         public PositionIdx? PositionIdx { get; set; }
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("orderStatus")]
+        [JsonPropertyName("orderStatus")]
         [JsonConverter(typeof(EnumConverter))]
         public Enums.V5.OrderStatus Status { get; set; }
         /// <summary>
         /// Cancel type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("cancelType")]
         public CancelType? CancelType { get; set; }
         /// <summary>
         /// Reject reason
         /// </summary>
-        public string? RejectReason { get; set; } 
+        [JsonPropertyName("rejectReason")]
+        public string? RejectReason { get; set; }
         /// <summary>
         /// Average fill pricec
         /// </summary>
-        [JsonProperty("avgPrice")]
+        [JsonPropertyName("avgPrice")]
         public decimal? AveragePrice { get; set; }
         /// <summary>
         /// Quantity open
         /// </summary>
-        [JsonProperty("leavesQty")]
+        [JsonPropertyName("leavesQty")]
         public decimal? QuantityRemaining { get; set; }
         /// <summary>
         /// Estimated value open
         /// </summary>
-        [JsonProperty("leavesValue")]
+        [JsonPropertyName("leavesValue")]
         public decimal? ValueRemaining { get; set; }
         /// <summary>
         /// Quantity filled
         /// </summary>
-        [JsonProperty("cumExecQty")]
+        [JsonPropertyName("cumExecQty")]
         public decimal? QuantityFilled { get; set; }
         /// <summary>
         /// Value filled
         /// </summary>
-        [JsonProperty("cumExecValue")]
+        [JsonPropertyName("cumExecValue")]
         public decimal? ValueFilled { get; set; }
         /// <summary>
         /// Fee paid for filled quantity
         /// </summary>
-        [JsonProperty("cumExecFee")]
+        [JsonPropertyName("cumExecFee")]
         public decimal? ExecutedFee { get; set; }
        /// <summary>
         /// Trading fee asset. for Spot only.
         /// </summary>
-        [JsonProperty("feeCurrency")]
+        [JsonPropertyName("feeCurrency")]
         public string? FeeAsset { get; set; }   
         /// <summary>
         /// Time in force
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("timeInForce")]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
         /// Stop order type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("stopOrderType")]
         public StopOrderType? StopOrderType { get; set; }
         /// <summary>
         /// Order Iv
         /// </summary>
+        [JsonPropertyName("orderIv")]
         public decimal? OrderIv { get; set; }
         /// <summary>
         /// Trigger price
         /// </summary>
+        [JsonPropertyName("triggerPrice")]
         public decimal? TriggerPrice { get; set; }
         /// <summary>
         /// Take profit
         /// </summary>
+        [JsonPropertyName("takeProfit")]
         public decimal? TakeProfit { get; set; }
         /// <summary>
         /// Stop loss
         /// </summary>
+        [JsonPropertyName("stopLoss")]
         public decimal? StopLoss { get; set; }
         /// <summary>
         /// Take profit trigger type
         /// </summary>
-        [JsonProperty("tpTriggerBy")]
+        [JsonPropertyName("tpTriggerBy")]
         [JsonConverter(typeof(EnumConverter))]
         public TriggerType? TakeProfitTriggerBy { get; set; }
         /// <summary>
         /// Stop loss trigger type
         /// </summary>
-        [JsonProperty("slTriggerBy")]
+        [JsonPropertyName("slTriggerBy")]
         [JsonConverter(typeof(EnumConverter))]
         public TriggerType? StopLossTriggerBy { get; set; }
         /// <summary>
         /// Trigger direction
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("triggerDirection")]
         public TriggerDirection? TriggerDirection { get; set; }
         /// <summary>
         /// Trigger price type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("triggerBy")]
         public TriggerType? TriggerBy { get; set; }
         /// <summary>
         /// Last price when the order was placed
         /// </summary>
+        [JsonPropertyName("lastPriceOnCreated")]
         public decimal? LastPriceOnCreated { get; set; }
         /// <summary>
         /// Close on trigger
         /// </summary>
+        [JsonPropertyName("closeOnTrigger")]
         public bool? CloseOnTrigger { get; set; }
         /// <summary>
         /// Reduce only
         /// </summary>
+        [JsonPropertyName("reduceOnly")]
         public bool? ReduceOnly { get; set; }
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("createdTime")]
+        [JsonPropertyName("createdTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("updatedTime")]
+        [JsonPropertyName("updatedTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Order create type
         /// </summary>
-        [JsonProperty("createType")]
+        [JsonPropertyName("createType")]
         public string? CreateType { get; set; }
         /// <summary>
         /// Market unit for quantity
         /// </summary>
-        [JsonProperty("marketUnit"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("marketUnit"), JsonConverter(typeof(EnumConverter))]
         public MarketUnit? MarketUnit { get; set; }
         /// <summary>
         /// Oco trigger type
         /// </summary>
-        [JsonProperty("ocoTriggerType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("ocoTriggerType"), JsonConverter(typeof(EnumConverter))]
         public OcoTriggerType? OcoTriggerType { get; set; }
         /// <summary>
         /// Take profit limit price
         /// </summary>
-        [JsonProperty("tpLimitPrice")]
+        [JsonPropertyName("tpLimitPrice")]
         public decimal? TakeProfitLimitPrice { get; set; }
         /// <summary>
         /// Stop loss limit price
         /// </summary>
-        [JsonProperty("slLimitPrice")]
+        [JsonPropertyName("slLimitPrice")]
         public decimal? StopLossLimitPrice { get; set; }
 
         /// <summary>
         /// Self match prevention type
         /// </summary>
-        [JsonProperty("smpType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("smpType"), JsonConverter(typeof(EnumConverter))]
         public SelfMatchPreventionType? SelfMatchPreventionType { get; set; }
         /// <summary>
         /// Self match prevention group, 0 by default
         /// </summary>
-        [JsonProperty("smpGroup")]
+        [JsonPropertyName("smpGroup")]
         public int? SelfMatchPreventionGroup { get; set; }
         /// <summary>
         /// The counterparty's orderID which triggers this SMP execution
         /// </summary>
-        [JsonProperty("smpOrderId")]
+        [JsonPropertyName("smpOrderId")]
         public string? SelfMatchPreventionOrderId { get; set; }
         /// <summary>
         /// Take profit/stop loss mode
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
-        [JsonProperty("tpslMode")]
+        [JsonPropertyName("tpslMode")]
         public StopLossTakeProfitMode? TpSlMode { get; set; }
         /// <summary>
         /// Place type (option only)
         /// </summary>
-        [JsonProperty("placeType")]
+        [JsonPropertyName("placeType")]
         public string? PlaceType { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -11,17 +10,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// The leverage
         /// </summary>
-        [JsonProperty("spotLeverage")]
+        [JsonPropertyName("spotLeverage")]
         public decimal? Leverage { get; set; }
         /// <summary>
         /// Is spot margin mode activated
         /// </summary>
-        [JsonProperty("spotMarginMode"), JsonConverter(typeof(BoolConverter))]
+        [JsonPropertyName("spotMarginMode"), JsonConverter(typeof(BoolConverter))]
         public bool SpotMarginMode { get; set; }
         /// <summary>
         /// Actual leverage ratio
         /// </summary>
-        [JsonProperty("effectiveLeverage")]
+        [JsonPropertyName("effectiveLeverage")]
         public decimal? EffectiveLeverage { get; set; }
     }
 }

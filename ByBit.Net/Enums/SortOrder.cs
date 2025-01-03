@@ -1,4 +1,6 @@
-﻿namespace Bybit.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Sort order
@@ -8,10 +10,12 @@
         /// <summary>
         /// Searches in descending order
         /// </summary>
+        [Map("desc")]
         Descending,
         /// <summary>
         /// Searched in ascending order
         /// </summary>
+        [Map("asc")]
         Ascending
     }
 }
