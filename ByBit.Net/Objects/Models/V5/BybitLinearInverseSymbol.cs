@@ -108,6 +108,28 @@ namespace Bybit.Net.Objects.Models.V5
         /// Leverage
         /// </summary>
         public BybitLinearInverseLeveragefilter? LeverageFilter { get; set; }
+        /// <summary>
+        /// Risk limit parameters
+        /// </summary>
+        [JsonProperty("riskParameters")]
+        public BybitRiskParameters? BybitRiskParameters { get; set; }
+    }
+
+    /// <summary>
+    /// Risk limit parameters
+    /// </summary>
+    public record BybitRiskParameters
+    {
+        /// <summary>
+        /// Price limit ratio X value
+        /// </summary>
+        [JsonProperty("priceLimitRatioX")]
+        public decimal? PriceLimitRatioX { get; set; }
+        /// <summary>
+        /// Price limit ratio Y value
+        /// </summary>
+        [JsonProperty("priceLimitRatioY")]
+        public decimal? PriceLimitRatioY { get; set; }
     }
 
     /// <summary>
