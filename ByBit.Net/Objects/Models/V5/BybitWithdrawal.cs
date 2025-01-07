@@ -1,5 +1,4 @@
 ﻿using Bybit.Net.Enums;
-using Bybit.Net.Enums.V5;
 using System.Text.Json.Serialization;
 using System;
 

@@ -1,0 +1,28 @@
+GET
+/v5/crypto-loan/borrow-history
+true
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "list": [
+            {
+                "borrowTime": "1728546174028",
+                "collateralCurrency": "BTC",
+                "expirationTime": "1729148399000",
+                "hourlyInterestRate": "0.0000010241",
+                "initialCollateralAmount": "0.0494727",
+                "initialLoanAmount": "1",
+                "loanCurrency": "ETH",
+                "loanTerm": "7",
+                "orderId": "1793569729874260992",
+                "repaidInterest": "0.00000515",
+                "repaidPenaltyInterest": "0",
+                "status": 1
+            }
+        ],
+        "nextPageCursor": ""
+    },
+    "retExtInfo": {},
+    "time": 1728632014857
+}

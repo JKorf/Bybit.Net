@@ -1,0 +1,12 @@
+POST
+/v5/crypto-loan/borrow
+true
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "orderId": "1794267532472646144"
+    },
+    "retExtInfo": {},
+    "time": 1728629357820
+}

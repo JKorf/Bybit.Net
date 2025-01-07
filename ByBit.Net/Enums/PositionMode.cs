@@ -1,6 +1,6 @@
 ﻿using CryptoExchange.Net.Attributes;
 
-namespace Bybit.Net.Enums.V5
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Position mode

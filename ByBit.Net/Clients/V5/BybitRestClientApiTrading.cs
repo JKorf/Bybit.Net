@@ -9,7 +9,6 @@ using CryptoExchange.Net;
 using Bybit.Net.Objects.Models.V5;
 using System.Globalization;
 using Bybit.Net.Interfaces.Clients.V5;
-using Bybit.Net.Enums.V5;
 using Bybit.Net.Objects.Internal;
 using System.Linq;
 using CryptoExchange.Net.RateLimiting.Guards;
@@ -447,13 +446,13 @@ namespace Bybit.Net.Clients.V5
         #region Get Order History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<Objects.Models.V5.BybitOrder>>> GetOrderHistoryAsync(
+        public async Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(
             Category category,
             string? symbol = null,
             string? baseAsset = null,
             string? orderId = null,
             string? clientOrderId = null,
-            Enums.V5.OrderStatus? status = null,
+            OrderStatus? status = null,
             OrderFilter? orderFilter = null,
             DateTime? startTime = null,
             DateTime? endTime = null,

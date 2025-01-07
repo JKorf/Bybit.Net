@@ -84,7 +84,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Vip level
         /// </summary>
         [JsonPropertyName("vipLevel")]
-        public string VipLevel { get; set; } = string.Empty;
+        public AccountLevel VipLevel { get; set; }
         /// <summary>
         /// Market maker level
         /// </summary>

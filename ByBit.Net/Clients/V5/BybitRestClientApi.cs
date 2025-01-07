@@ -48,6 +48,8 @@ namespace Bybit.Net.Clients.V5
         public IBybitRestClientApiTrading Trading { get; }
         /// <inheritdoc />
         public IBybitRestClientApiSubAccounts SubAccount { get; }
+        /// <inheritdoc />
+        public IBybitRestClientApiCryptoLoan CryptoLoan { get; }
 
         /// <inheritdoc />
         public string ExchangeName => "Bybit";
@@ -68,6 +70,7 @@ namespace Bybit.Net.Clients.V5
             ExchangeData = new BybitRestClientApiExchangeData(this);
             Trading = new BybitRestClientApiTrading(this);
             SubAccount = new BybitRestClientApiSubAccounts(this);
+            CryptoLoan = new BybitRestClientApiCryptoLoan(this);
 
             RequestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
@@ -134,7 +137,7 @@ namespace Bybit.Net.Clients.V5
             if (result.Data.ReturnCode != 0)
                 return result.AsError<T>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
-            return result.As<T>(result.Data.Result);
+            return result.As(result.Data.Result);
         }
 
         internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRawAsync<T, U>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
@@ -373,8 +376,8 @@ namespace Bybit.Net.Clients.V5
                 Symbol = order.Symbol,
                 Timestamp = order.CreateTime,
                 Type = order.OrderType == Enums.OrderType.Market ? CommonOrderType.Market : order.OrderType == Enums.OrderType.Limit ? CommonOrderType.Limit : CommonOrderType.Other,
-                Status = order.Status == Enums.V5.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
-                         order.Status == Enums.V5.OrderStatus.Filled ? CommonOrderStatus.Filled :
+                Status = order.Status == Enums.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
+                         order.Status == Enums.OrderStatus.Filled ? CommonOrderStatus.Filled :
                          CommonOrderStatus.Active,
                 SourceObject = order
             });
@@ -421,8 +424,8 @@ namespace Bybit.Net.Clients.V5
                 Symbol = o.Symbol,
                 Timestamp = o.CreateTime,
                 Type = o.OrderType == Enums.OrderType.Market ? CommonOrderType.Market : o.OrderType == Enums.OrderType.Limit ? CommonOrderType.Limit : CommonOrderType.Other,
-                Status = o.Status == Enums.V5.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
-                         o.Status == Enums.V5.OrderStatus.Filled ? CommonOrderStatus.Filled :
+                Status = o.Status == Enums.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
+                         o.Status == Enums.OrderStatus.Filled ? CommonOrderStatus.Filled :
                          CommonOrderStatus.Active,
                 SourceObject = o
             }));
@@ -447,8 +450,8 @@ namespace Bybit.Net.Clients.V5
                 Symbol = o.Symbol,
                 Timestamp = o.CreateTime,
                 Type = o.OrderType == Enums.OrderType.Market ? CommonOrderType.Market : o.OrderType == Enums.OrderType.Limit ? CommonOrderType.Limit : CommonOrderType.Other,
-                Status = o.Status == Enums.V5.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
-                         o.Status == Enums.V5.OrderStatus.Filled ? CommonOrderStatus.Filled :
+                Status = o.Status == Enums.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
+                         o.Status == Enums.OrderStatus.Filled ? CommonOrderStatus.Filled :
                          CommonOrderStatus.Active,
                 SourceObject = o
             }));

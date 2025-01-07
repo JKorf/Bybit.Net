@@ -7,7 +7,6 @@ using CryptoExchange.Net.Objects;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using Bybit.Net.Enums;
-using Bybit.Net.Enums.V5;
 using System.Globalization;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Internal;
@@ -97,7 +96,7 @@ namespace Bybit.Net.Clients.V5
         public async Task<WebCallResult> SwitchCrossIsolatedMarginAsync(
             Category category,
             string symbol,
-            Enums.TradeMode tradeMode,
+            TradeMode tradeMode,
             decimal buyLeverage,
             decimal sellLeverage,
             CancellationToken ct = default)
@@ -144,7 +143,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult> SwitchPositionModeAsync(
             Category category,
-            Enums.V5.PositionMode mode,
+            PositionMode mode,
             string? symbol = null,
             string? asset = null,
             CancellationToken ct = default)

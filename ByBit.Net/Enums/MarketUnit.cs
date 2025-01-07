@@ -1,6 +1,6 @@
 ﻿using CryptoExchange.Net.Attributes;
 
-namespace Bybit.Net.Enums.V5
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// The unit for quantity when creating Spot market orders for UTA account

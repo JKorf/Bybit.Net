@@ -1,0 +1,30 @@
+GET
+/v5/crypto-loan/loanable-data
+false
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "vipCoinList": [
+            {
+                "list": [
+                    {
+                        "borrowingAccuracy": 4,
+                        "currency": "USDT",
+                        "flexibleHourlyInterestRate": "0.0000090346",
+                        "hourlyInterestRate14D": "0.0000207796",
+                        "hourlyInterestRate180D": "",
+                        "hourlyInterestRate30D": "0.00002349",
+                        "hourlyInterestRate7D": "0.0000180692",
+                        "hourlyInterestRate90D": "",
+                        "maxBorrowingAmount": "8000000",
+                        "minBorrowingAmount": "20"
+                    }
+                ],
+                "vipLevel": "VIP0"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1728619315868
+}

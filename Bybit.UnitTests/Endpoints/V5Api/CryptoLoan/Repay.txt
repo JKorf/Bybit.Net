@@ -1,0 +1,12 @@
+POST
+/v5/crypto-loan/repay
+true
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "repayId": "1794271131730737664"
+    },
+    "retExtInfo": {},
+    "time": 1728629786884
+}

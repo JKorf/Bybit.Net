@@ -1,5 +1,4 @@
 ﻿using Bybit.Net.Enums;
-using Bybit.Net.Enums.V5;
 using System.Text.Json.Serialization;
 using System;
 
@@ -62,7 +61,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("orderStatus")]
         [JsonConverter(typeof(EnumConverter))]
-        public Enums.V5.OrderStatus Status { get; set; }
+        public OrderStatus Status { get; set; }
         /// <summary>
         /// Cancel type
         /// </summary>

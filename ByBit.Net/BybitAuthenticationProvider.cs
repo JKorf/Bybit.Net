@@ -50,9 +50,8 @@ namespace Bybit.Net
             var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
            
             var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : requestBodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : _messageSerializer.Serialize(parameters);
-            var key = _credentials.Key!;
             var recvWindow = ((BybitRestOptions)apiClient.ClientOptions).ReceiveWindow.TotalMilliseconds;
-            var payload = timestamp + key + recvWindow + signPayload;
+            var payload = timestamp + _credentials.Key + recvWindow + signPayload;
 
             string sign;
             if (_credentials.CredentialType == ApiCredentialsType.Hmac)
@@ -61,7 +60,7 @@ namespace Bybit.Net
                 sign = SignRSASHA256(Encoding.UTF8.GetBytes(payload), SignOutputType.Base64);
 
             headers ??= new Dictionary<string, string>();
-            headers.Add("X-BAPI-API-KEY", key);
+            headers.Add("X-BAPI-API-KEY", _credentials.Key);
             headers.Add("X-BAPI-SIGN", sign);
             headers.Add("X-BAPI-SIGN-TYPE", "2");
             headers.Add("X-BAPI-TIMESTAMP", timestamp);

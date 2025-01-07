@@ -56,13 +56,13 @@ namespace Bybit.Net.Clients.V5
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
                             x.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                            x.Status == Enums.V5.OrderStatus.Cancelled ? SharedOrderStatus.Canceled : (x.Status == Enums.V5.OrderStatus.New || x.Status == Enums.V5.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
+                            x.Status == Enums.OrderStatus.Cancelled ? SharedOrderStatus.Canceled : (x.Status == Enums.OrderStatus.New || x.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
                             x.CreateTime)
                         {
                             ClientOrderId = x.ClientOrderId?.ToString(),
-                            Quantity = x.MarketUnit == Enums.V5.MarketUnit.QuoteAsset ? null : x.Quantity,
+                            Quantity = x.MarketUnit == Enums.MarketUnit.QuoteAsset ? null : x.Quantity,
                             QuantityFilled = x.QuantityFilled,
-                            QuoteQuantity = x.MarketUnit != Enums.V5.MarketUnit.QuoteAsset ? null : x.Quantity,
+                            QuoteQuantity = x.MarketUnit != Enums.MarketUnit.QuoteAsset ? null : x.Quantity,
                             QuoteQuantityFilled = x.ValueFilled,
                             TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : x.TimeInForce == Enums.TimeInForce.GoodTillCanceled ? SharedTimeInForce.GoodTillCanceled : null,
                             UpdateTime = x.UpdateTime,
@@ -105,18 +105,18 @@ namespace Bybit.Net.Clients.V5
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
                             x.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                            x.Status == Enums.V5.OrderStatus.Cancelled ? SharedOrderStatus.Canceled : (x.Status == Enums.V5.OrderStatus.New || x.Status == Enums.V5.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
+                            x.Status == Enums.OrderStatus.Cancelled ? SharedOrderStatus.Canceled : (x.Status == Enums.OrderStatus.New || x.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
                             x.CreateTime)
                         {
                             ClientOrderId = x.ClientOrderId?.ToString(),
-                            Quantity = x.MarketUnit == Enums.V5.MarketUnit.QuoteAsset ? null : x.Quantity,
+                            Quantity = x.MarketUnit == Enums.MarketUnit.QuoteAsset ? null : x.Quantity,
                             QuantityFilled = x.QuantityFilled,
-                            QuoteQuantity = x.MarketUnit != Enums.V5.MarketUnit.QuoteAsset ? null : x.Quantity,
+                            QuoteQuantity = x.MarketUnit != Enums.MarketUnit.QuoteAsset ? null : x.Quantity,
                             QuoteQuantityFilled = x.ValueFilled,
                             TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ?SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : x.TimeInForce == Enums.TimeInForce.GoodTillCanceled ? SharedTimeInForce.GoodTillCanceled : null,
                             UpdateTime = x.UpdateTime,
                             AveragePrice = x.AveragePrice,
-                            PositionSide = x.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? null : x.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
+                            PositionSide = x.PositionIdx == Enums.PositionIdx.OneWayMode ? null : x.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                             ReduceOnly = x.ReduceOnly,
                             OrderPrice = x.Price,
                             Fee = x.ExecutedFee,
@@ -183,7 +183,7 @@ namespace Bybit.Net.Clients.V5
                 update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
                 {
                     AverageOpenPrice = x.AveragePrice,
-                    PositionSide = x.PositionIdx == Enums.V5.PositionIdx.OneWayMode ? (x.Side == Enums.PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long) : x.PositionIdx == Enums.V5.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
+                    PositionSide = x.PositionIdx == Enums.PositionIdx.OneWayMode ? (x.Side == Enums.PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long) : x.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                     LiquidationPrice = x.LiquidationPrice,
                     Leverage = x.Leverage,
                     UnrealizedPnl = x.UnrealizedPnl

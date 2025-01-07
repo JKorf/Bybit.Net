@@ -83,21 +83,21 @@ namespace Bybit.Net
     /// </summary>
     public class BybitRateLimiters
     {
-        private static Dictionary<RateLimitTier, (int limitOther, int limitSpot)> _orderTierLimits = new Dictionary<RateLimitTier, (int, int)>()
+        private static Dictionary<AccountLevel, (int limitOther, int limitSpot)> _orderTierLimits = new Dictionary<AccountLevel, (int, int)>()
         {
-            { RateLimitTier.Default, (10, 20) },
-            { RateLimitTier.Vip1, (20, 25) },
-            { RateLimitTier.Vip2, (40, 30) },
-            { RateLimitTier.Vip3, (60, 40) },
-            { RateLimitTier.Vip4, (60, 40) },
-            { RateLimitTier.Vip5, (60, 40) },
-            { RateLimitTier.VipSupreme, (60, 40) },
-            { RateLimitTier.Pro1, (150, 150) },
-            { RateLimitTier.Pro2, (200, 200) },
-            { RateLimitTier.Pro3, (250, 250) },
-            { RateLimitTier.Pro4, (300, 300) },
-            { RateLimitTier.Pro5, (300, 300) },
-            { RateLimitTier.Pro6, (300, 300) }
+            { AccountLevel.Default, (10, 20) },
+            { AccountLevel.Vip1, (20, 25) },
+            { AccountLevel.Vip2, (40, 30) },
+            { AccountLevel.Vip3, (60, 40) },
+            { AccountLevel.Vip4, (60, 40) },
+            { AccountLevel.Vip5, (60, 40) },
+            { AccountLevel.VipSupreme, (60, 40) },
+            { AccountLevel.Pro1, (150, 150) },
+            { AccountLevel.Pro2, (200, 200) },
+            { AccountLevel.Pro3, (250, 250) },
+            { AccountLevel.Pro4, (300, 300) },
+            { AccountLevel.Pro5, (300, 300) },
+            { AccountLevel.Pro6, (300, 300) }
         };
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Bybit.Net
         /// <summary>
         /// The Tier to use when calculating rate limits
         /// </summary>
-        public RateLimitTier Tier { get; private set; } = RateLimitTier.Default;
+        public AccountLevel Tier { get; private set; } = AccountLevel.Default;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal BybitRateLimiters()
@@ -127,7 +127,7 @@ namespace Bybit.Net
         /// Configure the rate limit with a different tier
         /// </summary>
         /// <param name="tier"></param>
-        public void Configure(RateLimitTier tier)
+        public void Configure(AccountLevel tier)
         {
             Tier = tier;
             Initialize();
