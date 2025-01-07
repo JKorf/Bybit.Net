@@ -65,6 +65,7 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Unknown type
         /// </summary>
+        [Map("Unknown")]
         Unknown
     }
 }

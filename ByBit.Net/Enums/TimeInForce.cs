@@ -25,6 +25,7 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Only place order if the order is added to the order book instead of being filled immediately
         /// </summary>
+        [Map("PostOnly")]
         PostOnly
     }
 }

@@ -25,6 +25,7 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Unknown
         /// </summary>
+        [Map("UNKNOWN", "0")]
         Unknown
     }
 }

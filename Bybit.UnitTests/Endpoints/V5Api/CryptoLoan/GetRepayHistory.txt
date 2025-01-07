@@ -1,0 +1,26 @@
+GET
+/v5/crypto-loan/repayment-history
+true
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "list": [
+            {
+                "collateralCurrency": "BTC",
+                "collateralReturn": "0",
+                "loanCurrency": "USDT",
+                "loanTerm": "",
+                "orderId": "1794267532472646144",
+                "repayAmount": "100",
+                "repayId": "1794271131730737664",
+                "repayStatus": 1,
+                "repayTime": "1728629786875",
+                "repayType": "1"
+            }
+        ],
+        "nextPageCursor": ""
+    },
+    "retExtInfo": {},
+    "time": 1728633717935
+}

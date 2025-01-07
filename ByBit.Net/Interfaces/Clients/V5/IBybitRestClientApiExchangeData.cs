@@ -17,7 +17,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// Get server announcements
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/announcement" /></para>
         /// </summary>
-        /// <param name="locale">Language</param>
+        /// <param name="locale">Language, for example en-US</param>
         /// <param name="type">Filter by type</param>
         /// <param name="tag">Filter by tag</param>
         /// <param name="page">Page</param>

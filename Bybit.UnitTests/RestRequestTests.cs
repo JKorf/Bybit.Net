@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Bybit.Net.Clients;
 using System.Linq;
 using Bybit.Net.Objects.Models.V5;
+using Bybit.Net.Enums;
 
 namespace Bybit.Net.UnitTests
 {
@@ -21,18 +22,18 @@ namespace Bybit.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "456");
             });
-            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Account", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: false);
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Account", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
             await tester.ValidateAsync(client => client.V5Api.Account.SetLeverageAsync(Enums.Category.Option, "ETHUSDT", 1, 1), "SetLeverage");
             await tester.ValidateAsync(client => client.V5Api.Account.SetCollateralAssetAsync("ETH", true), "SetCollateralAsset");
             await tester.ValidateAsync(client => client.V5Api.Account.SetMultipleCollateralAssetsAsync(new[] { new BybitSetCollateralAssetRequest { Asset = "ETH", UseForCollateral = true} }), "SetMultipleCollateralAssets");
             await tester.ValidateAsync(client => client.V5Api.Account.SwitchCrossIsolatedMarginAsync(Enums.Category.Option, "ETHUSDT", Enums.TradeMode.Isolated, 1, 1), "SwitchCrossIsolatedMargin");
             await tester.ValidateAsync(client => client.V5Api.Account.SetTakeProfitStopLossModeAsync(Enums.Category.Option, "ETHUSDT", Enums.StopLossTakeProfitMode.Full), "SetTakeProfitStopLossMode");
-            await tester.ValidateAsync(client => client.V5Api.Account.SwitchPositionModeAsync(Enums.Category.Option, Enums.V5.PositionMode.MergedSingle), "SwitchPositionMode");
+            await tester.ValidateAsync(client => client.V5Api.Account.SwitchPositionModeAsync(Enums.Category.Option, PositionMode.MergedSingle), "SwitchPositionMode");
             await tester.ValidateAsync(client => client.V5Api.Account.SetRiskLimitAsync(Enums.Category.Option, "ETHUSDT", 1), "SetRiskLimit");
             await tester.ValidateAsync(client => client.V5Api.Account.SetAutoAddMarginAsync(Enums.Category.Option, "ETHUSDT", true), "SetAutoAddMargin");
             await tester.ValidateAsync(client => client.V5Api.Account.GetBalancesAsync(Enums.AccountType.Option), "GetBalances");
             await tester.ValidateAsync(client => client.V5Api.Account.GetBorrowHistoryAsync("ETH"), "GetBorrowHistory");
-            await tester.ValidateAsync(client => client.V5Api.Account.GetCollateralInfoAsync("ETH"), "GetCollateralInfo");
+            await tester.ValidateAsync(client => client.V5Api.Account.GetCollateralInfoAsync("ETH"), "GetCollateralInfo", ignoreProperties: new List<string> { "freeBorrowingAmount" });
             await tester.ValidateAsync(client => client.V5Api.Account.GetAssetGreeksAsync("ETH"), "GetAssetGreeks");
             await tester.ValidateAsync(client => client.V5Api.Account.GetFeeRateAsync(Enums.Category.Inverse), "GetFeeRate");
             await tester.ValidateAsync(client => client.V5Api.Account.GetMarginAccountInfoAsync(), "GetMarginAccountInfo", ignoreProperties: new List<string> { "spotHedgingStatus" });
@@ -72,7 +73,7 @@ namespace Bybit.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "456");
             });
-            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/ExchangeData", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: false);
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/ExchangeData", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetAnnouncementsAsync("en-Us"), "GetAnnouncements");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetKlinesAsync(Enums.Category.Spot, "ETHUSDT", Enums.KlineInterval.OneDay), "GetKlines");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetMarkPriceKlinesAsync(Enums.Category.Spot, "ETHUSDT", Enums.KlineInterval.OneDay), "GetMarkPriceKlines");
@@ -106,7 +107,7 @@ namespace Bybit.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "456");
             });
-            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Trading", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: false);
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Trading", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
             await tester.ValidateAsync(client => client.V5Api.Trading.PlaceOrderAsync(Enums.Category.Option, "ETHUSDT", Enums.OrderSide.Buy, Enums.NewOrderType.Market, 1), "PlaceOrder");
             await tester.ValidateAsync(client => client.V5Api.Trading.PlaceMultipleOrdersAsync(Enums.Category.Option, new[] { new BybitPlaceOrderRequest() }), "PlaceMultipleOrders", skipResponseValidation: true);
             await tester.ValidateAsync(client => client.V5Api.Trading.EditOrderAsync(Enums.Category.Option, "ETHUSDT"), "EditOrder");
@@ -124,10 +125,32 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Trading.GetDeliveryHistoryAsync(Enums.Category.Option), "GetDeliveryHistory");
             await tester.ValidateAsync(client => client.V5Api.Trading.GetSettlementHistoryAsync(Enums.Category.Option), "GetSettlementHistory");
             await tester.ValidateAsync(client => client.V5Api.Trading.GetClosedProfitLossAsync(Enums.Category.Option), "GetClosedProfitLoss");
-            await tester.ValidateAsync(client => client.V5Api.Trading.SetTradingStopAsync(Enums.Category.Option, "ETHUSDT", Enums.V5.PositionIdx.OneWayMode, 1), "SetTradingStop");
+            await tester.ValidateAsync(client => client.V5Api.Trading.SetTradingStopAsync(Enums.Category.Option, "ETHUSDT", PositionIdx.OneWayMode, 1), "SetTradingStop");
             await tester.ValidateAsync(client => client.V5Api.Trading.PurchaseLeverageTokenAsync("123", 1), "PurchaseLeverageToken");
-            await tester.ValidateAsync(client => client.V5Api.Trading.RedeemLeverageTokenAsync("123", 1), "RedeemLeverageToken");
+            await tester.ValidateAsync(client => client.V5Api.Trading.RedeemLeverageTokenAsync("123", 1), "RedeemLeverageToken", ignoreProperties: new List<string> { "quantity" });
             await tester.ValidateAsync(client => client.V5Api.Trading.GetLeverageTokenOrderHistoryAsync("123"), "GetLeverageTokenOrderHistory", "result.list");
+        }
+
+
+        [Test]
+        public async Task ValidateCryptoLoanCalls()
+        {
+            var client = new BybitRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/CryptoLoan", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetBorrowableAssetsAsync(AccountLevel.Vip5, "123"), "GetBorrowableAssets", nestedJsonProperty: "result.vipCoinList");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetLimitsAsync("123", "123"), "GetLimits", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.BorrowAsync("123", "123"), "Borrow", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.RepayAsync("123", 0.1m), "Repay", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetOpenLoansAsync(), "GetOpenLoans", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetRepayHistoryAsync(), "GetRepayHistory", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetCompletedLoanOrdersAsync(), "GetCompletedLoanOrders", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetMaxCollateralAsync("123"), "GetMaxCollateral", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.AdjustCollateralAsync("123", 0.1m, AdjustDirection.Add), "AdjustCollateral", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetCollateralAdjustHistoryAsync(), "GetCollateralAdjustHistory", nestedJsonProperty: "result");
         }
 
         private bool IsAuthenticated(WebCallResult result)

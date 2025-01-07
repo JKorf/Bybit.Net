@@ -1,50 +1,50 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Internal
 {
     internal class BybitResult<T>
     {
-        [JsonProperty("ret_code")]
+        [JsonPropertyName("ret_code")]
         public int ReturnCode { get; set; }
-        [JsonProperty("retCode")]
+        [JsonInclude, JsonPropertyName("retCode")]
         private int ReturnCodeInternal
         {
             get => ReturnCode;
             set => ReturnCode = value; 
         }
 
-        [JsonProperty("ret_msg")]
+        [JsonPropertyName("ret_msg")]
         public string ReturnMessage { get; set; } = string.Empty;
-        [JsonProperty("retMsg")]
+        [JsonInclude, JsonPropertyName("retMsg")]
         private string ReturnMessageInternal
         {
             get => ReturnMessage;
             set => ReturnMessage = value;
         }
 
-        [JsonProperty("ext_code")]
+        [JsonPropertyName("ext_code")]
         public int? ExtCode { get; set; }
-        [JsonProperty("ext_info")]
+        [JsonPropertyName("ext_info")]
         public string? ExtInfo { get; set; }
-        [JsonProperty("time_now"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time_now"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonInclude, JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         private DateTime TimestampInternal
         {
             get => Timestamp;
             set => Timestamp = value;
         }
 
-        [JsonProperty("rate_limit_status")]
+        [JsonPropertyName("rate_limit_status")]
         public int? RateLimitStatus { get; set; }
-        [JsonProperty("rate_limit_reset_ms"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("rate_limit_reset_ms"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? RateLimitReset { get; set; }
-        [JsonProperty("rate_limit")]
+        [JsonPropertyName("rate_limit")]
         public int? RateLimit { get; set; }
 
 #pragma warning disable 8618
+        [JsonPropertyName("result")]
         public T Result { get; set; }
 #pragma warning restore
     }

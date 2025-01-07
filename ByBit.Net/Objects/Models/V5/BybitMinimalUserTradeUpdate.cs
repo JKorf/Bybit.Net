@@ -1,8 +1,6 @@
 ﻿using Bybit.Net.Enums;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -15,59 +13,64 @@ namespace Bybit.Net.Objects.Models.V5
         /// Category
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("category")]
         public Category Category { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Order id trade belongs to
         /// </summary>
+        [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Client order id trade belongs to
         /// </summary>
-        [JsonProperty("orderLinkId")]
+        [JsonPropertyName("orderLinkId")]
         public string? ClientOrderId { get; set; }
         /// <summary>
         /// Side
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Order price
         /// </summary>
+        [JsonPropertyName("orderPrice")]
         public decimal? OrderPrice { get; set; }
         /// <summary>
         /// Trade id
         /// </summary>
-        [JsonProperty("execId")]
+        [JsonPropertyName("execId")]
         public string TradeId { get; set; } = string.Empty;
         /// <summary>
         /// Is maker trade
         /// </summary>
-        [JsonProperty("isMaker")]
+        [JsonPropertyName("isMaker")]
         public bool IsMaker { get; set; }
         /// <summary>
         /// Trade price
         /// </summary>
-        [JsonProperty("execPrice")]
+        [JsonPropertyName("execPrice")]
         public decimal Price { get; set; }
         /// <summary>
         /// Trade quantity
         /// </summary>
-        [JsonProperty("execQty")]
+        [JsonPropertyName("execQty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("execTime")]
+        [JsonPropertyName("execTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Cross sequence, used to associate each fill and each position update
         /// </summary>
-        [JsonProperty("seq")]
+        [JsonPropertyName("seq")]
         public long? Sequence { get; set; }
     }
 }

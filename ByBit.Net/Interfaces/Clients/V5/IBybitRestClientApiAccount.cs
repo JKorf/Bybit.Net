@@ -1,5 +1,4 @@
 ﻿using Bybit.Net.Enums;
-using Bybit.Net.Enums.V5;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using System;
@@ -476,7 +475,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="sellLeverage">Sell leverage</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SwitchCrossIsolatedMarginAsync(Category category, string symbol, Enums.TradeMode tradeMode, decimal buyLeverage, decimal sellLeverage, CancellationToken ct = default);
+        Task<WebCallResult> SwitchCrossIsolatedMarginAsync(Category category, string symbol, TradeMode tradeMode, decimal buyLeverage, decimal sellLeverage, CancellationToken ct = default);
 
         /// <summary>
         /// Switch position mode
@@ -488,7 +487,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="asset">Asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SwitchPositionModeAsync(Category category, Enums.V5.PositionMode mode, string? symbol = null, string? asset = null, CancellationToken ct = default);
+        Task<WebCallResult> SwitchPositionModeAsync(Category category, PositionMode mode, string? symbol = null, string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Withdraw funds

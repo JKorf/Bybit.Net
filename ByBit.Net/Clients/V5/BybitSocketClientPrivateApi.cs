@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Enums;
-using Bybit.Net.Enums.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
 using Bybit.Net.Objects.Sockets.Queries;
@@ -56,6 +55,9 @@ namespace Bybit.Net.Clients.V5
 
             SetDedicatedConnection(BaseAddress.AppendPath("/v5/trade"), true);
         }
+
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         private Query GetPingQuery(SocketConnection connection)
         {

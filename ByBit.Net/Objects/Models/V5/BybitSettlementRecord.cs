@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -13,35 +12,38 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Side
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("size")]
+        [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Settlement price
         /// </summary>
-        [JsonProperty("sessionAvgPrice")]
+        [JsonPropertyName("sessionAvgPrice")]
         public decimal SettlementPrice { get; set; }
         /// <summary>
         /// Mark price
         /// </summary>
+        [JsonPropertyName("markPrice")]
         public decimal MarkPrice { get; set; }
         /// <summary>
         /// Realized profit and loss
         /// </summary>
-        [JsonProperty("realisedPnl")]
+        [JsonPropertyName("realisedPnl")]
         public decimal RealizedPnl { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("createdTime")]
+        [JsonPropertyName("createdTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
     }

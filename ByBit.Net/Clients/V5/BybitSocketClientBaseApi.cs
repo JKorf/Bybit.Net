@@ -7,14 +7,13 @@ using System.Threading;
 using CryptoExchange.Net.Objects;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Objects.Sockets;
 using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net;
 using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net.Interfaces;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -36,7 +35,12 @@ namespace Bybit.Net.Clients.V5
 
             UnhandledMessageExpected = true;
             KeepAliveInterval = TimeSpan.Zero;
+
+            MessageSendSizeLimit = 21000;
         }
+
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

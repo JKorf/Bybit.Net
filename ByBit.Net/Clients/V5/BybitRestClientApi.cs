@@ -48,6 +48,8 @@ namespace Bybit.Net.Clients.V5
         public IBybitRestClientApiTrading Trading { get; }
         /// <inheritdoc />
         public IBybitRestClientApiSubAccounts SubAccount { get; }
+        /// <inheritdoc />
+        public IBybitRestClientApiCryptoLoan CryptoLoan { get; }
 
         /// <inheritdoc />
         public string ExchangeName => "Bybit";
@@ -68,11 +70,15 @@ namespace Bybit.Net.Clients.V5
             ExchangeData = new BybitRestClientApiExchangeData(this);
             Trading = new BybitRestClientApiTrading(this);
             SubAccount = new BybitRestClientApiSubAccounts(this);
+            CryptoLoan = new BybitRestClientApiCryptoLoan(this);
 
             RequestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
         }
         #endregion
+
+        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor();
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
@@ -110,9 +116,9 @@ namespace Bybit.Net.Clients.V5
         public override TimeSpan? GetTimeOffset()
             => _timeSyncState.TimeOffset;
 
-        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
+        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            var result = await base.SendAsync<BybitResult<object>>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            var result = await base.SendAsync<BybitResult<object>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
             if (!result)
                 return result.AsDataless();
 
@@ -122,24 +128,9 @@ namespace Bybit.Net.Clients.V5
             return result.AsDataless();
         }
 
-        internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRequestFullResponseAsync<T,U>(
-             Uri uri,
-             HttpMethod method,
-             CancellationToken cancellationToken,
-             Dictionary<string, object>? parameters = null,
-             bool signed = false)
+        internal async Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
-        }
-
-        internal async Task<WebCallResult<T>> SendRequestAsync<T>(
-             Uri uri,
-             HttpMethod method,
-             CancellationToken cancellationToken,
-             Dictionary<string, object>? parameters = null,
-             bool signed = false)
-        {
-            var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
+            var result = await base.SendAsync<BybitResult<T>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
@@ -149,21 +140,30 @@ namespace Bybit.Net.Clients.V5
             return result.As(result.Data.Result);
         }
 
-        internal async Task<WebCallResult> SendRequestAsync(
-             Uri uri,
-             HttpMethod method,
-             CancellationToken cancellationToken,
-             Dictionary<string, object>? parameters = null,
-             bool signed = false)
+        internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRawAsync<T, U>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
-            if (!result)
-                return result.AsDataless();
+            return await base.SendAsync<BybitExtResult<T, U>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
+        }
 
-            if (result.Data.ReturnCode != 0)
-                return result.AsDatalessError(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+        protected override Error? TryParseError(IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        {
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
+            if (code != 10006)
+                return null;
 
-            return result.AsDataless();
+            // Rate limit error
+            var error = new ServerRateLimitError(accessor.GetValue<string>(MessagePath.Get().Property("retMsg"))!);
+            var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("X-Bapi-Limit-Reset-Timestamp", StringComparison.InvariantCultureIgnoreCase));
+            if (retryAfterHeader.Value?.Any() != true)
+                return error;
+
+            var value = retryAfterHeader.Value.First();
+            if (!long.TryParse(value, out var timestamp))
+                return error;
+
+            var time = DateTimeConverter.ConvertFromMilliseconds(timestamp);
+            error.RetryAfter = time;
+            return error;            
         }
 
         /// <inheritdoc />
@@ -376,8 +376,8 @@ namespace Bybit.Net.Clients.V5
                 Symbol = order.Symbol,
                 Timestamp = order.CreateTime,
                 Type = order.OrderType == Enums.OrderType.Market ? CommonOrderType.Market : order.OrderType == Enums.OrderType.Limit ? CommonOrderType.Limit : CommonOrderType.Other,
-                Status = order.Status == Enums.V5.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
-                         order.Status == Enums.V5.OrderStatus.Filled ? CommonOrderStatus.Filled :
+                Status = order.Status == Enums.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
+                         order.Status == Enums.OrderStatus.Filled ? CommonOrderStatus.Filled :
                          CommonOrderStatus.Active,
                 SourceObject = order
             });
@@ -424,8 +424,8 @@ namespace Bybit.Net.Clients.V5
                 Symbol = o.Symbol,
                 Timestamp = o.CreateTime,
                 Type = o.OrderType == Enums.OrderType.Market ? CommonOrderType.Market : o.OrderType == Enums.OrderType.Limit ? CommonOrderType.Limit : CommonOrderType.Other,
-                Status = o.Status == Enums.V5.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
-                         o.Status == Enums.V5.OrderStatus.Filled ? CommonOrderStatus.Filled :
+                Status = o.Status == Enums.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
+                         o.Status == Enums.OrderStatus.Filled ? CommonOrderStatus.Filled :
                          CommonOrderStatus.Active,
                 SourceObject = o
             }));
@@ -450,8 +450,8 @@ namespace Bybit.Net.Clients.V5
                 Symbol = o.Symbol,
                 Timestamp = o.CreateTime,
                 Type = o.OrderType == Enums.OrderType.Market ? CommonOrderType.Market : o.OrderType == Enums.OrderType.Limit ? CommonOrderType.Limit : CommonOrderType.Other,
-                Status = o.Status == Enums.V5.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
-                         o.Status == Enums.V5.OrderStatus.Filled ? CommonOrderStatus.Filled :
+                Status = o.Status == Enums.OrderStatus.Cancelled ? CommonOrderStatus.Canceled :
+                         o.Status == Enums.OrderStatus.Filled ? CommonOrderStatus.Filled :
                          CommonOrderStatus.Active,
                 SourceObject = o
             }));

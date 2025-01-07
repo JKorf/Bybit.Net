@@ -1,25 +1,24 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Internal
 {
     internal class BybitExtResult<T, U>
     {
-        [JsonProperty("retCode")]
+        [JsonPropertyName("retCode")]
         public int ReturnCode { get; set; }
 
-        [JsonProperty("retMsg")]
+        [JsonPropertyName("retMsg")]
         public string ReturnMessage { get; set; } = string.Empty;
 
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
 
 #pragma warning disable 8618
-        [JsonProperty("result")]
+        [JsonPropertyName("result")]
         public T Result { get; set; }
 
-        [JsonProperty("retExtInfo")]
+        [JsonPropertyName("retExtInfo")]
         public U ExtInfo { get; set; }
 #pragma warning restore
     }

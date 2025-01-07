@@ -1,27 +1,27 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets
 {
     internal class BybitRequestMessage
     {
-        [JsonProperty("req_id")]
+        [JsonPropertyName("req_id")]
         public string RequestId { get; set; } = string.Empty;
-        [JsonProperty("op")]
+        [JsonPropertyName("op")]
         public string Operation { get; set; } = string.Empty;
-        [JsonProperty("args", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("args"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<object>? Args { get; set; }
     }
 
     internal class BybitRequestQueryMessage
     {
-        [JsonProperty("reqId")]
+        [JsonPropertyName("reqId")]
         public string RequestId { get; set; } = string.Empty;
-        [JsonProperty("op")]
+        [JsonPropertyName("op")]
         public string Operation { get; set; } = string.Empty;
-        [JsonProperty("header", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("header"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, string>? Header { get; set; }
-        [JsonProperty("args", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("args"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<object>? Args { get; set; }
     }
 }

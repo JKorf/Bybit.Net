@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -14,7 +13,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Deposit list
         /// </summary>
-        [JsonProperty("rows")]
+        [JsonPropertyName("rows")]
         public IEnumerable<BybitDeposit> Deposits { get; set; } = Array.Empty<BybitDeposit>();
     }
 
@@ -26,58 +25,64 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Chain
         /// </summary>
-        [JsonProperty("chain")]
+        [JsonPropertyName("chain")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("txID")]
+        [JsonPropertyName("txID")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("status")]
         public DepositStatus Status { get; set; }
         /// <summary>
         /// Tag
         /// </summary>
+        [JsonPropertyName("tag")]
         public string Tag { get; set; } = string.Empty;
         /// <summary>
         /// Deposit fee
         /// </summary>
+        [JsonPropertyName("depositFee")]
         public decimal? DepositFee { get; set; }
         /// <summary>
         /// To address
         /// </summary>
+        [JsonPropertyName("toAddress")]
         public string ToAddress { get; set; } = string.Empty;
         /// <summary>
         /// Time of success
         /// </summary>
-        [JsonProperty("successAt")]
+        [JsonPropertyName("successAt")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? SuccessTime { get; set; }
         /// <summary>
         /// Number of confirmations
         /// </summary>
+        [JsonPropertyName("confirmations")]
         public int Confirmations { get; set; }
         /// <summary>
         /// Transaction index
         /// </summary>
-        [JsonProperty("txIndex")]
+        [JsonPropertyName("txIndex")]
         public string TransactionIndex { get; set; } = string.Empty;
         /// <summary>
         /// Block hash
         /// </summary>
+        [JsonPropertyName("blockHash")]
         public string BlockHash { get; set; } = string.Empty;
     }
 }

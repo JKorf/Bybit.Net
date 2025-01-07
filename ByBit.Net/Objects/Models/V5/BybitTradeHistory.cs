@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -13,55 +12,59 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Trade id
         /// </summary>
-        [JsonProperty("execId")]
+        [JsonPropertyName("execId")]
         public string TradeId { get; set; } = string.Empty;
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Price of the trade
         /// </summary>
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// Quantity of the trade
         /// </summary>
-        [JsonProperty("size")]
+        [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Side
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Trade timestamp
         /// </summary>
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// 
+        /// Is block trade
         /// </summary>
+        [JsonPropertyName("isBlockTrade")]
         public bool IsBlockTrade { get; set; }
         /// <summary>
         /// [Option only] Mark price
         /// </summary>
-        [JsonProperty("mP")]
+        [JsonPropertyName("mP")]
         public decimal? MarkPrice { get; set; }
         /// <summary>
         /// [Option only] Index price
         /// </summary>
-        [JsonProperty("iP")]
+        [JsonPropertyName("iP")]
         public decimal? IndexPrice { get; set; }
         /// <summary>
         /// [Option only] Mark iv
         /// </summary>
-        [JsonProperty("mIv")]
+        [JsonPropertyName("mIv")]
         public decimal? MarkIv { get; set; }
         /// <summary>
         /// [Option only] Index iv
         /// </summary>
-        [JsonProperty("iv")]
+        [JsonPropertyName("iv")]
         public decimal? IndexIv { get; set; }
     }
 }

@@ -1,8 +1,4 @@
-﻿using Bybit.Net.Interfaces.Clients.DerivativesApi;
-using Bybit.Net.Interfaces.Clients.DerivativesApi.ContractApi;
-using Bybit.Net.Interfaces.Clients.DerivativesApi.UnifiedMarginApi;
-using Bybit.Net.Interfaces.Clients.SpotApi.v3;
-using Bybit.Net.Interfaces.Clients.V5;
+﻿using Bybit.Net.Interfaces.Clients.V5;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Options;
@@ -14,22 +10,6 @@ namespace Bybit.Net.Interfaces.Clients
     /// </summary>
     public interface IBybitSocketClient : ISocketClient
     {
-        /// <summary>
-        /// Spot streams v3
-        /// </summary>
-        public IBybitSocketClientSpotApiV3 SpotV3Api { get; }
-        /// <summary>
-        /// Derivatives public streams
-        /// </summary>
-        public IBybitSocketClientDerivativesPublicApi DerivativesApi { get; }
-        /// <summary>
-        /// Unified margin private streams
-        /// </summary>
-        public IBybitSocketClientUnifiedMarginApi UnifiedMarginApi { get; }
-        /// <summary>
-        /// Contract private streams
-        /// </summary>
-        public IBybitSocketClientContractApi ContractApi { get; }
         /// <summary>
         /// V5 Spot streams
         /// </summary>

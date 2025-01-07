@@ -1,0 +1,24 @@
+GET
+/v5/crypto-loan/adjustment-history
+true
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "list": [
+            {
+                "adjustId": "1794318409405331968",
+                "adjustTime": "1728635422814",
+                "afterLTV": "0.7164",
+                "amount": "0.001",
+                "collateralCurrency": "BTC",
+                "direction": 1,
+                "orderId": "1794267532472646144",
+                "preLTV": "0.6546"
+            }
+        ],
+        "nextPageCursor": "1844656778923966466"
+    },
+    "retExtInfo": {},
+    "time": 1728635873329
+}

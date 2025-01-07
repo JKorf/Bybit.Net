@@ -1,0 +1,12 @@
+GET
+/v5/crypto-loan/max-collateral-amount
+true
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "maxCollateralAmount": "0.00210611"
+    },
+    "retExtInfo": {},
+    "time": 1728634291554
+}

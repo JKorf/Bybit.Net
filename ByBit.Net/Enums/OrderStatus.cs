@@ -8,48 +8,59 @@ namespace Bybit.Net.Enums
     public enum OrderStatus
     {
         /// <summary>
-        /// Created
+        /// Created but not yet in matching engine
         /// </summary>
+        [Map("Created")]
         Created,
+        /// <summary>
+        /// Placed successfully
+        /// </summary>
+        [Map("New")]
+        New,
         /// <summary>
         /// Rejected
         /// </summary>
-        [Map("ORDER_FAILED")]
+        [Map("Rejected")]
         Rejected,
-        /// <summary>
-        /// New
-        /// </summary>
-        [Map("ORDER_NEW")]
-        New,
         /// <summary>
         /// Partially filled
         /// </summary>
+        [Map("PartiallyFilled")]
         PartiallyFilled,
         /// <summary>
-        /// Fully filled
+        /// Partially filled and cancelled
         /// </summary>
-        [Map("ORDER_FILLED")]
+        [Map("PartiallyFilledCanceled")]
+        PartiallyFilledCanceled,
+        /// <summary>
+        /// Filled
+        /// </summary>
+        [Map("Filled")]
         Filled,
         /// <summary>
-        /// Canceled
+        /// Cancelled
         /// </summary>
-        [Map("ORDER_CANCELED")]
-        Canceled,
-        /// <summary>
-        /// Pending cancel
-        /// </summary>
-        PendingCancel,
-
-        /// <summary>
-        /// Market order was filled to near qty and the remaining USDT retrurned back 
-        /// </summary>
-        [Map("PARTIALLY_FILLED_CANCELED")]
-        PartiallyFilledCanceled,
-
+        [Map("Cancelled")]
+        Cancelled,
         /// <summary>
         /// Untriggered
         /// </summary>
-        [Map("UnTriggered")]
-        UnTriggered
+        [Map("Untriggered")]
+        Untriggered,
+        /// <summary>
+        /// Triggered
+        /// </summary>
+        [Map("Triggered")]
+        Triggered,
+        /// <summary>
+        /// Deactivated
+        /// </summary>
+        [Map("Deactivated")]
+        Deactivated,
+        /// <summary>
+        /// Order has been triggered and the new active order has been successfully placed. Is the final state of a successful conditional order
+        /// </summary>
+        [Map("Active")]
+        Active
     }
 }

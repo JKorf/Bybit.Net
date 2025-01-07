@@ -10,12 +10,12 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Buy
         /// </summary>
-        [Map("Buy")]
+        [Map("Buy", "BUY")]
         Buy,
         /// <summary>
         /// Sell
         /// </summary>
-        [Map("Sell")]
+        [Map("Sell", "SELL")]
         Sell
     }
 }

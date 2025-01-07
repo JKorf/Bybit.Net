@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -13,83 +12,92 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Order side
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Order quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Order price
         /// </summary>
+        [JsonPropertyName("orderPrice")]
         public decimal OrderPrice { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
         /// Trade type
         /// </summary>
-        [JsonProperty("execType")]
+        [JsonPropertyName("execType")]
         [JsonConverter(typeof(EnumConverter))]
         public TradeType TradeType { get; set; }
         /// <summary>
         /// Closed size
         /// </summary>
+        [JsonPropertyName("closedSize")]
         public decimal ClosedSize { get; set; }
         /// <summary>
         /// Cumulated entry position value
         /// </summary>
-        [JsonProperty("cumEntryValue")]
+        [JsonPropertyName("cumEntryValue")]
         public decimal EntryValue { get; set; }
         /// <summary>
         /// Average entry price
         /// </summary>
-        [JsonProperty("avgEntryPrice")]
+        [JsonPropertyName("avgEntryPrice")]
         public decimal AverageEntryPrice { get; set; }
         /// <summary>
         /// Cumulated exit position value
         /// </summary>
-        [JsonProperty("cumExitValue")]
+        [JsonPropertyName("cumExitValue")]
         public decimal ExitValue { get; set; }
         /// <summary>
         /// Average exit price
         /// </summary>
-        [JsonProperty("avgExitPrice")]
+        [JsonPropertyName("avgExitPrice")]
         public decimal AverageExitPrice { get; set; }
         /// <summary>
         /// Close PnL
         /// </summary>
+        [JsonPropertyName("closedPnl")]
         public decimal ClosedPnl { get; set; }
         /// <summary>
         /// Number of fills
         /// </summary>
+        [JsonPropertyName("fillCount")]
         public int FillCount { get; set; }
         /// <summary>
         /// Leverage
         /// </summary>
+        [JsonPropertyName("leverage")]
         public decimal Leverage { get; set; }
         /// <summary>
         /// Created time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("createdTime")]
+        [JsonPropertyName("createdTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Updated time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("updatedTime")]
+        [JsonPropertyName("updatedTime")]
         public DateTime UpdateTime { get; set; }
     }
 }

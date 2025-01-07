@@ -1,4 +1,6 @@
-﻿namespace Bybit.Net.Objects.Models.V5
+﻿using System.Text.Json.Serialization;
+
+namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
     /// Id
@@ -8,6 +10,7 @@
         /// <summary>
         /// Id
         /// </summary>
+        [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
     }
 }

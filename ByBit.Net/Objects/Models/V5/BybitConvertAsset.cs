@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -11,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Coins
         /// </summary>
-        [JsonProperty("coins")]
+        [JsonPropertyName("coins")]
         public IEnumerable<BybitConvertAsset> Assets { get; set; } = Array.Empty<BybitConvertAsset>();
     }
 
@@ -23,62 +21,62 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Full name
         /// </summary>
-        [JsonProperty("fullName")]
+        [JsonPropertyName("fullName")]
         public string FullName { get; set; } = string.Empty;
         /// <summary>
         /// Icon
         /// </summary>
-        [JsonProperty("icon")]
+        [JsonPropertyName("icon")]
         public string Icon { get; set; } = string.Empty;
         /// <summary>
         /// Icon night
         /// </summary>
-        [JsonProperty("iconNight")]
+        [JsonPropertyName("iconNight")]
         public string IconNight { get; set; } = string.Empty;
         /// <summary>
         /// The max amount of decimal places to use
         /// </summary>
-        [JsonProperty("accuracyLength")]
+        [JsonPropertyName("accuracyLength")]
         public int Precision { get; set; }
         /// <summary>
         /// Asset type
         /// </summary>
-        [JsonProperty("coinType")]
+        [JsonPropertyName("coinType")]
         public string AssetType { get; set; } = string.Empty;
         /// <summary>
         /// Balance
         /// </summary>
-        [JsonProperty("balance")]
+        [JsonPropertyName("balance")]
         public decimal? Balance { get; set; }
         /// <summary>
         /// Balance USDT value
         /// </summary>
-        [JsonProperty("uBalance")]
+        [JsonPropertyName("uBalance")]
         public decimal? BalanceValue { get; set; }
         /// <summary>
         /// The minimum quantity of fromAsset per transaction
         /// </summary>
-        [JsonProperty("singleFromMinLimit")]
+        [JsonPropertyName("singleFromMinLimit")]
         public decimal FromAssetMinQuantity { get; set; }
         /// <summary>
         /// The maximum quantity of fromAsset per transaction
         /// </summary>
-        [JsonProperty("singleFromMaxLimit")]
+        [JsonPropertyName("singleFromMaxLimit")]
         public decimal FromAssetMaxQuantity { get; set; }
         /// <summary>
         /// true: the asset is disabled to be fromAsset, false: the asset is allowed to be fromAsset
         /// </summary>
-        [JsonProperty("disableFrom")]
+        [JsonPropertyName("disableFrom")]
         public bool DisableFrom { get; set; }
         /// <summary>
         /// true: the asset is disabled to be toAsset, false: the asset is allowed to be toAsset
         /// </summary>
-        [JsonProperty("disableTo")]
+        [JsonPropertyName("disableTo")]
         public bool DisableTo { get; set; }
     }
 }

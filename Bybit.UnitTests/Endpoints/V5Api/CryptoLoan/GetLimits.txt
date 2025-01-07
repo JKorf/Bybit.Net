@@ -1,0 +1,17 @@
+GET
+/v5/crypto-loan/borrowable-collateralisable-number
+true
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "collateralCurrency": "BTC",
+        "loanCurrency": "USDT",
+        "maxCollateralAmount": "164.957732055526752104",
+        "maxLoanAmount": "8000000",
+        "minCollateralAmount": "0.000412394330138818",
+        "minLoanAmount": "20"
+    },
+    "retExtInfo": {},
+    "time": 1728627084863
+}

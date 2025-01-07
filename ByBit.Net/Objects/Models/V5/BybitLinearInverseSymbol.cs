@@ -1,8 +1,6 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -15,103 +13,113 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Symbol name
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Contract type
         /// </summary>
-        [JsonProperty("contractType")]
+        [JsonPropertyName("contractType")]
         [JsonConverter(typeof(EnumConverter))]
         public ContractTypeV5 ContractType { get; set; }
         /// <summary>
         /// Base asset
         /// </summary>
-        [JsonProperty("baseCoin")]
+        [JsonPropertyName("baseCoin")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset
         /// </summary>
-        [JsonProperty("quoteCoin")]
+        [JsonPropertyName("quoteCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Settle asset
         /// </summary>
-        [JsonProperty("settleCoin")]
+        [JsonPropertyName("settleCoin")]
         public string SettleAsset { get; set; } = string.Empty;
         /// <summary>
         /// Launch time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("launchTime")]
         public DateTime LaunchTime { get; set; }
         /// <summary>
         /// Delivery time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("deliveryTime")]
         public DateTime? DeliveryTime { get; set; }
         /// <summary>
         /// Symbol status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("status")]
         public SymbolStatus Status { get; set; }
         /// <summary>
         /// Delivery fee rate
         /// </summary>
+        [JsonPropertyName("deliveryFeeRate")]
         public decimal? DeliveryFeeRate { get; set; }
         /// <summary>
         /// Price scale
         /// </summary>
+        [JsonPropertyName("priceScale")]
         public decimal PriceScale { get; set; }
         /// <summary>
         /// Unified margin trade
         /// </summary>
+        [JsonPropertyName("unifiedMarginTrade")]
         public bool UnifiedMarginTrade { get; set; }
         /// <summary>
         /// Funding interval in minutes
         /// </summary>
+        [JsonPropertyName("fundingInterval")]
         public int FundingInterval { get; set; }
         /// <summary>
         /// Copy trading support
         /// </summary>
-        [JsonProperty("copyTrading"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("copyTrading"), JsonConverter(typeof(EnumConverter))]
         public CopyTradeType CopyTrading { get; set; }
         /// <summary>
         /// Upper limit of funding date
         /// </summary>
-        [JsonProperty("upperFundingRate")]
+        [JsonPropertyName("upperFundingRate")]
         public decimal UpperFundingRate { get; set; }
         /// <summary>
         /// Lower limit of funding data
         /// </summary>
-        [JsonProperty("lowerFundingRate")]
+        [JsonPropertyName("lowerFundingRate")]
         public decimal LowerFundingRate { get; set; }
         /// <summary>
         /// Whether the contract is a pre-market contract
         /// </summary>
-        [JsonProperty("isPreListing")]
+        [JsonPropertyName("isPreListing")]
         public bool IsPrelisting { get; set; }
 
         /// <summary>
         /// Prelisting information
         /// </summary>
-        [JsonProperty("preListingInfo")]
+        [JsonPropertyName("preListingInfo")]
         public BybitPrelistingInfo? PrelistingInfo { get; set; }
 
         /// <summary>
         /// Lot size order filter
         /// </summary>
+        [JsonPropertyName("lotSizeFilter")]
         public BybitLinearInverseLotSizeFilter? LotSizeFilter { get; set; }
         /// <summary>
         /// Price order filter
         /// </summary>
+        [JsonPropertyName("priceFilter")]
         public BybitLinearInversePriceFilter? PriceFilter { get; set; }
         /// <summary>
         /// Leverage
         /// </summary>
+        [JsonPropertyName("leverageFilter")]
         public BybitLinearInverseLeveragefilter? LeverageFilter { get; set; }
         /// <summary>
         /// Risk limit parameters
         /// </summary>
-        [JsonProperty("riskParameters")]
+        [JsonPropertyName("riskParameters")]
         public BybitRiskParameters? BybitRiskParameters { get; set; }
     }
 
@@ -123,12 +131,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Price limit ratio X value
         /// </summary>
-        [JsonProperty("priceLimitRatioX")]
+        [JsonPropertyName("priceLimitRatioX")]
         public decimal? PriceLimitRatioX { get; set; }
         /// <summary>
         /// Price limit ratio Y value
         /// </summary>
-        [JsonProperty("priceLimitRatioY")]
+        [JsonPropertyName("priceLimitRatioY")]
         public decimal? PriceLimitRatioY { get; set; }
     }
 
@@ -140,19 +148,19 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Current auction phase
         /// </summary>
-        [JsonProperty("curAuctionPhase"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("curAuctionPhase"), JsonConverter(typeof(EnumConverter))]
         public AuctionPhase CurrentPhase { get; set; }
 
         /// <summary>
         /// Phases
         /// </summary>
-        [JsonProperty("phases")]
+        [JsonPropertyName("phases")]
         public IEnumerable<BybitPrelistingPhase> Phases { get; set; } = Array.Empty<BybitPrelistingPhase>();
 
         /// <summary>
         /// Fee info
         /// </summary>
-        [JsonProperty("auctionFeeInfo")]
+        [JsonPropertyName("auctionFeeInfo")]
         public BybitPrelistingFees Fees { get; set; } = null!;
     }
 
@@ -164,17 +172,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// The trading fee rate during auction phase
         /// </summary>
-        [JsonProperty("auctionFeeRate")]
+        [JsonPropertyName("auctionFeeRate")]
         public decimal AuctionFeeRate { get; set; }
         /// <summary>
         /// The taker fee rate during continues trading phase
         /// </summary>
-        [JsonProperty("takerFeeRate")]
+        [JsonPropertyName("takerFeeRate")]
         public decimal TakerFeeRate { get; set; }
         /// <summary>
         /// The maker fee rate during continues trading phase
         /// </summary>
-        [JsonProperty("makerFeeRate")]
+        [JsonPropertyName("makerFeeRate")]
         public decimal MakerFeeRate { get; set; }
     }
 
@@ -186,17 +194,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Phase
         /// </summary>
-        [JsonProperty("phase"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("phase"), JsonConverter(typeof(EnumConverter))]
         public AuctionPhase Phase { get; set; }
         /// <summary>
         /// Phase start time
         /// </summary>
-        [JsonProperty("startTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("startTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime StartTime { get; set; }
         /// <summary>
         /// Phase end time
         /// </summary>
-        [JsonProperty("endTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("endTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime EndTime { get; set; }
     }
 
@@ -208,14 +216,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Min leverage
         /// </summary>
+        [JsonPropertyName("minLeverage")]
         public decimal MinLeverage { get; set; }
         /// <summary>
         /// Max leverage
         /// </summary>
+        [JsonPropertyName("maxLeverage")]
         public decimal MaxLeverage { get; set; }
         /// <summary>
         /// Leverage step
         /// </summary>
+        [JsonPropertyName("leverageStep")]
         public decimal LeverageStep { get; set; }
     }
 
@@ -227,27 +238,27 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Quantity step
         /// </summary>
-        [JsonProperty("qtyStep")]
+        [JsonPropertyName("qtyStep")]
         public decimal QuantityStep { get; set; }
         /// <summary>
         /// Min order quantity
         /// </summary>
-        [JsonProperty("minOrderQty")]
+        [JsonPropertyName("minOrderQty")]
         public decimal MinOrderQuantity { get; set; }
         /// <summary>
         /// Max order quantity
         /// </summary>
-        [JsonProperty("maxOrderQty")]
+        [JsonPropertyName("maxOrderQty")]
         public decimal MaxOrderQuantity { get; set; }
         /// <summary>
         /// Max market order quantity
         /// </summary>
-        [JsonProperty("maxMktOrderQty")]
+        [JsonPropertyName("maxMktOrderQty")]
         public decimal MaxMarketOrderQuantity { get; set; }
         /// <summary>
         /// Minimal notional value of an order
         /// </summary>
-        [JsonProperty("minNotionalValue")]
+        [JsonPropertyName("minNotionalValue")]
         public decimal? MinNotionalValue { get; set; }
     }
 
@@ -259,14 +270,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Tick size
         /// </summary>
+        [JsonPropertyName("tickSize")]
         public decimal TickSize { get; set; }
         /// <summary>
         /// Min price
         /// </summary>
+        [JsonPropertyName("minPrice")]
         public decimal MinPrice { get; set; }
         /// <summary>
         /// Max price
         /// </summary>
+        [JsonPropertyName("maxPrice")]
         public decimal MaxPrice { get; set; }
     }
 }

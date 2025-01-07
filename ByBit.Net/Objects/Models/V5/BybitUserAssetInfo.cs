@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +12,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Assets
         /// </summary>
-        [JsonProperty("rows")]
+        [JsonPropertyName("rows")]
         public IEnumerable<BybitUserAssetInfo> Assets { get; set; } = Array.Empty<BybitUserAssetInfo>();
     }
 
@@ -25,21 +24,22 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Name
         /// </summary>
+        [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
         /// asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Quantity remaining
         /// </summary>
-        [JsonProperty("remainAmount")]
+        [JsonPropertyName("remainAmount")]
         public decimal? QuantityRemaining { get; set; }
         /// <summary>
         /// Networks
         /// </summary>
-        [JsonProperty("chains")]
+        [JsonPropertyName("chains")]
         public IEnumerable<BybitAssetNetworkInfo> Networks { get; set; } = new List<BybitAssetNetworkInfo>();
     }
 
@@ -51,50 +51,54 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Network type
         /// </summary>
-        [JsonProperty("chainType")]
+        [JsonPropertyName("chainType")]
         public string NetworkType { get; set; } = string.Empty;
         /// <summary>
         /// Confirmations
         /// </summary>
+        [JsonPropertyName("confirmation")]
         public int? Confirmation { get; set; }
         /// <summary>
         /// Withdrawal fee
         /// </summary>
+        [JsonPropertyName("withdrawFee")]
         public decimal? WithdrawFee { get; set; }
         /// <summary>
         /// Min deposit quantity
         /// </summary>
-        [JsonProperty("depositMin")]
+        [JsonPropertyName("depositMin")]
         public decimal? MinDeposit { get; set; }
         /// <summary>
         /// Min withdrawal quantity
         /// </summary>
-        [JsonProperty("withdrawMin")]
+        [JsonPropertyName("withdrawMin")]
         public decimal? MinWithdraw { get; set; }
         /// <summary>
         /// Chain
         /// </summary>
-        [JsonProperty("chain")]
+        [JsonPropertyName("chain")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Chain deposit enabled
         /// </summary>
-        [JsonProperty("chainDeposit")]
+        [JsonPropertyName("chainDeposit")]
         [JsonConverter(typeof(BoolConverter))]
         public bool? NetworkDeposit { get; set; }
         /// <summary>
         /// Chain withdraw enabled
         /// </summary>
-        [JsonProperty("chainWithdraw")]
+        [JsonPropertyName("chainWithdraw")]
         [JsonConverter(typeof(BoolConverter))]
         public bool? NetworkWithdraw { get; set; }
         /// <summary>
         /// Minimal accuracy
         /// </summary>
+        [JsonPropertyName("minAccuracy")]
         public int MinAccuracy { get; set; }
         /// <summary>
         /// Withdrawal percentage fee
         /// </summary>
+        [JsonPropertyName("withdrawPercentageFee")]
         public decimal? WithdrawPercentageFee { get; set; }
     }
 }

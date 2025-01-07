@@ -1,4 +1,6 @@
-﻿namespace Bybit.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Position mode
@@ -6,16 +8,14 @@
     public enum PositionMode
     {
         /// <summary>
-        /// One way
+        /// Merge single
         /// </summary>
-        OneWay,
+        [Map("0")]
+        MergedSingle,
         /// <summary>
-        /// Buy side of both side mode
+        /// Both sides
         /// </summary>
-        BothSideBuy,
-        /// <summary>
-        /// Sell side of both side mode
-        /// </summary>
-        BothSideSell
+        [Map("3")]
+        BothSides
     }
 }

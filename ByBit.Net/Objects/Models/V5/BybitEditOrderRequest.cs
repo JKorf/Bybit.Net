@@ -1,7 +1,5 @@
-﻿using Bybit.Net.Converters;
-using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Bybit.Net.Enums;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -13,83 +11,83 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Edit by order id
         /// </summary>
-        [JsonProperty("orderId", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("orderId"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? OrderId { get; set; }
         /// <summary>
         /// Edit by client order id
         /// </summary>
-        [JsonProperty("orderLinkId", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("orderLinkId"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? ClientOrderId { get; set; }
         /// <summary>
         /// The symbol
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// New order quantity
         /// </summary>
-        [JsonProperty("qty", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("qty"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? Quantity { get; set; }
         /// <summary>
         /// Price if order type is not market
         /// </summary>
-        [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("price"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? Price { get; set; }
         /// <summary>
         /// Take profit price
         /// </summary>
-        [JsonProperty("takeProfit", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("takeProfit"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? TakeProfit { get; set; }
         /// <summary>
         /// Stop loss price
         /// </summary>
-        [JsonProperty("stopLoss", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("stopLoss"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? StopLoss { get; set; }
         /// <summary>
         /// Trigger price
         /// </summary>
-        [JsonProperty("triggerPrice", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("triggerPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? TriggerPrice { get; set; }
         /// <summary>
         /// Trigger price type
         /// </summary>
-        [JsonProperty("triggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("triggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public TriggerType? TriggerBy { get; set; }
         /// <summary>
         /// Take profit limit price
         /// </summary>
-        [JsonProperty("tpLimitPrice", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("tpLimitPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? TakeProfitLimitPrice { get; set; }
         /// <summary>
         /// Stop loss limit price
         /// </summary>
-        [JsonProperty("slLimitPrice", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("slLimitPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? StopLossLimitPrice { get; set; }
         /// <summary>
         /// Implied volatility. option only. Pass the real value, e.g for 10%, 0.1 should be passed. orderIv has a higher priority when price is passed as well
         /// </summary>
-        [JsonProperty("orderIv", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(DecimalToStringConverter))]
+        [JsonPropertyName("orderIv"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
         public decimal? OrderImpliedVolatility { get; set; }
         /// <summary>
         /// Take profit/Stop loss mode
         /// </summary>
-        [JsonProperty("tpslMode", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpslMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
         /// <summary>
         /// Stop Loss Trigger price type
         /// </summary>
-        [JsonProperty("slTriggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("slTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public TriggerType? StopLossTriggerBy { get; set; }
         /// <summary>
         /// Take Profit Trigger price type
         /// </summary>
-        [JsonProperty("tpTriggerBy", NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
         public TriggerType? TakeProfitTriggerBy { get; set; }
     }
 
     internal record BybitSocketEditOrderRequest : BybitEditOrderRequest
     {
-        [JsonProperty("category"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("category"), JsonConverter(typeof(EnumConverter))]
         public Category Category { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -10,20 +10,22 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// The asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Symbols
         /// </summary>
-        [JsonProperty("symbols")]
+        [JsonPropertyName("symbols")]
         public string Symbols { get; set; } = string.Empty;
         /// <summary>
         /// Balance
         /// </summary>
+        [JsonPropertyName("balance")]
         public decimal Balance { get; set; }
         /// <summary>
         /// Value
         /// </summary>
+        [JsonPropertyName("value")]
         public decimal Value { get; set; }
     }
 }

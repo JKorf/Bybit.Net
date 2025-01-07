@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -11,52 +11,52 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Quote transaction id
         /// </summary>
-        [JsonProperty("quoteTxId")]
+        [JsonPropertyName("quoteTxId")]
         public string QuoteTransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Exchange rate
         /// </summary>
-        [JsonProperty("exchangeRate")]
+        [JsonPropertyName("exchangeRate")]
         public decimal ExchangeRate { get; set; }
         /// <summary>
         /// From asset
         /// </summary>
-        [JsonProperty("fromCoin")]
+        [JsonPropertyName("fromCoin")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
         /// From asset type
         /// </summary>
-        [JsonProperty("fromCoinType")]
+        [JsonPropertyName("fromCoinType")]
         public string FromAssetType { get; set; } = string.Empty;
         /// <summary>
         /// To asset
         /// </summary>
-        [JsonProperty("toCoin")]
+        [JsonPropertyName("toCoin")]
         public string ToAsset { get; set; } = string.Empty;
         /// <summary>
         /// To asset type
         /// </summary>
-        [JsonProperty("toCoinType")]
+        [JsonPropertyName("toCoinType")]
         public string ToAssetType { get; set; } = string.Empty;
         /// <summary>
         /// From quantity
         /// </summary>
-        [JsonProperty("fromAmount")]
+        [JsonPropertyName("fromAmount")]
         public decimal FromQuantity { get; set; }
         /// <summary>
         /// To quantity
         /// </summary>
-        [JsonProperty("toAmount")]
+        [JsonPropertyName("toAmount")]
         public decimal ToQuantity { get; set; }
         /// <summary>
         /// Expire time
         /// </summary>
-        [JsonProperty("expiredTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("expiredTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime ExpireTime { get; set; }
         /// <summary>
         /// Request id
         /// </summary>
-        [JsonProperty("requestId")]
+        [JsonPropertyName("requestId")]
         public string? RequestId { get; set; }
     }
 

@@ -36,21 +36,6 @@ namespace Bybit.Net.Objects.Options
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
         /// <summary>
-        /// Options for the Spot API
-        /// </summary>
-        public RestApiOptions SpotOptions { get; private set; } = new RestApiOptions();
-
-        /// <summary>
-        /// Options for the Copy Trading API
-        /// </summary>
-        public RestApiOptions CopyTradingOptions { get; private set; } = new RestApiOptions();
-
-        /// <summary>
-        /// Options for the Derivatives API
-        /// </summary>
-        public RestApiOptions DerivativesOptions { get; private set; } = new RestApiOptions();
-
-        /// <summary>
         /// Options for the V5 API
         /// </summary>
         public RestApiOptions V5Options { get; private set; } = new RestApiOptions();
@@ -60,9 +45,6 @@ namespace Bybit.Net.Objects.Options
             targetOptions = base.Set<BybitRestOptions>(targetOptions);
             targetOptions.Referer = Referer;
             targetOptions.ReceiveWindow = ReceiveWindow;
-            targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
-            targetOptions.CopyTradingOptions = CopyTradingOptions.Set(targetOptions.CopyTradingOptions);
-            targetOptions.DerivativesOptions = DerivativesOptions.Set(targetOptions.DerivativesOptions);
             targetOptions.V5Options = V5Options.Set(targetOptions.V5Options);
             return targetOptions;
         }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -10,67 +10,67 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Hourly borrow rate
         /// </summary>
-        [JsonProperty("hourlyBorrowRate")]
+        [JsonPropertyName("hourlyBorrowRate")]
         public decimal HourlyBorrowRate { get; set; }
         /// <summary>
         /// Max borrow amount
         /// </summary>
-        [JsonProperty("maxBorrowingAmount")]
+        [JsonPropertyName("maxBorrowingAmount")]
         public decimal MaxBorrowAmount { get; set; }
         /// <summary>
         /// Free borrow amount
         /// </summary>
-        [JsonProperty("freeBorrowingAmount")]
+        [JsonPropertyName("freeBorrowAmount")]
         public decimal? FreeBorrowAmount { get; set; }
         /// <summary>
         /// The maximum limit for interest-free borrowing
         /// </summary>
-        [JsonProperty("freeBorrowingLimit")]
+        [JsonPropertyName("freeBorrowingLimit")]
         public decimal? FreeBorrowingLimit { get; set; }
         /// <summary>
         /// Borrow amount
         /// </summary>
-        [JsonProperty("borrowAmount")]
+        [JsonPropertyName("borrowAmount")]
         public decimal BorrowAmount { get; set; }
         /// <summary>
         /// The sum of borrowing amount for other accounts under the same main account
         /// </summary>
-        [JsonProperty("otherBorrowAmount")]
+        [JsonPropertyName("otherBorrowAmount")]
         public decimal OtherBorrowAmount { get; set; }
         /// <summary>
         /// Available to borrow
         /// </summary>
-        [JsonProperty("availableToBorrow")]
+        [JsonPropertyName("availableToBorrow")]
         public decimal AvailableToBorrow { get; set; }
         /// <summary>
         /// Is borrowable
         /// </summary>
-        [JsonProperty("borrowable")]
+        [JsonPropertyName("borrowable")]
         public bool Borrowable { get; set; }
         /// <summary>
         /// Whether it can be used as a margin collateral currency
         /// </summary>
-        [JsonProperty("marginCollateral")]
+        [JsonPropertyName("marginCollateral")]
         public bool MarginCollateral { get; set; }
         /// <summary>
         /// Whether the collateral is turned on by user 
         /// </summary>
-        [JsonProperty("collateralSwitch")]
+        [JsonPropertyName("collateralSwitch")]
         public bool CollateralSwitch { get; set; }
         /// <summary>
         /// Collateral ratio
         /// </summary>
-        [JsonProperty("collateralRatio")]
+        [JsonPropertyName("collateralRatio")]
         public decimal CollateralRatio { get; set; }
         /// <summary>
         /// Borrow usage rate
         /// </summary>
-        [JsonProperty("borrowUsageRate")]
+        [JsonPropertyName("borrowUsageRate")]
         public decimal? BorrowUsageRate { get; set; }
     }
 }

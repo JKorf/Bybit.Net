@@ -1,5 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -12,45 +12,45 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Trade timestamp
         /// </summary>
-        [JsonProperty("T")]
+        [JsonPropertyName("T")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Side
         /// </summary>
-        [JsonProperty("S")]
+        [JsonPropertyName("S")]
         [JsonConverter(typeof(EnumConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("v")]
+        [JsonPropertyName("v")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Price
         /// </summary>
-        [JsonProperty("p")]
+        [JsonPropertyName("p")]
         public decimal Price { get; set; }
         /// <summary>
         /// Direction
         /// </summary>
-        [JsonProperty("L")]
+        [JsonPropertyName("L")]
         [JsonConverter(typeof(EnumConverter))]
         public TickDirection? Direction { get; set; }
         /// <summary>
         /// Trade id
         /// </summary>
-        [JsonProperty("i")]
+        [JsonPropertyName("i")]
         public string TradeId { get; set; } = string.Empty;
         /// <summary>
         /// Is block trade
         /// </summary>
-        [JsonProperty("BT")]
+        [JsonPropertyName("BT")]
         public bool? IsBlockTrade { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -12,7 +11,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Tpsl mode
         /// </summary>
-        [JsonProperty("tpSlMode")]
+        [JsonPropertyName("tpSlMode")]
         [JsonConverter(typeof(EnumConverter))]
         public StopLossTakeProfitMode TakeProfitStopLossMode { get; set; }
     }

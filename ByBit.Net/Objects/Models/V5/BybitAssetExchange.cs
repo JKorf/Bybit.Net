@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +6,7 @@ namespace Bybit.Net.Objects.Models.V5
 {
     internal record BybitAssetExchageWrapper : BybitBaseResponse
     {
+        [JsonPropertyName("orderBody")]
         public IEnumerable<BybitAssetExchange> OrderBody { get; set; } = Array.Empty<BybitAssetExchange>();
     }
 
@@ -18,37 +18,38 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// From asset
         /// </summary>
-        [JsonProperty("fromCoin")]
+        [JsonPropertyName("fromCoin")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
         /// To asset
         /// </summary>
-        [JsonProperty("toCoin")]
+        [JsonPropertyName("toCoin")]
         public string ToAsset { get; set; } = string.Empty;
         /// <summary>
         /// From quantity
         /// </summary>
-        [JsonProperty("fromAmount")]
+        [JsonPropertyName("fromAmount")]
         public decimal FromQuantity { get; set; }
         /// <summary>
         /// To quantity
         /// </summary>
-        [JsonProperty("toAmount")]
+        [JsonPropertyName("toAmount")]
         public decimal ToQuantity { get; set; }
         /// <summary>
         /// Exchange rate
         /// </summary>
+        [JsonPropertyName("exchangeRate")]
         public decimal ExchangeRate { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("createdTime")]
+        [JsonPropertyName("createdTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Id
         /// </summary>
-        [JsonProperty("exchangeTxId")]
+        [JsonPropertyName("exchangeTxId")]
         public string ExchangeTransactionId { get; set; } = string.Empty;
     }
 }

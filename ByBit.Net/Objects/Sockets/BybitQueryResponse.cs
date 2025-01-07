@@ -1,18 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Sockets
 {
     internal class BybitQueryResponse
     {
-        [JsonProperty("success")]
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
-        [JsonProperty("ret_msg")]
+        [JsonPropertyName("ret_msg")]
         public string Message { get; set; } = string.Empty;
-        [JsonProperty("conn_id")]
+        [JsonPropertyName("conn_id")]
         public string ConnectionId { get; set; } = string.Empty;
-        [JsonProperty("req_id")]
+        [JsonPropertyName("req_id")]
         public string RequestId { get; set; } = string.Empty;
-        [JsonProperty("op")]
+        [JsonPropertyName("op")]
         public string Operation { get; set; } = string.Empty;
     }
 }

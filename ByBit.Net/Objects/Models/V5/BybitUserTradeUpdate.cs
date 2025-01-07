@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -12,13 +11,14 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Profit and Loss for a position execution
         /// </summary>
-        [JsonProperty("execPnl")]
+        [JsonPropertyName("execPnl")]
         public decimal? Pnl { get; set; }
 
         /// <summary>
         /// Category
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("category")]
         public Category Category { get; set; }
     }
 }

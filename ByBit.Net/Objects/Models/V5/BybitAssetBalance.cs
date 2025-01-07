@@ -1,5 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -13,15 +13,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Account type
         /// </summary>
+        [JsonPropertyName("accountType")]
         public AccountType AccountType { get; set; }
         /// <summary>
         /// Member id
         /// </summary>
+        [JsonPropertyName("memberId")]
         public string? MemberId { get; set; }
         /// <summary>
         /// Balances
         /// </summary>
-        [JsonProperty("balance")]
+        [JsonPropertyName("balance")]
         public IEnumerable<BybitAssetAccountBalance> Balances { get; set; } = Array.Empty<BybitAssetAccountBalance>();
     }
 
@@ -33,15 +35,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Account type
         /// </summary>
+        [JsonPropertyName("accountType")]
         public AccountType AccountType { get; set; }
         /// <summary>
         /// Member id
         /// </summary>
+        [JsonPropertyName("memberId")]
         public string? MemberId { get; set; }
         /// <summary>
         /// Balances
         /// </summary>
-        [JsonProperty("balance")]
+        [JsonPropertyName("balance")]
         public BybitAssetAccountBalance Balances { get; set; } = null!;
     }
 
@@ -53,19 +57,22 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Wallet balance
         /// </summary>
+        [JsonPropertyName("walletBalance")]
         public decimal? WalletBalance { get; set; }
         /// <summary>
         /// Transfer balance
         /// </summary>
+        [JsonPropertyName("transferBalance")]
         public decimal TransferBalance { get; set; }
         /// <summary>
         /// Bonus
         /// </summary>
+        [JsonPropertyName("bonus")]
         public decimal? Bonus { get; set; }
     }
 }

@@ -3,7 +3,6 @@ using Bybit.Net.Clients;
 using Bybit.Net.Objects.Internal;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using System;
@@ -17,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CryptoExchange.Net.Objects;
 using Bybit.Net.Interfaces.Clients;
+using System.Text.Json;
 
 namespace Bybit.UnitTests
 {
@@ -33,7 +33,7 @@ namespace Bybit.UnitTests
                 ReturnMessage = "Error occured"
             };
 
-            TestHelpers.SetResponse(client, JsonConvert.SerializeObject(resultObj));
+            TestHelpers.SetResponse(client, JsonSerializer.Serialize(resultObj));
 
             // act
             var result = await client.V5Api.ExchangeData.GetSpotSymbolsAsync();
@@ -71,7 +71,7 @@ namespace Bybit.UnitTests
                 ReturnMessage = "Error occured"
             };
 
-            TestHelpers.SetResponse(client, JsonConvert.SerializeObject(resultObj), System.Net.HttpStatusCode.BadRequest);
+            TestHelpers.SetResponse(client, JsonSerializer.Serialize(resultObj), System.Net.HttpStatusCode.BadRequest);
 
             // act
             var result = await client.V5Api.ExchangeData.GetSpotSymbolsAsync();

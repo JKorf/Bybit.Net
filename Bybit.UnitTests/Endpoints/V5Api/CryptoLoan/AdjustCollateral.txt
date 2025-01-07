@@ -1,0 +1,12 @@
+POST
+/v5/crypto-loan/adjust-ltv
+true
+{
+    "retCode": 0,
+    "retMsg": "request.success",
+    "result": {
+        "adjustId": "1794318409405331968"
+    },
+    "retExtInfo": {},
+    "time": 1728635422833
+}

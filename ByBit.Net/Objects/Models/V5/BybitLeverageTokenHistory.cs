@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Enums;
-using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -13,57 +12,57 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Token abbreviation
         /// </summary>
-        [JsonProperty("ltCoin")]
+        [JsonPropertyName("ltCoin")]
         public string Token { get; set; } = string.Empty;
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("ltOrderStatus"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("ltOrderStatus"), JsonConverter(typeof(EnumConverter))]
         public LeverageTokenOrderStatus Status { get; set; }
         /// <summary>
         /// Order record type
         /// </summary>
-        [JsonProperty("ltOrderType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("ltOrderType"), JsonConverter(typeof(EnumConverter))]
         public LeverageTokenRecordType OrderType { get; set; }
         /// <summary>
         /// Filled value
         /// </summary>
-        [JsonProperty("value")]
+        [JsonPropertyName("value")]
         public decimal? Value { get; set; }
         /// <summary>
         /// Filled quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
-        [JsonProperty("orderId")]
+        [JsonPropertyName("orderId")]
         public string PurchaseId { get; set; } = string.Empty;
         /// <summary>
         /// Serial number
         /// </summary>
-        [JsonProperty("serialNo")]
+        [JsonPropertyName("serialNo")]
         public string? ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset
         /// </summary>
-        [JsonProperty("valueCoin")]
+        [JsonPropertyName("valueCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Fee
         /// </summary>
-        [JsonProperty("fee")]
+        [JsonPropertyName("fee")]
         public decimal Fee { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("updateTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
         /// Order time
         /// </summary>
-        [JsonProperty("orderTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("orderTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Orderime { get; set; }
     }
 }
