@@ -157,6 +157,15 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.0.0 - 07 Jan 2025
+    * Updated from Newtonsoft.Json to System.Text.Json
+    * Added CryptoLoan endpoints
+    * Added client side ratelimiting
+    * Added Type property to XTExchange class
+    * Updated CryptoExchange.Net version
+    * Updated some namespaces
+    * Removed deprecated V1/V2/V3 endpoints, models and enums
+
 * Version 3.19.2 - 03 Jan 2025
     * Added RiskParameters properties to restClient.V5Api.ExchangeData.GetLinearInverseSymbolsAsync response model
 
