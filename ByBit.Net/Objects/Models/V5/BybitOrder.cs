@@ -50,6 +50,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Is leverage order
         /// </summary>
         [JsonConverter(typeof(BoolConverter))]
+        [JsonPropertyName("isLeverage")]
         public bool? IsLeverage { get; set; }
         /// <summary>
         /// Position mode

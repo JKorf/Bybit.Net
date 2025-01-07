@@ -57,6 +57,9 @@ namespace Bybit.Net.Clients.V5
             SetDedicatedConnection(BaseAddress.AppendPath("/v5/trade"), true);
         }
 
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+
         private Query GetPingQuery(SocketConnection connection)
         {
             if (connection.ConnectionUri.AbsolutePath.EndsWith("private"))

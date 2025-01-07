@@ -113,9 +113,9 @@ namespace Bybit.Net.Clients.V5
         public override TimeSpan? GetTimeOffset()
             => _timeSyncState.TimeOffset;
 
-        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
+        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            var result = await base.SendAsync<BybitResult<object>>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            var result = await base.SendAsync<BybitResult<object>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
             if (!result)
                 return result.AsDataless();
 
@@ -125,9 +125,9 @@ namespace Bybit.Net.Clients.V5
             return result.AsDataless();
         }
 
-        internal async Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
+        internal async Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            var result = await base.SendAsync<BybitResult<T>>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            var result = await base.SendAsync<BybitResult<T>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
             if (!result)
                 return result.As<T>(default);
 
@@ -137,54 +137,31 @@ namespace Bybit.Net.Clients.V5
             return result.As<T>(result.Data.Result);
         }
 
-        internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRawAsync<T, U>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
+        internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRawAsync<T, U>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            return await base.SendAsync<BybitExtResult<T, U>>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            return await base.SendAsync<BybitExtResult<T, U>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
         }
 
-        //internal async Task<WebCallResult<BybitExtResult<T, U>>> SendRequestFullResponseAsync<T,U>(
-        //     Uri uri,
-        //     HttpMethod method,
-        //     CancellationToken cancellationToken,
-        //     Dictionary<string, object>? parameters = null,
-        //     bool signed = false)
-        //{
-        //    return await base.SendRequestAsync<BybitExtResult<T, U>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
-        //}
+        protected override Error? TryParseError(IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        {
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
+            if (code != 10006)
+                return null;
 
-        //internal async Task<WebCallResult<T>> SendRequestAsync<T>(
-        //     Uri uri,
-        //     HttpMethod method,
-        //     CancellationToken cancellationToken,
-        //     Dictionary<string, object>? parameters = null,
-        //     bool signed = false)
-        //{
-        //    var result = await base.SendRequestAsync<BybitResult<T>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
-        //    if (!result)
-        //        return result.As<T>(default);
+            // Rate limit error
+            var error = new ServerRateLimitError(accessor.GetValue<string>(MessagePath.Get().Property("retMsg"))!);
+            var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("X-Bapi-Limit-Reset-Timestamp", StringComparison.InvariantCultureIgnoreCase));
+            if (retryAfterHeader.Value?.Any() != true)
+                return error;
 
-        //    if (result.Data.ReturnCode != 0)
-        //        return result.AsError<T>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+            var value = retryAfterHeader.Value.First();
+            if (!long.TryParse(value, out var timestamp))
+                return error;
 
-        //    return result.As(result.Data.Result);
-        //}
-
-        //internal async Task<WebCallResult> SendRequestAsync(
-        //     Uri uri,
-        //     HttpMethod method,
-        //     CancellationToken cancellationToken,
-        //     Dictionary<string, object>? parameters = null,
-        //     bool signed = false)
-        //{
-        //    var result = await base.SendRequestAsync<BybitResult<object>>(uri, method, cancellationToken, parameters, signed, requestWeight: 0).ConfigureAwait(false);
-        //    if (!result)
-        //        return result.AsDataless();
-
-        //    if (result.Data.ReturnCode != 0)
-        //        return result.AsDatalessError(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
-
-        //    return result.AsDataless();
-        //}
+            var time = DateTimeConverter.ConvertFromMilliseconds(timestamp);
+            error.RetryAfter = time;
+            return error;            
+        }
 
         /// <inheritdoc />
         protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)

@@ -33,6 +33,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("interestBearingBorrowSize")]
         public decimal InterestBearingBorrowSize { get; set; }
+        [JsonInclude, JsonPropertyName("InterestBearingBorrowSize")]
+        private decimal InterestBearingBorrowSizeInt
+        {
+            set => InterestBearingBorrowSize = value;
+        }
+
         /// <summary>
         /// Cost exemption
         /// </summary>

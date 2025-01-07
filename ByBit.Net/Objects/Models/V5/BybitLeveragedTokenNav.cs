@@ -27,7 +27,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Basket position
         /// </summary>
-        [JsonPropertyName("baskedPosition")]
+        [JsonPropertyName("basketPosition")]
         public decimal BasketPosition { get; set; }
         /// <summary>
         /// Leverage

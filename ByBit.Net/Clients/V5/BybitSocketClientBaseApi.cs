@@ -35,6 +35,8 @@ namespace Bybit.Net.Clients.V5
 
             UnhandledMessageExpected = true;
             KeepAliveInterval = TimeSpan.Zero;
+
+            MessageSendSizeLimit = 21000;
         }
 
         protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();

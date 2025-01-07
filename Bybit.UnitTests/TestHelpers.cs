@@ -22,17 +22,7 @@ namespace Bybit.UnitTests
         {
             BybitRestClient client;
             client = options != null ? new BybitRestClient(options) : new BybitRestClient();
-            client.SpotApiV3.RequestFactory = Mock.Of<IRequestFactory>();
-            client.CopyTradingApi.RequestFactory = Mock.Of<IRequestFactory>();
-            client.DerivativesApi.RequestFactory = Mock.Of<IRequestFactory>();
             client.V5Api.RequestFactory = Mock.Of<IRequestFactory>();
-            return client;
-        }
-
-        public static BybitRestClient CreateResponseClient(string response, Action<BybitRestOptions> options = null, HttpStatusCode code = HttpStatusCode.OK)
-        {
-            var client = CreateClient(options);
-            SetResponse(client, response, code);
             return client;
         }
 
@@ -53,16 +43,7 @@ namespace Bybit.UnitTests
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
             request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
 
-            var factory = Mock.Get(client.SpotApiV3.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-            factory = Mock.Get(client.CopyTradingApi.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-            factory = Mock.Get(client.DerivativesApi.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-            factory = Mock.Get(client.V5Api.RequestFactory);
+            var factory = Mock.Get(client.V5Api.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
             return request;
@@ -137,14 +118,6 @@ namespace Bybit.UnitTests
             }
 
             return null;
-        }
-
-        public static async Task<object> InvokeAsync(MethodInfo @this, object obj, params object[] parameters)
-        {
-            var task = (Task)@this.Invoke(obj, parameters);
-            await task.ConfigureAwait(false);
-            var resultProperty = task.GetType().GetProperty("Result");
-            return resultProperty.GetValue(task);
         }
     }
 }

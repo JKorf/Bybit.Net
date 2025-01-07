@@ -74,6 +74,7 @@ namespace Bybit.Net.Clients
         {
             V5LinearApi.SetApiCredentials(credentials);
             V5OptionsApi.SetApiCredentials(credentials);
+            V5InverseApi.SetApiCredentials(credentials);
             V5PrivateApi.SetApiCredentials(credentials);
             V5SpotApi.SetApiCredentials(credentials);
         }

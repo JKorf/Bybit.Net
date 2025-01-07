@@ -17,7 +17,7 @@ namespace Bybit.Net.UnitTests
             {
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "https://api.binance.com", "data", stjCompare: false);
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "https://api.binance.com", "data", stjCompare: true);
             await tester.ValidateAsync<BybitSpotTickerUpdate>((client, handler) => client.V5SpotApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
             await tester.ValidateAsync<IEnumerable<BybitKlineUpdate>>((client, handler) => client.V5SpotApi.SubscribeToLeveragedTokenKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneMonth, handler), "LeveragedKline");
             await tester.ValidateAsync<BybitLeveragedTokenTicker>((client, handler) => client.V5SpotApi.SubscribeToLeveragedTokenTickerUpdatesAsync("BTCUSDT", handler), "LeveragedTicker");
@@ -32,7 +32,7 @@ namespace Bybit.Net.UnitTests
             {
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Option", "https://api.binance.com", "data", stjCompare: false);
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Option", "https://api.binance.com", "data", stjCompare: true);
             await tester.ValidateAsync<BybitOptionTickerUpdate>((client, handler) => client.V5OptionsApi.SubscribeToTickerUpdatesAsync("BTC", handler), "Ticker");
             await tester.ValidateAsync<IEnumerable<BybitOptionTrade>>((client, handler) => client.V5OptionsApi.SubscribeToTradeUpdatesAsync("BTC", handler), "Trades");
             await tester.ValidateAsync<BybitOrderbook>((client, handler) => client.V5OptionsApi.SubscribeToOrderbookUpdatesAsync("BTCUSDT", 25, handler), "Book");
@@ -47,7 +47,7 @@ namespace Bybit.Net.UnitTests
             {
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Linear", "https://api.bybit.com", "data", stjCompare: false);
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Linear", "https://api.bybit.com", "data", stjCompare: true);
             await tester.ValidateAsync<BybitLinearTickerUpdate>((client, handler) => client.V5LinearApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
             await tester.ValidateAsync<IEnumerable<BybitTrade>>((client, handler) => client.V5LinearApi.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
         }
@@ -59,7 +59,7 @@ namespace Bybit.Net.UnitTests
             {
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Private", "https://api.bybit.com", "data", stjCompare: false);
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Private", "https://api.bybit.com", "data", stjCompare: true);
             await tester.ValidateAsync<IEnumerable<BybitPositionUpdate>>((client, handler) => client.V5PrivateApi.SubscribeToPositionUpdatesAsync(handler), "Position", ignoreProperties: new List<string> { "entryPrice" }, addressPath: "/v5/private");
             await tester.ValidateAsync<IEnumerable<BybitUserTradeUpdate>>((client, handler) => client.V5PrivateApi.SubscribeToUserTradeUpdatesAsync(handler), "UserTrades", addressPath: "/v5/private");
             await tester.ValidateAsync<IEnumerable<BybitMinimalUserTradeUpdate>>((client, handler) => client.V5PrivateApi.SubscribeToMinimalUserTradeUpdatesAsync(handler), "MinimalUserTrades", addressPath: "/v5/private");

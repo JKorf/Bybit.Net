@@ -6,6 +6,8 @@ using CryptoExchange.Net.Objects;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using Bybit.Net.Enums;
+using System;
+using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -43,13 +45,14 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("isUta", isUta);
             parameters.AddOptionalParameter("note", note);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/create-sub-member", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/create-sub-member", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitSubAccount>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
 
-        #region Create Sub Account
+        #region Create Sub Account Api Key
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitApiKeyInfo>> CreateSubAccountApiKeyAsync(
@@ -86,7 +89,8 @@ namespace Bybit.Net.Clients.V5
             AddPermission(permissions, permissionCopyTrading, "CopyTrading", "CopyTrading");
             parameters.Add("permissions", permissions);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/create-sub-api", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/create-sub-api", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitApiKeyInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -106,7 +110,8 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<List<BybitSubAccount>>> GetSubAccountsAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/query-sub-members", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/query-sub-members", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BybitSubAccountWrapper>(request, null, ct).ConfigureAwait(false);
             if (!result)
                 return result.As<List<BybitSubAccount>>(default);
@@ -126,7 +131,8 @@ namespace Bybit.Net.Clients.V5
                 { "subuid", subAccountId },
                 { "frozen", freeze ? 1 : 0 },
             };
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/frozen-sub-member", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/frozen-sub-member", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -166,7 +172,8 @@ namespace Bybit.Net.Clients.V5
             EditPermission(permissions, permissionExchangeHistory, "Exchange", "ExchangeHistory");
             parameters.Add("permissions", permissions);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/update-sub-api", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/update-sub-api", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitApiKeyInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -191,7 +198,8 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("apikey", apiKey);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/delete-sub-api", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/delete-sub-api", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 

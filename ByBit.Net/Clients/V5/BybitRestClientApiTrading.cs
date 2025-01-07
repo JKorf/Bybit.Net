@@ -12,6 +12,7 @@ using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Enums.V5;
 using Bybit.Net.Objects.Internal;
 using System.Linq;
+using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -98,7 +99,11 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("smpType", EnumConverter.GetString(selfMatchPreventionType));
             parameters.AddOptionalParameter("marketUnit", EnumConverter.GetString(marketUnit));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/create", true);
+            var limits = BybitExchange.RateLimiter.GetOrderLimits();
+            var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
+            var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
+            var request = _definitions.GetOrCreate("PlaceOrder" + categoryIdentifier, HttpMethod.Post, "v5/order/create", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
             if (result)
             {
@@ -128,8 +133,12 @@ namespace Bybit.Net.Clients.V5
                 { "request", orderRequests }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/create-batch", true);
-            var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct).ConfigureAwait(false);
+            var limits = BybitExchange.RateLimiter.GetOrderLimits();
+            var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
+            var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
+            var request = _definitions.GetOrCreate("PlaceOrderBatch" + categoryIdentifier, HttpMethod.Post, "v5/order/create-batch", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result || result.Data == null)
             {
                 if (result.Error?.Code == 404)
@@ -212,7 +221,9 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalString("tpLimitPrice", takeProfitLimitPrice);
             parameters.AddOptionalString("slLimitPrice", stopLossLimitPrice);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/amend", true);
+            var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
+            var request = _definitions.GetOrCreate("EditOrder" + categoryIdentifier, HttpMethod.Post, "v5/order/amend", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             return await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -232,8 +243,12 @@ namespace Bybit.Net.Clients.V5
                 { "request", orderRequests }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/amend-batch", true);
-            var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct).ConfigureAwait(false);
+            var limits = BybitExchange.RateLimiter.GetOrderLimits();
+            var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
+            var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
+            var request = _definitions.GetOrCreate("EditMultiple" + categoryIdentifier, HttpMethod.Post, "v5/order/amend-batch", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result || result.Data == null)
                 return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
 
@@ -282,7 +297,11 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("orderLinkId", clientOrderId);
             parameters.AddOptionalParameter("orderFilter", EnumConverter.GetString(orderFilter));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/cancel", true);
+            var limits = BybitExchange.RateLimiter.GetOrderLimits();
+            var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
+            var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
+            var request = _definitions.GetOrCreate("CancelOrder" + categoryIdentifier, HttpMethod.Post, "v5/order/cancel", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
             if (result)
             {
@@ -312,8 +331,12 @@ namespace Bybit.Net.Clients.V5
                 { "request", orderRequests }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/cancel-batch", true);
-            var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct).ConfigureAwait(false);
+            var limits = BybitExchange.RateLimiter.GetOrderLimits();
+            var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
+            var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/cancel-batch", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
 
@@ -382,8 +405,9 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/realtime", true);
-            return await _baseClient.SendAsync<BybitResponse<Objects.Models.V5.BybitOrder>>(request, parameters, ct).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/order/realtime", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BybitResponse<BybitOrder>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -411,7 +435,10 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("orderFilter", EnumConverter.GetString(orderFilter));
             parameters.AddOptionalParameter("stopOrderType", EnumConverter.GetString(stopOrderType));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/cancel-all", true);
+            var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
+            var limit = category == Category.Spot ? 20 : category == Category.Option ? 1 : 10;
+            var request = _definitions.GetOrCreate("CancelAll" + categoryIdentifier, HttpMethod.Post, "v5/order/cancel-all", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             return await _baseClient.SendAsync<BybitResponse<BybitOrderId>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -450,7 +477,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/order/history", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/order/history", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitOrder>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -491,7 +519,8 @@ namespace Bybit.Net.Clients.V5
             };
             parameters.AddOptionalEnum("product", productType);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/disconnected-cancel-all", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/order/disconnected-cancel-all", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -502,7 +531,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BybitDcpStatus>>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/query-dcp-info", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/query-dcp-info", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitDcpStatusWrapper>(request, null, ct).ConfigureAwait(false);
             return result.As<IEnumerable<BybitDcpStatus>>(result.Data?.Infos);
         }
@@ -540,7 +569,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/execution/list", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/execution/list", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitUserTrade>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -569,7 +599,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/position/list", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/position/list", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitPosition>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -589,7 +620,7 @@ namespace Bybit.Net.Clients.V5
                 { "symbol", symbol }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/confirm-pending-mmr", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/confirm-pending-mmr", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -611,7 +642,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/order-record", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/order-record", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(600, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BybitAssetExchageWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitAssetExchange>>(null);
@@ -645,7 +677,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/delivery-record", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/delivery-record", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitResponse<BybitDeliveryRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -673,7 +705,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/settlement-record", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/settlement-record", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitResponse<BybitSettlementRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -702,7 +734,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/position/closed-pnl", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/position/closed-pnl", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitClosedPnl>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -752,7 +785,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("tpOrderType", EnumConverter.GetString(takeProfitOrderType));
             parameters.AddOptionalParameter("slOrderType", EnumConverter.GetString(stopLossOrderType));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/trading-stop", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/trading-stop", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -771,7 +804,8 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("serialNo", clientOrderId);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-lever-token/purchase", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-lever-token/purchase", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitLeverageTokenPurchase>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -790,7 +824,8 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("serialNo", clientOrderId);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-lever-token/redeem", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-lever-token/redeem", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitLeverageTokenRedemption>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -810,7 +845,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("ltCoin", token);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/order-record", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/order-record", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BybitResponse<BybitLeverageTokenHistory>>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitLeverageTokenHistory>>(default);

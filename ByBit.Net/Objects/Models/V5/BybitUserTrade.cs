@@ -55,7 +55,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Stop order type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
-        [JsonPropertyName("stopOrderId")]
+        [JsonPropertyName("stopOrderType")]
         public StopOrderType? StopOrderType { get; set; }
         /// <summary>
         /// Fee paid

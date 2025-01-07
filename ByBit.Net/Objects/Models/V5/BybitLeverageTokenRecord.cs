@@ -33,6 +33,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal? Quantity { get; set; }
+        [JsonInclude, JsonPropertyName("quantity")]
+        private decimal? QuantityInt
+        {
+            set => Quantity = value;
+            get => Quantity;
+        }
         /// <summary>
         /// Serial number
         /// </summary>

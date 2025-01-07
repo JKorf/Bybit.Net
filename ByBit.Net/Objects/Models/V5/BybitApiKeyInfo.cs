@@ -56,7 +56,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Creation time
         /// </summary>
         [JsonPropertyName("createdAt")]
-        [JsonConverter(typeof(BoolConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Is unified margin account

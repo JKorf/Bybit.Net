@@ -25,7 +25,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Free borrow amount
         /// </summary>
-        [JsonPropertyName("freeBorrowingAmount")]
+        [JsonPropertyName("freeBorrowAmount")]
         public decimal? FreeBorrowAmount { get; set; }
         /// <summary>
         /// The maximum limit for interest-free borrowing

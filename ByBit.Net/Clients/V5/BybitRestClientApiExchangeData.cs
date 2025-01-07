@@ -38,7 +38,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("page", page);
             parameters.AddOptionalParameter("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/announcements/index", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/announcements/index", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitAnnouncement>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -49,7 +49,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/time", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/time", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitTime>(request, null, ct).ConfigureAwait(false);
         }
 
@@ -70,7 +70,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("end", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/kline", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/kline", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitKline>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -91,7 +91,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("end", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/mark-price-kline", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/mark-price-kline", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitBasicKline>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -112,7 +112,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("end", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/index-price-kline", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/index-price-kline", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitBasicKline>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -133,7 +133,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("end", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/premium-index-price-kline", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/premium-index-price-kline", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitBasicKline>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -150,7 +150,7 @@ namespace Bybit.Net.Clients.V5
             };
             parameters.AddOptionalParameter("symbol", symbol);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitSpotSymbol>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -170,7 +170,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitOptionSymbol>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -201,7 +201,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/instruments-info", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitLinearInverseSymbol>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -219,7 +219,7 @@ namespace Bybit.Net.Clients.V5
             };
             parameters.AddOptionalParameter("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/orderbook", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/orderbook", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitOrderbook>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -236,7 +236,7 @@ namespace Bybit.Net.Clients.V5
             };
             parameters.AddOptionalParameter("symbol", symbol);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitSpotTicker>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -258,7 +258,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("expDate", expirationDate);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitOptionTicker>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -280,7 +280,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("expDate", expirationDate);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/tickers", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitLinearInverseTicker>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -303,7 +303,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/funding/history", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/funding/history", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitFundingHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -323,7 +323,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("optionType", EnumConverter.GetString(optionType));
             parameters.AddOptionalParameter("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/recent-trade", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/recent-trade", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitTradeHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -348,7 +348,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/open-interest", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/open-interest", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitOpenInterest>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -368,7 +368,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("period", period);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/historical-volatility", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/historical-volatility", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<IEnumerable<BybitHistoricalVolatility>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -382,7 +382,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("coin", asset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/insurance", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/insurance", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitInsurance>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -403,7 +403,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/risk-limit", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/risk-limit", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitRiskLimit>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -426,7 +426,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/delivery-price", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/delivery-price", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitResponse<BybitDeliveryPrice>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -440,7 +440,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("ltCoin", leverageToken);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/info", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/info", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitLeverageTokenWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitLeverageToken>>(default);
@@ -460,7 +460,7 @@ namespace Bybit.Net.Clients.V5
                 { "ltCoin", leverageToken }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/reference", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/reference", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitLeverageTokenMarket>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -487,7 +487,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/account-ratio", false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/account-ratio", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitList<BybitLongShortRatio>>(request, parameters, ct).ConfigureAwait(false);
             if (!result || result.Data == null)
                 return result.As<IEnumerable<BybitLongShortRatio>>(default);

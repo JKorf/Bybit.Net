@@ -4,29 +4,6 @@ using System.Text.Json.Serialization;
 namespace Bybit.Net.Enums
 {
     /// <summary>
-    /// Contract type
-    /// </summary>
-    [JsonConverter(typeof(EnumConverter))]
-    public enum ContractType
-    {
-        /// <summary>
-        /// Future
-        /// </summary>
-        [Map("Future")]
-        Future,
-        /// <summary>
-        /// Perpetual
-        /// </summary>
-        [Map("Perpetual")]
-        Perpetual,
-        /// <summary>
-        /// Linear perpetual
-        /// </summary>
-        [Map("LinearPerpetual")]
-        LinearPerpetual
-    }
-
-    /// <summary>
     /// V5 contract types
     /// </summary>
     public enum ContractTypeV5

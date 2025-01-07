@@ -12,6 +12,7 @@ using System.Globalization;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Internal;
 using System.Linq;
+using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -45,7 +46,8 @@ namespace Bybit.Net.Clients.V5
                 { "sellLeverage", sellLeverage.ToString(CultureInfo.InvariantCulture) }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/set-leverage", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/set-leverage", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -65,7 +67,7 @@ namespace Bybit.Net.Clients.V5
                 { "collateralSwitch", useForCollateral ? "ON" : "OFF" },
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-collateral-switch", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-collateral-switch", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -83,7 +85,7 @@ namespace Bybit.Net.Clients.V5
                 { "request", assets }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-collateral-switch-batch", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-collateral-switch-batch", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -109,7 +111,7 @@ namespace Bybit.Net.Clients.V5
                 { "sellLeverage", sellLeverage.ToString(CultureInfo.InvariantCulture) }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/switch-isolated", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/switch-isolated", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -131,7 +133,7 @@ namespace Bybit.Net.Clients.V5
                 { "tpSlMode", EnumConverter.GetString(tpSlMode) }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/set-tpsl-mode", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/set-tpsl-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitTakeProfitStopLossMode>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -156,7 +158,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("coin", asset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/switch-mode", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/switch-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -181,7 +183,7 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("positionIdx", EnumConverter.GetString(positionIdx));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/set-risk-limit", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/set-risk-limit", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitSetRiskLimit>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -206,7 +208,7 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("positionIdx", EnumConverter.GetString(positionIdx));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/set-auto-add-margin", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/set-auto-add-margin", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -227,7 +229,8 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("coin", asset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/wallet-balance", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/wallet-balance", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitBalance>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -252,7 +255,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/borrow-history", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/borrow-history", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitBorrowHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -269,7 +273,8 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("currency", asset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/collateral-info", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/collateral-info", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitCollateralInfo>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -286,7 +291,8 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("baseCoin", baseAsset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/coin-greeks", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/coin-greeks", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitGreeks>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -310,8 +316,11 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("baseCoin", baseAsset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/fee-rate", true);
-            return await _baseClient.SendAsync<BybitResponse<BybitFeeRate>>(request, parameters, ct).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/fee-rate", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+
+            var weight = category == Category.Linear ? 1 : 2;
+            return await _baseClient.SendAsync<BybitResponse<BybitFeeRate>>(request, parameters, ct, singleLimiterWeight: weight).ConfigureAwait(false);
         }
 
         #endregion
@@ -321,7 +330,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitAccountInfo>> GetMarginAccountInfoAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/info", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/info", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitAccountInfo>(request, null, ct).ConfigureAwait(false);
         }
 
@@ -353,13 +362,14 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/transaction-log", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/transaction-log", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitTransactionLog>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
 
-        #region Get Transaction History
+        #region Get Classic Contract Transaction History
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitResponse<BybitTransactionLog>>> GetClassicContractTransactionHistoryAsync(
@@ -381,7 +391,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/contract-transaction-log", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/contract-transaction-log", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitTransactionLog>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -399,7 +410,7 @@ namespace Bybit.Net.Clients.V5
                 { "setMarginMode", EnumConverter.GetString(marginMode) }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-margin-mode", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-margin-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitSetMarginModeResult>(request, parameters, ct).ConfigureAwait(false);            
         }
 
@@ -420,7 +431,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("coin", asset);
 
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-asset-info", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-asset-info", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(60, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BybitAssetInfoWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
                 return result.As<BybitAccountAssetInfo>(null);
@@ -448,7 +460,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("memberId", memberId);
             parameters.AddOptionalParameter("withBonus", withBonus == true ? "1" : "0");
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-account-coins-balance", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-account-coins-balance", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitAllAssetBalances>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -472,7 +485,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("memberId", memberId);
             parameters.AddOptionalParameter("withBonus", withBonus == true ? "1" : "0");
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-account-coin-balance", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-account-coin-balance", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitSingleAssetBalance>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -492,7 +505,8 @@ namespace Bybit.Net.Clients.V5
                 { "toAccountType", EnumConverter.GetString(toAccountType) },
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-transfer-coin-list", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-transfer-coin-list", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(60, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<string>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -518,7 +532,8 @@ namespace Bybit.Net.Clients.V5
                 { "transferId", transferId ?? Guid.NewGuid().ToString() }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/transfer/inter-transfer", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/transfer/inter-transfer", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(60, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitTransferId>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -546,7 +561,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-inter-transfer-list", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-inter-transfer-list", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(60, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitTransfer>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -576,7 +592,8 @@ namespace Bybit.Net.Clients.V5
                 { "transferId", transferId ?? Guid.NewGuid().ToString() }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/transfer/universal-transfer", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/transfer/universal-transfer", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitTransferId>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -604,7 +621,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-universal-transfer-list", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/transfer/query-universal-transfer-list", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitTransfer>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -626,7 +644,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-allowed-list", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-allowed-list", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitAllowedDepositInfoResponse>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -644,7 +662,7 @@ namespace Bybit.Net.Clients.V5
                 { "accountType", EnumConverter.GetString(accountType) }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/deposit/deposit-to-account", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/deposit/deposit-to-account", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitOperationResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -668,7 +686,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-record", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-record", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(100, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitDeposits>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -694,7 +713,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptional("cursor", cursor);
             parameters.AddOptional("txID", transactionId);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-internal-record", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-internal-record", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitResponse<BybitInternalDeposit>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -714,7 +733,8 @@ namespace Bybit.Net.Clients.V5
             };
             parameters.AddOptionalParameter("chainType", networkType);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-address", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-address", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(300, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitDepositAddress>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -730,7 +750,8 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("coin", asset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/coin/query-info", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/coin/query-info", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(600, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitUserAssetInfos>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -760,7 +781,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("cursor", cursor);
             parameters.AddOptionalParameter("txID", transactionId);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/withdraw/query-record", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/withdraw/query-record", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(100, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitWithdrawal>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -778,7 +800,7 @@ namespace Bybit.Net.Clients.V5
                 { "coin", asset }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/withdraw/withdrawable-amount", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/withdraw/withdrawable-amount", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitDelayedWithdrawal>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -812,7 +834,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("forceChain", forceNetwork == null ? null : forceNetwork.Value ? 1 : 0);
             parameters.AddOptionalParameter("feeType", feeType == null ? null : feeType.Value ? 1 : 0);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/withdraw/create", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/withdraw/create", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitId>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -830,7 +853,8 @@ namespace Bybit.Net.Clients.V5
                 { "id", id },
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/withdraw/cancel", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/withdraw/cancel", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(60, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitOperationResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -841,7 +865,8 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitApiKeyInfo>> GetApiKeyInfoAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/query-api", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/query-api", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitApiKeyInfo>(request, null, ct).ConfigureAwait(false);
         }
 
@@ -885,7 +910,8 @@ namespace Bybit.Net.Clients.V5
             AddPermission(permissions, permissionAffiliate, "Affiliate", "Affiliate");
             parameters.Add("permissions", permissions);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/update-api", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/update-api", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitApiKeyInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -905,7 +931,8 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult> DeleteApiKeyAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/delete-api", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/delete-api", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, null, ct).ConfigureAwait(false);
         }
 
@@ -920,7 +947,7 @@ namespace Bybit.Net.Clients.V5
             if (subAccountIds != null)
                 parameters.AddOptionalParameter("memberIds", string.Join(",", subAccountIds));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/get-member-type", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/get-member-type", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitAccountTypeInfoWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
                 return result.As<IEnumerable<BybitAccountTypeInfo>>(default);
@@ -949,7 +976,7 @@ namespace Bybit.Net.Clients.V5
 
             parameters.AddOptionalParameter("positionIdx", EnumConverter.GetString(positionIdx));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/add-margin", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/position/add-margin", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitPosition>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -965,7 +992,7 @@ namespace Bybit.Net.Clients.V5
                 { "leverage", leverage.ToString(CultureInfo.InvariantCulture) }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-margin-trade/set-leverage", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-margin-trade/set-leverage", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -976,7 +1003,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitSpotMarginLeverageStatus>> GetSpotMarginStatusAndLeverageAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/state", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/state", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitSpotMarginLeverageStatus>(request, null, ct).ConfigureAwait(false);
         }
 
@@ -992,7 +1019,7 @@ namespace Bybit.Net.Clients.V5
                 { "spotMarginMode", spotMarginMode ? "1" : "0" }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-margin-trade/switch-mode", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-margin-trade/switch-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitSpotMarginStatus>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1007,7 +1034,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("currency", asset);
             parameters.AddOptionalParameter("vipLevel", vipLevel);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/data", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/data", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitSpotMarginVipMarginData>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
                 return result.As< IEnumerable<BybitSpotMarginVipMarginList>>(default);
@@ -1028,7 +1055,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/interest-rate-history", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/interest-rate-history", BybitExchange.RateLimiter.BybitRest, 1, true); 
             var result = await _baseClient.SendAsync<BybitResponse<BybitSpotMarginBorrowRate>>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IEnumerable<BybitSpotMarginBorrowRate>>(result.Data?.List);
         }
@@ -1040,7 +1067,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitBrokerAccountInfo>> GetBrokerAccountInfoAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/broker/account-info", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/broker/account-info", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitBrokerAccountInfo>(request, null, ct).ConfigureAwait(false);
         }
 
@@ -1059,7 +1086,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("cursor", cursor);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/broker/earnings-info", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/broker/earnings-info", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitBrokerEarnings>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1075,7 +1102,7 @@ namespace Bybit.Net.Clients.V5
                 { "setHedgingMode", spotHedgingMode ? "ON" : "OFF" }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-hedging-mode", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-hedging-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1089,7 +1116,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("coin", asset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/quick-repayment", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/quick-repayment", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitList<BybitLiabilityRepayment>>(request, parameters, ct).ConfigureAwait(false);
             if (!result || result.Data == null)
                 return result.As<IEnumerable<BybitLiabilityRepayment>>(default);
@@ -1111,7 +1138,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptional("adjustType", addOrReduce == null ? null : addOrReduce == true ? 0 : 1);
             parameters.AddOptionalParameter("utaDemoApplyMoney", funds.Select(f => new { coin = f.Key, amountStr = f.Value.ToString(CultureInfo.InvariantCulture) }));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/demo-apply-money", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/demo-apply-money", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1129,7 +1156,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalEnum("side", side);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/query-coin-list", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/query-coin-list", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitConvertAssetWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IEnumerable<BybitConvertAsset>>(result.Data?.Assets);
         }
@@ -1151,7 +1178,7 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("paramType", "opFrom");
             parameters.Add("paramValue", _baseClient._referer);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/exchange/quote-apply", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/exchange/quote-apply", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitConvertQuote>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1165,7 +1192,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection();
             parameters.Add("quoteTxId", quoteTransactionId);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/exchange/convert-execute", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/exchange/convert-execute", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitConvertTransactionResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -1180,7 +1207,7 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("quoteTxId", quoteTransactionId);
             parameters.AddEnum("accountType", accountType);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/convert-result-query", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/convert-result-query", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitConvertTransactionWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<BybitConvertTransaction>(result.Data?.Result);
         }
@@ -1197,7 +1224,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptional("index", page);
             parameters.AddOptional("limit", pageSize);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/query-convert-history", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/query-convert-history", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitConvertTransactionListWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IEnumerable<BybitConvertTransaction>>(result.Data?.List);
         }
@@ -1212,7 +1239,8 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection();
             parameters.Add("coinName", asset.ToUpperInvariant());
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/withdrawal", true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/withdrawal", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitTransferable>(request, parameters, ct).ConfigureAwait(false);
         }
 
