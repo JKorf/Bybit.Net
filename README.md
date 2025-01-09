@@ -157,6 +157,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.0.1 - 09 Jan 2025
+    * Fixed AveragePrice being null in BybitPosition and BybitPositionUpdate models
+
 * Version 4.0.0 - 07 Jan 2025
     * Updated from Newtonsoft.Json to System.Text.Json
     * Added CryptoLoan endpoints
