@@ -13,7 +13,8 @@ false
                 "quoteCoin": "USDT",
                 "innovation": "0",
                 "status": "Trading",
-                "marginTrading": "both",
+                "marginTrading": "utaOnly",
+                "stTag": "0",
                 "lotSizeFilter": {
                     "basePrecision": "0.000001",
                     "quotePrecision": "0.00000001",
@@ -26,8 +27,8 @@ false
                     "tickSize": "0.01"
                 },
                 "riskParameters": {
-                    "limitParameter": "0.05",
-                    "marketParameter": "0.05"
+                    "priceLimitRatioX": "0.01",
+                    "priceLimitRatioY": "0.02"
                 }
             }
         ]
