@@ -100,5 +100,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("withdrawPercentageFee")]
         public decimal? WithdrawPercentageFee { get; set; }
+        /// <summary>
+        /// Contract address
+        /// </summary>
+        [JsonPropertyName("contractAddress")]
+        public string ContractAddress { get; set; } = string.Empty;
     }
 }
