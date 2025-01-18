@@ -46,5 +46,15 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("chain")]
         public string Network { get; set; } = string.Empty;
+        /// <summary>
+        /// Deposit limit. -1 if there is no limit.
+        /// </summary>
+        [JsonPropertyName("batchReleaseLimit")]
+        public decimal DepositLimit { get; set; }
+        /// <summary>
+        /// Network contract asset, only last 6 characters
+        /// </summary>
+        [JsonPropertyName("contractAddress")]
+        public string ContractAddress { get; set; } = string.Empty;
     }
 }
