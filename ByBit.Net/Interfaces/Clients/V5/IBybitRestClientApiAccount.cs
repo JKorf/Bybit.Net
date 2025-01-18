@@ -64,7 +64,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="accountType">Account type</param>
         /// <param name="memberId">Member id</param>
-        /// <param name="asset">Asset, for example `ETH`</param>
+        /// <param name="asset">Asset, for example `ETH`. Can be specify multiple comma separated assets. Required for Unified account.</param>
         /// <param name="withBonus">Include bonus</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>

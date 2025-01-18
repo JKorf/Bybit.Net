@@ -119,7 +119,7 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("availableToBorrow")]
         public decimal? AvailableToBorrow { get; set; }
         /// <summary>
-        /// Available withdrawal amount
+        /// Available withdrawal amount, not available for Unified account
         /// </summary>
         [JsonPropertyName("availableToWithdraw")]
         public decimal? AvailableToWithdraw { get; set; }
