@@ -121,6 +121,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
+        /// Trade id
+        /// </summary>
+        [JsonPropertyName("execId")]
+        public string TradeId { get; set; } = string.Empty;
+        /// <summary>
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
