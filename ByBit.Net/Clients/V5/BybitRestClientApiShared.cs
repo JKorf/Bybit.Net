@@ -776,7 +776,7 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>(Exchange, validationError);
 
             var category = (request.TradingMode == null || request.TradingMode == TradingMode.PerpetualLinear || request.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
-            var result = await ExchangeData.GetLinearInverseSymbolsAsync(category, ct: ct).ConfigureAwait(false);
+            var result = await ExchangeData.GetLinearInverseSymbolsAsync(category, limit: 1000, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, null, default);
 
