@@ -157,6 +157,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.0.2 - 18 Jan 2025
+    * Added DepositLimit, DepositType and FromAddress to restClient.V5Api.Account.GetDepositsAsync response model
+    * Added DepositLimit and ContractAddress to restClient.V5Api.Account.GetDepositAddressAsync response model
+    * Added ContractAddress to restClient.V5Api.Account.GetAssetInfoAsync response model
+    * Added TradeId property to restClient.V5Api.Account.GetBrokerEarningsAsync response model
+    * Updated restClient.V5Api.ExchangeData.GetSpotSymbolsAsync PricePercentageFilter response model to new x/y limit value properties
+    * Fixed shared interfaces futures symbols request not returning full data set
+
 * Version 4.0.1 - 09 Jan 2025
     * Fixed AveragePrice being null in BybitPosition and BybitPositionUpdate models
 
