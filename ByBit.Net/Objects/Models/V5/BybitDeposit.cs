@@ -84,5 +84,20 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("blockHash")]
         public string BlockHash { get; set; } = string.Empty;
+        /// <summary>
+        /// Deposit limit. -1 if there is no limit.
+        /// </summary>
+        [JsonPropertyName("batchReleaseLimit")]
+        public decimal DepositLimit { get; set; }
+        /// <summary>
+        /// The deposit type. 0: normal deposit, 10: the deposit reaches daily deposit limit, 20: abnormal deposit
+        /// </summary>
+        [JsonPropertyName("depositType")]
+        public int DepositType { get; set; }
+        /// <summary>
+        /// Source address
+        /// </summary>
+        [JsonPropertyName("fromAddress")]
+        public string FromAddress { get; set; } = string.Empty;
     }
 }
