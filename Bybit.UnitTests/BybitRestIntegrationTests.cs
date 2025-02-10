@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.UnitTests
 {
     [NonParallelizable]
-    internal class BybitRestIntegrationTests : RestIntergrationTest<BybitRestClient>
+    internal class BybitRestIntegrationTests : RestIntegrationTest<BybitRestClient>
     {
         public override bool Run { get; set; }
 
