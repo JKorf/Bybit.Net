@@ -501,5 +501,20 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Spot Margin Tiered Collateral Ratio
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BybitSpotMarginCollateralRatio>>> GetSpotMarginTieredCollateralRatioAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("currency", asset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/collateral", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var result = await _baseClient.SendAsync<BybitResponse<BybitSpotMarginCollateralRatio>>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<IEnumerable<BybitSpotMarginCollateralRatio>>(result.Data?.List);
+        }
+
+        #endregion
+
     }
 }
