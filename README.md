@@ -159,6 +159,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.2.0 - 19 Feb 2025
+    * Added restClient.V5Api.ExchangeData.GetSpotMarginTieredCollateralRatioAsync endpoint
+    * Added restClient.V5Api.Account.GetTransferableAsync multi-asset overload and updated response model
+    * Added quoteAsset parameter to restClient.V5Api.ExchangeData.GetHistoricalVolatilityAsync endpoint
+    * Added support for RPI (RetailPriceImprovement) orders and data
+    * Fix for pagination in restClient.V5Api.SharedClient.GetKlinesAsync
+
 * Version 4.1.0 - 11 Feb 2025
     * Updated CryptoExchange.Net to version 8.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added support for more SharedKlineInterval values
