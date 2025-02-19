@@ -1234,9 +1234,13 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitTransferable>> GetTransferableAsync(string asset, CancellationToken ct = default)
+            => await GetTransferableAsync([asset], ct).ConfigureAwait(false);
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitTransferable>> GetTransferableAsync(IEnumerable<string> assets, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.Add("coinName", asset.ToUpperInvariant());
+            parameters.Add("coinName", string.Join(",", assets));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/withdrawal", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));

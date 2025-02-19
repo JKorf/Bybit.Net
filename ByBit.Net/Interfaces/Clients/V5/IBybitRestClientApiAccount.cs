@@ -682,5 +682,14 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitTransferable>> GetTransferableAsync(string asset, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get quantity available for withdrawal/transfer from unified wallet
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/unified-trans-amnt" /></para>
+        /// </summary>
+        /// <param name="assets">Asset names, can request up to 20 assets</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitTransferable>> GetTransferableAsync(IEnumerable<string> assets, CancellationToken ct = default);
     }
 }
