@@ -357,7 +357,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Historical Volatility
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, string? quoteAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection()
             {
@@ -366,6 +366,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("baseCoin", baseAsset);
+            parameters.AddOptionalParameter("quoteCoin", quoteAsset);
             parameters.AddOptionalParameter("period", period);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/historical-volatility", BybitExchange.RateLimiter.BybitRest, 1, false);

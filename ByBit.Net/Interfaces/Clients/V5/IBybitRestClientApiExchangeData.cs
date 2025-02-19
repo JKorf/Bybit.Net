@@ -53,7 +53,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results</param>
         /// <param name="ct">Cancellation token</param>
@@ -65,14 +65,15 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/iv" /></para>
         /// </summary>
         /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
+        /// <param name="quoteAsset">Quote asset, `USD` or `USDT`</param>
         /// <param name="period">Period</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, string? quoteAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get index price klines
@@ -81,7 +82,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results</param>
         /// <param name="ct">Cancellation token</param>
@@ -104,7 +105,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results</param>
         /// <param name="ct">Cancellation token</param>
@@ -151,7 +152,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results</param>
         /// <param name="ct">Cancellation token</param>
@@ -165,7 +166,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interestInterval">Interval</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
@@ -214,7 +215,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="ct">Cancellation token</param>
