@@ -47,6 +47,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("isBlockTrade")]
         public bool IsBlockTrade { get; set; }
         /// <summary>
+        /// Is Retail Price Improvement trade
+        /// </summary>
+        [JsonPropertyName("isRPITrade")]
+        public bool? IsRpiTrade { get; set; }
+        /// <summary>
         /// [Option only] Mark price
         /// </summary>
         [JsonPropertyName("mP")]

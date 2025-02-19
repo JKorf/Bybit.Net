@@ -26,6 +26,11 @@ namespace Bybit.Net.Enums
         /// Only place order if the order is added to the order book instead of being filled immediately
         /// </summary>
         [Map("PostOnly")]
-        PostOnly
+        PostOnly,
+        /// <summary>
+        /// Retail Price Improvement orders act as PostOnly orders but also do cannot match with algorithmic (API) orders. See https://www.bybit.nl/nl-NL/help-center/article/Retail-Price-Improvement-RPI-Order
+        /// </summary>
+        [Map("RPI")]
+        RetailPriceImprovement
     }
 }
