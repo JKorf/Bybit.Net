@@ -91,7 +91,7 @@ namespace Bybit.Net.UnitTests
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetFundingRateHistoryAsync(Enums.Category.Linear, "ETHUSDT", default, default, default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetTradeHistoryAsync(Enums.Category.Linear, "ETHUSDT", default, default, default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetOpenInterestAsync(Enums.Category.Linear, "ETHUSDT", Enums.OpenInterestInterval.OneDay, default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.V5Api.ExchangeData.GetHistoricalVolatilityAsync(default, default, default, default, default, default, default), false);
+            await RunAndCheckResult(client => client.V5Api.ExchangeData.GetHistoricalVolatilityAsync(default, default, default, default, default, default, default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetInsuranceAsync("ETH", default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetRiskLimitAsync(Enums.Category.Linear, default, default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetDeliveryPriceAsync(Enums.Category.Linear, default, default, default, default, default), false);
