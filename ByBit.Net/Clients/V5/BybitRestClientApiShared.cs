@@ -80,7 +80,7 @@ namespace Bybit.Net.Clients.V5
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (result.Data.List.Count() == limit)
+            if (result.Data.List.Count() != 0)
             {
                 var minOpenTime = result.Data.List.Min(x => x.StartTime);
                 if (request.StartTime == null || minOpenTime > request.StartTime.Value)
