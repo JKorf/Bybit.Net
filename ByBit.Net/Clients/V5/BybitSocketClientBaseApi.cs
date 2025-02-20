@@ -78,5 +78,16 @@ namespace Bybit.Net.Clients.V5
             var subscription = new BybitSubscription<BybitLiquidation>(_logger, symbols.Select(x => $"liquidation.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public virtual Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitLiquidationUpdate>>> handler, CancellationToken ct = default)
+            => SubscribeToAllLiquidationUpdatesAsync(new string[] { symbol }, handler, ct);
+
+        /// <inheritdoc />
+        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitLiquidationUpdate>>> handler, CancellationToken ct = default)
+        {
+            var subscription = new BybitSubscription<IEnumerable<BybitLiquidationUpdate>>(_logger, symbols.Select(x => $"allLiquidation.{x}").ToArray(), handler);
+            return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
+        }
     }
 }

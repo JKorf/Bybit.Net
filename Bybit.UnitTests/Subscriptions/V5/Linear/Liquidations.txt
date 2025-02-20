@@ -1,0 +1,17 @@
+> { "req_id": "|1|", "op": "subscribe", "args": [ "allLiquidation.ETHUSDT" ] }
+< { "success": true, "ret_msg": "", "conn_id": "3cd84cb1-4d06-4a05-930a-2efe5fc70f0f", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "topic": "allLiquidation.ETHUSDT",
+    "type": "snapshot",
+    "ts": 1739502303204,
+    "data": [
+        {
+            "T": 1739502302929,
+            "s": "ETHUSDT",
+            "S": "Sell",
+            "v": "20000",
+            "p": "0.04499"
+        }
+    ]
+}

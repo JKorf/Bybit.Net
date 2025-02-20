@@ -37,7 +37,6 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync<IEnumerable<BybitOptionTrade>>((client, handler) => client.V5OptionsApi.SubscribeToTradeUpdatesAsync("BTC", handler), "Trades");
             await tester.ValidateAsync<BybitOrderbook>((client, handler) => client.V5OptionsApi.SubscribeToOrderbookUpdatesAsync("BTCUSDT", 25, handler), "Book");
             await tester.ValidateAsync<IEnumerable<BybitKlineUpdate>>((client, handler) => client.V5OptionsApi.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneMonth, handler), "Klines");
-            await tester.ValidateAsync<BybitLiquidation>((client, handler) => client.V5OptionsApi.SubscribeToLiquidationUpdatesAsync("BTCUSDT", handler), "Liquidations");
         }
 
         [Test]
@@ -50,6 +49,7 @@ namespace Bybit.Net.UnitTests
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Linear", "https://api.bybit.com", "data", stjCompare: true);
             await tester.ValidateAsync<BybitLinearTickerUpdate>((client, handler) => client.V5LinearApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
             await tester.ValidateAsync<IEnumerable<BybitTrade>>((client, handler) => client.V5LinearApi.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
+            await tester.ValidateAsync<IEnumerable<BybitLiquidationUpdate>>((client, handler) => client.V5LinearApi.SubscribeToAllLiquidationUpdatesAsync("ETHUSDT", handler), "Liquidations");
         }
 
         [Test]
