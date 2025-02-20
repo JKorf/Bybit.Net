@@ -1,0 +1,23 @@
+GET
+/v5/earn/product
+false
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {
+        "list": [
+            {
+                "category": "FlexibleSaving",
+                "estimateApr": "3%",
+                "coin": "BTC",
+                "minStakeAmount": "0.001",
+                "maxStakeAmount": "10",
+                "precision": "8",
+                "productId": "430",
+                "status": "Available"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1739935669110
+}

@@ -1,0 +1,24 @@
+GET
+/v5/earn/order
+true
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {
+        "list": [
+            {
+                "coin": "BTC",
+                "orderValue": "0.35",
+                "orderType": "Redeem",
+                "orderId": "0572b030-6a0b-423f-88c4-b6ce31c0c82d",
+                "orderLinkId": "btc-earn-001",
+                "status": "Success",
+                "createdAt": "1739936607000",
+                "productId": "430",
+                "updatedAt": "1739936607000"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1739937045520
+}

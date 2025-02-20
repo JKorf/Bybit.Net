@@ -1,0 +1,13 @@
+POST
+/v5/earn/place-order
+true
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {
+        "orderId": "0572b030-6a0b-423f-88c4-b6ce31c0c82d",
+        "orderLinkId": "btc-earn-001"
+    },
+    "retExtInfo": {},
+    "time": 1739936607117
+}

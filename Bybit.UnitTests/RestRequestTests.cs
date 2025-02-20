@@ -131,7 +131,6 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Trading.GetLeverageTokenOrderHistoryAsync("123"), "GetLeverageTokenOrderHistory", "result.list");
         }
 
-
         [Test]
         public async Task ValidateCryptoLoanCalls()
         {
@@ -151,6 +150,21 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetMaxCollateralAsync("123"), "GetMaxCollateral", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.AdjustCollateralAsync("123", 0.1m, AdjustDirection.Add), "AdjustCollateral", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetCollateralAdjustHistoryAsync(), "GetCollateralAdjustHistory", nestedJsonProperty: "result");
+        }
+
+        [Test]
+        public async Task ValidateEarnCalls()
+        {
+            var client = new BybitRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Earn", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
+            await tester.ValidateAsync(client => client.V5Api.Earn.GetProductInfoAsync(EarnCategory.FlexibleSaving, "123"), "GetProductInfo", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Earn.PlaceOrderAsync(EarnCategory.FlexibleSaving, "123", AccountType.Fund, "123", EarnOrderType.Stake, 0.1m), "PlaceOrder", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Earn.GetOrderHistoryAsync(EarnCategory.FlexibleSaving, "123"), "GetOrderHistory", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Earn.GetStakedPositionsAsync(EarnCategory.FlexibleSaving), "GetStakedPositions", nestedJsonProperty: "result");
         }
 
         private bool IsAuthenticated(WebCallResult result)

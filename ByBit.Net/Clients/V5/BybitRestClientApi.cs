@@ -50,6 +50,8 @@ namespace Bybit.Net.Clients.V5
         public IBybitRestClientApiSubAccounts SubAccount { get; }
         /// <inheritdoc />
         public IBybitRestClientApiCryptoLoan CryptoLoan { get; }
+        /// <inheritdoc />
+        public IBybitRestClientApiEarn Earn { get; }
 
         /// <inheritdoc />
         public string ExchangeName => "Bybit";
@@ -71,6 +73,7 @@ namespace Bybit.Net.Clients.V5
             Trading = new BybitRestClientApiTrading(this);
             SubAccount = new BybitRestClientApiSubAccounts(this);
             CryptoLoan = new BybitRestClientApiCryptoLoan(this);
+            Earn = new BybitRestClientApiEarn(this);
 
             RequestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;

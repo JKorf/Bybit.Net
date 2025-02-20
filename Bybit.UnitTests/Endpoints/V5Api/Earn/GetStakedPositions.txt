@@ -1,0 +1,20 @@
+GET
+/v5/earn/position
+true
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {
+        "list": [
+            {
+                "coin": "USDT",
+                "productId": "428",
+                "amount": "3000",
+                "totalPnl": "125.6208",
+                "claimableYield": "0"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1739944577575
+}
