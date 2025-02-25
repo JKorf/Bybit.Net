@@ -159,6 +159,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.3.1 - 25 Feb 2025
+    * Fixed restClient.V5Api.CryptoLoan.BorrowAsync parameter serialization
+
 * Version 4.3.0 - 20 Feb 2025
     * Added Bybit Earn endpoints to restClient.V5Api.Earn
     * Added socket SubscribeToAllLiquidationUpdatesAsync subscription
