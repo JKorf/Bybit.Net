@@ -86,8 +86,8 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection();
             parameters.Add("loanCurrency", loanAsset);
             parameters.Add("collateralCurrency", collateralAsset);
-            parameters.AddOptional("loanAmount", loanQuantity);
-            parameters.AddOptional("collateralAmount", collateralQuantity);
+            parameters.AddOptionalString("loanAmount", loanQuantity);
+            parameters.AddOptionalString("collateralAmount", collateralQuantity);
             parameters.AddOptionalEnum("loanTerm", loanTerm);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/crypto-loan/borrow", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
