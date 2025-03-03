@@ -1,0 +1,4 @@
+GET
+/v5/crypto-loan/ongoing-orders
+true
+{"retCode":0,"retMsg":"request.success","result":{"list":[{"collateralAmount":"250","collateralCurrency":"USDT","currentLTV":"0.4692","expirationTime":"","hourlyInterestRate":"0.0000020554","loanCurrency":"ETH","loanTerm":"","orderId":"---","residualInterest":"0.00000022","residualPenaltyInterest":"0","totalDebt":"0.05"}],"nextPageCursor":"1896483678381928450"},"retExtInfo":{},"time":1740992802436}

@@ -44,7 +44,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Loan term
         /// </summary>
         [JsonPropertyName("loanTerm")]
-        public decimal LoanTerm { get; set; }
+        public decimal? LoanTerm { get; set; }
         /// <summary>
         /// Order id
         /// </summary>

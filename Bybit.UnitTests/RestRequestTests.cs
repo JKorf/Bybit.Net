@@ -145,6 +145,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.BorrowAsync("123", "123"), "Borrow", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.RepayAsync("123", 0.1m), "Repay", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetOpenLoansAsync(), "GetOpenLoans", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetOpenLoansAsync(), "GetOpenLoans2", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetRepayHistoryAsync(), "GetRepayHistory", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetCompletedLoanOrdersAsync(), "GetCompletedLoanOrders", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetMaxCollateralAsync("123"), "GetMaxCollateral", nestedJsonProperty: "result");
