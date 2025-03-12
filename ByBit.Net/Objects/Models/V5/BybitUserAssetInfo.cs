@@ -43,7 +43,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Networks
         /// </summary>
         [JsonPropertyName("chains")]
-        public BybitAssetNetworkInfo[] Networks { get; set; } = new List<BybitAssetNetworkInfo>();
+        public BybitAssetNetworkInfo[] Networks { get; set; } = [];
     }
 
     /// <summary>

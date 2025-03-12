@@ -36,7 +36,7 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("amount")]
         public decimal? Quantity { get; set; }
         [JsonInclude, JsonPropertyName("quantity")]
-        private decimal? QuantityInt
+        internal decimal? QuantityInt
         {
             set => Quantity = value;
             get => Quantity;

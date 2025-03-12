@@ -5,18 +5,15 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using CryptoExchange.Net.Converters.JsonNet;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CryptoExchange.Net.Objects;
 using Bybit.Net.Interfaces.Clients;
 using System.Text.Json;
+using CryptoExchange.Net.Converters.SystemTextJson;
 
 namespace Bybit.UnitTests
 {
@@ -104,7 +101,7 @@ namespace Bybit.UnitTests
                     { "category", "option" },
                     { "symbol", "BTC-29JUL22-25000-C" },
                 },
-                DateTimeConverter.ParseFromLong(1658384314791),
+                DateTimeConverter.ParseFromDouble(1658384314791),
                 true,
                 false);
         }
@@ -129,7 +126,7 @@ namespace Bybit.UnitTests
                 {
                     { "category", "option" }
                 },
-                DateTimeConverter.ParseFromLong(1658385579423),
+                DateTimeConverter.ParseFromDouble(1658385579423),
                 true,
                 false);
         }

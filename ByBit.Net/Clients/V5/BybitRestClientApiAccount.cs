@@ -907,7 +907,7 @@ namespace Bybit.Net.Clients.V5
             AddPermission(permissions, permissionExchangeHistory, "Exchange", "ExchangeHistory");
             AddPermission(permissions, permissionNftProductList, "NFT", "NFTQueryProductList");
             AddPermission(permissions, permissionAffiliate, "Affiliate", "Affiliate");
-            parameters.Add("permissions", permissions);
+            parameters.Add("permissions", permissions.ToDictionary(x => x.Key, x => x.Value.ToArray()));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/update-api", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));

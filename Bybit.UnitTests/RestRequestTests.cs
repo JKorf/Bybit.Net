@@ -22,7 +22,7 @@ namespace Bybit.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "456");
             });
-            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Account", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Account", "https://api.bybit.com", IsAuthenticated, "result");
             await tester.ValidateAsync(client => client.V5Api.Account.SetLeverageAsync(Enums.Category.Option, "ETHUSDT", 1, 1), "SetLeverage");
             await tester.ValidateAsync(client => client.V5Api.Account.SetCollateralAssetAsync("ETH", true), "SetCollateralAsset");
             await tester.ValidateAsync(client => client.V5Api.Account.SetMultipleCollateralAssetsAsync(new[] { new BybitSetCollateralAssetRequest { Asset = "ETH", UseForCollateral = true} }), "SetMultipleCollateralAssets");
@@ -73,7 +73,7 @@ namespace Bybit.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "456");
             });
-            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/ExchangeData", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/ExchangeData", "https://api.bybit.com", IsAuthenticated, "result");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetAnnouncementsAsync("en-Us"), "GetAnnouncements");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetKlinesAsync(Enums.Category.Spot, "ETHUSDT", Enums.KlineInterval.OneDay), "GetKlines");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetMarkPriceKlinesAsync(Enums.Category.Spot, "ETHUSDT", Enums.KlineInterval.OneDay), "GetMarkPriceKlines");
@@ -107,7 +107,7 @@ namespace Bybit.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "456");
             });
-            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Trading", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Trading", "https://api.bybit.com", IsAuthenticated, "result");
             await tester.ValidateAsync(client => client.V5Api.Trading.PlaceOrderAsync(Enums.Category.Option, "ETHUSDT", Enums.OrderSide.Buy, Enums.NewOrderType.Market, 1), "PlaceOrder");
             await tester.ValidateAsync(client => client.V5Api.Trading.PlaceMultipleOrdersAsync(Enums.Category.Option, new[] { new BybitPlaceOrderRequest() }), "PlaceMultipleOrders", skipResponseValidation: true);
             await tester.ValidateAsync(client => client.V5Api.Trading.EditOrderAsync(Enums.Category.Option, "ETHUSDT"), "EditOrder");
@@ -139,7 +139,7 @@ namespace Bybit.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "456");
             });
-            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/CryptoLoan", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/CryptoLoan", "https://api.bybit.com", IsAuthenticated, "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetBorrowableAssetsAsync(AccountLevel.Vip5, "123"), "GetBorrowableAssets", nestedJsonProperty: "result.vipCoinList");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.GetLimitsAsync("123", "123"), "GetLimits", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.CryptoLoan.BorrowAsync("123", "123"), "Borrow", nestedJsonProperty: "result");
@@ -161,7 +161,7 @@ namespace Bybit.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "456");
             });
-            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Earn", "https://api.bybit.com", IsAuthenticated, "result", stjCompare: true);
+            var tester = new RestRequestValidator<BybitRestClient>(client, "Endpoints/V5Api/Earn", "https://api.bybit.com", IsAuthenticated, "result");
             await tester.ValidateAsync(client => client.V5Api.Earn.GetProductInfoAsync(EarnCategory.FlexibleSaving, "123"), "GetProductInfo", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.Earn.PlaceOrderAsync(EarnCategory.FlexibleSaving, "123", AccountType.Fund, "123", EarnOrderType.Stake, 0.1m), "PlaceOrder", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.Earn.GetOrderHistoryAsync(EarnCategory.FlexibleSaving, "123"), "GetOrderHistory", nestedJsonProperty: "result");

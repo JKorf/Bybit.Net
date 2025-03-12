@@ -56,7 +56,7 @@ namespace Bybit.Net.Objects.Models.V5
         public decimal? AveragePrice { get; set; }
 
         [JsonInclude, JsonPropertyName("entryPrice")]
-        private decimal? EntryPrice
+        internal decimal? EntryPrice
         {
             get => AveragePrice;
             set => AveragePrice = value;
