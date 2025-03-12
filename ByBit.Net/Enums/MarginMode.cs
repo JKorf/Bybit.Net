@@ -7,7 +7,6 @@ namespace Bybit.Net.Enums
     /// <summary>
     /// Margin mode
     /// </summary>
-    [JsonConverter(typeof(EnumConverter))]
     [JsonConverter(typeof(EnumConverter<MarginMode>))]
     public enum MarginMode
     {

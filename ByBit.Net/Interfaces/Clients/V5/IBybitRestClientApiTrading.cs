@@ -359,7 +359,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> PlaceMultipleOrdersAsync(
+        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default);
@@ -372,7 +372,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> CancelMultipleOrdersAsync(
+        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitCancelOrderRequest> orderRequests,
             CancellationToken ct = default);
@@ -385,7 +385,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> EditMultipleOrdersAsync(
+        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitEditOrderRequest> orderRequests,
             CancellationToken ct = default);

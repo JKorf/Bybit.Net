@@ -7,7 +7,6 @@ namespace Bybit.Net.Enums
     /// <summary>
     /// Account type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter))]
     [JsonConverter(typeof(EnumConverter<AccountType>))]
     public enum AccountType
     {

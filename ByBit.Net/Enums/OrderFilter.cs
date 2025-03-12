@@ -7,7 +7,6 @@ namespace Bybit.Net.Enums
     /// <summary>
     /// Order filter
     /// </summary>
-    [JsonConverter(typeof(EnumConverter))]
     [JsonConverter(typeof(EnumConverter<OrderFilter>))]
     public enum OrderFilter
     {

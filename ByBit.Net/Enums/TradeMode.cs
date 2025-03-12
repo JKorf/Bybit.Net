@@ -7,7 +7,6 @@ namespace Bybit.Net.Enums
     /// <summary>
     /// Trigger direction
     /// </summary>
-    [JsonConverter(typeof(EnumConverter))]
     [JsonConverter(typeof(EnumConverter<TradeMode>))]
     public enum TradeMode
     {

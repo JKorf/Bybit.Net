@@ -7,7 +7,6 @@ namespace Bybit.Net.Enums
     /// <summary>
     /// Transfer status
     /// </summary>
-    [JsonConverter(typeof(EnumConverter))]
     [JsonConverter(typeof(EnumConverter<TransferStatus>))]
     public enum TransferStatus
     {

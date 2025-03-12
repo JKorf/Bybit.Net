@@ -81,7 +81,7 @@ namespace Bybit.Net.Clients.V5
         {
             var parameters = new ParameterCollection()
             {
-                { "request", assets }
+                { "request", assets.ToArray() }
             };
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-collateral-switch-batch", BybitExchange.RateLimiter.BybitRest, 1, true);
@@ -1036,7 +1036,7 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/data", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitSpotMarginVipMarginData>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
-                return result.As< IEnumerable<BybitSpotMarginVipMarginList>>(default);
+                return result.As<BybitSpotMarginVipMarginList[]>(default);
 
             return result.As(result.Data.VipCoinList);
         }

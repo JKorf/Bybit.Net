@@ -64,7 +64,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitKlineUpdate>>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
+            var subscription = new BybitSubscription<BybitKlineUpdate[]>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
 
@@ -86,7 +86,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidationUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitLiquidationUpdate>>(_logger, symbols.Select(x => $"allLiquidation.{x}").ToArray(), handler);
+            var subscription = new BybitSubscription<BybitLiquidationUpdate[]>(_logger, symbols.Select(x => $"allLiquidation.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
     }

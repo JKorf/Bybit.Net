@@ -84,7 +84,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> baseAssets, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitOptionsSubscription<IEnumerable<BybitOptionTrade>>(_logger, baseAssets.Select(s => $"publicTrade.{s}").ToArray(), handler);
+            var subscription = new BybitOptionsSubscription<BybitOptionTrade[]>(_logger, baseAssets.Select(s => $"publicTrade.{s}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
 
@@ -106,7 +106,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitOptionsSubscription<IEnumerable<BybitKlineUpdate>>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
+            var subscription = new BybitOptionsSubscription<BybitKlineUpdate[]>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
 

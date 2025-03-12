@@ -1,5 +1,6 @@
 using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
@@ -13,6 +14,9 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientPrivateApi : IBybitSocketClientPrivateApiShared
     {
+        private const string _topicSpotId = "BybitSpot";
+        private const string _topicFuturesId = "BybitFutures";
+
         public string Exchange => BybitExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes { get; } = new[] { TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.PerpetualInverse, TradingMode.DeliveryLinear, TradingMode.DeliveryInverse };
 
@@ -52,6 +56,7 @@ namespace Bybit.Net.Clients.V5
 
                     handler(update.AsExchangeEvent<SharedSpotOrder[]>(Exchange, data.Select(x =>
                         new SharedSpotOrder(
+                            ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol),
                             x.Symbol,
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -101,6 +106,7 @@ namespace Bybit.Net.Clients.V5
 
                     handler(update.AsExchangeEvent<SharedFuturesOrder[]>(Exchange, data.Select(x =>
                         new SharedFuturesOrder(
+                            ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol),
                             x.Symbol,
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -142,7 +148,7 @@ namespace Bybit.Net.Clients.V5
             var result = await SubscribeToUserTradeUpdatesAsync(
                 update =>
                 {
-                    var data = update.Data;
+                    IEnumerable<BybitUserTradeUpdate> data = update.Data;
                     if (request.TradingMode != null)
                         data = data.Where(x => x.Category == category);
 
@@ -151,6 +157,7 @@ namespace Bybit.Net.Clients.V5
 
                     handler(update.AsExchangeEvent<SharedUserTrade[]>(Exchange, data.Select(x =>
                         new SharedUserTrade(
+                            ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol) ?? ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol),
                             x.Symbol,
                             x.OrderId.ToString(),
                             x.TradeId.ToString(),
@@ -180,14 +187,14 @@ namespace Bybit.Net.Clients.V5
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await SubscribeToPositionUpdatesAsync(
-                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
+                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, x.Quantity, x.UpdateTime)
                 {
                     AverageOpenPrice = x.AveragePrice,
                     PositionSide = x.PositionIdx == Enums.PositionIdx.OneWayMode ? (x.Side == Enums.PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long) : x.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                     LiquidationPrice = x.LiquidationPrice,
                     Leverage = x.Leverage,
                     UnrealizedPnl = x.UnrealizedPnl
-                }))),
+                }).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);

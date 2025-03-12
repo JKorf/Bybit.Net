@@ -1,5 +1,6 @@
 using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
@@ -13,6 +14,7 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientLinearApi : IBybitSocketClientLinearApiShared
     {
+        private const string _topicId = "BybitFutures";
         public string Exchange => BybitExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes { get; } = new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear };
 
@@ -42,7 +44,7 @@ namespace Bybit.Net.Clients.V5
                 if (update.Data.PricePercentage24h.HasValue)
                     change = update.Data.PricePercentage24h.Value * 100;
 
-                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, lastPrice, high, low, vol, change)));
+                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, lastPrice, high, low, vol, change)));
             }, ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -62,7 +64,7 @@ namespace Bybit.Net.Clients.V5
             var result = await SubscribeToTradeUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
             {
                 Side = x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
-            }))), ct).ConfigureAwait(false);
+            }).ToArray())), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -90,7 +92,7 @@ namespace Bybit.Net.Clients.V5
                     bestBidQuantity = bestBid.Quantity;
                 }
 
-                handler(update.AsExchangeEvent(Exchange, new SharedBookTicker(bestAskPrice, bestAskQuantity, bestBidPrice, bestBidQuantity)));
+                handler(update.AsExchangeEvent(Exchange, new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, symbol), symbol, bestAskPrice, bestAskQuantity, bestBidPrice, bestBidQuantity)));
             }, ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);

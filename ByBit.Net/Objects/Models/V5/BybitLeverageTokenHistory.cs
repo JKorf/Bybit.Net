@@ -22,7 +22,6 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("ltOrderStatus")]
         public LeverageTokenOrderStatus Status { get; set; }
         /// <summary>
-    [SerializationModel]
         /// Order record type
         /// </summary>
         [JsonPropertyName("ltOrderType")]

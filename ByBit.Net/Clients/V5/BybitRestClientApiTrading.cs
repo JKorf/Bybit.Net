@@ -112,7 +112,7 @@ namespace Bybit.Net.Clients.V5
         #region Place multiple orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> PlaceMultipleOrdersAsync(
+        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -120,7 +120,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
-                { "request", orderRequests }
+                { "request", orderRequests.ToArray() }
             };
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
@@ -132,13 +132,13 @@ namespace Bybit.Net.Clients.V5
             if (!result || result.Data == null)
             {
                 if (result.Error?.Code == 404)
-                    return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(404, "Received 404 response; make sure your account is UTA PRO"));
+                    return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(404, "Received 404 response; make sure your account is UTA PRO"));
 
-                return result.As<BybitBatchResult<BybitBatchOrderId[]>>(default);
+                return result.As<BybitBatchResult<BybitBatchOrderId>[]>(default);
             }
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>(); 
             var resultItems = result.Data.Result.List.ToArray();
@@ -154,7 +154,7 @@ namespace Bybit.Net.Clients.V5
                 });
             }
 
-            return result.As<BybitBatchResult<BybitBatchOrderId[]>>(resultList);
+            return result.As<BybitBatchResult<BybitBatchOrderId>[]>(resultList.ToArray());
         }
 
         #endregion
@@ -213,7 +213,7 @@ namespace Bybit.Net.Clients.V5
         #region Edit multiple orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> EditMultipleOrdersAsync(
+        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitEditOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -221,7 +221,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
-                { "request", orderRequests }
+                { "request", orderRequests.ToArray() }
             };
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
@@ -231,10 +231,10 @@ namespace Bybit.Net.Clients.V5
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result || result.Data == null)
-                return result.As<BybitBatchResult<BybitBatchOrderId[]>>(default);
+                return result.As<BybitBatchResult<BybitBatchOrderId>[]>(default);
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
             var resultItems = result.Data.Result.List.ToArray();
@@ -249,7 +249,7 @@ namespace Bybit.Net.Clients.V5
                 });
             }
 
-            return result.As<BybitBatchResult<BybitBatchOrderId[]>>(resultList);
+            return result.As(resultList.ToArray());
         }
 
         #endregion
@@ -292,7 +292,7 @@ namespace Bybit.Net.Clients.V5
         #region Cancel multiple orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> CancelMultipleOrdersAsync(
+        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitCancelOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -300,7 +300,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
-                { "request", orderRequests }
+                { "request", orderRequests.ToArray() }
             };
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
@@ -310,10 +310,10 @@ namespace Bybit.Net.Clients.V5
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result)
-                return result.As<BybitBatchResult<BybitBatchOrderId[]>>(default);
+                return result.As<BybitBatchResult<BybitBatchOrderId>[]>(default);
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
             var resultItems = result.Data.Result.List.ToArray(); 
@@ -329,7 +329,7 @@ namespace Bybit.Net.Clients.V5
                 });
             }
 
-            return result.As<BybitBatchResult<BybitBatchOrderId[]>>(resultList);
+            return result.As<BybitBatchResult<BybitBatchOrderId>[]>(resultList.ToArray());
         }
 
         #endregion

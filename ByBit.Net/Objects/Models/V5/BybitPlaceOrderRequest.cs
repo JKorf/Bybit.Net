@@ -70,7 +70,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("triggerDirection"),
             JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault),
-            JsonConverterCtor(typeof(EnumConverter), true, true)]
+            JsonConverter(typeof(EnumIntWriterConverter<TriggerDirection>))]
         public TriggerDirection? TriggerDirection { get; set; }
         /// <summary>
         /// Trigger price
@@ -87,7 +87,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("positionIdx"),
             JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault),
-            JsonConverterCtor(typeof(EnumConverter), true, true)]
+            JsonConverter(typeof(EnumIntWriterConverter<PositionIdx>))]
         public PositionIdx? PositionIdx { get; set; }
         /// <summary>
         /// Take profit limit price

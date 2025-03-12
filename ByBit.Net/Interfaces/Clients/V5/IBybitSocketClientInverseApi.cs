@@ -39,7 +39,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitLinearTickerUpdate>> handler, CancellationToken ct = default);
 
         /// <summary>
-        /// DEPRECATED, use <see cref="SubscribeToAllLiquidationUpdatesAsync(IEnumerable{string}, Action{DataEvent{IEnumerable{BybitLiquidationUpdate}}}, CancellationToken)"/> instead
+        /// DEPRECATED, use <see cref="SubscribeToAllLiquidationUpdatesAsync(IEnumerable{string}, Action{DataEvent{BybitLiquidationUpdate[]}}, CancellationToken)"/> instead
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
@@ -49,7 +49,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default);
 
         /// <summary>
-        /// DEPRECATED, use <see cref="SubscribeToAllLiquidationUpdatesAsync(string, Action{DataEvent{IEnumerable{BybitLiquidationUpdate}}}, CancellationToken)"/> instead
+        /// DEPRECATED, use <see cref="SubscribeToAllLiquidationUpdatesAsync(string, Action{DataEvent{BybitLiquidationUpdate[]}}, CancellationToken)"/> instead
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/liquidation" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>

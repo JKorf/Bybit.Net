@@ -7,7 +7,6 @@ namespace Bybit.Net.Enums
     /// <summary>
     /// Trading type of option
     /// </summary>
-    [JsonConverter(typeof(EnumConverter))]
     [JsonConverter(typeof(EnumConverter<OptionType>))]
     public enum OptionType
     {

@@ -1,5 +1,6 @@
 using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients;
+using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis;
@@ -13,6 +14,9 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientApi : IBybitRestClientApiShared
     {
+        private const string _topicSpotId = "BybitSpot";
+        private const string _topicFuturesId = "BybitFutures";
+
         public string Exchange => BybitExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes { get; } = new[] { TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.DeliveryLinear, TradingMode.PerpetualInverse, TradingMode.DeliveryInverse };
 
@@ -130,7 +134,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, null, default);
 
-            return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, TradingMode.Spot, result.Data.List.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentag24h * 100)).ToArray());
+            return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, TradingMode.Spot, result.Data.List.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentag24h * 100)).ToArray());
         }
 
         EndpointOptions<GetTickerRequest> ISpotTickerRestClient.GetSpotTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
@@ -147,7 +151,7 @@ namespace Bybit.Net.Clients.V5
                     return result.AsExchangeResult<SharedSpotTicker>(Exchange, null, default);
 
                 var ticker = result.Data.List.Single();
-                return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h, ticker.PriceChangePercentag24h * 100));
+                return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, ticker.Symbol), ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h, ticker.PriceChangePercentag24h * 100));
             }
             else
             {
@@ -159,7 +163,7 @@ namespace Bybit.Net.Clients.V5
                     return result.AsExchangeResult<SharedSpotTicker>(Exchange, null, default);
 
                 var ticker = result.Data.List.Single();
-                return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h, ticker.PriceChangePercentage24h));
+                return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, ticker.Symbol), ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h, ticker.PriceChangePercentage24h));
             }
         }
 
@@ -227,6 +231,8 @@ namespace Bybit.Net.Clients.V5
                 SharedQuantityType.BaseAndQuoteAsset,
                 SharedQuantityType.BaseAndQuoteAsset);
 
+        string ISpotOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(32);
+
         PlaceSpotOrderOptions ISpotOrderRestClient.PlaceSpotOrderOptions { get; } = new PlaceSpotOrderOptions();
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
         {
@@ -275,6 +281,7 @@ namespace Bybit.Net.Clients.V5
 
             var order = orders.Data.List.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, order.Symbol),
                 order.Symbol,
                 order.OrderId.ToString(),
                 ParseOrderType(order.OrderType),
@@ -309,6 +316,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, null, default);
 
             return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, TradingMode.Spot, orders.Data.List.Select(x => new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -360,6 +368,7 @@ namespace Bybit.Net.Clients.V5
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
             return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, TradingMode.Spot, orders.Data.List.Select(x => new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -393,6 +402,7 @@ namespace Bybit.Net.Clients.V5
                 return trades.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
             return trades.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, trades.Data.List.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol), 
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -435,6 +445,7 @@ namespace Bybit.Net.Clients.V5
                 nextToken = new CursorToken(trades.Data.NextPageCursor!);
 
             return trades.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, trades.Data.List.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol), 
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -550,7 +561,7 @@ namespace Bybit.Net.Clients.V5
                     MinWithdrawQuantity = x.MinWithdraw,
                     WithdrawEnabled = x.NetworkWithdraw,
                     WithdrawFee = x.WithdrawFee 
-                })
+                }).ToArray()
             }).ToArray());
         }
 
@@ -734,6 +745,7 @@ namespace Bybit.Net.Clients.V5
                     new[] { TradingMode.PerpetualLinear, TradingMode.DeliveryLinear }
                     : new[] { TradingMode.PerpetualInverse, TradingMode.DeliveryInverse },
                 new SharedFuturesTicker(
+                    ExchangeSymbolCache.ParseSymbol(_topicFuturesId, symbol.Symbol),
                     symbol.Symbol,
                     symbol.LastPrice,
                     symbol.HighPrice24h,
@@ -766,7 +778,7 @@ namespace Bybit.Net.Clients.V5
                     new[] { TradingMode.PerpetualLinear, TradingMode.DeliveryLinear }
                     : new[] { TradingMode.PerpetualInverse, TradingMode.DeliveryInverse }, 
                 resultTicker.Data.List.Select(x =>
-             new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentage24h * 100)
+             new SharedFuturesTicker(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentage24h * 100)
              {
                  FundingRate = x.FundingRate,
                  IndexPrice = x.IndexPrice,
@@ -792,7 +804,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedFuturesSymbol[]>(Exchange, null, default);
 
-            var data = result.Data.List;
+            IEnumerable<BybitLinearInverseSymbol> data = result.Data.List;
             if (request.TradingMode != null)
             {
                 data = data.Where(x =>
@@ -803,10 +815,10 @@ namespace Bybit.Net.Clients.V5
             }
 
             return result.AsExchangeResult<SharedFuturesSymbol[]>(Exchange, request.TradingMode == null ? SupportedTradingModes : new[] { request.TradingMode.Value }, data.Select(s => new SharedFuturesSymbol(
-                s.ContractType == ContractTypeV5.LinearPerpetual ? SharedSymbolType.PerpetualLinear:
-                s.ContractType == ContractTypeV5.InversePerpetual ? SharedSymbolType.PerpetualInverse:
-                s.ContractType == ContractTypeV5.LinearFutures ? SharedSymbolType.DeliveryLinear :
-                SharedSymbolType.DeliveryInverse,
+                s.ContractType == ContractTypeV5.LinearPerpetual ? TradingMode.PerpetualLinear:
+                s.ContractType == ContractTypeV5.InversePerpetual ? TradingMode.PerpetualInverse:
+                s.ContractType == ContractTypeV5.LinearFutures ? TradingMode.DeliveryLinear :
+                TradingMode.DeliveryInverse,
                 s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
@@ -815,6 +827,8 @@ namespace Bybit.Net.Clients.V5
                 QuantityStep = s.LotSizeFilter?.QuantityStep,
                 DeliveryTime = s.DeliveryTime,
                 ContractSize = 1,
+                MaxLongLeverage = s.LeverageFilter?.MaxLeverage,
+                MaxShortLeverage = s.LeverageFilter?.MaxLeverage
             }).ToArray());
         }
 
@@ -1056,6 +1070,8 @@ namespace Bybit.Net.Clients.V5
                 SharedQuantityType.BaseAsset,
                 SharedQuantityType.BaseAsset);
 
+        string IFuturesOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(32);
+
         PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions();
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
@@ -1108,6 +1124,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeError<SharedFuturesOrder>(Exchange, new ServerError("Order not found"));
 
             return orders.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, order.Symbol),
                 order.Symbol,
                 order.OrderId.ToString(),
                 ParseOrderType(order.OrderType),
@@ -1155,6 +1172,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, null, default);
 
             return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, tradingMode, orders.Data.List.Select(x => new SharedFuturesOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -1206,6 +1224,7 @@ namespace Bybit.Net.Clients.V5
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
             return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, SupportedTradingModes ,orders.Data.List.Select(x => new SharedFuturesOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -1241,6 +1260,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
             return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, request.Symbol.TradingMode,orders.Data.List.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId,
@@ -1286,6 +1306,7 @@ namespace Bybit.Net.Clients.V5
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
             return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, request.Symbol.TradingMode,orders.Data.List.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId,
@@ -1336,7 +1357,7 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedPosition[]>(Exchange, null, default);
 
-            return result.AsExchangeResult<SharedPosition[]>(Exchange, request.Symbol == null ? SupportedTradingModes : new[] { request.Symbol.TradingMode }, result.Data.List.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
+            return result.AsExchangeResult<SharedPosition[]>(Exchange, request.Symbol == null ? SupportedTradingModes : new[] { request.Symbol.TradingMode }, result.Data.List.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, x.Quantity, x.UpdateTime)
             {
                 UnrealizedPnl = x.UnrealizedPnl,
                 LiquidationPrice = x.LiquidationPrice,
@@ -1461,6 +1482,7 @@ namespace Bybit.Net.Clients.V5
                 nextToken = new CursorToken(orders.Data.NextPageCursor!);
 
             return orders.AsExchangeResult<SharedPositionHistory[]>(Exchange, tradingMode, orders.Data.List.Select(x => new SharedPositionHistory(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.Side == OrderSide.Sell ? SharedPositionSide.Long : SharedPositionSide.Short,
                 x.AverageEntryPrice,
