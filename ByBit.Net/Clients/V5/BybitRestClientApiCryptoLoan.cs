@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -31,7 +31,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Collateral Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitCollateralAsset>>> GetCollateralAssetsAsync(
+        public async Task<WebCallResult<BybitCollateralAsset[]>> GetCollateralAssetsAsync(
             AccountLevel? level = null,
             string? asset = null,
             CancellationToken ct = default)
@@ -42,7 +42,7 @@ namespace Bybit.Net.Clients.V5
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/crypto-loan/collateral-data", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitCollateralAssets>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<BybitCollateralAsset>>(result.Data?.Assets);
+            return result.As<BybitCollateralAsset[]>(result.Data?.Assets);
         }
 
         #endregion
@@ -50,7 +50,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Borrowable Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitBorrowAsset>>> GetBorrowableAssetsAsync(AccountLevel? level = null, string? asset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitBorrowAsset[]>> GetBorrowableAssetsAsync(AccountLevel? level = null, string? asset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("currency", asset);
@@ -58,7 +58,7 @@ namespace Bybit.Net.Clients.V5
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/crypto-loan/loanable-data", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitBorrowAssetWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<BybitBorrowAsset>>(result.Data?.VipAssetList);
+            return result.As<BybitBorrowAsset[]>(result.Data?.VipAssetList);
         }
 
         #endregion

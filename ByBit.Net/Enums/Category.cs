@@ -1,5 +1,6 @@
-﻿using CryptoExchange.Net.Attributes;
 using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
@@ -7,6 +8,7 @@ namespace Bybit.Net.Enums
     /// Account type
     /// </summary>
     [JsonConverter(typeof(EnumConverter))]
+    [JsonConverter(typeof(EnumConverter<Category>))]
     public enum Category
     {
         /// <summary>

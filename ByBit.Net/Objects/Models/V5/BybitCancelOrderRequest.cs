@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Request info
     /// </summary>
+    [SerializationModel]
     public record BybitCancelOrderRequest
     {
         /// <summary>
@@ -27,13 +29,14 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Order filter
         /// </summary>
-        [JsonPropertyName("orderFilter"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderFilter"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public OrderFilter? OrderFilter { get; set; }
     }
 
+    [SerializationModel]
     internal record BybitSocketCancelOrderRequest: BybitCancelOrderRequest
     {
-        [JsonPropertyName("category"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("category")]
         public Category Category { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
 using Bybit.Net.Objects.Sockets.Queries;
@@ -65,11 +65,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitTrade>>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default)
             => SubscribeToTradeUpdatesAsync(new string[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitTrade>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default)
         {
             var subscription = new BybitSubscription<IEnumerable<BybitTrade>>(_logger, symbols.Select(s => $"publicTrade.{s}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);

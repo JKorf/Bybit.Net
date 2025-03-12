@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,13 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Bybit response
     /// </summary>
+    [SerializationModel]
     public record BybitBaseResponse
     {
         /// <summary>
         /// Category
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("category")]
         public Category? Category { get; set; }
         /// <summary>
@@ -43,13 +45,14 @@ namespace Bybit.Net.Objects.Models.V5
     /// Bybit response info
     /// </summary>
     /// <typeparam name="T">Type of the response data</typeparam>
+    [SerializationModel]
     public record BybitResponse<T> : BybitBaseResponse
     {
         /// <summary>
         /// Data list
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<T> List { get; set; } = Array.Empty<T>();
+        public T[] List { get; set; } = Array.Empty<T>();
 
         [JsonPropertyName("rows")]
         internal IEnumerable<T> Rows

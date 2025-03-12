@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using System;
@@ -91,7 +91,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitAssetExchange>>> GetAssetExchangeHistoryAsync(string? fromAsset = null, string? toAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitAssetExchange[]>> GetAssetExchangeHistoryAsync(string? fromAsset = null, string? toAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spot borrow quota
@@ -294,7 +294,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitDcpStatus>>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default);
+        Task<WebCallResult<BybitDcpStatus[]>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Set trading stop parameters
@@ -359,7 +359,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> PlaceMultipleOrdersAsync(
+        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default);
@@ -372,7 +372,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> CancelMultipleOrdersAsync(
+        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> CancelMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitCancelOrderRequest> orderRequests,
             CancellationToken ct = default);
@@ -385,7 +385,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> EditMultipleOrdersAsync(
+        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId[]>>> EditMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitEditOrderRequest> orderRequests,
             CancellationToken ct = default);
@@ -425,6 +425,6 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="type">Filter by type or record</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitLeverageTokenHistory>>> GetLeverageTokenOrderHistoryAsync(string? token = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, LeverageTokenRecordType? type = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitLeverageTokenHistory[]>> GetLeverageTokenOrderHistoryAsync(string? token = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, LeverageTokenRecordType? type = null, CancellationToken ct = default);
     }
 }

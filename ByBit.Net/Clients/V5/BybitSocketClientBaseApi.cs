@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,11 +58,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public virtual Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+        public virtual Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToKlineUpdatesAsync(new string[] { symbol }, interval, handler, ct);
 
         /// <inheritdoc />
-        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
         {
             var subscription = new BybitSubscription<IEnumerable<BybitKlineUpdate>>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
@@ -80,11 +80,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public virtual Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitLiquidationUpdate>>> handler, CancellationToken ct = default)
+        public virtual Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(string symbol, Action<DataEvent<BybitLiquidationUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToAllLiquidationUpdatesAsync(new string[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitLiquidationUpdate>>> handler, CancellationToken ct = default)
+        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidationUpdate[]>> handler, CancellationToken ct = default)
         {
             var subscription = new BybitSubscription<IEnumerable<BybitLiquidationUpdate>>(_logger, symbols.Select(x => $"allLiquidation.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);

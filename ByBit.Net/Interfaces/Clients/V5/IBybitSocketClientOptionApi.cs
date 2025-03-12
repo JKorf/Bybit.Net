@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -24,7 +24,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline updates
@@ -35,7 +35,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to order book updates
@@ -87,7 +87,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitOptionTrade>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to public trade updates
@@ -97,6 +97,6 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitOptionTrade>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default);
     }
 }

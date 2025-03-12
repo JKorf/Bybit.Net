@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
@@ -78,11 +78,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string baseAsset, Action<DataEvent<IEnumerable<BybitOptionTrade>>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string baseAsset, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
             => SubscribeToTradeUpdatesAsync(new string[] { baseAsset }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> baseAssets, Action<DataEvent<IEnumerable<BybitOptionTrade>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> baseAssets, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
         {
             var subscription = new BybitOptionsSubscription<IEnumerable<BybitOptionTrade>>(_logger, baseAssets.Select(s => $"publicTrade.{s}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
@@ -100,11 +100,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+        public override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToKlineUpdatesAsync(new string[] { symbol }, interval, handler, ct);
 
         /// <inheritdoc />
-        public async override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+        public async override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
         {
             var subscription = new BybitOptionsSubscription<IEnumerable<BybitKlineUpdate>>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);

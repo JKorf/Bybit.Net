@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Liquidation info
     /// </summary>
+    [SerializationModel]
     public record BybitLiquidationUpdate
     {
         /// <summary>
@@ -17,7 +19,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Side
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("S")]
         public OrderSide Side { get; set; }
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Broker earnings info
     /// </summary>
+    [SerializationModel]
     public record BybitBrokerEarnings
     {
         /// <summary>
@@ -18,7 +20,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Earning details
         /// </summary>
         [JsonPropertyName("details")]
-        public IEnumerable<BybitEarningDetails> Details { get; set; } = Array.Empty<BybitEarningDetails>();
+        public BybitEarningDetails[] Details { get; set; } = Array.Empty<BybitEarningDetails>();
         /// <summary>
         /// Cursor which can be used for paginiation
         /// </summary>
@@ -29,38 +31,40 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Total earnings info
     /// </summary>
+    [SerializationModel]
     public record BybitTotalEarnings
     {
         /// <summary>
         /// Spot earnings
         /// </summary>
         [JsonPropertyName("spot")]
-        public IEnumerable<BybitBrokerEarning> Spot { get; set; } = Array.Empty<BybitBrokerEarning>();
+        public BybitBrokerEarning[] Spot { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
         /// Convert earnings
         /// </summary>
         [JsonPropertyName("convert")]
-        public IEnumerable<BybitBrokerEarning> Convert { get; set; } = Array.Empty<BybitBrokerEarning>();
+        public BybitBrokerEarning[] Convert { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
         /// Derivatives earnings
         /// </summary>
         [JsonPropertyName("derivatives")]
-        public IEnumerable<BybitBrokerEarning> Derivatives { get; set; } = Array.Empty<BybitBrokerEarning>();
+        public BybitBrokerEarning[] Derivatives { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
         /// Options earnings
         /// </summary>
         [JsonPropertyName("options")]
-        public IEnumerable<BybitBrokerEarning> Options { get; set; } = Array.Empty<BybitBrokerEarning>();
+        public BybitBrokerEarning[] Options { get; set; } = Array.Empty<BybitBrokerEarning>();
         /// <summary>
         /// Total earnings
         /// </summary>
         [JsonPropertyName("total")]
-        public IEnumerable<BybitBrokerEarning> Total { get; set; } = Array.Empty<BybitBrokerEarning>();
+        public BybitBrokerEarning[] Total { get; set; } = Array.Empty<BybitBrokerEarning>();
     }
 
     /// <summary>
     /// Asset earning info
     /// </summary>
+    [SerializationModel]
     public record BybitBrokerEarning
     {
         /// <summary>
@@ -78,6 +82,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Earning details
     /// </summary>
+    [SerializationModel]
     public record BybitEarningDetails
     {
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Converters;
 using System.Text.Json.Serialization;
 using System;
 using Bybit.Net.Converters;
@@ -9,6 +10,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Mark price kline info
     /// </summary>
     [JsonConverter(typeof(ArrayConverter<BybitBasicKline, BybitSourceGenerationContext>))]
+    [SerializationModel]
     public record BybitBasicKline
     {
         /// <summary>

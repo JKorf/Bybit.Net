@@ -1,13 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Repayment type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<RepayType>))]
     public enum RepayType
     {
         /// <summary>

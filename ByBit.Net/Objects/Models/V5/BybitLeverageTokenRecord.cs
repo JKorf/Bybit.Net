@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leverage token purchase record
     /// </summary>
+    [SerializationModel]
     public record BybitLeverageTokenRecord
     {
         /// <summary>
@@ -16,7 +18,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonPropertyName("ltOrderStatus"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("ltOrderStatus")]
         public LeverageTokenOrderStatus Status { get; set; }
         /// <summary>
         /// Filled quantity
@@ -54,6 +56,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Purchase record
     /// </summary>
+    [SerializationModel]
     public record BybitLeverageTokenPurchase : BybitLeverageTokenRecord
     {
         /// <summary>
@@ -66,6 +69,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Purchase record
     /// </summary>
+    [SerializationModel]
     public record BybitLeverageTokenRedemption : BybitLeverageTokenRecord
     {
         /// <summary>

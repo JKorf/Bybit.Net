@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -940,7 +940,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Account Types
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitAccountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitAccountTypeInfo[]>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             if (subAccountIds != null)
@@ -949,7 +949,7 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/get-member-type", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitAccountTypeInfoWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<BybitAccountTypeInfo>>(default);
+                return result.As<BybitAccountTypeInfo[]>(default);
 
             return result.As(result.Data.Accounts);
         }
@@ -1027,7 +1027,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Spot Margin Data
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotMarginVipMarginList>>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotMarginVipMarginList[]>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("currency", asset);
@@ -1046,7 +1046,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Spot Margin Interest Rate History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotMarginBorrowRate>>> GetSpotMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotMarginBorrowRate[]>> GetSpotMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("currency", asset);
@@ -1056,7 +1056,7 @@ namespace Bybit.Net.Clients.V5
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/interest-rate-history", BybitExchange.RateLimiter.BybitRest, 1, true); 
             var result = await _baseClient.SendAsync<BybitResponse<BybitSpotMarginBorrowRate>>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<BybitSpotMarginBorrowRate>>(result.Data?.List);
+            return result.As<BybitSpotMarginBorrowRate[]>(result.Data?.List);
         }
 
         #endregion
@@ -1110,7 +1110,7 @@ namespace Bybit.Net.Clients.V5
         #region Repay Liabilities
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitLiabilityRepayment>>> RepayLiabilitiesAsync(string? asset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitLiabilityRepayment[]>> RepayLiabilitiesAsync(string? asset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("coin", asset);
@@ -1118,10 +1118,10 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/quick-repayment", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitList<BybitLiabilityRepayment>>(request, parameters, ct).ConfigureAwait(false);
             if (!result || result.Data == null)
-                return result.As<IEnumerable<BybitLiabilityRepayment>>(default);
+                return result.As<BybitLiabilityRepayment[]>(default);
 
             if (result.Data.List == null)
-                return result.As<IEnumerable<BybitLiabilityRepayment>>(Array.Empty<BybitLiabilityRepayment>());
+                return result.As<BybitLiabilityRepayment[]>(Array.Empty<BybitLiabilityRepayment>());
 
             return result.As(result.Data.List);
         }
@@ -1146,7 +1146,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Convert Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitConvertAsset>>> GetConvertAssetsAsync(ConvertAccountType accountType, string? asset = null, ConvertAssetSide? side = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitConvertAsset[]>> GetConvertAssetsAsync(ConvertAccountType accountType, string? asset = null, ConvertAssetSide? side = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection
             {
@@ -1157,7 +1157,7 @@ namespace Bybit.Net.Clients.V5
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/query-coin-list", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitConvertAssetWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<BybitConvertAsset>>(result.Data?.Assets);
+            return result.As<BybitConvertAsset[]>(result.Data?.Assets);
         }
 
         #endregion
@@ -1216,7 +1216,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Convert History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitConvertTransaction>>> GetConvertHistoryAsync(ConvertAccountType? accountType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitConvertTransaction[]>> GetConvertHistoryAsync(ConvertAccountType? accountType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalEnum("accountType", accountType);
@@ -1225,7 +1225,7 @@ namespace Bybit.Net.Clients.V5
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/exchange/query-convert-history", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitConvertTransactionListWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<BybitConvertTransaction>>(result.Data?.List);
+            return result.As<BybitConvertTransaction[]>(result.Data?.List);
         }
 
         #endregion

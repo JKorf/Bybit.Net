@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models.V5;
@@ -357,7 +357,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Historical Volatility
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, string? quoteAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitHistoricalVolatility[]>> GetHistoricalVolatilityAsync(string? baseAsset = null, string? quoteAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection()
             {
@@ -370,7 +370,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("period", period);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/historical-volatility", BybitExchange.RateLimiter.BybitRest, 1, false);
-            return await _baseClient.SendAsync<IEnumerable<BybitHistoricalVolatility>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BybitHistoricalVolatility[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -436,7 +436,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Leverage Token Info
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitLeverageToken>>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitLeverageToken[]>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("ltCoin", leverageToken);
@@ -444,7 +444,7 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-lever-token/info", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitLeverageTokenWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<BybitLeverageToken>>(default);
+                return result.As<BybitLeverageToken[]>(default);
 
             return result.As(result.Data.List);
         }
@@ -470,7 +470,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Long Short Ratio
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitLongShortRatio>>> GetLongShortRatioAsync(
+        public async Task<WebCallResult<BybitLongShortRatio[]>> GetLongShortRatioAsync(
             Category category,
             string symbol,
             DataPeriod period,
@@ -491,10 +491,10 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/account-ratio", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitList<BybitLongShortRatio>>(request, parameters, ct).ConfigureAwait(false);
             if (!result || result.Data == null)
-                return result.As<IEnumerable<BybitLongShortRatio>>(default);
+                return result.As<BybitLongShortRatio[]>(default);
 
             if (result.Data.List == null)
-                return result.As<IEnumerable<BybitLongShortRatio>>(Array.Empty<BybitLongShortRatio>());
+                return result.As<BybitLongShortRatio[]>(Array.Empty<BybitLongShortRatio>());
 
             return result.As(result.Data.List);
         }
@@ -505,14 +505,14 @@ namespace Bybit.Net.Clients.V5
         #region Get Spot Margin Tiered Collateral Ratio
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitSpotMarginCollateralRatio>>> GetSpotMarginTieredCollateralRatioAsync(string? asset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSpotMarginCollateralRatio[]>> GetSpotMarginTieredCollateralRatioAsync(string? asset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("currency", asset);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/collateral", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitResponse<BybitSpotMarginCollateralRatio>>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<BybitSpotMarginCollateralRatio>>(result.Data?.List);
+            return result.As<BybitSpotMarginCollateralRatio[]>(result.Data?.List);
         }
 
         #endregion

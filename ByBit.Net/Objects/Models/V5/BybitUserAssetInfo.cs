@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -7,18 +8,20 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset info
     /// </summary>
+    [SerializationModel]
     public record BybitUserAssetInfos : BybitBaseResponse
     {
         /// <summary>
         /// Assets
         /// </summary>
         [JsonPropertyName("rows")]
-        public IEnumerable<BybitUserAssetInfo> Assets { get; set; } = Array.Empty<BybitUserAssetInfo>();
+        public BybitUserAssetInfo[] Assets { get; set; } = Array.Empty<BybitUserAssetInfo>();
     }
 
     /// <summary>
     /// Asset info for user
     /// </summary>
+    [SerializationModel]
     public record BybitUserAssetInfo
     {
         /// <summary>
@@ -40,12 +43,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// Networks
         /// </summary>
         [JsonPropertyName("chains")]
-        public IEnumerable<BybitAssetNetworkInfo> Networks { get; set; } = new List<BybitAssetNetworkInfo>();
+        public BybitAssetNetworkInfo[] Networks { get; set; } = new List<BybitAssetNetworkInfo>();
     }
 
     /// <summary>
     /// Asset network info
     /// </summary>
+    [SerializationModel]
     public record BybitAssetNetworkInfo
     {
         /// <summary>

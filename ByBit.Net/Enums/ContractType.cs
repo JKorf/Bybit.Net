@@ -1,11 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
 using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// V5 contract types
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<ContractTypeV5>))]
     public enum ContractTypeV5
     {
         /// <summary>

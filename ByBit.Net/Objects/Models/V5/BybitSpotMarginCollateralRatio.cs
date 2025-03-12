@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -8,6 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Asset collateral ratio
     /// </summary>
+    [SerializationModel]
     public record BybitSpotMarginCollateralRatio
     {
         /// <summary>
@@ -19,12 +21,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// Collateral ratios
         /// </summary>
         [JsonPropertyName("collateralRatioList")]
-        public IEnumerable<BybitSpotMarginCollateralRatioTier> CollateralRatios { get; set; } = [];
+        public BybitSpotMarginCollateralRatioTier[] CollateralRatios { get; set; } = [];
     }
 
     /// <summary>
     /// Collateral ratio info
     /// </summary>
+    [SerializationModel]
     public record BybitSpotMarginCollateralRatioTier
     {
         /// <summary>

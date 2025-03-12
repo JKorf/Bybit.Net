@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Transferable
     /// </summary>
+    [SerializationModel]
     public record BybitTransferable
     {
         /// <summary>

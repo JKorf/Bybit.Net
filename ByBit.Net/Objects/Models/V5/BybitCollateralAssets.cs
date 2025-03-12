@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,15 +10,17 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Collateral asset info
     /// </summary>
+    [SerializationModel]
     internal record BybitCollateralAssets
     {
         [JsonPropertyName("vipCoinList")]
-        public IEnumerable<BybitCollateralAsset> Assets { get; set; } = [];
+        public BybitCollateralAsset[] Assets { get; set; } = [];
     }
 
     /// <summary>
     /// Collateral asset info
     /// </summary>
+    [SerializationModel]
     public record BybitCollateralAsset
     {
         /// <summary>
@@ -29,12 +32,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// Assets list
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<BybitCollateralAssetInfo> Assets { get; set; } = [];
+        public BybitCollateralAssetInfo[] Assets { get; set; } = [];
     }
 
     /// <summary>
     /// Collateral asset info
     /// </summary>
+    [SerializationModel]
     public record BybitCollateralAssetInfo
     {
         /// <summary>
