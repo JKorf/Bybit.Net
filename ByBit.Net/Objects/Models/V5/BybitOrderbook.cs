@@ -3,6 +3,7 @@ using CryptoExchange.Net.Interfaces;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using Bybit.Net.Converters;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -47,7 +48,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Order book entry
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
+    [JsonConverter(typeof(ArrayConverter<BybitOrderbookEntry, BybitSourceGenerationContext>))]
     public record BybitOrderbookEntry : ISymbolOrderBookEntry
     {
         /// <summary>

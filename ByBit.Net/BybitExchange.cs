@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+﻿using Bybit.Net.Converters;
+using Bybit.Net.Enums;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiting;
@@ -8,6 +9,7 @@ using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net
 {
@@ -47,6 +49,8 @@ namespace Bybit.Net
         /// Type of exchange
         /// </summary>
         public static ExchangeType Type { get; } = ExchangeType.CEX;
+
+        internal static JsonSerializerContext SerializerContext = new BybitSourceGenerationContext();
 
         /// <summary>
         /// Format a base and quote asset to a Bybit recognized symbol 

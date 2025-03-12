@@ -104,15 +104,6 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate("PlaceOrder" + categoryIdentifier, HttpMethod.Post, "v5/order/create", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
-            if (result)
-            {
-                _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
-                {
-                    Id = result.Data.OrderId,
-                    SourceObject = result.Data
-                });
-            }
-
             return result;
         }
 
@@ -160,16 +151,7 @@ namespace Bybit.Net.Clients.V5
                     Code = item.Code,
                     Message = item.Message,
                     Data = resultItem
-                }); ;
-
-                if (item.Code == 0)
-                {
-                    _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
-                    {
-                        Id = resultItem.OrderId,
-                        SourceObject = result.Data
-                    });
-                }
+                });
             }
 
             return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);
@@ -302,15 +284,6 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate("CancelOrder" + categoryIdentifier, HttpMethod.Post, "v5/order/cancel", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
-            if (result)
-            {
-                _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
-                {
-                    Id = result.Data.OrderId,
-                    SourceObject = result.Data
-                });
-            }
-
             return result;
         }
 
@@ -354,15 +327,6 @@ namespace Bybit.Net.Clients.V5
                     Message = item.Message,
                     Data = resultItem
                 });
-
-                if (item.Code == 0)
-                {
-                    _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
-                    {
-                        Id = resultItem.OrderId,
-                        SourceObject = result.Data
-                    });
-                }
             }
 
             return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);

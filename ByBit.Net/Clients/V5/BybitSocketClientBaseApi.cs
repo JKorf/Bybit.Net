@@ -39,8 +39,8 @@ namespace Bybit.Net.Clients.V5
             MessageSendSizeLimit = 21000;
         }
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange.SerializerContext));
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange.SerializerContext));
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

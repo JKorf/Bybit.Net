@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
@@ -13,6 +14,8 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientSpotApi : IBybitSocketClientSpotApiShared
     {
+        private const string _topicId = "BybitSpot";
+
         public string Exchange => BybitExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes { get; } = new[] { TradingMode.Spot };
 
@@ -30,7 +33,7 @@ namespace Bybit.Net.Clients.V5
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
             var result = await SubscribeToTickerUpdatesAsync(symbol, update =>
             {
-                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24h, update.Data.LowPrice24h, update.Data.Volume24h, update.Data.PricePercentage24h * 100)));
+                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24h, update.Data.LowPrice24h, update.Data.Volume24h, update.Data.PricePercentage24h * 100)));
             }, ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);

@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+	  <TargetFrameworks>net8.0;net9.0;netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
     <LangVersion>12.0</LangVersion>
   </PropertyGroup>
@@ -23,6 +23,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>https://github.com/JKorf/Bybit.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
   </PropertyGroup>
+	<PropertyGroup Label="AOT" Condition=" '$(TargetFramework)' == 'NET8_0' Or '$(TargetFramework)' == 'NET9_0' ">
+		<IsAotCompatible>true</IsAotCompatible>
+	</PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bybit.Net.xml</DocumentationFile>
   </PropertyGroup>
@@ -48,10 +51,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="CryptoExchange.Net" Version="8.8.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CryptoExchange.Net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
   </ItemGroup>
 </Project>
