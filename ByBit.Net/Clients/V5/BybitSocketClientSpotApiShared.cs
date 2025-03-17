@@ -70,12 +70,12 @@ namespace Bybit.Net.Clients.V5
             {
                 var bestAsk = update.Data.Asks.FirstOrDefault(f => f.Quantity != 0);
                 var bestBid = update.Data.Bids.FirstOrDefault(f => f.Quantity != 0);
-                if (update.Data.Asks.Any())
+                if (bestAsk != null)
                 {
                     bestAskPrice = bestAsk.Price;
                     bestAskQuantity = bestAsk.Quantity;
                 }
-                if (update.Data.Bids.Any())
+                if (bestBid != null)
                 {
                     bestBidPrice = bestBid.Price;
                     bestBidQuantity = bestBid.Quantity;

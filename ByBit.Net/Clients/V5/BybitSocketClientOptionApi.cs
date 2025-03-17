@@ -55,7 +55,7 @@ namespace Bybit.Net.Clients.V5
                 if (success == null)
                     return null;
 
-                success.AddRange(message.GetValues<string>(_failPath));
+                success.AddRange(message.GetValues<string>(_failPath)!);
                 return "resp" + string.Join("-", success.OrderBy(s => s));
             }
 
