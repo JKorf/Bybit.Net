@@ -65,10 +65,8 @@ namespace Bybit.Net.Clients.V5
                             x.CreateTime)
                         {
                             ClientOrderId = x.ClientOrderId?.ToString(),
-                            Quantity = x.MarketUnit == Enums.MarketUnit.QuoteAsset ? null : x.Quantity,
-                            QuantityFilled = x.QuantityFilled,
-                            QuoteQuantity = x.MarketUnit != Enums.MarketUnit.QuoteAsset ? null : x.Quantity,
-                            QuoteQuantityFilled = x.ValueFilled,
+                            OrderQuantity = new SharedOrderQuantity(x.MarketUnit == MarketUnit.QuoteAsset ? null : x.Quantity, x.MarketUnit == MarketUnit.QuoteAsset ? x.Quantity : null),
+                            QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled),
                             TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : x.TimeInForce == Enums.TimeInForce.GoodTillCanceled ? SharedTimeInForce.GoodTillCanceled : null,
                             UpdateTime = x.UpdateTime,
                             AveragePrice = x.AveragePrice,
@@ -115,10 +113,8 @@ namespace Bybit.Net.Clients.V5
                             x.CreateTime)
                         {
                             ClientOrderId = x.ClientOrderId?.ToString(),
-                            Quantity = x.MarketUnit == Enums.MarketUnit.QuoteAsset ? null : x.Quantity,
-                            QuantityFilled = x.QuantityFilled,
-                            QuoteQuantity = x.MarketUnit != Enums.MarketUnit.QuoteAsset ? null : x.Quantity,
-                            QuoteQuantityFilled = x.ValueFilled,
+                            OrderQuantity = new SharedOrderQuantity(x.Quantity, contractQuantity: x.Quantity),
+                            QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled, x.QuantityFilled),
                             TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ?SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : x.TimeInForce == Enums.TimeInForce.GoodTillCanceled ? SharedTimeInForce.GoodTillCanceled : null,
                             UpdateTime = x.UpdateTime,
                             AveragePrice = x.AveragePrice,

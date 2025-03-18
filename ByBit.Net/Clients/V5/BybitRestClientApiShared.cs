@@ -259,7 +259,7 @@ namespace Bybit.Net.Clients.V5
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 request.OrderType == SharedOrderType.Market ? NewOrderType.Market : NewOrderType.Limit,
-                quantity: request.Quantity ?? request.QuoteQuantity ?? 0,
+                quantity: request.Quantity?.QuantityInBaseAsset ?? request.Quantity?.QuantityInQuoteAsset ?? 0,
                 price: request.Price,
                 clientOrderId: request.ClientOrderId,
                 timeInForce: GetTimeInForce(request.OrderType, request.TimeInForce),
@@ -298,14 +298,12 @@ namespace Bybit.Net.Clients.V5
             {
                 ClientOrderId = order.ClientOrderId,
                 OrderPrice = order.Price,
-                Quantity = order.MarketUnit == null || order.MarketUnit == MarketUnit.BaseAsset ? order.Quantity : null,
-                QuantityFilled = order.QuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(order.MarketUnit == null || order.MarketUnit == MarketUnit.BaseAsset ? order.Quantity : null, order.MarketUnit == MarketUnit.QuoteAsset ? order.Quantity : null),
+                QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.ValueFilled),
                 UpdateTime = order.UpdateTime,
                 TimeInForce = ParseTimeInForce(order.TimeInForce),
                 FeeAsset = order.FeeAsset,
                 Fee = order.ExecutedFee,
-                QuoteQuantity = order.MarketUnit == MarketUnit.QuoteAsset ? order.Quantity : null,
-                QuoteQuantityFilled = order.ValueFilled,
                 AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice
             });
         }
@@ -333,14 +331,12 @@ namespace Bybit.Net.Clients.V5
             {
                 ClientOrderId = x.ClientOrderId,
                 OrderPrice = x.Price,
-                Quantity = x.MarketUnit == null || x.MarketUnit == MarketUnit.BaseAsset ? x.Quantity : null,
-                QuantityFilled = x.QuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(x.MarketUnit == null || x.MarketUnit == MarketUnit.BaseAsset ? x.Quantity : null, x.MarketUnit == MarketUnit.QuoteAsset ? x.Quantity : null),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled),
                 UpdateTime = x.UpdateTime,
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 FeeAsset = x.FeeAsset,
                 Fee = x.ExecutedFee,
-                QuoteQuantity = x.MarketUnit == MarketUnit.QuoteAsset ? x.Quantity : null,
-                QuoteQuantityFilled = x.ValueFilled,
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice
             }).ToArray());
         }
@@ -385,14 +381,12 @@ namespace Bybit.Net.Clients.V5
             {
                 ClientOrderId = x.ClientOrderId,
                 OrderPrice = x.Price,
-                Quantity = x.MarketUnit == null || x.MarketUnit == MarketUnit.BaseAsset ? x.Quantity : null,
-                QuantityFilled = x.QuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(x.MarketUnit == null || x.MarketUnit == MarketUnit.BaseAsset ? x.Quantity : null, x.MarketUnit == MarketUnit.QuoteAsset ? x.Quantity : null),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled),
                 UpdateTime = x.UpdateTime,
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 FeeAsset = x.FeeAsset,
                 Fee = x.ExecutedFee,
-                QuoteQuantity = x.MarketUnit == MarketUnit.QuoteAsset ? x.Quantity : null,
-                QuoteQuantityFilled = x.ValueFilled,
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice
             }).ToArray(), nextToken);
         }
@@ -547,14 +541,12 @@ namespace Bybit.Net.Clients.V5
             {
                 ClientOrderId = order.ClientOrderId,
                 OrderPrice = order.Price,
-                Quantity = order.MarketUnit == null || order.MarketUnit == MarketUnit.BaseAsset ? order.Quantity : null,
-                QuantityFilled = order.QuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(order.MarketUnit == null || order.MarketUnit == MarketUnit.BaseAsset ? order.Quantity : null, order.MarketUnit == MarketUnit.QuoteAsset ? order.Quantity : null),
+                QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.ValueFilled),
                 UpdateTime = order.UpdateTime,
                 TimeInForce = ParseTimeInForce(order.TimeInForce),
                 FeeAsset = order.FeeAsset,
                 Fee = order.ExecutedFee,
-                QuoteQuantity = order.MarketUnit == MarketUnit.QuoteAsset ? order.Quantity : null,
-                QuoteQuantityFilled = order.ValueFilled,
                 AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice
             });
         }
@@ -1157,11 +1149,10 @@ namespace Bybit.Net.Clients.V5
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 request.OrderType == SharedOrderType.Limit ? NewOrderType.Limit : NewOrderType.Market,
-                quantity: request.Quantity ?? 0,
+                quantity: request.Quantity?.QuantityInBaseAsset ?? request.Quantity?.QuantityInContracts ?? 0,
                 price: request.Price,
                 positionIdx: request.PositionSide == null ? PositionIdx.OneWayMode: request.PositionSide == SharedPositionSide.Long ? PositionIdx.BuyHedgeMode : PositionIdx.SellHedgeMode,
                 reduceOnly: request.ReduceOnly,
-                marketUnit: request.Quantity > 0 ? MarketUnit.BaseAsset : MarketUnit.QuoteAsset,
                 timeInForce: GetTimeInForce(request.OrderType, request.TimeInForce),
                 clientOrderId: request.ClientOrderId,
                 ct: ct).ConfigureAwait(false);
@@ -1200,9 +1191,8 @@ namespace Bybit.Net.Clients.V5
                 ClientOrderId = order.ClientOrderId,
                 AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
                 OrderPrice = order.Price,
-                Quantity = order.Quantity,
-                QuantityFilled = order.QuantityFilled,
-                QuoteQuantityFilled = order.ValueFilled,
+                OrderQuantity = new SharedOrderQuantity(order.Quantity, contractQuantity: order.Quantity),
+                QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.ValueFilled, order.QuantityFilled),
                 TimeInForce = ParseTimeInForce(order.TimeInForce),
                 UpdateTime = order.UpdateTime,
                 PositionSide = order.PositionIdx == PositionIdx.OneWayMode ? null : order.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
@@ -1254,9 +1244,8 @@ namespace Bybit.Net.Clients.V5
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 OrderPrice = x.Price,
-                Quantity = x.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantityFilled = x.ValueFilled,
+                OrderQuantity = new SharedOrderQuantity(x.Quantity, contractQuantity: x.Quantity),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled, x.QuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
                 PositionSide = x.PositionIdx == PositionIdx.OneWayMode ? null : x.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
@@ -1306,9 +1295,8 @@ namespace Bybit.Net.Clients.V5
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 OrderPrice = x.Price,
-                Quantity = x.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantityFilled = x.ValueFilled,
+                OrderQuantity = new SharedOrderQuantity(x.Quantity, contractQuantity: x.Quantity),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled, x.QuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
                 PositionSide = x.PositionIdx == PositionIdx.OneWayMode ? null : x.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
@@ -1507,9 +1495,8 @@ namespace Bybit.Net.Clients.V5
                 ClientOrderId = order.ClientOrderId,
                 AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
                 OrderPrice = order.Price,
-                Quantity = order.Quantity,
-                QuantityFilled = order.QuantityFilled,
-                QuoteQuantityFilled = order.ValueFilled,
+                OrderQuantity = new SharedOrderQuantity(order.Quantity, contractQuantity: order.Quantity),
+                QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.ValueFilled, order.QuantityFilled),
                 TimeInForce = ParseTimeInForce(order.TimeInForce),
                 UpdateTime = order.UpdateTime,
                 PositionSide = order.PositionIdx == PositionIdx.OneWayMode ? null : order.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
