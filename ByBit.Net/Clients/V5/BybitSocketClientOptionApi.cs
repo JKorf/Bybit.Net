@@ -51,12 +51,15 @@ namespace Bybit.Net.Clients.V5
             var type = message.GetValue<string>(_typePath);
             if (string.Equals(type, "COMMAND_RESP", StringComparison.Ordinal))
             {
+                var result = new List<string?>();
                 var success = message.GetValues<string>(_successPath);
                 if (success == null)
                     return null;
 
-                success.AddRange(message.GetValues<string>(_failPath)!);
-                return "resp" + string.Join("-", success.OrderBy(s => s));
+                result.AddRange(success);
+                var fails = message.GetValues<string>(_failPath)!;
+                result.AddRange(fails);
+                return "resp" + string.Join("-", result.OrderBy(s => s));
             }
 
             var op = message.GetValue<string>(_opPath);

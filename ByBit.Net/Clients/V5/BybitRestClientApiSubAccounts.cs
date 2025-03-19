@@ -109,13 +109,13 @@ namespace Bybit.Net.Clients.V5
         #region Get Subaccounts
 
         /// <inheritdoc />
-        public async Task<WebCallResult<List<BybitSubAccount>>> GetSubAccountsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSubAccount[]>> GetSubAccountsAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/query-sub-members", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BybitSubAccountWrapper>(request, null, ct).ConfigureAwait(false);
             if (!result)
-                return result.As<List<BybitSubAccount>>(default);
+                return result.As<BybitSubAccount[]>(default);
 
             return result.As(result.Data.SubMembers);
         }

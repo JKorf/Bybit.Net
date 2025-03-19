@@ -10,7 +10,7 @@ namespace Bybit.Net.Objects.Sockets
         [JsonPropertyName("op")]
         public string Operation { get; set; } = string.Empty;
         [JsonPropertyName("args"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public List<object>? Args { get; set; }
+        public object[]? Args { get; set; }
     }
 
     internal class BybitRequestQueryMessage
@@ -22,6 +22,6 @@ namespace Bybit.Net.Objects.Sockets
         [JsonPropertyName("header"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, string>? Header { get; set; }
         [JsonPropertyName("args"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public List<object>? Args { get; set; }
+        public object[]? Args { get; set; }
     }
 }

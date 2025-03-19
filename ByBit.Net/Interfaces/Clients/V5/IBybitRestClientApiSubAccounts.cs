@@ -65,7 +65,7 @@ namespace Bybit.Net.Clients.V5
         /// </summary>
         /// <param name="ct">Cancelation token</param>
         /// <returns></returns>
-        Task<WebCallResult<List<BybitSubAccount>>> GetSubAccountsAsync(CancellationToken ct = default);
+        Task<WebCallResult<BybitSubAccount[]>> GetSubAccountsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Edit API key. Note that permissions starting with the same topic (for example `permissionContractTradeOrder` and `permissionContractTradePosition` or `permissionWalletTransfer` and `permissionWalletSubAccountTransfer`) can not be adjusted separately and should both be set when changing one of the values.

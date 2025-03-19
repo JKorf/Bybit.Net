@@ -11,7 +11,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
     {
         public override HashSet<string> ListenerIdentifiers { get; set; }
 
-        public BybitOptionsQuery(string op, params object[] args) : base(new BybitRequestMessage { RequestId = ExchangeHelpers.NextId().ToString(), Operation = op, Args = args?.ToList() }, false, 1)
+        public BybitOptionsQuery(string op, params object[] args) : base(new BybitRequestMessage { RequestId = ExchangeHelpers.NextId().ToString(), Operation = op, Args = args?.ToArray() }, false, 1)
         {
             ListenerIdentifiers = new HashSet<string>() { "resp" + string.Join("-", args!.OrderBy(a => a)) };
         }

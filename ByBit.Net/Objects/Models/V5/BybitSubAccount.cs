@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     internal record BybitSubAccountWrapper
     {
         [JsonPropertyName("subMembers")]
-        public List<BybitSubAccount> SubMembers { get; set; } = new List<BybitSubAccount>();
+        public BybitSubAccount[] SubMembers { get; set; } = [];
     }
 
     /// <summary>
