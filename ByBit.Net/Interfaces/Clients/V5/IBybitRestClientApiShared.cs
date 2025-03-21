@@ -29,7 +29,9 @@ namespace Bybit.Net.Interfaces.Clients
         IPositionHistoryRestClient,
         IFeeRestClient,
         ISpotOrderClientIdClient,
-        IFuturesOrderClientIdClient
+        IFuturesOrderClientIdClient,
+        ISpotTriggerOrderRestClient,
+        IFuturesTriggerOrderRestClient
     {
     }
 }
