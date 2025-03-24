@@ -244,6 +244,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
         /// <param name="selfMatchPreventionType">Self match prevention type</param>
         /// <param name="marketUnit">The unit for qty when creating spot market orders for unified trading account</param>
+        /// <param name="slippageToleranceType">Slippage tolerance Type for market orders</param>
+        /// <param name="slippageTolerance">Slippage tolerance value</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(
@@ -276,6 +278,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
             StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             SelfMatchPreventionType? selfMatchPreventionType = null,
             MarketUnit? marketUnit = null,
+            SlippageToleranceType? slippageToleranceType = null,
+            decimal? slippageTolerance = null,
             CancellationToken ct = default);
 
         /// <summary>

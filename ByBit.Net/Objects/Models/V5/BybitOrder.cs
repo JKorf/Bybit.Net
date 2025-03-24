@@ -251,5 +251,15 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("placeType")]
         public string? PlaceType { get; set; }
+        /// <summary>
+        /// Slippage tolerance types
+        /// </summary>
+        [JsonPropertyName("slippageToleranceType")]
+        public SlippageToleranceType SlippageToleranceType { get; set; }
+        /// <summary>
+        /// Slippage tolerance value
+        /// </summary>
+        [JsonPropertyName("slippageTolerance")]
+        public decimal? SlippageTolerance { get; set; }
     }
 }

@@ -18,4 +18,10 @@ namespace Bybit.Net.Objects.Sockets
         [JsonPropertyName("connId")]
         public string ConnectionId { get; set; } = string.Empty;
     }
+
+    internal class BybitRequestQueryResponse<T, U> : BybitRequestQueryResponse<T>
+    {
+        [JsonPropertyName("retExtInfo")]
+        public U? ExtendedInfo { get; set; }
+    }
 }
