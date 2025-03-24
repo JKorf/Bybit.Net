@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 namespace Bybit.Net.Converters
 {
     [JsonSerializable(typeof(BybitExtResult<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>))]
+    [JsonSerializable(typeof(BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>))]
     [JsonSerializable(typeof(Dictionary<string, string[]>))]
     // End manual defined attributes
 
