@@ -59,6 +59,8 @@ namespace Bybit.Net.Clients.V5
             StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             SelfMatchPreventionType? selfMatchPreventionType = null,
             MarketUnit? marketUnit = null,
+            SlippageToleranceType? slippageToleranceType = null,
+            decimal? slippageTolerance = null,
             CancellationToken ct = default
         )
         {
@@ -97,6 +99,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("slLimitPrice", stopLossLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("smpType", EnumConverter.GetString(selfMatchPreventionType));
             parameters.AddOptionalParameter("marketUnit", EnumConverter.GetString(marketUnit));
+            parameters.AddOptionalEnum("slippageToleranceType", slippageToleranceType);
+            parameters.AddOptionalString("slippageTolerance", slippageTolerance);
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
             var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
