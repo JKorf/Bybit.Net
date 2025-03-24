@@ -199,6 +199,45 @@ namespace Bybit.Net.Interfaces.Clients.V5
             CancellationToken ct = default);
 
         /// <summary>
+        /// Place multiple orders
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/trade/guideline#request-parameters-2" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="orderRequests">Order requests</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitPlaceOrderRequest> orderRequests,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Edit multiple orders
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/trade/guideline#request-parameters-2" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="orderRequests">Order requests</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitEditOrderRequest> orderRequests,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel multiple orders
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/trade/guideline#request-parameters-2" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="orderRequests">Order requests</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitCancelOrderRequest> orderRequests,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribe to disconnect cancel all topics. It doesn't provide updates, but works with the <see href="https://bybit-exchange.github.io/docs/v5/order/dcp">DisconnectCancelAll</see> configuration
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/private/dcp" /></para>
         /// </summary>

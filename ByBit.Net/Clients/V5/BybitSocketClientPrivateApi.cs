@@ -19,6 +19,9 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net.CommonObjects;
+using System.Drawing;
+using System.Linq;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -189,6 +192,14 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToDisconnectCancelAllTopicAsync(ProductType productType, CancellationToken ct = default)
+        {
+            var product = productType == ProductType.Spot ? "spot" : productType == ProductType.Options ? "option" : "future";
+            var subscription = new BybitSubscription<object>(_logger, new[] { "dcp." + product }, x => { }, true);
+            return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
         public async Task<CallResult<BybitOrderId>> PlaceOrderAsync(Category category,
             string symbol,
             OrderSide side,
@@ -344,13 +355,86 @@ namespace Bybit.Net.Clients.V5
 
             return await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
 		}
-		
+
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToDisconnectCancelAllTopicAsync(ProductType productType, CancellationToken ct = default)
+        public async Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitPlaceOrderRequest> orderRequests,
+            CancellationToken ct = default)
         {
-            var product = productType == ProductType.Spot ? "spot" : productType == ProductType.Options ? "option" : "future";
-            var subscription = new BybitSubscription<object>(_logger, new[] { "dcp." + product }, x => { }, true);
-            return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
+            var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
+
+            var parameters = new ParameterCollection()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "request", orderRequests.ToArray() }
+            };
+
+            var query = new BybitBatchOrderRequestQuery(
+                "order.create-batch",
+                new Dictionary<string, string>
+                {
+                    { "X-BAPI-TIMESTAMP", timestamp },
+                    { "Referer", _referer }
+                },
+                parameters
+            );
+
+            return await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitEditOrderRequest> orderRequests,
+            CancellationToken ct = default)
+        {
+            var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
+
+            var parameters = new ParameterCollection()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "request", orderRequests.ToArray() }
+            };
+
+            var query = new BybitBatchOrderRequestQuery(
+                "order.amend-batch",
+                new Dictionary<string, string>
+                {
+                    { "X-BAPI-TIMESTAMP", timestamp },
+                    { "Referer", _referer }
+                },
+                parameters
+            );
+
+            return await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
+            Category category,
+            IEnumerable<BybitCancelOrderRequest> orderRequests,
+            CancellationToken ct = default)
+        {
+            var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
+
+            var parameters = new ParameterCollection()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "request", orderRequests.ToArray() }
+            };
+
+            var query = new BybitBatchOrderRequestQuery(
+                "order.cancel-batch",
+                new Dictionary<string, string>
+                {
+                    { "X-BAPI-TIMESTAMP", timestamp },
+                    { "Referer", _referer }
+                },
+                parameters
+            );
+
+            return await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
         }
     }
 }
