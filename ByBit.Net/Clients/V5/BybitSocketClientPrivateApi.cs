@@ -19,7 +19,6 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.SharedApis;
-using CryptoExchange.Net.CommonObjects;
 using System.Drawing;
 using System.Linq;
 
