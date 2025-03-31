@@ -160,6 +160,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.4.1 - 28 Mar 2025
+    * Removed incorrect id parameters checks from some endpoints
+
 * Version 4.4.0 - 24 Mar 2025
     * Added socketClient.V5PrivateApi.PlaceMultipleOrdersAsync, EditMultipleOrdersAsync and CancelMultipleOrdersAsync requests
     * Added SlippageTolerance support for orders

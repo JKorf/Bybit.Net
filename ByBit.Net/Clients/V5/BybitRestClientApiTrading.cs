@@ -269,7 +269,7 @@ namespace Bybit.Net.Clients.V5
             OrderFilter? orderFilter = null,
             CancellationToken ct = default)
         {
-            if (orderId == null == (clientOrderId == null))
+            if (orderId == null && clientOrderId == null)
                 throw new ArgumentException("One of orderId or clientOrderId should be provided");
 
             var parameters = new ParameterCollection()
@@ -354,9 +354,6 @@ namespace Bybit.Net.Clients.V5
             string? cursor = null,
             CancellationToken ct = default)
         {
-            if (orderId != null && clientOrderId != null)
-                throw new ArgumentException("One of orderId or clientOrderId should be provided");
-
             var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) }
