@@ -31,7 +31,8 @@ namespace Bybit.Net.Interfaces.Clients
         ISpotOrderClientIdClient,
         IFuturesOrderClientIdClient,
         ISpotTriggerOrderRestClient,
-        IFuturesTriggerOrderRestClient
+        IFuturesTriggerOrderRestClient,
+        IFuturesTpSlRestClient
     {
     }
 }
