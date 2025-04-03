@@ -61,7 +61,7 @@ namespace Bybit.Net.Clients.V5
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
                             x.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                            x.Status == Enums.OrderStatus.Cancelled ? SharedOrderStatus.Canceled : (x.Status == Enums.OrderStatus.New || x.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
+                            ParseOrderStatus(x.Status),
                             x.CreateTime)
                         {
                             ClientOrderId = x.ClientOrderId?.ToString(),
@@ -72,13 +72,26 @@ namespace Bybit.Net.Clients.V5
                             AveragePrice = x.AveragePrice,
                             OrderPrice = x.Price,
                             Fee = x.ExecutedFee,
-                            FeeAsset = x.FeeAsset
+                            FeeAsset = x.FeeAsset,
+                            TriggerPrice = x.TriggerPrice,
+                            IsTriggerOrder = x.TriggerPrice != null
                         }
                     ).ToArray()));
                 },
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderStatus ParseOrderStatus(OrderStatus status)
+        {
+            if (status == OrderStatus.Active || status == OrderStatus.PartiallyFilled || status == OrderStatus.Created || status == OrderStatus.New || status == OrderStatus.Untriggered)
+                return SharedOrderStatus.Open;
+
+            if (status == OrderStatus.Cancelled || status == OrderStatus.PartiallyFilledCanceled || status == OrderStatus.Deactivated || status == OrderStatus.Rejected)
+                return SharedOrderStatus.Canceled;
+
+            return SharedOrderStatus.Filled;
         }
         #endregion
 
@@ -122,7 +135,11 @@ namespace Bybit.Net.Clients.V5
                             ReduceOnly = x.ReduceOnly,
                             OrderPrice = x.Price,
                             Fee = x.ExecutedFee,
-                            FeeAsset = x.FeeAsset
+                            FeeAsset = x.FeeAsset,
+                            TriggerPrice = x.TriggerPrice,
+                            StopLossPrice = x.StopLoss,
+                            TakeProfitPrice = x.TakeProfit,
+                            IsTriggerOrder = x.TriggerPrice > 0
                         }
                     ).ToArray()));
                 },
@@ -189,7 +206,9 @@ namespace Bybit.Net.Clients.V5
                     PositionSide = x.PositionIdx == Enums.PositionIdx.OneWayMode ? (x.Side == Enums.PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long) : x.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                     LiquidationPrice = x.LiquidationPrice,
                     Leverage = x.Leverage,
-                    UnrealizedPnl = x.UnrealizedPnl
+                    UnrealizedPnl = x.UnrealizedPnl,
+                    StopLossPrice = x.StopLoss,
+                    TakeProfitPrice = x.TakeProfit
                 }).ToArray())),
                 ct: ct).ConfigureAwait(false);
 

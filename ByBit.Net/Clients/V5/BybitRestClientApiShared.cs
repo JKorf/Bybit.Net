@@ -173,6 +173,31 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Book Ticker client
+
+        EndpointOptions<GetBookTickerRequest> IBookTickerRestClient.GetBookTickerOptions { get; } = new EndpointOptions<GetBookTickerRequest>(false);
+        async Task<ExchangeWebResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
+        {
+            var validationError = ((IBookTickerRestClient)this).GetBookTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedBookTicker>(Exchange, validationError);
+
+            var category = request.Symbol.TradingMode == TradingMode.Spot ? Category.Spot : (request.Symbol.TradingMode == TradingMode.PerpetualLinear || request.Symbol.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
+            var resultTicker = await ExchangeData.GetOrderbookAsync(category, request.Symbol.GetSymbol(FormatSymbol), 1, ct: ct).ConfigureAwait(false);
+            if (!resultTicker)
+                return resultTicker.AsExchangeResult<SharedBookTicker>(Exchange, null, default);
+
+            return resultTicker.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedBookTicker(
+                ExchangeSymbolCache.ParseSymbol(request.Symbol.TradingMode == TradingMode.Spot ? _topicSpotId : _topicFuturesId, resultTicker.Data.Symbol),
+                resultTicker.Data.Symbol,
+                resultTicker.Data.Asks[0].Price,
+                resultTicker.Data.Asks[0].Quantity,
+                resultTicker.Data.Bids[0].Price,
+                resultTicker.Data.Bids[0].Quantity));
+        }
+
+        #endregion
+
         #region Recent Trade client
         GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000, false);
 
@@ -227,7 +252,6 @@ namespace Bybit.Net.Clients.V5
         #endregion
 
         #region Spot Order client
-
 
         SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         SharedFeeAssetType ISpotOrderRestClient.SpotFeeAssetType => SharedFeeAssetType.OutputAsset;
@@ -305,7 +329,9 @@ namespace Bybit.Net.Clients.V5
                 TimeInForce = ParseTimeInForce(order.TimeInForce),
                 FeeAsset = order.FeeAsset,
                 Fee = order.ExecutedFee,
-                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice
+                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
+                TriggerPrice = order.TriggerPrice,
+                IsTriggerOrder = order.TriggerPrice != null
             });
         }
 
@@ -338,7 +364,9 @@ namespace Bybit.Net.Clients.V5
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 FeeAsset = x.FeeAsset,
                 Fee = x.ExecutedFee,
-                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
+                TriggerPrice = x.TriggerPrice,
+                IsTriggerOrder = x.TriggerPrice != null
             }).ToArray());
         }
 
@@ -388,7 +416,9 @@ namespace Bybit.Net.Clients.V5
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 FeeAsset = x.FeeAsset,
                 Fee = x.ExecutedFee,
-                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
+                TriggerPrice = x.TriggerPrice,
+                IsTriggerOrder = x.TriggerPrice != null
             }).ToArray(), nextToken);
         }
 
@@ -548,7 +578,9 @@ namespace Bybit.Net.Clients.V5
                 TimeInForce = ParseTimeInForce(order.TimeInForce),
                 FeeAsset = order.FeeAsset,
                 Fee = order.ExecutedFee,
-                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice
+                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
+                TriggerPrice = order.TriggerPrice,
+                IsTriggerOrder = order.TriggerPrice != null
             });
         }
 
@@ -1198,7 +1230,11 @@ namespace Bybit.Net.Clients.V5
                 PositionSide = order.PositionIdx == PositionIdx.OneWayMode ? null : order.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = order.ReduceOnly,
                 Fee = order.ExecutedFee,
-                FeeAsset = order.FeeAsset
+                FeeAsset = order.FeeAsset,
+                TriggerPrice = order.TriggerPrice,
+                StopLossPrice = order.StopLoss,
+                TakeProfitPrice = order.TakeProfit,
+                IsTriggerOrder = order.TriggerPrice > 0
             });
         }
 
@@ -1251,7 +1287,11 @@ namespace Bybit.Net.Clients.V5
                 PositionSide = x.PositionIdx == PositionIdx.OneWayMode ? null : x.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.ExecutedFee,
-                FeeAsset = x.FeeAsset
+                FeeAsset = x.FeeAsset,
+                TriggerPrice = x.TriggerPrice,
+                StopLossPrice = x.StopLoss,
+                TakeProfitPrice = x.TakeProfit,
+                IsTriggerOrder = x.TriggerPrice > 0
             }).ToArray());
         }
 
@@ -1302,7 +1342,11 @@ namespace Bybit.Net.Clients.V5
                 PositionSide = x.PositionIdx == PositionIdx.OneWayMode ? null : x.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.ExecutedFee,
-                FeeAsset = x.FeeAsset
+                FeeAsset = x.FeeAsset,
+                TriggerPrice = x.TriggerPrice,
+                StopLossPrice = x.StopLoss,
+                TakeProfitPrice = x.TakeProfit,
+                IsTriggerOrder = x.TriggerPrice > 0
             }).ToArray(), nextToken);
         }
 
@@ -1428,6 +1472,8 @@ namespace Bybit.Net.Clients.V5
                 LiquidationPrice = x.LiquidationPrice,
                 AverageOpenPrice = x.AveragePrice,
                 Leverage = x.Leverage,
+                StopLossPrice = x.StopLoss,
+                TakeProfitPrice = x.TakeProfit,
                 PositionSide = x.Side == PositionSide.None ? SharedPositionSide.Long : x.Side == PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long
             }).ToArray());
         }
@@ -1502,7 +1548,11 @@ namespace Bybit.Net.Clients.V5
                 PositionSide = order.PositionIdx == PositionIdx.OneWayMode ? null : order.PositionIdx == Enums.PositionIdx.BuyHedgeMode ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = order.ReduceOnly,
                 Fee = order.ExecutedFee,
-                FeeAsset = order.FeeAsset
+                FeeAsset = order.FeeAsset,
+                TriggerPrice = order.TriggerPrice,
+                StopLossPrice = order.StopLoss,
+                TakeProfitPrice = order.TakeProfit,
+                IsTriggerOrder = order.TriggerPrice > 0
             });
         }
 
@@ -1816,8 +1866,8 @@ namespace Bybit.Net.Clients.V5
             {
                 PlacedOrderId = order.OrderId,
                 OrderPrice = order.Price,
-                OrderQuantity = new SharedOrderQuantity(order.MarketUnit == null || order.MarketUnit == MarketUnit.BaseAsset ? order.Quantity : null, order.MarketUnit == MarketUnit.QuoteAsset ? order.Quantity : null),
-                QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.ValueFilled),
+                OrderQuantity = new SharedOrderQuantity(order.Quantity, contractQuantity: order.Quantity),
+                QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.ValueFilled, order.QuantityFilled),
                 UpdateTime = order.UpdateTime,
                 TimeInForce = ParseTimeInForce(order.TimeInForce),
                 FeeAsset = order.FeeAsset,
