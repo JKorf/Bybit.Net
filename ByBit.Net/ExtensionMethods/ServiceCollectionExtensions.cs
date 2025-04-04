@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration configuration)
         {
             var options = new BybitOptions();
-            // Reset environment so we know if theyre overriden
+            // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             configuration.Bind(options);
@@ -65,7 +65,7 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<BybitOptions>? optionsDelegate = null)
         {
             var options = new BybitOptions();
-            // Reset environment so we know if theyre overriden
+            // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             optionsDelegate?.Invoke(options);
@@ -81,21 +81,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(x => Options.Options.Create(options.Socket));
 
             return AddBybitCore(services, options.SocketClientLifeTime);
-        }
-
-        /// <summary>
-        /// DEPRECATED; use <see cref="AddBybit(IServiceCollection, Action{BybitOptions}?)" /> instead
-        /// </summary>
-        public static IServiceCollection AddBybit(
-            this IServiceCollection services,
-            Action<BybitRestOptions> restDelegate,
-            Action<BybitSocketOptions>? socketDelegate = null,
-            ServiceLifetime? socketClientLifeTime = null)
-        {
-            services.Configure<BybitRestOptions>((x) => { restDelegate?.Invoke(x); });
-            services.Configure<BybitSocketOptions>((x) => { socketDelegate?.Invoke(x); });
-
-            return AddBybitCore(services, socketClientLifeTime);
         }
 
         private static IServiceCollection AddBybitCore(

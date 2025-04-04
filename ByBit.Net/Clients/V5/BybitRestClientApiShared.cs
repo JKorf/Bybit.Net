@@ -1929,7 +1929,7 @@ namespace Bybit.Net.Clients.V5
                 takeProfit: request.TpSlSide == SharedTpSlSide.TakeProfit ? request.TriggerPrice : null,
                 takeProfitOrderType: request.TpSlSide == SharedTpSlSide.TakeProfit ? OrderType.Market : null,
                 stopLoss: request.TpSlSide == SharedTpSlSide.StopLoss ? request.TriggerPrice : null,
-                stopLossOrderType: request.TpSlSide == SharedTpSlSide.StopLoss ? OrderType.Market : null,                
+                stopLossOrderType: request.TpSlSide == SharedTpSlSide.StopLoss ? OrderType.Market : null,
                 ct: ct).ConfigureAwait(false);
 
             if (!result)
