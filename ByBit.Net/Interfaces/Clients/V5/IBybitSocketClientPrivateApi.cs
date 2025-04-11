@@ -206,7 +206,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">Order requests</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+        Task<CallResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default);

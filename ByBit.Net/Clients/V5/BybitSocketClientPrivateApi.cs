@@ -356,7 +356,7 @@ namespace Bybit.Net.Clients.V5
 		}
 
         /// <inheritdoc />
-        public async Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+        public async Task<CallResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -379,7 +379,23 @@ namespace Bybit.Net.Clients.V5
                 parameters
             );
 
-            return await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
+            var resultData = await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
+            if (!resultData)
+                return resultData.As<CallResult<BybitBatchOrderId>[]>(default);
+
+            var result = new List<CallResult<BybitBatchOrderId>>();
+            foreach (var item in resultData.Data!)
+            {
+                if (item.Code != 0)
+                    result.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, item.Message!)));
+                else
+                    result.Add(new CallResult<BybitBatchOrderId>(item.Data!));
+            }
+
+            if (result.All(x => !x.Success))
+                return resultData.AsErrorWithData(new ServerError("All orders failed"), result.ToArray());
+
+            return resultData.As(result.ToArray());
         }
 
         /// <inheritdoc />

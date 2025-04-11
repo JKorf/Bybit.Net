@@ -116,7 +116,7 @@ namespace Bybit.Net.Clients.V5
         #region Place multiple orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+        public async Task<WebCallResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -136,29 +136,27 @@ namespace Bybit.Net.Clients.V5
             if (!result || result.Data == null)
             {
                 if (result.Error?.Code == 404)
-                    return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(404, "Received 404 response; make sure your account is UTA PRO"));
+                    return result.AsError<CallResult<BybitBatchOrderId>[]>(new ServerError(404, "Received 404 response; make sure your account is UTA PRO"));
 
-                return result.As<BybitBatchResult<BybitBatchOrderId>[]>(default);
+                return result.As<CallResult<BybitBatchOrderId>[]>(default);
             }
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<CallResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
-            var resultList = new List<BybitBatchResult<BybitBatchOrderId>>(); 
+            var resultList = new List<CallResult<BybitBatchOrderId>>(); 
             var resultItems = result.Data.Result.List.ToArray();
             int index = 0;
             foreach (var item in result.Data.ExtInfo.List)
             {                
                 var resultItem = resultItems[index++];
-                resultList.Add(new BybitBatchResult<BybitBatchOrderId>
-                {
-                    Code = item.Code,
-                    Message = item.Message,
-                    Data = resultItem
-                });
+                if (item.Code != 0)
+                    resultList.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, item.Message!)));
+                else
+                    resultList.Add(new CallResult<BybitBatchOrderId>(resultItem));
             }
 
-            return result.As<BybitBatchResult<BybitBatchOrderId>[]>(resultList.ToArray());
+            return result.As<CallResult<BybitBatchOrderId>[]>(resultList.ToArray());
         }
 
         #endregion

@@ -9,6 +9,9 @@ namespace Bybit.Net.Converters
 {
     [JsonSerializable(typeof(BybitExtResult<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>))]
     [JsonSerializable(typeof(BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>))]
+    [JsonSerializable(typeof(BybitRequestQueryResponse<object>))]
+    [JsonSerializable(typeof(BybitRequestQueryResponse<BybitOrderId>))]
+    [JsonSerializable(typeof(BybitRequestQueryResponse<BybitList<BybitBatchOrderId>>))]
     [JsonSerializable(typeof(Dictionary<string, string[]>))]
     // End manual defined attributes
 

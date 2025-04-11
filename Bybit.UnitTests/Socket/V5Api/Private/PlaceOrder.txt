@@ -1,0 +1,23 @@
+> {"reqId":"|1|","op":"auth","args":["1",1744376638423,"3"]}
+< {"reqId":"|1|","retCode":0,"retMsg":"OK","op":"auth","connId":"curcd3l5atjd25oepmv0-835gx"}
+> { "reqId": "|2|", "header": { "X-BAPI-TIMESTAMP": "1711001595207", "X-BAPI-RECV-WINDOW": "8000", "Referer": "bot-001" }, "op": "order.create", "args": [{ "symbol": "ETHUSDT", "side": "Buy", "orderType": "Limit", "qty": "0.2", "price": "2800", "category": "linear", "timeInForce": "PostOnly" }]}
+=
+{
+    "reqId": "|2|",
+    "retCode": 0,
+    "retMsg": "OK",
+    "op": "order.create",
+    "data": {
+        "orderId": "a4c1718e-fe53-4659-a118-1f6ecce04ad9",
+        "orderLinkId": ""
+    },
+    "retExtInfo": {},
+    "header": {
+        "X-Bapi-Limit": "10",
+        "X-Bapi-Limit-Status": "9",
+        "X-Bapi-Limit-Reset-Timestamp": "1711001595208",
+        "Traceid": "38b7977b430f9bd228f4b19724794dfd",
+        "Timenow": "1711001595209"
+    },
+    "connId": "cnt5leec0hvan15eukcg-2v"
+}
