@@ -29,6 +29,11 @@ namespace Bybit.Net.Enums
         /// Inverse futures
         /// </summary>
         [Map("InverseFutures")]
-        InverseFutures
+        InverseFutures,
+        /// <summary>
+        /// Spot
+        /// </summary>
+        [Map("Spot")]
+        Spot
     }
 }

@@ -49,6 +49,11 @@ namespace Bybit.Net.Enums
         /// Move position
         /// </summary>
         [Map("MovePosition")]
-        MovePosition
+        MovePosition,
+        /// <summary>
+        /// Spread trade
+        /// </summary>
+        [Map("FutureSpread")]
+        FutureSpread
     }
 }

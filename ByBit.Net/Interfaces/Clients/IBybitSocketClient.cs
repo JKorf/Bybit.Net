@@ -31,6 +31,11 @@ namespace Bybit.Net.Interfaces.Clients
         /// <see cref="IBybitSocketClientOptionApi"/>
         public IBybitSocketClientOptionApi V5OptionsApi { get; }
         /// <summary>
+        /// V5 Spread streams
+        /// </summary>
+        /// <see cref="IBybitSocketClientSpreadApi"/>
+        public IBybitSocketClientSpreadApi V5SpreadApi { get; }
+        /// <summary>
         /// V5 Private streams
         /// </summary>
         /// <see cref="IBybitSocketClientPrivateApi"/>

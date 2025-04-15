@@ -1,0 +1,51 @@
+GET
+/v5/spread/execution/list
+true
+{
+    "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+        "nextPageCursor": "82c82077-0caa-5304-894d-58a50a342bd7%3A1744104992219%2C82c82077-0caa-5304-894d-58a50a342bd7%3A1744104992219",
+        "list": [
+            {
+                "symbol": "SOLUSDT_SOL/USDT",
+                "orderLinkId": "",
+                "side": "Buy",
+                "orderId": "5e010c35-2b44-4f03-8081-8fa31fb73376",
+                "execPrice": "21",
+                "legs": [
+                    {
+                        "symbol": "SOLUSDT",
+                        "side": "Buy",
+                        "execPrice": "124.1",
+                        "execTime": "1744104992224",
+                        "execValue": "248.2",
+                        "execType": "FutureSpread",
+                        "category": "linear",
+                        "execQty": "2",
+                        "execFee": "0.039712",
+                        "execId": "99a18f80-d3b5-4c6f-a1f1-8c5870e3f3bc"
+                    },
+                    {
+                        "symbol": "SOLUSDT",
+                        "side": "Sell",
+                        "execPrice": "103.1152",
+                        "execTime": "1744104992224",
+                        "execValue": "206.2304",
+                        "execType": "FutureSpread",
+                        "category": "spot",
+                        "execQty": "2",
+                        "execFee": "0.06186912",
+                        "execId": "2110000000061481958"
+                    }
+                ],
+                "execTime": "1744104992220",
+                "execType": "Trade",
+                "execQty": "2",
+                "execId": "82c82077-0caa-5304-894d-58a50a342bd7"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1744105105169
+}

@@ -75,6 +75,24 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<CallResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<BybitBalance[]>> handler, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribe to spread order updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/websocket/private/order" /></para>
+        /// </summary>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToSpreadOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to spread user trade updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/websocket/private/execution" /></para>
+        /// </summary>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToSpreadUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
         /// Place a new order
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/trade/guideline" /></para>
         /// </summary>
@@ -85,7 +103,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="quantity">Quantity</param>
         /// <param name="price">Price</param>
         /// <param name="isLeverage">Is leverage</param>
-        /// <param name="triggerDirection">Conditional order diraction</param>
+        /// <param name="triggerDirection">Conditional order direction</param>
         /// <param name="orderFilter">Order filter</param>
         /// <param name="triggerPrice">Trigger price</param>
         /// <param name="triggerBy">Trigger by</param>

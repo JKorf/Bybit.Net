@@ -1,0 +1,13 @@
+POST
+/v5/spread/order/amend
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "orderId": "b0e6c938-9731-4122-8552-01e6dc06b303",
+        "orderLinkId": "1744072052193428475"
+    },
+    "retExtInfo": {},
+    "time": 1744083952599
+}

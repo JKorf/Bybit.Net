@@ -430,5 +430,92 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitLeverageTokenHistory[]>> GetLeverageTokenOrderHistoryAsync(string? token = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, LeverageTokenRecordType? type = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Place a new spread order
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/trade/create-order" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="side">Order side</param>
+        /// <param name="type">Order type</param>
+        /// <param name="quantity">Order quantity</param>
+        /// <param name="timeInForce">Time in force</param>
+        /// <param name="price">Limit price</param>
+        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitOrderId>> PlaceSpreadOrderAsync(string symbol, OrderSide side, NewOrderType type, decimal quantity, TimeInForce timeInForce, decimal? price = null, string? clientOrderId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Edit an active spread order
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/trade/amend-order" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">Order id, either this or orderId should be provided</param>
+        /// <param name="quantity">New quantity</param>
+        /// <param name="price">New price</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitOrderId>> EditSpreadOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, decimal? quantity = null, decimal? price = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel an active spread order
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/trade/cancel-order" /></para>
+        /// </summary>
+        /// <param name="orderId">Order id of order to cancel, either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">Client order id of order to cancel, either this or orderId should be provided</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitOrderId>> CancelSpreadOrderAsync(string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel all spread orders
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/trade/cancel-all" /></para>
+        /// </summary>
+        /// <param name="symbol">Filter orders to cancel by symbol</param>
+        /// <param name="cancelAll">Cancel all</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitOrderId[]>> CancelAllSpreadOrdersAsync(string? symbol = null, bool? cancelAll = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get open spread orders
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/trade/open-order" /></para>
+        /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="orderId">Filter by order id</param>
+        /// <param name="clientOrderId">Filter by client order id</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitResponse<BybitSpreadOrder>>> GetOpenSpreadOrdersAsync(string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread order history
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/trade/order-history" /></para>
+        /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="orderId">Filter by order id</param>
+        /// <param name="clientOrderId">Filter by client order id</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max number of results, max 50</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitResponse<BybitClosedSpreadOrder>>> GetClosedSpreadOrdersAsync(string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// 
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/trade/trade-history" /></para>
+        /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="orderId">Filter by order id</param>
+        /// <param name="clientOrderId">Filter by client order id</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max number of results, max 50</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitResponse<BybitSpreadUserTrade>>> GetSpreadUserTradesAsync(string? symbol = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
     }
 }

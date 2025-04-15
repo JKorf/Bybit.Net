@@ -303,5 +303,43 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitSpotMarginCollateralRatio[]>> GetSpotMarginTieredCollateralRatioAsync(string? asset = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread trading symbols
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/market/instrument" /></para>
+        /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="limit">Max number of results, max 500</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpreadSymbol[]>> GetSpreadSymbolsAsync(string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread trading order book
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/market/orderbook" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="limit">Max number of results, max 25</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitOrderbook>> GetSpreadOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread tickers
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/market/tickers" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpreadTicker>> GetSpreadTickersAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread symbol recent trades
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/market/recent-trade" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="limit">Max number of results, max 1000</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpreadTrade[]>> GetSpreadRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
     }
 }

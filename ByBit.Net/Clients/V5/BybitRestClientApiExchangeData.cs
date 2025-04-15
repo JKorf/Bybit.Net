@@ -7,6 +7,7 @@ using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -513,6 +514,67 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/collateral", BybitExchange.RateLimiter.BybitRest, 1, false);
             var result = await _baseClient.SendAsync<BybitResponse<BybitSpotMarginCollateralRatio>>(request, parameters, ct).ConfigureAwait(false);
             return result.As<BybitSpotMarginCollateralRatio[]>(result.Data?.List);
+        }
+
+        #endregion
+
+        #region Get Spread Symbols
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpreadSymbol[]>> GetSpreadSymbolsAsync(string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptional("baseCoin", baseAsset);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/instrument", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var result = await _baseClient.SendAsync<BybitList<BybitSpreadSymbol>>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitSpreadSymbol[]>(result.Data?.List);
+        }
+
+        #endregion
+
+        #region Get Spread Order Book
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitOrderbook>> GetSpreadOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/orderbook", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var result = await _baseClient.SendAsync<BybitOrderbook>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Spread Tickers
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpreadTicker>> GetSpreadTickersAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/tickers", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var result = await _baseClient.SendAsync<BybitList<BybitSpreadTicker>>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitSpreadTicker>(result.Data?.List.Single());
+        }
+
+        #endregion
+
+        #region Get Spread Recent Trades
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpreadTrade[]>> GetSpreadRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/recent-trade", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var result = await _baseClient.SendAsync<BybitList<BybitSpreadTrade>>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitSpreadTrade[]>(result.Data?.List);
         }
 
         #endregion

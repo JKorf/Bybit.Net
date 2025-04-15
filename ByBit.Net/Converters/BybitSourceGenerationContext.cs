@@ -13,6 +13,14 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(BybitRequestQueryResponse<BybitOrderId>))]
     [JsonSerializable(typeof(BybitRequestQueryResponse<BybitList<BybitBatchOrderId>>))]
     [JsonSerializable(typeof(Dictionary<string, string[]>))]
+    [JsonSerializable(typeof(BybitResult<BybitList<BybitSpreadSymbol>>))]
+    [JsonSerializable(typeof(BybitResult<BybitList<BybitSpreadTicker>>))]
+    [JsonSerializable(typeof(BybitResult<BybitList<BybitSpreadTrade>>))]
+    [JsonSerializable(typeof(BybitResult<BybitList<BybitOrderId>>))]
+    [JsonSerializable(typeof(BybitResult<BybitResponse<BybitSpreadOrder>>))]
+    [JsonSerializable(typeof(BybitResult<BybitResponse<BybitClosedSpreadOrder>>))]
+    [JsonSerializable(typeof(BybitResult<BybitResponse<BybitSpreadUserTrade>>))]
+    
     // End manual defined attributes
 
     [JsonSerializable(typeof(BybitResult<BybitResponse<BybitBalance>>))]
@@ -70,6 +78,8 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitOrderUpdate[]>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitBalance[]>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitGreeks[]>))]
+    [JsonSerializable(typeof(BybitSpotSocketEvent<BybitSpreadTickerUpdate>))]   
+
     [JsonSerializable(typeof(BybitResult<BybitResult>))]
     [JsonSerializable(typeof(BybitResult<BybitTakeProfitStopLossMode>))]
     [JsonSerializable(typeof(BybitResult<BybitSetRiskLimit>))]

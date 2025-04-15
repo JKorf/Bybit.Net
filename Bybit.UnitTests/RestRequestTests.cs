@@ -8,6 +8,8 @@ using Bybit.Net.Clients;
 using System.Linq;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Enums;
+using System.Drawing;
+using System;
 
 namespace Bybit.Net.UnitTests
 {
@@ -97,6 +99,10 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetLeverageTokensAsync(), "GetLeverageTokens", nestedJsonProperty: "result.list");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetLeverageTokenMarketAsync("ETHUSDT"), "GetLeverageTokenMarket");
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetLongShortRatioAsync(Enums.Category.Option, "ETHUSDT", Enums.DataPeriod.OneDay), "GetLongShortRatio", nestedJsonProperty: "result.list");
+            await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpreadSymbolsAsync(), "GetSpreadSymbols", nestedJsonProperty: "result.list");
+            await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpreadOrderBookAsync("123"), "GetSpreadOrderBook", nestedJsonProperty: "result", ignoreProperties: ["cts"]);
+            await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpreadTickersAsync("123"), "GetSpreadTickers", nestedJsonProperty: "result.list", useSingleArrayItem: true);
+            await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpreadRecentTradesAsync("123"), "GetSpreadRecentTrades", nestedJsonProperty: "result.list");
         }
 
         [Test]
@@ -129,6 +135,13 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Trading.PurchaseLeverageTokenAsync("123", 1), "PurchaseLeverageToken");
             await tester.ValidateAsync(client => client.V5Api.Trading.RedeemLeverageTokenAsync("123", 1), "RedeemLeverageToken", ignoreProperties: new List<string> { "quantity" });
             await tester.ValidateAsync(client => client.V5Api.Trading.GetLeverageTokenOrderHistoryAsync("123"), "GetLeverageTokenOrderHistory", "result.list");
+            await tester.ValidateAsync(client => client.V5Api.Trading.PlaceSpreadOrderAsync("123", OrderSide.Buy, NewOrderType.Market, 0.1m, TimeInForce.FillOrKill), "PlaceSpreadOrder", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Trading.EditSpreadOrderAsync("123"), "EditSpreadOrder", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Trading.CancelSpreadOrderAsync("123"), "CancelSpreadOrder", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Trading.CancelAllSpreadOrdersAsync(), "CancelAllSpreadOrders", nestedJsonProperty: "result.list");
+            await tester.ValidateAsync(client => client.V5Api.Trading.GetOpenSpreadOrdersAsync(), "GetOpenSpreadOrders", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Trading.GetClosedSpreadOrdersAsync(), "GetClosedSpreadOrders", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Trading.GetSpreadUserTradesAsync(), "GetSpreadUserTrades", nestedJsonProperty: "result");
         }
 
         [Test]
