@@ -14,6 +14,11 @@ namespace Bybit.Net.Enums
         /// Flexible saving
         /// </summary>
         [Map("FlexibleSaving")]
-        FlexibleSaving
+        FlexibleSaving,
+        /// <summary>
+        /// On chain
+        /// </summary>
+        [Map("OnChain")]
+        OnChain
     }
 }
