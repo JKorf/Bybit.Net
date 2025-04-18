@@ -52,7 +52,7 @@ namespace Bybit.Net.Objects.Models.V5
         public IEnumerable<T> List { get; set; } = Array.Empty<T>();
 
         [JsonPropertyName("rows")]
-        internal IEnumerable<T> Rows
+        public IEnumerable<T> Rows
         {
             get => List;
             set => List = value;
