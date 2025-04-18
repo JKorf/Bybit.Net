@@ -50,7 +50,7 @@ namespace Bybit.Net
         /// </summary>
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
-        internal static JsonSerializerContext SerializerContext = new BybitSourceGenerationContext();
+        internal static JsonSerializerContext _serializerContext = new BybitSourceGenerationContext();
 
         /// <summary>
         /// Format a base and quote asset to a Bybit recognized symbol 
@@ -115,6 +115,11 @@ namespace Bybit.Net
         public event Action<RateLimitEvent> RateLimitTriggered;
 
         /// <summary>
+        /// Event when the rate limit is updated. Note that it's only updated when a request is send, so there are no specific updates when the current usage is decaying.
+        /// </summary>
+        public event Action<RateLimitUpdateEvent> RateLimitUpdated;
+
+        /// <summary>
         /// The Tier to use when calculating rate limits
         /// </summary>
         public AccountLevel Tier { get; private set; } = AccountLevel.Default;
@@ -149,7 +154,9 @@ namespace Bybit.Net
             BybitSocket = new RateLimitGate("Bybit Socket")
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, [new LimitItemTypeFilter(RateLimitItemType.Connection)], 500, TimeSpan.FromMinutes(5), RateLimitWindowType.Sliding)); // 500 connections per 5 minutes
             BybitRest.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            BybitRest.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             BybitSocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            BybitSocket.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
         }
 
 
