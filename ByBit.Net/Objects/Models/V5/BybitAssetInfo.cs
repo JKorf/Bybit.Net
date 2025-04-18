@@ -1,9 +1,11 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitAssetInfoWrapper
     {
         [JsonPropertyName("spot")]
@@ -13,6 +15,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Account asset info
     /// </summary>
+    [SerializationModel]
     public record BybitAccountAssetInfo
     {
         /// <summary>
@@ -24,12 +27,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// Assdet info
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BybitAssetInfo> Assets { get; set; } = Array.Empty<BybitAssetInfo>();
+        public BybitAssetInfo[] Assets { get; set; } = Array.Empty<BybitAssetInfo>();
     }
 
     /// <summary>
     /// Asset info
     /// </summary>
+    [SerializationModel]
     public record BybitAssetInfo
     {
         /// <summary>

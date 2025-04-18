@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
     /// Marging status
     /// </summary>
+    [SerializationModel]
     public record BybitSpotMarginStatus
     {
         /// <summary>

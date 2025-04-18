@@ -27,7 +27,13 @@ namespace Bybit.Net.Interfaces.Clients
         IFuturesOrderRestClient,
         IPositionModeRestClient,
         IPositionHistoryRestClient,
-        IFeeRestClient
+        IFeeRestClient,
+        ISpotOrderClientIdClient,
+        IFuturesOrderClientIdClient,
+        ISpotTriggerOrderRestClient,
+        IFuturesTriggerOrderRestClient,
+        IFuturesTpSlRestClient,
+        IBookTickerRestClient
     {
     }
 }

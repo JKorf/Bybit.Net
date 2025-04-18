@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Trade info
     /// </summary>
+    [SerializationModel]
     public record BybitTrade
     {
         /// <summary>
@@ -24,7 +26,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Side
         /// </summary>
         [JsonPropertyName("S")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public OrderSide Side { get; set; }
         /// <summary>
         /// Quantity
@@ -40,7 +42,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Direction
         /// </summary>
         [JsonPropertyName("L")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public TickDirection? Direction { get; set; }
         /// <summary>
         /// Trade id

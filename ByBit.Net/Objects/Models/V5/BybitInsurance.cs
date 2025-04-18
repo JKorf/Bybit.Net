@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
     /// Insurance pool info
     /// </summary>
+    [SerializationModel]
     public record BybitInsurance
     {
         /// <summary>

@@ -13,28 +13,38 @@ namespace Bybit.Net.Interfaces.Clients
         /// <summary>
         /// V5 Spot streams
         /// </summary>
+        /// <see cref="IBybitSocketClientSpotApi"/>
         public IBybitSocketClientSpotApi V5SpotApi { get; }
         /// <summary>
         /// V5 Linear streams
         /// </summary>
+        /// <see cref="IBybitSocketClientLinearApi"/>
         public IBybitSocketClientLinearApi V5LinearApi { get; }
         /// <summary>
         /// V5 Inverse contract streams
         /// </summary>
+        /// <see cref="IBybitSocketClientInverseApi"/>
         public IBybitSocketClientInverseApi V5InverseApi { get; }
         /// <summary>
         /// V5 Option streams
         /// </summary>
+        /// <see cref="IBybitSocketClientOptionApi"/>
         public IBybitSocketClientOptionApi V5OptionsApi { get; }
+        /// <summary>
+        /// V5 Spread streams
+        /// </summary>
+        /// <see cref="IBybitSocketClientSpreadApi"/>
+        public IBybitSocketClientSpreadApi V5SpreadApi { get; }
         /// <summary>
         /// V5 Private streams
         /// </summary>
+        /// <see cref="IBybitSocketClientPrivateApi"/>
         public IBybitSocketClientPrivateApi V5PrivateApi { get; }
 
         /// <summary>
         /// Update specific options
         /// </summary>
-        /// <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+        /// <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
         void SetOptions(UpdateOptions options);
 
         /// <summary>

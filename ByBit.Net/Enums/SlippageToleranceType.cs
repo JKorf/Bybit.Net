@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Tolerance type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<SlippageToleranceType>))]
     public enum SlippageToleranceType
     {
         /// <summary>

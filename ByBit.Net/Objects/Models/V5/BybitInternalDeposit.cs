@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Internal deposit info
     /// </summary>
+    [SerializationModel]
     public record BybitInternalDeposit
     {
         /// <summary>
@@ -38,7 +40,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Status
         /// </summary>
         [JsonPropertyName("status")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public InternalDepositStatus Status { get; set; }
         /// <summary>
         /// Timestamp 

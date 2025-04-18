@@ -8,6 +8,7 @@ using CryptoExchange.Net;
 using Bybit.Net.Enums;
 using System;
 using CryptoExchange.Net.RateLimiting.Guards;
+using System.Linq;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -108,13 +109,13 @@ namespace Bybit.Net.Clients.V5
         #region Get Subaccounts
 
         /// <inheritdoc />
-        public async Task<WebCallResult<List<BybitSubAccount>>> GetSubAccountsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BybitSubAccount[]>> GetSubAccountsAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/user/query-sub-members", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BybitSubAccountWrapper>(request, null, ct).ConfigureAwait(false);
             if (!result)
-                return result.As<List<BybitSubAccount>>(default);
+                return result.As<BybitSubAccount[]>(default);
 
             return result.As(result.Data.SubMembers);
         }
@@ -170,7 +171,7 @@ namespace Bybit.Net.Clients.V5
             EditPermission(permissions, permissionOptionsTrade, "Options", "OptionsTrade");
             EditPermission(permissions, permissionCopyTrading, "CopyTrading", "CopyTrading");
             EditPermission(permissions, permissionExchangeHistory, "Exchange", "ExchangeHistory");
-            parameters.Add("permissions", permissions);
+            parameters.Add("permissions", permissions.ToDictionary(x => x.Key, x => x.Value.ToArray()));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/user/update-sub-api", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));

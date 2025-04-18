@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Request info
     /// </summary>
+    [SerializationModel]
     public record BybitEditOrderRequest
     {
         /// <summary>
@@ -51,7 +53,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Trigger price type
         /// </summary>
-        [JsonPropertyName("triggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("triggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TriggerType? TriggerBy { get; set; }
         /// <summary>
         /// Take profit limit price
@@ -71,23 +73,24 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Take profit/Stop loss mode
         /// </summary>
-        [JsonPropertyName("tpslMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpslMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
         /// <summary>
         /// Stop Loss Trigger price type
         /// </summary>
-        [JsonPropertyName("slTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("slTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TriggerType? StopLossTriggerBy { get; set; }
         /// <summary>
         /// Take Profit Trigger price type
         /// </summary>
-        [JsonPropertyName("tpTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TriggerType? TakeProfitTriggerBy { get; set; }
     }
 
+    [SerializationModel]
     internal record BybitSocketEditOrderRequest : BybitEditOrderRequest
     {
-        [JsonPropertyName("category"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("category")]
         public Category Category { get; set; }
     }
 }

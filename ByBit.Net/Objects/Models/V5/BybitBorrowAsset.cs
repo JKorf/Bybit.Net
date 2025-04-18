@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,25 +7,27 @@ using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitBorrowAssetWrapper
     {
         /// <summary>
         /// Vip asset list
         /// </summary>
         [JsonPropertyName("vipCoinList")]
-        public IEnumerable<BybitBorrowAsset> VipAssetList { get; set; } = Array.Empty<BybitBorrowAsset>();
+        public BybitBorrowAsset[] VipAssetList { get; set; } = Array.Empty<BybitBorrowAsset>();
     }
 
     /// <summary>
     /// 
     /// </summary>
+    [SerializationModel]
     public record BybitBorrowAsset
     {
         /// <summary>
         /// Assets
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<BybitBorrowAssetInfo> Assets { get; set; } = Array.Empty<BybitBorrowAssetInfo>();
+        public BybitBorrowAssetInfo[] Assets { get; set; } = Array.Empty<BybitBorrowAssetInfo>();
         /// <summary>
         /// Vip level
         /// </summary>
@@ -35,6 +38,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// 
     /// </summary>
+    [SerializationModel]
     public record BybitBorrowAssetInfo
     {
         /// <summary>

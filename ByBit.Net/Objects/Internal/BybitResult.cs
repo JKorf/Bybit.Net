@@ -3,12 +3,12 @@ using System;
 
 namespace Bybit.Net.Objects.Internal
 {
-    internal class BybitResult<T>
+    internal class BybitResult
     {
         [JsonPropertyName("ret_code")]
         public int ReturnCode { get; set; }
         [JsonInclude, JsonPropertyName("retCode")]
-        private int ReturnCodeInternal
+        internal int ReturnCodeInternal
         {
             get => ReturnCode;
             set => ReturnCode = value; 
@@ -17,7 +17,7 @@ namespace Bybit.Net.Objects.Internal
         [JsonPropertyName("ret_msg")]
         public string ReturnMessage { get; set; } = string.Empty;
         [JsonInclude, JsonPropertyName("retMsg")]
-        private string ReturnMessageInternal
+        internal string ReturnMessageInternal
         {
             get => ReturnMessage;
             set => ReturnMessage = value;
@@ -30,7 +30,7 @@ namespace Bybit.Net.Objects.Internal
         [JsonPropertyName("time_now"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         [JsonInclude, JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
-        private DateTime TimestampInternal
+        internal DateTime TimestampInternal
         {
             get => Timestamp;
             set => Timestamp = value;
@@ -43,6 +43,10 @@ namespace Bybit.Net.Objects.Internal
         [JsonPropertyName("rate_limit")]
         public int? RateLimit { get; set; }
 
+    }
+
+    internal class BybitResult<T> : BybitResult
+    {
 #pragma warning disable 8618
         [JsonPropertyName("result")]
         public T Result { get; set; }

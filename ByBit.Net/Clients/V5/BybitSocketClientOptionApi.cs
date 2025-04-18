@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
@@ -51,12 +51,15 @@ namespace Bybit.Net.Clients.V5
             var type = message.GetValue<string>(_typePath);
             if (string.Equals(type, "COMMAND_RESP", StringComparison.Ordinal))
             {
+                var result = new List<string?>();
                 var success = message.GetValues<string>(_successPath);
                 if (success == null)
                     return null;
 
-                success.AddRange(message.GetValues<string>(_failPath));
-                return "resp" + string.Join("-", success.OrderBy(s => s));
+                result.AddRange(success);
+                var fails = message.GetValues<string>(_failPath)!;
+                result.AddRange(fails);
+                return "resp" + string.Join("-", result.OrderBy(s => s));
             }
 
             var op = message.GetValue<string>(_opPath);
@@ -78,13 +81,13 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string baseAsset, Action<DataEvent<IEnumerable<BybitOptionTrade>>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string baseAsset, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
             => SubscribeToTradeUpdatesAsync(new string[] { baseAsset }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> baseAssets, Action<DataEvent<IEnumerable<BybitOptionTrade>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> baseAssets, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitOptionsSubscription<IEnumerable<BybitOptionTrade>>(_logger, baseAssets.Select(s => $"publicTrade.{s}").ToArray(), handler);
+            var subscription = new BybitOptionsSubscription<BybitOptionTrade[]>(_logger, baseAssets.Select(s => $"publicTrade.{s}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
 
@@ -100,13 +103,13 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+        public override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToKlineUpdatesAsync(new string[] { symbol }, interval, handler, ct);
 
         /// <inheritdoc />
-        public async override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default)
+        public async override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitOptionsSubscription<IEnumerable<BybitKlineUpdate>>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
+            var subscription = new BybitOptionsSubscription<BybitKlineUpdate[]>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
 

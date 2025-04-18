@@ -1,0 +1,16 @@
+GET
+/v5/spread/orderbook
+false
+{
+    "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+        "s": "SOLUSDT_SOL/USDT",       
+        "u": 46977,
+        "ts": 1744077242177,
+        "seq": 213110,
+        "cts": 1744076329043
+    },
+    "retExtInfo": {},
+    "time": 1744077243583
+}

@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// User trade info
     /// </summary>
+    [SerializationModel]
     public record BybitUserTradeUpdate : BybitUserTrade
     {
         /// <summary>
@@ -17,7 +19,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Category
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("category")]
         public Category Category { get; set; }
     }

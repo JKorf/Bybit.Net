@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,13 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Balance info
     /// </summary>
+    [SerializationModel]
     public record BybitBalance
     {
         /// <summary>
         /// Account type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("accountType")]
         public AccountType AccountType { get; set; }
         /// <summary>
@@ -70,12 +72,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// Asset info
         /// </summary>
         [JsonPropertyName("coin")]
-        public IEnumerable<BybitAssetBalance> Assets { get; set; } = Array.Empty<BybitAssetBalance>();
+        public BybitAssetBalance[] Assets { get; set; } = Array.Empty<BybitAssetBalance>();
     }
 
     /// <summary>
     /// Asset balance info
     /// </summary>
+    [SerializationModel]
     public record BybitAssetBalance
     {
         /// <summary>

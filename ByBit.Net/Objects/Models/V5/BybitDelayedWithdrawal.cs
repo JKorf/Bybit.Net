@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
     /// Delayed withdrawal info
     /// </summary>
+    [SerializationModel]
     public record BybitDelayedWithdrawal
     {
         /// <summary>
@@ -22,6 +24,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Delayed withdrawal account info
     /// </summary>
+    [SerializationModel]
     public record BybitDelayedWithdrawalQuantities
     {
         /// <summary>
@@ -39,6 +42,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Delayed withdrawal account quantity
     /// </summary>
+    [SerializationModel]
     public record BybitDelayedWithdrawalQuantity
     {
         /// <summary>

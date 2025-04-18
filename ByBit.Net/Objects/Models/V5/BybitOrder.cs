@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Order info
     /// </summary>
+    [SerializationModel]
     public record BybitOrder
     {
         /// <summary>
@@ -42,7 +44,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
@@ -60,12 +62,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// Order status
         /// </summary>
         [JsonPropertyName("orderStatus")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public OrderStatus Status { get; set; }
         /// <summary>
         /// Cancel type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("cancelType")]
         public CancelType? CancelType { get; set; }
         /// <summary>
@@ -111,19 +113,19 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Time in force
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("timeInForce")]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
         /// Stop order type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("stopOrderType")]
         public StopOrderType? StopOrderType { get; set; }
         /// <summary>
@@ -150,24 +152,24 @@ namespace Bybit.Net.Objects.Models.V5
         /// Take profit trigger type
         /// </summary>
         [JsonPropertyName("tpTriggerBy")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public TriggerType? TakeProfitTriggerBy { get; set; }
         /// <summary>
         /// Stop loss trigger type
         /// </summary>
         [JsonPropertyName("slTriggerBy")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public TriggerType? StopLossTriggerBy { get; set; }
         /// <summary>
         /// Trigger direction
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("triggerDirection")]
         public TriggerDirection? TriggerDirection { get; set; }
         /// <summary>
         /// Trigger price type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("triggerBy")]
         public TriggerType? TriggerBy { get; set; }
         /// <summary>
@@ -205,12 +207,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Market unit for quantity
         /// </summary>
-        [JsonPropertyName("marketUnit"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("marketUnit")]
         public MarketUnit? MarketUnit { get; set; }
         /// <summary>
         /// Oco trigger type
         /// </summary>
-        [JsonPropertyName("ocoTriggerType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("ocoTriggerType")]
         public OcoTriggerType? OcoTriggerType { get; set; }
         /// <summary>
         /// Take profit limit price
@@ -226,7 +228,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Self match prevention type
         /// </summary>
-        [JsonPropertyName("smpType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("smpType")]
         public SelfMatchPreventionType? SelfMatchPreventionType { get; set; }
         /// <summary>
         /// Self match prevention group, 0 by default
@@ -241,7 +243,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Take profit/stop loss mode
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("tpslMode")]
         public StopLossTakeProfitMode? TpSlMode { get; set; }
         /// <summary>

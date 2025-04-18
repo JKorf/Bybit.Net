@@ -1,19 +1,22 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitLeverageTokenWrapper
     {
         [JsonPropertyName("list")]
-        public IEnumerable<BybitLeverageToken> List { get; set; } = Array.Empty<BybitLeverageToken>();
+        public BybitLeverageToken[] List { get; set; } = Array.Empty<BybitLeverageToken>();
     }
 
     /// <summary>
     /// Leverage token info
     /// </summary>
+    [SerializationModel]
     public record BybitLeverageToken
     {
         /// <summary>
@@ -69,7 +72,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Token status
         /// </summary>
-        [JsonPropertyName("ltStatus"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("ltStatus")]
         public LeverageTokenStatus Status { get; set; }
         /// <summary>
         /// Funding fee charged daily for users holding leveraged token

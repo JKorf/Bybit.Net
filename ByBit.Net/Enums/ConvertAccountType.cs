@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Convert account type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<ConvertAccountType>))]
     public enum ConvertAccountType
     {
         /// <summary>

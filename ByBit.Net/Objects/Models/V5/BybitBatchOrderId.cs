@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,12 +8,13 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Order ids
     /// </summary>
+    [SerializationModel]
     public record BybitBatchOrderId
     {
         /// <summary>
         /// Category
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("category")]
         public Category Category { get; set; }
         /// <summary>

@@ -1,13 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Earn order type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<EarnOrderType>))]
     public enum EarnOrderType
     {
         /// <summary>

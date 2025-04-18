@@ -1,0 +1,25 @@
+GET
+/v5/spread/tickers
+false
+{
+    "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+        "list": [
+            {
+                "symbol": "SOLUSDT_SOL/USDT",
+                "bidPrice": "",
+                "bidSize": "",
+                "askPrice": "",
+                "askSize": "",
+                "lastPrice": "19.444",
+                "highPrice24h": "23.8353",
+                "lowPrice24h": "0",
+                "prevPrice24h": "20",
+                "volume24h": "24694.9"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1744079413254
+}

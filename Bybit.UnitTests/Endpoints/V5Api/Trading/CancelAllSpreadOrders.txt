@@ -1,0 +1,18 @@
+POST
+/v5/spread/order/cancel-all
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "orderId": "11ec47f3-f0a2-4b2a-b302-236f2a2d53a2",
+                "orderLinkId": ""
+            }
+        ],
+        "success": "1"
+    },
+    "retExtInfo": {},
+    "time": 1744090940933
+}

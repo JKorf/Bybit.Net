@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// KnowYourCustomer level
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<KycLevel>))]
     public enum KycLevel
     {
         /// <summary>

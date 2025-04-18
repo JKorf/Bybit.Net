@@ -1,0 +1,29 @@
+GET
+/v5/spread/recent-trade
+false
+{
+    "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+        "list": [
+            {
+                "execId": "c8512970-d6fb-5039-93a5-b4196dffbe88",
+                "symbol": "SOLUSDT_SOL/USDT",
+                "price": "20.2805",
+                "size": "3.3",
+                "side": "Sell",
+                "time": "1744078324035"
+            },
+            {
+                "execId": "92b0002e-c49d-5618-a195-4140d7e10a2b",
+                "symbol": "SOLUSDT_SOL/USDT",
+                "price": "20.843",
+                "size": "2.2",
+                "side": "Buy",
+                "time": "1744078322010"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1744078324682
+}

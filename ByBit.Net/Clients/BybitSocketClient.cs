@@ -23,6 +23,8 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public IBybitSocketClientOptionApi V5OptionsApi { get; }
         /// <inheritdoc />
+        public IBybitSocketClientSpreadApi V5SpreadApi { get; }
+        /// <inheritdoc />
         public IBybitSocketClientPrivateApi V5PrivateApi { get; }
 
         /// <summary>
@@ -47,6 +49,7 @@ namespace Bybit.Net.Clients
             V5InverseApi = AddApiClient(new BybitSocketClientInverseApi(_logger, options.Value));
             V5LinearApi = AddApiClient(new BybitSocketClientLinearApi(_logger, options.Value));
             V5OptionsApi = AddApiClient(new BybitSocketClientOptionApi(_logger, options.Value));
+            V5SpreadApi = AddApiClient(new BybitSocketClientSpreadApi(_logger, options.Value));
             V5PrivateApi = AddApiClient(new BybitSocketClientPrivateApi(_logger, options.Value));
         }
 
@@ -57,6 +60,7 @@ namespace Bybit.Net.Clients
             V5InverseApi.SetOptions(options);
             V5LinearApi.SetOptions(options);
             V5OptionsApi.SetOptions(options);
+            V5SpreadApi.SetOptions(options);
             V5PrivateApi.SetOptions(options);
         }
 
@@ -76,6 +80,7 @@ namespace Bybit.Net.Clients
             V5OptionsApi.SetApiCredentials(credentials);
             V5InverseApi.SetApiCredentials(credentials);
             V5PrivateApi.SetApiCredentials(credentials);
+            V5SpreadApi.SetApiCredentials(credentials);
             V5SpotApi.SetApiCredentials(credentials);
         }
     }

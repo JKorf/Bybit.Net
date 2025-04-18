@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Deposit address info
     /// </summary>
+    [SerializationModel]
     public record BybitDepositAddress
     {
         /// <summary>
@@ -18,12 +20,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// Networks
         /// </summary>
         [JsonPropertyName("chains")]
-        public IEnumerable<BybitDepositChainAddress> Networks { get; set; } = Array.Empty<BybitDepositChainAddress>();
+        public BybitDepositChainAddress[] Networks { get; set; } = Array.Empty<BybitDepositChainAddress>();
     }
 
     /// <summary>
     /// Deposit address
     /// </summary>
+    [SerializationModel]
     public record BybitDepositChainAddress
     {
         /// <summary>

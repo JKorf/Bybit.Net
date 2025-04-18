@@ -27,7 +27,7 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
             var data = (BybitSpotSocketEvent<T>)message.Data;
             var splitIndex = data.Topic.LastIndexOf('.');
             _handler?.Invoke(message.As(data.Data, data.Topic, splitIndex == -1 ? null : data.Topic.Substring(splitIndex + 1), string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(data.Timestamp));
-            return new CallResult(null);
+            return CallResult.SuccessResult;
         }
 
         public override Type? GetMessageType(IMessageAccessor message) => typeof(BybitSpotSocketEvent<T>);
