@@ -161,6 +161,33 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.0.0-beta1 - 22 Apr 2025
+    * Updated CryptoExchange.Net to version 9.0.0-beta1, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added support for Native AOT compilation
+    * Added RateLimitUpdated event
+    * Added SharedSymbol response property to all Shared interfaces response models returning a symbol name
+    * Added GenerateClientOrderId method to V5 Shared client
+    * Added OptionalExchangeParameters and Supported properties to EndpointOptions
+    * Added support for Spread trading
+    * Added IBookTickerRestClient implementation to V5Api Shared client
+    * Added ISpotOrderClientIdClient implementation to V5Api Shared client
+    * Added IFuturesOrderClientIdClient implementation to V5Api Shared client
+    * Added ISpotTriggerOrderRestClient implementation to V5Api Shared client
+    * Added IFuturesTriggerOrderRestClient implementation to V5Api Shared client
+    * Added IFuturesTpSlRestClient implementation to V5Api Shared client
+    * Added TriggerPrice, IsTriggerOrder to SharedSpotOrder model
+    * Added TriggerPrice, IsTriggerOrder, StopLossPrice, TakeProfitPrice to SharedFuturesOrder model
+    * Added MaxLongLeverage, MaxShortLeverage to SharedFuturesSymbol model
+    * Added OnChain value to EarnCategory enum
+    * Refactored Shared clients quantity parameters and responses to use SharedQuantity
+    * Updated all IEnumerable response and model types to array response types
+    * Updated restClient.V5Api.Trading.PlaceMultipleOrdersAsync and socketClient.V5PrivateApi.PlaceMultipleOrdersAsync to return a list of CallResult models and an error if all orders fail to place
+    * Removed Newtonsoft.Json dependency
+    * Removed legacy ISpotClient implementation
+    * Removed legacy AddBybit(restOptions, socketOptions) DI overload
+    * Fixed error in V5 Shared SubscribeToBookTickerUpdatesAsync subscription
+    * Fixed some typos
+
 * Version 4.4.1 - 28 Mar 2025
     * Removed incorrect id parameters checks from some endpoints
 
