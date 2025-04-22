@@ -1689,7 +1689,7 @@ namespace Bybit.Net.Clients.V5
                 return result.AsExchangeError<SharedFee>(Exchange, new ServerError("Not found"));
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFee(symbol.MakerFeeRate * 100, symbol.TakerFeeRate * 100));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFee(symbol.MakerFeeRate * 100, symbol.TakerFeeRate * 100));
         }
         #endregion
 
@@ -1936,7 +1936,7 @@ namespace Bybit.Net.Clients.V5
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(""));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(""));
         }
 
         EndpointOptions<CancelTpSlRequest> IFuturesTpSlRestClient.CancelFuturesTpSlOptions { get; } = new EndpointOptions<CancelTpSlRequest>(true)
