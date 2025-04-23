@@ -31,7 +31,7 @@ namespace Bybit.Net.Clients.V5
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
 
-            decimal lastPrice = 0, high = 0, low = 0, vol = 0, change = 0;
+            decimal lastPrice = 0, high = 0, low = 0, vol = 0, change = 0, quoteVol = 0;
             var result = await SubscribeToTickerUpdatesAsync(symbol, update =>
             {
                 if (update.Data.LastPrice.HasValue)
@@ -44,8 +44,13 @@ namespace Bybit.Net.Clients.V5
                     vol = update.Data.Volume24h.Value;
                 if (update.Data.PricePercentage24h.HasValue)
                     vol = update.Data.PricePercentage24h.Value;
+                if (update.Data.Turnover24h.HasValue)
+                    quoteVol = update.Data.Turnover24h.Value;
 
-                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, lastPrice, high, low, vol, change)));
+                handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, lastPrice, high, low, vol, change)
+                {
+                    QuoteVolume = quoteVol
+                }));
             }, ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
