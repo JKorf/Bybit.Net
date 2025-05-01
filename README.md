@@ -161,6 +161,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.0.0-beta3 - 01 May 2025
+    * Updated CryptoExchange.Net version to 9.0.0-beta5
+    * Added property to retrieve all available API environments
+
 * Version 5.0.0-beta2 - 23 Apr 2025
     * Updated CryptoExchange.Net to version 9.0.0-beta2
     * Added Shared spot ticker QuoteVolume mapping
