@@ -24,6 +24,11 @@ namespace Bybit.Net.Enums
         /// Limit maker order, only available for SPOT
         /// </summary>
         [Map("LIMIT_MAKER")]
-        LimitMaker
+        LimitMaker,
+        /// <summary>
+        /// Unknown order type
+        /// </summary>
+        [Map("UNKNOWN")]
+        Unknown
     }
 }
