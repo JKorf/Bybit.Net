@@ -1,6 +1,5 @@
 ﻿using Bybit.Net.Clients.V5;
 using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
 
 namespace Bybit.Net.Interfaces.Clients.V5
 {
@@ -12,35 +11,36 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
+        /// <see cref="IBybitRestClientApiAccount"/>
         IBybitRestClientApiAccount Account { get; }
         /// <summary>
         /// Endpoints related to retrieving market and system data
         /// </summary>
+        /// <see cref="IBybitRestClientApiExchangeData"/>
         IBybitRestClientApiExchangeData ExchangeData { get; }
         /// <summary>
         /// Endpoints related to orders and trades
         /// </summary>
+        /// <see cref="IBybitRestClientApiTrading"/>
         IBybitRestClientApiTrading Trading { get; }
         /// <summary>
         /// Endpoint for managing sub accounts
         /// </summary>
+        /// <see cref="IBybitRestClientApiSubAccounts"/>
         IBybitRestClientApiSubAccounts SubAccount { get; }
         /// <summary>
         /// Endpoint for crypto loans
         /// </summary>
+        /// <see cref="IBybitRestClientApiCryptoLoan"/>
         IBybitRestClientApiCryptoLoan CryptoLoan { get; }
         /// <summary>
         /// Endpoints for Bybit Earn
         /// </summary>
+        /// <see cref="IBybitRestClientApiEarn"/>
         IBybitRestClientApiEarn Earn { get; }
 
         /// <summary>
-        /// DEPRECATED; use <see cref="CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
-        /// </summary>
-        public ISpotClient CommonSpotClient { get; }
-
-        /// <summary>
-        /// Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
         /// </summary>
         public IBybitRestClientApiShared SharedClient { get; }
     }

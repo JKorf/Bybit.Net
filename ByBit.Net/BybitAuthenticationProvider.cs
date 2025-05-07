@@ -15,7 +15,7 @@ namespace Bybit.Net
 {
     internal class BybitAuthenticationProvider : AuthenticationProvider
     {
-        private static readonly IMessageSerializer _messageSerializer = new SystemTextJsonMessageSerializer();
+        private static readonly IMessageSerializer _messageSerializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
         public BybitAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {

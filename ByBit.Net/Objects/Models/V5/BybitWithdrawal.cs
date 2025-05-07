@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Withdrawal info
     /// </summary>
+    [SerializationModel]
     public record BybitWithdrawal
     {
         /// <summary>
@@ -32,7 +34,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("status")]
         public WithdrawalStatus Status { get; set; }
         /// <summary>
@@ -71,7 +73,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Type
         /// </summary>
         [JsonPropertyName("withdrawType")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public WithdrawalType Type { get; set; }
     }
 }

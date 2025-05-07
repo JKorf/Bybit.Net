@@ -1,18 +1,21 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitAccountTypeInfoWrapper
     {
         [JsonPropertyName("accounts")]
-        public IEnumerable<BybitAccountTypeInfo> Accounts { get; set; } = Array.Empty<BybitAccountTypeInfo>();
+        public BybitAccountTypeInfo[] Accounts { get; set; } = Array.Empty<BybitAccountTypeInfo>();
     }
 
     /// <summary>
     /// Account type
     /// </summary>
+    [SerializationModel]
     public record BybitAccountTypeInfo
     {
         /// <summary>
@@ -24,6 +27,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// Account types
         /// </summary>
         [JsonPropertyName("accountType")]
-        public IEnumerable<string> AccountTypes { get; set; } = Array.Empty<string>();
+        public string[] AccountTypes { get; set; } = Array.Empty<string>();
     }
 }

@@ -1,0 +1,30 @@
+GET
+/v5/spread/order/realtime
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "nextPageCursor": "aaaee090-fab3-42ea-aea0-c9fbfe6c4bc4%3A1744096099767%2Caaaee090-fab3-42ea-aea0-c9fbfe6c4bc4%3A1744096099767",
+        "list": [
+            {
+                "symbol": "SOLUSDT_SOL/USDT",
+                "orderType": "Limit",
+                "updatedTime": "1744096099771",
+                "orderLinkId": "",
+                "side": "Buy",
+                "orderId": "aaaee090-fab3-42ea-aea0-c9fbfe6c4bc4",
+                "leavesQty": "0.1",
+                "orderStatus": "New",
+                "cumExecQty": "0",
+                "price": "-4",
+                "qty": "0.1",
+                "createdTime": "1744096099767",
+                "timeInForce": "PostOnly",
+                "baseCoin": "SOL"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1744096103435
+}

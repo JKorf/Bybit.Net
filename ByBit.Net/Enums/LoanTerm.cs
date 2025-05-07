@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Loan term
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<LoanTerm>))]
     public enum LoanTerm
     {
         /// <summary>

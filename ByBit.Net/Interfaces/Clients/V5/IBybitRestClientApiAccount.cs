@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using System;
@@ -140,7 +140,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="subAccountIds">Master id can request subaccount info</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitAccountTypeInfo>>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitAccountTypeInfo[]>> GetAccountTypesAsync(IEnumerable<string>? subAccountIds = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get asset balance
@@ -556,7 +556,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="vipLevel">Filter by VIP level</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotMarginVipMarginList>>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitSpotMarginVipMarginList[]>> GetSpotMarginDataAsync(string? asset = null, string? vipLevel = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spot margin interest rate history
@@ -568,7 +568,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotMarginBorrowRate>>> GetSpotMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitSpotMarginBorrowRate[]>> GetSpotMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get broker earnings
@@ -608,7 +608,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="asset">Only repay this asset; if null repay all assets</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitLiabilityRepayment>>> RepayLiabilitiesAsync(string? asset = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitLiabilityRepayment[]>> RepayLiabilitiesAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Request funds for demo trading
@@ -629,7 +629,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="side">Request side, from or to list</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitConvertAsset>>> GetConvertAssetsAsync(ConvertAccountType accountType, string? asset = null, ConvertAssetSide? side = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitConvertAsset[]>> GetConvertAssetsAsync(ConvertAccountType accountType, string? asset = null, ConvertAssetSide? side = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a convert quote for 2 assets
@@ -672,7 +672,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="pageSize">Page size</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitConvertTransaction>>> GetConvertHistoryAsync(ConvertAccountType? accountType = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitConvertTransaction[]>> GetConvertHistoryAsync(ConvertAccountType? accountType = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get quantity available for withdrawal/transfer from unified wallet

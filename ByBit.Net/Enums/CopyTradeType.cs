@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Copy trading type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<CopyTradeType>))]
     public enum CopyTradeType
     {
         /// <summary>

@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// The unit for quantity when creating Spot market orders for UTA account
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<MarketUnit>))]
     public enum MarketUnit
     {
         /// <summary>

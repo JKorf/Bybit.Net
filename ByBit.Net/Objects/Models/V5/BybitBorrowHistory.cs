@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Borrow history info
     /// </summary>
+    [SerializationModel]
     public record BybitBorrowHistory
     {
         /// <summary>
@@ -24,7 +26,7 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("borrowCost")]
         public decimal BorrowCost { get; set; }
         /// <summary>
-        /// Houly borrow rate
+        /// Hourly borrow rate
         /// </summary>
         [JsonPropertyName("hourlyBorrowRate")]
         public decimal HourlyBorrowRate { get; set; }
@@ -34,8 +36,9 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("interestBearingBorrowSize")]
         public decimal InterestBearingBorrowSize { get; set; }
         [JsonInclude, JsonPropertyName("InterestBearingBorrowSize")]
-        private decimal InterestBearingBorrowSizeInt
+        internal decimal InterestBearingBorrowSizeInt
         {
+            get => InterestBearingBorrowSize;
             set => InterestBearingBorrowSize = value;
         }
 

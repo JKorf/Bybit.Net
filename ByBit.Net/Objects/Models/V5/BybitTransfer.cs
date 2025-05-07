@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Transfer info
     /// </summary>
+    [SerializationModel]
     public record BybitTransfer
     {
         /// <summary>
@@ -27,13 +29,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// From account
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("fromAccountType")]
         public AccountType FromAccountType { get; set; }
         /// <summary>
         /// To account
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("toAccountType")]
         public AccountType ToAccountType { get; set; }
         /// <summary>
@@ -45,7 +47,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("status")]
         public TransferStatus Status { get; set; }
         /// <summary>

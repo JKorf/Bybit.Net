@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Api key info
     /// </summary>
+    [SerializationModel]
     public record BybitApiKeyInfo
     {
         /// <summary>
@@ -40,7 +42,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Allowed ip addresses
         /// </summary>
         [JsonPropertyName("ips")]
-        public IEnumerable<string> Ips { get; set; } = Array.Empty<string>();
+        public string[] Ips { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Remaining valid days
         /// </summary>
@@ -115,7 +117,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Parent Uid, 0 if main account
         /// </summary>
-        [JsonPropertyName("kycLevel"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("kycLevel")]
         public KycLevel? KycLevel { get; set; }
 
         /// <summary>
@@ -139,57 +141,58 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Permission info
     /// </summary>
+    [SerializationModel]
     public record BybitPermissions
     {
         /// <summary>
         /// Contract trade permissions
         /// </summary>
         [JsonPropertyName("ContractTrade")]
-        public IEnumerable<string> ContractTrade { get; set; } = Array.Empty<string>();
+        public string[] ContractTrade { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Spot permissions
         /// </summary>
         [JsonPropertyName("Spot")]
-        public IEnumerable<string> Spot { get; set; } = Array.Empty<string>();
+        public string[] Spot { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Wallet permissions
         /// </summary>
         [JsonPropertyName("Wallet")]
-        public IEnumerable<string> Wallet { get; set; } = Array.Empty<string>();
+        public string[] Wallet { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Options permissions
         /// </summary>
         [JsonPropertyName("Options")]
-        public IEnumerable<string> Options { get; set; } = Array.Empty<string>();
+        public string[] Options { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Derivatives permissions
         /// </summary>
         [JsonPropertyName("Derivatives")]
-        public IEnumerable<string> Derivatives { get; set; } = Array.Empty<string>();
+        public string[] Derivatives { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Copy trading permissions
         /// </summary>
         [JsonPropertyName("CopyTrading")]
-        public IEnumerable<string> CopyTrading { get; set; } = Array.Empty<string>();
+        public string[] CopyTrading { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Block trade permissions
         /// </summary>
         [JsonPropertyName("BlockTrade")]
-        public IEnumerable<string> BlockTrade { get; set; } = Array.Empty<string>();
+        public string[] BlockTrade { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Exchange permissions
         /// </summary>
         [JsonPropertyName("Exchange")]
-        public IEnumerable<string> Exchange { get; set; } = Array.Empty<string>();
+        public string[] Exchange { get; set; } = Array.Empty<string>();
         /// <summary>
         /// NFT permissions
         /// </summary>
         [JsonPropertyName("NFT")]
-        public IEnumerable<string> NFT { get; set; } = Array.Empty<string>();
+        public string[] NFT { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Affiliate permissions
         /// </summary>
         [JsonPropertyName("Affiliate")]
-        public IEnumerable<string> Affiliate { get; set; } = Array.Empty<string>();
+        public string[] Affiliate { get; set; } = Array.Empty<string>();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -7,15 +8,17 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Margin data
     /// </summary>
+    [SerializationModel]
     internal record BybitSpotMarginVipMarginData
     {
         [JsonPropertyName("vipCoinList")]
-        public IEnumerable<BybitSpotMarginVipMarginList> VipCoinList { get; set; } = null!;
+        public BybitSpotMarginVipMarginList[] VipCoinList { get; set; } = null!;
     }
 
     /// <summary>
     /// Margin data
     /// </summary>
+    [SerializationModel]
     public record BybitSpotMarginVipMarginList
     {
         /// <summary>
@@ -27,12 +30,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// Assets
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<BybitSpotMarginVipMarginItem> Assets { get; set; } = Array.Empty<BybitSpotMarginVipMarginItem>();
+        public BybitSpotMarginVipMarginItem[] Assets { get; set; } = Array.Empty<BybitSpotMarginVipMarginItem>();
     }
 
     /// <summary>
     /// Margin item
     /// </summary>
+    [SerializationModel]
     public record BybitSpotMarginVipMarginItem
     {
         /// <summary>

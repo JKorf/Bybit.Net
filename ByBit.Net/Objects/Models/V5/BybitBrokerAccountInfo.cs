@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Broker account info
     /// </summary>
+    [SerializationModel]
     public record BybitBrokerAccountInfo
     {
         /// <summary>
@@ -39,6 +41,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Rebate rate info
     /// </summary>
+    [SerializationModel]
     public record BybitBrokerRebateRate
     {
         /// <summary>

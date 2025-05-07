@@ -1,10 +1,12 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitConvertTransactionWrapper
     {
         /// <summary>
@@ -14,24 +16,26 @@ namespace Bybit.Net.Objects.Models.V5
         public BybitConvertTransaction Result { get; set; } = null!;
     }
 
+    [SerializationModel]
     internal record BybitConvertTransactionListWrapper
     {
         /// <summary>
         /// List
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<BybitConvertTransaction> List { get; set; } = Array.Empty<BybitConvertTransaction>();
+        public BybitConvertTransaction[] List { get; set; } = Array.Empty<BybitConvertTransaction>();
     }
 
     /// <summary>
     /// Convert transaction info
     /// </summary>
+    [SerializationModel]
     public record BybitConvertTransaction
     {
         /// <summary>
         /// Account type
         /// </summary>
-        [JsonPropertyName("accountType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("accountType")]
         public ConvertAccountType AccountType { get; set; }
         /// <summary>
         /// Exchange transaction id
@@ -76,7 +80,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Exchange status
         /// </summary>
-        [JsonPropertyName("exchangeStatus"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("exchangeStatus")]
         public ConvertTransactionStatus? ExchangeStatus { get; set; }
         /// <summary>
         /// Convert rate

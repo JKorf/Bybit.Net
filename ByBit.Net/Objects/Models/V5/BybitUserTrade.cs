@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// User trade info
     /// </summary>
+    [SerializationModel]
     public record BybitUserTrade
     {
         /// <summary>
@@ -27,7 +29,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Side
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
@@ -48,13 +50,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("orderType")]
         public OrderType? OrderType { get; set; }
         /// <summary>
         /// Stop order type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("stopOrderType")]
         public StopOrderType? StopOrderType { get; set; }
         /// <summary>
@@ -92,7 +94,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Trade type
         /// </summary>
         [JsonPropertyName("execType")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public TradeType? TradeType { get; set; }
         /// <summary>
         /// Is maker

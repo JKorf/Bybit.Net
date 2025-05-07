@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using System;
@@ -73,7 +73,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitHistoricalVolatility>>> GetHistoricalVolatilityAsync(string? baseAsset = null, string? quoteAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitHistoricalVolatility[]>> GetHistoricalVolatilityAsync(string? baseAsset = null, string? quoteAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get index price klines
@@ -270,7 +270,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="leverageToken">Filter by token</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitLeverageToken>>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitLeverageToken[]>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get leveraged token market info
@@ -293,7 +293,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">Limit for data size per page</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitLongShortRatio>>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitLongShortRatio[]>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get UTA loan tiered collateral ratio
@@ -302,6 +302,44 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="asset">Filter by asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitSpotMarginCollateralRatio>>> GetSpotMarginTieredCollateralRatioAsync(string? asset = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitSpotMarginCollateralRatio[]>> GetSpotMarginTieredCollateralRatioAsync(string? asset = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread trading symbols
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/market/instrument" /></para>
+        /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="baseAsset">Filter by base asset</param>
+        /// <param name="limit">Max number of results, max 500</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpreadSymbol[]>> GetSpreadSymbolsAsync(string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread trading order book
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/market/orderbook" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="limit">Max number of results, max 25</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitOrderbook>> GetSpreadOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread tickers
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/market/tickers" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpreadTicker>> GetSpreadTickersAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spread symbol recent trades
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/market/recent-trade" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="limit">Max number of results, max 1000</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpreadTrade[]>> GetSpreadRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
     }
 }

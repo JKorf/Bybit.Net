@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Clients;
 using Bybit.Net.Objects;
+using Bybit.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
@@ -113,6 +114,12 @@ namespace Bybit.Net.UnitTests
             await RunAndCheckResult(client => client.V5Api.Trading.GetDeliveryHistoryAsync(Enums.Category.Linear, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.V5Api.Trading.GetSettlementHistoryAsync(Enums.Category.Linear, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.V5Api.Trading.GetClosedProfitLossAsync(Enums.Category.Linear, default, default, default, default, default, default), true);
+        }
+
+        [Test]
+        public async Task TestOrderBooks()
+        {
+            await TestOrderBook(new BybitSymbolOrderBook("ETHUSDT", Enums.Category.Spot));
         }
     }
 }

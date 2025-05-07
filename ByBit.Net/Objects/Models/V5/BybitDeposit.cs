@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -8,18 +9,20 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Deposits info
     /// </summary>
+    [SerializationModel]
     public record BybitDeposits : BybitBaseResponse
     {
         /// <summary>
         /// Deposit list
         /// </summary>
         [JsonPropertyName("rows")]
-        public IEnumerable<BybitDeposit> Deposits { get; set; } = Array.Empty<BybitDeposit>();
+        public BybitDeposit[] Deposits { get; set; } = Array.Empty<BybitDeposit>();
     }
 
     /// <summary>
     /// Deposit info
     /// </summary>
+    [SerializationModel]
     public record BybitDeposit
     {
         /// <summary>
@@ -45,7 +48,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("status")]
         public DepositStatus Status { get; set; }
         /// <summary>

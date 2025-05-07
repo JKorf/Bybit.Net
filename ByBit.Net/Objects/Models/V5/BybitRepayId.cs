@@ -1,13 +1,15 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace Bybit.Net.Interfaces.Clients.V5
+namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
     /// Repay id
     /// </summary>
+    [SerializationModel]
     public record BybitRepayId
     {
         /// <summary>
