@@ -51,8 +51,9 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("list")]
         public IEnumerable<T> List { get; set; } = Array.Empty<T>();
 
+        [JsonInclude]
         [JsonPropertyName("rows")]
-        public IEnumerable<T> Rows
+        internal IEnumerable<T> Rows
         {
             get => List;
             set => List = value;
