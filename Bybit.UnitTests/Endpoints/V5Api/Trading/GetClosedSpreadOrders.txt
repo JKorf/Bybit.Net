@@ -18,7 +18,6 @@ true
                 "price": "-4",
                 "leg2Symbol": "SOLUSDT",
                 "orderQty": "0.1",
-                "orderPrice": "-4",
                 "timeInForce": "PostOnly",
                 "baseCoin": "SOL",
                 "updatedAt": "1744098396079",
