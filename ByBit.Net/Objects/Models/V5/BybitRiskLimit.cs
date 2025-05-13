@@ -43,5 +43,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("maxLeverage")]
         public decimal MaxLeverage { get; set; }
+
+        /// <summary>
+        /// Maintenance Margin Deduction
+        /// </summary>
+        [JsonPropertyName("mmDeduction")]
+        public decimal MaintenanceMarginDeduction { get; set; }
     }
 }
