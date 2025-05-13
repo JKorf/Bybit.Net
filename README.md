@@ -161,6 +161,41 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.0.0 - 13 May 2025
+    * Updated CryptoExchange.Net to version 9.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added support for Native AOT compilation
+    * Added RateLimitUpdated event
+    * Added SharedSymbol response property to all Shared interfaces response models returning a symbol name
+    * Added GenerateClientOrderId method to V5 Shared client
+    * Added OptionalExchangeParameters and Supported properties to EndpointOptions
+    * Added support for Spread trading
+    * Added IBookTickerRestClient implementation to V5Api Shared client
+    * Added ISpotOrderClientIdClient implementation to V5Api Shared client
+    * Added IFuturesOrderClientIdClient implementation to V5Api Shared client
+    * Added ISpotTriggerOrderRestClient implementation to V5Api Shared client
+    * Added IFuturesTriggerOrderRestClient implementation to V5Api Shared client
+    * Added IFuturesTpSlRestClient implementation to V5Api Shared client
+    * Added TriggerPrice, IsTriggerOrder to SharedSpotOrder model
+    * Added TriggerPrice, IsTriggerOrder, StopLossPrice, TakeProfitPrice to SharedFuturesOrder model
+    * Added MaxLongLeverage, MaxShortLeverage to SharedFuturesSymbol model
+    * Added QuoteVolume property mapping to SharedSpotTicker model
+    * Added OnChain value to EarnCategory Enum
+    * Added All property to retrieve all available environment on BybitEnvironment
+    * Added missing Unknown value to OrderType Enum
+    * Added MaintenanceMarginDeduction property to BybitRiskLimit model
+    * Added DisplayName to BybitLinearInverseSymbol and BybitOptionSymbol models
+    * Refactored Shared clients quantity parameters and responses to use SharedQuantity
+    * Updated all IEnumerable response and model types to array response types
+    * Updated restClient.V5Api.Trading.PlaceMultipleOrdersAsync and socketClient.V5PrivateApi.PlaceMultipleOrdersAsync to return a list of CallResult models and an error if all orders fail to place
+    * Removed Newtonsoft.Json dependency
+    * Removed legacy ISpotClient implementation
+    * Removed legacy AddBybit(restOptions, socketOptions) DI overload
+    * Fixed incorrect DataTradeMode on certain Shared interface responses
+    * Fixed OrderPrice returned as 0 instead of null in socket order updates
+    * Fixed some list results being empty while there is data
+    * Fixed error in V5 Shared SubscribeToBookTickerUpdatesAsync subscription
+    * Fixed some typos
+
 * Version 5.0.0-beta3 - 01 May 2025
     * Updated CryptoExchange.Net version to 9.0.0-beta5
     * Added property to retrieve all available API environments
