@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
     /// Batch item result
     /// </summary>
+    [SerializationModel]
     public record BybitBatchResult
     {
         /// <summary>
@@ -23,6 +25,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Batch item result
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [SerializationModel]
     public record BybitBatchResult<T> : BybitBatchResult
     {
         /// <summary>

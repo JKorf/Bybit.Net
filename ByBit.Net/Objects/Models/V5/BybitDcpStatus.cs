@@ -1,19 +1,22 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitDcpStatusWrapper
     {
         [JsonPropertyName("dcpInfos")]
-        public IEnumerable<BybitDcpStatus> Infos { get; set; } = Array.Empty<BybitDcpStatus>();
+        public BybitDcpStatus[] Infos { get; set; } = Array.Empty<BybitDcpStatus>();
     }
 
     /// <summary>
     /// Dcp status
     /// </summary>
+    [SerializationModel]
     public record BybitDcpStatus
     {
         /// <summary>

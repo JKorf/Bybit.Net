@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Spot symbol
     /// </summary>
+    [SerializationModel]
     public record BybitSpotSymbol
     {
         /// <summary>
@@ -26,13 +28,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Symbol status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("status")]
         public SymbolStatus Status { get; set; }
         /// <summary>
         /// Margin trade status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("marginTrading")]
         public MarginTrading MarginTrading { get; set; }
         /// <summary>
@@ -66,6 +68,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Price limits
     /// </summary>
+    [SerializationModel]
     public record BybitPriceLimit
     {
         /// <summary>
@@ -83,6 +86,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Lot size filter info
     /// </summary>
+    [SerializationModel]
     public record BybitSpotLotSizeFilter
     {
         /// <summary>
@@ -120,6 +124,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Price filter info
     /// </summary>
+    [SerializationModel]
     public record BybitSpotPriceFilter
     {
         /// <summary>

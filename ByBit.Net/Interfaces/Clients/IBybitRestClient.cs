@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Authentication;
+﻿using Bybit.Net.Interfaces.Clients.V5;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Options;
 
@@ -12,12 +13,13 @@ namespace Bybit.Net.Interfaces.Clients
         /// <summary>
         /// V5 API endpoints
         /// </summary>
-        V5.IBybitRestClientApi V5Api { get; }
+        /// <see cref="IBybitRestClientApi"/>
+        IBybitRestClientApi V5Api { get; }
 
         /// <summary>
         /// Update specific options
         /// </summary>
-        /// <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+        /// <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
         void SetOptions(UpdateOptions options);
 
         /// <summary>

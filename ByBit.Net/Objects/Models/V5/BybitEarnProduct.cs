@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Product info
     /// </summary>
+    [SerializationModel]
     public record BybitEarnProduct
     {
         /// <summary>

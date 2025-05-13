@@ -1,13 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Tier of account
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<AccountLevel>))]
     public enum AccountLevel
     {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member

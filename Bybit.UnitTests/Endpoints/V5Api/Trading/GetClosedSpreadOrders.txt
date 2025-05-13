@@ -1,0 +1,41 @@
+GET
+/v5/spread/order/history
+true
+{
+    "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+        "nextPageCursor": "aaaee090-fab3-42ea-aea0-c9fbfe6c4bc4%3A1744096099767%2Caaaee090-fab3-42ea-aea0-c9fbfe6c4bc4%3A1744096099767",
+        "list": [
+            {
+                "symbol": "SOLUSDT_SOL/USDT",
+                "orderType": "Limit",
+                "orderLinkId": "",
+                "orderId": "aaaee090-fab3-42ea-aea0-c9fbfe6c4bc4",
+                "contractType": "FundingRateArb",
+                "orderStatus": "Cancelled",
+                "createdAt": "1744096099767",
+                "price": "-4",
+                "leg2Symbol": "SOLUSDT",
+                "orderQty": "0.1",
+                "timeInForce": "PostOnly",
+                "baseCoin": "SOL",
+                "updatedAt": "1744098396079",
+                "side": "Buy",
+                "leg2Side": "Sell",
+                "leavesQty": "0",
+                "leg1Side": "Buy",
+                "settleCoin": "USDT",
+                "cumExecQty": "0",
+                "qty": "0.1",
+                "leg1OrderId": "82335b0a-b7d9-4ea5-9230-e71271a65100",
+                "leg2OrderId": "1924011967786517249",
+                "leg2ProdType": "Spot",
+                "leg1ProdType": "Futures",
+                "leg1Symbol": "SOLUSDT"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1744102655725
+}

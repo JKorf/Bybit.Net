@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,19 +8,20 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Position info
     /// </summary>
+    [SerializationModel]
     public record BybitPosition
     {
         /// <summary>
         /// Category
         /// </summary>
         [JsonPropertyName("category")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public Category Category { get; set; }
         /// <summary>
         /// Position mode
         /// </summary>
         [JsonPropertyName("positionIdx")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public PositionIdx PositionIdx { get; set; }
         /// <summary>
         /// Risk id
@@ -39,7 +41,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("side")]
         public PositionSide? Side { get; set; }
         /// <summary>
@@ -54,7 +56,7 @@ namespace Bybit.Net.Objects.Models.V5
         public decimal? AveragePrice { get; set; }
 
         [JsonInclude, JsonPropertyName("entryPrice")]
-        private decimal? EntryPrice
+        internal decimal? EntryPrice
         {
             get => AveragePrice;
             set => AveragePrice = value;
@@ -68,13 +70,13 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Trade mode. Only valid for Classic and UTA (inverse)
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("tradeMode")]
         public TradeMode TradeMode { get; set; }
         /// <summary>
         /// Position status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("positionStatus")]
         public PositionStatus? PositionStatus { get; set; }
         /// <summary>
@@ -110,7 +112,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Take profit / stop loss price
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("tpslMode")]
         public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
         /// <summary>

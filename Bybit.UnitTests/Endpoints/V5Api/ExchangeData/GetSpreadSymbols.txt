@@ -1,0 +1,40 @@
+GET
+/v5/spread/instrument
+false
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "list": [
+            {
+                "symbol": "SOLUSDT_SOL/USDT",
+                "contractType": "FundingRateArb",
+                "status": "Trading",
+                "baseCoin": "SOL",
+                "quoteCoin": "USDT",
+                "settleCoin": "USDT",
+                "tickSize": "0.0001",
+                "minPrice": "-1999.9998",
+                "maxPrice": "1999.9998",
+                "lotSize": "0.1",
+                "minSize": "0.1",
+                "maxSize": "50000",
+                "launchTime": "1743675300000",
+                "deliveryTime": "0",
+                "legs": [
+                    {
+                        "symbol": "SOLUSDT",
+                        "contractType": "LinearPerpetual"
+                    },
+                    {
+                        "symbol": "SOLUSDT",
+                        "contractType": "Spot"
+                    }
+                ]
+            }
+        ],
+        "nextPageCursor": "first%3D100008%26last%3D100008"
+    },
+    "retExtInfo": {},
+    "time": 1744076802479
+}

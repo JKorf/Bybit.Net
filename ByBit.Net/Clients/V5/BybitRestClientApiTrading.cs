@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Internal;
 using System.Linq;
 using CryptoExchange.Net.RateLimiting.Guards;
+using System.Drawing;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -108,15 +109,6 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate("PlaceOrder" + categoryIdentifier, HttpMethod.Post, "v5/order/create", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
-            if (result)
-            {
-                _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
-                {
-                    Id = result.Data.OrderId,
-                    SourceObject = result.Data
-                });
-            }
-
             return result;
         }
 
@@ -125,7 +117,7 @@ namespace Bybit.Net.Clients.V5
         #region Place multiple orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> PlaceMultipleOrdersAsync(
+        public async Task<WebCallResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -133,7 +125,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
-                { "request", orderRequests }
+                { "request", orderRequests.ToArray() }
             };
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
@@ -145,38 +137,27 @@ namespace Bybit.Net.Clients.V5
             if (!result || result.Data == null)
             {
                 if (result.Error?.Code == 404)
-                    return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(404, "Received 404 response; make sure your account is UTA PRO"));
+                    return result.AsError<CallResult<BybitBatchOrderId>[]>(new ServerError(404, "Received 404 response; make sure your account is UTA PRO"));
 
-                return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
+                return result.As<CallResult<BybitBatchOrderId>[]>(default);
             }
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<CallResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
-            var resultList = new List<BybitBatchResult<BybitBatchOrderId>>(); 
+            var resultList = new List<CallResult<BybitBatchOrderId>>(); 
             var resultItems = result.Data.Result.List.ToArray();
             int index = 0;
             foreach (var item in result.Data.ExtInfo.List)
             {                
                 var resultItem = resultItems[index++];
-                resultList.Add(new BybitBatchResult<BybitBatchOrderId>
-                {
-                    Code = item.Code,
-                    Message = item.Message,
-                    Data = resultItem
-                }); ;
-
-                if (item.Code == 0)
-                {
-                    _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
-                    {
-                        Id = resultItem.OrderId,
-                        SourceObject = result.Data
-                    });
-                }
+                if (item.Code != 0)
+                    resultList.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, item.Message!)));
+                else
+                    resultList.Add(new CallResult<BybitBatchOrderId>(resultItem));
             }
 
-            return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);
+            return result.As<CallResult<BybitBatchOrderId>[]>(resultList.ToArray());
         }
 
         #endregion
@@ -235,7 +216,7 @@ namespace Bybit.Net.Clients.V5
         #region Edit multiple orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> EditMultipleOrdersAsync(
+        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitEditOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -243,7 +224,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
-                { "request", orderRequests }
+                { "request", orderRequests.ToArray() }
             };
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
@@ -253,10 +234,10 @@ namespace Bybit.Net.Clients.V5
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result || result.Data == null)
-                return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
+                return result.As<BybitBatchResult<BybitBatchOrderId>[]>(default);
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
             var resultItems = result.Data.Result.List.ToArray();
@@ -271,7 +252,7 @@ namespace Bybit.Net.Clients.V5
                 });
             }
 
-            return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);
+            return result.As(resultList.ToArray());
         }
 
         #endregion
@@ -306,15 +287,6 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate("CancelOrder" + categoryIdentifier, HttpMethod.Post, "v5/order/cancel", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
-            if (result)
-            {
-                _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
-                {
-                    Id = result.Data.OrderId,
-                    SourceObject = result.Data
-                });
-            }
-
             return result;
         }
 
@@ -323,7 +295,7 @@ namespace Bybit.Net.Clients.V5
         #region Cancel multiple orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>> CancelMultipleOrdersAsync(
+        public async Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitCancelOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -331,7 +303,7 @@ namespace Bybit.Net.Clients.V5
             var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) },
-                { "request", orderRequests }
+                { "request", orderRequests.ToArray() }
             };
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
@@ -341,10 +313,10 @@ namespace Bybit.Net.Clients.V5
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(default);
+                return result.As<BybitBatchResult<BybitBatchOrderId>[]>(default);
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
             var resultItems = result.Data.Result.List.ToArray(); 
@@ -358,18 +330,9 @@ namespace Bybit.Net.Clients.V5
                     Message = item.Message,
                     Data = resultItem
                 });
-
-                if (item.Code == 0)
-                {
-                    _baseClient.InvokeOrderPlaced(new CryptoExchange.Net.CommonObjects.OrderId
-                    {
-                        Id = resultItem.OrderId,
-                        SourceObject = result.Data
-                    });
-                }
             }
 
-            return result.As<IEnumerable<BybitBatchResult<BybitBatchOrderId>>>(resultList);
+            return result.As<BybitBatchResult<BybitBatchOrderId>[]>(resultList.ToArray());
         }
 
         #endregion
@@ -529,11 +492,11 @@ namespace Bybit.Net.Clients.V5
         #region Get Disconnect Cancel All
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitDcpStatus>>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BybitDcpStatus[]>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/query-dcp-info", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitDcpStatusWrapper>(request, null, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<BybitDcpStatus>>(result.Data?.Infos);
+            return result.As<BybitDcpStatus[]>(result.Data?.Infos);
         }
 
         #endregion
@@ -629,7 +592,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Asset Exchange History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitAssetExchange>>> GetAssetExchangeHistoryAsync(
+        public async Task<WebCallResult<BybitAssetExchange[]>> GetAssetExchangeHistoryAsync(
             string? fromAsset = null,
             string? toAsset = null,
             int? limit = null,
@@ -646,7 +609,7 @@ namespace Bybit.Net.Clients.V5
                 new SingleLimitGuard(600, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BybitAssetExchageWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<BybitAssetExchange>>(null);
+                return result.As<BybitAssetExchange[]>(null);
 
             return result.As(result.Data.OrderBody);
         }
@@ -834,7 +797,7 @@ namespace Bybit.Net.Clients.V5
         #region Get leverage Token Order History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BybitLeverageTokenHistory>>> GetLeverageTokenOrderHistoryAsync(string? token = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, LeverageTokenRecordType? type = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitLeverageTokenHistory[]>> GetLeverageTokenOrderHistoryAsync(string? token = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, LeverageTokenRecordType? type = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("serialNo", clientOrderId);
@@ -849,11 +812,140 @@ namespace Bybit.Net.Clients.V5
                 new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BybitResponse<BybitLeverageTokenHistory>>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
-                return result.As<IEnumerable<BybitLeverageTokenHistory>>(default);
+                return result.As<BybitLeverageTokenHistory[]>(default);
 
             return result.As(result.Data.List);
         }
 
         #endregion
+
+        #region Place Spread Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitOrderId>> PlaceSpreadOrderAsync(string symbol, OrderSide side, NewOrderType type, decimal quantity, TimeInForce timeInForce, decimal? price = null, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("orderType", type);
+            parameters.Add("qty", quantity);
+            parameters.AddEnum("timeInForce", timeInForce);
+            parameters.AddOptional("price", price);
+            parameters.AddOptional("orderLinkId", clientOrderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/spread/order/create", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Edit Spread Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitOrderId>> EditSpreadOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, decimal? quantity = null, decimal? price = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("orderLinkId", clientOrderId);
+            parameters.AddOptional("qty", quantity);
+            parameters.AddOptional("price", price);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/spread/order/amend", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Cancel Spread Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitOrderId>> CancelSpreadOrderAsync(string? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("orderLinkId", clientOrderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/spread/order/cancel", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Cancel All Spread Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitOrderId[]>> CancelAllSpreadOrdersAsync(string? symbol = null, bool? cancelAll = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptional("cancelAll", cancelAll);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/spread/order/cancel-all", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitList<BybitOrderId>>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitOrderId[]>(result.Data?.List);
+        }
+
+        #endregion
+
+        #region Get Open Spread Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitSpreadOrder>>> GetOpenSpreadOrdersAsync(string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptional("baseCoin", baseAsset);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("orderLinkId", clientOrderId);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/order/realtime", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitResponse<BybitSpreadOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Closed Spread Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitClosedSpreadOrder>>> GetClosedSpreadOrdersAsync(string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptional("baseCoin", baseAsset);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("orderLinkId", clientOrderId);
+            parameters.AddOptionalMilliseconds("startTime", startTime);
+            parameters.AddOptionalMilliseconds("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/order/history", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitResponse<BybitClosedSpreadOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Spread User Trades
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitSpreadUserTrade>>> GetSpreadUserTradesAsync(string? symbol = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("orderLinkId", clientOrderId);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/execution/list", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitResponse<BybitSpreadUserTrade>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
     }
 }

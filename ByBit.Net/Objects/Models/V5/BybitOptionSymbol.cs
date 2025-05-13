@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Option symbol
     /// </summary>
+    [SerializationModel]
     public record BybitOptionSymbol
     {
         /// <summary>
@@ -15,10 +17,15 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("symbol")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
+        /// Display name
+        /// </summary>
+        [JsonPropertyName("displayName")]
+        public string DisplayName { get; set; } = string.Empty;
+        /// <summary>
         /// Options type
         /// </summary>
         [JsonPropertyName("optionsType")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public OptionType OptionType { get; set; }
         /// <summary>
         /// Base asset
@@ -50,7 +57,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Symbol status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("status")]
         public SymbolStatus Status { get; set; }
         /// <summary>
@@ -73,6 +80,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Lot size filter info
     /// </summary>
+    [SerializationModel]
     public record BybitOptionLotSizeFilter
     {
         /// <summary>
@@ -95,6 +103,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Price filter info
     /// </summary>
+    [SerializationModel]
     public record BybitOptionPriceFilter
     {
         /// <summary>

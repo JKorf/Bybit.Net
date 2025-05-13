@@ -14,7 +14,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
         public override HashSet<string> ListenerIdentifiers { get; set; }
 
         public BybitBatchOrderRequestQuery(string op, Dictionary<string, string>? headers, params object[]? args) : 
-            base(new BybitRequestQueryMessage { RequestId = ExchangeHelpers.NextId().ToString(), Header = headers, Operation = op, Args = args?.ToList() }, true, 1)
+            base(new BybitRequestQueryMessage { RequestId = ExchangeHelpers.NextId().ToString(), Header = headers, Operation = op, Args = args?.ToArray() }, true, 1)
         {
             ListenerIdentifiers = new HashSet<string>() { ((BybitRequestQueryMessage)Request).RequestId };
         }

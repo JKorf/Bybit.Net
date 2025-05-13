@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Repayment info
     /// </summary>
+    [SerializationModel]
     public record BybitRepayment
     {
         /// <summary>

@@ -23,8 +23,8 @@ namespace Bybit.Net.Objects.Sockets
     internal class BybitOptionsQueryData
     {
         [JsonPropertyName("failTopics")]
-        public List<string> FailedTopics { get; set; } = new List<string>();
+        public string[] FailedTopics { get; set; } = [];
         [JsonPropertyName("successTopics")]
-        public List<string> SuccessTopics { get; set; } = new List<string>();
+        public string[] SuccessTopics { get; set; } = [];
     }
 }

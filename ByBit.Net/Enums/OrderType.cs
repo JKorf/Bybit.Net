@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Order type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<OrderType>))]
     public enum OrderType
     {
         /// <summary>
@@ -21,6 +24,11 @@ namespace Bybit.Net.Enums
         /// Limit maker order, only available for SPOT
         /// </summary>
         [Map("LIMIT_MAKER")]
-        LimitMaker
+        LimitMaker,
+        /// <summary>
+        /// Unknown order type
+        /// </summary>
+        [Map("UNKNOWN")]
+        Unknown
     }
 }

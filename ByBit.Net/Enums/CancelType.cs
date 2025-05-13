@@ -1,8 +1,12 @@
-﻿namespace Bybit.Net.Enums
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
+namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Cancel type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<CancelType>))]
     public enum CancelType
     {
         /// <summary>

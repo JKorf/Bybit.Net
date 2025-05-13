@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Kline update
     /// </summary>
+    [SerializationModel]
     public record BybitKlineUpdate
     {
         /// <summary>
@@ -24,7 +26,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Interval
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("interval")]
         public KlineInterval Interval { get; set; }
         /// <summary>

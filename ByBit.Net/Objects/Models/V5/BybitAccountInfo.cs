@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 
@@ -7,18 +8,19 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Account info
     /// </summary>
+    [SerializationModel]
     public record BybitAccountInfo
     {
         /// <summary>
         /// Unified margin status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("unifiedMarginStatus")]
         public UnifiedMarginStatus UnifiedMarginStatus { get; set; }
         /// <summary>
         /// Margin info
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("marginMode")]
         public MarginMode MarginMode { get; set; }
         /// <summary>

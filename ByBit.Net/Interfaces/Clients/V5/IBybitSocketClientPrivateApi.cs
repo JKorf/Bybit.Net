@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -16,7 +16,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
     public interface IBybitSocketClientPrivateApi : ISocketApiClient
     {
         /// <summary>
-        /// Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
         /// </summary>
         IBybitSocketClientPrivateApiShared SharedClient { get; }
 
@@ -27,7 +27,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEvent<IEnumerable<BybitGreeks>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEvent<BybitGreeks[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to order updates
@@ -36,7 +36,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to position updates
@@ -45,7 +45,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BybitPositionUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to trade updates
@@ -54,7 +54,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BybitUserTradeUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to minimal trade updates. There is less data available, but updates are pushed significantly faster
@@ -63,7 +63,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToMinimalUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BybitMinimalUserTradeUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToMinimalUserTradeUpdatesAsync(Action<DataEvent<BybitMinimalUserTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to wallet balance updates
@@ -72,7 +72,25 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<IEnumerable<BybitBalance>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<BybitBalance[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to spread order updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/websocket/private/order" /></para>
+        /// </summary>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToSpreadOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to spread user trade updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spread/websocket/private/execution" /></para>
+        /// </summary>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToSpreadUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new order
@@ -85,7 +103,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="quantity">Quantity</param>
         /// <param name="price">Price</param>
         /// <param name="isLeverage">Is leverage</param>
-        /// <param name="triggerDirection">Conditional order diraction</param>
+        /// <param name="triggerDirection">Conditional order direction</param>
         /// <param name="orderFilter">Order filter</param>
         /// <param name="triggerPrice">Trigger price</param>
         /// <param name="triggerBy">Trigger by</param>
@@ -206,7 +224,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">Order requests</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+        Task<CallResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default);

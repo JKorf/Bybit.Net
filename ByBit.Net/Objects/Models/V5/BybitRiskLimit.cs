@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>
     /// Risk limit info
     /// </summary>
+    [SerializationModel]
     public record BybitRiskLimit
     {
         /// <summary>
@@ -48,6 +50,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// Maintenance Margin Deduction
         /// </summary>
         [JsonPropertyName("mmDeduction")]
-        public decimal MaintenanceMarginDeduction { get; set; }
+        public decimal? MaintenanceMarginDeduction { get; set; }
     }
 }

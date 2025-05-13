@@ -1,21 +1,24 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitConvertAssetWrapper
     {
         /// <summary>
         /// Coins
         /// </summary>
         [JsonPropertyName("coins")]
-        public IEnumerable<BybitConvertAsset> Assets { get; set; } = Array.Empty<BybitConvertAsset>();
+        public BybitConvertAsset[] Assets { get; set; } = Array.Empty<BybitConvertAsset>();
     }
 
     /// <summary>
     /// Convert asset info
     /// </summary>
+    [SerializationModel]
     public record BybitConvertAsset
     {
         /// <summary>

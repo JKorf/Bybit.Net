@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,6 +7,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Request info
     /// </summary>
+    [SerializationModel]
     public record BybitPlaceOrderRequest
     {
         /// <summary>
@@ -16,12 +18,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Type of order
         /// </summary>
-        [JsonPropertyName("orderType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderType")]
         public NewOrderType OrderType { get; set; }
         /// <summary>
         /// Side of the order
         /// </summary>
-        [JsonPropertyName("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Order quantity
@@ -36,7 +38,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Time in force, if not passed GoodTillCanceled is used by default
         /// </summary>
-        [JsonPropertyName("timeInForce"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("timeInForce"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TimeInForce? TimeInForce { get; set; }
         /// <summary>
         /// Client order id. Required for Options
@@ -51,7 +53,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Take profit / stop loss mode
         /// </summary>
-        [JsonPropertyName("tpslMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpslMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public StopLossTakeProfitMode? TakeProfitStopLossMode { get; set; }
         /// <summary>
         /// Take profit price
@@ -68,7 +70,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("triggerDirection"),
             JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault),
-            JsonConverterCtor(typeof(EnumConverter), true, true)]
+            JsonConverter(typeof(EnumIntWriterConverter<TriggerDirection>))]
         public TriggerDirection? TriggerDirection { get; set; }
         /// <summary>
         /// Trigger price
@@ -78,14 +80,14 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Trigger price type
         /// </summary>
-        [JsonPropertyName("triggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("triggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TriggerType? TriggerBy { get; set; }
         /// <summary>
         /// Position idx
         /// </summary>
         [JsonPropertyName("positionIdx"),
             JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault),
-            JsonConverterCtor(typeof(EnumConverter), true, true)]
+            JsonConverter(typeof(EnumIntWriterConverter<PositionIdx>))]
         public PositionIdx? PositionIdx { get; set; }
         /// <summary>
         /// Take profit limit price
@@ -100,12 +102,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Stop loss order type
         /// </summary>
-        [JsonPropertyName("slOrderType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("slOrderType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public OrderType? StopLossOrderType { get; set; }
         /// <summary>
         /// Take profit order type
         /// </summary>
-        [JsonPropertyName("tpOrderType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpOrderType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public OrderType? TakeProfitOrderType { get; set; }
         /// <summary>
         /// Market maker protection. option only. true means set the order as a market maker protection order
@@ -120,7 +122,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// The unit for qty when creating spot market orders for unified trading account
         /// </summary>
-        [JsonPropertyName("marketUnit"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("marketUnit"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public MarketUnit? MarketUnit { get; set; }
         /// <summary>
         /// Close on trigger, can only reduce the position
@@ -130,22 +132,22 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Self match prevention type
         /// </summary>
-        [JsonPropertyName("smpType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("smpType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SelfMatchPreventionType? StpType { get; set; }
         /// <summary>
         /// Stop loss trigger by
         /// </summary>
-        [JsonPropertyName("slTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("slTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TriggerType? StopLossTriggerBy { get; set; }
         /// <summary>
         /// Take profit trigger by
         /// </summary>
-        [JsonPropertyName("tpTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("tpTriggerBy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TriggerType? TakeProfitTriggerBy { get; set; }
         /// <summary>
         /// Order filter
         /// </summary>
-        [JsonPropertyName("orderFilter"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderFilter"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public OrderFilter? OrderFilter { get; set; }
         /// <summary>
         /// Whether to borrow. Valid for Unified spot only. 1 for true
@@ -154,9 +156,10 @@ namespace Bybit.Net.Objects.Models.V5
         public int? IsLeverage { get; set; }
     }
 
+    [SerializationModel]
     internal record BybitSocketPlaceOrderRequest : BybitPlaceOrderRequest
     {
-        [JsonPropertyName("category"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("category")]
         public Category Category { get; set; }
     }
 }

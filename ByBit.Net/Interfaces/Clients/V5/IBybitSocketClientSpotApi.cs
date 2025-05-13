@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -15,7 +15,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
     public interface IBybitSocketClientSpotApi : IBybitSocketClientBaseApi
     {
         /// <summary>
-        /// Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
         /// </summary>
         IBybitSocketClientSpotApiShared SharedClient { get; }
 
@@ -28,7 +28,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to leveraged token kline updates
@@ -39,7 +39,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IEnumerable<BybitKlineUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToLeveragedTokenKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to leveraged token NAV updates
@@ -109,7 +109,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BybitTrade>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to public trade updates
@@ -119,6 +119,6 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BybitTrade>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default);
     }
 }

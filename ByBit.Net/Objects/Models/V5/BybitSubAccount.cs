@@ -1,18 +1,21 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitSubAccountWrapper
     {
         [JsonPropertyName("subMembers")]
-        public List<BybitSubAccount> SubMembers { get; set; } = new List<BybitSubAccount>();
+        public BybitSubAccount[] SubMembers { get; set; } = [];
     }
 
     /// <summary>
     /// Sub account info
     /// </summary>
+    [SerializationModel]
     public record BybitSubAccount
     {
         /// <summary>
@@ -28,17 +31,17 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Account type
         /// </summary>
-        [JsonPropertyName("memberType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("memberType")]
         public SubAccountType AccountType { get; set; }
         /// <summary>
         /// Account status
         /// </summary>
-        [JsonPropertyName("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("status")]
         public SubAccountStatus Status { get; set; }
         /// <summary>
         /// Account mode
         /// </summary>
-        [JsonPropertyName("accountMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("accountMode")]
         public AccountMode? AccountMode { get; set; }
         /// <summary>
         /// Remark

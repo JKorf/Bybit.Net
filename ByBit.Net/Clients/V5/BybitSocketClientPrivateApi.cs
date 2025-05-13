@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Enums;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
@@ -19,7 +19,6 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.SharedApis;
-using CryptoExchange.Net.CommonObjects;
 using System.Drawing;
 using System.Linq;
 
@@ -59,8 +58,8 @@ namespace Bybit.Net.Clients.V5
             SetDedicatedConnection(BaseAddress.AppendPath("/v5/trade"), true);
         }
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
         private Query GetPingQuery(SocketConnection connection)
         {
@@ -150,44 +149,58 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<IEnumerable<BybitPositionUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BybitPositionUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitPositionUpdate>>(_logger, new[] { "position" }, handler, true);
+            var subscription = new BybitSubscription<BybitPositionUpdate[]>(_logger, new[] { "position" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BybitUserTradeUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitUserTradeUpdate>>(_logger, new[] { "execution" }, handler, true);
+            var subscription = new BybitSubscription<BybitUserTradeUpdate[]>(_logger, new[] { "execution" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToMinimalUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BybitMinimalUserTradeUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToSpreadUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitMinimalUserTradeUpdate>>(_logger, new[] { "execution.fast" }, handler, true);
+            var subscription = new BybitSubscription<BybitUserTradeUpdate[]>(_logger, new[] { "spread.execution" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BybitOrderUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToMinimalUserTradeUpdatesAsync(Action<DataEvent<BybitMinimalUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitOrderUpdate>>(_logger, new[] { "order" }, handler, true);
+            var subscription = new BybitSubscription<BybitMinimalUserTradeUpdate[]>(_logger, new[] { "execution.fast" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<IEnumerable<BybitBalance>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitBalance>>(_logger, new[] { "wallet" }, handler, true);
+            var subscription = new BybitSubscription<BybitOrderUpdate[]>(_logger, new[] { "order" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEvent<IEnumerable<BybitGreeks>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToSpreadOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<IEnumerable<BybitGreeks>>(_logger, new[] { "greeks" }, handler, true);
+            var subscription = new BybitSubscription<BybitOrderUpdate[]>(_logger, new[] { "spread.order" }, handler, true);
+            return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<BybitBalance[]>> handler, CancellationToken ct = default)
+        {
+            var subscription = new BybitSubscription<BybitBalance[]>(_logger, new[] { "wallet" }, handler, true);
+            return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEvent<BybitGreeks[]>> handler, CancellationToken ct = default)
+        {
+            var subscription = new BybitSubscription<BybitGreeks[]>(_logger, new[] { "greeks" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
@@ -357,7 +370,7 @@ namespace Bybit.Net.Clients.V5
 		}
 
         /// <inheritdoc />
-        public async Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+        public async Task<CallResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default)
@@ -380,7 +393,23 @@ namespace Bybit.Net.Clients.V5
                 parameters
             );
 
-            return await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
+            var resultData = await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
+            if (!resultData)
+                return resultData.As<CallResult<BybitBatchOrderId>[]>(default);
+
+            var result = new List<CallResult<BybitBatchOrderId>>();
+            foreach (var item in resultData.Data!)
+            {
+                if (item.Code != 0)
+                    result.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, item.Message!)));
+                else
+                    result.Add(new CallResult<BybitBatchOrderId>(item.Data!));
+            }
+
+            if (result.All(x => !x.Success))
+                return resultData.AsErrorWithData(new ServerError("All orders failed"), result.ToArray());
+
+            return resultData.As(result.ToArray());
         }
 
         /// <inheritdoc />

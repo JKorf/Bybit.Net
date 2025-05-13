@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Announcmeent
     /// </summary>
+    [SerializationModel]
     public record BybitAnnouncement
     {
         /// <summary>
@@ -52,7 +54,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// Tags
         /// </summary>
         [JsonPropertyName("tags")]
-        public IEnumerable<string> Tags { get; set; } = Array.Empty<string>();
+        public string[] Tags { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Type
         /// </summary>

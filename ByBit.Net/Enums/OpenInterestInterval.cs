@@ -1,12 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
 using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Open interest interval, int value represents the time in seconds
     /// </summary>
-    [JsonConverter(typeof(EnumConverter))]
+    [JsonConverter(typeof(EnumConverter<OpenInterestInterval>))]
     public enum OpenInterestInterval
     {
         /// <summary>

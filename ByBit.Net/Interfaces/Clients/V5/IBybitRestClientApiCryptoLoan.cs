@@ -1,4 +1,4 @@
-﻿using Bybit.Net.Enums;
+using Bybit.Net.Enums;
 using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
@@ -22,7 +22,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="asset">Filter by asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BybitCollateralAsset>>> GetCollateralAssetsAsync(
+        Task<WebCallResult<BybitCollateralAsset[]>> GetCollateralAssetsAsync(
             AccountLevel? level = null,
             string? asset = null,
             CancellationToken ct = default);
@@ -34,7 +34,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="accountLevel">Filter by account level</param>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BybitBorrowAsset>>> GetBorrowableAssetsAsync(AccountLevel? accountLevel = null, string? asset = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitBorrowAsset[]>> GetBorrowableAssetsAsync(AccountLevel? accountLevel = null, string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get borrow/collateral limits

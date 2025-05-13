@@ -1,4 +1,5 @@
-﻿using Bybit.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Linear/Inverse symbol
     /// </summary>
+    [SerializationModel]
     public record BybitLinearInverseSymbol
     {
         /// <summary>
@@ -15,11 +17,18 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Display name
+        /// </summary>
+        [JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; }
+
         /// <summary>
         /// Contract type
         /// </summary>
         [JsonPropertyName("contractType")]
-        [JsonConverter(typeof(EnumConverter))]
+
         public ContractTypeV5 ContractType { get; set; }
         /// <summary>
         /// Base asset
@@ -51,7 +60,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Symbol status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+
         [JsonPropertyName("status")]
         public SymbolStatus Status { get; set; }
         /// <summary>
@@ -77,7 +86,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Copy trading support
         /// </summary>
-        [JsonPropertyName("copyTrading"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("copyTrading")]
         public CopyTradeType CopyTrading { get; set; }
         /// <summary>
         /// Upper limit of funding date
@@ -126,6 +135,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Risk limit parameters
     /// </summary>
+    [SerializationModel]
     public record BybitRiskParameters
     {
         /// <summary>
@@ -143,19 +153,20 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Prelisting info
     /// </summary>
+    [SerializationModel]
     public record BybitPrelistingInfo
     {
         /// <summary>
         /// Current auction phase
         /// </summary>
-        [JsonPropertyName("curAuctionPhase"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("curAuctionPhase")]
         public AuctionPhase CurrentPhase { get; set; }
 
         /// <summary>
         /// Phases
         /// </summary>
         [JsonPropertyName("phases")]
-        public IEnumerable<BybitPrelistingPhase> Phases { get; set; } = Array.Empty<BybitPrelistingPhase>();
+        public BybitPrelistingPhase[] Phases { get; set; } = Array.Empty<BybitPrelistingPhase>();
 
         /// <summary>
         /// Fee info
@@ -167,6 +178,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Prelisting fee info
     /// </summary>
+    [SerializationModel]
     public record BybitPrelistingFees
     {
         /// <summary>
@@ -189,12 +201,13 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Prelisting phase
     /// </summary>
+    [SerializationModel]
     public record BybitPrelistingPhase
     {
         /// <summary>
         /// Phase
         /// </summary>
-        [JsonPropertyName("phase"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("phase")]
         public AuctionPhase Phase { get; set; }
         /// <summary>
         /// Phase start time
@@ -211,6 +224,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Leverage filter info
     /// </summary>
+    [SerializationModel]
     public record BybitLinearInverseLeveragefilter
     {
         /// <summary>
@@ -233,6 +247,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Lot size filter info
     /// </summary>
+    [SerializationModel]
     public record BybitLinearInverseLotSizeFilter
     {
         /// <summary>
@@ -265,6 +280,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Price filter info
     /// </summary>
+    [SerializationModel]
     public record BybitLinearInversePriceFilter
     {
         /// <summary>

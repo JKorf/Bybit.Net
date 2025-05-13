@@ -1,4 +1,6 @@
-﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Converters;
+using CryptoExchange.Net.Converters;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Models.V5
@@ -6,7 +8,8 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Kline info
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
+    [JsonConverter(typeof(ArrayConverter<BybitKline>))]
+    [SerializationModel]
     public record BybitKline: BybitBasicKline
     {
         /// <summary>

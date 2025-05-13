@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bybit.Net.Enums
 {
     /// <summary>
     /// Trade type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<TradeType>))]
     public enum TradeType
     {
         /// <summary>
@@ -46,6 +49,11 @@ namespace Bybit.Net.Enums
         /// Move position
         /// </summary>
         [Map("MovePosition")]
-        MovePosition
+        MovePosition,
+        /// <summary>
+        /// Spread trade
+        /// </summary>
+        [Map("FutureSpread")]
+        FutureSpread
     }
 }

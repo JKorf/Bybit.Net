@@ -1,18 +1,21 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    [SerializationModel]
     internal record BybitAssetExchageWrapper : BybitBaseResponse
     {
         [JsonPropertyName("orderBody")]
-        public IEnumerable<BybitAssetExchange> OrderBody { get; set; } = Array.Empty<BybitAssetExchange>();
+        public BybitAssetExchange[] OrderBody { get; set; } = Array.Empty<BybitAssetExchange>();
     }
 
     /// <summary>
     /// Asset exchange info
     /// </summary>
+    [SerializationModel]
     public record BybitAssetExchange
     {
         /// <summary>
