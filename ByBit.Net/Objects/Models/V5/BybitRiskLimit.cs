@@ -50,6 +50,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// Maintenance Margin Deduction
         /// </summary>
         [JsonPropertyName("mmDeduction")]
-        public decimal MaintenanceMarginDeduction { get; set; }
+        public decimal? MaintenanceMarginDeduction { get; set; }
     }
 }
