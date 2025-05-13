@@ -64,10 +64,10 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("orderQty")]
         public decimal OrderQuantity { get; set; }
         /// <summary>
-        /// Order price
+        /// Reject reason
         /// </summary>
-        [JsonPropertyName("orderPrice")]
-        public decimal? OrderPrice { get; set; }
+        [JsonPropertyName("cxlRejReason")]
+        public string? RejectReason { get; set; }
         /// <summary>
         /// Time in force
         /// </summary>
