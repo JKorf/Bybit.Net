@@ -50,7 +50,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Order book entry
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BybitOrderbookEntry, BybitSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BybitOrderbookEntry>))]
     [SerializationModel]
     public record BybitOrderbookEntry : ISymbolOrderBookEntry
     {

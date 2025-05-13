@@ -8,7 +8,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Kline info
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BybitKline, BybitSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BybitKline>))]
     [SerializationModel]
     public record BybitKline: BybitBasicKline
     {

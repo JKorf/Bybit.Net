@@ -9,7 +9,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// <summary>
     /// Mark price kline info
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BybitBasicKline, BybitSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BybitBasicKline>))]
     [SerializationModel]
     public record BybitBasicKline
     {
