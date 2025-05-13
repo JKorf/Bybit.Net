@@ -54,6 +54,7 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("list")]
         public T[] List { get; set; } = Array.Empty<T>();
 
+        [JsonInclude]
         [JsonPropertyName("rows")]
         internal T[] Rows
         {
