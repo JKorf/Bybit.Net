@@ -17,6 +17,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("symbol")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
+        /// Display name
+        /// </summary>
+        [JsonPropertyName("displayName")]
+        public string DisplayName { get; set; } = string.Empty;
+        /// <summary>
         /// Options type
         /// </summary>
         [JsonPropertyName("optionsType")]
