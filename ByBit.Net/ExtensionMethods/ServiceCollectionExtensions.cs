@@ -119,6 +119,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBybitOrderBookFactory, BybitOrderBookFactory>();
             services.AddTransient<IBybitTrackerFactory, BybitTrackerFactory>();
+            services.AddSingleton<IBybitUserClientProvider, BybitUserClientProvider>(x =>
+            new BybitUserClientProvider(
+                x.GetRequiredService<HttpClient>(),
+                x.GetRequiredService<ILoggerFactory>(),
+                x.GetRequiredService<IOptions<BybitRestOptions>>(),
+                x.GetRequiredService<IOptions<BybitSocketOptions>>()));
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedClient);
