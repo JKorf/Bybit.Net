@@ -76,6 +76,13 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToInsurancePoolUpdatesAsync(string contractAsset, Action<DataEvent<BybitInsuranceUpdate[]>> handler, CancellationToken ct = default)
+        {
+            var subscription = new BybitSubscription<BybitInsuranceUpdate[]>(_logger, [$"insurance.{contractAsset}"], handler);
+            return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
     }
 }

@@ -97,5 +97,13 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidationUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to insurance pool updates
+        /// </summary>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToInsurancePoolUpdatesAsync(Action<DataEvent<BybitInsuranceUpdate[]>> handler, CancellationToken ct = default);
     }
 }
