@@ -414,17 +414,15 @@ namespace Bybit.Net.Clients.V5
         #region Get Delivery Price
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Category category, string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
-            if (category != Category.Linear && category != Category.Inverse)
-                throw new ArgumentException("Invalid category; should be Linear or Inverse");
-
             var parameters = new ParameterCollection()
             {
                 { "category", EnumConverter.GetString(category) }
             };
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("baseCoin", baseAsset);
+            parameters.AddOptionalParameter("settleCoin", settleAsset);
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("cursor", cursor);
 

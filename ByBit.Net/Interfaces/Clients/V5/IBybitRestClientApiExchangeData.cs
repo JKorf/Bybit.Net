@@ -41,11 +41,12 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category</param>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="baseAsset">Filter by base asset, for example `ETH`</param>
+        /// <param name="settleAsset">Filter by settlement asset</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Category category, string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get funding rate history
