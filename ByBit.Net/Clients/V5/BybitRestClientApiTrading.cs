@@ -916,8 +916,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptional("baseCoin", baseAsset);
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("orderLinkId", clientOrderId);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("cursor", cursor);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/order/history", BybitExchange.RateLimiter.BybitRest, 1, true);
@@ -936,8 +936,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptional("symbol", symbol);
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("orderLinkId", clientOrderId);
-            parameters.AddOptionalMillisecondsString("startTime", startTime);
-            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("cursor", cursor);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/spread/execution/list", BybitExchange.RateLimiter.BybitRest, 1, true);
