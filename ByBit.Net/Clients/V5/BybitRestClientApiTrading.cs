@@ -828,9 +828,9 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("symbol", symbol);
             parameters.AddEnum("side", side);
             parameters.AddEnum("orderType", type);
-            parameters.Add("qty", quantity);
+            parameters.Add("qty", quantity.ToString(CultureInfo.InvariantCulture));
             parameters.AddEnum("timeInForce", timeInForce);
-            parameters.AddOptional("price", price);
+            parameters.AddOptional("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptional("orderLinkId", clientOrderId);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/spread/order/create", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
@@ -848,8 +848,8 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("symbol", symbol);
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("orderLinkId", clientOrderId);
-            parameters.AddOptional("qty", quantity);
-            parameters.AddOptional("price", price);
+            parameters.AddOptional("qty", quantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptional("price", price?.ToString(CultureInfo.InvariantCulture));
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/spread/order/amend", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;
