@@ -106,5 +106,16 @@ namespace Bybit.Net.Clients.V5
         /// <param name="ct">Cancelation token</param>
         /// <returns></returns>
         Task<WebCallResult> DeleteSubAccountApiKeyAsync(string? apiKey = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get deposit address for a sub account, only available for master account
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/deposit/sub-deposit-addr" /></para>
+        /// </summary>
+        /// <param name="subAccountId"></param>
+        /// <param name="asset"></param>
+        /// <param name="network"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitDepositAddress>> GetSubAccountDepositAddressAsync(string subAccountId, string asset, string network, CancellationToken ct = default);
     }
 }

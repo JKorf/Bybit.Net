@@ -205,5 +205,22 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Get SubAccount Deposit Address
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitDepositAddress>> GetSubAccountDepositAddressAsync(string subAccountId, string asset, string network, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("subMemberId", subAccountId);
+            parameters.Add("coin", asset);
+            parameters.Add("chainType", network);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/asset/deposit/query-sub-member-address", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BybitDepositAddress>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }
