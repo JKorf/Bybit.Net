@@ -26,6 +26,11 @@ namespace Bybit.Net.Objects.Models.V5
     public record BybitDeposit
     {
         /// <summary>
+        /// Deposit id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
         /// Asset
         /// </summary>
         [JsonPropertyName("coin")]

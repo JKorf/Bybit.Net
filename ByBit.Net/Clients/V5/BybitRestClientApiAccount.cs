@@ -672,6 +672,8 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<WebCallResult<BybitDeposits>> GetDepositsAsync(
             string? asset = null,
+            string? id = null,
+            string? transactionId = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             int? limit = null,
@@ -680,6 +682,8 @@ namespace Bybit.Net.Clients.V5
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalParameter("id", id);
+            parameters.AddOptionalParameter("txID", transactionId);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
