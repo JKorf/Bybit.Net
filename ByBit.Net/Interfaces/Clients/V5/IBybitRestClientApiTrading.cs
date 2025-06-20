@@ -222,7 +222,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="quantity">Quantity</param>
         /// <param name="price">Price</param>
         /// <param name="isLeverage">Is leverage</param>
-        /// <param name="triggerDirection">Conditional order diraction</param>
+        /// <param name="triggerDirection">Conditional order direction</param>
         /// <param name="orderFilter">Order filter</param>
         /// <param name="triggerPrice">Trigger price</param>
         /// <param name="triggerBy">Trigger by</param>
@@ -293,7 +293,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult> SetDisconnectCancelAllAsync(int windowSeconds, ProductType? productType = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get DiconnectCancelAll/dcp configuration
+        /// Get DisconnectCancelAll/dcp configuration
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/dcp-info" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
@@ -516,6 +516,76 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BybitResponse<BybitSpreadUserTrade>>> GetSpreadUserTradesAsync(string? symbol = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Calculate margin changes for an order before placing it
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/order/pre-check-order" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="side">Order side</param>
+        /// <param name="type">Order type</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="price">Price</param>
+        /// <param name="isLeverage">Is leverage</param>
+        /// <param name="triggerDirection">Conditional order direction</param>
+        /// <param name="orderFilter">Order filter</param>
+        /// <param name="triggerPrice">Trigger price</param>
+        /// <param name="triggerBy">Trigger by</param>
+        /// <param name="orderIv">Order implied volatility</param>
+        /// <param name="timeInForce">Time in force</param>
+        /// <param name="positionIdx">Position idx</param>
+        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="takeProfitOrderType"></param>
+        /// <param name="takeProfit">Take profit price</param>
+        /// <param name="takeProfitLimitPrice"></param>        
+        /// <param name="stopLossOrderType"></param>
+        /// <param name="stopLoss">Stop loss price</param>
+        /// <param name="stopLossLimitPrice"></param>        
+        /// <param name="takeProfitTriggerBy">Take profit trigger</param>
+        /// <param name="stopLossTriggerBy">Stop loss trigger</param>
+        /// <param name="reduceOnly">Is reduce only</param>
+        /// <param name="closeOnTrigger">Close on trigger</param>
+        /// <param name="marketMakerProtection">Market maker protection</param>
+        /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
+        /// <param name="selfMatchPreventionType">Self match prevention type</param>
+        /// <param name="marketUnit">The unit for qty when creating spot market orders for unified trading account</param>
+        /// <param name="slippageToleranceType">Slippage tolerance Type for market orders</param>
+        /// <param name="slippageTolerance">Slippage tolerance value</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BybitPreCheckResult>> PreCheckOrderAsync(Category category,
+            string symbol,
+            OrderSide side,
+            NewOrderType type,
+            decimal quantity,
+            decimal? price = null,
+            bool? isLeverage = null,
+            TriggerDirection? triggerDirection = null,
+            OrderFilter? orderFilter = null,
+            decimal? triggerPrice = null,
+            TriggerType? triggerBy = null,
+            decimal? orderIv = null,
+            TimeInForce? timeInForce = null,
+            PositionIdx? positionIdx = null,
+            string? clientOrderId = null,
+            OrderType? takeProfitOrderType = null,
+            decimal? takeProfit = null,
+            decimal? takeProfitLimitPrice = null,
+            OrderType? stopLossOrderType = null,
+            decimal? stopLoss = null,
+            decimal? stopLossLimitPrice = null,
+            TriggerType? takeProfitTriggerBy = null,
+            TriggerType? stopLossTriggerBy = null,
+            bool? reduceOnly = null,
+            bool? closeOnTrigger = null,
+            bool? marketMakerProtection = null,
+            StopLossTakeProfitMode? stopLossTakeProfitMode = null,
+            SelfMatchPreventionType? selfMatchPreventionType = null,
+            MarketUnit? marketUnit = null,
+            SlippageToleranceType? slippageToleranceType = null,
+            decimal? slippageTolerance = null,
+            CancellationToken ct = default);
 
     }
 }

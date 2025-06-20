@@ -142,6 +142,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Trading.GetOpenSpreadOrdersAsync(), "GetOpenSpreadOrders", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.Trading.GetClosedSpreadOrdersAsync(), "GetClosedSpreadOrders", nestedJsonProperty: "result");
             await tester.ValidateAsync(client => client.V5Api.Trading.GetSpreadUserTradesAsync(), "GetSpreadUserTrades", nestedJsonProperty: "result");
+            await tester.ValidateAsync(client => client.V5Api.Trading.PreCheckOrderAsync(Category.Inverse, "ETHUSDT", OrderSide.Buy, NewOrderType.Market, 1), "PreCheckOrder", nestedJsonProperty: "result");
         }
 
         [Test]

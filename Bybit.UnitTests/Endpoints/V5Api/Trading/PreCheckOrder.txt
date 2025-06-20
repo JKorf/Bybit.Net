@@ -1,0 +1,17 @@
+POST
+/v5/order/pre-check
+true
+{
+    "retCode": 0,
+    "retMsg": "OK",
+    "result": {
+        "orderId": "24920bdb-4019-4e37-ad1c-876e3a855ac3",
+        "orderLinkId": "test129",
+        "preImrE4": 30,
+        "preMmrE4": 21,
+        "postImrE4": 357,
+        "postMmrE4": 294
+    },
+    "retExtInfo": {},
+    "time": 1749541599589
+}
