@@ -109,5 +109,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("contractAddress")]
         public string ContractAddress { get; set; } = string.Empty;
+        /// <summary>
+        /// Confirmations required for unlocking
+        /// </summary>
+        [JsonPropertyName("safeConfirmNumber")]
+        public int? RequiredConfirmations { get; set; }
     }
 }

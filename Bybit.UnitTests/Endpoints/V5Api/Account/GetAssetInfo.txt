@@ -12,28 +12,32 @@ true
                 "remainAmount": "1020000",
                 "chains": [
                     {
-                        "chainType": "ETH",
-                        "confirmation": "10000",
-                        "withdrawFee": "0.005",
-                        "depositMin": "0.01",
-                        "withdrawMin": "0.02",
+                        "chainType": "Ethereum",
+                        "confirmation": "6",
+                        "withdrawFee": "3",
+                        "depositMin": "0",
+                        "withdrawMin": "3",
                         "chain": "ETH",
                         "chainDeposit": "1",
                         "chainWithdraw": "1",
                         "minAccuracy": "8",
-                        "withdrawPercentageFee": "0.022"
+                        "withdrawPercentageFee": "0",
+                        "contractAddress": "0x3c3a81e81dc49a522a592e7622a7e711c06bf354",
+                        "safeConfirmNumber": "65"
                     },
                     {
-                        "chainType": "Arbitrum One",
-                        "confirmation": "10",
-                        "withdrawFee": "0.01",
-                        "depositMin": "0.001",
-                        "withdrawMin": "0.1",
-                        "chain": "ARBI",
+                        "chainType": "Mantle Network",
+                        "confirmation": "100",
+                        "withdrawFee": "0",
+                        "depositMin": "0",
+                        "withdrawMin": "10",
+                        "chain": "MANTLE",
                         "chainDeposit": "1",
                         "chainWithdraw": "1",
                         "minAccuracy": "8",
-                        "withdrawPercentageFee": "0"
+                        "withdrawPercentageFee": "0",
+                        "contractAddress": "",
+                        "safeConfirmNumber": "100"
                     }
                 ]
             }
