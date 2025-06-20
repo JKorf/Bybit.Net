@@ -163,6 +163,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.2.0 - 20 Jun 2025
+    * Added restClient.V5Api.Trading.PreCheckOrderAsync endpoint
+    * Added RequiredConfirmations property to BybitUserAssetInfo model
+    * Added Id property to BybitDeposit model
+    * Added id and transactionId parameters to restClient.V5Api.Account.GetDepositsAsync endpoint
+
 * Version 5.1.0 - 02 Jun 2025
     * Updated CryptoExchange.Net to version 9.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added (I)BybitUserClientProvider allowing for easy client management when handling multiple users
