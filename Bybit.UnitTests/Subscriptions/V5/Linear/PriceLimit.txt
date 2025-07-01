@@ -1,0 +1,12 @@
+> { "req_id": "|1|", "op": "subscribe", "args": [ "priceLimit.BTCUSDT" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "69b552d7-f8cf-46bc-a6ee-c6ed331ce668", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+	"topic": "priceLimit.BTCUSDT",
+	"data": {
+		"symbol": "BTCUSDT",
+		"buyLmt": "2.436558",
+		"sellLmt": "2.118747"
+	},
+	"ts": 1750963471934
+}
