@@ -84,6 +84,31 @@ namespace Bybit.Net.Objects.Models.V5
     }
 
     /// <summary>
+    /// Current price limits that an order has.
+    /// </summary>
+    [SerializationModel]
+    public record BybitOrderPriceLimit
+    {
+        /// <summary>
+        /// Symbol name
+        /// </summary>
+        [JsonPropertyName("symbol")]
+        public string Symbol { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Highest possible bid price
+        /// </summary>
+        [JsonPropertyName("buyLmt")]
+        public decimal BuyLimit { get; set; }
+
+        /// <summary>
+        /// Lowest possible Ask Price
+        /// </summary>
+        [JsonPropertyName("sellLmt")]
+        public decimal SellLimit { get; set; }
+    }
+
+    /// <summary>
     /// Lot size filter info
     /// </summary>
     [SerializationModel]

@@ -81,6 +81,7 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitGreeks[]>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitSpreadTickerUpdate>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitInsuranceUpdate[]>))]
+    [JsonSerializable(typeof(BybitSpotSocketEvent<BybitOrderPriceLimit>))]
 
     [JsonSerializable(typeof(BybitResult<BybitResult>))]
     [JsonSerializable(typeof(BybitResult<BybitTakeProfitStopLossMode>))]

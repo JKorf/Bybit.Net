@@ -23,6 +23,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync<BybitLeveragedTokenTicker>((client, handler) => client.V5SpotApi.SubscribeToLeveragedTokenTickerUpdatesAsync("BTCUSDT", handler), "LeveragedTicker");
             await tester.ValidateAsync<BybitLeveragedTokenNav>((client, handler) => client.V5SpotApi.SubscribeToLeveragedTokenNavUpdatesAsync("BTCUSDT", handler), "LeveragedNav");
             await tester.ValidateAsync<BybitTrade[]>((client, handler) => client.V5SpotApi.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
+            await tester.ValidateAsync<BybitOrderPriceLimit>((client, handler) => client.V5SpotApi.SubscribeToPriceLimitAsync("BTCUSDT", handler), "PriceLimit");
         }
 
         [Test]
@@ -50,6 +51,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync<BybitLinearTickerUpdate>((client, handler) => client.V5LinearApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
             await tester.ValidateAsync<BybitTrade[]>((client, handler) => client.V5LinearApi.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
             await tester.ValidateAsync<BybitLiquidationUpdate[]>((client, handler) => client.V5LinearApi.SubscribeToAllLiquidationUpdatesAsync("ETHUSDT", handler), "Liquidations");
+            await tester.ValidateAsync<BybitOrderPriceLimit>((client, handler) => client.V5LinearApi.SubscribeToPriceLimitAsync("BTCUSDT", handler), "PriceLimit");
         }
 
         [Test]
