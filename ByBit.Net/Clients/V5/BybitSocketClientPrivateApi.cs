@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.SharedApis;
 using System.Drawing;
 using System.Linq;
+using System.Net.WebSockets;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -58,7 +59,7 @@ namespace Bybit.Net.Clients.V5
             SetDedicatedConnection(BaseAddress.AppendPath("/v5/trade"), true);
         }
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
+        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
         private Query GetPingQuery(SocketConnection connection)

@@ -14,6 +14,7 @@ using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Interfaces;
+using System.Net.WebSockets;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -39,7 +40,7 @@ namespace Bybit.Net.Clients.V5
             MessageSendSizeLimit = 21000;
         }
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
+        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
         /// <inheritdoc />
