@@ -163,6 +163,22 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.3.0 - 15 Jul 2025
+    * Updated CryptoExchange.Net to version 9.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added restClient.V5Api.ExchangeData.GetOrderPriceLimitAsync endpoint and socketClient SubscribeToPriceLimitUpdatesAsync subscriptions
+    * Added OpenFee/CloseFee to restClient.V5Api.Trading.GetClosedProfitLossAsync response model
+    * Added AverageEntryPrice property to restClient.V5Api.Trading.GetDeliveryHistoryAsync response model
+    * Added FeeV2 and FeeAsset to BybitSpreadUserTrade model
+    * Added FeeV2 to BybitUserTrade model
+    * Added InitialMarginByMarkPrice and MaintenanceMarginByMarkPrice properties to BybitPosition model
+    * Added Georgia environment
+    * Added restClient.V5Api.ExchangeData.GetSystemStatusAsync endpoint
+    * Added socketClient.V5SpotApi.SubscribeToSystemStatusUpdatesAsync subscription
+    * Updated BybitBalance model with ByMarkPrice properties
+    * Updated TransactionLogType enum values
+    * Fixed issue in restClient.V5Api.Account.RequestDemoFundsAsync request signing
+    * Fixed socketClient.V5PrivateApi.SubscribeToSpreadUserTradeUpdatesAsync update model
+
 * Version 5.2.0 - 20 Jun 2025
     * Added restClient.V5Api.Trading.PreCheckOrderAsync endpoint
     * Added RequiredConfirmations property to BybitUserAssetInfo model
