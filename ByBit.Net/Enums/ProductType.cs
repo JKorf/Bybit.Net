@@ -13,17 +13,22 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Options
         /// </summary>
-        [Map("OPTIONS")]
+        [Map("OPTIONS", "3")]
         Options,
         /// <summary>
         /// Derivatives
         /// </summary>
-        [Map("DERIVATIVES")]
+        [Map("DERIVATIVES", "1")]
         Derivatives,
         /// <summary>
         /// Spot
         /// </summary>
-        [Map("SPOT")]
-        Spot
+        [Map("SPOT", "2")]
+        Spot,
+        /// <summary>
+        /// Spread
+        /// </summary>
+        [Map("SPREAD", "4")]
+        Spread
     }
 }

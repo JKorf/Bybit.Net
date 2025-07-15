@@ -1,0 +1,136 @@
+GET
+/v5/system/status
+false
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {
+        "list": [
+            {
+                "id": "4d95b2a0-587f-11f0-bcc9-56f28c94d6ea",
+                "title": "t06",
+                "state": "completed",
+                "begin": "1751596902000",
+                "end": "1751597011000",
+                "href": "",
+                "serviceTypes": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "product": [
+                    1,
+                    2
+                ],
+                "uidSuffix": [],
+                "maintainType": 1,
+                "env": 1
+            },
+            {
+                "id": "19bb6f82-587f-11f0-bcc9-56f28c94d6ea",
+                "title": "t05",
+                "state": "completed",
+                "begin": "1751254200000",
+                "end": "1751254500000",
+                "href": "",
+                "serviceTypes": [
+                    1,
+                    4
+                ],
+                "product": [
+                    1
+                ],
+                "uidSuffix": [],
+                "maintainType": 3,
+                "env": 1
+            },
+            {
+                "id": "25f4bc8c-533c-11f0-bcc9-56f28c94d6ea",
+                "title": "t04",
+                "state": "completed",
+                "begin": "1751017967000",
+                "end": "1751018096000",
+                "href": "",
+                "serviceTypes": [
+                    2
+                ],
+                "product": [
+                    2
+                ],
+                "uidSuffix": [],
+                "maintainType": 1,
+                "env": 1
+            },
+            {
+                "id": "679a9c5f-533b-11f0-bcc9-56f28c94d6ea",
+                "title": "t03",
+                "state": "completed",
+                "begin": "1751017532000",
+                "end": "1751017658000",
+                "href": "",
+                "serviceTypes": [
+                    5,
+                    4
+                ],
+                "product": [
+                    1,
+                    2
+                ],
+                "uidSuffix": [],
+                "maintainType": 2,
+                "env": 1
+            },
+            {
+                "id": "c8990f96-5332-11f0-8fd3-c241b123dd9e",
+                "title": "t02",
+                "state": "completed",
+                "begin": "1751013817000",
+                "end": "1751013890000",
+                "href": "",
+                "serviceTypes": [
+                    5,
+                    4,
+                    3,
+                    2,
+                    1
+                ],
+                "product": [
+                    4,
+                    3,
+                    2,
+                    1
+                ],
+                "uidSuffix": [],
+                "maintainType": 2,
+                "env": 1
+            },
+            {
+                "id": "f9d6842d-5331-11f0-8fd3-c241b123dd9e",
+                "title": "t01",
+                "state": "completed",
+                "begin": "1751012688000",
+                "end": "1751012760000",
+                "href": "",
+                "serviceTypes": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "product": [
+                    1,
+                    2,
+                    3,
+                    4
+                ],
+                "uidSuffix": [],
+                "maintainType": 3,
+                "env": 2
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1751858399649
+}

@@ -350,5 +350,15 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">Category. Defaults to Linear</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BybitOrderPriceLimit>> GetOrderPriceLimitAsync(string symbol, Category? category = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the system status messages
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/system-status" /></para>
+        /// </summary>
+        /// <param name="id">Filter by id</param>
+        /// <param name="status">Filter by status</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSystemStatus[]>> GetSystemStatusAsync(string? id = null, SystemStatus? status = null, CancellationToken ct = default);
+
     }
 }

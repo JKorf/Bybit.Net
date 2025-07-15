@@ -590,5 +590,21 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Get System Status
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSystemStatus[]>> GetSystemStatusAsync(string? id = null, SystemStatus? status = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("id", id);
+            parameters.AddOptionalEnum("state", status);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/system/status", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var result = await _baseClient.SendAsync<BybitList<BybitSystemStatus>>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitSystemStatus[]>(result.Data?.List);
+        }
+
+        #endregion
+
     }
 }
