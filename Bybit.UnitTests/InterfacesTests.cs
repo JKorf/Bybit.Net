@@ -60,7 +60,9 @@ namespace Bybit.UnitTests
                         }
                     }
 
-                    if (method.Name == "SubscribeToLiquidationUpdatesAsync" || method.Name == "SubscribeToAllLiquidationUpdatesAsync")
+                    if (method.Name == "SubscribeToLiquidationUpdatesAsync" 
+                        || method.Name == "SubscribeToAllLiquidationUpdatesAsync"
+                        || method.Name == "SubscribeToPriceLimitUpdatesAsync")
                         continue;
                     
                     ClassicAssert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.Name}");

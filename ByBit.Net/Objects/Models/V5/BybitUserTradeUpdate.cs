@@ -19,7 +19,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Category
         /// </summary>
-
         [JsonPropertyName("category")]
         public Category Category { get; set; }
     }

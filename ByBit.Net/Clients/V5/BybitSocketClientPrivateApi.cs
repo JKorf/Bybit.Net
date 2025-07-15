@@ -164,9 +164,9 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToSpreadUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToSpreadUserTradeUpdatesAsync(Action<DataEvent<BybitSpreadUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitUserTradeUpdate[]>(_logger, new[] { "spread.execution" }, handler, true);
+            var subscription = new BybitSubscription<BybitSpreadUserTradeUpdate[]>(_logger, new[] { "spread.execution" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 

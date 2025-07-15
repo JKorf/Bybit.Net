@@ -1,0 +1,39 @@
+> { "req_id": "|5|", "op": "auth", "args": [ "|4|", "|2|", "|3|" ] }
+< { "success": true, "ret_msg": "", "op": "auth", "conn_id": "cejreaspqfh3sjdnldmg-p", "req_id": "|5|" }
+> { "req_id": "|1|", "op": "subscribe", "args": [ "spread.execution" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+     "topic": "spread.execution",
+     "id": "cvqes8141ilt347i9l20",
+     "creationTime": 1744104992226,
+     "data": [
+          {
+               "category": "combination",
+               "symbol": "SOLUSDT_SOL/USDT",
+               "closedSize": "",
+               "execFee": "",
+               "execId": "82c82077-0caa-5304-894d-58a50a342bd7",
+               "parentExecId": "",
+               "execPrice": "20.9848",
+               "execQty": "2",
+               "execType": "Trade",
+               "execValue": "",
+               "feeRate": "",
+               "markPrice": "",
+               "leavesQty": "0",
+               "orderId": "5e010c35-2b44-4f03-8081-8fa31fb73376",
+               "orderLinkId": "",
+               "orderPrice": "21",
+               "orderQty": "2",
+               "orderType": "Limit",
+               "side": "Buy",
+               "execTime": "1744104992220",
+               "isLeverage": "",
+               "isMaker": false,
+               "seq": 241321,
+               "createType": "CreateByUser",
+               "execPnl": ""
+          }
+     ]
+}

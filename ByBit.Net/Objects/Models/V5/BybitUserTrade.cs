@@ -29,7 +29,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Side
         /// </summary>
-
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
@@ -50,13 +49,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Order type
         /// </summary>
-
         [JsonPropertyName("orderType")]
         public OrderType? OrderType { get; set; }
         /// <summary>
         /// Stop order type
         /// </summary>
-
         [JsonPropertyName("stopOrderType")]
         public StopOrderType? StopOrderType { get; set; }
         /// <summary>
@@ -64,6 +61,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("execFee")]
         public decimal? Fee { get; set; }
+        /// <summary>
+        /// Spot leg transaction fee, only works for execType=FutureSpread
+        /// </summary>
+        [JsonPropertyName("execFeeV2")]
+        public decimal? FeeV2 { get; set; }
         /// <summary>
         /// Trade id
         /// </summary>
@@ -94,7 +96,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// Trade type
         /// </summary>
         [JsonPropertyName("execType")]
-
         public TradeType? TradeType { get; set; }
         /// <summary>
         /// Is maker

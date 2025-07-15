@@ -116,6 +116,16 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("execFee")]
         public decimal Fee { get; set; }
         /// <summary>
+        /// Trade fee
+        /// </summary>
+        [JsonPropertyName("execFeeV2")]
+        public decimal FeeV2 { get; set; }
+        /// <summary>
+        /// Fee asset
+        /// </summary>
+        [JsonPropertyName("feeCurrency")]
+        public string FeeAsset { get; set; } = string.Empty;
+        /// <summary>
         /// Trade id
         /// </summary>
         [JsonPropertyName("execId")]
