@@ -45,6 +45,8 @@ namespace Bybit.Net
              "Netherlands" => Netherlands,
              "Hongkong" => HongKong,
              "Turkey" => Turkey,
+             "Kazakhstan" => Kazakhstan,
+             "Georgia" => Georgia,
              "demo" => DemoTrading,
              "" => Live,
              null => Live,
@@ -55,7 +57,7 @@ namespace Bybit.Net
         /// Available environment names
         /// </summary>
         /// <returns></returns>
-        public static string[] All => [Live.Name, Testnet.Name, Netherlands.Name, HongKong.Name, Turkey.Name, DemoTrading.Name];
+        public static string[] All => [Live.Name, Testnet.Name, Netherlands.Name, HongKong.Name, Turkey.Name, Kazakhstan.Name, Georgia.Name, DemoTrading.Name];
 
         /// <summary>
         /// Live environment
@@ -96,6 +98,22 @@ namespace Bybit.Net
             = new BybitEnvironment("Turkey",
                                      BybitApiAddresses.Turkey.RestBaseAddress,
                                      BybitApiAddresses.Turkey.SocketBaseAddress);
+
+        /// <summary>
+        /// Live environment for users from Kazakhstan
+        /// </summary>
+        public static BybitEnvironment Kazakhstan { get; }
+            = new BybitEnvironment("Kazakhstan",
+                                     BybitApiAddresses.Kazakhstan.RestBaseAddress,
+                                     BybitApiAddresses.Kazakhstan.SocketBaseAddress);
+
+        /// <summary>
+        /// Live environment for users from Georgia
+        /// </summary>
+        public static BybitEnvironment Georgia { get; }
+            = new BybitEnvironment("Georgia",
+                                     BybitApiAddresses.Georgia.RestBaseAddress,
+                                     BybitApiAddresses.Georgia.SocketBaseAddress);
 
         /// <summary>
         /// Demo trading environment, needs separate API key. See https://bybit-exchange.github.io/docs/v5/demo

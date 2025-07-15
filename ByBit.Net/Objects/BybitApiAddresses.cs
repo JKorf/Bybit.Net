@@ -69,6 +69,15 @@
         };
 
         /// <summary>
+        /// The addresses to connect to the Bybit main net for users from Georgia
+        /// </summary>
+        public static BybitApiAddresses Georgia = new BybitApiAddresses
+        {
+            RestBaseAddress = "https://api.bybitgeorgia.ge",
+            SocketBaseAddress = "wss://stream.bybitgeorgia.ge"
+        };
+
+        /// <summary>
         /// The addresses to connect to the Bybit demo trading environment
         /// </summary>
         public static BybitApiAddresses DemoTrading = new BybitApiAddresses
