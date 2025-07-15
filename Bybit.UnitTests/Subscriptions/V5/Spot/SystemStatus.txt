@@ -1,0 +1,30 @@
+> { "req_id": "|1|", "op": "subscribe", "args": [ "system.status" ] }
+< { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|1|", "op": "subscribe" }
+= 
+{
+    "topic": "system.status",
+    "ts": 1751858399649,
+    "data": [
+        {
+            "id": "4d95b2a0-587f-11f0-bcc9-56f28c94d6ea",
+            "title": "t06",
+            "state": "completed",
+            "begin": "1751596902000",
+            "end": "1751597011000",
+            "href": "",
+            "serviceTypes": [
+                2,
+                3,
+                4,
+                5
+            ],
+            "product": [
+                1,
+                2
+            ],
+            "uidSuffix": [],
+            "maintainType": 1,
+            "env": 1
+        }
+    ]
+}

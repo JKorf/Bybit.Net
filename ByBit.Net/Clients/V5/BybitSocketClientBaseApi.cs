@@ -106,5 +106,12 @@ namespace Bybit.Net.Clients.V5
                 });
             return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToSystemStatusUpdatesAsync(Action<DataEvent<BybitSystemStatus[]>> handler, CancellationToken ct = default)
+        {
+            var subscription = new BybitSubscription<BybitSystemStatus[]>(_logger, ["system.status"], handler);
+            return await SubscribeAsync(BaseAddress + "/v5/public/misc/status", subscription, ct).ConfigureAwait(false);
+        }
     }
 }

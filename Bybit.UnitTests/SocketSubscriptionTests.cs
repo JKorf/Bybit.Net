@@ -28,6 +28,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync<BybitLeveragedTokenNav>((client, handler) => client.V5SpotApi.SubscribeToLeveragedTokenNavUpdatesAsync("BTCUSDT", handler), "LeveragedNav");
             await tester.ValidateAsync<BybitTrade[]>((client, handler) => client.V5SpotApi.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
             await tester.ValidateAsync<BybitOrderPriceLimit>((client, handler) => client.V5SpotApi.SubscribeToPriceLimitUpdatesAsync("BTCUSDT", handler), "PriceLimit");
+            await tester.ValidateAsync<BybitSystemStatus[]>((client, handler) => client.V5SpotApi.SubscribeToSystemStatusUpdatesAsync(handler), "SystemStatus");
         }
 
         [Test]

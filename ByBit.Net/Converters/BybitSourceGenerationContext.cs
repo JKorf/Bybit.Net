@@ -26,6 +26,7 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitOrderPriceLimit>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitSpreadUserTradeUpdate[]>))]
     [JsonSerializable(typeof(BybitResult<BybitList<BybitSystemStatus>>))]
+    [JsonSerializable(typeof(BybitSpotSocketEvent<BybitSystemStatus[]>))]
 
     // End manual defined attributes
 

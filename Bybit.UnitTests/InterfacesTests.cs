@@ -62,6 +62,7 @@ namespace Bybit.UnitTests
 
                     if (method.Name == "SubscribeToLiquidationUpdatesAsync" 
                         || method.Name == "SubscribeToAllLiquidationUpdatesAsync"
+                        || method.Name == "SubscribeToSystemStatusUpdatesAsync"
                         || method.Name == "SubscribeToPriceLimitUpdatesAsync")
                         continue;
                     

@@ -59,6 +59,12 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
 
-        
+        /// <summary>
+        /// Subscribe to system status updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/system/system-status" /></para>
+        /// </summary>
+        /// <param name="handler">Update handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        Task<CallResult<UpdateSubscription>> SubscribeToSystemStatusUpdatesAsync(Action<DataEvent<BybitSystemStatus[]>> handler, CancellationToken ct = default);
     }
 }
