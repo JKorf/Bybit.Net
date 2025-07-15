@@ -29,10 +29,20 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("accountIMRate")]
         public decimal? AccountInitialMarginRate { get; set; }
         /// <summary>
+        /// Account initial margin rate by mark price
+        /// </summary>
+        [JsonPropertyName("accountIMRateByMp")]
+        public decimal? AccountInitialMarginRateByMarkPrice { get; set; }
+        /// <summary>
         /// Account maintenance margin rate
         /// </summary>
         [JsonPropertyName("accountMMRate")]
         public decimal? AccountMaintenanceMarginRate { get; set; }
+        /// <summary>
+        /// Account maintenance margin rate by mark price
+        /// </summary>
+        [JsonPropertyName("accountMMRateByMp")]
+        public decimal? AccountMaintenanceMarginRateByMarkPrice { get; set; }
         /// <summary>
         /// Account equity in USD
         /// </summary>
@@ -59,15 +69,25 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("totalPerpUPL")]
         public decimal? TotalPerpUnrealizedPnl { get; set; }
         /// <summary>
-        /// Iniital margin in USD
+        /// Initial margin in USD
         /// </summary>
         [JsonPropertyName("totalInitialMargin")]
         public decimal? TotalInitialMargin { get; set; }
+        /// <summary>
+        /// Initial margin in USD by mark price
+        /// </summary>
+        [JsonPropertyName("totalInitialMarginByMp")]
+        public decimal? TotalInitialMarginByMarkPrice { get; set; }
         /// <summary>
         /// Maintenance margin in USD
         /// </summary>
         [JsonPropertyName("totalMaintenanceMargin")]
         public decimal? TotalMaintenanceMargin { get; set; }
+        /// <summary>
+        /// Maintenance margin in USD by mark price
+        /// </summary>
+        [JsonPropertyName("totalMaintenanceMarginByMp")]
+        public decimal? TotalMaintenanceMarginByMarkPrice { get; set; }
         /// <summary>
         /// Asset info
         /// </summary>
