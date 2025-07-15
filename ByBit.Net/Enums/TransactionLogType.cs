@@ -204,5 +204,97 @@ namespace Bybit.Net.Enums
         /// </summary>
         [Map("LOANS_ASSET_REDEMPTION")]
         LoansAssetRedemption,
+        /// <summary>
+        /// </summary>
+        [Map("LOANS_PLEDGE_ASSET")]
+        LoansPledgeAsset,
+        /// <summary>
+        /// </summary>
+        [Map("FLEXIBLE_STAKING_REFUND")]
+        FlexibleStakingRefund,
+        /// <summary>
+        /// </summary>
+        [Map("FIXED_STAKING_REFUND")]
+        FixedStakingRefund,
+        /// <summary>
+        /// </summary>
+        [Map("BONUS_TRANSFER_IN")]
+        BonusTransferIn,
+        /// <summary>
+        /// </summary>
+        [Map("BONUS_TRANSFER_OUT")]
+        BonusTransferOut,
+        /// <summary>
+        /// </summary>
+        [Map("PEF_TRANSFER_IN")]
+        PefTransferIn,
+        /// <summary>
+        /// </summary>
+        [Map("PEF_TRANSFER_OUT")]
+        PefTransferOut,
+        /// <summary>
+        /// </summary>
+        [Map("PEF_PROFIT_SHARE")]
+        PefProfitShare,
+        /// <summary>
+        /// </summary>
+        [Map("ONCHAINEARN_SUBSCRIPTION")]
+        OnChainEarnTransferOut,
+        /// <summary>
+        /// </summary>
+        [Map("ONCHAINEARN_REDEMPTION")]
+        OnChainEarnTransferIn,
+        /// <summary>
+        /// </summary>
+        [Map("ONCHAINEARN_REFUND")]
+        OnChainEarnRefund,
+        /// <summary>
+        /// </summary>
+        [Map("STRUCTURE_PRODUCT_SUBSCRIPTION")]
+        StructureProductTransferOut,
+        /// <summary>
+        /// </summary>
+        [Map("STRUCTURE_PRODUCT_REFUND")]
+        StructureProductTransferIn,
+        /// <summary>
+        /// </summary>
+        [Map("CLASSIC_WEALTH_MANAGEMENT_SUBSCRIPTION")]
+        ClassicWealthManagementTransferIn,
+        /// <summary>
+        /// </summary>
+        [Map("PREMIMUM_WEALTH_MANAGEMENT_SUBSCRIPTION")]
+        PremiumWealthManagementTransferIn,
+        /// <summary>
+        /// </summary>
+        [Map("PREMIMUM_WEALTH_MANAGEMENT_REFUND")]
+        PremiumWealthManagementRefund,
+        /// <summary>
+        /// </summary>
+        [Map("LIQUIDITY_MINING_SUBSCRIPTION")]
+        LiquidityMiningTransferOut,
+        /// <summary>
+        /// </summary>
+        [Map("LIQUIDITY_MINING_REFUND")]
+        LiquidityMiningRefund,
+        /// <summary>
+        /// </summary>
+        [Map("PWM_SUBSCRIPTION")]
+        PwmTransferOut,
+        /// <summary>
+        /// </summary>
+        [Map("PWM_REFUND")]
+        PwmRefund,
+        /// <summary>
+        /// </summary>
+        [Map("DEFI_INVESTMENT_SUBSCRIPTION")]
+        DefiInvestmentTransferOut,
+        /// <summary>
+        /// </summary>
+        [Map("DEFI_INVESTMENT_REFUND")]
+        DefiInvestmentRefund,
+        /// <summary>
+        /// </summary>
+        [Map("DEFI_INVESTMENT_REDEMPTION")]
+        DefiInvestmentTransferIn
     }
 }
