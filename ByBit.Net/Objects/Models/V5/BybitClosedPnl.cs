@@ -101,5 +101,15 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("updatedTime")]
         public DateTime UpdateTime { get; set; }
+        /// <summary>
+        /// Open fee
+        /// </summary>
+        [JsonPropertyName("openFee")]
+        public decimal? OpenFee { get; set; }
+        /// <summary>
+        /// Close fee
+        /// </summary>
+        [JsonPropertyName("closeFee")]
+        public decimal? CloseFee { get; set; }
     }
 }
