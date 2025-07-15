@@ -105,10 +105,20 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("positionIM")]
         public decimal? InitialMargin { get; set; }
         /// <summary>
+        /// Initial margin by mark price
+        /// </summary>
+        [JsonPropertyName("positionIMByMp")]
+        public decimal? InitialMarginByMarkPrice { get; set; }
+        /// <summary>
         /// Maintenance margin
         /// </summary>
         [JsonPropertyName("positionMM")]
         public decimal? MaintenanceMargin { get; set; }
+        /// <summary>
+        /// Maintenance margin by mark price
+        /// </summary>
+        [JsonPropertyName("positionMMByMp")]
+        public decimal? MaintenanceMarginByMarkPrice { get; set; }
         /// <summary>
         /// Take profit / stop loss price
         /// </summary>
