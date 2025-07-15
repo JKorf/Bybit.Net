@@ -105,5 +105,23 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToInsurancePoolUpdatesAsync(Action<DataEvent<BybitInsuranceUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to order price limit updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/order-price-limit" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        Task<CallResult<UpdateSubscription>> SubscribeToPriceLimitUpdatesAsync(string symbol, Action<DataEvent<BybitOrderPriceLimit>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to order price limit updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/order-price-limit" /></para>
+        /// </summary>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
+        /// <param name="handler">Data handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        Task<CallResult<UpdateSubscription>> SubscribeToPriceLimitUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOrderPriceLimit>> handler, CancellationToken ct = default);
     }
 }

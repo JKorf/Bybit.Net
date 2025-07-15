@@ -342,5 +342,13 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BybitSpreadTrade[]>> GetSpreadRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Get order price limits
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/order-price-limit" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol name</param>
+        /// <param name="category">Category. Defaults to Linear</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitOrderPriceLimit>> GetOrderPriceLimitAsync(string symbol, Category? category = null, CancellationToken ct = default);
     }
 }

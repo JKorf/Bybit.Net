@@ -1,0 +1,15 @@
+GET
+/v5/market/price-limit
+false
+{
+    "retCode": 0,
+    "retMsg": "",
+    "result": {
+        "symbol": "BTCUSDT",
+        "buyLmt": "105878.10",
+        "sellLmt": "103781.60",
+        "ts": "1750302284491"
+    },
+    "retExtInfo": {},
+    "time": 1750302285376
+}

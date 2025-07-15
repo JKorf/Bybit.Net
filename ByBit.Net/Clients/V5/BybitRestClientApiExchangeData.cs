@@ -577,5 +577,18 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Order Price
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitOrderPriceLimit>> GetOrderPriceLimitAsync(string symbol, Category? category = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptionalEnum("category", category);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/market/price-limit", BybitExchange.RateLimiter.BybitRest, 1, false);
+            return await _baseClient.SendAsync<BybitOrderPriceLimit>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

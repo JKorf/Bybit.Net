@@ -103,6 +103,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpreadOrderBookAsync("123"), "GetSpreadOrderBook", nestedJsonProperty: "result", ignoreProperties: ["cts"]);
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpreadTickersAsync("123"), "GetSpreadTickers", nestedJsonProperty: "result.list", useSingleArrayItem: true);
             await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetSpreadRecentTradesAsync("123"), "GetSpreadRecentTrades", nestedJsonProperty: "result.list");
+            await tester.ValidateAsync(client => client.V5Api.ExchangeData.GetOrderPriceLimitAsync("123"), "GetOrderPriceLimit", nestedJsonProperty: "result");
         }
 
         [Test]
