@@ -21,6 +21,7 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(BybitResult<BybitResponse<BybitClosedSpreadOrder>>))]
     [JsonSerializable(typeof(BybitResult<BybitResponse<BybitSpreadUserTrade>>))]
     [JsonSerializable(typeof(BybitResult<BybitPreCheckResult>))]
+    [JsonSerializable(typeof(BybitDemoFundsRequest[]))]
 
     // End manual defined attributes
 

@@ -1139,7 +1139,7 @@ namespace Bybit.Net.Clients.V5
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("adjustType", addOrReduce == null ? null : addOrReduce == true ? 0 : 1);
-            parameters.AddOptionalParameter("utaDemoApplyMoney", funds.Select(f => new { coin = f.Key, amountStr = f.Value.ToString(CultureInfo.InvariantCulture) }));
+            parameters.AddOptionalParameter("utaDemoApplyMoney", funds.Select(f => new BybitDemoFundsRequest { Asset = f.Key, Quantity = f.Value }).ToArray());
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/demo-apply-money", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
