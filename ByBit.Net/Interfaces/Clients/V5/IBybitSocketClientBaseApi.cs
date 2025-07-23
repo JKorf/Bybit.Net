@@ -60,6 +60,24 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribe to RPI order book updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/orderbook-rpi" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
+        /// <param name="updateHandler">Update handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        Task<CallResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(string symbol, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to RPI order book updates
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/orderbook-rpi" /></para>
+        /// </summary>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
+        /// <param name="updateHandler">Update handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        Task<CallResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribe to system status updates
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/system/system-status" /></para>
         /// </summary>

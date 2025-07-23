@@ -138,6 +138,7 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(BybitResult<BybitLeverageTokenRedemption>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitOptionTickerUpdate>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitOrderbook>))]
+    [JsonSerializable(typeof(BybitSpotSocketEvent<BybitRpiOrderbook>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitLiquidation>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitLinearTickerUpdate>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<object>))]

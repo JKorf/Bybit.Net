@@ -113,5 +113,16 @@ namespace Bybit.Net.Clients.V5
             var subscription = new BybitSubscription<BybitSystemStatus[]>(_logger, ["system.status"], handler);
             return await SubscribeAsync(BaseAddress + "/v5/public/misc/status", subscription, ct).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public virtual Task<CallResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(string symbol, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default)
+            => SubscribeToRpiOrderbookUpdatesAsync(new string[] { symbol }, updateHandler, ct);
+
+        /// <inheritdoc />
+        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default)
+        {
+            var subscription = new BybitSubscription<BybitRpiOrderbook>(_logger, symbols.Select(s => $"orderbook.rpi.{s}").ToArray(), updateHandler);
+            return await SubscribeAsync(BaseAddress + _baseEndpoint, subscription, ct).ConfigureAwait(false);
+        }
     }
 }
