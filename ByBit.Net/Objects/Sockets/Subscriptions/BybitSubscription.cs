@@ -13,24 +13,21 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
     {
         private string[] _topics;
         private Action<DataEvent<T>> _handler;
-        public override HashSet<string> ListenerIdentifiers { get; set; }
 
         public BybitSubscription(ILogger logger, string[] topics, Action<DataEvent<T>> handler, bool auth = false) : base(logger, auth)
         {
             _topics = topics;
             _handler = handler;
-            ListenerIdentifiers = new HashSet<string>(topics);
+
+            MessageMatcher = MessageMatcher.Create<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
         }
 
-        public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BybitSpotSocketEvent<T>> message)
         {
-            var data = (BybitSpotSocketEvent<T>)message.Data;
-            var splitIndex = data.Topic.LastIndexOf('.');
-            _handler?.Invoke(message.As(data.Data, data.Topic, splitIndex == -1 ? null : data.Topic.Substring(splitIndex + 1), string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(data.Timestamp));
+            var splitIndex = message.Data.Topic.LastIndexOf('.');
+            _handler?.Invoke(message.As(message.Data.Data, message.Data.Topic, splitIndex == -1 ? null : message.Data.Topic.Substring(splitIndex + 1), string.Equals(message.Data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(message.Data.Timestamp));
             return CallResult.SuccessResult;
         }
-
-        public override Type? GetMessageType(IMessageAccessor message) => typeof(BybitSpotSocketEvent<T>);
 
         public override Query? GetSubQuery(SocketConnection connection)
         {

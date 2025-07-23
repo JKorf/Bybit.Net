@@ -9,19 +9,17 @@ namespace Bybit.Net.Objects.Sockets.Queries
 {
     internal class BybitQuery : Query<BybitQueryResponse>
     {
-        public override HashSet<string> ListenerIdentifiers { get; set; }
-
         public BybitQuery(string op, params object[]? args) : base(new BybitRequestMessage { RequestId = ExchangeHelpers.NextId().ToString(), Operation = op, Args = args?.ToArray() }, false, 1)
         {
-            ListenerIdentifiers = new HashSet<string>() { ((BybitRequestMessage)Request).RequestId };
+            MessageMatcher = MessageMatcher.Create<BybitQueryResponse>(((BybitRequestMessage)Request).RequestId, HandleMessage);
         }
 
-        public override CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DataEvent<BybitQueryResponse> message)
+        public CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DataEvent<BybitQueryResponse> message)
         {
             if (!message.Data.Success)
-                return new CallResult<BybitQueryResponse>(new ServerError(message.Data.Message));
+                return new CallResult<BybitQueryResponse>(new ServerError(message.Data.Message), message.OriginalData);
 
-            return new CallResult<BybitQueryResponse>(message.Data);
+            return message.ToCallResult();
         }
     }
 }
