@@ -1252,5 +1252,20 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Set Price Limit Behavior
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> SetPriceLimitBehaviorAsync(Category category, bool allowModifyPrice, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("category", category);
+            parameters.Add("modifyEnable", allowModifyPrice);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/account/set-limit-px-action", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
     }
 }

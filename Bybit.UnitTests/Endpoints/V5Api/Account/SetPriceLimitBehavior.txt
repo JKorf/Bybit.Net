@@ -1,0 +1,10 @@
+POST
+/v5/account/set-limit-px-action
+true
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {},
+    "retExtInfo": {},
+    "time": 1753255927952
+}

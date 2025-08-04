@@ -693,5 +693,14 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitTransferable>> GetTransferableAsync(IEnumerable<string> assets, CancellationToken ct = default);
+
+        /// <summary>
+        /// Set the behavior when placing an order exceeding the price limit
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/set-price-limit" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="allowModifyPrice">True: allow the system to adjust the price to nearest allowed, False: fail the order</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult> SetPriceLimitBehaviorAsync(Category category, bool allowModifyPrice, CancellationToken ct = default);
     }
 }
