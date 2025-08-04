@@ -164,6 +164,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.5.0 - 04 Aug 2025
+    * Updated CryptoExchange.Net to version 9.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added support for multi-symbol Shared socket subscriptions
+    * Updated socket client connecting to live environment for public data when BybitEnvironment is set to DemoTrading
+    * Fixed shared GetBalancesAsync and SubscribeToBalanceUpdatesAsync Available property not correct
+    * Added restClient.V5Api.Account.SetPriceLimitBehaviorAsync endpoint
+
 * Version 5.4.0 - 23 Jul 2025
     * Updated CryptoExchange.Net to version 9.3.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Updated websocket message matching
