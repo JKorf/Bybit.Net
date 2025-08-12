@@ -1,5 +1,6 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
         public CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DataEvent<BybitQueryResponse> message)
         {
             if (!message.Data.Success)
-                return new CallResult<BybitQueryResponse>(new ServerError(message.Data.Message), message.OriginalData);
+                return new CallResult<BybitQueryResponse>(new ServerError(ErrorInfo.Unknown with { Message = message.Data.Message }), message.OriginalData);
 
             return message.ToCallResult();
         }

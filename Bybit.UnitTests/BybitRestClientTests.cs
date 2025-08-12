@@ -27,7 +27,7 @@ namespace Bybit.UnitTests
             var resultObj = new BybitResult<object>()
             {
                 ReturnCode = 400001,
-                ReturnMessage = "Error occured"
+                ReturnMessage = "Error occurred"
             };
 
             TestHelpers.SetResponse(client, JsonSerializer.Serialize(resultObj));
@@ -38,8 +38,8 @@ namespace Bybit.UnitTests
             // assert
             ClassicAssert.IsFalse(result.Success);
             ClassicAssert.IsNotNull(result.Error);
-            Assert.That(result.Error!.Code == 400001);
-            Assert.That(result.Error.Message == "Error occured");
+            Assert.That(result.Error!.ErrorCode == "400001");
+            Assert.That(result.Error.Message == "Error occurred");
         }
 
         [TestCase()]
@@ -65,7 +65,7 @@ namespace Bybit.UnitTests
             var resultObj = new BybitResult<object>()
             {
                 ReturnCode = 400001,
-                ReturnMessage = "Error occured"
+                ReturnMessage = "Error occurred"
             };
 
             TestHelpers.SetResponse(client, JsonSerializer.Serialize(resultObj), System.Net.HttpStatusCode.BadRequest);
@@ -76,8 +76,8 @@ namespace Bybit.UnitTests
             // assert
             ClassicAssert.IsFalse(result.Success);
             ClassicAssert.IsNotNull(result.Error);
-            Assert.That(result.Error!.Code == 400001);
-            Assert.That(result.Error.Message == "Error occured");
+            Assert.That(result.Error!.ErrorCode == "400001");
+            Assert.That(result.Error.Message == "Error occurred");
         }
 
         [Test]

@@ -22,6 +22,7 @@ using CryptoExchange.Net.SharedApis;
 using System.Drawing;
 using System.Linq;
 using System.Net.WebSockets;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -48,7 +49,7 @@ namespace Bybit.Net.Clients.V5
                 GetPingQuery,
                 (connection, result) =>
                 {
-                    if (result.Error?.Message.Equals("Query timeout") == true)
+                    if (result.Error?.ErrorType == ErrorType.Timeout)
                     {
                         // Ping timeout, reconnect
                         _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
@@ -122,7 +123,7 @@ namespace Bybit.Net.Clients.V5
                 var key = authProvider.ApiKey;
                 var sign = authProvider.Sign($"GET/realtime{expireTime}");
 
-                return Task.FromResult<Query?>(new BybitRequestQuery<object>("auth", null, new object[]
+                return Task.FromResult<Query?>(new BybitRequestQuery<object>(this, "auth", null, new object[]
                 {
                 key,
                 expireTime,
@@ -247,6 +248,7 @@ namespace Bybit.Net.Clients.V5
         {
             var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
             var query = new BybitRequestQuery<BybitOrderId>(
+                this, 
                 "order.create",
                 new Dictionary<string, string>
                 {
@@ -311,6 +313,7 @@ namespace Bybit.Net.Clients.V5
         {
             var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
             var query = new BybitRequestQuery<BybitOrderId>(
+                this, 
                 "order.amend",
                 new Dictionary<string, string>
                 {
@@ -351,6 +354,7 @@ namespace Bybit.Net.Clients.V5
         {
             var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
             var query = new BybitRequestQuery<BybitOrderId>(
+                this, 
                 "order.cancel",
                 new Dictionary<string, string>
                 {
@@ -385,6 +389,7 @@ namespace Bybit.Net.Clients.V5
             };
 
             var query = new BybitBatchOrderRequestQuery(
+                this, 
                 "order.create-batch",
                 new Dictionary<string, string>
                 {
@@ -402,13 +407,13 @@ namespace Bybit.Net.Clients.V5
             foreach (var item in resultData.Data!)
             {
                 if (item.Code != 0)
-                    result.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, item.Message!)));
+                    result.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, GetErrorInfo(item.Code, item.Message!))));
                 else
                     result.Add(new CallResult<BybitBatchOrderId>(item.Data!));
             }
 
             if (result.All(x => !x.Success))
-                return resultData.AsErrorWithData(new ServerError("All orders failed"), result.ToArray());
+                return resultData.AsErrorWithData(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All orders failed")), result.ToArray());
 
             return resultData.As(result.ToArray());
         }
@@ -428,6 +433,7 @@ namespace Bybit.Net.Clients.V5
             };
 
             var query = new BybitBatchOrderRequestQuery(
+                this, 
                 "order.amend-batch",
                 new Dictionary<string, string>
                 {
@@ -455,6 +461,7 @@ namespace Bybit.Net.Clients.V5
             };
 
             var query = new BybitBatchOrderRequestQuery(
+                this, 
                 "order.cancel-batch",
                 new Dictionary<string, string>
                 {
