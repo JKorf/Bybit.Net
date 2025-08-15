@@ -36,16 +36,7 @@ namespace Bybit.Net.Clients.V5
         /// </summary>
         protected readonly string _wsPublicAddress;
 
-        protected override ErrorCollection ErrorMapping { get; } = new ErrorCollection(
-            [
-                new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid topic/category", "10404"),
-                new ErrorInfo(ErrorType.InvalidParameter, false, "Duplicate request id", "20006"),
-
-                new ErrorInfo(ErrorType.RequestRateLimited, false, "Too many requests", "20003"),
-
-                new ErrorInfo(ErrorType.ConnectionRateLimited, false, "Too many connections", "10003"),
-            ]
-        );
+        protected override ErrorCollection ErrorMapping => BybitErrors.WebsocketErrors;
 
         internal BybitSocketClientBaseApi(ILogger log, BybitSocketOptions options, string baseEndpoint)
             : base(log, options.Environment.SocketBaseAddress, options, options.V5Options)
