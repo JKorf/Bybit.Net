@@ -2,6 +2,7 @@
 using Bybit.Net.Objects;
 using Bybit.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -45,7 +46,8 @@ namespace Bybit.Net.UnitTests
             var result = await CreateClient().V5Api.ExchangeData.GetSpotTickersAsync("TST_TST", default);
 
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Error.Code, Is.EqualTo(10001));
+            Assert.That(result.Error.ErrorCode, Is.EqualTo("10001"));
+            Assert.That(result.Error.ErrorType, Is.EqualTo(ErrorType.UnknownSymbol));
         }
 
         [Test]

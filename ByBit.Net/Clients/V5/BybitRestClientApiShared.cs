@@ -3,6 +3,7 @@ using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace Bybit.Net.Clients.V5
         {
             var interval = (KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(KlineInterval), interval))
-                return new ExchangeWebResult<SharedKline[]>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -318,7 +319,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeResult<SharedSpotOrder>(Exchange, null, default);
 
             if (!orders.Data.List.Any())
-                return new ExchangeWebResult<SharedSpotOrder>(Exchange, new ServerError("Order not found"));
+                return new ExchangeWebResult<SharedSpotOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.List.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
@@ -567,7 +568,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeResult<SharedSpotOrder>(Exchange, null, default);
 
             if (!orders.Data.List.Any())
-                return new ExchangeWebResult<SharedSpotOrder>(Exchange, new ServerError("Order not found"));
+                return new ExchangeWebResult<SharedSpotOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.List.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
@@ -622,7 +623,7 @@ namespace Bybit.Net.Clients.V5
 
             var asset = assets.Data.Assets.SingleOrDefault();
             if (asset == null)
-                return assets.AsExchangeError<SharedAsset>(Exchange, new ServerError("Asset not found"));
+                return assets.AsExchangeError<SharedAsset>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownAsset, "Asset not found")));
 
             return assets.AsExchangeResult(Exchange, TradingMode.Spot, new SharedAsset(asset.Name)
             {
@@ -834,7 +835,7 @@ namespace Bybit.Net.Clients.V5
 
             var symbol = resultTicker.Data.List.SingleOrDefault();
             if (symbol == null)
-                return resultTicker.AsExchangeError<SharedFuturesTicker>(Exchange, new ServerError("Symbol not found"));
+                return resultTicker.AsExchangeError<SharedFuturesTicker>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, "Symbol not found")));
 
             return resultTicker.AsExchangeResult(Exchange,
                 category == Category.Linear ?
@@ -991,7 +992,7 @@ namespace Bybit.Net.Clients.V5
         {
             var interval = (KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(KlineInterval), interval))
-                return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, FuturesTradingModes);
             if (validationError != null)
@@ -1049,7 +1050,7 @@ namespace Bybit.Net.Clients.V5
         {
             var interval = (KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(KlineInterval), interval))
-                return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, FuturesTradingModes);
             if (validationError != null)
@@ -1218,7 +1219,7 @@ namespace Bybit.Net.Clients.V5
 
             var order = orders.Data.List.SingleOrDefault();
             if (order == null)
-                return orders.AsExchangeError<SharedFuturesOrder>(Exchange, new ServerError("Order not found"));
+                return orders.AsExchangeError<SharedFuturesOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             return orders.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedFuturesOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicFuturesId, order.Symbol),
@@ -1265,7 +1266,7 @@ namespace Bybit.Net.Clients.V5
 
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
             if (symbol == null && ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset") == null)
-                return new ExchangeWebResult<SharedFuturesOrder[]>(Exchange, new ArgumentError("Either the Symbol request parameter or the SettleAsset exchange parameter is required"));
+                return new ExchangeWebResult<SharedFuturesOrder[]>(Exchange, ArgumentError.Invalid("SettleAsset", "Either the Symbol request parameter or the SettleAsset exchange parameter is required"));
 
             var orders = await Trading.GetOrdersAsync(
                 category,
@@ -1463,7 +1464,7 @@ namespace Bybit.Net.Clients.V5
 
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
             if (symbol == null && ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset") == null)
-                return new ExchangeWebResult<SharedPosition[]>(Exchange, new ArgumentError("Either the Symbol request parameter or the SettleAsset exchange parameter is required"));
+                return new ExchangeWebResult<SharedPosition[]>(Exchange, ArgumentError.Invalid("SettleAsset", "Either the Symbol request parameter or the SettleAsset exchange parameter is required"));
 
             var tradingMode = request.Symbol?.TradingMode ?? request.TradingMode ?? TradingMode.PerpetualLinear;
             var category = (tradingMode == TradingMode.PerpetualLinear || tradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
@@ -1535,7 +1536,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
 
             if (!orders.Data.List.Any())
-                return new ExchangeWebResult<SharedFuturesOrder>(Exchange, new ServerError("Order not found"));
+                return new ExchangeWebResult<SharedFuturesOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.List.Single();
             return orders.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedFuturesOrder(
@@ -1603,7 +1604,7 @@ namespace Bybit.Net.Clients.V5
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, null, default);
 
             if (!result.Data.List.Any())
-                return new ExchangeWebResult<SharedPositionModeResult>(Exchange, new ServerError("Position not found"));
+                return new ExchangeWebResult<SharedPositionModeResult>(Exchange, new ServerError(new ErrorInfo(ErrorType.NoPosition, "Position not found")));
 
             return result.AsExchangeResult(Exchange, tradingMode, new SharedPositionModeResult(result.Data.List.Single().PositionIdx == PositionIdx.OneWayMode ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode));
         }
@@ -1695,7 +1696,7 @@ namespace Bybit.Net.Clients.V5
 
             var symbol = result.Data.List.SingleOrDefault();
             if (symbol == null)
-                return result.AsExchangeError<SharedFee>(Exchange, new ServerError("Not found"));
+                return result.AsExchangeError<SharedFee>(Exchange, new ServerError(new ErrorInfo(ErrorType.Unknown, "Not found")));
 
             // Return
             return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedFee(symbol.MakerFeeRate * 100, symbol.TakerFeeRate * 100));
@@ -1745,7 +1746,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeResult<SharedSpotTriggerOrder>(Exchange, null, default);
 
             if (!orders.Data.List.Any())
-                return new ExchangeWebResult<SharedSpotTriggerOrder>(Exchange, new ServerError("Order not found"));
+                return new ExchangeWebResult<SharedSpotTriggerOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.List.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTriggerOrder(
@@ -1859,7 +1860,7 @@ namespace Bybit.Net.Clients.V5
                 return orders.AsExchangeResult<SharedFuturesTriggerOrder>(Exchange, null, default);
 
             if (!orders.Data.List.Any())
-                return new ExchangeWebResult<SharedFuturesTriggerOrder>(Exchange, new ServerError("Order not found"));
+                return new ExchangeWebResult<SharedFuturesTriggerOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.List.Single();
             return orders.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedFuturesTriggerOrder(

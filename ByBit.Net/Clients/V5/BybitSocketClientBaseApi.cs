@@ -16,6 +16,7 @@ using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Interfaces;
 using System.Net.WebSockets;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -35,6 +36,7 @@ namespace Bybit.Net.Clients.V5
         /// </summary>
         protected readonly string _wsPublicAddress;
 
+        protected override ErrorMapping ErrorMapping => BybitErrors.WebsocketErrors;
 
         internal BybitSocketClientBaseApi(ILogger log, BybitSocketOptions options, string baseEndpoint)
             : base(log, options.Environment.SocketBaseAddress, options, options.V5Options)

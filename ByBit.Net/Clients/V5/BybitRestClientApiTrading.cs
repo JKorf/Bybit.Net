@@ -13,6 +13,7 @@ using Bybit.Net.Objects.Internal;
 using System.Linq;
 using CryptoExchange.Net.RateLimiting.Guards;
 using System.Drawing;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -214,16 +215,9 @@ namespace Bybit.Net.Clients.V5
             var request = _definitions.GetOrCreate("PlaceOrderBatch" + categoryIdentifier, HttpMethod.Post, "v5/order/create-batch", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
-            if (!result || result.Data == null)
-            {
-                if (result.Error?.Code == 404)
-                    return result.AsError<CallResult<BybitBatchOrderId>[]>(new ServerError(404, "Received 404 response; make sure your account is UTA PRO"));
-
-                return result.As<CallResult<BybitBatchOrderId>[]>(default);
-            }
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<CallResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<CallResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, _baseClient.GetErrorInfo(result.Data.ReturnCode, result.Data.ReturnMessage)));
 
             var resultList = new List<CallResult<BybitBatchOrderId>>(); 
             var resultItems = result.Data.Result.List.ToArray();
@@ -232,10 +226,13 @@ namespace Bybit.Net.Clients.V5
             {                
                 var resultItem = resultItems[index++];
                 if (item.Code != 0)
-                    resultList.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, item.Message!)));
+                    resultList.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, _baseClient.GetErrorInfo(item.Code, item.Message!))));
                 else
                     resultList.Add(new CallResult<BybitBatchOrderId>(resultItem));
             }
+
+            if (resultList.All(x => !x.Success))
+                return result.AsErrorWithData<CallResult<BybitBatchOrderId>[]>(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All order failed")), resultList.ToArray());
 
             return result.As<CallResult<BybitBatchOrderId>[]>(resultList.ToArray());
         }
@@ -317,7 +314,7 @@ namespace Bybit.Net.Clients.V5
                 return result.As<BybitBatchResult<BybitBatchOrderId>[]>(default);
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, _baseClient.GetErrorInfo(result.Data.ReturnCode, result.Data.ReturnMessage)));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
             var resultItems = result.Data.Result.List.ToArray();
@@ -396,7 +393,7 @@ namespace Bybit.Net.Clients.V5
                 return result.As<BybitBatchResult<BybitBatchOrderId>[]>(default);
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, result.Data.ReturnMessage));
+                return result.AsError<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(result.Data.ReturnCode, _baseClient.GetErrorInfo(result.Data.ReturnCode, result.Data.ReturnMessage)));
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
             var resultItems = result.Data.Result.List.ToArray(); 

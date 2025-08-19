@@ -16,6 +16,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -34,7 +35,7 @@ namespace Bybit.Net.Clients.V5
                 x => new BybitQuery("ping", null) { RequestTimeout = TimeSpan.FromSeconds(5) },
                 (connection, result) =>
                 {
-                    if (result.Error?.Message.Equals("Query timeout") == true)
+                    if (result.Error?.ErrorType == ErrorType.Timeout)
                     {
                         // Ping timeout, reconnect
                         _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
