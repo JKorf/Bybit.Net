@@ -9,7 +9,7 @@ namespace Bybit.Net
 {
     internal static class BybitErrors
     {
-        public static ErrorCollection RestErrors { get; } = new ErrorCollection(
+        public static ErrorMapping RestErrors { get; } = new ErrorMapping(
             [
 
                 new ErrorInfo(ErrorType.InvalidTimestamp, false, "Request expired", "-1"),
@@ -99,6 +99,9 @@ namespace Bybit.Net
                 new ErrorInfo(ErrorType.NoPosition, false, "You can't set margin without an open position", "110033"),
                 new ErrorInfo(ErrorType.NoPosition, false, "There is no net position", "110034"),
 
+                new ErrorInfo(ErrorType.MaxPosition, false, "Total value of positions and open orders reached", "3400139"),
+                new ErrorInfo(ErrorType.MaxPosition, false, "Max position of token reached", "170010", "170011", "175017"),
+
                 new ErrorInfo(ErrorType.DuplicateClientOrderId, false, "Duplicate client order id", "110072", "170141"),
 
                 new ErrorInfo(ErrorType.InvalidStopParameters, false, "Trigger price should be lower than current price", "110092"),
@@ -132,7 +135,7 @@ namespace Bybit.Net
                 ]
         );
 
-        public static ErrorCollection WebsocketErrors { get; } = new ErrorCollection(
+        public static ErrorMapping WebsocketErrors { get; } = new ErrorMapping(
             [
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid topic/category", "10404"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Duplicate request id", "20006"),

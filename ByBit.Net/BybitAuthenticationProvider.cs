@@ -1,15 +1,15 @@
-﻿using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Globalization;
-using Bybit.Net.Clients.V5;
-using System.Text;
+﻿using Bybit.Net.Clients.V5;
 using Bybit.Net.Objects.Options;
+using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Http;
+using System.Text;
 
 namespace Bybit.Net
 {
@@ -21,50 +21,34 @@ namespace Bybit.Net
         {
         }
 
-        public override void AuthenticateRequest(
-            RestApiClient apiClient,
-            Uri uri,
-            HttpMethod method,
-            ref IDictionary<string, object>? uriParameters,
-            ref IDictionary<string, object>? bodyParameters,
-            ref Dictionary<string, string>? headers,
-            bool auth,
-            ArrayParametersSerialization arraySerialization,
-            HttpMethodParameterPosition parameterPosition,
-            RequestBodyFormat requestBodyFormat)
+        public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
-            if (!auth)
+            if (!request.Authenticated)
                 return;
 
-            IDictionary<string, object> parameters;
-            if (parameterPosition == HttpMethodParameterPosition.InUri)
-            {
-                uriParameters ??= new Dictionary<string, object>();
-                parameters = uriParameters;
-            }
-            else
-            {
-                bodyParameters ??= new Dictionary<string, object>();
-                parameters = bodyParameters;
-            }
             var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
-           
-            var signPayload = parameterPosition == HttpMethodParameterPosition.InUri ? uri.SetParameters(parameters, arraySerialization).Query.Replace("?", "") : requestBodyFormat == RequestBodyFormat.FormData ? parameters.ToFormData() : _messageSerializer.Serialize(parameters);
             var recvWindow = ((BybitRestOptions)apiClient.ClientOptions).ReceiveWindow.TotalMilliseconds;
-            var payload = timestamp + _credentials.Key + recvWindow + signPayload;
-
-            string sign;
-            if (_credentials.CredentialType == ApiCredentialsType.Hmac)
-                sign = SignHMACSHA256(payload);
+            string payload;
+            if (request.ParameterPosition == HttpMethodParameterPosition.InUri)
+            {
+                var queryString = request.GetQueryString();
+                payload = timestamp + _credentials.Key + recvWindow + queryString;
+                request.SetQueryString(queryString);
+            }
             else
-                sign = SignRSASHA256(Encoding.UTF8.GetBytes(payload), SignOutputType.Base64);
+            {
+                var requestBody = request.BodyFormat == RequestBodyFormat.FormData ? request.BodyParameters.ToFormData() : GetSerializedBody(_messageSerializer, request.BodyParameters);
+                payload = timestamp + _credentials.Key + recvWindow + requestBody;
+                request.SetBodyContent(requestBody);
+            }
 
-            headers ??= new Dictionary<string, string>();
-            headers.Add("X-BAPI-API-KEY", _credentials.Key);
-            headers.Add("X-BAPI-SIGN", sign);
-            headers.Add("X-BAPI-SIGN-TYPE", "2");
-            headers.Add("X-BAPI-TIMESTAMP", timestamp);
-            headers.Add("X-BAPI-RECV-WINDOW", recvWindow.ToString());
+            var signature = _credentials.CredentialType == ApiCredentialsType.Hmac ? SignHMACSHA256(payload) : SignRSASHA256(Encoding.UTF8.GetBytes(payload), SignOutputType.Base64);
+
+            request.Headers.Add("X-BAPI-API-KEY", _credentials.Key);
+            request.Headers.Add("X-BAPI-SIGN", signature);
+            request.Headers.Add("X-BAPI-SIGN-TYPE", "2");
+            request.Headers.Add("X-BAPI-TIMESTAMP", timestamp);
+            request.Headers.Add("X-BAPI-RECV-WINDOW", recvWindow.ToString());
         }
 
         public string Sign(string toSign) => SignHMACSHA256(toSign);

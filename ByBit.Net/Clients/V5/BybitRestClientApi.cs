@@ -25,7 +25,7 @@ namespace Bybit.Net.Clients.V5
     {
         internal TimeSyncState _timeSyncState = new TimeSyncState("Bybit V5 API");
 
-        protected override ErrorCollection ErrorMapping => BybitErrors.RestErrors;
+        protected override ErrorMapping ErrorMapping => BybitErrors.RestErrors;
 
         public IBybitRestClientApiShared SharedClient => this;
 

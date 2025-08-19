@@ -36,7 +36,7 @@ namespace Bybit.Net.Clients.V5
         /// </summary>
         protected readonly string _wsPublicAddress;
 
-        protected override ErrorCollection ErrorMapping => BybitErrors.WebsocketErrors;
+        protected override ErrorMapping ErrorMapping => BybitErrors.WebsocketErrors;
 
         internal BybitSocketClientBaseApi(ILogger log, BybitSocketOptions options, string baseEndpoint)
             : base(log, options.Environment.SocketBaseAddress, options, options.V5Options)

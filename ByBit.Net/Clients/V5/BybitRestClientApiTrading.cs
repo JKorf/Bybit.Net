@@ -13,6 +13,7 @@ using Bybit.Net.Objects.Internal;
 using System.Linq;
 using CryptoExchange.Net.RateLimiting.Guards;
 using System.Drawing;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -229,6 +230,9 @@ namespace Bybit.Net.Clients.V5
                 else
                     resultList.Add(new CallResult<BybitBatchOrderId>(resultItem));
             }
+
+            if (resultList.All(x => !x.Success))
+                return result.AsErrorWithData<CallResult<BybitBatchOrderId>[]>(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All order failed")), resultList.ToArray());
 
             return result.As<CallResult<BybitBatchOrderId>[]>(resultList.ToArray());
         }
