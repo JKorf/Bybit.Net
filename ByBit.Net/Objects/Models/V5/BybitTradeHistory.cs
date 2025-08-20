@@ -34,7 +34,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Side
         /// </summary>
-
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
@@ -73,5 +72,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("iv")]
         public decimal? IndexIv { get; set; }
+        /// <summary>
+        /// Cross sequence
+        /// </summary>
+        [JsonPropertyName("seq")]
+        public long? Sequence { get; set; }
     }
 }
