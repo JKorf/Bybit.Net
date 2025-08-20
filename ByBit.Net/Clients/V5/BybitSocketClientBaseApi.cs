@@ -66,11 +66,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitOrderbook>(_logger, symbols.Select(s => $"orderbook.{depth}.{s}").ToArray(), x =>
-            {
-                x.Data.Timestamp = x.DataTime!.Value;
-                updateHandler(x);
-            });
+            var subscription = new BybitOrderBookSubscription(_logger, symbols.Select(s => $"orderbook.{depth}.{s}").ToArray(), updateHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 

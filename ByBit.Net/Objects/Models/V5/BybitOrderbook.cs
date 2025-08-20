@@ -36,6 +36,12 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
+        /// Timestamp the matching engine produced the data
+        /// </summary>
+        [JsonPropertyName("cts")]
+        [JsonConverter(typeof(DateTimeConverter))]
+        public DateTime MatchingEngineTimestamp { get; set; }
+        /// <summary>
         /// Update id
         /// </summary>
         [JsonPropertyName("u")]

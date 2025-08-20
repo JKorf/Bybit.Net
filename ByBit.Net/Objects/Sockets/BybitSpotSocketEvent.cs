@@ -14,5 +14,7 @@ namespace Bybit.Net.Objects.Sockets
         public DateTime Timestamp { get; set; }
         [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
+        [JsonPropertyName("cts")]
+        public DateTime? CTimestamp { get; set; }
     }
 }
