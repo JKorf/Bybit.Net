@@ -59,5 +59,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("RPI")]
         public bool? IsRpiTrade { get; set; }
+        /// <summary>
+        /// Cross sequence
+        /// </summary>
+        [JsonPropertyName("seq")]
+        public long? Sequence { get; set; }
     }
 }
