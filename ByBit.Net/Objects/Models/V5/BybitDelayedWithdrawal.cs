@@ -37,6 +37,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("FUND")]
         public BybitDelayedWithdrawalQuantity Fund { get; set; } = null!;
+        /// <summary>
+        /// Universal Trade Account
+        /// </summary>
+        [JsonPropertyName("UTA")]
+        public BybitDelayedWithdrawalQuantity Uta { get; set; } = null!;
     }
 
     /// <summary>
