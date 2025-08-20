@@ -164,6 +164,17 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.6.0 - 20 Aug 2025
+    * Updated CryptoExchange.Net to version 9.5.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added improved error parsing
+    * Added Sequence property for socketClient.V5SpotApi.SubscribeToTradeUpdatesAsync updates
+    * Added Sequence property to restClient.V5Api.ExchangeData.GetTradeHistoryAsync response
+    * Added MatchingEngineTimestamp to order book websocket updates and rest responses
+    * Added Uta to restClient.V5Api.Account.GetDelayedWithdrawQuantityAsync response model
+    * Updated restClient.V5Api.Account.WithdrawAsync accountType parameter type and is now mandatory
+    * Updated rest request sending too prevent duplicate parameter serialization
+    * Fixed socketClient.V5SpotApi.SubscribeToOrderbookUpdatesAsync update Timestamp property not being set
+
 * Version 5.5.0 - 04 Aug 2025
     * Updated CryptoExchange.Net to version 9.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added support for multi-symbol Shared socket subscriptions
