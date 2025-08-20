@@ -44,7 +44,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Account.GetAssetInfoAsync(), "GetAssetInfo", ignoreProperties: new List<string> { "chainDeposit", "chainWithdraw" });
             await tester.ValidateAsync(client => client.V5Api.Account.GetWithdrawalsAsync(), "GetWithdrawals", skipResponseValidation: true);
             await tester.ValidateAsync(client => client.V5Api.Account.GetDelayedWithdrawQuantityAsync("ETH"), "GetDelayedWithdrawQuantity");
-            await tester.ValidateAsync(client => client.V5Api.Account.WithdrawAsync("ETH", "ERC20", "123", 1), "Withdraw");
+            await tester.ValidateAsync(client => client.V5Api.Account.WithdrawAsync("ETH", "ERC20", "123", 1, WithdrawAccountType.Fund), "Withdraw");
             await tester.ValidateAsync(client => client.V5Api.Account.CancelWithdrawalAsync("123"), "CancelWithdrawal");
             await tester.ValidateAsync(client => client.V5Api.Account.GetApiKeyInfoAsync(), "GetApiKeyInfo");
             await tester.ValidateAsync(client => client.V5Api.Account.EditApiKeyAsync(), "EditApiKey");

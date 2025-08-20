@@ -817,9 +817,9 @@ namespace Bybit.Net.Clients.V5
             string network,
             string toAddress,
             decimal quantity,
+            WithdrawAccountType accountType,
             string? tag = null,
             bool? forceNetwork = null,
-            AccountType? accountType = null,
             bool? feeType = null,
             CancellationToken ct = default)
         {

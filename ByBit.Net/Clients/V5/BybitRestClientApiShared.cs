@@ -810,6 +810,7 @@ namespace Bybit.Net.Clients.V5
                 quantity: request.Quantity,
                 network: request.Network!,
                 tag: request.AddressTag,
+                accountType: WithdrawAccountType.FundAndUta,
                 ct: ct).ConfigureAwait(false);
             if (!withdrawal)
                 return withdrawal.AsExchangeResult<SharedId>(Exchange, null, default);
