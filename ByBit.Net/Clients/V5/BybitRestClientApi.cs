@@ -173,7 +173,12 @@ namespace Bybit.Net.Clients.V5
         protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
+            {
+                if (httpStatusCode == 401)
+                    return new ServerError(new ErrorInfo(ErrorType.Unauthorized, "Unauthorized"));
+
                 return new ServerError(ErrorInfo.Unknown, exception: exception);
+            }
 
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
             var msg = accessor.GetValue<string>(MessagePath.Get().Property("retMsg"));
