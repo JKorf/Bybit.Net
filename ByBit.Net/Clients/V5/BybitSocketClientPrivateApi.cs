@@ -35,6 +35,8 @@ namespace Bybit.Net.Clients.V5
         private static readonly MessagePath _opPath = MessagePath.Get().Property("op");
         private string _referer;
 
+        protected override ErrorMapping ErrorMapping => BybitErrors.WebsocketErrors;
+
         internal BybitSocketClientPrivateApi(ILogger logger, BybitSocketOptions options)
             : base(logger, options.Environment.SocketBaseAddress, options, options.V5Options)
         {
@@ -67,7 +69,7 @@ namespace Bybit.Net.Clients.V5
         {
             if (connection.ConnectionUri.AbsolutePath.EndsWith("private"))
             {
-                return new BybitQuery("ping", null) { RequestTimeout = TimeSpan.FromSeconds(5) };
+                return new BybitQuery(this, "ping", null) { RequestTimeout = TimeSpan.FromSeconds(5) };
             }
             else
             {
@@ -108,7 +110,7 @@ namespace Bybit.Net.Clients.V5
                 var key = authProvider.ApiKey;
                 var sign = authProvider.Sign($"GET/realtime{expireTime}");
 
-                return Task.FromResult<Query?>(new BybitQuery("auth", new object[]
+                return Task.FromResult<Query?>(new BybitQuery(this, "auth", new object[]
                 {
                 key,
                 expireTime,
@@ -153,56 +155,56 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BybitPositionUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitPositionUpdate[]>(_logger, new[] { "position" }, handler, true);
+            var subscription = new BybitSubscription<BybitPositionUpdate[]>(_logger, this, new[] { "position" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitUserTradeUpdate[]>(_logger, new[] { "execution" }, handler, true);
+            var subscription = new BybitSubscription<BybitUserTradeUpdate[]>(_logger, this, new[] { "execution" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToSpreadUserTradeUpdatesAsync(Action<DataEvent<BybitSpreadUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitSpreadUserTradeUpdate[]>(_logger, new[] { "spread.execution" }, handler, true);
+            var subscription = new BybitSubscription<BybitSpreadUserTradeUpdate[]>(_logger, this, new[] { "spread.execution" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToMinimalUserTradeUpdatesAsync(Action<DataEvent<BybitMinimalUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitMinimalUserTradeUpdate[]>(_logger, new[] { "execution.fast" }, handler, true);
+            var subscription = new BybitSubscription<BybitMinimalUserTradeUpdate[]>(_logger, this, new[] { "execution.fast" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitOrderUpdate[]>(_logger, new[] { "order" }, handler, true);
+            var subscription = new BybitSubscription<BybitOrderUpdate[]>(_logger, this, new[] { "order" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToSpreadOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitOrderUpdate[]>(_logger, new[] { "spread.order" }, handler, true);
+            var subscription = new BybitSubscription<BybitOrderUpdate[]>(_logger, this, new[] { "spread.order" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<BybitBalance[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitBalance[]>(_logger, new[] { "wallet" }, handler, true);
+            var subscription = new BybitSubscription<BybitBalance[]>(_logger, this, new[] { "wallet" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEvent<BybitGreeks[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitGreeks[]>(_logger, new[] { "greeks" }, handler, true);
+            var subscription = new BybitSubscription<BybitGreeks[]>(_logger, this, new[] { "greeks" }, handler, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 
@@ -210,7 +212,7 @@ namespace Bybit.Net.Clients.V5
         public async Task<CallResult<UpdateSubscription>> SubscribeToDisconnectCancelAllTopicAsync(ProductType productType, CancellationToken ct = default)
         {
             var product = productType == ProductType.Spot ? "spot" : productType == ProductType.Options ? "option" : "future";
-            var subscription = new BybitSubscription<object>(_logger, new[] { "dcp." + product }, x => { }, true);
+            var subscription = new BybitSubscription<object>(_logger, this, new[] { "dcp." + product }, x => { }, true);
             return await SubscribeAsync(BaseAddress.AppendPath("/v5/private"), subscription, ct).ConfigureAwait(false);
         }
 

@@ -66,7 +66,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default)
         {
-            var subscription = new BybitOrderBookSubscription(_logger, symbols.Select(s => $"orderbook.{depth}.{s}").ToArray(), updateHandler);
+            var subscription = new BybitOrderBookSubscription(_logger, this, symbols.Select(s => $"orderbook.{depth}.{s}").ToArray(), updateHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
@@ -77,7 +77,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitKlineUpdate[]>(_logger, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
+            var subscription = new BybitSubscription<BybitKlineUpdate[]>(_logger, this, symbols.Select(x => $"kline.{EnumConverter.GetString(interval)}.{x}").ToArray(), handler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
@@ -88,7 +88,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitLiquidation>(_logger, symbols.Select(x => $"liquidation.{x}").ToArray(), handler);
+            var subscription = new BybitSubscription<BybitLiquidation>(_logger, this, symbols.Select(x => $"liquidation.{x}").ToArray(), handler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
@@ -99,7 +99,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidationUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitLiquidationUpdate[]>(_logger, symbols.Select(x => $"allLiquidation.{x}").ToArray(), handler);
+            var subscription = new BybitSubscription<BybitLiquidationUpdate[]>(_logger, this, symbols.Select(x => $"allLiquidation.{x}").ToArray(), handler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
@@ -110,7 +110,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToPriceLimitUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOrderPriceLimit>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitOrderPriceLimit>(_logger, symbols.Select(x => $"priceLimit.{x}").ToArray(), 
+            var subscription = new BybitSubscription<BybitOrderPriceLimit>(_logger, this, symbols.Select(x => $"priceLimit.{x}").ToArray(), 
                 x => 
                 { 
                     x.Data.Timestamp = x.DataTime ?? x.ReceiveTime; 
@@ -122,7 +122,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToSystemStatusUpdatesAsync(Action<DataEvent<BybitSystemStatus[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitSystemStatus[]>(_logger, ["system.status"], handler);
+            var subscription = new BybitSubscription<BybitSystemStatus[]>(_logger, this, ["system.status"], handler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath("/v5/public/misc/status"), subscription, ct).ConfigureAwait(false);
         }
 
@@ -133,7 +133,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async virtual Task<CallResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitRpiOrderbook>(_logger, symbols.Select(s => $"orderbook.rpi.{s}").ToArray(), updateHandler);
+            var subscription = new BybitSubscription<BybitRpiOrderbook>(_logger, this, symbols.Select(s => $"orderbook.rpi.{s}").ToArray(), updateHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
     }

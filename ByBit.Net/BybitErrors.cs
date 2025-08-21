@@ -143,7 +143,21 @@ namespace Bybit.Net
                 new ErrorInfo(ErrorType.RateLimitRequest, false, "Too many requests", "20003"),
 
                 new ErrorInfo(ErrorType.RateLimitConnection, false, "Too many connections", "10003"),
-            ]
+            ],
+            [
+                new ErrorEvaluator("err", (code, msg) => {
+                    if (string.IsNullOrEmpty(msg))
+                        return ErrorInfo.Unknown;
+
+                    if (msg!.StartsWith("Invalid symbol"))
+                        return new ErrorInfo(ErrorType.UnknownSymbol, "Unknown symbol");
+
+                    if (msg!.Equals("API key is invalid."))
+                        return new ErrorInfo(ErrorType.Unauthorized, "Unauthorized");
+
+                    return ErrorInfo.Unknown;
+                })
+                ]
         );
 
     }

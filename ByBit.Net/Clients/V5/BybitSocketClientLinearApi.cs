@@ -31,7 +31,7 @@ namespace Bybit.Net.Clients.V5
             RegisterPeriodicQuery(
                 "Heartbeat",
                 TimeSpan.FromSeconds(20),
-                x => new BybitQuery("ping", null) { RequestTimeout = TimeSpan.FromSeconds(5) },
+                x => new BybitQuery(this, "ping", null) { RequestTimeout = TimeSpan.FromSeconds(5) },
                 (connection, result) =>
                 {
                     if (result.Error?.ErrorType == ErrorType.Timeout)
@@ -62,7 +62,7 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLinearTickerUpdate>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitLinearTickerUpdate>(_logger, symbols.Select(x => $"tickers.{x}").ToArray(), handler);
+            var subscription = new BybitSubscription<BybitLinearTickerUpdate>(_logger, this, symbols.Select(x => $"tickers.{x}").ToArray(), handler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
@@ -73,14 +73,14 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitTrade[]>(_logger, symbols.Select(s => $"publicTrade.{s}").ToArray(), handler);
+            var subscription = new BybitSubscription<BybitTrade[]>(_logger, this, symbols.Select(s => $"publicTrade.{s}").ToArray(), handler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToInsurancePoolUpdatesAsync(string contractAsset, Action<DataEvent<BybitInsuranceUpdate[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitSubscription<BybitInsuranceUpdate[]>(_logger, [$"insurance.{contractAsset}"], handler);
+            var subscription = new BybitSubscription<BybitInsuranceUpdate[]>(_logger, this, [$"insurance.{contractAsset}"], handler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
