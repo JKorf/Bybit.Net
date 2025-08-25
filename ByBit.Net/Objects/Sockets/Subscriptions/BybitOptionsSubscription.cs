@@ -30,11 +30,11 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
         }
 
 
-        public override Query? GetSubQuery(SocketConnection connection)
+        protected override Query? GetSubQuery(SocketConnection connection)
         {
             return new BybitOptionsQuery("subscribe", _topics);
         }
-        public override Query? GetUnsubQuery()
+        protected override Query? GetUnsubQuery(SocketConnection connection)
         {
             return new BybitOptionsQuery("unsubscribe", _topics);
         }
