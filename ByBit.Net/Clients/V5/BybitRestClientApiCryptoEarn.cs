@@ -46,7 +46,7 @@ namespace Bybit.Net.Clients.V5
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(EarnCategory category, string productId, AccountType accountType, string asset, EarnOrderType orderType, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(EarnCategory category, string productId, AccountType accountType, string asset, EarnOrderType orderType, decimal quantity, string? clientOrderId = null, AccountType? toAccountType = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("category", category);
@@ -56,6 +56,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddEnum("orderType", orderType);
             parameters.AddString("amount", quantity);
             parameters.Add("orderLinkId", clientOrderId ?? Guid.NewGuid().ToString());
+            parameters.AddOptionalEnum("toAccountType", toAccountType);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/earn/place-order", BybitExchange.RateLimiter.BybitRest, 1, true);
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;

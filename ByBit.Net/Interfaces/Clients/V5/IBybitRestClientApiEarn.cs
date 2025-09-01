@@ -34,8 +34,9 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderType">Stake or Redeem</param>
         /// <param name="quantity">Quantity</param>
         /// <param name="clientOrderId">Client order id</param>
+        /// <param name="toAccountType">Target account type</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(EarnCategory category, string productId, AccountType accountType, string asset, EarnOrderType orderType, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(EarnCategory category, string productId, AccountType accountType, string asset, EarnOrderType orderType, decimal quantity, string? clientOrderId = null, AccountType? toAccountType = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order history
