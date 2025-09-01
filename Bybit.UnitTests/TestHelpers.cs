@@ -44,7 +44,7 @@ namespace Bybit.UnitTests
             request.Setup(c => c.GetHeaders()).Returns(new KeyValuePair<string, string[]>[0]);
 
             var factory = Mock.Get(client.V5Api.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
+            factory.Setup(c => c.Create(It.IsAny<Version>(), It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
             return request;
         }
