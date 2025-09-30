@@ -25,8 +25,12 @@ namespace Bybit.Net.Objects.Models.V5
         /// Options type
         /// </summary>
         [JsonPropertyName("optionsType")]
-
         public OptionType OptionType { get; set; }
+        /// <summary>
+        /// Symbol type
+        /// </summary>
+        [JsonPropertyName("symbolType")]
+        public SymbolType? SymbolType { get; set; }
         /// <summary>
         /// Base asset
         /// </summary>

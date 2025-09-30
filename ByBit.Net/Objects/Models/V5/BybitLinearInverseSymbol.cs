@@ -103,6 +103,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("isPreListing")]
         public bool IsPrelisting { get; set; }
+        /// <summary>
+        /// Symbol type
+        /// </summary>
+        [JsonPropertyName("symbolType")]
+        public SymbolType? SymbolType { get; set; }
 
         /// <summary>
         /// Prelisting information
