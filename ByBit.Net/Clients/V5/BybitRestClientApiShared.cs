@@ -633,7 +633,8 @@ namespace Bybit.Net.Clients.V5
                     DepositEnabled = x.NetworkDeposit,
                     MinWithdrawQuantity = x.MinWithdraw,
                     WithdrawEnabled = x.NetworkWithdraw,
-                    WithdrawFee = x.WithdrawFee
+                    WithdrawFee = x.WithdrawFee,
+                    ContractAddress = x.ContractAddress
                 }).ToArray()
             });
         }
@@ -657,7 +658,8 @@ namespace Bybit.Net.Clients.V5
                     DepositEnabled = x.NetworkDeposit,
                     MinWithdrawQuantity = x.MinWithdraw,
                     WithdrawEnabled = x.NetworkWithdraw,
-                    WithdrawFee = x.WithdrawFee 
+                    WithdrawFee = x.WithdrawFee,
+                    ContractAddress = x.ContractAddress
                 }).ToArray()
             }).ToArray());
         }

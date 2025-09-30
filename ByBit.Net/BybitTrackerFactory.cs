@@ -33,6 +33,21 @@ namespace Bybit.Net
         }
 
         /// <inheritdoc />
+        public bool CanCreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval)
+        {
+            var client = (_serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient());
+            SubscribeKlineOptions klineOptions = symbol.TradingMode == TradingMode.Spot
+                ? client.V5SpotApi.SharedClient.SubscribeKlineOptions
+                : symbol.TradingMode.IsLinear() 
+                    ? client.V5LinearApi.SharedClient.SubscribeKlineOptions
+                        : client.V5InverseApi.SharedClient.SubscribeKlineOptions;
+            return klineOptions.IsSupported(interval);
+        }
+
+        /// <inheritdoc />
+        public bool CanCreateTradeTracker(SharedSymbol symbol) => true;
+
+        /// <inheritdoc />
         public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();

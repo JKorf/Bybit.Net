@@ -102,6 +102,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBybitOrderBookFactory, BybitOrderBookFactory>();
             services.AddTransient<IBybitTrackerFactory, BybitTrackerFactory>();
+            services.AddTransient<ITrackerFactory, BybitTrackerFactory>();
             services.AddSingleton<IBybitUserClientProvider, BybitUserClientProvider>(x =>
             new BybitUserClientProvider(
                 x.GetRequiredService<HttpClient>(),
