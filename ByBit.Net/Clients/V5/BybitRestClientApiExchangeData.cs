@@ -638,5 +638,17 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Index Price Components
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitIndexComponents>> GetIndexPriceComponentsAsync(string indexName, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("indexName", indexName);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/market/index-price-components", BybitExchange.RateLimiter.BybitRest, 1, false);
+            return await _baseClient.SendAsync<BybitIndexComponents>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

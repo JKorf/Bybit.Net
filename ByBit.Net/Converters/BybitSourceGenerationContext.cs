@@ -17,6 +17,7 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(BybitResult<BybitList<BybitSpreadTicker>>))]
     [JsonSerializable(typeof(BybitResult<BybitList<BybitSpreadTrade>>))]
     [JsonSerializable(typeof(BybitResult<BybitList<BybitOrderId>>))]
+    [JsonSerializable(typeof(BybitResult<BybitIndexComponents>))]
     [JsonSerializable(typeof(BybitResult<BybitList<BybitAdlAlert>>))]
     [JsonSerializable(typeof(BybitSpotSocketEvent<BybitAdlAlert[]>))]
     [JsonSerializable(typeof(BybitResult<BybitResponse<BybitSpreadOrder>>))]

@@ -377,5 +377,13 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BybitAdlAlert[]>> GetAdlAlertsAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get components which make up the index price
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/index-components" /></para>
+        /// </summary>
+        /// <param name="indexName">Index name</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitIndexComponents>> GetIndexPriceComponentsAsync(string indexName, CancellationToken ct = default);
     }
 }
