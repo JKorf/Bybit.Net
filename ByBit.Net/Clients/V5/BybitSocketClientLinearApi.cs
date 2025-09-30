@@ -85,6 +85,13 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
+        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToAdlAlertUpdatesAsync(string asset, Action<DataEvent<BybitAdlAlert[]>> updateHandler, CancellationToken ct = default)
+        {
+            var subscription = new BybitSubscription<BybitAdlAlert[]>(_logger, this, ["adlAlert." + asset], updateHandler);
+            return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
     }
 }

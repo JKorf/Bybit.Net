@@ -624,5 +624,19 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get ADL Alerts
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitAdlAlert[]>> GetAdlAlertsAsync(string symbol,CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/market/adlAlert", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var result = await _baseClient.SendAsync<BybitList<BybitAdlAlert>>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitAdlAlert[]>(result.Data?.List);
+        }
+
+        #endregion
+
     }
 }

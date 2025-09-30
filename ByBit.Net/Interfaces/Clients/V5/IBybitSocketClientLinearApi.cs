@@ -124,5 +124,14 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         Task<CallResult<UpdateSubscription>> SubscribeToPriceLimitUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOrderPriceLimit>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to auto deleveraging updates
+        /// </summary>
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/adl-alert" /></para>
+        /// <param name="asset">The asset, either USDC or USDT</param>
+        /// <param name="updateHandler">Data handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        Task<CallResult<UpdateSubscription>> SubscribeToAdlAlertUpdatesAsync(string asset, Action<DataEvent<BybitAdlAlert[]>> updateHandler, CancellationToken ct = default);
     }
 }
