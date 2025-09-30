@@ -157,7 +157,7 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("totalOrderIM")]
         public decimal? TotalOrderInitialMargin { get; set; }
         /// <summary>
-        /// Total position maintenance marging
+        /// Total position maintenance margin
         /// </summary>
         [JsonPropertyName("totalPositionIM")]
         public decimal? TotalPositionInitialMargin { get; set; }
@@ -196,5 +196,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("marginCollateral")]
         public bool MarginCollateral { get; set; }
+        /// <summary>
+        /// Borrow amount by spot margin trade
+        /// </summary>
+        [JsonPropertyName("spotBorrow")]
+        public decimal SpotBorrow { get; set; }
     }
 }
