@@ -2,6 +2,7 @@ using CryptoExchange.Net.Converters.SystemTextJson;
 using Bybit.Net.Enums;
 using System.Text.Json.Serialization;
 using System;
+using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Models.V5
 {
@@ -261,5 +262,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("slippageTolerance")]
         public decimal? SlippageTolerance { get; set; }
+        /// <summary>
+        /// Fee details
+        /// </summary>
+        [JsonPropertyName("cumFeeDetail")]
+        public Dictionary<string, decimal> FeeDetails { get; set; } = new();
     }
 }
