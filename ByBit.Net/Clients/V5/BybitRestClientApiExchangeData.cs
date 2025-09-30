@@ -208,7 +208,7 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Get order book
+        #region Get Order Book
 
         /// <inheritdoc />
         public async Task<WebCallResult<BybitOrderbook>> GetOrderbookAsync(Category category, string symbol, int? limit = null, CancellationToken ct = default)
@@ -221,6 +221,24 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("limit", limit);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/orderbook", BybitExchange.RateLimiter.BybitRest, 1, false);
+            return await _baseClient.SendAsync<BybitOrderbook>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get RPI Order Book
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitOrderbook>> GetRpiOrderbookAsync(Category category, string symbol, int limit, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection()
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "symbol", symbol }
+            };
+            parameters.AddParameter("limit", limit);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/market/rpi_orderbook", BybitExchange.RateLimiter.BybitRest, 1, false);
             return await _baseClient.SendAsync<BybitOrderbook>(request, parameters, ct).ConfigureAwait(false);
         }
 

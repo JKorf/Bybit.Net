@@ -210,6 +210,16 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<WebCallResult<BybitOrderbook>> GetOrderbookAsync(Category category, string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get RPI order book
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/rpi-orderbook" /></para>
+        /// </summary>
+        /// <param name="category">Category</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="limit">Limit of results, max 50</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitOrderbook>> GetRpiOrderbookAsync(Category category, string symbol, int limit, CancellationToken ct = default);
+
+        /// <summary>
         /// Get premium index klines
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/market/preimum-index-kline" /></para>
         /// </summary>
