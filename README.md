@@ -165,6 +165,18 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.9.0 - 30 Sep 2025
+    * Updated CryptoExchange.Net version to 9.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added ITrackerFactory to TrackerFactory implementation
+    * Added ContractAddress mapping in Shared IAssetClient implementation
+    * Added SpotBorrow property to BybitBalance model
+    * Added restClient.V5Api.ExchangeData.GetRpiOrderbookAsync endpoint
+    * Added FeeDetails property to BybitOrder response model
+    * Added restClient.V5Api.ExchangeData.GetAdlAlertsAsync endpoint
+    * Added socketClient.V5LinearApi.SubscribeToAdlAlertUpdatesAsync subscription
+    * Added restClient.V5Api.ExchangeData.GetIndexPriceComponentsAsync endpoint
+    * Added SymbolType property to GetSymbol response models
+
 * Version 5.8.0 - 01 Sep 2025
     * Updated CryptoExchange.Net version to 9.7.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * HTTP REST requests will now use HTTP version 2.0 by default
