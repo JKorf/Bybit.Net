@@ -185,6 +185,7 @@ namespace Bybit.Net.Clients.V5
             string? symbol = null,
             string? baseAsset = null,
             SymbolStatus? status = null,
+            SymbolType? symbolType = null,
             int? limit = null,
             string? cursor = null,
             CancellationToken ct = default)
@@ -197,6 +198,7 @@ namespace Bybit.Net.Clients.V5
                 { "category", EnumConverter.GetString(category) }
             };
             parameters.AddOptionalEnum("status", status);
+            parameters.AddOptionalEnum("symbolType", symbolType);
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("baseCoin", baseAsset);
             parameters.AddOptionalParameter("limit", limit);

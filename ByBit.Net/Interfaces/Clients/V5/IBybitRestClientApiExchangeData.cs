@@ -121,6 +121,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="baseAsset">Base asset, for example `ETH`</param>
         /// <param name="status">Filter by status</param>
+        /// <param name="symbolType">Filter by symbol type</param>
         /// <param name="limit">Number of results per page</param>
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
@@ -130,6 +131,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
             string? symbol = null,
             string? baseAsset = null,
             SymbolStatus? status = null,
+            SymbolType? symbolType = null,
             int? limit = null,
             string? cursor = null,
             CancellationToken ct = default);

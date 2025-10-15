@@ -86,7 +86,7 @@ namespace Bybit.Net.UnitTests
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetPremiumIndexPriceKlinesAsync(Enums.Category.Linear, "ETHUSDT", Enums.KlineInterval.OneDay, default, default, default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetSpotSymbolsAsync(default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetOptionSymbolsAsync(default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(default, default, default, default, default, default, default), false);
+            await RunAndCheckResult(client => client.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(default, default, default, default, default, default, default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetOrderbookAsync(Enums.Category.Spot, "ETHUSDT", default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetSpotTickersAsync(default, default), false);
             await RunAndCheckResult(client => client.V5Api.ExchangeData.GetOptionTickersAsync(default, "BTC", default, default), false);
