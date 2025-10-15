@@ -179,6 +179,7 @@ namespace Bybit.Net.Clients.V5
                             x.Price,
                             x.Timestamp)
                         {
+                            ClientOrderId = x.ClientOrderId,
                             Fee = x.Fee,
                             FeeAsset = x.FeeAsset,
                             Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker

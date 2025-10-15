@@ -236,23 +236,14 @@ namespace Bybit.Net.Clients.V5
         #endregion
 
         #region Balance client
-        EndpointOptions<GetBalancesRequest> IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions<GetBalancesRequest>(true)
-        {
-            RequestNotes = "Defaults to Unified account balances. Can be set to Contract balances by setting the `UnifiedAccount` exchange parameter to `false`",
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("UnifiedAccount", typeof(bool), "False to request Contract account info instead of unified account", false)
-            },
-        };
-
+        GetBalancesOptions IBalanceRestClient.GetBalancesOptions { get; } = new GetBalancesOptions(AccountTypeFilter.Spot, AccountTypeFilter.Futures, AccountTypeFilter.Funding, AccountTypeFilter.Margin, AccountTypeFilter.Option);
         async Task<ExchangeWebResult<SharedBalance[]>> IBalanceRestClient.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
         {
-            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
+            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, request, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedBalance[]>(Exchange, validationError);
 
-            var accountType = ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "UnifiedAccount");
-            var result = await Account.GetBalancesAsync(accountType == false ? AccountType.Contract : AccountType.Unified, ct: ct).ConfigureAwait(false);
+            var result = await Account.GetBalancesAsync(AccountType.Unified, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedBalance[]>(Exchange, null, default);
 
@@ -453,6 +444,7 @@ namespace Bybit.Net.Clients.V5
                 x.Price,
                 x.Timestamp)
             {
+                ClientOrderId = x.ClientOrderId,
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
@@ -496,6 +488,7 @@ namespace Bybit.Net.Clients.V5
                 x.Price,
                 x.Timestamp)
             {
+                ClientOrderId = x.ClientOrderId,
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
@@ -1385,6 +1378,7 @@ namespace Bybit.Net.Clients.V5
                 x.Price,
                 x.Timestamp)
             {
+                ClientOrderId = x.ClientOrderId,
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
@@ -1431,6 +1425,7 @@ namespace Bybit.Net.Clients.V5
                 x.Price,
                 x.Timestamp)
             {
+                ClientOrderId = x.ClientOrderId,
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.IsMaker ? SharedRole.Maker : SharedRole.Taker
@@ -1979,6 +1974,45 @@ namespace Bybit.Net.Clients.V5
 
             // Return
             return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, true);
+        }
+
+        #endregion
+
+        #region Transfer client
+
+        TransferOptions ITransferRestClient.TransferOptions { get; } = new TransferOptions([
+            SharedAccountType.Funding,
+            SharedAccountType.Unified
+            ]);
+        async Task<ExchangeWebResult<SharedId>> ITransferRestClient.TransferAsync(TransferRequest request, CancellationToken ct)
+        {
+            var validationError = ((ITransferRestClient)this).TransferOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            var fromType = GetTransferType(request.FromAccountType);
+            var toType = GetTransferType(request.ToAccountType);
+            if (fromType == null || toType == null)
+                return new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Invalid("To/From AccountType", "invalid to/from account combination"));
+
+            // Get data
+            var transfer = await Account.CreateInternalTransferAsync(
+                request.Asset,
+                request.Quantity,
+                fromType.Value,
+                toType.Value,
+                ct: ct).ConfigureAwait(false);
+            if (!transfer)
+                return transfer.AsExchangeResult<SharedId>(Exchange, null, default);
+
+            return transfer.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(transfer.Data.TransferId));
+        }
+
+        private AccountType? GetTransferType(SharedAccountType type)
+        {
+            if (type == SharedAccountType.Funding) return AccountType.Fund;
+            if (type == SharedAccountType.Unified) return AccountType.Unified;
+            return null;
         }
 
         #endregion

@@ -33,7 +33,8 @@ namespace Bybit.Net.Interfaces.Clients
         ISpotTriggerOrderRestClient,
         IFuturesTriggerOrderRestClient,
         IFuturesTpSlRestClient,
-        IBookTickerRestClient
+        IBookTickerRestClient,
+        ITransferRestClient
     {
     }
 }
