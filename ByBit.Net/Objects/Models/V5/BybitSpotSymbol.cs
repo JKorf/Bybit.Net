@@ -116,6 +116,16 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("maxOrderAmt")]
         public decimal MaxOrderValue { get; set; }
+        /// <summary>
+        ///	Maximum Market order quantity
+        /// </summary>
+        [JsonPropertyName("maxMarketOrderQty")]
+        public decimal MaxMarketOrderQuantity { get; set; }
+        /// <summary>
+        /// Maximum Limit order quantity
+        /// </summary>
+        [JsonPropertyName("maxLimitOrderQty")]
+        public decimal MaxLimitOrderQuantity { get; set; }
     }
 
     /// <summary>
