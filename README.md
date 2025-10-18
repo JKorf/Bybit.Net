@@ -166,6 +166,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.10.1 - 18 Oct 2025
+    * Fixed deserialization issue for decimal values using scientific exponent notation in certain models
+
 * Version 5.10.0 - 16 Oct 2025
     * Updated CryptoExchange.Net version to 9.10.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added ClientOrderId mapping on SharedUserTrade models
