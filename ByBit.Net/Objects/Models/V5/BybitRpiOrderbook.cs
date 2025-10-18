@@ -51,7 +51,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Price of the entry
         /// </summary>
-        [ArrayProperty(0)]
+        [ArrayProperty(0), JsonConverter(typeof(DecimalConverter))]
         public decimal Price { get; set; }
         /// <summary>
         /// None RPI quantity

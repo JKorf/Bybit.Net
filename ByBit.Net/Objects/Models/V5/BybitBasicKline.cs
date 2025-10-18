@@ -22,22 +22,22 @@ namespace Bybit.Net.Objects.Models.V5
         /// <summary>
         /// Open price
         /// </summary>
-        [ArrayProperty(1)]
+        [ArrayProperty(1), JsonConverter(typeof(DecimalConverter))]
         public decimal OpenPrice { get; set; }
         /// <summary>
         /// High price
         /// </summary>
-        [ArrayProperty(2)]
+        [ArrayProperty(2), JsonConverter(typeof(DecimalConverter))]
         public decimal HighPrice { get; set; }
         /// <summary>
         /// Low price
         /// </summary>
-        [ArrayProperty(3)]
+        [ArrayProperty(3), JsonConverter(typeof(DecimalConverter))]
         public decimal LowPrice { get; set; }
         /// <summary>
         /// Close price
         /// </summary>
-        [ArrayProperty(4)]
+        [ArrayProperty(4), JsonConverter(typeof(DecimalConverter))]
         public decimal ClosePrice { get; set; }
     }
 }
