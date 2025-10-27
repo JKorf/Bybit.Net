@@ -167,6 +167,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.11.0 - 27 Oct 2025
+    * Added restClient.V5Api.Account.GetWithdrawAddressListAsync endpoint
+    * Added restClient.V5Api.Account.GetSpotSymbolsAsync and GetLinearInverseSymbolsAsync endpoints
+    * Added FundingInterval, FundingCap and BasisRateYear properties to BybitLinearTicker(Update) models
+    * Added ForbidUnrealizedPnlWithdrawal property to BybitLinearInverseSymbol model
+    * Added bboSideType and bboLevel parameter to restClient.V5Api.Trading.PlaceOrderAsync endpoint
+    * Added asset parameter to restClient.V5Api.Account.SetSpotMarginLeverageAsync endpoint
+
 * Version 5.10.1 - 18 Oct 2025
     * Fixed deserialization issue for decimal values using scientific exponent notation in certain models
 
