@@ -63,6 +63,8 @@ namespace Bybit.Net.Clients.V5
             MarketUnit? marketUnit = null,
             SlippageToleranceType? slippageToleranceType = null,
             decimal? slippageTolerance = null,
+            BboSideType? bboSideType = null,
+            int? bboLevel = null,
             CancellationToken ct = default
         )
         {
@@ -103,6 +105,8 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("marketUnit", EnumConverter.GetString(marketUnit));
             parameters.AddOptionalEnum("slippageToleranceType", slippageToleranceType);
             parameters.AddOptionalString("slippageTolerance", slippageTolerance);
+            parameters.AddOptionalEnum("bboSideType", bboSideType);
+            parameters.AddOptional("bboLevel", bboLevel);
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
             var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;

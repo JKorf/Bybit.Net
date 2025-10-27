@@ -246,6 +246,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="marketUnit">The unit for qty when creating spot market orders for unified trading account</param>
         /// <param name="slippageToleranceType">Slippage tolerance Type for market orders</param>
         /// <param name="slippageTolerance">Slippage tolerance value</param>
+        /// <param name="bboSideType">BBO side type</param>
+        /// <param name="bboLevel">BBO level (1 - 5)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(
@@ -280,6 +282,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
             MarketUnit? marketUnit = null,
             SlippageToleranceType? slippageToleranceType = null,
             decimal? slippageTolerance = null,
+            BboSideType? bboSideType = null,
+            int? bboLevel = null,
             CancellationToken ct = default);
 
         /// <summary>
