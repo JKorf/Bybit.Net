@@ -702,5 +702,31 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="allowModifyPrice">True: allow the system to adjust the price to nearest allowed, False: fail the order</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult> SetPriceLimitBehaviorAsync(Category category, bool allowModifyPrice, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get spot symbols available to the user
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/instrument" /></para>
+        /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="limit">Number of results, max 200</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? symbol = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get linear/inverse symbols available to the user
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/account/instrument" /></para>
+        /// </summary>
+        /// <param name="category">Category, either linear or inverse</param>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="limit">Number of results, max 200</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(
+            Category category,
+            string? symbol = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
     }
 }

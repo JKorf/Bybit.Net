@@ -1267,5 +1267,49 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Spot symbols
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? symbol = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection()
+            {
+                { "category", EnumConverter.GetString(Category.Spot) }
+            };
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("cursor", cursor);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/instruments-info", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitResponse<BybitSpotSymbol>>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Linear Inverse symbols
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(
+            Category category,
+            string? symbol = null,            
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            if (category != Category.Linear && category != Category.Inverse)
+                throw new ArgumentException("Invalid category; should be Linear or Inverse");
+
+            var parameters = new ParameterCollection()
+            {
+                { "category", EnumConverter.GetString(category) }
+            };
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/instruments-info", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitResponse<BybitLinearInverseSymbol>>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }
