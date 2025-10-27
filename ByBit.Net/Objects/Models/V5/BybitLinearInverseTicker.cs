@@ -148,5 +148,20 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("curPreListingPhase")]
         public AuctionPhase? PreListingPhase { get; set; }
+        /// <summary>
+        /// Funding interval in hours
+        /// </summary>
+        [JsonPropertyName("fundingIntervalHour")]
+        public int? FundingInterval { get; set; }
+        /// <summary>
+        /// Funding rate upper and lower limits
+        /// </summary>
+        [JsonPropertyName("fundingCap")]
+        public decimal? FundingCap { get; set; }
+        /// <summary>
+        /// Annual basis rate
+        /// </summary>
+        [JsonPropertyName("basisRateYear")]
+        public decimal? BasisRateYear { get; set; }
     }
 }
