@@ -1311,5 +1311,29 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Get Withdraw Address List
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitResponse<BybitWithdrawAddress>>> GetWithdrawAddressListAsync(
+            string? asset = null,
+            string? network = null,
+            AddressType? addressType = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("coin", asset);
+            parameters.AddOptional("chain", network);
+            parameters.AddOptionalEnum("addressType", addressType);
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("cursor", cursor);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/asset/withdraw/query-address", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitResponse<BybitWithdrawAddress>>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

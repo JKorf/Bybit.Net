@@ -728,5 +728,23 @@ namespace Bybit.Net.Interfaces.Clients.V5
             int? limit = null,
             string? cursor = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Get withdrawal addresses
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/withdraw/withdraw-address" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="network">Filter by network</param>
+        /// <param name="addressType">Filter by network type</param>
+        /// <param name="limit">Number of results, max 50</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitResponse<BybitWithdrawAddress>>> GetWithdrawAddressListAsync(
+            string? asset = null,
+            string? network = null,
+            AddressType? addressType = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
     }
 }

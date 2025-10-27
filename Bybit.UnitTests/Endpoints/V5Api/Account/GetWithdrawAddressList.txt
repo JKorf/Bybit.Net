@@ -1,0 +1,36 @@
+GET
+/v5/asset/withdraw/query-address
+true
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "rows": [
+            {
+                "coin": "USDT",
+                "chain": "ETH",
+                "address": "0x48101adb67d426cb15e46be5f1d9f6ab25f311ea",
+                "tag": "",
+                "remark": "",
+                "status": 0,
+                "addressType": 0,
+                "verified": 0,
+                "createdAt": "1760951195"
+            },
+            {
+                "coin": "baseCoin",
+                "chain": "ETH",
+                "address": "0x48101adb67d426cb15e46be5f1d9f6ab25f311ea",
+                "tag": "",
+                "remark": "Universal Address",
+                "status": 0,
+                "addressType": 0,
+                "verified": 0,
+                "createdAt": "1760951332"
+            }
+        ],
+        "nextPageCursor": "eyJtaW5JRCI6MTA1MDgsIm1heElEIjoxMDUwOX0="
+    },
+    "retExtInfo": {},
+    "time": 1760960379395
+}

@@ -66,6 +66,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Account.GetConvertStatusAsync(Enums.ConvertAccountType.ConvertFunding, "123"), "GetConvertStatus", "result.result", ignoreProperties: new List<string> { "extInfo" });
             await tester.ValidateAsync(client => client.V5Api.Account.GetConvertHistoryAsync(Enums.ConvertAccountType.ConvertFunding), "GetConvertHistory", "result.list", ignoreProperties: new List<string> { "extInfo" });
             await tester.ValidateAsync(client => client.V5Api.Account.SetPriceLimitBehaviorAsync(Category.Spot, false), "SetPriceLimitBehavior");
+            await tester.ValidateAsync(client => client.V5Api.Account.GetWithdrawAddressListAsync(), "GetWithdrawAddressList");
         }
 
         [Test]
