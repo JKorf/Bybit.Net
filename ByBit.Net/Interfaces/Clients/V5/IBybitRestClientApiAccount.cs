@@ -529,9 +529,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/set-leverage" /></para>
         /// </summary>
         /// <param name="leverage">New leverage</param>
+        /// <param name="asset">Asset name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SetSpotMarginLeverageAsync(decimal leverage, CancellationToken ct = default);
+        Task<WebCallResult> SetSpotMarginLeverageAsync(decimal leverage, string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Query the Spot margin status and leverage of Unified account

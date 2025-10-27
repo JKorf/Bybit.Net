@@ -988,12 +988,13 @@ namespace Bybit.Net.Clients.V5
         #region Set Spot Margin Leverage
 
         /// <inheritdoc />
-        public async Task<WebCallResult> SetSpotMarginLeverageAsync(decimal leverage, CancellationToken ct = default)
+        public async Task<WebCallResult> SetSpotMarginLeverageAsync(decimal leverage, string? asset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection()
             {
                 { "leverage", leverage.ToString(CultureInfo.InvariantCulture) }
             };
+            parameters.AddOptional("currency", asset);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-margin-trade/set-leverage", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
