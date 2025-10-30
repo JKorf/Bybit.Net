@@ -50,16 +50,13 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public string ExchangeName => "Bybit";
 
-        internal string _referer = "Zx000356";
-
         #region ctor
         internal BybitRestClientApi(ILogger logger, HttpClient? httpClient, BybitRestOptions options) :
             base(logger, httpClient, options.Environment.RestBaseAddress, options, options.V5Options)
         {
-            _referer = !string.IsNullOrEmpty(options.Referer) ? options.Referer! : _referer;
             StandardRequestHeaders = new Dictionary<string, string>
             {
-                { "Referer", _referer }
+                { "Referer", LibraryHelpers.GetClientReference(() => ClientOptions.Referer, Exchange) }
             };
 
             Account = new BybitRestClientApiAccount(this);

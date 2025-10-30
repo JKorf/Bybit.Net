@@ -33,17 +33,16 @@ namespace Bybit.Net.Clients.V5
         private static readonly MessagePath _reqId2Path = MessagePath.Get().Property("reqId");
         private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
         private static readonly MessagePath _opPath = MessagePath.Get().Property("op");
-        private string _referer;
 
         protected override ErrorMapping ErrorMapping => BybitErrors.WebsocketErrors;
+
+        public new BybitSocketOptions ClientOptions => (BybitSocketOptions)base.ClientOptions;
 
         internal BybitSocketClientPrivateApi(ILogger logger, BybitSocketOptions options)
             : base(logger, options.Environment.SocketBaseAddress, options, options.V5Options)
         {
             UnhandledMessageExpected = true;
             KeepAliveInterval = TimeSpan.Zero;
-
-            _referer = !string.IsNullOrEmpty(options.Referer) ? options.Referer! : "Zx000356";
 
             RegisterPeriodicQuery(
                 "Heartbeat",
@@ -255,7 +254,7 @@ namespace Bybit.Net.Clients.V5
                 new Dictionary<string, string>
                 {
                     { "X-BAPI-TIMESTAMP", timestamp },
-                    { "Referer", _referer }
+                    { "Referer", LibraryHelpers.GetClientReference(() => ClientOptions.Referer, Exchange) }
                 },
                 new object[] { new BybitSocketPlaceOrderRequest
                 {
@@ -320,7 +319,7 @@ namespace Bybit.Net.Clients.V5
                 new Dictionary<string, string>
                 {
                     { "X-BAPI-TIMESTAMP", timestamp },
-                    { "Referer", _referer }
+                    { "Referer", LibraryHelpers.GetClientReference(() => ClientOptions.Referer, Exchange) }
                 },
                 new object[] { new BybitSocketEditOrderRequest
                 {
@@ -361,7 +360,7 @@ namespace Bybit.Net.Clients.V5
                 new Dictionary<string, string>
                 {
                     { "X-BAPI-TIMESTAMP", timestamp },
-                    { "Referer", _referer }
+                    { "Referer", LibraryHelpers.GetClientReference(() => ClientOptions.Referer, Exchange) }
                 },
                 new object[] { new BybitSocketCancelOrderRequest
                 {
@@ -396,7 +395,7 @@ namespace Bybit.Net.Clients.V5
                 new Dictionary<string, string>
                 {
                     { "X-BAPI-TIMESTAMP", timestamp },
-                    { "Referer", _referer }
+                    { "Referer", LibraryHelpers.GetClientReference(() => ClientOptions.Referer, Exchange) }
                 },
                 parameters
             );
@@ -440,7 +439,7 @@ namespace Bybit.Net.Clients.V5
                 new Dictionary<string, string>
                 {
                     { "X-BAPI-TIMESTAMP", timestamp },
-                    { "Referer", _referer }
+                    { "Referer", LibraryHelpers.GetClientReference(() => ClientOptions.Referer, Exchange) }
                 },
                 parameters
             );
@@ -468,7 +467,7 @@ namespace Bybit.Net.Clients.V5
                 new Dictionary<string, string>
                 {
                     { "X-BAPI-TIMESTAMP", timestamp },
-                    { "Referer", _referer }
+                    { "Referer", LibraryHelpers.GetClientReference(() => ClientOptions.Referer, Exchange) }
                 },
                 parameters
             );

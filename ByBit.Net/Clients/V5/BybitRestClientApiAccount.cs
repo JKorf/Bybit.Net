@@ -1180,7 +1180,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddString("requestAmount", quantity);
             parameters.AddOptional("requestId", clientOrderId);
             parameters.Add("paramType", "opFrom");
-            parameters.Add("paramValue", _baseClient._referer);
+            parameters.Add("paramValue", LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.Referer, _baseClient.Exchange));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/asset/exchange/quote-apply", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitConvertQuote>(request, parameters, ct).ConfigureAwait(false);
