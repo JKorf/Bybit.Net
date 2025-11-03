@@ -54,6 +54,16 @@ namespace Bybit.Net
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<BybitSourceGenerationContext>();
 
         /// <summary>
+        /// Aliases for Bybit assets
+        /// </summary>
+        public static AssetAliasConfiguration AssetAliases { get; } = new AssetAliasConfiguration
+        {
+            Aliases = [
+                new AssetAlias("USDT", SharedSymbol.UsdOrStable.ToUpperInvariant(), AliasType.OnlyToExchange)
+            ]
+        };
+        
+        /// <summary>
         /// Format a base and quote asset to a Bybit recognized symbol 
         /// </summary>
         /// <param name="baseAsset">Base asset</param>
@@ -63,8 +73,11 @@ namespace Bybit.Net
         /// <returns></returns>
         public static string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
         {
+            baseAsset = AssetAliases.CommonToExchangeName(baseAsset.ToUpperInvariant());
+            quoteAsset = AssetAliases.CommonToExchangeName(quoteAsset.ToUpperInvariant());
+
             if (tradingMode == TradingMode.Spot)
-                return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+                return baseAsset + quoteAsset;
 
             if (tradingMode.IsLinear())
             {
@@ -73,13 +86,13 @@ namespace Bybit.Net
                     if (quoteAsset == "USDC")
                         return baseAsset + "PERP";
 
-                    return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+                    return baseAsset + quoteAsset;
                 }
 
-                return baseAsset.ToUpperInvariant() + "-" + deliverTime!.Value.ToString("ddMMMyy").ToUpperInvariant();
+                return baseAsset + "-" + deliverTime!.Value.ToString("ddMMMyy");
             }
 
-            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
+            return baseAsset + quoteAsset + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
         }
 
         /// <summary>
