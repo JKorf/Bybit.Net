@@ -1,11 +1,12 @@
 ﻿using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Interfaces;
 
 namespace Bybit.Net.Interfaces.Clients
 {
     /// <summary>
     /// Provider for clients with credentials for specific users
     /// </summary>
-    public interface IBybitUserClientProvider
+    public interface IBybitUserClientProvider : IExchangeService
     {
         /// <summary>
         /// Initialize a client for the specified user identifier. This can be used so to initialize a client for a user so ApiCredentials do not need to be passed later.

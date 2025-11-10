@@ -17,6 +17,9 @@ namespace Bybit.Net.SymbolOrderBooks
         private readonly IServiceProvider _serviceProvider;
 
         /// <inheritdoc />
+        public string ExchangeName => BybitExchange.ExchangeName;
+
+        /// <inheritdoc />
         public IOrderBookFactory<BybitOrderBookOptions> Spot { get; }
 
         /// <inheritdoc />

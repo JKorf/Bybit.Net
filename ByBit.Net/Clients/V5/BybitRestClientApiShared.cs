@@ -71,9 +71,10 @@ namespace Bybit.Net.Clients.V5
 
             // Get data
             var category = request.Symbol!.TradingMode == TradingMode.Spot ? Category.Spot : (request.Symbol!.TradingMode == TradingMode.PerpetualLinear || request.Symbol!.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
+            var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var result = await ExchangeData.GetKlinesAsync(
                 category,
-                request.Symbol!.GetSymbol(FormatSymbol),
+                symbol,
                 interval,
                 startTime,
                 endTime,
@@ -93,7 +94,8 @@ namespace Bybit.Net.Clients.V5
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<SharedKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.List.Select(x => new SharedKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
+            return result.AsExchangeResult<SharedKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.List.Select(x => 
+                new SharedKline(request.Symbol, symbol, x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 
         #endregion
@@ -128,7 +130,7 @@ namespace Bybit.Net.Clients.V5
 
         #region Spot Ticker client
 
-        EndpointOptions<GetTickersRequest> ISpotTickerRestClient.GetSpotTickersOptions { get; } = new EndpointOptions<GetTickersRequest>(false);
+        GetTickersOptions ISpotTickerRestClient.GetSpotTickersOptions { get; } = new GetTickersOptions();
         async Task<ExchangeWebResult<SharedSpotTicker[]>> ISpotTickerRestClient.GetSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
         {
             var validationError = ((ISpotTickerRestClient)this).GetSpotTickersOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
@@ -145,7 +147,7 @@ namespace Bybit.Net.Clients.V5
             }).ToArray());
         }
 
-        EndpointOptions<GetTickerRequest> ISpotTickerRestClient.GetSpotTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
+        GetTickerOptions ISpotTickerRestClient.GetSpotTickerOptions { get; } = new GetTickerOptions();
         async Task<ExchangeWebResult<SharedSpotTicker>> ISpotTickerRestClient.GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
             var validationError = ((ISpotTickerRestClient)this).GetSpotTickerOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
@@ -227,7 +229,8 @@ namespace Bybit.Net.Clients.V5
             if (!result)
                 return result.AsExchangeResult<SharedTrade[]>(Exchange, null, default);
 
-            return result.AsExchangeResult<SharedTrade[]>(Exchange, request.Symbol!.TradingMode, result.Data.List.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
+            return result.AsExchangeResult<SharedTrade[]>(Exchange, request.Symbol!.TradingMode, result.Data.List.Select(x =>
+            new SharedTrade(request.Symbol, x.Symbol, x.Quantity, x.Price, x.Timestamp)
             {
                 Side = x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray());
@@ -817,7 +820,7 @@ namespace Bybit.Net.Clients.V5
 
         #region Futures Ticker client
 
-        EndpointOptions<GetTickerRequest> IFuturesTickerRestClient.GetFuturesTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
+        GetTickerOptions IFuturesTickerRestClient.GetFuturesTickerOptions { get; } = new GetTickerOptions();
         async Task<ExchangeWebResult<SharedFuturesTicker>> IFuturesTickerRestClient.GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
             var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickerOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, FuturesTradingModes);
@@ -853,7 +856,7 @@ namespace Bybit.Net.Clients.V5
                 });
         }
 
-        EndpointOptions<GetTickersRequest> IFuturesTickerRestClient.GetFuturesTickersOptions { get; } = new EndpointOptions<GetTickersRequest>(false);
+        GetTickersOptions IFuturesTickerRestClient.GetFuturesTickersOptions { get; } = new GetTickersOptions();
 
         async Task<ExchangeWebResult<SharedFuturesTicker[]>> IFuturesTickerRestClient.GetFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
         {
@@ -1012,9 +1015,10 @@ namespace Bybit.Net.Clients.V5
                 startTime = request.StartTime;
 
             var category = (request.Symbol!.TradingMode == TradingMode.PerpetualLinear || request.Symbol!.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
+            var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var result = await ExchangeData.GetMarkPriceKlinesAsync(
                 category,
-                request.Symbol!.GetSymbol(FormatSymbol),
+                symbol,
                 interval,
                 startTime,
                 endTime,
@@ -1033,7 +1037,8 @@ namespace Bybit.Net.Clients.V5
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.List.Select(x => new SharedFuturesKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.List.Select(x => 
+                new SharedFuturesKline(request.Symbol, symbol, x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -1070,9 +1075,10 @@ namespace Bybit.Net.Clients.V5
                 startTime = request.StartTime;
 
             var category = (request.Symbol!.TradingMode == TradingMode.PerpetualLinear || request.Symbol!.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
+            var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var result = await ExchangeData.GetIndexPriceKlinesAsync(
                 category,
-                request.Symbol!.GetSymbol(FormatSymbol),
+                symbol,
                 interval,
                 startTime,
                 endTime,
@@ -1091,7 +1097,8 @@ namespace Bybit.Net.Clients.V5
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.List.Select(x => new SharedFuturesKline(x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.List.Select(x => 
+                new SharedFuturesKline(request.Symbol, symbol, x.StartTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion

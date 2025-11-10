@@ -22,6 +22,9 @@ namespace Bybit.Net.Clients
         private readonly HttpClient _httpClient;
         private readonly ILoggerFactory? _loggerFactory;
 
+        /// <inheritdoc />
+        public string ExchangeName => BybitExchange.ExchangeName;
+
         /// <summary>
         /// ctor
         /// </summary>

@@ -9,7 +9,7 @@ namespace Bybit.Net.Interfaces
     /// <summary>
     /// Bybit order book factory
     /// </summary>
-    public interface IBybitOrderBookFactory
+    public interface IBybitOrderBookFactory : IExchangeService
     {
         /// <summary>
         /// Spot order book factory methods
