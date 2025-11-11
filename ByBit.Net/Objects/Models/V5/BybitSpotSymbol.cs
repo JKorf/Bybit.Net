@@ -126,6 +126,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("maxLimitOrderQty")]
         public decimal MaxLimitOrderQuantity { get; set; }
+        /// <summary>
+        /// Maximum order quantity for post-only limit orders
+        /// </summary>
+        [JsonPropertyName("postOnlyMaxLimitOrderSize")]
+        public decimal PostOnlyMaxLimitOrderQuantity { get; set; }
     }
 
     /// <summary>
