@@ -14,13 +14,19 @@ namespace Bybit.Net.UnitTests
     [TestFixture]
     public class SocketSubscriptionTests
     {
-        [Test]
-        public async Task ValidateSpotSubscriptions()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateSpotSubscriptions(bool newDeserialization)
         {
-            var client = new BybitSocketClient(opts =>
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
-                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
-            });
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "https://api.binance.com", "data");
             await tester.ValidateAsync<BybitSpotTickerUpdate>((client, handler) => client.V5SpotApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
             await tester.ValidateAsync<BybitKlineUpdate[]>((client, handler) => client.V5SpotApi.SubscribeToLeveragedTokenKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneMonth, handler), "LeveragedKline");
@@ -31,13 +37,19 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync<BybitSystemStatus[]>((client, handler) => client.V5SpotApi.SubscribeToSystemStatusUpdatesAsync(handler), "SystemStatus");
         }
 
-        [Test]
-        public async Task ValidateOptionSubscriptions()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateOptionSubscriptions(bool newDeserialization)
         {
-            var client = new BybitSocketClient(opts =>
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
-                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
-            });
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Option", "https://api.binance.com", "data");
             await tester.ValidateAsync<BybitOptionTickerUpdate>((client, handler) => client.V5OptionsApi.SubscribeToTickerUpdatesAsync("BTC", handler), "Ticker");
             await tester.ValidateAsync<BybitOptionTrade[]>((client, handler) => client.V5OptionsApi.SubscribeToTradeUpdatesAsync("BTC", handler), "Trades");
@@ -45,36 +57,45 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync<BybitKlineUpdate[]>((client, handler) => client.V5OptionsApi.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneMonth, handler), "Klines");
         }
 
-        [Test]
-        public async Task ValidateLinearSubscriptions()
-        {
-            var client = new BybitSocketClient(opts =>
-            {
-                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
-            });
-            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Linear", "https://api.bybit.com", "data");
-            await tester.ValidateAsync<BybitLinearTickerUpdate>((client, handler) => client.V5LinearApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
-            await tester.ValidateAsync<BybitTrade[]>((client, handler) => client.V5LinearApi.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
-            await tester.ValidateAsync<BybitLiquidationUpdate[]>((client, handler) => client.V5LinearApi.SubscribeToAllLiquidationUpdatesAsync("ETHUSDT", handler), "Liquidations");
-        }
-
-        [Test]
-        public async Task ValidatePrivateSubscriptions()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateLinearSubscriptions(bool newDeserialization)
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider());
 
             var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456")
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Linear", "https://api.bybit.com", "data");
+            await tester.ValidateAsync<BybitLinearTickerUpdate>((client, handler) => client.V5LinearApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
+            await tester.ValidateAsync<BybitTrade[]>((client, handler) => client.V5LinearApi.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
+            await tester.ValidateAsync<BybitLiquidationUpdate[]>((client, handler) => client.V5LinearApi.SubscribeToAllLiquidationUpdatesAsync("ETHUSDT", handler), "Liquidations");
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidatePrivateSubscriptions(bool newDeserialization)
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
+            {
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
             }), logger);
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Private", "https://api.bybit.com", "data");
-            //await tester.ValidateAsync<BybitPositionUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToPositionUpdatesAsync(handler), "Position", ignoreProperties: new List<string> { "entryPrice" }, addressPath: "/v5/private");
-            //await tester.ValidateAsync<BybitUserTradeUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToUserTradeUpdatesAsync(handler), "UserTrades", addressPath: "/v5/private");
-            //await tester.ValidateAsync<BybitMinimalUserTradeUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToMinimalUserTradeUpdatesAsync(handler), "MinimalUserTrades", addressPath: "/v5/private");
-            //await tester.ValidateAsync<BybitOrderUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToOrderUpdatesAsync(handler), "Order", addressPath: "/v5/private");
-            //await tester.ValidateAsync<BybitBalance[]>((client, handler) => client.V5PrivateApi.SubscribeToWalletUpdatesAsync(handler), "Balance", addressPath: "/v5/private");
-            //await tester.ValidateAsync<BybitGreeks[]>((client, handler) => client.V5PrivateApi.SubscribeToGreekUpdatesAsync(handler), "Greeks", addressPath: "/v5/private");
+            await tester.ValidateAsync<BybitPositionUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToPositionUpdatesAsync(handler), "Position", ignoreProperties: new List<string> { "entryPrice" }, addressPath: "/v5/private");
+            await tester.ValidateAsync<BybitUserTradeUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToUserTradeUpdatesAsync(handler), "UserTrades", addressPath: "/v5/private");
+            await tester.ValidateAsync<BybitMinimalUserTradeUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToMinimalUserTradeUpdatesAsync(handler), "MinimalUserTrades", addressPath: "/v5/private");
+            await tester.ValidateAsync<BybitOrderUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToOrderUpdatesAsync(handler), "Order", addressPath: "/v5/private");
+            await tester.ValidateAsync<BybitBalance[]>((client, handler) => client.V5PrivateApi.SubscribeToWalletUpdatesAsync(handler), "Balance", addressPath: "/v5/private");
+            await tester.ValidateAsync<BybitGreeks[]>((client, handler) => client.V5PrivateApi.SubscribeToGreekUpdatesAsync(handler), "Greeks", addressPath: "/v5/private");
             await tester.ValidateAsync<BybitSpreadUserTradeUpdate[]>((client, handler) => client.V5PrivateApi.SubscribeToSpreadUserTradeUpdatesAsync(handler), "SpreadUserTrade", addressPath: "/v5/private");
         }
     }

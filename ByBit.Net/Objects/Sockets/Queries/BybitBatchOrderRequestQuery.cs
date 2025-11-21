@@ -5,6 +5,7 @@ using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,15 +22,15 @@ namespace Bybit.Net.Objects.Sockets.Queries
             MessageMatcher = MessageMatcher.Create<BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
         }
 
-        public CallResult<BybitBatchResult<BybitBatchOrderId>[]> HandleMessage(SocketConnection connection, DataEvent<BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>> message)
+        public CallResult<BybitBatchResult<BybitBatchOrderId>[]> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>> message)
         {
-            if (message.Data.ReturnCode != 0)
-                return new CallResult<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(message.Data.ReturnCode, _client.GetErrorInfo(message.Data.ReturnCode, message.Data.ReturnMessage)), message.OriginalData);
+            if (message.ReturnCode != 0)
+                return new CallResult<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(message.ReturnCode, _client.GetErrorInfo(message.ReturnCode, message.ReturnMessage)), originalData);
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
-            var resultItems = message.Data.Data!.List.ToArray();
+            var resultItems = message.Data!.List.ToArray();
             int index = 0;
-            foreach (var item in message.Data.ExtendedInfo!.List)
+            foreach (var item in message.ExtendedInfo!.List)
             {
                 var resultItem = resultItems[index++];
                 resultList.Add(new BybitBatchResult<BybitBatchOrderId>
@@ -40,7 +41,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
                 }); 
             }
 
-            return message.ToCallResult(resultList.ToArray());
+            return new CallResult<BybitBatchResult<BybitBatchOrderId>[]>(resultList.ToArray(), originalData, null);
         }
     }
 }

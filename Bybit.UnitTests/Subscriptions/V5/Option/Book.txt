@@ -1,5 +1,5 @@
 > { "req_id": "|1|", "op": "subscribe", "args": [ "orderbook.25.BTCUSDT" ] }
-< { "success": true, "conn_id": "aa01fbfffe80af37-00000001-000b37b9-7147f432704fd28c-00e1c172", "data": { "failTopics": [], "successTopics": [ "tickers.BTC" ] }, "type": "COMMAND_RESP" }
+< { "success": true, "conn_id": "aa01fbfffe80af37-00000001-000b37b9-7147f432704fd28c-00e1c172", "data": { "failTopics": [], "successTopics": [ "orderbook.25.BTCUSDT" ] }, "type": "COMMAND_RESP" }
 = 
 {
     "topic": "orderbook.25.BTCUSDT",

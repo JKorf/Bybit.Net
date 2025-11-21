@@ -4,6 +4,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,12 +20,12 @@ namespace Bybit.Net.Objects.Sockets.Queries
             MessageMatcher = MessageMatcher.Create<BybitQueryResponse>(((BybitRequestMessage)Request).RequestId, HandleMessage);
         }
 
-        public CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DataEvent<BybitQueryResponse> message)
+        public CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitQueryResponse message)
         {
-            if (!message.Data.Success)
-                return new CallResult<BybitQueryResponse>(new ServerError(_client.GetErrorInfo("err", message.Data.Message)), message.OriginalData);
+            if (!message.Success)
+                return new CallResult<BybitQueryResponse>(new ServerError(_client.GetErrorInfo("err", message.Message)), originalData);
 
-            return message.ToCallResult();
+            return new CallResult<BybitQueryResponse>(message, originalData, null);
         }
     }
 }

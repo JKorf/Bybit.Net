@@ -26,12 +26,19 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
             MessageMatcher = MessageMatcher.Create<BybitSpotSocketEvent<BybitOrderbook>>(topics, DoHandleMessage);
         }
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BybitSpotSocketEvent<BybitOrderbook>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitSpotSocketEvent<BybitOrderbook> message)
         {
-            var splitIndex = message.Data.Topic.LastIndexOf('.');
-            message.Data.Data.Timestamp = message.Data.Timestamp;
-            message.Data.Data.MatchingEngineTimestamp = message.Data.CTimestamp!.Value;
-            _handler?.Invoke(message.As(message.Data.Data, message.Data.Topic, splitIndex == -1 ? null : message.Data.Topic.Substring(splitIndex + 1), string.Equals(message.Data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(message.Data.Timestamp));
+            var splitIndex = message.Topic.LastIndexOf('.');
+            message.Data.Timestamp = message.Data.Timestamp;
+            message.Data.MatchingEngineTimestamp = message.CTimestamp!.Value;
+
+            _handler?.Invoke(
+                new DataEvent<BybitOrderbook>(message.Data, receiveTime, originalData)
+                    .WithStreamId(message.Topic)
+                    .WithSymbol(splitIndex == -1 ? null : message.Topic.Substring(splitIndex + 1))
+                    .WithUpdateType(string.Equals(message.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                    .WithDataTimestamp(message.Data.Timestamp)
+                );
             return CallResult.SuccessResult;
         }
 

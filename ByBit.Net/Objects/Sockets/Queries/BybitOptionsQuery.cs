@@ -3,6 +3,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,12 +16,12 @@ namespace Bybit.Net.Objects.Sockets.Queries
             MessageMatcher = MessageMatcher.Create<BybitOptionsQueryResponse>("resp" + string.Join("-", args!.OrderBy(a => a)), HandleMessage);
         }
 
-        public CallResult<BybitOptionsQueryResponse> HandleMessage(SocketConnection connection, DataEvent<BybitOptionsQueryResponse> message)
+        public CallResult<BybitOptionsQueryResponse> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitOptionsQueryResponse message)
         {
-            if (!message.Data.Success)
-                return new CallResult<BybitOptionsQueryResponse>(new ServerError(ErrorInfo.Unknown with { Message = message.Data.Message }), message.OriginalData);
+            if (!message.Success)
+                return new CallResult<BybitOptionsQueryResponse>(new ServerError(ErrorInfo.Unknown with { Message = message.Message }), originalData);
 
-            return message.ToCallResult();
+            return new CallResult<BybitOptionsQueryResponse>(message, originalData, null);
         }
     }
 }

@@ -1,12 +1,14 @@
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;
+using Bybit.Net.Objects.Sockets;
 using Bybit.Net.Objects.Sockets.Queries;
 using Bybit.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
@@ -56,6 +58,7 @@ namespace Bybit.Net.Clients.V5
 
         protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
+        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter2();
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
@@ -92,7 +95,18 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitSpreadTickerUpdate>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitOptionsSubscription<BybitSpreadTickerUpdate>(_logger, symbols.Select(x => $"tickers.{x}").ToArray(), handler);
+            var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitSpreadTickerUpdate>>((receiveTime, originalData, data) =>
+            {
+                handler(
+                    new DataEvent<BybitSpreadTickerUpdate>(data.Data, receiveTime, originalData)
+                        .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Topic)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new BybitOptionsSubscription<BybitSpreadTickerUpdate>(_logger, symbols.Select(x => $"tickers.{x}").ToArray(), internalHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath("/v5/public/spread"), subscription, ct).ConfigureAwait(false);
         }
 
@@ -103,7 +117,18 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitOptionsSubscription<BybitTrade[]>(_logger, symbols.Select(s => $"publicTrade.{s}").ToArray(), handler);
+            var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitTrade[]>>((receiveTime, originalData, data) =>
+            {
+                handler(
+                    new DataEvent<BybitTrade[]>(data.Data, receiveTime, originalData)
+                        .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Topic)
+                        .WithSymbol(data.Data.First().Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new BybitOptionsSubscription<BybitTrade[]>(_logger, symbols.Select(s => $"publicTrade.{s}").ToArray(), internalHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath("/v5/public/spread"), subscription, ct).ConfigureAwait(false);
         }
 
@@ -112,9 +137,20 @@ namespace Bybit.Net.Clients.V5
             => SubscribeToOrderbookUpdatesAsync(new string[] { symbol }, depth, updateHandler, ct);
 
         /// <inheritdoc />
-        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default)
+        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> handler, CancellationToken ct = default)
         {
-            var subscription = new BybitOptionsSubscription<BybitOrderbook>(_logger, symbols.Select(s => $"orderbook.{depth}.{s}").ToArray(), updateHandler);
+            var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOrderbook>>((receiveTime, originalData, data) =>
+            {
+                handler(
+                    new DataEvent<BybitOrderbook>(data.Data, receiveTime, originalData)
+                        .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Topic)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new BybitOptionsSubscription<BybitOrderbook>(_logger, symbols.Select(s => $"orderbook.{depth}.{s}").ToArray(), internalHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath("/v5/public/spread"), subscription, ct).ConfigureAwait(false);
         }
 
