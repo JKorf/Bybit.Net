@@ -49,7 +49,7 @@ namespace Bybit.Net.Clients.V5
 
         public IBybitSocketClientLinearApiShared SharedClient => this;
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter1();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter1();
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)

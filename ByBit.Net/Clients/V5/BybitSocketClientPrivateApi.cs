@@ -66,7 +66,7 @@ namespace Bybit.Net.Clients.V5
 
         protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter3();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter3();
 
         private Query GetPingQuery(ISocketConnection connection)
         {

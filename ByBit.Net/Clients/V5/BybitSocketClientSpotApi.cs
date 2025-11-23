@@ -47,7 +47,7 @@ namespace Bybit.Net.Clients.V5
                 });
         }
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter1();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter1();
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);

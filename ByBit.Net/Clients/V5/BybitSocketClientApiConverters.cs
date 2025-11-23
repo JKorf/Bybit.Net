@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Bybit.Net.Clients.V5
 {
-    internal class BybitSocketClientApiConverter1 : DynamicJsonConverter
+    internal class BybitSocketClientApiConverter1 : JsonSocketMessageHandler
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BybitExchange._serializerContext);
 
@@ -31,7 +31,7 @@ namespace Bybit.Net.Clients.V5
     }
 
 
-    internal class BybitSocketClientApiConverter2 : DynamicJsonConverter
+    internal class BybitSocketClientApiConverter2 : JsonSocketMessageHandler
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BybitExchange._serializerContext);
 
@@ -69,7 +69,7 @@ namespace Bybit.Net.Clients.V5
         ];
     }
 
-    internal class BybitSocketClientApiConverter3 : DynamicJsonConverter
+    internal class BybitSocketClientApiConverter3 : JsonSocketMessageHandler
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BybitExchange._serializerContext);
 

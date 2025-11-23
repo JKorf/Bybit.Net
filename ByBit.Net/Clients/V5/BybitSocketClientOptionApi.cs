@@ -50,7 +50,7 @@ namespace Bybit.Net.Clients.V5
                 });
         }
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter2();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter2();
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
