@@ -1,3 +1,4 @@
+using Bybit.Net.Clients.MessageHandlers;
 using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
@@ -47,7 +48,7 @@ namespace Bybit.Net.Clients.V5
                 });
         }
 
-        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter1();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler1();
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);

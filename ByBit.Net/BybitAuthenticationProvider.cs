@@ -37,13 +37,16 @@ namespace Bybit.Net
             }
             else
             {
-                var requestBody = request.BodyFormat == RequestBodyFormat.FormData ? request.BodyParameters.ToFormData() : GetSerializedBody(_messageSerializer, request.BodyParameters);
+                var requestBody = request.BodyFormat == RequestBodyFormat.FormData
+                        ? (request.BodyParameters?.ToFormData() ?? string.Empty)
+                        : GetSerializedBody(_messageSerializer, request.BodyParameters ?? new Dictionary<string, object>());
                 payload = timestamp + _credentials.Key + recvWindow + requestBody;
                 request.SetBodyContent(requestBody);
             }
 
             var signature = _credentials.CredentialType == ApiCredentialsType.Hmac ? SignHMACSHA256(payload) : SignRSASHA256(Encoding.UTF8.GetBytes(payload), SignOutputType.Base64);
 
+            request.Headers ??= new Dictionary<string, string>();
             request.Headers.Add("X-BAPI-API-KEY", _credentials.Key);
             request.Headers.Add("X-BAPI-SIGN", signature);
             request.Headers.Add("X-BAPI-SIGN-TYPE", "2");

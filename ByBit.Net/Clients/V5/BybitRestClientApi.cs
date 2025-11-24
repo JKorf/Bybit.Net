@@ -1,22 +1,25 @@
-﻿using Bybit.Net.Objects.Internal;
+﻿using Bybit.Net.Clients.MessageHandlers;
+using Bybit.Net.Interfaces.Clients;
+using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Objects.Internal;
+using Bybit.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Objects;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Threading;
-using Bybit.Net.Interfaces.Clients.V5;
-using Microsoft.Extensions.Logging;
-using Bybit.Net.Objects.Options;
-using System.Linq;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Interfaces;
-using Bybit.Net.Interfaces.Clients;
-using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.SharedApis;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -27,6 +30,7 @@ namespace Bybit.Net.Clients.V5
 
         protected override ErrorMapping ErrorMapping => BybitErrors.RestErrors;
 
+        protected override IRestMessageHandler MessageHandler { get; } = new BybitRestMessageHandler(BybitErrors.RestErrors);
         public IBybitRestClientApiShared SharedClient => this;
 
         /// <summary>
@@ -139,7 +143,7 @@ namespace Bybit.Net.Clients.V5
             return await base.SendAsync<BybitExtResult<T,U>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
         }
 
-        protected override Error? TryParseError(RequestDefinition request, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
+        protected override Error? TryParseError(RequestDefinition request, HttpResponseHeaders responseHeaders, IMessageAccessor accessor)
         {
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
             if (code == null || code == 0)
@@ -167,7 +171,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
+        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
             {

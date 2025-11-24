@@ -1,3 +1,4 @@
+using Bybit.Net.Clients.MessageHandlers;
 using Bybit.Net.Clients.V5;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
@@ -49,7 +50,7 @@ namespace Bybit.Net.Clients.V5
 
         public IBybitSocketClientLinearApiShared SharedClient => this;
 
-        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketClientApiConverter1();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler1();
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
