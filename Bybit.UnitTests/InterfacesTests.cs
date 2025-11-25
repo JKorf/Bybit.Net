@@ -11,7 +11,7 @@ using CryptoExchange.Net.Objects.Sockets;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Bybit.UnitTests
+namespace Bybit.Net.UnitTests
 {
     public class InterfacesTests
     {

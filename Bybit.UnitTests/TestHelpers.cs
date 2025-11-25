@@ -14,7 +14,7 @@ using System.Collections;
 using Bybit.Net.Clients;
 using Bybit.Net.Objects.Options;
 
-namespace Bybit.UnitTests
+namespace Bybit.Net.UnitTests
 {
     public class TestHelpers
     {
