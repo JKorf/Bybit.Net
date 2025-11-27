@@ -24,6 +24,7 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
             _handler = handler;
 
             MessageMatcher = MessageMatcher.Create<BybitSpotSocketEvent<BybitOrderbook>>(topics, DoHandleMessage);
+            MessageRouter = MessageRouter.Create<BybitSpotSocketEvent<BybitOrderbook>>(topics, DoHandleMessage);
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitSpotSocketEvent<BybitOrderbook> message)

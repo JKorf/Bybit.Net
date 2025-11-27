@@ -19,7 +19,9 @@ namespace Bybit.Net.Objects.Sockets.Queries
             base(new BybitRequestQueryMessage { RequestId = ExchangeHelpers.NextId().ToString(), Header = headers, Operation = op, Args = args?.ToArray() }, true, 1)
         {
             _client = client;
+
             MessageMatcher = MessageMatcher.Create<BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
+            MessageRouter = MessageRouter.Create<BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
         }
 
         public CallResult<BybitBatchResult<BybitBatchOrderId>[]> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>> message)

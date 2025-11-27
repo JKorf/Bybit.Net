@@ -11,6 +11,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
         {
             RequestTimeout = TimeSpan.FromSeconds(5);
             MessageMatcher = MessageMatcher.Create<BybitPong>("pong");
+            MessageRouter = MessageRouter.Create<BybitPong>("pong");
         }
     }
 }

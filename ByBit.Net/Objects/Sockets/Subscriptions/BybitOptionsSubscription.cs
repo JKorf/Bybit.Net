@@ -20,6 +20,7 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
             _handler = handler;
 
             MessageMatcher = MessageMatcher.Create<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
+            MessageRouter = MessageRouter.Create<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitSpotSocketEvent<T> message)
