@@ -19,7 +19,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
             _client = client;
 
             MessageMatcher = MessageMatcher.Create<BybitRequestQueryResponse<T>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
-            MessageRouter = MessageRouter.Create<BybitRequestQueryResponse<T>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitRequestQueryResponse<T>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
         }
 
         public CallResult<T> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitRequestQueryResponse<T> message)

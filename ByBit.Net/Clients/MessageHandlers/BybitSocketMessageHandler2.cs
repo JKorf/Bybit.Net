@@ -18,7 +18,7 @@ namespace Bybit.Net.Clients.MessageHandlers
                     new PropertyFieldReference("failTopics") { Depth = 2, ArrayValues = true },
                 ],
                 IdentifyMessageCallback = x => {
-                    var topics = x.FieldValue("successTopics").Split(',')?.ToList() ?? new();
+                    var topics = x.FieldValue("successTopics")!.Split(',')?.ToList() ?? new();
                     topics.AddRange(x.FieldValue("failTopics")?.Split(',') ?? []);
                     return "resp" + string.Join("-", topics);
                 },
@@ -29,7 +29,7 @@ namespace Bybit.Net.Clients.MessageHandlers
                 Fields = [
                     new PropertyFieldReference("topic"),
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("topic"),
+                IdentifyMessageCallback = x => x.FieldValue("topic")!,
             },
 
             new MessageEvaluator {

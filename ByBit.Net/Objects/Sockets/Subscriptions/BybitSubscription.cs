@@ -23,14 +23,12 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
             _handler = handler;
 
             MessageMatcher = MessageMatcher.Create<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
-            MessageRouter = MessageRouter.Create<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitSpotSocketEvent<T> message)
         {
-            //var splitIndex = message.Data.Topic.LastIndexOf('.');
             _handler.Invoke(receiveTime, originalData, message);
-            //_handler?.Invoke(message.As(message.Data.Data, message.Data.Topic, splitIndex == -1 ? null : message.Data.Topic.Substring(splitIndex + 1), string.Equals(message.Data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(message.Data.Timestamp));
             return CallResult.SuccessResult;
         }
 

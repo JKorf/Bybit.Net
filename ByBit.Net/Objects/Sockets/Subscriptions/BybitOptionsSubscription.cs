@@ -20,16 +20,12 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
             _handler = handler;
 
             MessageMatcher = MessageMatcher.Create<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
-            MessageRouter = MessageRouter.Create<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitSpotSocketEvent<T> message)
         {
-            var splitIndex = message.Topic.LastIndexOf('.');
-
             _handler.Invoke(receiveTime, originalData, message);
-
-            //_handler?.Invoke(message.As(message.Data, message.Topic, splitIndex == -1 ? null : message.Topic.Substring(splitIndex + 1), string.Equals(message.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(message.Timestamp));
             return CallResult.SuccessResult;
         }
 

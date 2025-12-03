@@ -16,7 +16,7 @@ namespace Bybit.Net.Clients.MessageHandlers
                 Fields = [
                     new PropertyFieldReference("req_id"),
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("req_id"),
+                IdentifyMessageCallback = x => x.FieldValue("req_id")!,
             },
 
             new MessageEvaluator {
