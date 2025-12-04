@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets.Subscriptions
 {
-    internal class BybitOptionsSubscription<T> : Subscription<BybitOptionsQueryResponse, BybitOptionsQueryResponse>
+    internal class BybitOptionsSubscription<T> : Subscription
     {
         private string[] _topics;
         private Action<DateTime, string?, BybitSpotSocketEvent<T>> _handler;

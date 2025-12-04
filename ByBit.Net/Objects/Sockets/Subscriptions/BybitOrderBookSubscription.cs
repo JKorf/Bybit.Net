@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets.Subscriptions
 {
-    internal class BybitOrderBookSubscription : Subscription<BybitQueryResponse, BybitQueryResponse>
+    internal class BybitOrderBookSubscription : Subscription
     {
         private readonly SocketApiClient _client;
         private string[] _topics;

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets.Subscriptions
 {
-    internal class BybitSubscription<T> : Subscription<BybitQueryResponse, BybitQueryResponse>
+    internal class BybitSubscription<T> : Subscription
     {
         private readonly SocketApiClient _client;
         private string[] _topics;
