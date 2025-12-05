@@ -1,0 +1,6 @@
+>1 { "req_id": "|*|", "op": "subscribe", "args": [ "kline.60.ETHUSDT" ] }
+>2 { "req_id": "|*|", "op": "subscribe", "args": [ "kline.D.ETHUSDT" ] }
+<1 { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|req_id|", "op": "subscribe" }
+<2 { "success": true, "ret_msg": "subscribe", "conn_id": "2324d924-aa4d-45b0-a858-7b8be29ab52b", "req_id": "|req_id|", "op": "subscribe" }
+=1 { "topic": "kline.60.ETHUSDT", "data": [{ "start": 1672324800000, "end": 1672325099999, "interval": "5"}], "ts": 1672324988882, "type": "snapshot"}
+=2 { "topic": "kline.D.ETHUSDT", "data": [{ "start": 1672324800000, "end": 1672325099999, "interval": "5"}], "ts": 1672324988882, "type": "snapshot"}

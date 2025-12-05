@@ -16,6 +16,26 @@ namespace Bybit.Net.UnitTests
     {
         [TestCase(false)]
         [TestCase(true)]
+        public async Task ValidateConcurrentV5Subscriptions(bool newDeserialization)
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
+            {
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
+
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "https://api.bybit.com", "data");
+            await tester.ValidateConcurrentAsync<BybitKlineUpdate[]>(
+                (client, handler) => client.V5SpotApi.SubscribeToKlineUpdatesAsync(["ETHUSDT"], Enums.KlineInterval.OneDay, handler),
+                (client, handler) => client.V5SpotApi.SubscribeToKlineUpdatesAsync(["ETHUSDT"], Enums.KlineInterval.OneHour, handler),
+                "Concurrent");
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
         public async Task ValidateSpotSubscriptions(bool newDeserialization)
         {
             var logger = new LoggerFactory();
@@ -27,7 +47,7 @@ namespace Bybit.Net.UnitTests
                 OutputOriginalData = true,
                 UseUpdatedDeserialization = newDeserialization
             }), logger);
-            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "https://api.binance.com", "data");
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "https://api.bybit.com", "data");
             await tester.ValidateAsync<BybitSpotTickerUpdate>((client, handler) => client.V5SpotApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
             await tester.ValidateAsync<BybitKlineUpdate[]>((client, handler) => client.V5SpotApi.SubscribeToLeveragedTokenKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneMonth, handler), "LeveragedKline");
             await tester.ValidateAsync<BybitLeveragedTokenTicker>((client, handler) => client.V5SpotApi.SubscribeToLeveragedTokenTickerUpdatesAsync("BTCUSDT", handler), "LeveragedTicker");
@@ -50,7 +70,7 @@ namespace Bybit.Net.UnitTests
                 OutputOriginalData = true,
                 UseUpdatedDeserialization = newDeserialization
             }), logger);
-            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Option", "https://api.binance.com", "data");
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Option", "https://api.bybit.com", "data");
             await tester.ValidateAsync<BybitOptionTickerUpdate>((client, handler) => client.V5OptionsApi.SubscribeToTickerUpdatesAsync("BTC", handler), "Ticker");
             await tester.ValidateAsync<BybitOptionTrade[]>((client, handler) => client.V5OptionsApi.SubscribeToTradeUpdatesAsync("BTC", handler), "Trades");
             await tester.ValidateAsync<BybitOrderbook>((client, handler) => client.V5OptionsApi.SubscribeToOrderbookUpdatesAsync("BTCUSDT", 25, handler), "Book");
