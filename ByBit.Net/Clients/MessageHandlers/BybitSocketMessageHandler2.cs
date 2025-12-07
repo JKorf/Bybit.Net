@@ -8,34 +8,31 @@ namespace Bybit.Net.Clients.MessageHandlers
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BybitExchange._serializerContext);
 
-        protected override MessageEvaluator[] TypeEvaluators { get; } = [
+        protected override MessageTypeDefinition[] TypeEvaluators { get; } = [
 
-            new MessageEvaluator {
-                Priority = 1,
+            new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("type") { Constraint = x => x!.Equals("COMMAND_RESP", System.StringComparison.Ordinal) },
+                    new PropertyFieldReference("type").WithEqualContstraint("COMMAND_RESP"),
                     new PropertyFieldReference("successTopics") { Depth = 2, ArrayValues = true },
                     new PropertyFieldReference("failTopics") { Depth = 2, ArrayValues = true },
                 ],
-                IdentifyMessageCallback = x => {
+                TypeIdentifierCallback = x => {
                     var topics = x.FieldValue("successTopics")!.Split(',')?.ToList() ?? new();
                     topics.AddRange(x.FieldValue("failTopics")?.Split(',') ?? []);
                     return "resp" + string.Join("-", topics);
                 },
             },
 
-            new MessageEvaluator {
-                Priority = 2,
+            new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("topic"),
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("topic")!,
+                TypeIdentifierCallback = x => x.FieldValue("topic")!,
             },
 
-            new MessageEvaluator {
-                Priority = 3,
+            new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("op") { Constraint = x => x!.Equals("pong", System.StringComparison.Ordinal) },
+                    new PropertyFieldReference("op").WithEqualContstraint("pong"),
                 ],
                 StaticIdentifier = "pong",
             }
