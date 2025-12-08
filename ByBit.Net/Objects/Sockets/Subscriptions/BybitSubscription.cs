@@ -1,12 +1,10 @@
 ﻿using Bybit.Net.Objects.Sockets.Queries;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets.Subscriptions
 {

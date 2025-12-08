@@ -1,7 +1,6 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Sockets;
 using System;
-using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets.Queries
 {

@@ -1,14 +1,11 @@
-﻿using Bybit.Net.Clients.V5;
-using Bybit.Net.Objects.Options;
+﻿using Bybit.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Net.Http;
 using System.Text;
 
 namespace Bybit.Net

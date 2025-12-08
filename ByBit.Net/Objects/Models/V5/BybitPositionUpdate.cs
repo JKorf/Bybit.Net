@@ -1,4 +1,3 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
 namespace Bybit.Net.Objects.Models.V5
 {
     /// <summary>

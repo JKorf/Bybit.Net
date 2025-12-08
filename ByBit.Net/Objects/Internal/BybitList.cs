@@ -1,6 +1,4 @@
-using Bybit.Net.Enums;
 using System;
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Objects.Internal

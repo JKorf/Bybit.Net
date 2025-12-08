@@ -1,5 +1,4 @@
 using Bybit.Net.Clients.MessageHandlers;
-using Bybit.Net.Clients.V5;
 using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Options;

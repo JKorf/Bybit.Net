@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Clients;
 using Bybit.Net.Interfaces.Clients;
+using CryptoExchange.Net.Interfaces.Clients;
 
 namespace CryptoExchange.Net.Interfaces
 {
