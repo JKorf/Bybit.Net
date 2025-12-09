@@ -14,6 +14,8 @@ namespace Bybit.Net
     {
         private static readonly IStringMessageSerializer _messageSerializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.RsaPem, ApiCredentialsType.RsaXml];
+
         public BybitAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }
