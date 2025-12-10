@@ -6,6 +6,7 @@ Bybit.Net is a strongly typed client library for accessing the [Bybit REST and W
 ## Features
 * Response data is mapped to descriptive models
 * Input parameters and response values are mapped to discriptive enum values where possible
+* High performance
 * Automatic websocket (re)connection management 
 * Client side order book implementation
 * Support for managing different accounts
@@ -15,7 +16,7 @@ Bybit.Net is a strongly typed client library for accessing the [Bybit REST and W
 * Native AOT support
 
 ## Supported Frameworks
-The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility, as well as dotnet 8.0 and 9.0 to use the latest framework features.
+The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility, as well as the latest dotnet versions to use the latest framework features.
 
 |.NET implementation|Version Support|
 |--|--|

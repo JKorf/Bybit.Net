@@ -142,54 +142,5 @@ namespace Bybit.Net.Clients.V5
         {
             return await base.SendAsync<BybitExtResult<T,U>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
         }
-
-        protected override Error? TryParseError(RequestDefinition request, HttpResponseHeaders responseHeaders, IMessageAccessor accessor)
-        {
-            var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
-            if (code == null || code == 0)
-                return null;
-
-            if (code == 10006)
-            {
-                // Rate limit error
-                var error = new ServerRateLimitError(accessor.GetValue<string>(MessagePath.Get().Property("retMsg"))!);
-                var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("X-Bapi-Limit-Reset-Timestamp", StringComparison.InvariantCultureIgnoreCase));
-                if (retryAfterHeader.Value?.Any() != true)
-                    return error;
-
-                var value = retryAfterHeader.Value.First();
-                if (!long.TryParse(value, out var timestamp))
-                    return error;
-
-                var time = DateTimeConverter.ConvertFromMilliseconds(timestamp);
-                error.RetryAfter = time;
-                return error;
-            }
-
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("retMsg"));
-            return new ServerError(code.Value, GetErrorInfo(code.Value, msg));
-        }
-
-        /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
-        {
-            if (!accessor.IsValid)
-            {
-                if (httpStatusCode == 401)
-                    return new ServerError(new ErrorInfo(ErrorType.Unauthorized, "Unauthorized"));
-
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-            }
-
-            var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("retMsg"));
-            if (msg == null)
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-
-            if (code == null)
-                return new ServerError(ErrorInfo.Unknown with { Message = msg }, exception);
-
-            return new ServerError(code.Value, GetErrorInfo(code.Value, msg), exception);
-        }
     }
 }
