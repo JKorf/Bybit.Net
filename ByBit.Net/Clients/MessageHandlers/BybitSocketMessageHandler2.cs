@@ -13,7 +13,7 @@ namespace Bybit.Net.Clients.MessageHandlers
 
             new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("type").WithEqualContstraint("COMMAND_RESP"),
+                    new PropertyFieldReference("type").WithEqualConstraint("COMMAND_RESP"),
                     new PropertyFieldReference("successTopics") { Depth = 2, ArrayValues = true },
                     new PropertyFieldReference("failTopics") { Depth = 2, ArrayValues = true },
                 ],
@@ -33,7 +33,7 @@ namespace Bybit.Net.Clients.MessageHandlers
 
             new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("op").WithEqualContstraint("pong"),
+                    new PropertyFieldReference("op").WithEqualConstraint("pong"),
                 ],
                 StaticIdentifier = "pong",
             }

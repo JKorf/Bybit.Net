@@ -36,7 +36,7 @@ namespace Bybit.Net.Clients.MessageHandlers
 
             new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("op").WithEqualContstraint("pong")
+                    new PropertyFieldReference("op").WithEqualConstraint("pong")
                 ],
                 StaticIdentifier = "pong",
             }
