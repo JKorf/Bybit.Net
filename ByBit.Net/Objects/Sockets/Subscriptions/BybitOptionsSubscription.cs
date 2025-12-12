@@ -17,6 +17,8 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
             _topics = topics;
             _handler = handler;
 
+            IndividualSubscriptionCount = topics.Length;
+
             MessageMatcher = MessageMatcher.Create<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
         }
