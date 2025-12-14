@@ -35,7 +35,7 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
             message.Data.MatchingEngineTimestamp = message.CTimestamp!.Value;
 
             _handler?.Invoke(
-                new DataEvent<BybitOrderbook>(message.Data, receiveTime, originalData)
+                new DataEvent<BybitOrderbook>(BybitExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithStreamId(message.Topic)
                     .WithSymbol(splitIndex == -1 ? null : message.Topic.Substring(splitIndex + 1))
                     .WithUpdateType(string.Equals(message.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)

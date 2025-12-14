@@ -162,7 +162,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitPositionUpdate[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitPositionUpdate[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitPositionUpdate[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
@@ -180,7 +180,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitUserTradeUpdate[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitUserTradeUpdate[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitUserTradeUpdate[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
@@ -198,7 +198,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitSpreadUserTradeUpdate[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitSpreadUserTradeUpdate[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitSpreadUserTradeUpdate[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
@@ -216,7 +216,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitMinimalUserTradeUpdate[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitMinimalUserTradeUpdate[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitMinimalUserTradeUpdate[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
@@ -234,7 +234,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOrderUpdate[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitOrderUpdate[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitOrderUpdate[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
@@ -252,7 +252,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOrderUpdate[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitOrderUpdate[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitOrderUpdate[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
@@ -270,7 +270,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitBalance[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitBalance[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitBalance[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithDataTimestamp(data.Timestamp)
@@ -287,7 +287,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitGreeks[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitGreeks[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitGreeks[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithDataTimestamp(data.Timestamp)

@@ -99,7 +99,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitSpreadTickerUpdate>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitSpreadTickerUpdate>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitSpreadTickerUpdate>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.Symbol)
@@ -121,7 +121,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitTrade[]>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitTrade[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitTrade[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
@@ -143,7 +143,7 @@ namespace Bybit.Net.Clients.V5
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOrderbook>>((receiveTime, originalData, data) =>
             {
                 handler(
-                    new DataEvent<BybitOrderbook>(data.Data, receiveTime, originalData)
+                    new DataEvent<BybitOrderbook>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.Symbol)
