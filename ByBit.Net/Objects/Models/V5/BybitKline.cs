@@ -1,10 +1,5 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
-using Bybit.Net.Converters;
 using CryptoExchange.Net.Converters;
 using System.Text.Json.Serialization;
-using System.Globalization;
-using System.Text.Json;
-using System;
 
 namespace Bybit.Net.Objects.Models.V5
 {

@@ -1,12 +1,10 @@
 ﻿using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Net.Http;
 
 namespace Bybit.Net.Clients

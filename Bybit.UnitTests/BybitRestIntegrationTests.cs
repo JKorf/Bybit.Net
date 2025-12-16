@@ -18,7 +18,7 @@ namespace Bybit.Net.UnitTests
     [NonParallelizable]
     internal class BybitRestIntegrationTests : RestIntegrationTest<BybitRestClient>
     {
-        public override bool Run { get; set; }
+        public override bool Run { get; set; } = false;
 
         public BybitRestIntegrationTests()
         {

@@ -1,7 +1,6 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Sockets;
 using System;
-using System.Collections.Generic;
 
 namespace Bybit.Net.Objects.Sockets.Queries
 {
@@ -11,6 +10,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
         {
             RequestTimeout = TimeSpan.FromSeconds(5);
             MessageMatcher = MessageMatcher.Create<BybitPong>("pong");
+            MessageRouter = MessageRouter.CreateWithoutHandler<BybitPong>("pong");
         }
     }
 }

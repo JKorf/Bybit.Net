@@ -15,7 +15,7 @@ using Bybit.Net.Interfaces.Clients;
 using System.Text.Json;
 using CryptoExchange.Net.Converters.SystemTextJson;
 
-namespace Bybit.UnitTests
+namespace Bybit.Net.UnitTests
 {
     public class BybitRestClientTests
     {

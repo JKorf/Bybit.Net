@@ -1,6 +1,6 @@
 ﻿using Bybit.Net.Interfaces.Clients.V5;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects.Options;
 
 namespace Bybit.Net.Interfaces.Clients

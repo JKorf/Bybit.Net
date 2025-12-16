@@ -1,10 +1,9 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Errors;
-using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using System.Collections.Generic;
+using CryptoExchange.Net.Sockets.Default;
+using System;
 using System.Linq;
 
 namespace Bybit.Net.Objects.Sockets.Queries
@@ -16,15 +15,17 @@ namespace Bybit.Net.Objects.Sockets.Queries
         public BybitQuery(SocketApiClient client, string op, params object[]? args) : base(new BybitRequestMessage { RequestId = ExchangeHelpers.NextId().ToString(), Operation = op, Args = args?.ToArray() }, false, 1)
         {
             _client = client;
+
             MessageMatcher = MessageMatcher.Create<BybitQueryResponse>(((BybitRequestMessage)Request).RequestId, HandleMessage);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitQueryResponse>(((BybitRequestMessage)Request).RequestId, HandleMessage);
         }
 
-        public CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DataEvent<BybitQueryResponse> message)
+        public CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitQueryResponse message)
         {
-            if (!message.Data.Success)
-                return new CallResult<BybitQueryResponse>(new ServerError(_client.GetErrorInfo("err", message.Data.Message)), message.OriginalData);
+            if (!message.Success)
+                return new CallResult<BybitQueryResponse>(new ServerError(_client.GetErrorInfo("err", message.Message)), originalData);
 
-            return message.ToCallResult();
+            return new CallResult<BybitQueryResponse>(message, originalData, null);
         }
     }
 }

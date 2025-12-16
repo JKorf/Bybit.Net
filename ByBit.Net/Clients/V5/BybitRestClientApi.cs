@@ -1,22 +1,25 @@
-﻿using Bybit.Net.Objects.Internal;
+﻿using Bybit.Net.Clients.MessageHandlers;
+using Bybit.Net.Interfaces.Clients;
+using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Objects.Internal;
+using Bybit.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Objects;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Threading;
-using Bybit.Net.Interfaces.Clients.V5;
-using Microsoft.Extensions.Logging;
-using Bybit.Net.Objects.Options;
-using System.Linq;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Interfaces;
-using Bybit.Net.Interfaces.Clients;
-using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.SharedApis;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -27,6 +30,7 @@ namespace Bybit.Net.Clients.V5
 
         protected override ErrorMapping ErrorMapping => BybitErrors.RestErrors;
 
+        protected override IRestMessageHandler MessageHandler { get; } = new BybitRestMessageHandler(BybitErrors.RestErrors);
         public IBybitRestClientApiShared SharedClient => this;
 
         /// <summary>
@@ -137,55 +141,6 @@ namespace Bybit.Net.Clients.V5
         internal async Task<WebCallResult<BybitExtResult<T,U>>> SendRawAsync<T,U>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
             return await base.SendAsync<BybitExtResult<T,U>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
-        }
-
-        protected override Error? TryParseError(RequestDefinition request, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
-        {
-            var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
-            if (code == null || code == 0)
-                return null;
-
-            if (code == 10006)
-            {
-                // Rate limit error
-                var error = new ServerRateLimitError(accessor.GetValue<string>(MessagePath.Get().Property("retMsg"))!);
-                var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("X-Bapi-Limit-Reset-Timestamp", StringComparison.InvariantCultureIgnoreCase));
-                if (retryAfterHeader.Value?.Any() != true)
-                    return error;
-
-                var value = retryAfterHeader.Value.First();
-                if (!long.TryParse(value, out var timestamp))
-                    return error;
-
-                var time = DateTimeConverter.ConvertFromMilliseconds(timestamp);
-                error.RetryAfter = time;
-                return error;
-            }
-
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("retMsg"));
-            return new ServerError(code.Value, GetErrorInfo(code.Value, msg));
-        }
-
-        /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
-        {
-            if (!accessor.IsValid)
-            {
-                if (httpStatusCode == 401)
-                    return new ServerError(new ErrorInfo(ErrorType.Unauthorized, "Unauthorized"));
-
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-            }
-
-            var code = accessor.GetValue<int?>(MessagePath.Get().Property("retCode"));
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("retMsg"));
-            if (msg == null)
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-
-            if (code == null)
-                return new ServerError(ErrorInfo.Unknown with { Message = msg }, exception);
-
-            return new ServerError(code.Value, GetErrorInfo(code.Value, msg), exception);
         }
     }
 }

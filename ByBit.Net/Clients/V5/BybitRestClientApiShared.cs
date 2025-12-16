@@ -7,7 +7,6 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1174,7 +1173,7 @@ namespace Bybit.Net.Clients.V5
 
         string IFuturesOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(32);
 
-        PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(false);
+        PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(true);
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).PlaceFuturesOrderOptions.ValidateRequest(
@@ -1200,6 +1199,8 @@ namespace Bybit.Net.Clients.V5
                 reduceOnly: request.ReduceOnly,
                 timeInForce: GetTimeInForce(request.OrderType, request.TimeInForce),
                 clientOrderId: request.ClientOrderId,
+                stopLoss: request.StopLossPrice,
+                takeProfit: request.TakeProfitPrice,
                 ct: ct).ConfigureAwait(false);
 
             if (!result)

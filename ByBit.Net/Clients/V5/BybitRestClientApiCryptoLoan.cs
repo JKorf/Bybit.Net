@@ -1,18 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Threading;
 using CryptoExchange.Net.Objects;
 using Bybit.Net.Objects.Models.V5;
-using CryptoExchange.Net;
 using Bybit.Net.Enums;
-using System.Globalization;
 using Bybit.Net.Interfaces.Clients.V5;
-using Bybit.Net.Objects.Internal;
-using System.Linq;
-using CryptoExchange.Net.RateLimiting.Guards;
-using System.Reflection.Emit;
 
 namespace Bybit.Net.Clients.V5
 {

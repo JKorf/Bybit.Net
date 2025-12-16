@@ -12,7 +12,6 @@ using Bybit.Net.Interfaces.Clients.V5;
 using Bybit.Net.Objects.Internal;
 using System.Linq;
 using CryptoExchange.Net.RateLimiting.Guards;
-using System.Drawing;
 using CryptoExchange.Net.Objects.Errors;
 
 namespace Bybit.Net.Clients.V5

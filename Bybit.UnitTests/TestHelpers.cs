@@ -14,7 +14,7 @@ using System.Collections;
 using Bybit.Net.Clients;
 using Bybit.Net.Objects.Options;
 
-namespace Bybit.UnitTests
+namespace Bybit.Net.UnitTests
 {
     public class TestHelpers
     {
@@ -36,12 +36,12 @@ namespace Bybit.UnitTests
             var response = new Mock<IResponse>();
             response.Setup(c => c.IsSuccessStatusCode).Returns(code == HttpStatusCode.OK);
             response.Setup(c => c.StatusCode).Returns(code);
-            response.Setup(c => c.GetResponseStreamAsync()).Returns(Task.FromResult((Stream)responseStream));
+            response.Setup(c => c.GetResponseStreamAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult((Stream)responseStream));
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
-            request.Setup(c => c.GetHeaders()).Returns(new KeyValuePair<string, string[]>[0]);
+            request.Setup(c => c.GetHeaders()).Returns(new HttpRequestMessage().Headers);
 
             var factory = Mock.Get(client.V5Api.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<Version>(), It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))

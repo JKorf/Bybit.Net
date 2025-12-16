@@ -5,7 +5,6 @@ using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
