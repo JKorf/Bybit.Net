@@ -14,7 +14,7 @@ namespace Bybit.Net.UnitTests
     [NonParallelizable]
     internal class BybitSocketIntegrationTests : SocketIntegrationTest<BybitSocketClient>
     {
-        public override bool Run { get; set; } = true;
+        public override bool Run { get; set; } = false;
 
         public BybitSocketIntegrationTests()
         {
