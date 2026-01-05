@@ -42,7 +42,7 @@ namespace Bybit.Net
          {
              TradeEnvironmentNames.Live => Live,
              TradeEnvironmentNames.Testnet => Testnet,
-             "Netherlands" => Netherlands,
+             "Eu" => Eu,
              "Hongkong" => HongKong,
              "Turkey" => Turkey,
              "Kazakhstan" => Kazakhstan,
@@ -57,7 +57,7 @@ namespace Bybit.Net
         /// Available environment names
         /// </summary>
         /// <returns></returns>
-        public static string[] All => [Live.Name, Testnet.Name, Netherlands.Name, HongKong.Name, Turkey.Name, Kazakhstan.Name, Georgia.Name, DemoTrading.Name];
+        public static string[] All => [Live.Name, Testnet.Name, Eu.Name, HongKong.Name, Turkey.Name, Kazakhstan.Name, Georgia.Name, DemoTrading.Name];
 
         /// <summary>
         /// Live environment
@@ -76,12 +76,12 @@ namespace Bybit.Net
                                      BybitApiAddresses.TestNet.SocketBaseAddress);
 
         /// <summary>
-        /// Live environment for users from The Netherlands
+        /// Live environment for users from the European Union
         /// </summary>
-        public static BybitEnvironment Netherlands { get; }
-            = new BybitEnvironment("Netherlands",
-                                     BybitApiAddresses.Netherlands.RestBaseAddress,
-                                     BybitApiAddresses.Netherlands.SocketBaseAddress);
+        public static BybitEnvironment Eu { get; }
+            = new BybitEnvironment("Eu",
+                                     BybitApiAddresses.Eu.RestBaseAddress,
+                                     BybitApiAddresses.Eu.SocketBaseAddress);
 
         /// <summary>
         /// Live environment for users from HongKong

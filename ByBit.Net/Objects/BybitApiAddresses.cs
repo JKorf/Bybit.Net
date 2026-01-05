@@ -33,12 +33,12 @@
         };
 
         /// <summary>
-        /// The addresses to connect to the main net for users from The Netherlands
+        /// The addresses to connect to the main net for users from the European Union
         /// </summary>
-        public static BybitApiAddresses Netherlands = new BybitApiAddresses
+        public static BybitApiAddresses Eu = new BybitApiAddresses
         {
-            RestBaseAddress = "https://api.bybit.nl",
-            SocketBaseAddress = "wss://stream.bybit.com" // As per Telegram support, normal address should be used for websockets
+            RestBaseAddress = "https://api.bybit.eu",
+            SocketBaseAddress = "wss://stream.bybit.eu" // As per Telegram support, normal address should be used for websockets
         };
 
         /// <summary>
