@@ -168,6 +168,16 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 6.1.0 - 07 Jan 2026
+    * Updated CryptoExchange.Net version to 10.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Added DataTimeLocal and DataAge properties to DataEvent object
+    * Added UpdateServerTime, UpdateLocalTime and DataAge properties to (I)SymbolOrderBook
+    * Added Inactive value to PositionStatus
+    * Removed `The Netherlands` Bybit environment, added `Eu`
+    * Fixed typo in Liquidation PositionStatus enum value
+    * Fixed deserialization error when array result is expected but empty object is returned with error response
+    * Fixed Shared SetFuturesTpSlAsync implementation not passing tpSlMode parameter
+
 * Version 6.0.0 - 16 Dec 2025
     * Added Net10.0 target framework
     * Updated CryptoExchange.Net version to 10.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
