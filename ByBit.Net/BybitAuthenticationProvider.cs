@@ -1,12 +1,17 @@
 ﻿using Bybit.Net.Objects.Options;
+using Bybit.Net.Objects.Sockets.Queries;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Bybit.Net
 {
@@ -25,7 +30,7 @@ namespace Bybit.Net
             if (!request.Authenticated)
                 return;
 
-            var timestamp = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
+            var timestamp = GetMillisecondTimestamp(apiClient);
             var recvWindow = ((BybitRestOptions)apiClient.ClientOptions).ReceiveWindow.TotalMilliseconds;
             string payload;
             if (request.ParameterPosition == HttpMethodParameterPosition.InUri)
@@ -53,6 +58,36 @@ namespace Bybit.Net
             request.Headers.Add("X-BAPI-RECV-WINDOW", recvWindow.ToString());
         }
 
-        public string Sign(string toSign) => SignHMACSHA256(toSign);
+        public override Query? GetAuthenticationQuery(SocketApiClient apiClient, SocketConnection connection, Dictionary<string, object?>? context = null)
+        {
+            if (connection.ConnectionUri.AbsolutePath.EndsWith("private"))
+            {
+                // Auth subscription
+                var expireTime = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddSeconds(30))!;
+                var key = ApiKey;
+                var sign = SignHMACSHA256($"GET/realtime{expireTime}");
+
+                return new BybitQuery(apiClient, "auth", new object[]
+                {
+                key,
+                expireTime,
+                sign
+                });
+            }
+            else
+            {
+                // Trading
+                var expireTime = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddSeconds(30))!;
+                var key = ApiKey;
+                var sign = SignHMACSHA256($"GET/realtime{expireTime}");
+
+                return new BybitRequestQuery<object>(apiClient, "auth", null, new object[]
+                {
+                key,
+                expireTime,
+                sign
+                });
+            }
+        }
     }
 }

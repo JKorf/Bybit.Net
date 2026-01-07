@@ -80,12 +80,14 @@ namespace Bybit.Net.Clients.V5
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitKlineUpdate[]>>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 handler(
                     new DataEvent<BybitKlineUpdate[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Topic.Substring(data.Topic.LastIndexOf('.') + 1))
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
@@ -102,12 +104,14 @@ namespace Bybit.Net.Clients.V5
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitLiquidation>>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 handler(
                     new DataEvent<BybitLiquidation>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
@@ -124,12 +128,14 @@ namespace Bybit.Net.Clients.V5
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitLiquidationUpdate[]>>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 handler(
                     new DataEvent<BybitLiquidationUpdate[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
             var subscription = new BybitSubscription<BybitLiquidationUpdate[]>(_logger, this, symbols.Select(x => $"allLiquidation.{x}").ToArray(), internalHandler);
@@ -145,13 +151,15 @@ namespace Bybit.Net.Clients.V5
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOrderPriceLimit>>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 data.Data.Timestamp = data.Timestamp;
                 handler(
                     new DataEvent<BybitOrderPriceLimit>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
@@ -164,11 +172,13 @@ namespace Bybit.Net.Clients.V5
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitSystemStatus[]>>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 handler(
                     new DataEvent<BybitSystemStatus[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
@@ -185,12 +195,14 @@ namespace Bybit.Net.Clients.V5
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitRpiOrderbook>>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 handler(
                     new DataEvent<BybitRpiOrderbook>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 

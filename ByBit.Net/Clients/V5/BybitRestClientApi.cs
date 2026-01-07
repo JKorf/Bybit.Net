@@ -26,8 +26,6 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitRestClientApi"/>
     internal partial class BybitRestClientApi : RestApiClient, IBybitRestClientApi
     {
-        internal TimeSyncState _timeSyncState = new TimeSyncState("Bybit V5 API");
-
         protected override ErrorMapping ErrorMapping => BybitErrors.RestErrors;
 
         protected override IRestMessageHandler MessageHandler { get; } = new BybitRestMessageHandler(BybitErrors.RestErrors);
@@ -105,14 +103,6 @@ namespace Bybit.Net.Clients.V5
 
             return time.As(time.Data.TimeNano);
         }
-
-        /// <inheritdoc />
-        public override TimeSyncInfo? GetTimeSyncInfo()
-            => new TimeSyncInfo(_logger, (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp), (ApiOptions.TimestampRecalculationInterval ?? ClientOptions.TimestampRecalculationInterval), _timeSyncState);
-
-        /// <inheritdoc />
-        public override TimeSpan? GetTimeOffset()
-            => _timeSyncState.TimeOffset;
 
         internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {

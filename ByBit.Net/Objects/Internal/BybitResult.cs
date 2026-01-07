@@ -49,6 +49,7 @@ namespace Bybit.Net.Objects.Internal
     {
 #pragma warning disable 8618
         [JsonPropertyName("result")]
+        [JsonConverter(typeof(ObjectOrArrayConverter))] // Error can return empty object `{}` for array responses 
         public T Result { get; set; }
 #pragma warning restore
     }

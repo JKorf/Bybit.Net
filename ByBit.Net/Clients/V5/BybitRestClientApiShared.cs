@@ -1946,6 +1946,7 @@ namespace Bybit.Net.Clients.V5
                 takeProfitOrderType: request.TpSlSide == SharedTpSlSide.TakeProfit ? OrderType.Market : null,
                 stopLoss: request.TpSlSide == SharedTpSlSide.StopLoss ? request.TriggerPrice : null,
                 stopLossOrderType: request.TpSlSide == SharedTpSlSide.StopLoss ? OrderType.Market : null,
+                stopLossTakeProfitMode: StopLossTakeProfitMode.Full,
                 ct: ct).ConfigureAwait(false);
 
             if (!result)

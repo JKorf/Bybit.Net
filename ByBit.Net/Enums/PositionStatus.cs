@@ -18,11 +18,16 @@ namespace Bybit.Net.Enums
         /// Liquidation
         /// </summary>
         [Map("Liq")]
-        Liqidation,
+        Liquidation,
         /// <summary>
         /// Auto deleverage
         /// </summary>
         [Map("Adl")]
-        AutoDeleverage
+        AutoDeleverage,
+        /// <summary>
+        /// Inactive
+        /// </summary>
+        [Map("Inactive")]
+        Inactive
     }
 }

@@ -74,12 +74,14 @@ namespace Bybit.Net.Clients.V5
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitSpotTickerUpdate>>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 handler(
                     new DataEvent<BybitSpotTickerUpdate>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(string.Equals(data.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
@@ -96,12 +98,14 @@ namespace Bybit.Net.Clients.V5
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitTrade[]>>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 handler(
                     new DataEvent<BybitTrade[]>(BybitExchange.ExchangeName, data.Data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId(data.Topic)
                         .WithSymbol(data.Data.First().Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
