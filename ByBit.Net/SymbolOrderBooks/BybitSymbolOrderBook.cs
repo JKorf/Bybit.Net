@@ -96,9 +96,9 @@ namespace Bybit.Net.SymbolOrderBooks
         private void ProcessUpdate(DataEvent<BybitOrderbook> data)
         {
             if (data.UpdateType == SocketUpdateType.Snapshot)
-                SetInitialOrderBook(data.Data.UpdateId, data.Data.Bids, data.Data.Asks);
+                SetInitialOrderBook(data.Data.UpdateId, data.Data.Bids, data.Data.Asks, data.DataTime, data.DataTimeLocal);
             else
-                UpdateOrderBook(data.Data.UpdateId, data.Data.Bids, data.Data.Asks);
+                UpdateOrderBook(data.Data.UpdateId, data.Data.Bids, data.Data.Asks, data.DataTime, data.DataTimeLocal);
         }
 
         /// <inheritdoc />
