@@ -41,7 +41,7 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
                     .WithStreamId(message.Topic)
                     .WithSymbol(splitIndex == -1 ? null : message.Topic.Substring(splitIndex + 1))
                     .WithUpdateType(string.Equals(message.Type, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-                    .WithDataTimestamp(message.Data.Timestamp, _client.GetTimeOffset())
+                    .WithDataTimestamp(message.Timestamp, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }
