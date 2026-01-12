@@ -1066,6 +1066,37 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Set Spot Margin Auto Repay Mode
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpotMarginAutoRepayMode[]>> SetSpotMarginAutoRepayModeAsync(bool enabled, string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("currency", asset);
+            parameters.Add("autoRepayMode", enabled ? "1" : "0");
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-margin-trade/set-auto-repay-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitSpotMarginAutoRepayModeWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitSpotMarginAutoRepayMode[]>(result.Data?.Data);
+        }
+
+        #endregion
+
+        #region Get Spot Margin Auto Repay Mode
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpotMarginAutoRepayMode[]>> GetSpotMarginAutoRepayModeAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("currency", asset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/get-auto-repay-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitSpotMarginAutoRepayModeWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitSpotMarginAutoRepayMode[]>(result.Data?.Data);
+        }
+
+        #endregion
+
         #region Get Broker Account Info
 
         /// <inheritdoc />

@@ -803,5 +803,22 @@ namespace Bybit.Net.Interfaces.Clients.V5
             int? page = null,
             int? pageSize = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Set Spot Margin auto repay mode
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/set-auto-repay-mode" /></para>
+        /// </summary>
+        /// <param name="asset">Asset. If not provided set for all assets</param>
+        /// <param name="enabled">Enable or not</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpotMarginAutoRepayMode[]>> SetSpotMarginAutoRepayModeAsync(bool enabled, string? asset = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get Spot Margin auto repay mode
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/get-auto-repay-mode" /></para>
+        /// </summary>
+        /// <param name="asset">Asset. If not provided get mode for all assets</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpotMarginAutoRepayMode[]>> GetSpotMarginAutoRepayModeAsync(string? asset = null, CancellationToken ct = default);
     }
 }
