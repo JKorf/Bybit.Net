@@ -1,0 +1,29 @@
+GET
+/v5/asset/covert/small-balance-list
+true
+{
+    "retCode": 0,
+    "retMsg": "ok",
+    "result": {
+        "smallAssetCoins": [
+            {
+                "fromCoin": "XRP",
+                "supportConvert": 1,
+                "availableBalance": "0.0002",
+                "baseValue": "0.00036554008",
+                "toCoin": "",
+                "toAmount": "",
+                "exchangeRate": "",
+                "feeInfo": null,
+                "taxFeeInfo": null
+            }
+        ],
+        "supportToCoins": [
+            "MNT",
+            "USDT",
+            "USDC"
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1766125546274
+}

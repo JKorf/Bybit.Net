@@ -67,6 +67,9 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Account.GetConvertHistoryAsync(Enums.ConvertAccountType.ConvertFunding), "GetConvertHistory", "result.list", ignoreProperties: new List<string> { "extInfo" });
             await tester.ValidateAsync(client => client.V5Api.Account.SetPriceLimitBehaviorAsync(Category.Spot, false), "SetPriceLimitBehavior");
             await tester.ValidateAsync(client => client.V5Api.Account.GetWithdrawAddressListAsync(), "GetWithdrawAddressList");
+            await tester.ValidateAsync(client => client.V5Api.Account.GetSmallBalanceAssetsAsync(ConvertAccountType.ConvertUta), "GetSmallBalanceAssets", ignoreProperties: ["toCoin", "toAmount", "exchangeRate", "feeInfo", "taxFeeInfo"]);
+            await tester.ValidateAsync(client => client.V5Api.Account.GetSmallBalancesQuoteAsync(ConvertAccountType.ConvertUta, ["ETH"], "USDT"), "GetSmallBalancesQuote", ignoreProperties: ["taxFeeItems"]);
+            await tester.ValidateAsync(client => client.V5Api.Account.GetSmallBalancesExchangeHistoryAsync(), "GetSmallBalancesExchangeHistory", ignoreProperties: ["taxFeeItems"]);
         }
 
         [Test]
