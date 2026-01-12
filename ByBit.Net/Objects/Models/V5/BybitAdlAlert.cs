@@ -32,14 +32,6 @@ namespace Bybit.Net.Objects.Models.V5
         internal decimal WSBalance { set => Balance = value; }
 
         /// <summary>
-        /// Maximum balance of the insurance pool in the last 8 hours
-        /// </summary>
-        [JsonPropertyName("maxBalance")]
-        public decimal MaxBalance { get; set; }
-        [JsonInclude, JsonPropertyName("mb")]
-        internal decimal WSMaxBalance { set => MaxBalance = value; }
-
-        /// <summary>
         /// PnL ratio threshold for triggering contract PnL drawdown ADL
         /// </summary>
         [JsonPropertyName("insurancePnlRatio")]

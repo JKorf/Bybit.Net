@@ -1,0 +1,63 @@
+GET
+/v5/asset/covert/small-balance-history
+true
+{
+    "retCode": 0,
+    "retMsg": "ok",
+    "result": {
+        "cursor": "1",
+        "size": "50",
+        "lastPage": "1",
+        "totalCount": "1",
+        "records": [
+            {
+                "accountType": "eb_convert_uta",
+                "exchangeTxId": "1010075157602517596339322880",
+                "toCoin": "USDC",
+                "toAmount": "0.000728325793503221",
+                "subRecords": [
+                    {
+                        "fromCoin": "SOL",
+                        "fromAmount": "0.000003",
+                        "toCoin": "USDC",
+                        "toAmount": "0.000363439538230885",
+                        "feeCoin": "USDC",
+                        "feeAmount": "0.000007417133433283",
+                        "status": "success",
+                        "taxFeeInfo": {
+                            "totalAmount": "0",
+                            "feeCoin": "",
+                            "taxFeeItems": []
+                        }
+                    },
+                    {
+                        "fromCoin": "XRP",
+                        "fromAmount": "0.0002",
+                        "toCoin": "USDC",
+                        "toAmount": "0.000364886255272336",
+                        "feeCoin": "USDC",
+                        "feeAmount": "0.000007446658270864",
+                        "status": "success",
+                        "taxFeeInfo": {
+                            "totalAmount": "0",
+                            "feeCoin": "",
+                            "taxFeeItems": []
+                        }
+                    }
+                ],
+                "status": "success",
+                "createdAt": "1766128195000",
+                "exchangeSource": "small_asset_uta",
+                "feeCoin": "USDC",
+                "totalFeeAmount": "0.000014863791704147",
+                "totalTaxFeeInfo": {
+                    "totalAmount": "0",
+                    "feeCoin": "",
+                    "taxFeeItems": []
+                }
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1766129394948
+}

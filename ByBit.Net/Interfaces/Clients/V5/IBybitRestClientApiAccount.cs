@@ -747,5 +747,78 @@ namespace Bybit.Net.Interfaces.Clients.V5
             int? limit = null,
             string? cursor = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Get small balance assets
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert-small-balance/small-balanc-coins" /></para>
+        /// </summary>
+        /// <param name="accountType">Account type</param>
+        /// <param name="fromAsset">From asset filter</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSmallBalanceAssets>> GetSmallBalanceAssetsAsync(
+            ConvertAccountType accountType,
+            string? fromAsset = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get small balance exchange quote
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert-small-balance/request-quote" /></para>
+        /// </summary>
+        /// <param name="accountType">Account type</param>
+        /// <param name="fromAssets">Assets to convert</param>
+        /// <param name="toAsset">Output asset</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSmallBalancesQuote>> GetSmallBalancesQuoteAsync(
+            ConvertAccountType accountType,
+            IEnumerable<string> fromAssets,
+            string toAsset,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Confirm small balances exchange quote
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert-small-balance/confirm-quote" /></para>
+        /// </summary>
+        /// <param name="quoteId">Quote id</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSmallBalancesQuoteResult>> ConfirmSmallBalancesQuoteAsync(
+            string quoteId,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get small balances exchange history
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/asset/convert-small-balance/exchange-history" /></para>
+        /// </summary>
+        /// <param name="accountType">Filter by account</param>
+        /// <param name="quoteId">Filter by quote id</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="page">Page number</param>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitPage<BybitSmallBalancesExchangeItem>>> GetSmallBalancesExchangeHistoryAsync(
+            ConvertAccountType? accountType = null,
+            string? quoteId = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? page = null,
+            int? pageSize = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Set Spot Margin auto repay mode
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/set-auto-repay-mode" /></para>
+        /// </summary>
+        /// <param name="asset">Asset. If not provided set for all assets</param>
+        /// <param name="enabled">Enable or not</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpotMarginAutoRepayMode[]>> SetSpotMarginAutoRepayModeAsync(bool enabled, string? asset = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get Spot Margin auto repay mode
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/get-auto-repay-mode" /></para>
+        /// </summary>
+        /// <param name="asset">Asset. If not provided get mode for all assets</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BybitSpotMarginAutoRepayMode[]>> GetSpotMarginAutoRepayModeAsync(string? asset = null, CancellationToken ct = default);
     }
 }

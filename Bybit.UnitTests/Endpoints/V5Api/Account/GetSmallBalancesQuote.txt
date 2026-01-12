@@ -1,0 +1,66 @@
+POST
+/v5/asset/covert/get-quote
+true
+{
+    "retCode": 0,
+    "retMsg": "ok",
+    "result": {
+        "quoteId": "1010075157602510902217555968",
+        "result": {
+            "quoteCreateTime": "1766126593232",
+            "quoteExpireTime": "1766126623231",
+            "exchangeCoins": [
+                {
+                    "fromCoin": "SOL",
+                    "supportConvert": 1,
+                    "availableBalance": "0.000003",
+                    "baseValue": "0.00036837",
+                    "toCoin": "USDC",
+                    "toAmount": "0.00035721396701649",
+                    "exchangeRate": "119.07132233883026",
+                    "feeInfo": {
+                        "feeCoin": "USDC",
+                        "amount": "0.00000729008095952",
+                        "feeRate": "0.02"
+                    },
+                    "taxFeeInfo": {
+                        "totalAmount": "0",
+                        "feeCoin": "",
+                        "taxFeeItems": []
+                    }
+                },
+                {
+                    "fromCoin": "XRP",
+                    "supportConvert": 1,
+                    "availableBalance": "0.0002",
+                    "baseValue": "0.00024536",
+                    "toCoin": "USDC",
+                    "toAmount": "0.000359866676661744",
+                    "exchangeRate": "1.79933338330872",
+                    "feeInfo": {
+                        "feeCoin": "USDC",
+                        "amount": "0.000007344217891056",
+                        "feeRate": "0.02"
+                    },
+                    "taxFeeInfo": {
+                        "totalAmount": "0",
+                        "feeCoin": "",
+                        "taxFeeItems": []
+                    }
+                }
+            ],
+            "totalFeeInfo": {
+                "feeCoin": "USDC",
+                "amount": "0.000014634298850576",
+                "feeRate": "0.02"
+            },
+            "totalTaxFeeInfo": {
+                "totalAmount": "0",
+                "feeCoin": "",
+                "taxFeeItems": []
+            }
+        }
+    },
+    "retExtInfo": {},
+    "time": 1766126593232
+}

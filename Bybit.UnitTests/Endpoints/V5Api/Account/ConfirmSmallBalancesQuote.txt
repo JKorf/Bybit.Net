@@ -1,0 +1,16 @@
+POST
+/v5/asset/covert/small-balance-execute
+true
+{
+    "retCode": 0,
+    "retMsg": "ok",
+    "result": {
+        "quoteId": "1010075157602517596339322880",
+        "exchangeTxId": "1010075157602517596339322880",
+        "submitTime": "1766128195512",
+        "status": "processing",
+        "msg": ""
+    },
+    "retExtInfo": {},
+    "time": 1766128195512
+}

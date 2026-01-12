@@ -1066,6 +1066,37 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Set Spot Margin Auto Repay Mode
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpotMarginAutoRepayMode[]>> SetSpotMarginAutoRepayModeAsync(bool enabled, string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("currency", asset);
+            parameters.Add("autoRepayMode", enabled ? "1" : "0");
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "v5/spot-margin-trade/set-auto-repay-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitSpotMarginAutoRepayModeWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitSpotMarginAutoRepayMode[]>(result.Data?.Data);
+        }
+
+        #endregion
+
+        #region Get Spot Margin Auto Repay Mode
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSpotMarginAutoRepayMode[]>> GetSpotMarginAutoRepayModeAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("currency", asset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/spot-margin-trade/get-auto-repay-mode", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitSpotMarginAutoRepayModeWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BybitSpotMarginAutoRepayMode[]>(result.Data?.Data);
+        }
+
+        #endregion
+
         #region Get Broker Account Info
 
         /// <inheritdoc />
@@ -1333,6 +1364,90 @@ namespace Bybit.Net.Clients.V5
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/asset/withdraw/query-address", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync<BybitResponse<BybitWithdrawAddress>>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Small Balance Assets
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSmallBalanceAssets>> GetSmallBalanceAssetsAsync(
+            ConvertAccountType accountType,
+            string? fromAsset = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("accountType", accountType);
+            parameters.AddOptional("fromCoin", fromAsset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/asset/covert/small-balance-list", BybitExchange.RateLimiter.BybitRest, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BybitSmallBalanceAssets>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Small Balances Quote
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSmallBalancesQuote>> GetSmallBalancesQuoteAsync(
+            ConvertAccountType accountType,
+            IEnumerable<string> fromAssets,
+            string toAsset,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("accountType", accountType);
+            parameters.Add("fromCoinList", fromAssets.ToArray());
+            parameters.Add("toCoin", toAsset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/asset/covert/get-quote", BybitExchange.RateLimiter.BybitRest, 1, true,
+                limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BybitSmallBalancesQuote>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Confirm Small Balances Quote
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitSmallBalancesQuoteResult>> ConfirmSmallBalancesQuoteAsync(
+            string quoteId,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("quoteId", quoteId);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/v5/asset/covert/small-balance-execute", BybitExchange.RateLimiter.BybitRest, 1, true,
+                limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BybitSmallBalancesQuoteResult>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Small Balance Exchange History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BybitPage<BybitSmallBalancesExchangeItem>>> GetSmallBalancesExchangeHistoryAsync(
+            ConvertAccountType? accountType = null,
+            string? quoteId = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? page = null,
+            int? pageSize = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalEnum("accountType", accountType);
+            parameters.AddOptional("quoteId", quoteId);
+            parameters.AddOptionalMilliseconds("startTime", startTime);
+            parameters.AddOptionalMilliseconds("endTime", endTime);
+            parameters.AddOptional("cursor", page);
+            parameters.AddOptional("size", pageSize);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v5/asset/covert/small-balance-history", BybitExchange.RateLimiter.BybitRest, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BybitPage<BybitSmallBalancesExchangeItem>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

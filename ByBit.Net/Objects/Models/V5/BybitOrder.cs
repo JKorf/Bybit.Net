@@ -22,6 +22,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("orderLinkId")]
         public string? ClientOrderId { get; set; }
         /// <summary>
+        /// Linked parent order for stop loss / take profit orders for futures/options orders 
+        /// </summary>
+        [JsonPropertyName("parentOrderLinkId")]
+        public string? ParentOrderId { get; set; }
+        /// <summary>
         /// Block trade id
         /// </summary>
         [JsonPropertyName("blockTradeId")]

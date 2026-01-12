@@ -1,0 +1,17 @@
+POST
+/v5/spot-margin-trade/set-auto-repay-mode
+true
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "data": [
+            {
+                "currency": "ETH",
+                "autoRepayMode": "1"
+            }
+        ]
+    },
+    "retExtInfo": {},
+    "time": 1766976677678
+}

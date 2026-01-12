@@ -7,6 +7,12 @@ using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Converters
 {
+    [JsonSerializable(typeof(BybitResult<BybitSmallBalanceAssets>))]
+    [JsonSerializable(typeof(BybitResult<BybitSmallBalancesQuote>))]
+    [JsonSerializable(typeof(BybitResult<BybitSmallBalancesQuoteResult>))]
+    [JsonSerializable(typeof(BybitResult<BybitPage<BybitSmallBalancesExchangeItem>>))]
+    [JsonSerializable(typeof(BybitResult<BybitSpotMarginAutoRepayModeWrapper>))]
+
     [JsonSerializable(typeof(BybitExtResult<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>))]
     [JsonSerializable(typeof(BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>))]
     [JsonSerializable(typeof(BybitRequestQueryResponse<object>))]
