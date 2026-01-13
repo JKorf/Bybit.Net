@@ -168,6 +168,15 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 6.2.0 - 13 Jan 2026
+    * Updated CryptoExchange.Net to version 10.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Added SequenceNumber to order book websocket updates
+    * Added small balances convert endpoints
+    * Added restClient.V5Api.Account.Get/SetSpotMarginAutoRepayModeAsync endpoints
+    * Added ParentOrderId to BybitOrder model
+    * Added missing timestamping to SymbolOrderBook implementation
+    * Removed MaxBalance property from BybitAdlAlert model as its deprecated
+
 * Version 6.1.0 - 07 Jan 2026
     * Updated CryptoExchange.Net version to 10.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Added DataTimeLocal and DataAge properties to DataEvent object
