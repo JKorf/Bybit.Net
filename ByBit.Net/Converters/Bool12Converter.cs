@@ -2,7 +2,7 @@
 {
     internal class Bool12Converter : IntBoolConverter
     {
-        public Bool12Converter(int trueValue) : base(1)
+        public Bool12Converter() : base(1)
         {
         }
     }
