@@ -53,7 +53,6 @@ namespace Bybit.Net.Clients.V5
             MessageSendSizeLimit = 21000;
         }
 
-        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
         /// <inheritdoc />

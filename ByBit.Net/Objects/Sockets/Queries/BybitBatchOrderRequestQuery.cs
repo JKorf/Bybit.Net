@@ -20,7 +20,6 @@ namespace Bybit.Net.Objects.Sockets.Queries
         {
             _client = client;
 
-            MessageMatcher = MessageMatcher.Create<BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
         }
 

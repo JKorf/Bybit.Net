@@ -73,7 +73,6 @@ namespace Bybit.Net.Clients.V5
         }
         #endregion
 
-        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
         /// <inheritdoc />

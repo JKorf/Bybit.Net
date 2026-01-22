@@ -26,9 +26,6 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientLinearApi" />
     internal partial class BybitSocketClientInverseApi : BybitSocketClientBaseApi, IBybitSocketClientInverseApi
     {
-        private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
-        private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
-
         internal BybitSocketClientInverseApi(ILogger log, BybitSocketOptions options)
             : base(log, options, "/v5/public/inverse")
         {
@@ -48,18 +45,7 @@ namespace Bybit.Net.Clients.V5
         }
         public IBybitSocketClientInverseApiShared SharedClient => this;
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler1();
-
-        /// <inheritdoc />
-        public override string? GetListenerIdentifier(IMessageAccessor message)
-        {
-            var reqId = message.GetValue<string>(_reqIdPath);
-            if (reqId != null)
-                return reqId;
-
-            return message.GetValue<string>(_topicPath);
-        }
-
-
+        
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitLinearTickerUpdate>> handler, CancellationToken ct = default)
             => SubscribeToTickerUpdatesAsync(new string[] { symbol }, handler, ct);

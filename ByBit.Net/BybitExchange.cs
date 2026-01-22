@@ -20,6 +20,19 @@ namespace Bybit.Net
     public static class BybitExchange
     {
         /// <summary>
+        /// Platform metadata
+        /// </summary>
+        public static PlatformInfo Metadata { get; } = new PlatformInfo(
+                "Bybit",
+                "Bybit",
+                "https://raw.githubusercontent.com/JKorf/Bybit.Net/master/ByBit.Net/Icon/icon.png",
+                "https://www.bybit.com",
+                ["https://bybit-exchange.github.io/docs/v5/intro"],
+                PlatformType.CryptoCurrencyExchange,
+                CentralizationType.Centralized
+                );
+
+        /// <summary>
         /// Exchange name
         /// </summary>
         public static string ExchangeName => "Bybit";

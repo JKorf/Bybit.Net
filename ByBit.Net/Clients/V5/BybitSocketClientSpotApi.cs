@@ -27,9 +27,6 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientSpotApi" />
     internal partial class BybitSocketClientSpotApi : BybitSocketClientBaseApi, IBybitSocketClientSpotApi
     {
-        private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
-        private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
-
         internal BybitSocketClientSpotApi(ILogger logger, BybitSocketOptions options)
             : base(logger, options, "/v5/public/spot")
         {
@@ -54,16 +51,6 @@ namespace Bybit.Net.Clients.V5
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
 
         public IBybitSocketClientSpotApiShared SharedClient => this;
-
-        /// <inheritdoc />
-        public override string? GetListenerIdentifier(IMessageAccessor message)
-        {
-            var reqId = message.GetValue<string>(_reqIdPath);
-            if (reqId != null)
-                return reqId;
-
-            return message.GetValue<string>(_topicPath);
-        }
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTickerUpdate>> handler, CancellationToken ct = default)

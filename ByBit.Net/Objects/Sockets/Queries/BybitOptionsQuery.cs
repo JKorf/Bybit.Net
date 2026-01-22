@@ -12,7 +12,6 @@ namespace Bybit.Net.Objects.Sockets.Queries
     {
         public BybitOptionsQuery(string op, params object[] args) : base(new BybitRequestMessage { RequestId = ExchangeHelpers.NextId().ToString(), Operation = op, Args = args?.ToArray() }, false, 1)
         {
-            MessageMatcher = MessageMatcher.Create<BybitOptionsQueryResponse>("resp" + string.Join("-", args!.OrderBy(a => a)), HandleMessage);
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitOptionsQueryResponse>("resp" + string.Join("-", args!.OrderBy(a => a)), HandleMessage);
         }
 

@@ -33,11 +33,6 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientPrivateApi" />
     internal partial class BybitSocketClientPrivateApi : SocketApiClient, IBybitSocketClientPrivateApi
     {
-        private static readonly MessagePath _reqIdPath = MessagePath.Get().Property("req_id");
-        private static readonly MessagePath _reqId2Path = MessagePath.Get().Property("reqId");
-        private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
-        private static readonly MessagePath _opPath = MessagePath.Get().Property("op");
-
         protected override ErrorMapping ErrorMapping => BybitErrors.WebsocketErrors;
 
         public new BybitSocketOptions ClientOptions => (BybitSocketOptions)base.ClientOptions;
@@ -65,7 +60,6 @@ namespace Bybit.Net.Clients.V5
             SetDedicatedConnection(BaseAddress.AppendPath("/v5/trade"), true);
         }
 
-        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler3();
 
@@ -102,24 +96,6 @@ namespace Bybit.Net.Clients.V5
         }
 
         public IBybitSocketClientPrivateApiShared SharedClient => this;
-
-        /// <inheritdoc />
-        public override string? GetListenerIdentifier(IMessageAccessor message)
-        {
-            var reqId = message.GetValue<string>(_reqIdPath);
-            if (reqId != null)
-                return reqId;
-
-            var reqId2 = message.GetValue<string>(_reqId2Path);
-            if (reqId2 != null)
-                return reqId2;
-
-            var op = message.GetValue<string>(_opPath);
-            if (string.Equals(op, "pong"))
-                return op;
-
-            return message.GetValue<string>(_topicPath);
-        }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BybitPositionUpdate[]>> handler, CancellationToken ct = default)

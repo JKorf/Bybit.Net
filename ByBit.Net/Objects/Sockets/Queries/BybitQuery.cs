@@ -16,7 +16,6 @@ namespace Bybit.Net.Objects.Sockets.Queries
         {
             _client = client;
 
-            MessageMatcher = MessageMatcher.Create<BybitQueryResponse>(((BybitRequestMessage)Request).RequestId, HandleMessage);
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitQueryResponse>(((BybitRequestMessage)Request).RequestId, HandleMessage);
         }
 

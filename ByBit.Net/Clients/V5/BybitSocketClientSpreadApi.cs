@@ -28,12 +28,6 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientSpreadApi" />
     internal partial class BybitSocketClientSpreadApi : SocketApiClient, IBybitSocketClientSpreadApi
     {
-        private static readonly MessagePath _typePath = MessagePath.Get().Property("type");
-        private static readonly MessagePath _successPath = MessagePath.Get().Property("data").Property("successTopics");
-        private static readonly MessagePath _failPath = MessagePath.Get().Property("data").Property("failTopics");
-        private static readonly MessagePath _topicPath = MessagePath.Get().Property("topic");
-        private static readonly MessagePath _opPath = MessagePath.Get().Property("op");
-
         private readonly string _wsPublicAddress;
 
         internal BybitSocketClientSpreadApi(ILogger log, BybitSocketOptions options)
@@ -57,37 +51,12 @@ namespace Bybit.Net.Clients.V5
                 });
         }
 
-        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler2();
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
             => BybitExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
-
-        /// <inheritdoc />
-        public override string? GetListenerIdentifier(IMessageAccessor message)
-        {
-            var type = message.GetValue<string>(_typePath);
-            if (string.Equals(type, "COMMAND_RESP", StringComparison.Ordinal))
-            {
-                var result = new List<string?>();
-                var success = message.GetValues<string>(_successPath);
-                if (success == null)
-                    return null;
-
-                result.AddRange(success);
-                var fails = message.GetValues<string>(_failPath)!;
-                result.AddRange(fails);
-                return "resp" + string.Join("-", result.OrderBy(s => s));
-            }
-
-            var op = message.GetValue<string>(_opPath);
-            if (string.Equals(op, "pong", StringComparison.Ordinal))
-                return "pong";
-
-            return message.GetValue<string>(_topicPath);
-        }
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitSpreadTickerUpdate>> handler, CancellationToken ct = default)
