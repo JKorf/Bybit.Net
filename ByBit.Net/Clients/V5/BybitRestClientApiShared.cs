@@ -1566,6 +1566,7 @@ namespace Bybit.Net.Clients.V5
                 Leverage = x.Leverage,
                 StopLossPrice = x.StopLoss,
                 TakeProfitPrice = x.TakeProfit,
+                PositionMode = x.PositionIdx == PositionIdx.OneWayMode ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
                 PositionSide = x.Side == PositionSide.None ? SharedPositionSide.Long : x.Side == PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long
             }).ToArray());
         }
