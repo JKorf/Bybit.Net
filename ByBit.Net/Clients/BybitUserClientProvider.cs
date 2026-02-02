@@ -64,7 +64,7 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public IBybitRestClient GetRestClient(string userIdentifier, ApiCredentials? credentials = null, BybitEnvironment? environment = null)
         {
-            if (!_restClients.TryGetValue(userIdentifier, out var client))
+            if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateRestClient(userIdentifier, credentials, environment);
 
             return client;
@@ -73,7 +73,7 @@ namespace Bybit.Net.Clients
         /// <inheritdoc />
         public IBybitSocketClient GetSocketClient(string userIdentifier, ApiCredentials? credentials = null, BybitEnvironment? environment = null)
         {
-            if (!_socketClients.TryGetValue(userIdentifier, out var client))
+            if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateSocketClient(userIdentifier, credentials, environment);
 
             return client;
