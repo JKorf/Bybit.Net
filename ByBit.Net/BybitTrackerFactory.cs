@@ -2,11 +2,16 @@
 using Bybit.Net.Interfaces;
 using Bybit.Net.Interfaces.Clients;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Trackers.Klines;
 using CryptoExchange.Net.Trackers.Trades;
+using CryptoExchange.Net.Trackers.UserData;
+using CryptoExchange.Net.Trackers.UserData.Interfaces;
+using CryptoExchange.Net.Trackers.UserData.Objects;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 
 namespace Bybit.Net
@@ -116,5 +121,64 @@ namespace Bybit.Net
                 period
                 );
         }
+
+        /// <inheritdoc />
+        public IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig config)
+        {
+            var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient();
+            return new BybitUserSpotDataTracker(
+                _serviceProvider?.GetRequiredService<ILogger<BybitUserSpotDataTracker>>() ?? new NullLogger<BybitUserSpotDataTracker>(),
+                restClient,
+                socketClient,
+                null,
+                config
+                );
+        }
+
+        /// <inheritdoc />
+        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, SpotUserDataTrackerConfig config, ApiCredentials credentials, BybitEnvironment? environment = null)
+        {
+            var clientProvider = _serviceProvider?.GetRequiredService<IBybitUserClientProvider>() ?? new BybitUserClientProvider();
+            var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
+            var socketClient = clientProvider.GetSocketClient(userIdentifier, credentials, environment);
+            return new BybitUserSpotDataTracker(
+                _serviceProvider?.GetRequiredService<ILogger<BybitUserSpotDataTracker>>() ?? new NullLogger<BybitUserSpotDataTracker>(),
+                restClient,
+                socketClient,
+                userIdentifier,
+                config
+                );
+        }
+
+        /// <inheritdoc />
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(FuturesUserDataTrackerConfig config)
+        {
+            var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient();
+            return new BybitUserFuturesDataTracker(
+                _serviceProvider?.GetRequiredService<ILogger<BybitUserFuturesDataTracker>>() ?? new NullLogger<BybitUserFuturesDataTracker>(),
+                restClient,
+                socketClient,
+                null,
+                config
+                );
+        }
+
+        /// <inheritdoc />
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, FuturesUserDataTrackerConfig config, ApiCredentials credentials, BybitEnvironment? environment = null)
+        {
+            var clientProvider = _serviceProvider?.GetRequiredService<IBybitUserClientProvider>() ?? new BybitUserClientProvider();
+            var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
+            var socketClient = clientProvider.GetSocketClient(userIdentifier, credentials, environment);
+            return new BybitUserFuturesDataTracker(
+                _serviceProvider?.GetRequiredService<ILogger<BybitUserFuturesDataTracker>>() ?? new NullLogger<BybitUserFuturesDataTracker>(),
+                restClient,
+                socketClient,
+                userIdentifier,
+                config
+                );
+        }
+
     }
 }
