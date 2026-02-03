@@ -43,7 +43,7 @@ namespace Bybit.Net
              TradeEnvironmentNames.Live => Live,
              TradeEnvironmentNames.Testnet => Testnet,
              "Eu" => Eu,
-             "Hongkong" => HongKong,
+             "HongKong" => HongKong,
              "Turkey" => Turkey,
              "Kazakhstan" => Kazakhstan,
              "Georgia" => Georgia,
