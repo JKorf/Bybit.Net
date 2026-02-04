@@ -748,7 +748,15 @@ namespace Bybit.Net.Clients.V5
             if (!string.IsNullOrEmpty(deposits.Data.NextPageCursor))
                 nextToken = new CursorToken(deposits.Data.NextPageCursor!);
 
-            return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, TradingMode.Spot, deposits.Data.Deposits.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == DepositStatus.Success, x.SuccessTime ?? new DateTime())
+            return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, TradingMode.Spot, deposits.Data.Deposits.Select(x => 
+            new SharedDeposit(
+                x.Asset, 
+                x.Quantity, 
+                x.Status == DepositStatus.Success,
+                x.SuccessTime ?? new DateTime(),
+                x.Status == DepositStatus.Success ? SharedTransferStatus.Completed
+                : x.Status == DepositStatus.DepositFailed ? SharedTransferStatus.Failed
+                : SharedTransferStatus.InProgress)
             {
                 Network = x.Network,
                 TransactionId = x.TransactionId,
