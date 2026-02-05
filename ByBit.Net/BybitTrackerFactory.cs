@@ -123,7 +123,7 @@ namespace Bybit.Net
         }
 
         /// <inheritdoc />
-        public IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig config)
+        public IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig? config = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient();
@@ -137,7 +137,7 @@ namespace Bybit.Net
         }
 
         /// <inheritdoc />
-        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, SpotUserDataTrackerConfig config, ApiCredentials credentials, BybitEnvironment? environment = null)
+        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, BybitEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<IBybitUserClientProvider>() ?? new BybitUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
@@ -152,7 +152,7 @@ namespace Bybit.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(FuturesUserDataTrackerConfig config)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(FuturesUserDataTrackerConfig? config = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient();
@@ -166,7 +166,7 @@ namespace Bybit.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, FuturesUserDataTrackerConfig config, ApiCredentials credentials, BybitEnvironment? environment = null)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, ApiCredentials credentials, FuturesUserDataTrackerConfig? config = null, BybitEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<IBybitUserClientProvider>() ?? new BybitUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);

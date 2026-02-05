@@ -17,7 +17,7 @@ namespace Bybit.Net
             IBybitRestClient restClient,
             IBybitSocketClient socketClient,
             string? userIdentifier,
-            SpotUserDataTrackerConfig config) : base(
+            SpotUserDataTrackerConfig? config) : base(
                 logger,
                 restClient.V5Api.SharedClient,
                 null,
@@ -27,7 +27,7 @@ namespace Bybit.Net
                 socketClient.V5PrivateApi.SharedClient,
                 socketClient.V5PrivateApi.SharedClient,
                 userIdentifier,
-                config)
+                config ?? new SpotUserDataTrackerConfig())
         {
         }
     }
@@ -46,7 +46,7 @@ namespace Bybit.Net
             IBybitRestClient restClient,
             IBybitSocketClient socketClient,
             string? userIdentifier,
-            FuturesUserDataTrackerConfig config) : base(logger,
+            FuturesUserDataTrackerConfig? config) : base(logger,
                 restClient.V5Api.SharedClient,
                 null,
                 restClient.V5Api.SharedClient,
@@ -56,7 +56,7 @@ namespace Bybit.Net
                 socketClient.V5PrivateApi.SharedClient,
                 socketClient.V5PrivateApi.SharedClient,
                 userIdentifier,
-                config)
+                config ?? new FuturesUserDataTrackerConfig())
         {
         }
     }
