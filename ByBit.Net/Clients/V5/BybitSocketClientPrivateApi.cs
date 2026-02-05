@@ -43,6 +43,8 @@ namespace Bybit.Net.Clients.V5
             UnhandledMessageExpected = true;
             KeepAliveInterval = TimeSpan.Zero;
 
+            _clientName = "BybitSocketClientApi";
+
             RegisterPeriodicQuery(
                 "Heartbeat",
                 options.V5Options.PingInterval,

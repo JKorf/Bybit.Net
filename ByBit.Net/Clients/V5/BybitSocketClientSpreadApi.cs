@@ -36,6 +36,8 @@ namespace Bybit.Net.Clients.V5
             KeepAliveInterval = TimeSpan.Zero; // Server doesn't respond to ping frames
             _wsPublicAddress = options.Environment.Name == BybitEnvironment.DemoTrading.Name ? BybitEnvironment.Live.SocketBaseAddress : options.Environment.SocketBaseAddress;
 
+            _clientName = "BybitSocketClientApi";
+
             RegisterPeriodicQuery(
                 "Heartbeat",
                 TimeSpan.FromSeconds(20),

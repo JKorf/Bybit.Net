@@ -46,6 +46,7 @@ namespace Bybit.Net.Clients.V5
             // For demo trading the live environment should be used for market data
             _wsPublicAddress = options.Environment.Name == BybitEnvironment.DemoTrading.Name ? BybitEnvironment.Live.SocketBaseAddress : options.Environment.SocketBaseAddress;
 
+            _clientName = "BybitSocketClientApi";
 
             UnhandledMessageExpected = true;
             KeepAliveInterval = TimeSpan.Zero;
