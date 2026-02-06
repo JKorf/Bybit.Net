@@ -19,6 +19,7 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(BybitRequestQueryResponse<BybitOrderId>))]
     [JsonSerializable(typeof(BybitRequestQueryResponse<BybitList<BybitBatchOrderId>>))]
     [JsonSerializable(typeof(Dictionary<string, string[]>))]
+    [JsonSerializable(typeof(Dictionary<string, List<string>>))]
     [JsonSerializable(typeof(BybitResult<BybitList<BybitSpreadSymbol>>))]
     [JsonSerializable(typeof(BybitResult<BybitList<BybitSpreadTicker>>))]
     [JsonSerializable(typeof(BybitResult<BybitList<BybitSpreadTrade>>))]
