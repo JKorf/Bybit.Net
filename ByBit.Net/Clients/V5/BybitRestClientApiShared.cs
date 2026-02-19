@@ -54,7 +54,7 @@ namespace Bybit.Net.Clients.V5
             var direction = DataDirection.Descending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var limit = request.Limit ?? 1000;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
 
             // Get data
             var category = request.Symbol!.TradingMode == TradingMode.Spot ? Category.Spot : (request.Symbol!.TradingMode == TradingMode.PerpetualLinear || request.Symbol!.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
@@ -76,8 +76,6 @@ namespace Bybit.Net.Clients.V5
                     result.Data.List.Select(x => x.StartTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams);
 
             return result.AsExchangeResult(
@@ -420,7 +418,7 @@ namespace Bybit.Net.Clients.V5
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 50;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, maxPeriod: TimeSpan.FromDays(7));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, maxPeriod: TimeSpan.FromDays(7));
 
             // Get data
             var result = await Trading.GetOrderHistoryAsync(Category.Spot,
@@ -440,8 +438,6 @@ namespace Bybit.Net.Clients.V5
                result.Data.List.Select(x => x.CreateTime),
                request.StartTime,
                request.EndTime ?? DateTime.UtcNow,
-               limit,
-               direction,
                pageParams,
                TimeSpan.FromDays(7));
 
@@ -511,7 +507,7 @@ namespace Bybit.Net.Clients.V5
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 50;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(7));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(7));
 
             // Get data
             var result = await Trading.GetUserTradesAsync(
@@ -531,8 +527,6 @@ namespace Bybit.Net.Clients.V5
                 result.Data.List.Select(x => x.Timestamp),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 TimeSpan.FromDays(7));
 
@@ -752,7 +746,7 @@ namespace Bybit.Net.Clients.V5
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 50;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(30));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(30));
 
             // Get data
             var result = await Account.GetDepositsAsync(
@@ -771,8 +765,6 @@ namespace Bybit.Net.Clients.V5
                 result.Data.Deposits.Select(x => x.SuccessTime ?? default),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 TimeSpan.FromDays(30));
 
@@ -832,7 +824,7 @@ namespace Bybit.Net.Clients.V5
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 50;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(30));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(30));
 
             // Get data
             var result = await Account.GetWithdrawalsAsync(
@@ -851,8 +843,6 @@ namespace Bybit.Net.Clients.V5
                 result.Data.List.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 TimeSpan.FromDays(30));
 
@@ -1127,7 +1117,7 @@ namespace Bybit.Net.Clients.V5
             var direction = DataDirection.Descending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var limit = request.Limit ?? 1000;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
 
             var category = (request.Symbol!.TradingMode == TradingMode.PerpetualLinear || request.Symbol!.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
             var result = await ExchangeData.GetMarkPriceKlinesAsync(
@@ -1148,8 +1138,6 @@ namespace Bybit.Net.Clients.V5
                     result.Data.List.Select(x => x.StartTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams);
 
             return result.AsExchangeResult(
@@ -1187,7 +1175,7 @@ namespace Bybit.Net.Clients.V5
             var direction = DataDirection.Descending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var limit = request.Limit ?? 1000;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
 
             var category = (request.Symbol!.TradingMode == TradingMode.PerpetualLinear || request.Symbol!.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
             var result = await ExchangeData.GetIndexPriceKlinesAsync(
@@ -1208,8 +1196,6 @@ namespace Bybit.Net.Clients.V5
                     result.Data.List.Select(x => x.StartTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams);
 
             return result.AsExchangeResult(
@@ -1264,7 +1250,7 @@ namespace Bybit.Net.Clients.V5
             var direction = DataDirection.Descending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var limit = request.Limit ?? 200;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
 
             // Get data
             var category = (request.Symbol!.TradingMode == TradingMode.PerpetualLinear || request.Symbol!.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
@@ -1284,8 +1270,6 @@ namespace Bybit.Net.Clients.V5
                     result.Data.List.Select(x => x.Timestamp),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams);
 
             return result.AsExchangeResult(
@@ -1457,7 +1441,7 @@ namespace Bybit.Net.Clients.V5
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 50;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(7));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(7));
 
             // Get data
             var category = (request.Symbol!.TradingMode == TradingMode.PerpetualLinear || request.Symbol!.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
@@ -1478,8 +1462,6 @@ namespace Bybit.Net.Clients.V5
                result.Data.List.Select(x => x.CreateTime),
                request.StartTime,
                request.EndTime ?? DateTime.UtcNow,
-               limit,
-               direction,
                pageParams,
                TimeSpan.FromDays(7));
 
@@ -1554,7 +1536,7 @@ namespace Bybit.Net.Clients.V5
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 50;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(7));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(7));
 
             // Get data
             var category = (request.Symbol == null || request.Symbol.TradingMode == TradingMode.PerpetualLinear || request.Symbol.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
@@ -1576,8 +1558,6 @@ namespace Bybit.Net.Clients.V5
                 result.Data.List.Select(x => x.Timestamp),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 TimeSpan.FromDays(7));
 
@@ -1811,7 +1791,7 @@ namespace Bybit.Net.Clients.V5
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest);
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest);
 
             // Get data
             var tradingMode = request.Symbol?.TradingMode ?? request.TradingMode ?? TradingMode.PerpetualLinear;
@@ -1834,8 +1814,6 @@ namespace Bybit.Net.Clients.V5
                 result.Data.List.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams);
 
             return result.AsExchangeResult(
