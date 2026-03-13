@@ -168,6 +168,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
+        protected override BybitAuthenticationProvider CreateAuthenticationProvider(BybitCredentials credentials)
+            => new BybitAuthenticationProvider(credentials);
     }
 }

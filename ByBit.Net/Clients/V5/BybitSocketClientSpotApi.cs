@@ -48,7 +48,8 @@ namespace Bybit.Net.Clients.V5
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler1();
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
+        protected override BybitAuthenticationProvider CreateAuthenticationProvider(BybitCredentials credentials) 
+            => new BybitAuthenticationProvider(credentials);
 
         public IBybitSocketClientSpotApiShared SharedClient => this;
 

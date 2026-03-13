@@ -7,7 +7,7 @@ namespace Bybit.Net.Objects.Options
     /// <summary>
     /// Options for the BybitRestClient
     /// </summary>
-    public class BybitRestOptions : RestExchangeOptions<BybitEnvironment, ApiCredentials>
+    public class BybitRestOptions : RestExchangeOptions<BybitEnvironment, BybitCredentials>
     {
         /// <summary>
         /// Default options for the rest client
@@ -38,7 +38,7 @@ namespace Bybit.Net.Objects.Options
         /// <summary>
         /// Options for the V5 API
         /// </summary>
-        public RestApiOptions V5Options { get; private set; } = new RestApiOptions();
+        public RestApiOptions<BybitCredentials> V5Options { get; private set; } = new RestApiOptions<BybitCredentials>();
 
         internal BybitRestOptions Set(BybitRestOptions targetOptions)
         {

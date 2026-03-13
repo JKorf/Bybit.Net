@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitRestClientApi"/>
-    internal partial class BybitRestClientApi : RestApiClient, IBybitRestClientApi
+    internal partial class BybitRestClientApi : RestApiClient<BybitEnvironment, BybitAuthenticationProvider, BybitCredentials>, IBybitRestClientApi
     {
         protected override ErrorMapping ErrorMapping => BybitErrors.RestErrors;
 
@@ -76,7 +76,7 @@ namespace Bybit.Net.Clients.V5
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override BybitAuthenticationProvider CreateAuthenticationProvider(BybitCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />

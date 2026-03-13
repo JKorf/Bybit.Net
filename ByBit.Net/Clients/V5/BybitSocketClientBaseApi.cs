@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientBaseApi" />
-    internal abstract class BybitSocketClientBaseApi : SocketApiClient, IBybitSocketClientBaseApi
+    internal abstract class BybitSocketClientBaseApi : SocketApiClient<BybitEnvironment, BybitAuthenticationProvider, BybitCredentials>, IBybitSocketClientBaseApi
     {
         /// <inheritdoc />
         public new BybitSocketOptions ClientOptions => (BybitSocketOptions)base.ClientOptions;

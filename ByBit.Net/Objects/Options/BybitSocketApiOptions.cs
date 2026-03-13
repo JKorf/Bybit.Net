@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Options
     /// <summary>
     /// Bybit socket API options
     /// </summary>
-    public class BybitSocketApiOptions : SocketApiOptions
+    public class BybitSocketApiOptions : SocketApiOptions<BybitCredentials>
     {
         /// <summary>
         /// Interval at which to send a ping to the server

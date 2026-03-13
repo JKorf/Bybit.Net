@@ -137,7 +137,7 @@ namespace Bybit.Net
         }
 
         /// <inheritdoc />
-        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, BybitEnvironment? environment = null)
+        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, BybitCredentials credentials, SpotUserDataTrackerConfig? config = null, BybitEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<IBybitUserClientProvider>() ?? new BybitUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
@@ -166,7 +166,7 @@ namespace Bybit.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, ApiCredentials credentials, FuturesUserDataTrackerConfig? config = null, BybitEnvironment? environment = null)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, BybitCredentials credentials, FuturesUserDataTrackerConfig? config = null, BybitEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<IBybitUserClientProvider>() ?? new BybitUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);

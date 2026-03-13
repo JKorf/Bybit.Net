@@ -13,7 +13,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
     /// <summary>
     /// Bybit streaming data subscriptions
     /// </summary>
-    public interface IBybitSocketClientBaseApi : ISocketApiClient
+    public interface IBybitSocketClientBaseApi : ISocketApiClient<BybitCredentials>
     {
         /// <summary>
         /// Subscribe to kline updates

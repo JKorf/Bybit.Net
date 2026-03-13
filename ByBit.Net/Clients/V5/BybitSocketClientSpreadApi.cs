@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientSpreadApi" />
-    internal partial class BybitSocketClientSpreadApi : SocketApiClient, IBybitSocketClientSpreadApi
+    internal partial class BybitSocketClientSpreadApi : SocketApiClient<BybitEnvironment, BybitAuthenticationProvider, BybitCredentials>, IBybitSocketClientSpreadApi
     {
         private readonly string _wsPublicAddress;
 
@@ -133,6 +133,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
+        protected override BybitAuthenticationProvider CreateAuthenticationProvider(BybitCredentials credentials)
+            => new BybitAuthenticationProvider(credentials);
     }
 }

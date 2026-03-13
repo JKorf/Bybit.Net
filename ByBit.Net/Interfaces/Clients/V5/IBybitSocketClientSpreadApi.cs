@@ -12,7 +12,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
     /// <summary>
     /// Bybit spread data streams
     /// </summary>
-    public interface IBybitSocketClientSpreadApi: ISocketApiClient
+    public interface IBybitSocketClientSpreadApi: ISocketApiClient<BybitCredentials>
     {
         /// <summary>
         /// Subscribe to ticker updates

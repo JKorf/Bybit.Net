@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Options
     /// <summary>
     /// Options for the BybitSocketClient
     /// </summary>
-    public class BybitSocketOptions : SocketExchangeOptions<BybitEnvironment>
+    public class BybitSocketOptions : SocketExchangeOptions<BybitEnvironment, BybitCredentials>
     {
         /// <summary>
         /// Default options for the socket client

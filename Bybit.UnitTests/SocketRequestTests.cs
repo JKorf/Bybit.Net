@@ -23,7 +23,7 @@ namespace Bybit.Net.UnitTests
             var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
                 RequestTimeout = TimeSpan.FromSeconds(1),
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456")
+                ApiCredentials = new BybitCredentials("123", "456")
             }), fact);
             return client;
         }

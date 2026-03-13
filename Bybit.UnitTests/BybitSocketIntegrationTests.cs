@@ -29,7 +29,7 @@ namespace Bybit.Net.UnitTests
             return new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null
+                ApiCredentials = Authenticated ? new BybitCredentials(key, sec) : null
             }), loggerFactory);
         }
 

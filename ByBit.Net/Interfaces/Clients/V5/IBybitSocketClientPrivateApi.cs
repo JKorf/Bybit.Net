@@ -13,7 +13,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
     /// <summary>
     /// Bybit user data streams
     /// </summary>
-    public interface IBybitSocketClientPrivateApi : ISocketApiClient
+    public interface IBybitSocketClientPrivateApi : ISocketApiClient<BybitCredentials>
     {
         /// <summary>
         /// Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.

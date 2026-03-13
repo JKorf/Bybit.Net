@@ -33,7 +33,7 @@ namespace Bybit.Net.UnitTests
             return new BybitRestClient(null, loggerFactory, Options.Create(new Objects.Options.BybitRestOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new ApiCredentials(key, sec) : null
+                ApiCredentials = Authenticated ? new BybitCredentials(key, sec) : null
             }));
         }
 
@@ -109,7 +109,7 @@ namespace Bybit.Net.UnitTests
             await RunAndCheckResult(client => client.V5Api.Trading.GetOrderHistoryAsync(Enums.Category.Spot, default, default, default, default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.V5Api.Trading.GetBorrowQuotaAsync("ETHUSDT", Enums.OrderSide.Buy, default), true);
             await RunAndCheckResult(client => client.V5Api.Trading.GetDisconnectCancelAllConfigAsync(default), true);
-            await RunAndCheckResult(client => client.V5Api.Trading.GetUserTradesAsync(Enums.Category.Spot, default, default, default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(client => client.V5Api.Trading.GetUserTradesAsync(Enums.Category.Spot, default, default, default, default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.V5Api.Trading.GetPositionsAsync(Enums.Category.Linear, default, default, "USDT", default, default, default), true);
             await RunAndCheckResult(client => client.V5Api.Trading.GetAssetExchangeHistoryAsync(default, default, default, default, default), true);
             await RunAndCheckResult(client => client.V5Api.Trading.GetDeliveryHistoryAsync(Enums.Category.Linear, default, default, default, default, default, default, default), true);

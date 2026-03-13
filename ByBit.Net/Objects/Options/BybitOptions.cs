@@ -6,7 +6,7 @@ namespace Bybit.Net.Objects.Options
     /// <summary>
     /// Bybit options
     /// </summary>
-    public class BybitOptions : LibraryOptions<BybitRestOptions, BybitSocketOptions, ApiCredentials, BybitEnvironment>
+    public class BybitOptions : LibraryOptions<BybitRestOptions, BybitSocketOptions, BybitCredentials, BybitEnvironment>
     {
     }
 }

@@ -14,6 +14,7 @@ using CryptoExchange.Net.Objects;
 using Bybit.Net.Interfaces.Clients;
 using System.Text.Json;
 using CryptoExchange.Net.Converters.SystemTextJson;
+using Bybit.Net.Clients.V5;
 
 namespace Bybit.Net.UnitTests
 {
@@ -83,7 +84,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public void CheckSignatureExample1()
         {
-            var authProvider = new BybitAuthenticationProvider(new ApiCredentials("XXXXXXXXXX", "XXXXXXXXXX"));
+            var authProvider = new BybitAuthenticationProvider(new BybitCredentials("XXXXXXXXXX", "XXXXXXXXXX"));
             var client = (RestApiClient)new BybitRestClient().V5Api;
 
             CryptoExchange.Net.Testing.TestHelpers.CheckSignature(
@@ -109,7 +110,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public void CheckSignatureExample2()
         {
-            var authProvider = new BybitAuthenticationProvider(new ApiCredentials("XXXXXXXXXX", "XXXXXXXXXX"));
+            var authProvider = new BybitAuthenticationProvider(new BybitCredentials("XXXXXXXXXX", "XXXXXXXXXX"));
             var client = (RestApiClient)new BybitRestClient().V5Api;
 
             CryptoExchange.Net.Testing.TestHelpers.CheckSignature(
@@ -223,8 +224,8 @@ namespace Bybit.Net.UnitTests
 
             Assert.That(((BaseApiClient)restClient.V5Api).OutputOriginalData, Is.True);
             Assert.That(((BaseApiClient)socketClient.V5SpotApi).OutputOriginalData, Is.False);
-            Assert.That(((BaseApiClient)restClient.V5Api).AuthenticationProvider.ApiKey, Is.EqualTo("123"));
-            Assert.That(((BaseApiClient)socketClient.V5SpotApi).AuthenticationProvider.ApiKey, Is.EqualTo("456"));
+            Assert.That(((BybitRestClientApi)restClient.V5Api).AuthenticationProvider.PublicKey, Is.EqualTo("123"));
+            Assert.That(((BybitSocketClientBaseApi)socketClient.V5SpotApi).AuthenticationProvider.PublicKey, Is.EqualTo("456"));
             Assert.That(((BaseApiClient)restClient.V5Api).ClientOptions.Proxy.Host, Is.EqualTo("host"));
             Assert.That(((BaseApiClient)restClient.V5Api).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.V5SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));

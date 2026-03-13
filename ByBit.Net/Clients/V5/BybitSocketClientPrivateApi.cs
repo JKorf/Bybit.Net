@@ -31,7 +31,7 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientPrivateApi" />
-    internal partial class BybitSocketClientPrivateApi : SocketApiClient, IBybitSocketClientPrivateApi
+    internal partial class BybitSocketClientPrivateApi : SocketApiClient<BybitEnvironment, BybitAuthenticationProvider, BybitCredentials>, IBybitSocketClientPrivateApi
     {
         protected override ErrorMapping ErrorMapping => BybitErrors.WebsocketErrors;
 
@@ -78,7 +78,8 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BybitAuthenticationProvider(credentials);
+        protected override BybitAuthenticationProvider CreateAuthenticationProvider(BybitCredentials credentials)
+            => new BybitAuthenticationProvider(credentials);
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

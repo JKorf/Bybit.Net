@@ -49,7 +49,7 @@ namespace Bybit.Net.Clients
         }
 
         /// <inheritdoc />
-        public void InitializeUserClient(string userIdentifier, ApiCredentials credentials, BybitEnvironment? environment = null)
+        public void InitializeUserClient(string userIdentifier, BybitCredentials credentials, BybitEnvironment? environment = null)
         {
             CreateRestClient(userIdentifier, credentials, environment);
             CreateSocketClient(userIdentifier, credentials, environment);
@@ -63,7 +63,7 @@ namespace Bybit.Net.Clients
         }
 
         /// <inheritdoc />
-        public IBybitRestClient GetRestClient(string userIdentifier, ApiCredentials? credentials = null, BybitEnvironment? environment = null)
+        public IBybitRestClient GetRestClient(string userIdentifier, BybitCredentials? credentials = null, BybitEnvironment? environment = null)
         {
             if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateRestClient(userIdentifier, credentials, environment);
@@ -72,7 +72,7 @@ namespace Bybit.Net.Clients
         }
 
         /// <inheritdoc />
-        public IBybitSocketClient GetSocketClient(string userIdentifier, ApiCredentials? credentials = null, BybitEnvironment? environment = null)
+        public IBybitSocketClient GetSocketClient(string userIdentifier, BybitCredentials? credentials = null, BybitEnvironment? environment = null)
         {
             if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateSocketClient(userIdentifier, credentials, environment);
@@ -80,7 +80,7 @@ namespace Bybit.Net.Clients
             return client;
         }
 
-        private IBybitRestClient CreateRestClient(string userIdentifier, ApiCredentials? credentials, BybitEnvironment? environment)
+        private IBybitRestClient CreateRestClient(string userIdentifier, BybitCredentials? credentials, BybitEnvironment? environment)
         {
             var clientRestOptions = SetRestEnvironment(environment);
             var client = new BybitRestClient(_httpClient, _loggerFactory, clientRestOptions);
@@ -92,7 +92,7 @@ namespace Bybit.Net.Clients
             return client;
         }
 
-        private IBybitSocketClient CreateSocketClient(string userIdentifier, ApiCredentials? credentials, BybitEnvironment? environment)
+        private IBybitSocketClient CreateSocketClient(string userIdentifier, BybitCredentials? credentials, BybitEnvironment? environment)
         {
             var clientSocketOptions = SetSocketEnvironment(environment);
             var client = new BybitSocketClient(clientSocketOptions!, _loggerFactory);
