@@ -21,7 +21,7 @@ namespace Bybit.Net
 
         public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.Rsa];
 
-        public override string PublicKey => ApiCredentials.PublicKey;
+        public override string Key => ApiCredentials.Key;
 
         public BybitAuthenticationProvider(BybitCredentials credentials) : base(credentials)
         {
@@ -38,7 +38,7 @@ namespace Bybit.Net
             if (request.ParameterPosition == HttpMethodParameterPosition.InUri)
             {
                 var queryString = request.GetQueryString();
-                payload = timestamp + ApiCredentials.PublicKey + recvWindow + queryString;
+                payload = timestamp + ApiCredentials.Key + recvWindow + queryString;
                 request.SetQueryString(queryString);
             }
             else
@@ -46,7 +46,7 @@ namespace Bybit.Net
                 var requestBody = request.BodyFormat == RequestBodyFormat.FormData
                         ? (request.BodyParameters?.ToFormData() ?? string.Empty)
                         : GetSerializedBody(_messageSerializer, request.BodyParameters ?? new Dictionary<string, object>());
-                payload = timestamp + ApiCredentials.PublicKey + recvWindow + requestBody;
+                payload = timestamp + ApiCredentials.Key + recvWindow + requestBody;
                 request.SetBodyContent(requestBody);
             }
 
@@ -56,7 +56,7 @@ namespace Bybit.Net
                     : SignRSASHA256(ApiCredentials.Rsa!, Encoding.UTF8.GetBytes(payload), SignOutputType.Base64);
 
             request.Headers ??= new Dictionary<string, string>();
-            request.Headers.Add("X-BAPI-API-KEY", ApiCredentials.PublicKey);
+            request.Headers.Add("X-BAPI-API-KEY", ApiCredentials.Key);
             request.Headers.Add("X-BAPI-SIGN", signature);
             request.Headers.Add("X-BAPI-SIGN-TYPE", "2");
             request.Headers.Add("X-BAPI-TIMESTAMP", timestamp);
@@ -66,7 +66,7 @@ namespace Bybit.Net
         public override Query? GetAuthenticationQuery(SocketApiClient apiClient, SocketConnection connection, Dictionary<string, object?>? context = null)
         {
             var expireTime = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddSeconds(30))!;
-            var key = ApiCredentials.PublicKey;
+            var key = ApiCredentials.Key;
             var sign =
                 ApiCredentials.CredentialType == ApiCredentialsType.Hmac
                     ? SignHMACSHA256(ApiCredentials.Hmac!, $"GET/realtime{expireTime}")
