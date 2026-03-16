@@ -201,12 +201,12 @@ namespace Bybit.Net.UnitTests
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    { "ApiCredentials:Key", "123" },
-                    { "ApiCredentials:Secret", "456" },
-                    { "ApiCredentials:Memo", "000" },
-                    { "Socket:ApiCredentials:Key", "456" },
-                    { "Socket:ApiCredentials:Secret", "789" },
-                    { "Socket:ApiCredentials:Memo", "xxx" },
+                    { "ApiCredentials:Hmac:Key", "123" },
+                    { "ApiCredentials:Hmac:Secret", "456" },
+                    { "ApiCredentials:Hmac:Pass", "000" },
+                    { "Socket:ApiCredentials:Hmac:Key", "456" },
+                    { "Socket:ApiCredentials:Hmac:Secret", "789" },
+                    { "Socket:ApiCredentials:Hmac:Pass", "xxx" },
                     { "Rest:OutputOriginalData", "true" },
                     { "Socket:OutputOriginalData", "false" },
                     { "Rest:Proxy:Host", "host" },
@@ -224,8 +224,8 @@ namespace Bybit.Net.UnitTests
 
             Assert.That(((BaseApiClient)restClient.V5Api).OutputOriginalData, Is.True);
             Assert.That(((BaseApiClient)socketClient.V5SpotApi).OutputOriginalData, Is.False);
-            Assert.That(((BybitRestClientApi)restClient.V5Api).AuthenticationProvider.PublicKey, Is.EqualTo("123"));
-            Assert.That(((BybitSocketClientBaseApi)socketClient.V5SpotApi).AuthenticationProvider.PublicKey, Is.EqualTo("456"));
+            Assert.That(((BybitRestClientApi)restClient.V5Api).AuthenticationProvider.Key, Is.EqualTo("123"));
+            Assert.That(((BybitSocketClientBaseApi)socketClient.V5SpotApi).AuthenticationProvider.Key, Is.EqualTo("456"));
             Assert.That(((BaseApiClient)restClient.V5Api).ClientOptions.Proxy.Host, Is.EqualTo("host"));
             Assert.That(((BaseApiClient)restClient.V5Api).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.V5SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));

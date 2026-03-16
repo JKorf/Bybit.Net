@@ -23,6 +23,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     <PackageReleaseNotes>https://github.com/JKorf/Bybit.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
+    <NoWarn>$(NoWarn);SYSLIB1100;SYSLIB1101</NoWarn>
   </PropertyGroup>
   <PropertyGroup Label="AOT" Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
     <IsAotCompatible>true</IsAotCompatible>
