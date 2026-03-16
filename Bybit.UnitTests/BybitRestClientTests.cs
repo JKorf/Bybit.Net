@@ -201,12 +201,12 @@ namespace Bybit.Net.UnitTests
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    { "ApiCredentials:Hmac:Key", "123" },
-                    { "ApiCredentials:Hmac:Secret", "456" },
-                    { "ApiCredentials:Hmac:Pass", "000" },
-                    { "Socket:ApiCredentials:Hmac:Key", "456" },
-                    { "Socket:ApiCredentials:Hmac:Secret", "789" },
-                    { "Socket:ApiCredentials:Hmac:Pass", "xxx" },
+                    { "ApiCredentials:HMAC:Key", "123" },
+                    { "ApiCredentials:HMAC:Secret", "456" },
+                    { "ApiCredentials:HMAC:Pass", "000" },
+                    { "Socket:ApiCredentials:HMAC:Key", "456" },
+                    { "Socket:ApiCredentials:HMAC:Secret", "789" },
+                    { "Socket:ApiCredentials:HMAC:Pass", "xxx" },
                     { "Rest:OutputOriginalData", "true" },
                     { "Socket:OutputOriginalData", "false" },
                     { "Rest:Proxy:Host", "host" },

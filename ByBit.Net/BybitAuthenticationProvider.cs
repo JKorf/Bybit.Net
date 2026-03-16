@@ -19,7 +19,7 @@ namespace Bybit.Net
     {
         private static readonly IStringMessageSerializer _messageSerializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
 
-        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.Rsa];
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.HMAC, ApiCredentialsType.RSA];
 
         public override string Key => ApiCredentials.Key;
 
@@ -51,9 +51,9 @@ namespace Bybit.Net
             }
 
             var signature = 
-                ApiCredentials.CredentialType == ApiCredentialsType.Hmac
-                    ? SignHMACSHA256(ApiCredentials.Hmac!, payload)
-                    : SignRSASHA256(ApiCredentials.Rsa!, Encoding.UTF8.GetBytes(payload), SignOutputType.Base64);
+                ApiCredentials.CredentialType == ApiCredentialsType.HMAC
+                    ? SignHMACSHA256(ApiCredentials.HMAC!, payload)
+                    : SignRSASHA256(ApiCredentials.RSA!, Encoding.UTF8.GetBytes(payload), SignOutputType.Base64);
 
             request.Headers ??= new Dictionary<string, string>();
             request.Headers.Add("X-BAPI-API-KEY", ApiCredentials.Key);
@@ -68,9 +68,9 @@ namespace Bybit.Net
             var expireTime = DateTimeConverter.ConvertToMilliseconds(GetTimestamp(apiClient).AddSeconds(30))!;
             var key = ApiCredentials.Key;
             var sign =
-                ApiCredentials.CredentialType == ApiCredentialsType.Hmac
-                    ? SignHMACSHA256(ApiCredentials.Hmac!, $"GET/realtime{expireTime}")
-                    : SignRSASHA256(ApiCredentials.Rsa!, Encoding.UTF8.GetBytes($"GET/realtime{expireTime}"), SignOutputType.Base64);
+                ApiCredentials.CredentialType == ApiCredentialsType.HMAC
+                    ? SignHMACSHA256(ApiCredentials.HMAC!, $"GET/realtime{expireTime}")
+                    : SignRSASHA256(ApiCredentials.RSA!, Encoding.UTF8.GetBytes($"GET/realtime{expireTime}"), SignOutputType.Base64);
 
             if (connection.ConnectionUri.AbsolutePath.EndsWith("private"))
             {
