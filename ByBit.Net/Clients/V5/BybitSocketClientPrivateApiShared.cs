@@ -85,13 +85,27 @@ namespace Bybit.Net.Clients.V5
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
-            if (status == OrderStatus.Active || status == OrderStatus.PartiallyFilled || status == OrderStatus.Created || status == OrderStatus.New || status == OrderStatus.Untriggered)
+            if (status == OrderStatus.Active
+                || status == OrderStatus.PartiallyFilled
+                || status == OrderStatus.Created
+                || status == OrderStatus.New
+                || status == OrderStatus.Untriggered)
+            {
                 return SharedOrderStatus.Open;
+            }
 
-            if (status == OrderStatus.Cancelled || status == OrderStatus.PartiallyFilledCanceled || status == OrderStatus.Deactivated || status == OrderStatus.Rejected)
+            if (status == OrderStatus.Cancelled
+                || status == OrderStatus.PartiallyFilledCanceled
+                || status == OrderStatus.Deactivated
+                || status == OrderStatus.Rejected)
+            {
                 return SharedOrderStatus.Canceled;
+            }
 
-            return SharedOrderStatus.Filled;
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
+
+            return SharedOrderStatus.Unknown;
         }
         #endregion
 
@@ -122,7 +136,7 @@ namespace Bybit.Net.Clients.V5
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
                             x.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                            x.Status == Enums.OrderStatus.Cancelled ? SharedOrderStatus.Canceled : (x.Status == Enums.OrderStatus.New || x.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
+                            ParseOrderStatus(x.Status),
                             x.CreateTime)
                         {
                             ClientOrderId = x.ClientOrderId?.ToString(),

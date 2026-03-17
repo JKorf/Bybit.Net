@@ -568,9 +568,27 @@ namespace Bybit.Net.Clients.V5
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
-            if (status == OrderStatus.PartiallyFilled || status == OrderStatus.New || status == OrderStatus.Created) return SharedOrderStatus.Open;
-            if (status == OrderStatus.Cancelled || status == OrderStatus.Rejected) return SharedOrderStatus.Canceled;
-            return SharedOrderStatus.Filled;
+            if (status == OrderStatus.Active
+                || status == OrderStatus.PartiallyFilled
+                || status == OrderStatus.Created
+                || status == OrderStatus.New
+                || status == OrderStatus.Untriggered)
+            {
+                return SharedOrderStatus.Open;
+            }
+
+            if (status == OrderStatus.Cancelled
+                || status == OrderStatus.PartiallyFilledCanceled
+                || status == OrderStatus.Deactivated
+                || status == OrderStatus.Rejected)
+            {
+                return SharedOrderStatus.Canceled;
+            }
+
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
+
+            return SharedOrderStatus.Unknown;
         }
 
         private SharedOrderType ParseOrderType(OrderType type)
@@ -778,14 +796,24 @@ namespace Bybit.Net.Clients.V5
                                 x.Quantity, 
                                 x.Status == DepositStatus.Success,
                                 x.SuccessTime ?? new DateTime(),
-                                x.Status == DepositStatus.Success ? SharedTransferStatus.Completed
-                                : x.Status == DepositStatus.DepositFailed ? SharedTransferStatus.Failed
-                                : SharedTransferStatus.InProgress)
+                                ParseTransferStatus(x.Status))
                             {
                                 Network = x.Network,
                                 TransactionId = x.TransactionId,
                             })
                        .ToArray(), nextPageRequest);
+        }
+
+        private SharedTransferStatus ParseTransferStatus(DepositStatus status)
+        {
+            if (status == DepositStatus.Success)
+                return SharedTransferStatus.Completed;
+            if (status == DepositStatus.DepositFailed)
+                return SharedTransferStatus.Failed;
+            if (status == DepositStatus.Processing || status == DepositStatus.ToBeConfirmed)
+                return SharedTransferStatus.InProgress;
+
+            return SharedTransferStatus.Unknown;
         }
 
         #endregion
@@ -1962,7 +1990,19 @@ namespace Bybit.Net.Clients.V5
                 return SharedTriggerOrderStatus.CanceledOrRejected;
             }
 
-            return SharedTriggerOrderStatus.Active;
+            if (order.Status == OrderStatus.Active
+                || order.Status == OrderStatus.Created
+                || order.Status == OrderStatus.PartiallyFilled
+                || order.Status == OrderStatus.New
+                || order.Status == OrderStatus.Untriggered)
+            {
+                return SharedTriggerOrderStatus.Active;
+            }
+
+            if (order.Status == OrderStatus.Triggered)
+                return SharedTriggerOrderStatus.Triggered;
+
+            return SharedTriggerOrderStatus.Unknown;
         }
 
         #endregion
