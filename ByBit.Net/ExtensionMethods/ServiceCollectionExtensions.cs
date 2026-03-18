@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Add services such as the IBybitRestClient and IBybitSocketClient. Configures the services based on the provided configuration.
+        /// Add services such as the IBybitRestClient and IBybitSocketClient. Configures the services based on the provided configuration.<br />
+        /// See <see href="https://github.com/JKorf/CryptoExchange.Net/blob/master/Examples/example-config.json" /> for an example of how to set up the configuration.
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="configuration">The configuration(section) containing the options</param>

@@ -38,7 +38,7 @@ namespace Bybit.Net.Objects.Options
         /// <summary>
         /// Options for the V5 API
         /// </summary>
-        public RestApiOptions<BybitCredentials> V5Options { get; private set; } = new RestApiOptions<BybitCredentials>();
+        public RestApiOptions V5Options { get; private set; } = new RestApiOptions();
 
         internal BybitRestOptions Set(BybitRestOptions targetOptions)
         {

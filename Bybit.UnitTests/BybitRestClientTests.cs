@@ -84,7 +84,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public void CheckSignatureExample1()
         {
-            var authProvider = new BybitAuthenticationProvider(new BybitCredentials("XXXXXXXXXX", "XXXXXXXXXX"));
+            var authProvider = new BybitAuthenticationProvider(new BybitCredentials().WithHMAC("XXXXXXXXXX", "XXXXXXXXXX"));
             var client = (RestApiClient)new BybitRestClient().V5Api;
 
             CryptoExchange.Net.Testing.TestHelpers.CheckSignature(
@@ -110,7 +110,7 @@ namespace Bybit.Net.UnitTests
         [Test]
         public void CheckSignatureExample2()
         {
-            var authProvider = new BybitAuthenticationProvider(new BybitCredentials("XXXXXXXXXX", "XXXXXXXXXX"));
+            var authProvider = new BybitAuthenticationProvider(new BybitCredentials().WithHMAC("XXXXXXXXXX", "XXXXXXXXXX"));
             var client = (RestApiClient)new BybitRestClient().V5Api;
 
             CryptoExchange.Net.Testing.TestHelpers.CheckSignature(

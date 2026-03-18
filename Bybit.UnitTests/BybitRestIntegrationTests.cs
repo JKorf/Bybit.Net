@@ -33,7 +33,7 @@ namespace Bybit.Net.UnitTests
             return new BybitRestClient(null, loggerFactory, Options.Create(new Objects.Options.BybitRestOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new BybitCredentials(key, sec) : null
+                ApiCredentials = Authenticated ? new BybitCredentials().WithHMAC(key, sec) : null
             }));
         }
 

@@ -40,7 +40,7 @@ namespace Bybit.Net.UnitTests
 
             var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
-                ApiCredentials = new BybitCredentials("123", "456"),
+                ApiCredentials = new BybitCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "https://api.bybit.com", "data");
@@ -58,7 +58,7 @@ namespace Bybit.Net.UnitTests
 
             var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
-                ApiCredentials = new BybitCredentials("123", "456"),
+                ApiCredentials = new BybitCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Option", "https://api.bybit.com", "data");
@@ -76,7 +76,7 @@ namespace Bybit.Net.UnitTests
 
             var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
-                ApiCredentials = new BybitCredentials("123", "456"),
+                ApiCredentials = new BybitCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Linear", "https://api.bybit.com", "data");
@@ -93,7 +93,7 @@ namespace Bybit.Net.UnitTests
 
             var client = new BybitSocketClient(Options.Create(new BybitSocketOptions
             {
-                ApiCredentials = new BybitCredentials("123", "456"),
+                ApiCredentials = new BybitCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Private", "https://api.bybit.com", "data");
