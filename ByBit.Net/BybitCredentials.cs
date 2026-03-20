@@ -9,7 +9,7 @@ namespace Bybit.Net
     /// </summary>
     public class BybitCredentials : ApiCredentials
     {
-        internal CredentialPair Credential { get; set; }
+        internal CredentialSet Credential { get; set; }
 
         /// <summary>
         /// HMAC credentials
