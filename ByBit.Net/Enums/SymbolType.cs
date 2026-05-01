@@ -29,5 +29,15 @@ namespace Bybit.Net.Enums
         /// </summary>
         [Map("commodity")]
         Commodity,
+        /// <summary>
+        /// ["<c>stock</c>"] Stock
+        /// </summary>
+        [Map("stock")]
+        Stock,
+        /// <summary>
+        /// ["<c>forex</c>"] Forex
+        /// </summary>
+        [Map("forex")]
+        Forex,
     }
 }
