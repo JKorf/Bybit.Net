@@ -187,6 +187,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 6.12.0 - 01 May 2026
+    * Added Stock, Forex values to SymbolType enum
+    * Added SymbolId property to BybitSpotSymbol response model
+
 * Version 6.11.0 - 09 Apr 2026
     * Updated CryptoExchange.Net to version 11.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Added XstockMultiplier property to BybitSpotSymbol model
