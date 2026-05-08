@@ -1,0 +1,1024 @@
+# Bybit.Net Full LLM Context
+
+> Detailed AI/LLM reference for generating correct C#/.NET code with Bybit.Net. Use this file when `llms.txt` is too brief and the task needs concrete examples, endpoint routing guidance, V5 category handling, socket routing, or anti-hallucination rules.
+
+Bybit.Net is a strongly typed .NET client library for the Bybit REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket subscription patterns as the other JKorf exchange libraries.
+
+Current package version in this repository: 6.12.0.
+CryptoExchange.Net dependency: 11.1.0.
+Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
+Native AOT: supported on compatible .NET targets.
+
+Primary documentation:
+- README.md: overview, installation, feature table, release notes, basic examples
+- docs site: https://cryptoexchange.jkorf.dev/Bybit.Net/
+- Bybit V5 API docs: https://bybit-exchange.github.io/docs/v5/intro
+- API quick map: `docs/ai-api-map.md`
+- source interfaces: `Bybit.Net/Interfaces/Clients/V5/**`
+- AI examples: `Examples/ai-friendly/`
+
+## Golden Rules For AI Code Generation
+
+- Use `BybitRestClient` for REST and `BybitSocketClient` for WebSocket. Do not generate raw `HttpClient` calls to Bybit endpoints.
+- Prefer the V5 API surface unless the user explicitly asks for older behavior.
+- REST is rooted at `restClient.V5Api`, not `SpotApi`, `UsdFuturesApi`, `CoinFuturesApi`, or `GeneralApi`.
+- Public socket streams are split by product: `V5SpotApi`, `V5LinearApi`, `V5InverseApi`, `V5OptionsApi`, and `V5SpreadApi`.
+- Private socket streams and WebSocket trading requests are under `socketClient.V5PrivateApi`.
+- Use `BybitCredentials`, not generic `ApiCredentials`, for API key setup in examples.
+- Include `using Bybit.Net;` when using `BybitCredentials` or `BybitEnvironment`.
+- Bybit HMAC credentials are key and secret. Do not include an API passphrase.
+- Always check `.Success` before reading `.Data`.
+- REST methods return `WebCallResult<T>` or `WebCallResult`.
+- WebSocket subscriptions and socket API requests return `CallResult<T>` or `CallResult`.
+- Reuse clients. Do not instantiate a REST or socket client per request in production code.
+- Prefer dependency injection for long-running services.
+- Store WebSocket subscriptions and unsubscribe during shutdown.
+- Do not call `.Result` or `.Wait()` on async methods.
+- Do not invent endpoint names. If unsure, inspect `Bybit.Net/Interfaces/Clients/V5/**`.
+- For V5 product-specific methods, pass the correct `Category`: `Spot`, `Linear`, `Inverse`, or `Option`.
+- For account and wallet calls, pass the correct `AccountType`: commonly `Unified`, `Spot`, `Fund`, or `Contract`.
+- Use Bybit V5 symbols such as `ETHUSDT`, `BTCUSDT`, and `BTCUSD`. Do not use `ETH-USDT`, `ETH_USDT`, `ETH/USD`, or `tETHUSD`.
+- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient`.
+
+## Installation
+
+```bash
+dotnet add package Bybit.Net
+```
+
+## Required Usings
+
+Typical REST/trading code:
+
+```csharp
+using Bybit.Net;
+using Bybit.Net.Clients;
+using Bybit.Net.Enums;
+```
+
+Result helper code may also need:
+
+```csharp
+using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
+```
+
+Shared API code:
+
+```csharp
+using Bybit.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+```
+
+Dependency injection setup:
+
+```csharp
+using Bybit.Net;
+using Microsoft.Extensions.DependencyInjection;
+```
+
+Interface injection:
+
+```csharp
+using Bybit.Net.Interfaces.Clients;
+```
+
+## Client Setup
+
+Public market data does not require credentials:
+
+```csharp
+var client = new BybitRestClient();
+
+var ticker = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+if (!ticker.Success)
+{
+    Console.WriteLine(ticker.Error);
+    return;
+}
+
+Console.WriteLine(ticker.Data.List.First().LastPrice);
+```
+
+Private account and trading endpoints require credentials:
+
+```csharp
+var client = new BybitRestClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+```
+
+Socket client with credentials:
+
+```csharp
+var socketClient = new BybitSocketClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+```
+
+BybitCredentials supports HMAC credentials and RSA credential wrappers:
+
+```csharp
+var hmac = new BybitCredentials("API_KEY", "API_SECRET");
+```
+
+Do not add a passphrase parameter; Bybit does not use passphrase-based API credentials.
+
+## Environments And Options
+
+Default REST environment is `BybitEnvironment.Live`. Default REST receive window is 5 seconds.
+
+```csharp
+var live = new BybitRestClient(options => options.Environment = BybitEnvironment.Live);
+var testnet = new BybitRestClient(options => options.Environment = BybitEnvironment.Testnet);
+var demo = new BybitRestClient(options => options.Environment = BybitEnvironment.DemoTrading);
+var eu = new BybitRestClient(options => options.Environment = BybitEnvironment.Eu);
+```
+
+Available built-in environments:
+
+```text
+BybitEnvironment.Live
+BybitEnvironment.Testnet
+BybitEnvironment.Eu
+BybitEnvironment.HongKong
+BybitEnvironment.Turkey
+BybitEnvironment.Kazakhstan
+BybitEnvironment.Georgia
+BybitEnvironment.DemoTrading
+```
+
+Common REST options:
+
+```csharp
+var client = new BybitRestClient(options =>
+{
+    options.Environment = BybitEnvironment.Testnet;
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+    options.ReceiveWindow = TimeSpan.FromSeconds(5);
+    options.Referer = "my-app";
+});
+```
+
+Common socket options:
+
+```csharp
+var socketClient = new BybitSocketClient(options =>
+{
+    options.Environment = BybitEnvironment.Live;
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+    options.SocketSubscriptionsCombineTarget = 10;
+    options.SocketNoDataTimeout = TimeSpan.FromSeconds(30);
+});
+```
+
+## Dependency Injection
+
+Current DI shape:
+
+```csharp
+services.AddBybit(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+    options.Rest.ReceiveWindow = TimeSpan.FromSeconds(5);
+    options.Socket.SocketSubscriptionsCombineTarget = 10;
+});
+```
+
+Inject:
+
+```csharp
+public class MyService
+{
+    private readonly IBybitRestClient _restClient;
+    private readonly IBybitSocketClient _socketClient;
+
+    public MyService(IBybitRestClient restClient, IBybitSocketClient socketClient)
+    {
+        _restClient = restClient;
+        _socketClient = socketClient;
+    }
+}
+```
+
+Configuration binding is also supported through `services.AddBybit(configuration)`. The DI extension registers shared REST and socket interfaces from the V5 shared clients.
+
+## Result Handling Pattern
+
+Always branch on `.Success`.
+
+```csharp
+var result = await client.V5Api.ExchangeData.GetOrderbookAsync(Category.Linear, "ETHUSDT", 25);
+if (!result.Success)
+{
+    Console.WriteLine($"Code: {result.Error?.Code}");
+    Console.WriteLine($"Message: {result.Error?.Message}");
+    return;
+}
+
+var bestBid = result.Data.Bids.FirstOrDefault();
+Console.WriteLine(bestBid?.Price);
+```
+
+For retry logic, only retry transient errors:
+
+```csharp
+async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call, int maxAttempts = 3)
+{
+    WebCallResult<T> last = default!;
+
+    for (var attempt = 1; attempt <= maxAttempts; attempt++)
+    {
+        last = await call();
+        if (last.Success)
+            return last;
+
+        if (last.Error?.IsTransient != true)
+            return last;
+
+        await Task.Delay(TimeSpan.FromMilliseconds(250 * Math.Pow(2, attempt)));
+    }
+
+    return last;
+}
+```
+
+Bybit.Net returns normal API, validation, signing, and rate-limit failures through `.Error`; it generally does not throw for exchange rejections. Exceptions are for misconfiguration, disposal, cancellation, or programming errors.
+
+## Main API Surface
+
+REST:
+
+```text
+BybitRestClient
+  .V5Api
+    .Account
+    .ExchangeData
+    .Trading
+    .SubAccount
+    .CryptoLoan
+    .Earn
+    .SharedClient
+```
+
+WebSocket:
+
+```text
+BybitSocketClient
+  .V5SpotApi
+    .SharedClient
+  .V5LinearApi
+    .SharedClient
+  .V5InverseApi
+    .SharedClient
+  .V5OptionsApi
+  .V5SpreadApi
+  .V5PrivateApi
+    .SharedClient
+```
+
+Important: Bybit.Net does not use Binance-style REST roots. Do not generate:
+
+```text
+restClient.SpotApi
+restClient.UsdFuturesApi
+restClient.CoinFuturesApi
+restClient.GeneralApi
+socketClient.SpotApi
+socketClient.UsdFuturesApi
+```
+
+## V5 Category And Product Routing
+
+Many V5 REST methods require a product category. Choose the category from the product being queried or traded:
+
+```text
+Category.Spot     -> spot
+Category.Linear   -> USDT/USDC linear perpetuals and futures
+Category.Inverse  -> inverse perpetuals and futures
+Category.Option   -> USDC options
+```
+
+Examples:
+
+```csharp
+await client.V5Api.ExchangeData.GetKlinesAsync(Category.Spot, "ETHUSDT", KlineInterval.OneMinute);
+await client.V5Api.ExchangeData.GetKlinesAsync(Category.Linear, "ETHUSDT", KlineInterval.OneMinute);
+await client.V5Api.ExchangeData.GetOrderbookAsync(Category.Inverse, "BTCUSD", 25);
+await client.V5Api.Trading.GetPositionsAsync(Category.Linear, symbol: "ETHUSDT");
+```
+
+If a method has a dedicated spot method, use the dedicated method:
+
+```csharp
+await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+await client.V5Api.ExchangeData.GetSpotSymbolsAsync("ETHUSDT");
+```
+
+Use linear/inverse methods for derivatives:
+
+```csharp
+await client.V5Api.ExchangeData.GetLinearInverseTickersAsync(Category.Linear, "ETHUSDT");
+await client.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(Category.Inverse, symbol: "BTCUSD");
+```
+
+## V5 Account Types
+
+Common `AccountType` values:
+
+```text
+AccountType.Unified  -> Unified trading account
+AccountType.Spot     -> Classic spot account
+AccountType.Contract -> Contract account
+AccountType.Fund     -> Funding account
+AccountType.Option   -> Option account
+```
+
+Balance examples:
+
+```csharp
+var unifiedBalances = await client.V5Api.Account.GetBalancesAsync(AccountType.Unified, "USDT");
+var fundingBalance = await client.V5Api.Account.GetAssetBalanceAsync(AccountType.Fund, "USDT");
+var allSpotBalances = await client.V5Api.Account.GetAllAssetBalancesAsync(AccountType.Spot);
+```
+
+Do not assume every Bybit account has every account type enabled. Surface the exchange error if the account mode does not support the requested endpoint.
+
+## Intent To Method Map
+
+For a broader quick reference, see `docs/ai-api-map.md`.
+
+Common REST market data tasks:
+
+```text
+Get server time -> client.V5Api.ExchangeData.GetServerTimeAsync()
+Get announcements -> client.V5Api.ExchangeData.GetAnnouncementsAsync(...)
+Get spot symbols -> client.V5Api.ExchangeData.GetSpotSymbolsAsync(symbol)
+Get linear/inverse symbols -> client.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(Category.Linear, ...)
+Get option symbols -> client.V5Api.ExchangeData.GetOptionSymbolsAsync(...)
+Get spot ticker -> client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT")
+Get linear/inverse ticker -> client.V5Api.ExchangeData.GetLinearInverseTickersAsync(Category.Linear, "ETHUSDT")
+Get option ticker -> client.V5Api.ExchangeData.GetOptionTickersAsync(...)
+Get klines -> client.V5Api.ExchangeData.GetKlinesAsync(category, symbol, interval, ...)
+Get mark price klines -> client.V5Api.ExchangeData.GetMarkPriceKlinesAsync(category, symbol, interval, ...)
+Get index price klines -> client.V5Api.ExchangeData.GetIndexPriceKlinesAsync(category, symbol, interval, ...)
+Get premium index klines -> client.V5Api.ExchangeData.GetPremiumIndexPriceKlinesAsync(category, symbol, interval, ...)
+Get order book -> client.V5Api.ExchangeData.GetOrderbookAsync(category, symbol, limit)
+Get RPI order book -> client.V5Api.ExchangeData.GetRpiOrderbookAsync(category, symbol, limit)
+Get recent trades -> client.V5Api.ExchangeData.GetTradeHistoryAsync(category, symbol, ...)
+Get funding rate history -> client.V5Api.ExchangeData.GetFundingRateHistoryAsync(category, symbol, ...)
+Get open interest -> client.V5Api.ExchangeData.GetOpenInterestAsync(category, symbol, interestInterval, ...)
+Get risk limit -> client.V5Api.ExchangeData.GetRiskLimitAsync(category, ...)
+Get delivery price -> client.V5Api.ExchangeData.GetDeliveryPriceAsync(category, ...)
+Get insurance -> client.V5Api.ExchangeData.GetInsuranceAsync(asset)
+Get long/short ratio -> client.V5Api.ExchangeData.GetLongShortRatioAsync(...)
+Get system status -> client.V5Api.ExchangeData.GetSystemStatusAsync()
+Get spread symbols -> client.V5Api.ExchangeData.GetSpreadSymbolsAsync(...)
+Get spread order book -> client.V5Api.ExchangeData.GetSpreadOrderBookAsync(...)
+Get spread tickers -> client.V5Api.ExchangeData.GetSpreadTickersAsync(...)
+Get spread trades -> client.V5Api.ExchangeData.GetSpreadRecentTradesAsync(...)
+```
+
+Common account and asset tasks:
+
+```text
+Get wallet balance -> client.V5Api.Account.GetBalancesAsync(AccountType.Unified, asset)
+Get all asset balances -> client.V5Api.Account.GetAllAssetBalancesAsync(accountType, ...)
+Get one asset balance -> client.V5Api.Account.GetAssetBalanceAsync(accountType, asset, ...)
+Get asset info -> client.V5Api.Account.GetAssetInfoAsync(...)
+Get deposit address -> client.V5Api.Account.GetDepositAddressAsync(asset, ...)
+Get deposits -> client.V5Api.Account.GetDepositsAsync(...)
+Get withdrawals -> client.V5Api.Account.GetWithdrawalsAsync(...)
+Cancel withdrawal -> client.V5Api.Account.CancelWithdrawalAsync(id)
+Get API key info -> client.V5Api.Account.GetApiKeyInfoAsync()
+Get account types -> client.V5Api.Account.GetAccountTypesAsync(...)
+Get fee rates -> client.V5Api.Account.GetFeeRatesAsync(category, ...)
+Create internal transfer -> client.V5Api.Account.CreateInternalTransferAsync(...)
+Create universal transfer -> client.V5Api.Account.CreateUniversalTransferAsync(...)
+Get transferable amount -> client.V5Api.Account.GetTransferableAsync(asset)
+Get collateral info -> client.V5Api.Account.GetCollateralInfoAsync(...)
+Get borrow history -> client.V5Api.Account.GetBorrowHistoryAsync(...)
+Get transfer history -> client.V5Api.Account.GetFundingTransactionHistoryAsync(...)
+Get asset overview -> client.V5Api.Account.GetAssetOverviewAsync(...)
+Get spot margin auto repay mode -> client.V5Api.Account.GetSpotMarginAutoRepayModeAsync(...)
+Set spot margin auto repay mode -> client.V5Api.Account.SetSpotMarginAutoRepayModeAsync(...)
+```
+
+Common trading tasks:
+
+```text
+Place order -> client.V5Api.Trading.PlaceOrderAsync(category, symbol, side, type, quantity, ...)
+Pre-check order -> client.V5Api.Trading.PreCheckOrderAsync(category, symbol, side, type, quantity, ...)
+Edit order -> client.V5Api.Trading.EditOrderAsync(category, symbol, ...)
+Cancel order -> client.V5Api.Trading.CancelOrderAsync(category, symbol, ...)
+Cancel all orders -> client.V5Api.Trading.CancelAllOrderAsync(category, ...)
+Get open orders -> client.V5Api.Trading.GetOrdersAsync(category, ...)
+Get order history -> client.V5Api.Trading.GetOrderHistoryAsync(category, ...)
+Get user trades -> client.V5Api.Trading.GetUserTradesAsync(category, ...)
+Get positions -> client.V5Api.Trading.GetPositionsAsync(category, ...)
+Set trading stop -> client.V5Api.Trading.SetTradingStopAsync(category, symbol, positionIdx, ...)
+Get closed PnL -> client.V5Api.Trading.GetClosedProfitLossAsync(category, ...)
+Place multiple orders -> client.V5Api.Trading.PlaceMultipleOrdersAsync(category, orderRequests)
+Edit multiple orders -> client.V5Api.Trading.EditMultipleOrdersAsync(category, orderRequests)
+Cancel multiple orders -> client.V5Api.Trading.CancelMultipleOrdersAsync(category, orderRequests)
+Purchase leverage token -> client.V5Api.Trading.PurchaseLeverageTokenAsync(...)
+Redeem leverage token -> client.V5Api.Trading.RedeemLeverageTokenAsync(...)
+Get leverage token order history -> client.V5Api.Trading.GetLeverageTokenOrderHistoryAsync(...)
+Place spread order -> client.V5Api.Trading.PlaceSpreadOrderAsync(...)
+Get open spread orders -> client.V5Api.Trading.GetOpenSpreadOrdersAsync(...)
+Get closed spread orders -> client.V5Api.Trading.GetClosedSpreadOrdersAsync(...)
+Cancel spread order -> client.V5Api.Trading.CancelSpreadOrderAsync(...)
+Cancel all spread orders -> client.V5Api.Trading.CancelAllSpreadOrdersAsync(...)
+Get spread user trades -> client.V5Api.Trading.GetSpreadUserTradesAsync(...)
+```
+
+Other groups:
+
+```text
+Sub-account endpoints -> client.V5Api.SubAccount.*
+Crypto loan endpoints -> client.V5Api.CryptoLoan.*
+Earn endpoints -> client.V5Api.Earn.*
+Shared REST abstractions -> client.V5Api.SharedClient
+```
+
+Common WebSocket tasks:
+
+```text
+Subscribe spot ticker -> socketClient.V5SpotApi.SubscribeToTickerUpdatesAsync(symbol, handler)
+Subscribe spot trades -> socketClient.V5SpotApi.SubscribeToTradeUpdatesAsync(symbol, handler)
+Subscribe spot price limits -> socketClient.V5SpotApi.SubscribeToPriceLimitUpdatesAsync(symbol, handler)
+Subscribe linear ticker -> socketClient.V5LinearApi.SubscribeToTickerUpdatesAsync(symbol, handler)
+Subscribe linear trades -> socketClient.V5LinearApi.SubscribeToTradeUpdatesAsync(symbol, handler)
+Subscribe linear liquidations -> socketClient.V5LinearApi.SubscribeToAllLiquidationUpdatesAsync(symbol, handler)
+Subscribe linear insurance pool -> socketClient.V5LinearApi.SubscribeToInsurancePoolUpdatesAsync(asset, handler)
+Subscribe linear price limits -> socketClient.V5LinearApi.SubscribeToPriceLimitUpdatesAsync(symbol, handler)
+Subscribe inverse streams -> socketClient.V5InverseApi.* matching inverse public stream methods
+Subscribe option ticker -> socketClient.V5OptionsApi.SubscribeToTickerUpdatesAsync(symbol, handler)
+Subscribe option trades -> socketClient.V5OptionsApi.SubscribeToTradeUpdatesAsync(symbol, handler)
+Subscribe option klines -> socketClient.V5OptionsApi.SubscribeToKlineUpdatesAsync(symbol, interval, handler)
+Subscribe option order book -> socketClient.V5OptionsApi.SubscribeToOrderbookUpdatesAsync(symbol, depth, handler)
+Subscribe private orders -> socketClient.V5PrivateApi.SubscribeToOrderUpdatesAsync(handler)
+Subscribe private positions -> socketClient.V5PrivateApi.SubscribeToPositionUpdatesAsync(handler)
+Subscribe private user trades -> socketClient.V5PrivateApi.SubscribeToUserTradeUpdatesAsync(handler)
+Subscribe private wallet -> socketClient.V5PrivateApi.SubscribeToWalletUpdatesAsync(handler)
+Subscribe private Greeks -> socketClient.V5PrivateApi.SubscribeToGreekUpdatesAsync(handler)
+Place order over WebSocket -> socketClient.V5PrivateApi.PlaceOrderAsync(...)
+Edit order over WebSocket -> socketClient.V5PrivateApi.EditOrderAsync(...)
+Cancel order over WebSocket -> socketClient.V5PrivateApi.CancelOrderAsync(...)
+```
+
+## Market Data Example
+
+```csharp
+using Bybit.Net.Clients;
+using Bybit.Net.Enums;
+
+var client = new BybitRestClient();
+
+var spotTicker = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+if (!spotTicker.Success)
+{
+    Console.WriteLine(spotTicker.Error);
+    return;
+}
+
+var ticker = spotTicker.Data.List.FirstOrDefault();
+Console.WriteLine($"{ticker?.Symbol}: {ticker?.LastPrice}");
+
+var klines = await client.V5Api.ExchangeData.GetKlinesAsync(
+    Category.Linear,
+    "ETHUSDT",
+    KlineInterval.OneMinute,
+    limit: 10);
+
+if (!klines.Success)
+{
+    Console.WriteLine(klines.Error);
+    return;
+}
+
+foreach (var candle in klines.Data.List)
+    Console.WriteLine($"{candle.StartTime:u} close={candle.ClosePrice}");
+```
+
+## Account Balance Example
+
+```csharp
+using Bybit.Net;
+using Bybit.Net.Clients;
+using Bybit.Net.Enums;
+
+var client = new BybitRestClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+
+var balances = await client.V5Api.Account.GetBalancesAsync(AccountType.Unified, "USDT");
+if (!balances.Success)
+{
+    Console.WriteLine(balances.Error);
+    return;
+}
+
+foreach (var account in balances.Data.List)
+{
+    foreach (var asset in account.Assets)
+        Console.WriteLine($"{asset.Asset}: wallet={asset.WalletBalance}, free={asset.Free}");
+}
+```
+
+## Linear Order Example
+
+```csharp
+using Bybit.Net;
+using Bybit.Net.Clients;
+using Bybit.Net.Enums;
+
+var client = new BybitRestClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+
+var order = await client.V5Api.Trading.PlaceOrderAsync(
+    category: Category.Linear,
+    symbol: "ETHUSDT",
+    side: OrderSide.Buy,
+    type: NewOrderType.Limit,
+    quantity: 0.1m,
+    price: 2000m,
+    timeInForce: TimeInForce.GoodTillCanceled,
+    positionIdx: PositionIdx.OneWayMode);
+
+if (!order.Success)
+{
+    Console.WriteLine(order.Error);
+    return;
+}
+
+Console.WriteLine(order.Data.OrderId);
+```
+
+Hedge mode note: if the account is in hedge mode, use `PositionIdx.BuyHedgeMode` or `PositionIdx.SellHedgeMode`. In one-way mode, use `PositionIdx.OneWayMode` or omit `positionIdx` when the endpoint/account mode allows it.
+
+Use `reduceOnly: true` when closing a derivatives position if you want to avoid opening or flipping a position.
+
+## Spot Order Example
+
+```csharp
+var order = await client.V5Api.Trading.PlaceOrderAsync(
+    Category.Spot,
+    "ETHUSDT",
+    OrderSide.Buy,
+    NewOrderType.Limit,
+    quantity: 0.01m,
+    price: 2000m,
+    timeInForce: TimeInForce.GoodTillCanceled);
+
+if (!order.Success)
+{
+    Console.WriteLine(order.Error);
+    return;
+}
+```
+
+For spot market orders, Bybit V5 can use `marketUnit` for the unit of quantity in unified trading account flows. Inspect `PlaceOrderAsync` parameters if the user asks for quote-amount market buys.
+
+## Order Query And Cancel Example
+
+```csharp
+var orders = await client.V5Api.Trading.GetOrdersAsync(
+    Category.Linear,
+    symbol: "ETHUSDT",
+    limit: 20);
+
+if (!orders.Success)
+{
+    Console.WriteLine(orders.Error);
+    return;
+}
+
+var firstOrder = orders.Data.List.FirstOrDefault();
+if (firstOrder != null)
+{
+    var cancel = await client.V5Api.Trading.CancelOrderAsync(
+        Category.Linear,
+        "ETHUSDT",
+        orderId: firstOrder.OrderId);
+
+    if (!cancel.Success)
+        Console.WriteLine(cancel.Error);
+}
+```
+
+## Position And Trading Stop Example
+
+```csharp
+var positions = await client.V5Api.Trading.GetPositionsAsync(
+    Category.Linear,
+    symbol: "ETHUSDT");
+
+if (!positions.Success)
+{
+    Console.WriteLine(positions.Error);
+    return;
+}
+
+var tradingStop = await client.V5Api.Trading.SetTradingStopAsync(
+    Category.Linear,
+    "ETHUSDT",
+    PositionIdx.OneWayMode,
+    takeProfit: 2500m,
+    stopLoss: 1800m);
+
+if (!tradingStop.Success)
+    Console.WriteLine(tradingStop.Error);
+```
+
+## WebSocket Subscription Example
+
+```csharp
+using Bybit.Net.Clients;
+
+var socketClient = new BybitSocketClient();
+
+var spotSub = await socketClient.V5SpotApi.SubscribeToTickerUpdatesAsync(
+    "ETHUSDT",
+    update => Console.WriteLine(update.Data.LastPrice));
+
+if (!spotSub.Success)
+{
+    Console.WriteLine(spotSub.Error);
+    return;
+}
+
+Console.ReadLine();
+
+await socketClient.UnsubscribeAsync(spotSub.Data);
+```
+
+Multiple subscriptions should all be checked before `.Data` is used:
+
+```csharp
+var linearSub = await socketClient.V5LinearApi.SubscribeToTickerUpdatesAsync(
+    "ETHUSDT",
+    update => Console.WriteLine(update.Data.MarkPrice));
+
+if (!linearSub.Success)
+{
+    await socketClient.UnsubscribeAsync(spotSub.Data);
+    Console.WriteLine(linearSub.Error);
+    return;
+}
+```
+
+## Private WebSocket Example
+
+```csharp
+using Bybit.Net;
+using Bybit.Net.Clients;
+
+var socketClient = new BybitSocketClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+
+var orderSub = await socketClient.V5PrivateApi.SubscribeToOrderUpdatesAsync(
+    update =>
+    {
+        foreach (var order in update.Data)
+            Console.WriteLine($"{order.Symbol}: {order.OrderStatus}");
+    });
+
+if (!orderSub.Success)
+{
+    Console.WriteLine(orderSub.Error);
+    return;
+}
+
+Console.ReadLine();
+
+await socketClient.UnsubscribeAsync(orderSub.Data);
+```
+
+## WebSocket Trading Example
+
+Bybit.Net also exposes V5 private WebSocket trading methods:
+
+```csharp
+var socketClient = new BybitSocketClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+
+var order = await socketClient.V5PrivateApi.PlaceOrderAsync(
+    Category.Linear,
+    "ETHUSDT",
+    OrderSide.Buy,
+    NewOrderType.Limit,
+    quantity: 0.1m,
+    price: 2000m,
+    timeInForce: TimeInForce.GoodTillCanceled,
+    positionIdx: PositionIdx.OneWayMode);
+
+if (!order.Success)
+{
+    Console.WriteLine(order.Error);
+    return;
+}
+
+Console.WriteLine(order.Data.OrderId);
+```
+
+Use REST trading methods by default unless the user specifically asks for WebSocket order entry.
+
+## SharedApis Multi-Exchange Pattern
+
+Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Bybit and other exchanges.
+
+```csharp
+using Bybit.Net.Clients;
+
+var shared = new BybitRestClient().V5Api.SharedClient;
+
+Console.WriteLine(shared.Exchange);
+Console.WriteLine(string.Join(", ", shared.SupportedTradingModes));
+```
+
+Native Bybit endpoints remain better when the user needs Bybit-specific fields or parameters:
+
+```text
+Category
+AccountType
+PositionIdx
+TriggerType
+OrderFilter
+StopLossTakeProfitMode
+Spread trading endpoints
+Bybit-specific response fields
+```
+
+Shared WebSocket clients are exposed on specific socket roots:
+
+```csharp
+var socketClient = new BybitSocketClient();
+var spotShared = socketClient.V5SpotApi.SharedClient;
+var linearShared = socketClient.V5LinearApi.SharedClient;
+var inverseShared = socketClient.V5InverseApi.SharedClient;
+var privateShared = socketClient.V5PrivateApi.SharedClient;
+```
+
+For shared socket interface variables, keep the concrete `BybitSocketClient` so you can call:
+
+```csharp
+await socketClient.UnsubscribeAsync(subscription.Data);
+```
+
+## Symbol And Quantity Handling
+
+Use exchange symbol metadata instead of hard-coded precision. For spot:
+
+```csharp
+var symbols = await client.V5Api.ExchangeData.GetSpotSymbolsAsync("ETHUSDT");
+if (!symbols.Success || symbols.Data.List.Length == 0)
+{
+    Console.WriteLine(symbols.Error);
+    return;
+}
+
+var symbolInfo = symbols.Data.List.First();
+```
+
+For linear/inverse:
+
+```csharp
+var symbols = await client.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(
+    Category.Linear,
+    symbol: "ETHUSDT");
+
+if (!symbols.Success || symbols.Data.List.Length == 0)
+{
+    Console.WriteLine(symbols.Error);
+    return;
+}
+```
+
+Do not manually round order quantities and prices using string operations. Prefer exchange filters, the symbol metadata returned by Bybit, or CryptoExchange.Net helpers when available.
+
+Common order validation problems:
+
+```text
+Invalid symbol format
+Wrong category for symbol
+Quantity below minimum
+Quantity step does not match lot size
+Price tick size mismatch
+Insufficient balance or margin
+Position mode mismatch with PositionIdx
+Account type not enabled for the endpoint
+```
+
+## Error Handling Notes
+
+Common categories of Bybit failures:
+
+```text
+Rate limiting or temporary network failure: transient; back off and retry if appropriate.
+Timestamp/receive-window issue: check local clock and ReceiveWindow.
+Signature issue: credentials, environment, or signing configuration; do not retry blindly.
+Invalid category/symbol: fix Category and symbol.
+Order validation failure: fix quantity, price, tick size, lot size, account mode, or permissions.
+Insufficient balance/margin: usually permanent until account state changes.
+Unknown order: may be expected for already-filled, already-canceled, or wrong category/symbol queries.
+```
+
+Bybit.Net result objects contain `Error.Code` and `Error.Message` when available:
+
+```csharp
+if (!result.Success)
+{
+    Console.WriteLine(result.Error?.Code);
+    Console.WriteLine(result.Error?.Message);
+    return;
+}
+```
+
+## AI-Friendly Examples
+
+Use these examples when generating code:
+
+```text
+Examples/ai-friendly/01-v5-market-and-account.cs
+  V5 REST setup, public spot/linear market data, order book, and credential-gated wallet balance.
+
+Examples/ai-friendly/02-v5-trading.cs
+  V5 order placement, open orders, positions, cancellation, categories, and dry-run safety.
+
+Examples/ai-friendly/03-websocket.cs
+  V5 public spot and linear subscriptions, private order updates, success checks, teardown.
+
+Examples/ai-friendly/04-shared-client.cs
+  CryptoExchange.Net shared client access beside native Bybit V5 endpoints.
+
+Examples/ai-friendly/05-error-handling.cs
+  WebCallResult and CallResult helpers, typed error output, and subscription teardown.
+```
+
+These files are intended to be copied into a console `Program.cs` after `dotnet add package Bybit.Net`. Private and trading examples read credentials from environment variables and avoid live order placement unless explicitly enabled.
+
+## Anti-Hallucination Checklist
+
+Before finalizing generated code:
+
+- Does it compile with the current package?
+- Does it include `using Bybit.Net;` when using credentials or environments?
+- Does every REST/socket result check `.Success` before `.Data`?
+- Does it use `restClient.V5Api` for REST?
+- Does it use the correct socket root: `V5SpotApi`, `V5LinearApi`, `V5InverseApi`, `V5OptionsApi`, `V5SpreadApi`, or `V5PrivateApi`?
+- Does it avoid raw Bybit URLs and manual signing?
+- Does it avoid nonexistent Binance-style roots?
+- Does it avoid API passphrases?
+- Does it avoid `.Result` and `.Wait()`?
+- Are WebSocket subscriptions unsubscribed on shutdown?
+- For shared socket interfaces, does it keep the concrete socket client for `UnsubscribeAsync(sub.Data)`?
+- Does every category-based call use the correct `Category` for the product?
+- Does account/balance code use the intended `AccountType`?
+- For derivatives hedge-mode code, is `PositionIdx` correct?
+- For order quantities/prices, does it use exchange metadata or a proper helper instead of ad hoc rounding?
+
+## Source Of Truth For Method Names
+
+When unsure, inspect these files instead of guessing:
+
+```text
+Bybit.Net/Interfaces/Clients/IBybitRestClient.cs
+Bybit.Net/Interfaces/Clients/IBybitSocketClient.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitRestClientApi.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitRestClientApiExchangeData.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitRestClientApiAccount.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitRestClientApiTrading.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitRestClientApiSubAccount.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitRestClientApiCryptoLoan.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitRestClientApiEarn.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitSocketClientSpotApi.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitSocketClientLinearApi.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitSocketClientInverseApi.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitSocketClientOptionApi.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitSocketClientSpreadApi.cs
+Bybit.Net/Interfaces/Clients/V5/IBybitSocketClientPrivateApi.cs
+Bybit.Net/Enums/*.cs
+```
+
+Prefer the interface files over memory when generating endpoint names, parameters, callback names, and return types.
+
+## Common Wrong Patterns To Avoid
+
+Wrong:
+
+```csharp
+var client = new BybitClient();
+```
+
+Use:
+
+```csharp
+var client = new BybitRestClient();
+```
+
+Wrong:
+
+```csharp
+var ticker = await client.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+```
+
+Use:
+
+```csharp
+var ticker = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+```
+
+Wrong:
+
+```csharp
+var order = await client.UsdFuturesApi.Trading.PlaceOrderAsync("ETHUSDT", OrderSide.Buy, ...);
+```
+
+Use:
+
+```csharp
+var order = await client.V5Api.Trading.PlaceOrderAsync(
+    Category.Linear,
+    "ETHUSDT",
+    OrderSide.Buy,
+    NewOrderType.Limit,
+    quantity: 0.1m,
+    price: 2000m);
+```
+
+Wrong:
+
+```csharp
+options.ApiCredentials = new BybitCredentials("key", "secret", "passphrase");
+```
+
+Use:
+
+```csharp
+options.ApiCredentials = new BybitCredentials("key", "secret");
+```
+
+Wrong:
+
+```csharp
+var result = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+Console.WriteLine(result.Data.List.First().LastPrice);
+```
+
+Use:
+
+```csharp
+var result = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+if (!result.Success)
+{
+    Console.WriteLine(result.Error);
+    return;
+}
+Console.WriteLine(result.Data.List.First().LastPrice);
+```
+
+Wrong:
+
+```csharp
+await sharedTickerSocket.UnsubscribeAsync(sub.Data);
+```
+
+Use:
+
+```csharp
+await socketClient.UnsubscribeAsync(sub.Data);
+```
+
+Wrong:
+
+```csharp
+await client.V5Api.ExchangeData.GetOrderbookAsync(Category.Spot, "ETH-USDT");
+```
+
+Use:
+
+```csharp
+await client.V5Api.ExchangeData.GetOrderbookAsync(Category.Spot, "ETHUSDT");
+```
+
+Wrong:
+
+```csharp
+await client.V5Api.Trading.GetPositionsAsync(Category.Spot, symbol: "ETHUSDT");
+```
+
+Use:
+
+```csharp
+await client.V5Api.Trading.GetPositionsAsync(Category.Linear, symbol: "ETHUSDT");
+```

@@ -81,6 +81,17 @@ var tickerSubscriptionResult = socketClient.V5SpotApi.SubscribeToTickerUpdatesAs
 
 For information on the clients, dependency injection, response processing and more see the [Bybit.Net documentation](https://cryptoexchange.jkorf.dev?library=Bybit.Net), [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Bybit.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
+## AI documentation
+This repository includes AI-focused guidance for generating correct Bybit.Net code:
+
+* [CLAUDE.md](CLAUDE.md) - skill-style instructions for Bybit.Net usage
+* [llms.txt](llms.txt) - compact AI context
+* [llms-full.txt](llms-full.txt) - detailed AI context and API map
+* [docs/ai-api-map.md](docs/ai-api-map.md) - V5 API surface map
+* [Examples/ai-friendly](Examples/ai-friendly) - compilable examples for assistants and quick onboarding
+
+The AI guidance focuses on the V5 API shape (`restClient.V5Api`, `socketClient.V5SpotApi`, `socketClient.V5LinearApi`, `socketClient.V5PrivateApi`, etc.), Bybit product categories, result handling, and avoiding raw HTTP signing code.
+
 ## CryptoExchange.Net
 Bybit.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
 

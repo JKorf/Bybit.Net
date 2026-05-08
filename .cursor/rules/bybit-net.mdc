@@ -1,0 +1,108 @@
+---
+description: Conventions for using the Bybit.Net library when working with the Bybit cryptocurrency exchange in C#/.NET. Apply when generating code that interacts with the Bybit API.
+globs:
+  - "**/*.cs"
+  - "**/*.csproj"
+alwaysApply: false
+---
+
+# Bybit.Net Conventions
+
+This codebase uses **Bybit.Net** for Bybit cryptocurrency exchange access. Do not write raw `HttpClient` calls to Bybit endpoints.
+
+## Client setup pattern
+
+```csharp
+using Bybit.Net;
+using Bybit.Net.Clients;
+
+var restClient = new BybitRestClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+```
+
+For public market data only, no credentials are needed: `new BybitRestClient()`.
+
+## Result pattern
+
+All methods return `WebCallResult<T>` for REST or `CallResult<T>` for WebSocket operations. Always check `.Success` before reading `.Data`:
+
+```csharp
+var ticker = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+if (!ticker.Success) { return; }
+var price = ticker.Data.List.First().LastPrice;
+```
+
+## API surface
+
+- `restClient.V5Api.ExchangeData`
+- `restClient.V5Api.Account`
+- `restClient.V5Api.Trading`
+- `restClient.V5Api.SubAccount`
+- `restClient.V5Api.CryptoLoan`
+- `restClient.V5Api.Earn`
+- `restClient.V5Api.SharedClient`
+- `socketClient.V5SpotApi`
+- `socketClient.V5LinearApi`
+- `socketClient.V5InverseApi`
+- `socketClient.V5OptionsApi`
+- `socketClient.V5SpreadApi`
+- `socketClient.V5PrivateApi`
+
+Use `Category.Spot`, `Category.Linear`, `Category.Inverse`, or `Category.Option` when V5 methods require a category.
+
+## Order placement
+
+```csharp
+var order = await restClient.V5Api.Trading.PlaceOrderAsync(
+    Category.Linear,
+    "ETHUSDT",
+    OrderSide.Buy,
+    NewOrderType.Limit,
+    quantity: 0.1m,
+    price: 2000m,
+    timeInForce: TimeInForce.GoodTillCanceled,
+    positionIdx: PositionIdx.OneWayMode);
+```
+
+## WebSocket pattern
+
+```csharp
+var sub = await socketClient.V5SpotApi.SubscribeToTickerUpdatesAsync(
+    "ETHUSDT",
+    update => Console.WriteLine(update.Data.LastPrice));
+
+if (!sub.Success) { return; }
+await socketClient.UnsubscribeAsync(sub.Data);
+```
+
+Use `V5PrivateApi` for authenticated order, position, wallet, user trade, and Greek updates.
+
+## Multi-exchange code
+
+For exchange-agnostic code, use CryptoExchange.Net shared clients:
+
+```csharp
+var shared = new BybitRestClient().V5Api.SharedClient;
+Console.WriteLine(shared.Exchange);
+```
+
+## Hard rules
+
+- Never write raw `HttpClient` calls to Bybit endpoints.
+- Never invent `SpotApi`, `UsdFuturesApi`, `CoinFuturesApi`, or `GeneralApi` roots for Bybit.Net.
+- Never use `.Result` or `.Wait()`; use async methods with `await`.
+- Never instantiate clients per request; reuse clients or use DI.
+- Never skip checking `WebCallResult.Success` or `CallResult.Success`.
+- Never use passphrase credentials for Bybit HMAC authentication.
+- Never use non-Bybit symbol formats such as `ETH-USDT`, `ETH_USDT`, `ETH/USD`, or `tETHUSD`.
+- Always use the V5 client roots and the correct product category.
+- Always store WebSocket subscriptions and unsubscribe on shutdown.
+
+## Reference
+
+- Skill: `CLAUDE.md` in the repository root has fuller examples.
+- LLM context: `llms.txt` and `llms-full.txt` in the repository root.
+- API map: `docs/ai-api-map.md`.
+- Examples: `Examples/ai-friendly/`.

@@ -1,0 +1,101 @@
+# Bybit.Net AI Context
+
+Bybit.Net is a C#/.NET client for the Bybit exchange built on CryptoExchange.Net. Use it instead of raw HTTP for Bybit REST and WebSocket integration.
+
+## Install
+
+```bash
+dotnet add package Bybit.Net
+```
+
+## Core clients
+
+```csharp
+using Bybit.Net;
+using Bybit.Net.Clients;
+using Bybit.Net.Enums;
+
+var restClient = new BybitRestClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+
+var socketClient = new BybitSocketClient(options =>
+{
+    options.ApiCredentials = new BybitCredentials("API_KEY", "API_SECRET");
+});
+```
+
+Public market data can use `new BybitRestClient()` or `new BybitSocketClient()` without credentials.
+
+## V5 REST roots
+
+- `restClient.V5Api.ExchangeData`
+- `restClient.V5Api.Account`
+- `restClient.V5Api.Trading`
+- `restClient.V5Api.SubAccount`
+- `restClient.V5Api.CryptoLoan`
+- `restClient.V5Api.Earn`
+- `restClient.V5Api.SharedClient`
+
+## V5 WebSocket roots
+
+- `socketClient.V5SpotApi`
+- `socketClient.V5LinearApi`
+- `socketClient.V5InverseApi`
+- `socketClient.V5OptionsApi`
+- `socketClient.V5SpreadApi`
+- `socketClient.V5PrivateApi`
+
+## Common calls
+
+```csharp
+var spotTicker = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var linearTicker = await restClient.V5Api.ExchangeData.GetLinearInverseTickersAsync(Category.Linear, "ETHUSDT");
+var klines = await restClient.V5Api.ExchangeData.GetKlinesAsync(Category.Linear, "ETHUSDT", KlineInterval.OneMinute, limit: 10);
+var orderBook = await restClient.V5Api.ExchangeData.GetOrderbookAsync(Category.Linear, "ETHUSDT", limit: 25);
+var balances = await restClient.V5Api.Account.GetBalancesAsync(AccountType.Unified, "USDT");
+var orders = await restClient.V5Api.Trading.GetOrdersAsync(Category.Linear, symbol: "ETHUSDT");
+var positions = await restClient.V5Api.Trading.GetPositionsAsync(Category.Linear, symbol: "ETHUSDT");
+```
+
+## Order placement
+
+```csharp
+var order = await restClient.V5Api.Trading.PlaceOrderAsync(
+    Category.Linear,
+    "ETHUSDT",
+    OrderSide.Buy,
+    NewOrderType.Limit,
+    quantity: 0.1m,
+    price: 2000m,
+    timeInForce: TimeInForce.GoodTillCanceled,
+    positionIdx: PositionIdx.OneWayMode);
+```
+
+## Result handling
+
+All REST calls return `WebCallResult<T>` and WebSocket calls return `CallResult<T>`.
+
+```csharp
+if (!spotTicker.Success)
+{
+    Console.WriteLine(spotTicker.Error);
+    return;
+}
+
+Console.WriteLine(spotTicker.Data.List.First().LastPrice);
+```
+
+## Rules
+
+- Prefer V5 API roots.
+- Use Bybit compact symbols such as `ETHUSDT`.
+- Use `Category.Spot`, `Category.Linear`, `Category.Inverse`, or `Category.Option` correctly.
+- Use `BybitCredentials("key", "secret")` for HMAC credentials; no passphrase.
+- Check `.Success` before `.Data`.
+- Use async/await.
+- Reuse clients or use dependency injection.
+- Store and unsubscribe WebSocket subscriptions.
+
+See `CLAUDE.md`, `llms-full.txt`, `docs/ai-api-map.md`, and `Examples/ai-friendly/` for more complete guidance.
