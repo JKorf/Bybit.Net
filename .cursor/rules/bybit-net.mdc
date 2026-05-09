@@ -102,7 +102,7 @@ Console.WriteLine(shared.Exchange);
 
 ## Reference
 
-- Skill: `CLAUDE.md` in the repository root has fuller examples.
+- Skill: `AGENTS.md` in the repository root has fuller examples.
 - LLM context: `llms.txt` and `llms-full.txt` in the repository root.
 - API map: `docs/ai-api-map.md`.
 - Examples: `Examples/ai-friendly/`.

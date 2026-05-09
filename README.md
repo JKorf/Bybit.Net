@@ -84,7 +84,7 @@ For information on the clients, dependency injection, response processing and mo
 ## AI documentation
 This repository includes AI-focused guidance for generating correct Bybit.Net code:
 
-* [CLAUDE.md](CLAUDE.md) - skill-style instructions for Bybit.Net usage
+* [AGENTS.md](AGENTS.md) - skill-style instructions for Bybit.Net usage
 * [llms.txt](llms.txt) - compact AI context
 * [llms-full.txt](llms-full.txt) - detailed AI context and API map
 * [docs/ai-api-map.md](docs/ai-api-map.md) - V5 API surface map
