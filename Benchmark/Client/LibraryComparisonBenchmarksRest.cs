@@ -32,12 +32,14 @@ namespace Bybit.Net.Benchmark.Client
                 x.Environment = env;
             });
 
+#pragma warning disable CS0612 // Type or member is obsolete
             _bybitApiClient = new BybitRestApiClient(new BybitRestApiClientOptions
             {
                 RateLimiterEnabled = false,
                 RateLimiters = [],
                 BaseAddress = "http://localhost:" + Program.ServerPort
             });
+#pragma warning restore CS0612 // Type or member is obsolete
             BybitAddress.MainNet.RestApiAddress = "http://localhost:" + Program.ServerPort;
 
             _ccxtClient = new bybit(new Dictionary<string, object>
