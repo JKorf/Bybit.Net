@@ -1302,7 +1302,7 @@ namespace Bybit.Net.Clients.V5
 
             return result.AsExchangeResult(
                    Exchange,
-                   TradingMode.Spot,
+                   request.Symbol!.TradingMode,
                    ExchangeHelpers.ApplyFilter(result.Data.List, x => x.Timestamp, request.StartTime, request.EndTime, direction)
                    .Select(x =>
                         new SharedFundingRate(x.FundingRate, x.Timestamp))
