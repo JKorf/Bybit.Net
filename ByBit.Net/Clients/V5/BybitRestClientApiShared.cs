@@ -1640,16 +1640,24 @@ namespace Bybit.Net.Clients.V5
             if (validationError != null)
                 return new ExchangeWebResult<SharedPosition[]>(Exchange, validationError);
 
-            var symbol = request.Symbol?.GetSymbol(FormatSymbol);
-            if (symbol == null && ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset") == null)
-                return new ExchangeWebResult<SharedPosition[]>(Exchange, ArgumentError.Invalid("SettleAsset", "Either the Symbol request parameter or the SettleAsset exchange parameter is required"));
-
             var tradingMode = request.Symbol?.TradingMode ?? request.TradingMode ?? TradingMode.PerpetualLinear;
             var category = (tradingMode == TradingMode.PerpetualLinear || tradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
+
+            var settleAsset = ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset") ??
+                ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "settleCoin");
+
+            var symbol = request.Symbol?.GetSymbol(FormatSymbol);
+            if (symbol == null
+                && settleAsset == null
+                && category == Category.Linear)
+            {
+                return new ExchangeWebResult<SharedPosition[]>(Exchange, ArgumentError.Invalid("SettleAsset", "Either the Symbol request parameter or the SettleAsset exchange parameter is required for linear positions"));
+            }
+
             var result = await Trading.GetPositionsAsync(
                 category,
                 symbol: symbol,
-                settleAsset: symbol != null ? null : ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset")!,
+                settleAsset: symbol != null ? null : settleAsset,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedPosition[]>(Exchange, null, default);
