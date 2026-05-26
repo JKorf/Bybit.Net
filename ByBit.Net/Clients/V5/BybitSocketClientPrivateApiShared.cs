@@ -175,7 +175,7 @@ namespace Bybit.Net.Clients.V5
             var result = await SubscribeToUserTradeUpdatesAsync(
                 update =>
                 {
-                    IEnumerable<BybitUserTradeUpdate> data = update.Data;
+                    IEnumerable<BybitUserTradeUpdate> data = update.Data.Where(x => x.TradeType != TradeType.Funding);
                     if (request.TradingMode != null)
                         data = data.Where(x => x.Category == category);
 
