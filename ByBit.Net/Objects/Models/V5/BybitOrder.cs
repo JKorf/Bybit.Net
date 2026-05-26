@@ -271,5 +271,15 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("cumFeeDetail")]
         public Dictionary<string, decimal> FeeDetails { get; set; } = new();
+        /// <summary>
+        /// ["<c>rpiTakerAccess</c>"] Whether the order has matched with an RPI order as the counterparty
+        /// </summary>
+        [JsonPropertyName("rpiTakerAccess")]
+        public bool? RpiMatch { get; set; }
+        /// <summary>
+        /// ["<c>rpiMatchedQty</c>"] Cumulative quantity matched against RPI orders as the counterparty
+        /// </summary>
+        [JsonPropertyName("rpiMatchedQty")]
+        public decimal? RpiMatchedQuantity { get; set; }
     }
 }
