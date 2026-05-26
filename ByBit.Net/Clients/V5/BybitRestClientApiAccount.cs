@@ -362,7 +362,7 @@ namespace Bybit.Net.Clients.V5
             parameters.AddOptionalParameter("cursor", cursor);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v5/account/transaction-log", BybitExchange.RateLimiter.BybitRest, 1, true,
-                new SingleLimitGuard(50, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+                new SingleLimitGuard(25, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitResponse<BybitTransactionLog>>(request, parameters, ct).ConfigureAwait(false);
         }
 
