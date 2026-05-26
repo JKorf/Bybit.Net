@@ -201,6 +201,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 6.13.0 - 26 May 2026
+    * Updated CryptoExchange.Net to version 11.2.0
+    * Added RpiMatch and RpiMatchedQuantity to BybitOrder response model
+    * Added CollateralRestriction property on BybitAssetBalance model
+    * Updated rate limit for restClient.V5Api.Account.GetTransactionHistoryAsync from 50 to 25 request per second
+    * Fixed Shared Futures SubscribeToUserTradeUpdatesAsync pushing funding trade updates
+
 * Version 6.12.1 - 22 May 2026
     * Added settleCoin mapping for Shared GetPositionsAsync implementation
     * Fixed Shared GetPositionsAsync implementation not allowing inverse retrieving without SettleAsset parameter
