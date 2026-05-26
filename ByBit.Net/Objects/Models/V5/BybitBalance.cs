@@ -190,6 +190,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("collateralSwitch")]
         public bool CollateralSwitch { get; set; }
         /// <summary>
+        /// ["<c>colRes</c>"] Collateral restriction status
+        /// </summary>
+        [JsonPropertyName("colRes")]
+        public string CollateralRestriction { get; set; } = string.Empty;
+        /// <summary>
         /// ["<c>marginCollateral</c>"] Whether the collateral is turned on by user (user)
         /// </summary>
         [JsonPropertyName("marginCollateral")]
