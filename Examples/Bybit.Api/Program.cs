@@ -1,5 +1,6 @@
+using Bybit.Net;
+using Bybit.Net.Enums;
 using Bybit.Net.Interfaces.Clients;
-using CryptoExchange.Net.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,7 @@ builder.Services.AddBybit();
 /*
 builder.Services.AddBybit(options =>
 {    
-   options.ApiCredentials = new ApiCredentials("<APIKEY>", "<APISECRET>");
+   options.ApiCredentials = new BybitCredentials("<APIKEY>", "<APISECRET>");
    options.Rest.RequestTimeout = TimeSpan.FromSeconds(5);
 });
 */
@@ -28,14 +29,22 @@ app.UseHttpsRedirection();
 app.MapGet("/{Symbol}", async ([FromServices] IBybitRestClient client, string symbol) =>
 {
     var result = await client.V5Api.ExchangeData.GetSpotTickersAsync(symbol);
-    return (object)(result.Success ? result.Data : result.Error!);
+    if (!result.Success)
+        return Results.Problem(result.Error?.Message, statusCode: 502);
+
+    var ticker = result.Data.List.FirstOrDefault();
+    return ticker == null
+        ? Results.NotFound()
+        : Results.Ok(ticker.LastPrice);
 })
 .WithOpenApi();
 
 app.MapGet("/Balances", async ([FromServices] IBybitRestClient client) =>
 {
-    var result = await client.V5Api.Account.GetBalancesAsync(Bybit.Net.Enums.AccountType.Spot);
-    return (object)(result.Success ? result.Data : result.Error!);
+    var result = await client.V5Api.Account.GetBalancesAsync(AccountType.Spot);
+    return result.Success
+        ? Results.Ok(result.Data)
+        : Results.Problem(result.Error?.Message, statusCode: 502);
 })
 .WithOpenApi();
 

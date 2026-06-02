@@ -1,13 +1,11 @@
 # Examples
 
-### Bybit.Examples.Api
-A minimal API showing how to integrate Bybit.Net in a web API project
+| Project | Topic |
+|---|---|
+| `Bybit.Examples.Api` | Minimal ASP.NET Core API integration, dependency injection, public ticker endpoint, private balances endpoint |
+| `Bybit.Examples.Console` | Basic REST ticker request and WebSocket ticker subscription |
+| `Bybit.Examples.V5OrderPlacement` | Spot and linear V5 order placement, order status lookup, and cancellation |
+| `Bybit.Examples.OrderBook` | Client-side order book implementation with live console display |
+| `Bybit.Examples.Tracker` | Trade tracker with rolling market statistics |
 
-### Bybit.Examples.Console
-A simple console client demonstrating basic usage
-
-### Bybit.Examples.OrderBook
-Example of using the client side order book implementation
-
-### Bybit.Examples.Tracker
-Example of using the trade tracker
+The `ai-friendly` folder contains standalone copy/paste examples intended for quick onboarding and AI coding assistant context.
