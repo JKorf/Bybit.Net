@@ -17,15 +17,15 @@ namespace Bybit.Net.Objects.Sockets.Queries
         {
             _client = client;
 
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitQueryResponse>(((BybitRequestMessage)Request).RequestId, HandleMessage);
+            MessageRouter = MessageRouter.CreateForQuery<BybitQueryResponse>(((BybitRequestMessage)Request).RequestId, HandleMessage);
         }
 
         public CallResult<BybitQueryResponse> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitQueryResponse message)
         {
             if (!message.Success)
-                return new CallResult<BybitQueryResponse>(new ServerError(_client.GetErrorInfo("err", message.Message)), originalData);
+                return CallResult<BybitQueryResponse>.Fail(new ServerError(_client.GetErrorInfo("err", message.Message)), originalData);
 
-            return new CallResult<BybitQueryResponse>(message, originalData, null);
+            return CallResult<BybitQueryResponse>.Ok(message, originalData);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
 
             IndividualSubscriptionCount = topics.Length;
 
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitSpotSocketEvent<BybitOrderbook>>(topics, DoHandleMessage);
+            MessageRouter = MessageRouter.CreateForEvent<BybitSpotSocketEvent<BybitOrderbook>>(topics, DoHandleMessage);
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitSpotSocketEvent<BybitOrderbook> message)
@@ -44,7 +44,7 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Timestamp, _client.GetTimeOffset())
                     .WithSequenceNumber(message.Data.Sequence)
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         protected override Query? GetSubQuery(SocketConnection connection)

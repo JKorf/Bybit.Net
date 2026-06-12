@@ -19,15 +19,15 @@ namespace Bybit.Net.Objects.Sockets.Queries
         {
             _client = client;
 
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitRequestQueryResponse<T>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
+            MessageRouter = MessageRouter.CreateForQuery<BybitRequestQueryResponse<T>, T>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
         }
 
         public CallResult<T> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitRequestQueryResponse<T> message)
         {
             if (message.ReturnCode != 0)
-                return new CallResult<T>(new ServerError(message.ReturnCode, _client.GetErrorInfo(message.ReturnCode, message.ReturnMessage)), originalData);
+                return CallResult<T>.Fail(new ServerError(message.ReturnCode, _client.GetErrorInfo(message.ReturnCode, message.ReturnMessage)), originalData);
 
-            return new CallResult<T>(message.Data, originalData, null);
+            return CallResult<T>.Ok(message.Data!, originalData);
         }
     }
 }

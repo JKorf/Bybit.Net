@@ -24,7 +24,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="asset">["<c>currency</c>"] Filter by asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitCollateralAsset[]>> GetCollateralAssetsAsync(
+        Task<HttpResult<BybitCollateralAsset[]>> GetCollateralAssetsAsync(
             AccountLevel? level = null,
             string? asset = null,
             CancellationToken ct = default);
@@ -41,7 +41,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="accountLevel">["<c>vipLevel</c>"] Filter by account level</param>
         /// <param name="asset">["<c>currency</c>"] Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitBorrowAsset[]>> GetBorrowableAssetsAsync(AccountLevel? accountLevel = null, string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BybitBorrowAsset[]>> GetBorrowableAssetsAsync(AccountLevel? accountLevel = null, string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get borrow/collateral limits
@@ -55,7 +55,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="loanAsset">["<c>loanCurrency</c>"] The loan asset, for example `ETH`</param>
         /// <param name="collateralAsset">["<c>collateralCurrency</c>"] The collateral asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitBorrowLimits>> GetLimitsAsync(string loanAsset, string collateralAsset, CancellationToken ct = default);
+        Task<HttpResult<BybitBorrowLimits>> GetLimitsAsync(string loanAsset, string collateralAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Borrow an asset
@@ -72,7 +72,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="collateralQuantity">["<c>collateralAmount</c>"] Quantity to use as collateral, either this or loanQuantity should be provided</param>
         /// <param name="loanTerm">["<c>loanTerm</c>"] The term for the loan, null for flexible term</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderId>> BorrowAsync(string loanAsset, string collateralAsset, decimal? loanQuantity = null, decimal? collateralQuantity = null, LoanTerm? loanTerm = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderId>> BorrowAsync(string loanAsset, string collateralAsset, decimal? loanQuantity = null, decimal? collateralQuantity = null, LoanTerm? loanTerm = null, CancellationToken ct = default);
 
         /// <summary>
         /// Repay a loan
@@ -86,7 +86,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderId">["<c>orderId</c>"] Loan order id</param>
         /// <param name="quantity">["<c>amount</c>"] Quantity to repay</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitRepayId>> RepayAsync(string orderId, decimal quantity, CancellationToken ct = default);
+        Task<HttpResult<BybitRepayId>> RepayAsync(string orderId, decimal quantity, CancellationToken ct = default);
 
         /// <summary>
         /// Get unpaid loans
@@ -105,7 +105,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitLoan>>> GetOpenLoansAsync(string? orderId = null, string? loanAsset = null, string? collateralAsset = null, LoanType? loanType = null, LoanTerm? loanTerm = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitLoan>>> GetOpenLoansAsync(string? orderId = null, string? loanAsset = null, string? collateralAsset = null, LoanType? loanType = null, LoanTerm? loanTerm = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get repayment history
@@ -122,7 +122,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitRepayment>>> GetRepayHistoryAsync(string? orderId = null, string? repayId = null, string? loanAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitRepayment>>> GetRepayHistoryAsync(string? orderId = null, string? repayId = null, string? loanAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get completed loan orders
@@ -139,7 +139,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitLoanOrder>>> GetCompletedLoanOrdersAsync(string? orderId = null, string? loanAsset = null, string? collateralAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitLoanOrder>>> GetCompletedLoanOrdersAsync(string? orderId = null, string? loanAsset = null, string? collateralAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get max collateral for a loan
@@ -152,7 +152,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="orderId">["<c>orderId</c>"] Order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitMaxCollateral>> GetMaxCollateralAsync(string orderId, CancellationToken ct = default);
+        Task<HttpResult<BybitMaxCollateral>> GetMaxCollateralAsync(string orderId, CancellationToken ct = default);
 
         /// <summary>
         /// Adjust collateral
@@ -167,7 +167,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="quantity">["<c>amount</c>"] Quantity</param>
         /// <param name="direction">["<c>direction</c>"] Direction</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitAdjustId>> AdjustCollateralAsync(string orderId, decimal quantity, AdjustDirection direction, CancellationToken ct = default);
+        Task<HttpResult<BybitAdjustId>> AdjustCollateralAsync(string orderId, decimal quantity, AdjustDirection direction, CancellationToken ct = default);
 
         /// <summary>
         /// Get collateral adjustment history
@@ -184,7 +184,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitAdjustHistory>>> GetCollateralAdjustHistoryAsync(string? orderId = null, string? adjustId = null, string? collateralAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitAdjustHistory>>> GetCollateralAdjustHistoryAsync(string? orderId = null, string? adjustId = null, string? collateralAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
     }
 }

@@ -13,15 +13,15 @@ namespace Bybit.Net.Objects.Sockets.Queries
     {
         public BybitOptionsQuery(string op, params object[] args) : base(new BybitRequestMessage { RequestId = ExchangeHelpers.NextId().ToString(), Operation = op, Args = args?.ToArray() }, false, 1)
         {
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitOptionsQueryResponse>("resp" + string.Join("-", args!.OrderBy(a => a)), HandleMessage);
+            MessageRouter = MessageRouter.CreateForQuery<BybitOptionsQueryResponse>("resp" + string.Join("-", args!.OrderBy(a => a)), HandleMessage);
         }
 
         public CallResult<BybitOptionsQueryResponse> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitOptionsQueryResponse message)
         {
             if (!message.Success)
-                return new CallResult<BybitOptionsQueryResponse>(new ServerError(ErrorInfo.Unknown with { Message = message.Message }), originalData);
+                return CallResult<BybitOptionsQueryResponse>.Fail(new ServerError(ErrorInfo.Unknown with { Message = message.Message }), originalData);
 
-            return new CallResult<BybitOptionsQueryResponse>(message, originalData, null);
+            return CallResult<BybitOptionsQueryResponse>.Ok(message, originalData);
         }
     }
 }

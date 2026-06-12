@@ -47,11 +47,11 @@ namespace Bybit.Net.Clients.V5
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler1();
         
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitLinearTickerUpdate>> handler, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitLinearTickerUpdate>> handler, CancellationToken ct = default)
             => SubscribeToTickerUpdatesAsync(new string[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLinearTickerUpdate>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLinearTickerUpdate>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitLinearTickerUpdate>>((receiveTime, originalData, data) =>
             {
@@ -71,11 +71,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default)
             => SubscribeToTradeUpdatesAsync(new string[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitTrade[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitTrade[]>>((receiveTime, originalData, data) =>
             {
@@ -95,7 +95,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToInsurancePoolUpdatesAsync(Action<DataEvent<BybitInsuranceUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToInsurancePoolUpdatesAsync(Action<DataEvent<BybitInsuranceUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitInsuranceUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -114,7 +114,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async virtual Task<CallResult<UpdateSubscription>> SubscribeToAdlAlertUpdatesAsync(Action<DataEvent<BybitAdlAlert[]>> handler, CancellationToken ct = default)
+        public async virtual Task<WebSocketResult<UpdateSubscription>> SubscribeToAdlAlertUpdatesAsync(Action<DataEvent<BybitAdlAlert[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitAdlAlert[]>>((receiveTime, originalData, data) =>
             {

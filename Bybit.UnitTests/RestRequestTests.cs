@@ -198,7 +198,7 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Earn.GetStakedPositionsAsync(EarnCategory.FlexibleSaving), "GetStakedPositions", nestedJsonProperty: "result");
         }
 
-        private bool IsAuthenticated(WebCallResult result)
+        private bool IsAuthenticated(IHttpResult result)
         {
             return result.RequestHeaders.Any(r => r.Key == "X-BAPI-SIGN");
         }

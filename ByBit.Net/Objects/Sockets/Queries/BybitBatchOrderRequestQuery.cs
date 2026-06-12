@@ -21,13 +21,15 @@ namespace Bybit.Net.Objects.Sockets.Queries
         {
             _client = client;
 
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>>(((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
+            MessageRouter = MessageRouter.CreateForQuery
+                <BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>, BybitBatchResult<BybitBatchOrderId>[]>
+                (((BybitRequestQueryMessage)Request).RequestId, HandleMessage);
         }
 
         public CallResult<BybitBatchResult<BybitBatchOrderId>[]> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitRequestQueryResponse<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>> message)
         {
             if (message.ReturnCode != 0)
-                return new CallResult<BybitBatchResult<BybitBatchOrderId>[]>(new ServerError(message.ReturnCode, _client.GetErrorInfo(message.ReturnCode, message.ReturnMessage)), originalData);
+                return CallResult<BybitBatchResult<BybitBatchOrderId>[]>.Fail(new ServerError(message.ReturnCode, _client.GetErrorInfo(message.ReturnCode, message.ReturnMessage)), originalData);
 
             var resultList = new List<BybitBatchResult<BybitBatchOrderId>>();
             var resultItems = message.Data!.List.ToArray();
@@ -43,7 +45,7 @@ namespace Bybit.Net.Objects.Sockets.Queries
                 }); 
             }
 
-            return new CallResult<BybitBatchResult<BybitBatchOrderId>[]>(resultList.ToArray(), originalData, null);
+            return CallResult<BybitBatchResult<BybitBatchOrderId>[]>.Ok(resultList.ToArray(), originalData);
         }
     }
 }

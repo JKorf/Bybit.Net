@@ -23,7 +23,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="category">["<c>category</c>"] Earn category</param>
         /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitEarnProduct>>> GetProductInfoAsync(EarnCategory category, string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitEarnProduct>>> GetProductInfoAsync(EarnCategory category, string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new Stake or Redeem order
@@ -43,7 +43,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="clientOrderId">["<c>orderLinkId</c>"] Client order id</param>
         /// <param name="toAccountType">["<c>toAccountType</c>"] Target account type</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(EarnCategory category, string productId, AccountType accountType, string asset, EarnOrderType orderType, decimal quantity, string? clientOrderId = null, AccountType? toAccountType = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderId>> PlaceOrderAsync(EarnCategory category, string productId, AccountType accountType, string asset, EarnOrderType orderType, decimal quantity, string? clientOrderId = null, AccountType? toAccountType = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order history
@@ -58,7 +58,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderId">["<c>orderId</c>"] Order id</param>
         /// <param name="clientOrderId">["<c>orderLinkId</c>"] Client order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitEarnOrder>>> GetOrderHistoryAsync(EarnCategory category, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitEarnOrder>>> GetOrderHistoryAsync(EarnCategory category, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get staked positions
@@ -73,7 +73,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="productId">["<c>productId</c>"] Filter by product id</param>
         /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitEarnStakedPosition>>> GetStakedPositionsAsync(EarnCategory category, string? productId = null, string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitEarnStakedPosition>>> GetStakedPositionsAsync(EarnCategory category, string? productId = null, string? asset = null, CancellationToken ct = default);
 
     }
 }

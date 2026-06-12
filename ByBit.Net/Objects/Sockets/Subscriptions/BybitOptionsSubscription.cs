@@ -20,13 +20,13 @@ namespace Bybit.Net.Objects.Sockets.Subscriptions
 
             IndividualSubscriptionCount = topics.Length;
 
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
+            MessageRouter = MessageRouter.CreateForEvent<BybitSpotSocketEvent<T>>(topics, DoHandleMessage);
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BybitSpotSocketEvent<T> message)
         {
             _handler.Invoke(receiveTime, originalData, message);
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
 

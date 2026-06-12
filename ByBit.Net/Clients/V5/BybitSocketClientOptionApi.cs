@@ -48,11 +48,11 @@ namespace Bybit.Net.Clients.V5
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler2();
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitOptionTickerUpdate>> handler, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitOptionTickerUpdate>> handler, CancellationToken ct = default)
             => SubscribeToTickerUpdatesAsync(new string[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOptionTickerUpdate>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOptionTickerUpdate>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOptionTickerUpdate>>((receiveTime, originalData, data) =>
             {
@@ -72,11 +72,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string baseAsset, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string baseAsset, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
             => SubscribeToTradeUpdatesAsync(new string[] { baseAsset }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> baseAssets, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> baseAssets, Action<DataEvent<BybitOptionTrade[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOptionTrade[]>>((receiveTime, originalData, data) =>
             {
@@ -96,11 +96,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public override Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default)
+        public override Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default)
             => SubscribeToOrderbookUpdatesAsync(new string[] { symbol }, depth, updateHandler, ct);
 
         /// <inheritdoc />
-        public async override Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> handler, CancellationToken ct = default)
+        public async override Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOrderbook>>((receiveTime, originalData, data) =>
             {
@@ -120,11 +120,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
+        public override Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToKlineUpdatesAsync(new string[] { symbol }, interval, handler, ct);
 
         /// <inheritdoc />
-        public async override Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
+        public async override Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitKlineUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -144,11 +144,11 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public override Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default)
+        public override Task<WebSocketResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default)
             => SubscribeToLiquidationUpdatesAsync(new string[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async override Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default)
+        public async override Task<WebSocketResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitLiquidation>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitLiquidation>>((receiveTime, originalData, data) =>
             {

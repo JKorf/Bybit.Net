@@ -38,9 +38,8 @@ namespace Bybit.Net.Clients.V5
         public new BybitSocketOptions ClientOptions => (BybitSocketOptions)base.ClientOptions;
 
         internal BybitSocketClientPrivateApi(ILogger logger, BybitSocketOptions options)
-            : base(logger, options.Environment.SocketBaseAddress, options, options.V5Options)
+            : base(logger, BybitExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.V5Options)
         {
-            UnhandledMessageExpected = true;
             KeepAliveInterval = TimeSpan.Zero;
 
             _clientName = "BybitSocketClientApi";
@@ -101,7 +100,7 @@ namespace Bybit.Net.Clients.V5
         public IBybitSocketClientPrivateApiShared SharedClient => this;
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BybitPositionUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BybitPositionUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitPositionUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -121,7 +120,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BybitUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitUserTradeUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -141,7 +140,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToSpreadUserTradeUpdatesAsync(Action<DataEvent<BybitSpreadUserTradeUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToSpreadUserTradeUpdatesAsync(Action<DataEvent<BybitSpreadUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitSpreadUserTradeUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -161,7 +160,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToMinimalUserTradeUpdatesAsync(Action<DataEvent<BybitMinimalUserTradeUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToMinimalUserTradeUpdatesAsync(Action<DataEvent<BybitMinimalUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitMinimalUserTradeUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -181,7 +180,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOrderUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -201,7 +200,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToSpreadOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToSpreadOrderUpdatesAsync(Action<DataEvent<BybitOrderUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitOrderUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -221,7 +220,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<BybitBalance[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToWalletUpdatesAsync(Action<DataEvent<BybitBalance[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitBalance[]>>((receiveTime, originalData, data) =>
             {
@@ -240,7 +239,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEvent<BybitGreeks[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToGreekUpdatesAsync(Action<DataEvent<BybitGreeks[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitGreeks[]>>((receiveTime, originalData, data) =>
             {
@@ -259,7 +258,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToDisconnectCancelAllTopicAsync(ProductType productType, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToDisconnectCancelAllTopicAsync(ProductType productType, CancellationToken ct = default)
         {
             var product = productType == ProductType.Spot ? "spot" : productType == ProductType.Options ? "option" : "future";
             var subscription = new BybitSubscription<object>(_logger, this, new[] { "dcp." + product }, (time, data, x) => { }, true);
@@ -267,7 +266,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<BybitOrderId>> PlaceOrderAsync(Category category,
+        public async Task<QueryResult<BybitOrderId>> PlaceOrderAsync(Category category,
             string symbol,
             OrderSide side,
             NewOrderType type,
@@ -345,7 +344,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<BybitOrderId>> EditOrderAsync(Category category,
+        public async Task<QueryResult<BybitOrderId>> EditOrderAsync(Category category,
             string symbol,
             string? orderId = null,
             string? clientOrderId = null,
@@ -397,7 +396,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<BybitOrderId>> CancelOrderAsync(Category category,
+        public async Task<QueryResult<BybitOrderId>> CancelOrderAsync(Category category,
             string symbol,
             string? orderId = null,
             string? clientOrderId = null,
@@ -427,14 +426,14 @@ namespace Bybit.Net.Clients.V5
 		}
 
         /// <inheritdoc />
-        public async Task<CallResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+        public async Task<QueryResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default)
         {
             var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings)
             {
                 { "category", EnumConverter.GetString(category) },
                 { "request", orderRequests.ToArray() }
@@ -452,33 +451,33 @@ namespace Bybit.Net.Clients.V5
             );
 
             var resultData = await QueryAsync(BaseAddress.AppendPath("/v5/trade"), query, ct).ConfigureAwait(false);
-            if (!resultData)
-                return resultData.As<CallResult<BybitBatchOrderId>[]>(default);
+            if (!resultData.Success)
+                return QueryResult.Fail<CallResult<BybitBatchOrderId>[]>(resultData);
 
             var result = new List<CallResult<BybitBatchOrderId>>();
             foreach (var item in resultData.Data!)
             {
                 if (item.Code != 0)
-                    result.Add(new CallResult<BybitBatchOrderId>(new ServerError(item.Code, GetErrorInfo(item.Code, item.Message!))));
+                    result.Add(CallResult<BybitBatchOrderId>.Fail(new ServerError(item.Code, GetErrorInfo(item.Code, item.Message!))));
                 else
-                    result.Add(new CallResult<BybitBatchOrderId>(item.Data!));
+                    result.Add(CallResult<BybitBatchOrderId>.Ok(item.Data!));
             }
 
             if (result.All(x => !x.Success))
-                return resultData.AsErrorWithData(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All orders failed")), result.ToArray());
+                return QueryResult.Fail<CallResult<BybitBatchOrderId>[]>(resultData, new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All orders failed")), result.ToArray());
 
-            return resultData.As(result.ToArray());
+            return QueryResult.Ok(resultData, result.ToArray());
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
+        public async Task<QueryResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitEditOrderRequest> orderRequests,
             CancellationToken ct = default)
         {
             var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings)
             {
                 { "category", EnumConverter.GetString(category) },
                 { "request", orderRequests.ToArray() }
@@ -499,14 +498,14 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
+        public async Task<QueryResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitCancelOrderRequest> orderRequests,
             CancellationToken ct = default)
         {
             var timestamp = DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(-1000)).Value.ToString(CultureInfo.InvariantCulture);
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings)
             {
                 { "category", EnumConverter.GetString(category) },
                 { "request", orderRequests.ToArray() }

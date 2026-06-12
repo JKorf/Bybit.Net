@@ -65,6 +65,12 @@ namespace Bybit.Net
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<BybitSourceGenerationContext>();
+        internal static ParameterSerializationSettings _parameterSerializationSettings = new ParameterSerializationSettings
+        {
+            Decimal = DecimalSerialization.String,
+            DateTimes = DateTimeSerialization.MillisecondsNumber,
+            Bool = BoolSerialization.String
+        };
 
         /// <summary>
         /// Aliases for Bybit assets

@@ -97,13 +97,12 @@ namespace Bybit.Net.UnitTests
                     return headers["X-BAPI-SIGN"].ToString();
                 },
                 "B3A13CBD6F9DE0AD7ECE696645A98000281BE3558716624CFCA03DEBD2F24574",
-                new Dictionary<string, object>
+                new Parameters(BybitExchange._parameterSerializationSettings)
                 {
                     { "category", "option" },
                     { "symbol", "BTC-29JUL22-25000-C" },
                 },
                 DateTimeConverter.ParseFromDouble(1658384314791),
-                true,
                 false);
         }
 
@@ -123,12 +122,11 @@ namespace Bybit.Net.UnitTests
                     return headers["X-BAPI-SIGN"].ToString();
                 },
                 "A04DEA33A62E644897B14C6FF458DB428B9C2424B5CB785C9586490CCACA24AF",
-                new Dictionary<string, object>
+                new Parameters(BybitExchange._parameterSerializationSettings)
                 {
                     { "category", "option" }
                 },
                 DateTimeConverter.ParseFromDouble(1658385579423),
-                true,
                 false);
         }
 

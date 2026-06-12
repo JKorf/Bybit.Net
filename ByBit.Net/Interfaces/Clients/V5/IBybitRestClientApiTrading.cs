@@ -30,7 +30,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopOrderType">["<c>stopOrderType</c>"] Stop order type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, OrderFilter? orderFilter = null, StopOrderType? stopOrderType = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitOrderId>>> CancelAllOrderAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, OrderFilter? orderFilter = null, StopOrderType? stopOrderType = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel order
@@ -48,7 +48,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderFilter">["<c>orderFilter</c>"] Order filter</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> CancelOrderAsync(Category category, string symbol, string? orderId = null, string? clientOrderId = null, OrderFilter? orderFilter = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderId>> CancelOrderAsync(Category category, string symbol, string? orderId = null, string? clientOrderId = null, OrderFilter? orderFilter = null, CancellationToken ct = default);
 
         /// <summary>
         /// Edit an order
@@ -77,7 +77,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopLossLimitPrice">["<c>slLimitPrice</c>"] New stop loss limit price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> EditOrderAsync(
+        Task<HttpResult<BybitOrderId>> EditOrderAsync(
             Category category, 
             string symbol,
             string? orderId = null,
@@ -111,7 +111,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitAssetExchange[]>> GetAssetExchangeHistoryAsync(string? fromAsset = null, string? toAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitAssetExchange[]>> GetAssetExchangeHistoryAsync(string? fromAsset = null, string? toAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spot borrow quota
@@ -126,7 +126,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="side">["<c>side</c>"] Side</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBorrowQuota>> GetBorrowQuotaAsync(string symbol, OrderSide side, CancellationToken ct = default);
+        Task<HttpResult<BybitBorrowQuota>> GetBorrowQuotaAsync(string symbol, OrderSide side, CancellationToken ct = default);
 
         /// <summary>
         /// Get delivery history
@@ -146,7 +146,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitDeliveryRecord>>> GetDeliveryHistoryAsync(Category category, string? symbol = null, DateTime? expiryDate = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitDeliveryRecord>>> GetDeliveryHistoryAsync(Category category, string? symbol = null, DateTime? expiryDate = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get real-time open orders
@@ -169,7 +169,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrdersAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, string? orderId = null, string? clientOrderId = null, int? openOnly = null, OrderFilter? orderFilter = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitOrder>>> GetOrdersAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, string? orderId = null, string? clientOrderId = null, int? openOnly = null, OrderFilter? orderFilter = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order history
@@ -193,7 +193,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category category, string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, OrderStatus? status = null, OrderFilter? orderFilter = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitOrder>>> GetOrderHistoryAsync(Category category, string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, OrderStatus? status = null, OrderFilter? orderFilter = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get positions
@@ -212,7 +212,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitPosition>>> GetPositionsAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitPosition>>> GetPositionsAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Confirm risk limit after being marked as only reducing positions
@@ -227,7 +227,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> ConfirmRiskLimitAsync(Category category, string symbol, CancellationToken ct = default);
+        Task<HttpResult> ConfirmRiskLimitAsync(Category category, string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get settlement history
@@ -246,7 +246,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitSettlementRecord>>> GetSettlementHistoryAsync(Category category, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitSettlementRecord>>> GetSettlementHistoryAsync(Category category, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get user trade history
@@ -270,7 +270,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitUserTrade>>> GetUserTradesAsync(
+        Task<HttpResult<BybitResponse<BybitUserTrade>>> GetUserTradesAsync(
             Category category,
             string? symbol = null,
             string? baseAsset = null,
@@ -328,7 +328,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="bboLevel">["<c>bboLevel</c>"] BBO level (1 - 5)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderId>> PlaceOrderAsync(
+        Task<HttpResult<BybitOrderId>> PlaceOrderAsync(
             Category category, 
             string symbol, 
             OrderSide side,
@@ -377,7 +377,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="productType">["<c>product</c>"] Type of product, defaults to Options</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SetDisconnectCancelAllAsync(int windowSeconds, ProductType? productType = null, CancellationToken ct = default);
+        Task<HttpResult> SetDisconnectCancelAllAsync(int windowSeconds, ProductType? productType = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get DisconnectCancelAll/dcp configuration
@@ -390,7 +390,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitDcpStatus[]>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default);
+        Task<HttpResult<BybitDcpStatus[]>> GetDisconnectCancelAllConfigAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Set trading stop parameters
@@ -419,7 +419,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopLossOrderType">["<c>slOrderType</c>"] Stop loss order type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> SetTradingStopAsync(
+        Task<HttpResult> SetTradingStopAsync(
             Category category, 
             string symbol, 
             PositionIdx positionIdx, 
@@ -455,7 +455,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitClosedPnl>>> GetClosedProfitLossAsync(Category category, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitClosedPnl>>> GetClosedProfitLossAsync(Category category, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Place multiple orders. Note that a successful response doesn't mean all orders were correctly processed; check the order results in the call response.
@@ -470,7 +470,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">["<c>request</c>"] Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
+        Task<HttpResult<CallResult<BybitBatchOrderId>[]>> PlaceMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitPlaceOrderRequest> orderRequests,
             CancellationToken ct = default);
@@ -488,7 +488,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">["<c>request</c>"] Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
+        Task<HttpResult<BybitBatchResult<BybitBatchOrderId>[]>> CancelMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitCancelOrderRequest> orderRequests,
             CancellationToken ct = default);
@@ -506,7 +506,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderRequests">["<c>request</c>"] Request data</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
+        Task<HttpResult<BybitBatchResult<BybitBatchOrderId>[]>> EditMultipleOrdersAsync(
             Category category,
             IEnumerable<BybitEditOrderRequest> orderRequests,
             CancellationToken ct = default);
@@ -525,7 +525,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="clientOrderId">["<c>serialNo</c>"] Custom order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitLeverageTokenPurchase>> PurchaseLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<BybitLeverageTokenPurchase>> PurchaseLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Redeem a leverage token
@@ -541,7 +541,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="clientOrderId">["<c>serialNo</c>"] Custom order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitLeverageTokenRedemption>> RedeemLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<BybitLeverageTokenRedemption>> RedeemLeverageTokenAsync(string token, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get leverage token order history
@@ -561,7 +561,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="type">["<c>ltOrderType</c>"] Filter by type or record</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitLeverageTokenHistory[]>> GetLeverageTokenOrderHistoryAsync(string? token = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, LeverageTokenRecordType? type = null, CancellationToken ct = default);
+        Task<HttpResult<BybitLeverageTokenHistory[]>> GetLeverageTokenOrderHistoryAsync(string? token = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, LeverageTokenRecordType? type = null, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new spread order
@@ -580,7 +580,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="price">["<c>price</c>"] Limit price</param>
         /// <param name="clientOrderId">["<c>orderLinkId</c>"] Client order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderId>> PlaceSpreadOrderAsync(string symbol, OrderSide side, NewOrderType type, decimal quantity, TimeInForce timeInForce, decimal? price = null, string? clientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderId>> PlaceSpreadOrderAsync(string symbol, OrderSide side, NewOrderType type, decimal quantity, TimeInForce timeInForce, decimal? price = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Edit an active spread order
@@ -597,7 +597,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="quantity">["<c>qty</c>"] New quantity</param>
         /// <param name="price">["<c>price</c>"] New price</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderId>> EditSpreadOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, decimal? quantity = null, decimal? price = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderId>> EditSpreadOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, decimal? quantity = null, decimal? price = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an active spread order
@@ -611,7 +611,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="orderId">["<c>orderId</c>"] Order id of order to cancel, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">["<c>orderLinkId</c>"] Client order id of order to cancel, either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderId>> CancelSpreadOrderAsync(string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderId>> CancelSpreadOrderAsync(string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel all spread orders
@@ -625,7 +625,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">["<c>symbol</c>"] Filter orders to cancel by symbol</param>
         /// <param name="cancelAll">["<c>cancelAll</c>"] Cancel all</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderId[]>> CancelAllSpreadOrdersAsync(string? symbol = null, bool? cancelAll = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderId[]>> CancelAllSpreadOrdersAsync(string? symbol = null, bool? cancelAll = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get open spread orders
@@ -643,7 +643,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitSpreadOrder>>> GetOpenSpreadOrdersAsync(string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitSpreadOrder>>> GetOpenSpreadOrdersAsync(string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spread order history
@@ -663,7 +663,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 50</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitClosedSpreadOrder>>> GetClosedSpreadOrdersAsync(string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitClosedSpreadOrder>>> GetClosedSpreadOrdersAsync(string? symbol = null, string? baseAsset = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -682,7 +682,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 50</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitResponse<BybitSpreadUserTrade>>> GetSpreadUserTradesAsync(string? symbol = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitSpreadUserTrade>>> GetSpreadUserTradesAsync(string? symbol = null, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Calculate margin changes for an order before placing it
@@ -726,7 +726,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="slippageTolerance">["<c>slippageTolerance</c>"] Slippage tolerance value</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitPreCheckResult>> PreCheckOrderAsync(Category category,
+        Task<HttpResult<BybitPreCheckResult>> PreCheckOrderAsync(Category category,
             string symbol,
             OrderSide side,
             NewOrderType type,

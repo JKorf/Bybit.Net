@@ -24,7 +24,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline updates
@@ -35,7 +35,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<BybitKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to order book updates
@@ -46,7 +46,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="updateHandler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(IEnumerable<string> symbols, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to order book updates
@@ -60,7 +60,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="updateHandler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderbookUpdatesAsync(string symbol, int depth, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to RPI order book updates
@@ -69,7 +69,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="updateHandler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
-        Task<CallResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(string symbol, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(string symbol, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to RPI order book updates
@@ -78,7 +78,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="updateHandler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
-        Task<CallResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToRpiOrderbookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitRpiOrderbook>> updateHandler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to system status updates
@@ -86,6 +86,6 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="handler">Update handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
-        Task<CallResult<UpdateSubscription>> SubscribeToSystemStatusUpdatesAsync(Action<DataEvent<BybitSystemStatus[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToSystemStatusUpdatesAsync(Action<DataEvent<BybitSystemStatus[]>> handler, CancellationToken ct = default);
     }
 }
