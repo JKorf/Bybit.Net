@@ -1,6 +1,7 @@
 ﻿using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -10,18 +11,17 @@ using System.Net.Http;
 namespace Bybit.Net.Clients
 {
     /// <inheritdoc />
-    public class BybitUserClientProvider : IBybitUserClientProvider
+    public class BybitUserClientProvider : UserClientProvider<
+        IBybitRestClient,
+        IBybitSocketClient,
+        BybitRestOptions,
+        BybitSocketOptions,
+        BybitCredentials,
+        BybitEnvironment
+        >, IBybitUserClientProvider
     {
-        private ConcurrentDictionary<string, IBybitRestClient> _restClients = new ConcurrentDictionary<string, IBybitRestClient>();
-        private ConcurrentDictionary<string, IBybitSocketClient> _socketClients = new ConcurrentDictionary<string, IBybitSocketClient>();
-
-        private readonly IOptions<BybitRestOptions> _restOptions;
-        private readonly IOptions<BybitSocketOptions> _socketOptions;
-        private readonly HttpClient _httpClient;
-        private readonly ILoggerFactory? _loggerFactory;
-
         /// <inheritdoc />
-        public string ExchangeName => BybitExchange.ExchangeName;
+        public override string ExchangeName => BybitExchange.ExchangeName;
 
         /// <summary>
         /// ctor
@@ -40,97 +40,15 @@ namespace Bybit.Net.Clients
             ILoggerFactory? loggerFactory,
             IOptions<BybitRestOptions> restOptions,
             IOptions<BybitSocketOptions> socketOptions)
+            : base(httpClient, loggerFactory, restOptions, socketOptions)
         {
-            _httpClient = httpClient ?? new HttpClient();
-            _httpClient.Timeout = restOptions.Value.RequestTimeout;
-            _loggerFactory = loggerFactory;
-            _restOptions = restOptions;
-            _socketOptions = socketOptions;
         }
 
         /// <inheritdoc />
-        public void InitializeUserClient(string userIdentifier, BybitCredentials credentials, BybitEnvironment? environment = null)
-        {
-            CreateRestClient(userIdentifier, credentials, environment);
-            CreateSocketClient(userIdentifier, credentials, environment);
-        }
-
+        protected override IBybitRestClient ConstructRestClient(HttpClient client, ILoggerFactory? loggerFactory, IOptions<BybitRestOptions> options)
+            => new BybitRestClient(client, loggerFactory, options);
         /// <inheritdoc />
-        public void ClearUserClients(string userIdentifier)
-        {
-            _restClients.TryRemove(userIdentifier, out _);
-            _socketClients.TryRemove(userIdentifier, out _);
-        }
-
-        /// <inheritdoc />
-        public IBybitRestClient GetRestClient(string userIdentifier, BybitCredentials? credentials = null, BybitEnvironment? environment = null)
-        {
-            if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
-                client = CreateRestClient(userIdentifier, credentials, environment);
-
-            return client;
-        }
-
-        /// <inheritdoc />
-        public IBybitSocketClient GetSocketClient(string userIdentifier, BybitCredentials? credentials = null, BybitEnvironment? environment = null)
-        {
-            if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
-                client = CreateSocketClient(userIdentifier, credentials, environment);
-
-            return client;
-        }
-
-        private IBybitRestClient CreateRestClient(string userIdentifier, BybitCredentials? credentials, BybitEnvironment? environment)
-        {
-            var clientRestOptions = SetRestEnvironment(environment);
-            var client = new BybitRestClient(_httpClient, _loggerFactory, clientRestOptions);
-            if (credentials != null)
-            {
-                client.SetApiCredentials(credentials);
-                _restClients[userIdentifier] = client;
-            }
-            return client;
-        }
-
-        private IBybitSocketClient CreateSocketClient(string userIdentifier, BybitCredentials? credentials, BybitEnvironment? environment)
-        {
-            var clientSocketOptions = SetSocketEnvironment(environment);
-            var client = new BybitSocketClient(clientSocketOptions!, _loggerFactory);
-            if (credentials != null)
-            {
-                client.SetApiCredentials(credentials);
-                _socketClients[userIdentifier] = client;
-            }
-            return client;
-        }
-
-        private IOptions<BybitRestOptions> SetRestEnvironment(BybitEnvironment? environment)
-        {
-            if (environment == null)
-                return _restOptions;
-
-            var newRestClientOptions = new BybitRestOptions();
-            var restOptions = _restOptions.Value.Set(newRestClientOptions);
-            newRestClientOptions.Environment = environment;
-            return Options.Create(newRestClientOptions);
-        }
-
-        private IOptions<BybitSocketOptions> SetSocketEnvironment(BybitEnvironment? environment)
-        {
-            if (environment == null)
-                return _socketOptions;
-
-            var newSocketClientOptions = new BybitSocketOptions();
-            var restOptions = _socketOptions.Value.Set(newSocketClientOptions);
-            newSocketClientOptions.Environment = environment;
-            return Options.Create(newSocketClientOptions);
-        }
-
-        private static T ApplyOptionsDelegate<T>(Action<T>? del) where T : new()
-        {
-            var opts = new T();
-            del?.Invoke(opts);
-            return opts;
-        }
+        protected override IBybitSocketClient ConstructSocketClient(ILoggerFactory? loggerFactory, IOptions<BybitSocketOptions> options)
+            => new BybitSocketClient(options, loggerFactory);
     }
 }

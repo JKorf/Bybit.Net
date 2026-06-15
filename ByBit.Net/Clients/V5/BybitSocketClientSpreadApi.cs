@@ -30,8 +30,8 @@ namespace Bybit.Net.Clients.V5
     {
         private readonly string _wsPublicAddress;
 
-        internal BybitSocketClientSpreadApi(ILogger log, BybitSocketOptions options)
-            : base(log, BybitExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.V5Options)
+        internal BybitSocketClientSpreadApi(ILoggerFactory? loggerFactory, BybitSocketOptions options)
+            : base(loggerFactory, BybitExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.V5Options)
         {
             KeepAliveInterval = TimeSpan.Zero; // Server doesn't respond to ping frames
             _wsPublicAddress = options.Environment.Name == BybitEnvironment.DemoTrading.Name ? BybitEnvironment.Live.SocketBaseAddress : options.Environment.SocketBaseAddress;

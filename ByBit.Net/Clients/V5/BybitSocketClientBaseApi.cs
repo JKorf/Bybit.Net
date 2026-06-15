@@ -39,8 +39,8 @@ namespace Bybit.Net.Clients.V5
 
         protected override ErrorMapping ErrorMapping => BybitErrors.WebsocketErrors;
 
-        internal BybitSocketClientBaseApi(ILogger log, BybitSocketOptions options, string baseEndpoint)
-            : base(log, BybitExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.V5Options)
+        internal BybitSocketClientBaseApi(ILoggerFactory? loggerFactory, BybitSocketOptions options, string baseEndpoint)
+            : base(loggerFactory, BybitExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.V5Options)
         {
             _baseEndpoint = baseEndpoint;
             // For demo trading the live environment should be used for market data

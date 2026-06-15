@@ -37,7 +37,7 @@ namespace Bybit.Net.Clients
         {
             Initialize(options.Value);
 
-            V5Api = AddApiClient(new V5.BybitRestClientApi(_logger, httpClient, options.Value));
+            V5Api = AddApiClient(new V5.BybitRestClientApi(loggerFactory, httpClient, options.Value));
         }
 
         #endregion

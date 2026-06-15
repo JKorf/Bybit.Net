@@ -37,8 +37,8 @@ namespace Bybit.Net.Clients.V5
 
         public new BybitSocketOptions ClientOptions => (BybitSocketOptions)base.ClientOptions;
 
-        internal BybitSocketClientPrivateApi(ILogger logger, BybitSocketOptions options)
-            : base(logger, BybitExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.V5Options)
+        internal BybitSocketClientPrivateApi(ILoggerFactory? loggerFactory, BybitSocketOptions options)
+            : base(loggerFactory, BybitExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.V5Options)
         {
             KeepAliveInterval = TimeSpan.Zero;
 

@@ -53,8 +53,8 @@ namespace Bybit.Net.Clients.V5
         public string ExchangeName => "Bybit";
 
         #region ctor
-        internal BybitRestClientApi(ILogger logger, HttpClient? httpClient, BybitRestOptions options) :
-            base(logger, BybitExchange.Metadata.Id, httpClient, options.Environment.RestBaseAddress, options, options.V5Options)
+        internal BybitRestClientApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, BybitRestOptions options) :
+            base(loggerFactory, BybitExchange.Metadata.Id, httpClient, options.Environment.RestBaseAddress, options, options.V5Options)
         {
             StandardRequestHeaders = new Dictionary<string, string>
             {

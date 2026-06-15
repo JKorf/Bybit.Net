@@ -26,8 +26,8 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientLinearApi" />
     internal partial class BybitSocketClientInverseApi : BybitSocketClientBaseApi, IBybitSocketClientInverseApi
     {
-        internal BybitSocketClientInverseApi(ILogger log, BybitSocketOptions options)
-            : base(log, options, "/v5/public/inverse")
+        internal BybitSocketClientInverseApi(ILoggerFactory? loggerFactory, BybitSocketOptions options)
+            : base(loggerFactory, options, "/v5/public/inverse")
         {
             RegisterPeriodicQuery(
                 "Heartbeat",

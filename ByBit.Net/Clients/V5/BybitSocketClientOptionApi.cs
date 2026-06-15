@@ -27,8 +27,8 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientOptionApi" />
     internal class BybitSocketClientOptionApi : BybitSocketClientBaseApi, IBybitSocketClientOptionApi
     {
-        internal BybitSocketClientOptionApi(ILogger log, BybitSocketOptions options)
-            : base(log, options, "/v5/public/option")
+        internal BybitSocketClientOptionApi(ILoggerFactory? loggerFactory, BybitSocketOptions options)
+            : base(loggerFactory, options, "/v5/public/option")
         {
             RegisterPeriodicQuery(
                 "Heartbeat",
