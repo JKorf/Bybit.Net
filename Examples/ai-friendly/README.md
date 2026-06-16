@@ -15,7 +15,7 @@ These examples are optimized for AI coding assistants and quick onboarding. Each
 | `02-v5-trading.cs` | V5 order placement, open orders, positions, cancellation, categories, and dry-run safety |
 | `03-websocket.cs` | V5 public spot and linear subscriptions, private order updates, and proper teardown |
 | `04-shared-client.cs` | CryptoExchange.Net shared client access beside native Bybit V5 endpoints |
-| `05-error-handling.cs` | `WebCallResult` / `CallResult` handling, typed errors, and retry-friendly helpers |
+| `05-error-handling.cs` | `HttpResult` / `CallResult` handling, typed errors, and retry-friendly helpers |
 
 ## Running
 

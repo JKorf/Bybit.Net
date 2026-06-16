@@ -25,7 +25,7 @@ namespace Bybit.Net.UnitTests
                 OutputOriginalData = true
             }), logger);
 
-            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "https://api.bybit.com", "data");
+            var tester = new SocketSubscriptionValidator<BybitSocketClient>(client, "Subscriptions/V5/Spot", "wss://stream.bybit.com/v5/public/spot", "data");
             await tester.ValidateConcurrentAsync<BybitKlineUpdate[]>(
                 (client, handler) => client.V5SpotApi.SubscribeToKlineUpdatesAsync(["ETHUSDT"], Enums.KlineInterval.OneDay, handler),
                 (client, handler) => client.V5SpotApi.SubscribeToKlineUpdatesAsync(["ETHUSDT"], Enums.KlineInterval.OneHour, handler),

@@ -1358,7 +1358,7 @@ namespace Bybit.Net.Clients.V5
         {
             OptionalExchangeParameters = new List<ParameterDescription>
             {
-                new ParameterDescription("SettleAsset", typeof(string), "Settlement asset filter", "USDT")
+                new ParameterDescription(["SettleAsset", "settleCoin"], typeof(string), "Settlement asset filter", "USDT")
             }
         };
         async Task<HttpResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetOpenFuturesOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
@@ -1371,14 +1371,14 @@ namespace Bybit.Net.Clients.V5
             var category = (tradingMode == TradingMode.PerpetualLinear || tradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
 
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
-            if (symbol == null && ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset") == null)
+            if (symbol == null && request.GetParamValue<string?>(Exchange, "SettleAsset", "settleCoin") == null)
                 return HttpResult.Fail<SharedFuturesOrder[]>(Exchange, ArgumentError.Invalid("SettleAsset", "Either the Symbol request parameter or the SettleAsset exchange parameter is required"));
 
             var orders = await Trading.GetOrdersAsync(
                 category,
                 symbol,
                 openOnly: 0, 
-                settleAsset: symbol != null ? null : ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset"),
+                settleAsset: symbol != null ? null : request.GetParamValue<string?>(Exchange, "SettleAsset", "settleCoin"),
                 ct: ct
                 ).ConfigureAwait(false);
             if (!orders.Success)
@@ -1576,7 +1576,7 @@ namespace Bybit.Net.Clients.V5
         {
             OptionalExchangeParameters = new List<ParameterDescription>
             {
-                new ParameterDescription("SettleAsset", typeof(string), "Settlement asset filter", "USDT")
+                new ParameterDescription(["SettleAsset", "settleCoin"], typeof(string), "Settlement asset filter", "USDT")
             }
         };
         async Task<HttpResult<SharedPosition[]>> IFuturesOrderRestClient.GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
@@ -1588,9 +1588,7 @@ namespace Bybit.Net.Clients.V5
             var tradingMode = request.Symbol?.TradingMode ?? request.TradingMode ?? TradingMode.PerpetualLinear;
             var category = (tradingMode == TradingMode.PerpetualLinear || tradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
 
-            var settleAsset = ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "SettleAsset") ??
-                ExchangeParameters.GetValue<string?>(request.ExchangeParameters, Exchange, "settleCoin");
-
+            var settleAsset = request.GetParamValue<string?>(Exchange, "SettleAsset", "settleCoin");
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
             if (symbol == null
                 && settleAsset == null

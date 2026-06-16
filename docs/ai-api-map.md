@@ -229,13 +229,13 @@ await socketClient.UnsubscribeAsync(sub.Data);
 REST:
 
 ```csharp
-WebCallResult<T>
+HttpResult<T>
 ```
 
 WebSocket:
 
 ```csharp
-CallResult<T>
+WebSocketResult<T>
 ```
 
 Pattern:
