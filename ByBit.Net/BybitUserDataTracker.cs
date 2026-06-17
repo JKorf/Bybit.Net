@@ -20,7 +20,6 @@ namespace Bybit.Net
             SpotUserDataTrackerConfig? config) : base(
                 logger,
                 restClient.V5Api.SharedClient,
-                null,
                 restClient.V5Api.SharedClient,
                 socketClient.V5PrivateApi.SharedClient,
                 restClient.V5Api.SharedClient,
@@ -48,7 +47,6 @@ namespace Bybit.Net
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config) : base(logger,
                 restClient.V5Api.SharedClient,
-                null,
                 restClient.V5Api.SharedClient,
                 socketClient.V5PrivateApi.SharedClient,
                 restClient.V5Api.SharedClient,
