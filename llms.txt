@@ -75,7 +75,7 @@ var order = await restClient.V5Api.Trading.PlaceOrderAsync(
 
 ## Result handling
 
-All REST calls return `HttpResult<T>` and WebSocket calls return `WebSocketResult<T>`.
+All REST calls return `HttpResult<T>`, WebSocket calls return `WebSocketResult<T>`, and shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`.
 
 ```csharp
 if (!spotTicker.Success)
@@ -94,6 +94,7 @@ Console.WriteLine(spotTicker.Data.List.First().LastPrice);
 - Use `Category.Spot`, `Category.Linear`, `Category.Inverse`, or `Category.Option` correctly.
 - Use `BybitCredentials("key", "secret")` for HMAC credentials; no passphrase.
 - Check `.Success` before `.Data`.
+- Use `.SharedClient.Discover()` before routing optional shared features across exchanges.
 - Use async/await.
 - Reuse clients or use dependency injection.
 - Store and unsubscribe WebSocket subscriptions.

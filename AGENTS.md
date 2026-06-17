@@ -54,7 +54,7 @@ var restClient = new BybitRestClient(options =>
 
 ## Core Pattern: Result Handling
 
-REST methods return `HttpResult<T>`. WebSocket methods return `WebSocketResult<UpdateSubscription>` for subscriptions. Always check `.Success` before reading `.Data`.
+REST methods return `HttpResult<T>`. WebSocket methods return `WebSocketResult<UpdateSubscription>` for subscriptions. Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`. Always check `.Success` before reading `.Data`.
 
 ```csharp
 var result = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
@@ -213,15 +213,17 @@ await privateSocket.V5PrivateApi.SubscribeToOrderUpdatesAsync(
 
 ## Multi-Exchange via CryptoExchange.Net.SharedApis
 
-Use `CryptoExchange.Net.SharedApis` when the user asks for exchange-agnostic code. Bybit exposes a shared REST client at `restClient.V5Api.SharedClient` and shared socket clients on the relevant socket API objects.
+Use `CryptoExchange.Net.SharedApis` when the user asks for exchange-agnostic code. Bybit exposes a shared REST client at `restClient.V5Api.SharedClient` and shared socket clients on the relevant socket API objects. Use `.SharedClient.Discover()` to inspect supported shared features at runtime.
 
 ```csharp
 using Bybit.Net.Clients;
 
 var bybitShared = new BybitRestClient().V5Api.SharedClient;
+var info = bybitShared.Discover();
 
 Console.WriteLine(bybitShared.Exchange);
 Console.WriteLine(string.Join(", ", bybitShared.SupportedTradingModes));
+Console.WriteLine($"{info.TypeName}: {info.Features.Count(x => x.Supported)} supported shared features");
 ```
 
 Native Bybit endpoints remain available beside the shared abstractions, and are usually better when the user needs Bybit-specific fields such as `Category`, `PositionIdx`, trigger settings, account types, or spread trading.

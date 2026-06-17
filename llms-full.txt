@@ -30,6 +30,7 @@ Primary documentation:
 - Always check `.Success` before reading `.Data`.
 - REST methods return `HttpResult<T>` or `HttpResult`.
 - WebSocket subscriptions and socket API requests return `WebSocketResult<T>` or `WebSocketResult`.
+- Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
 - Store WebSocket subscriptions and unsubscribe during shutdown.
@@ -38,7 +39,7 @@ Primary documentation:
 - For V5 product-specific methods, pass the correct `Category`: `Spot`, `Linear`, `Inverse`, or `Option`.
 - For account and wallet calls, pass the correct `AccountType`: commonly `Unified`, `Spot`, `Fund`, or `Contract`.
 - Use Bybit V5 symbols such as `ETHUSDT`, `BTCUSDT`, and `BTCUSD`. Do not use `ETH-USDT`, `ETH_USDT`, `ETH/USD`, or `tETHUSD`.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient`.
+- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient` and call `.Discover()` to inspect supported shared features.
 
 ## Installation
 
@@ -735,12 +736,15 @@ Use REST trading methods by default unless the user specifically asks for WebSoc
 
 ## SharedApis Multi-Exchange Pattern
 
-Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Bybit and other exchanges.
+Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Bybit and other exchanges. Call `.Discover()` before routing optional shared features across exchanges.
 
 ```csharp
 using Bybit.Net.Clients;
 
 var shared = new BybitRestClient().V5Api.SharedClient;
+var info = shared.Discover();
+var supported = info.Features.Where(x => x.Supported).Select(x => x.EndpointName);
+Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supported)}");
 
 Console.WriteLine(shared.Exchange);
 Console.WriteLine(string.Join(", ", shared.SupportedTradingModes));
@@ -859,7 +863,7 @@ Examples/ai-friendly/03-websocket.cs
   V5 public spot and linear subscriptions, private order updates, success checks, teardown.
 
 Examples/ai-friendly/04-shared-client.cs
-  CryptoExchange.Net shared client access beside native Bybit V5 endpoints.
+  CryptoExchange.Net shared client access, capability discovery, and native Bybit V5 endpoints.
 
 Examples/ai-friendly/05-error-handling.cs
   HttpResult and WebSocketResult helpers, typed error output, and subscription teardown.

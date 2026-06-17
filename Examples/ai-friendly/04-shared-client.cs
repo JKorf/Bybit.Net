@@ -14,6 +14,12 @@ var sharedRest = restClient.V5Api.SharedClient;
 Console.WriteLine($"Shared exchange: {sharedRest.Exchange}");
 Console.WriteLine($"Supported trading modes: {string.Join(", ", sharedRest.SupportedTradingModes)}");
 
+var sharedInfo = sharedRest.Discover();
+var supportedFeatures = sharedInfo.Features
+    .Where(x => x.Supported)
+    .Select(x => x.EndpointName);
+Console.WriteLine($"{sharedInfo.Exchange} {sharedInfo.TypeName}: {string.Join(", ", supportedFeatures)}");
+
 var socketClient = new BybitSocketClient();
 Console.WriteLine($"Spot socket shared exchange: {socketClient.V5SpotApi.SharedClient.Exchange}");
 Console.WriteLine($"Linear socket shared exchange: {socketClient.V5LinearApi.SharedClient.Exchange}");

@@ -1,7 +1,7 @@
 // 05-error-handling.cs
 //
-// Demonstrates: consistent Bybit.Net result handling for REST and WebSocket
-// calls. All examples check Success before reading Data.
+// Demonstrates: consistent Bybit.Net result handling for REST, WebSocket,
+// and shared helper calls. All examples check Success before reading Data.
 //
 // Setup: dotnet add package Bybit.Net
 
