@@ -117,7 +117,7 @@ namespace Bybit.Net
         /// <summary>
         /// Rate limiter configuration for the Bybit API
         /// </summary>
-        public static BybitRateLimiters RateLimiter { get; } = new BybitRateLimiters();
+        public static BybitRateLimiters RateLimiter { get; set; } = new BybitRateLimiters();
     }
 
     /// <summary>
@@ -158,7 +158,10 @@ namespace Bybit.Net
         public AccountLevel Tier { get; private set; } = AccountLevel.Default;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        internal BybitRateLimiters()
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BybitRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Initialize();
@@ -180,7 +183,10 @@ namespace Bybit.Net
             Initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Initialize the rate limits
+        /// </summary>
+        protected virtual void Initialize()
         {
             BybitRest = new RateLimitGate("Bybit Rest")
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, Array.Empty<IGuardFilter>(), 600, TimeSpan.FromSeconds(5), RateLimitWindowType.Sliding)); // 600 requests per 5 seconds
