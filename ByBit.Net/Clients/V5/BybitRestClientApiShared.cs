@@ -856,7 +856,13 @@ namespace Bybit.Net.Clients.V5
 
             return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data.List, x => x.CreateTime, request.StartTime, request.EndTime, direction)
                        .Select(x => 
-                            new SharedWithdrawal(x.Asset, x.ToAddress, x.Quantity, x.Status == WithdrawalStatus.Success, x.CreateTime)
+                            new SharedWithdrawal(
+                                x.Asset,
+                                x.ToAddress, 
+                                x.Quantity, 
+                                x.Status == WithdrawalStatus.Success, 
+                                x.CreateTime,
+                                GetWithdrawalStatus(x))
                             {
                                 Id = x.Id,
                                 Network = x.Network,
@@ -865,6 +871,25 @@ namespace Bybit.Net.Clients.V5
                                 Fee = x.WithdrawFee
                             })
                        .ToArray(), nextPageRequest);
+        }
+
+        private SharedTransferStatus GetWithdrawalStatus(BybitWithdrawal x)
+        {
+            if (x.Status == WithdrawalStatus.Failed || x.Status == WithdrawalStatus.CanceledByUser || x.Status == WithdrawalStatus.Rejected)
+                return SharedTransferStatus.Failed;
+
+            if (x.Status == WithdrawalStatus.Success)
+                return SharedTransferStatus.Completed;
+
+            if (x.Status == WithdrawalStatus.BlockchainConfirmed
+                || x.Status == WithdrawalStatus.MoreInformationRequired
+                || x.Status == WithdrawalStatus.Pending
+                || x.Status == WithdrawalStatus.SecurityCheck)
+            {
+                return SharedTransferStatus.InProgress;
+            }
+
+            return SharedTransferStatus.Unknown;
         }
 
         #endregion
