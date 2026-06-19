@@ -29,7 +29,8 @@ namespace Bybit.Net
                 "https://www.bybit.com",
                 ["https://bybit-exchange.github.io/docs/v5/intro"],
                 PlatformType.CryptoCurrencyExchange,
-                CentralizationType.Centralized
+                CentralizationType.Centralized,
+                BybitEnvironment.All
                 );
 
         /// <summary>
