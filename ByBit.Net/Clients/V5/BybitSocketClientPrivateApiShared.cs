@@ -34,7 +34,12 @@ namespace Bybit.Net.Clients.V5
                 return WebSocketResult.Fail<UpdateSubscription>(_exchangeName, validationError);
 
             var result = await SubscribeToWalletUpdatesAsync(
-                update => handler(update.ToType<SharedBalance[]>(update.Data.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, (x.WalletBalance ?? 0) - (x.Locked ?? 0), x.WalletBalance ?? 0))).ToArray())),
+                update => handler(update.ToType<SharedBalance[]>(update.Data.SelectMany(x => x.Assets.Select(x => 
+                    new SharedBalance(
+                        SupportedTradingModes, 
+                        x.Asset, 
+                        (x.WalletBalance ?? 0) - (x.Locked ?? 0),
+                        x.WalletBalance ?? 0))).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return result;

@@ -1498,8 +1498,8 @@ namespace Bybit.Net.Clients.V5
         public async Task<HttpResult<BybitResponse<BybitFundingTransfer>>> GetFundingTransactionHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
-            parameters.Add("createTimeFrom", startTime);
-            parameters.Add("createTimeTo", endTime);
+            parameters.Add("createTimeFrom", startTime, DateTimeSerialization.SecondsNumber);
+            parameters.Add("createTimeTo", endTime, DateTimeSerialization.SecondsNumber);
             parameters.Add("limit", limit);
             parameters.Add("cursor", cursor);
             var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/v5/asset/fundinghistory", BybitExchange.RateLimiter.BybitRest, 1, true);

@@ -281,7 +281,12 @@ namespace Bybit.Net.Clients.V5
             if (!result.Success)
                 return HttpResult.Fail<SharedBalance[]>(result);
 
-            return HttpResult.Ok(result, result.Data.List.SelectMany(x => x.Assets.Select(x => new SharedBalance(x.Asset, (x.WalletBalance ?? 0) - (x.Locked ?? 0), x.Equity ?? 0))).ToArray());
+            return HttpResult.Ok(result, result.Data.List.SelectMany(x => x.Assets.Select(x => 
+                new SharedBalance(
+                    SupportedTradingModes, 
+                    x.Asset,
+                    (x.WalletBalance ?? 0) - (x.Locked ?? 0),
+                    x.Equity ?? 0))).ToArray());
         }
 
         #endregion

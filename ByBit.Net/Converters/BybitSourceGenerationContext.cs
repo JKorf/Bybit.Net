@@ -2,6 +2,7 @@ using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models;
 using Bybit.Net.Objects.Models.V5;
 using Bybit.Net.Objects.Sockets;
+using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -320,6 +321,8 @@ namespace Bybit.Net.Converters
     [JsonSerializable(typeof(decimal))]
     [JsonSerializable(typeof(DateTime))]
     [JsonSerializable(typeof(DateTime?))]
+    [JsonSerializable(typeof(Parameters))]
+    [JsonSerializable(typeof(Parameters[]))]
     internal partial class BybitSourceGenerationContext : JsonSerializerContext
     {
     }
