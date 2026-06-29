@@ -28,8 +28,9 @@ Primary documentation:
 - Include `using Bybit.Net;` when using `BybitCredentials` or `BybitEnvironment`.
 - Bybit HMAC credentials are key and secret. Do not include an API passphrase.
 - Always check `.Success` before reading `.Data`.
-- REST methods return `WebCallResult<T>` or `WebCallResult`.
-- WebSocket subscriptions and socket API requests return `CallResult<T>` or `CallResult`.
+- REST methods return `HttpResult<T>` or `HttpResult`.
+- WebSocket subscriptions and socket API requests return `WebSocketResult<T>` or `WebSocketResult`.
+- Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
 - Store WebSocket subscriptions and unsubscribe during shutdown.
@@ -38,7 +39,7 @@ Primary documentation:
 - For V5 product-specific methods, pass the correct `Category`: `Spot`, `Linear`, `Inverse`, or `Option`.
 - For account and wallet calls, pass the correct `AccountType`: commonly `Unified`, `Spot`, `Fund`, or `Contract`.
 - Use Bybit V5 symbols such as `ETHUSDT`, `BTCUSDT`, and `BTCUSD`. Do not use `ETH-USDT`, `ETH_USDT`, `ETH/USD`, or `tETHUSD`.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient`.
+- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient` and call `.Discover()` to inspect supported shared features.
 
 ## Installation
 
@@ -225,9 +226,9 @@ Console.WriteLine(bestBid?.Price);
 For retry logic, only retry transient errors:
 
 ```csharp
-async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call, int maxAttempts = 3)
+async Task<HttpResult<T>> WithRetry<T>(Func<Task<HttpResult<T>>> call, int maxAttempts = 3)
 {
-    WebCallResult<T> last = default!;
+    HttpResult<T> last = default!;
 
     for (var attempt = 1; attempt <= maxAttempts; attempt++)
     {
@@ -735,12 +736,15 @@ Use REST trading methods by default unless the user specifically asks for WebSoc
 
 ## SharedApis Multi-Exchange Pattern
 
-Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Bybit and other exchanges.
+Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Bybit and other exchanges. Call `.Discover()` before routing optional shared features across exchanges.
 
 ```csharp
 using Bybit.Net.Clients;
 
 var shared = new BybitRestClient().V5Api.SharedClient;
+var info = shared.Discover();
+var supported = info.Features.Where(x => x.Supported).Select(x => x.EndpointName);
+Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supported)}");
 
 Console.WriteLine(shared.Exchange);
 Console.WriteLine(string.Join(", ", shared.SupportedTradingModes));
@@ -859,10 +863,10 @@ Examples/ai-friendly/03-websocket.cs
   V5 public spot and linear subscriptions, private order updates, success checks, teardown.
 
 Examples/ai-friendly/04-shared-client.cs
-  CryptoExchange.Net shared client access beside native Bybit V5 endpoints.
+  CryptoExchange.Net shared client access, capability discovery, and native Bybit V5 endpoints.
 
 Examples/ai-friendly/05-error-handling.cs
-  WebCallResult and CallResult helpers, typed error output, and subscription teardown.
+  HttpResult and WebSocketResult helpers, typed error output, and subscription teardown.
 ```
 
 These files are intended to be copied into a console `Program.cs` after `dotnet add package Bybit.Net`. Private and trading examples read credentials from environment variables and avoid live order placement unless explicitly enabled.

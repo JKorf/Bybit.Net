@@ -28,7 +28,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Page size</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitAnnouncement>>> GetAnnouncementsAsync(string locale, string? type = null, string? tag = null, int? page = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitAnnouncement>>> GetAnnouncementsAsync(string locale, string? type = null, string? tag = null, int? page = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get server time
@@ -41,7 +41,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default);
+        Task<HttpResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get delivery price
@@ -60,7 +60,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitDeliveryPrice>>> GetDeliveryPriceAsync(Category category, string? symbol = null, string? baseAsset = null, string? settleAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get funding rate history
@@ -78,7 +78,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitFundingHistory>>> GetFundingRateHistoryAsync(Category category, string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitFundingHistory>>> GetFundingRateHistoryAsync(Category category, string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get historical volatility
@@ -96,7 +96,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitHistoricalVolatility[]>> GetHistoricalVolatilityAsync(string? baseAsset = null, string? quoteAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<HttpResult<BybitHistoricalVolatility[]>> GetHistoricalVolatilityAsync(string? baseAsset = null, string? quoteAsset = null, int? period = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get index price klines
@@ -115,7 +115,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetIndexPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitBasicKline>>> GetIndexPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get insurance pool data
@@ -129,7 +129,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="asset">["<c>coin</c>"] Asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitInsurance>>> GetInsuranceAsync(string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitInsurance>>> GetInsuranceAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get klines
@@ -148,7 +148,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitKline>>> GetKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitKline>>> GetKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get linear/inverse symbols
@@ -168,7 +168,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(
+        Task<HttpResult<BybitResponse<BybitLinearInverseSymbol>>> GetLinearInverseSymbolsAsync(
             Category category,
             string? symbol = null,
             string? baseAsset = null,
@@ -193,7 +193,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="expirationDate">["<c>expDate</c>"] Expiration date</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitLinearInverseTicker>>> GetLinearInverseTickersAsync(Category category, string? symbol = null, string? baseAsset = null, string? expirationDate = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitLinearInverseTicker>>> GetLinearInverseTickersAsync(Category category, string? symbol = null, string? baseAsset = null, string? expirationDate = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get mark price klines
@@ -212,7 +212,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetMarkPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitBasicKline>>> GetMarkPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get open interest
@@ -232,7 +232,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOpenInterest>>> GetOpenInterestAsync(Category category, string symbol, OpenInterestInterval interestInterval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitOpenInterest>>> GetOpenInterestAsync(Category category, string symbol, OpenInterestInterval interestInterval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get option symbols
@@ -249,7 +249,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOptionSymbol>>> GetOptionSymbolsAsync(string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitOptionSymbol>>> GetOptionSymbolsAsync(string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get option tickers
@@ -265,7 +265,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="expirationDate">["<c>expDate</c>"] Expiration date</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitOptionTicker>>> GetOptionTickersAsync(string? symbol = null, string? baseAsset = null, string? expirationDate = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitOptionTicker>>> GetOptionTickersAsync(string? symbol = null, string? baseAsset = null, string? expirationDate = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order book
@@ -281,7 +281,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Limit of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitOrderbook>> GetOrderbookAsync(Category category, string symbol, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderbook>> GetOrderbookAsync(Category category, string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get RPI order book
@@ -296,7 +296,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="limit">["<c>limit</c>"] Limit of results, max 50</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderbook>> GetRpiOrderbookAsync(Category category, string symbol, int limit, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderbook>> GetRpiOrderbookAsync(Category category, string symbol, int limit, CancellationToken ct = default);
 
         /// <summary>
         /// Get premium index klines
@@ -315,7 +315,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Number of results per page</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitBasicKline>>> GetPremiumIndexPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitBasicKline>>> GetPremiumIndexPriceKlinesAsync(Category category, string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get risk limits
@@ -325,7 +325,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Next page cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitRiskLimit>>> GetRiskLimitAsync(Category category, string? symbol = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitRiskLimit>>> GetRiskLimitAsync(Category category, string? symbol = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spot symbols
@@ -339,7 +339,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? symbol = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitSpotSymbol>>> GetSpotSymbolsAsync(string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Spot tickers
@@ -353,7 +353,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitSpotTicker>>> GetSpotTickersAsync(string? symbol = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitSpotTicker>>> GetSpotTickersAsync(string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get trade history
@@ -371,7 +371,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Limit of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitResponse<BybitTradeHistory>>> GetTradeHistoryAsync(Category category, string symbol, string? baseAsset = null, OptionType? optionType = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitTradeHistory>>> GetTradeHistoryAsync(Category category, string symbol, string? baseAsset = null, OptionType? optionType = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get leverage token info
@@ -385,7 +385,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="leverageToken">["<c>ltCoin</c>"] Filter by token</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitLeverageToken[]>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default);
+        Task<HttpResult<BybitLeverageToken[]>> GetLeverageTokensAsync(string? leverageToken = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get leveraged token market info
@@ -399,7 +399,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="leverageToken">["<c>ltCoin</c>"] Token</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitLeverageTokenMarket>> GetLeverageTokenMarketAsync(string leverageToken, CancellationToken ct = default);
+        Task<HttpResult<BybitLeverageTokenMarket>> GetLeverageTokenMarketAsync(string leverageToken, CancellationToken ct = default);
 
         /// <summary>
         /// Get long/short ratio history
@@ -418,7 +418,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Limit for data size per page</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitLongShortRatio[]>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitLongShortRatio[]>> GetLongShortRatioAsync(Category category, string symbol, DataPeriod period, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get UTA loan tiered collateral ratio
@@ -432,7 +432,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="asset">["<c>currency</c>"] Filter by asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitSpotMarginCollateralRatio[]>> GetSpotMarginTieredCollateralRatioAsync(string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BybitSpotMarginCollateralRatio[]>> GetSpotMarginTieredCollateralRatioAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spread trading symbols
@@ -448,7 +448,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 500</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitSpreadSymbol[]>> GetSpreadSymbolsAsync(string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitSpreadSymbol[]>> GetSpreadSymbolsAsync(string? symbol = null, string? baseAsset = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spread trading order book
@@ -462,7 +462,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 25</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderbook>> GetSpreadOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderbook>> GetSpreadOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get spread tickers
@@ -475,7 +475,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitSpreadTicker>> GetSpreadTickersAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BybitSpreadTicker>> GetSpreadTickersAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get spread symbol recent trades
@@ -489,7 +489,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 1000</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitSpreadTrade[]>> GetSpreadRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BybitSpreadTrade[]>> GetSpreadRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order price limits
@@ -503,7 +503,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="symbol">["<c>symbol</c>"] Symbol name, for example `ETHUSDT`</param>
         /// <param name="category">["<c>category</c>"] Category. Defaults to Linear</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitOrderPriceLimit>> GetOrderPriceLimitAsync(string symbol, Category? category = null, CancellationToken ct = default);
+        Task<HttpResult<BybitOrderPriceLimit>> GetOrderPriceLimitAsync(string symbol, Category? category = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get the system status messages
@@ -517,7 +517,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="id">["<c>id</c>"] Filter by id</param>
         /// <param name="status">["<c>state</c>"] Filter by status</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitSystemStatus[]>> GetSystemStatusAsync(string? id = null, SystemStatus? status = null, CancellationToken ct = default);
+        Task<HttpResult<BybitSystemStatus[]>> GetSystemStatusAsync(string? id = null, SystemStatus? status = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get ADL alerts
@@ -530,7 +530,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitAdlAlert[]>> GetAdlAlertsAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BybitAdlAlert[]>> GetAdlAlertsAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get components which make up the index price
@@ -543,6 +543,6 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="indexName">["<c>indexName</c>"] Index name</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BybitIndexComponents>> GetIndexPriceComponentsAsync(string indexName, CancellationToken ct = default);
+        Task<HttpResult<BybitIndexComponents>> GetIndexPriceComponentsAsync(string indexName, CancellationToken ct = default);
     }
 }

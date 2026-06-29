@@ -1,7 +1,7 @@
 // 05-error-handling.cs
 //
-// Demonstrates: consistent Bybit.Net result handling for REST and WebSocket
-// calls. All examples check Success before reading Data.
+// Demonstrates: consistent Bybit.Net result handling for REST, WebSocket,
+// and shared helper calls. All examples check Success before reading Data.
 //
 // Setup: dotnet add package Bybit.Net
 
@@ -36,7 +36,7 @@ if (!TryGetSocketData(subscriptionResult, out UpdateSubscription? subscription))
 await Task.Delay(TimeSpan.FromSeconds(5));
 await socketClient.UnsubscribeAsync(subscription);
 
-static bool TryGetRestData<T>(WebCallResult<T> result, out T data)
+static bool TryGetRestData<T>(HttpResult<T> result, out T data)
 {
     if (result.Success)
     {
@@ -49,7 +49,7 @@ static bool TryGetRestData<T>(WebCallResult<T> result, out T data)
     return false;
 }
 
-static bool TryGetSocketData<T>(CallResult<T> result, out T data)
+static bool TryGetSocketData<T>(WebSocketResult<T> result, out T data)
 {
     if (result.Success)
     {

@@ -27,7 +27,7 @@ namespace Bybit.Net
 
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
-            if (!request.Authenticated)
+            if (!request.RequestDefinition.Authenticated)
                 return;
 
             var timestamp = GetMillisecondTimestamp(apiClient);
@@ -43,7 +43,7 @@ namespace Bybit.Net
             {
                 var requestBody = request.BodyFormat == RequestBodyFormat.FormData
                         ? (request.BodyParameters?.ToFormData() ?? string.Empty)
-                        : GetSerializedBody(_messageSerializer, request.BodyParameters ?? new Dictionary<string, object>());
+                        : GetSerializedBody(_messageSerializer, request.BodyParameters ?? new Parameters(BybitExchange._parameterSerializationSettings));
                 payload = timestamp + ApiCredentials.Credential.Key + recvWindow + requestBody;
                 request.SetBodyContent(requestBody);
             }

@@ -47,7 +47,7 @@ Do not generate Binance-style `SpotApi`, `UsdFuturesApi`, `CoinFuturesApi`, or `
 | `V5Api.SubAccount` | Sub-account management | Use for sub-account operations when requested |
 | `V5Api.CryptoLoan` | Crypto loan endpoints | Use for loan orders and loan history when requested |
 | `V5Api.Earn` | Earn endpoints | Use for savings/earn products when requested |
-| `V5Api.SharedClient` | CryptoExchange.Net shared REST client | Use for exchange-agnostic code |
+| `V5Api.SharedClient` | CryptoExchange.Net shared REST client | Use for exchange-agnostic code; call `Discover()` to inspect supported features |
 
 ## Market Data Patterns
 
@@ -229,13 +229,19 @@ await socketClient.UnsubscribeAsync(sub.Data);
 REST:
 
 ```csharp
-WebCallResult<T>
+HttpResult<T>
 ```
 
 WebSocket:
 
 ```csharp
-CallResult<T>
+WebSocketResult<T>
+```
+
+Shared non-I/O symbol/cache helpers:
+
+```csharp
+ExchangeCallResult<T>
 ```
 
 Pattern:

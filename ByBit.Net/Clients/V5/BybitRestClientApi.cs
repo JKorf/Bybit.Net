@@ -53,8 +53,8 @@ namespace Bybit.Net.Clients.V5
         public string ExchangeName => "Bybit";
 
         #region ctor
-        internal BybitRestClientApi(ILogger logger, HttpClient? httpClient, BybitRestOptions options) :
-            base(logger, httpClient, options.Environment.RestBaseAddress, options, options.V5Options)
+        internal BybitRestClientApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, BybitRestOptions options) :
+            base(loggerFactory, BybitExchange.Metadata.Id, httpClient, options.Environment.RestBaseAddress, options, options.V5Options)
         {
             StandardRequestHeaders = new Dictionary<string, string>
             {
@@ -94,42 +94,42 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        protected override async Task<WebCallResult<DateTime>> GetServerTimestampAsync()
+        protected override async Task<HttpResult<DateTime>> GetServerTimestampAsync()
         {
             var time = await ExchangeData.GetServerTimeAsync().ConfigureAwait(false);
-            if (!time)
-                return time.As<DateTime>(default);
+            if (!time.Success)
+                return HttpResult.Fail<DateTime>(time);
 
-            return time.As(time.Data.TimeNano);
+            return HttpResult.Ok(time, time.Data.TimeNano);
         }
 
-        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
+        internal async Task<HttpResult> SendAsync(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            var result = await base.SendAsync<BybitResult>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
-            if (!result)
-                return result.AsDataless();
+            var result = await base.SendAsync<BybitResult>(definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
+            if (!result.Success)
+                return result;
 
             if (result.Data.ReturnCode != 0)
-                return result.AsDatalessError(new ServerError(result.Data.ReturnCode, GetErrorInfo(result.Data.ReturnCode, result.Data.ReturnMessage)));
+                return HttpResult.Fail(result, new ServerError(result.Data.ReturnCode, GetErrorInfo(result.Data.ReturnCode, result.Data.ReturnMessage)));
 
-            return result.AsDataless();
+            return result;
         }
 
-        internal async Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
+        internal async Task<HttpResult<T>> SendAsync<T>(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            var result = await base.SendAsync<BybitResult<T>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
-            if (!result)
-                return result.As<T>(default);
+            var result = await base.SendAsync<BybitResult<T>>(definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<T>(result);
 
             if (result.Data.ReturnCode != 0)
-                return result.AsError<T>(new ServerError(result.Data.ReturnCode, GetErrorInfo(result.Data.ReturnCode, result.Data.ReturnMessage)));
+                return HttpResult.Fail<T>(result ,new ServerError(result.Data.ReturnCode, GetErrorInfo(result.Data.ReturnCode, result.Data.ReturnMessage)));
 
-            return result.As(result.Data.Result);
+            return HttpResult.Ok(result, result.Data.Result);
         }
 
-        internal async Task<WebCallResult<BybitExtResult<T,U>>> SendRawAsync<T,U>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
+        internal async Task<HttpResult<BybitExtResult<T,U>>> SendRawAsync<T,U>(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null, int? singleLimiterWeight = null)
         {
-            return await base.SendAsync<BybitExtResult<T,U>>(BaseAddress, definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
+            return await base.SendAsync<BybitExtResult<T,U>>(definition, parameters, cancellationToken, null, weight, weightSingleLimiter: singleLimiterWeight).ConfigureAwait(false);
         }
     }
 }

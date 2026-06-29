@@ -28,7 +28,7 @@ namespace Bybit.Net.Clients.V5
         /// <param name="note">["<c>note</c>"] Set a remark</param>
         /// <param name="ct">Cancelation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitSubAccount>> CreateSubAccountAsync(string username, SubAccountType type, string? password = null, bool? enableQuickLogin = null, bool? isUta = null, string? note = null, CancellationToken ct = default);
+        Task<HttpResult<BybitSubAccount>> CreateSubAccountAsync(string username, SubAccountType type, string? password = null, bool? enableQuickLogin = null, bool? isUta = null, string? note = null, CancellationToken ct = default);
 
         /// <summary>
         /// Create a new API key for a sub account
@@ -53,7 +53,7 @@ namespace Bybit.Net.Clients.V5
         /// <param name="note">["<c>note</c>"] Note</param>
         /// <param name="ct">Cancelation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitApiKeyInfo>> CreateSubAccountApiKeyAsync(
+        Task<HttpResult<BybitApiKeyInfo>> CreateSubAccountApiKeyAsync(
            string subAccountId,
            bool readOnly,
            bool? permissionContractTradeOrder = null,
@@ -79,7 +79,7 @@ namespace Bybit.Net.Clients.V5
         /// </summary>
         /// <param name="ct">Cancelation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitSubAccount[]>> GetSubAccountsAsync(CancellationToken ct = default);
+        Task<HttpResult<BybitSubAccount[]>> GetSubAccountsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Edit API key. Note that permissions starting with the same topic (for example `permissionContractTradeOrder` and `permissionContractTradePosition` or `permissionWalletTransfer` and `permissionWalletSubAccountTransfer`) can not be adjusted separately and should both be set when changing one of the values.
@@ -103,7 +103,7 @@ namespace Bybit.Net.Clients.V5
         /// <param name="permissionCopyTrading">Has copy trade permission</param>
         /// <param name="ct">Cancelation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BybitApiKeyInfo>> EditSubAccountApiKeyAsync(
+        Task<HttpResult<BybitApiKeyInfo>> EditSubAccountApiKeyAsync(
             string? apiKey = null,
             bool? readOnly = null,
             string? ipRestrictions = null,
@@ -129,7 +129,7 @@ namespace Bybit.Net.Clients.V5
         /// <param name="apiKey">["<c>apikey</c>"] Api key, should be passed if deleting from Master account, should be null if editing own API key from sub account</param>
         /// <param name="ct">Cancelation token</param>
         /// <returns></returns>
-        Task<WebCallResult> DeleteSubAccountApiKeyAsync(string? apiKey = null, CancellationToken ct = default);
+        Task<HttpResult> DeleteSubAccountApiKeyAsync(string? apiKey = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get deposit address for a sub account, only available for master account
@@ -145,6 +145,6 @@ namespace Bybit.Net.Clients.V5
         /// <param name="network">["<c>chainType</c>"]</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<WebCallResult<BybitDepositAddress>> GetSubAccountDepositAddressAsync(string subAccountId, string asset, string network, CancellationToken ct = default);
+        Task<HttpResult<BybitDepositAddress>> GetSubAccountDepositAddressAsync(string subAccountId, string asset, string network, CancellationToken ct = default);
     }
 }
