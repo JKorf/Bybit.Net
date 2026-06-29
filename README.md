@@ -202,6 +202,39 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 7.0.0 - 29 Jun 2026
+    * Result types:
+      * (Web)CallResult types are replaced by HttpResult, WebSocketResult and QueryResult with the same logic
+      * WebSocketResult and QueryResult now return additional info for websocket operations
+      * Updated result types to record type
+      * Removed implicit result type conversion to bool, `if (result)` no longer works, instead use `if (result.Success)`
+      * Fixed result object nullability hinting, for example Data might be null if Success isn't checked for true
+    * Clients:
+      * Added ToString overrides on base API types
+      * Added Exchange property on BaseApiClient
+      * Added ApiCredentials property on Api clients
+      * Updated ILogger source from client name to topic specific client name
+      * Removed logging from client creation
+      * Fixed issue in SocketApiClient.GetSocketConnection causing requests to always wait the full max 10 seconds when there was a reconnecting socket
+    * Shared APIs:
+      * Added missing dedicated option types
+      * Added Discover method on ISharedClient interface, returning info on supported capabilities and operations
+      * Added ResetStaticExchangeParameters method on ExchangeParameters
+      * Added Status property to SharedWithdrawal model
+      * Added TradingModes property to SharedBalance model
+      * Updated Shared ExchangeParameters parameter names to be case insensitive
+      * Updated code comments
+      * Replaced ExchangeResult with ExchangeCallResult type
+      * Removed TradingMode from the response model, only maintained on models where it makes sense
+    * Added async streaming on UserDataTracker items with StreamUpdatesAsync
+    * Added cancellation token support to UserDataTracker starting
+    * Added SupportedEnvironments property to PlatformInfo
+    * Added Clear() method on UserClientProvider to clear all cached clients
+    * Added setter to BybitExchange.RateLimiter to allow custom rate limit settings
+    * Various small performance improvements
+    * Fixed websocket connection attempts counting towards rate limit even when server could not be reached
+    * Fixed restClient.V5Api.Account.GetFundingTransactionHistoryAsync endpoint timestamp serialization
+
 * Version 6.14.0 - 08 Jun 2026
     * Updated CryptoExchange.Net to version 11.2.2
     * Fixed user client provider not caching new client when previous client was disposed
