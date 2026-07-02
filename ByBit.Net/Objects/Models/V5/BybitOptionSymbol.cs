@@ -11,6 +11,11 @@ namespace Bybit.Net.Objects.Models.V5
     public record BybitOptionSymbol
     {
         /// <summary>
+        /// ["<c>symbolId</c>"] Symbol id
+        /// </summary>
+        [JsonPropertyName("symbolId")]
+        public int SymbolId { get; set; }
+        /// <summary>
         /// ["<c>symbol</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("symbol")]
