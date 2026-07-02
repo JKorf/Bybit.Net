@@ -156,5 +156,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("seq")]
         public long? Sequence { get; set; }
+        /// <summary>
+        /// ["<c>marketUnit</c>"] Market unit
+        /// </summary>
+        [JsonPropertyName("marketUnit")]
+        public MarketUnit MarketUnit { get; set; }
     }
 }
