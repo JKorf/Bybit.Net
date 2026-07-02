@@ -103,6 +103,11 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("withdrawPercentageFee")]
         public decimal? WithdrawPercentageFee { get; set; }
         /// <summary>
+        /// ["<c>withdrawMax</c>"] Withdrawal max amount
+        /// </summary>
+        [JsonPropertyName("withdrawMax")]
+        public decimal? WithdrawMax { get; set; }
+        /// <summary>
         /// ["<c>contractAddress</c>"] Contract address
         /// </summary>
         [JsonPropertyName("contractAddress")]
