@@ -281,5 +281,25 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("rpiMatchedQty")]
         public decimal? RpiMatchedQuantity { get; set; }
+        /// <summary>
+        /// ["<c>basePrice</c>"] Base price
+        /// </summary>
+        [JsonPropertyName("basePrice")]
+        public decimal? BasePrice { get; set; }
+        /// <summary>
+        /// ["<c>trailingValue</c>"] Trailing value
+        /// </summary>
+        [JsonPropertyName("trailingValue")]
+        public decimal? TrailingValue { get; set; }
+        /// <summary>
+        /// ["<c>activationPrice</c>"] Activation price
+        /// </summary>
+        [JsonPropertyName("activationPrice")]
+        public decimal? ActivationPrice { get; set; }
+        /// <summary>
+        /// ["<c>trailingPercentage</c>"] Trailing percentage
+        /// </summary>
+        [JsonPropertyName("trailingPercentage")]
+        public decimal? TrailingPercentage { get; set; }
     }
 }
