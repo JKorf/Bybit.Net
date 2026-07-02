@@ -192,5 +192,35 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("Affiliate")]
         public string[] Affiliate { get; set; } = Array.Empty<string>();
+        /// <summary>
+        /// ["<c>Earn</c>"] Earn permissions
+        /// </summary>
+        [JsonPropertyName("Earn")]
+        public string[] Earn { get; set; } = Array.Empty<string>();
+        /// <summary>
+        /// ["<c>FiatP2P</c>"] Fiat P2P permissions
+        /// </summary>
+        [JsonPropertyName("FiatP2P")]
+        public string[] FiatP2P { get; set; } = Array.Empty<string>();
+        /// <summary>
+        /// ["<c>FiatConvertBroker</c>"] Fiat convert broker permissions
+        /// </summary>
+        [JsonPropertyName("FiatConvertBroker")]
+        public string[] FiatConvertBroker { get; set; } = Array.Empty<string>();
+        /// <summary>
+        /// ["<c>FiatBitPay</c>"] Fiat bit pay permissions
+        /// </summary>
+        [JsonPropertyName("FiatBitPay")]
+        public string[] FiatBitPay { get; set; } = Array.Empty<string>();
+        /// <summary>
+        /// ["<c>BitCard</c>"] Bit card permissions
+        /// </summary>
+        [JsonPropertyName("BitCard")]
+        public string[] BitCard { get; set; } = Array.Empty<string>();
+        /// <summary>
+        /// ["<c>ByXPost</c>"] ByX Post permissions
+        /// </summary>
+        [JsonPropertyName("ByXPost")]
+        public string[] ByXPost { get; set; } = Array.Empty<string>();
     }
 }
