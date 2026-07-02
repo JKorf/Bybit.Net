@@ -162,5 +162,15 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("basisRateYear")]
         public decimal? BasisRateYear { get; set; }
+        /// <summary>
+        /// ["<c>singleOpenInterest</c>"] Single open interest
+        /// </summary>
+        [JsonPropertyName("singleOpenInterest")]
+        public decimal? SingleOpenInterest { get; set; }
+        /// <summary>
+        /// ["<c>singleOpenInterestValue</c>"] Single open interest value
+        /// </summary>
+        [JsonPropertyName("singleOpenInterestValue")]
+        public decimal? SingleOpenInterestValue { get; set; }
     }
 }
