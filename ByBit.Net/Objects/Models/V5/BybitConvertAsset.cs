@@ -79,5 +79,41 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("disableTo")]
         public bool DisableTo { get; set; }
+        /// <summary>
+        /// ["<c>timePeriod</c>"] Time period
+        /// </summary>
+        [JsonPropertyName("timePeriod")]
+        public long TimePeriod { get; set; }
+        /// <summary>
+        /// ["<c>singleToMinLimit</c>"] The minimum quantity of toAsset per transaction
+        /// </summary>
+        [JsonPropertyName("singleToMinLimit")]
+        public decimal ToAssetMinQuantity { get; set; }
+        /// <summary>
+        /// ["<c>singleToMaxLimit</c>"] The maximum quantity of toAsset per transaction
+        /// </summary>
+        [JsonPropertyName("singleToMaxLimit")]
+        public decimal ToAssetMaxQuantity { get; set; }
+
+        /// <summary>
+        /// ["<c>dailyFromMinLimit</c>"] Daily from asset min limit
+        /// </summary>
+        [JsonPropertyName("dailyFromMinLimit")]
+        public decimal FromAssetDailyMinLimit { get; set; }
+        /// <summary>
+        /// ["<c>dailyFromMaxLimit</c>"] Daily from asset max limit
+        /// </summary>
+        [JsonPropertyName("dailyFromMaxLimit")]
+        public decimal FromAssetDailyMaxLimit { get; set; }
+        /// <summary>
+        /// ["<c>dailyToMinLimit</c>"] Daily to asset min limit
+        /// </summary>
+        [JsonPropertyName("dailyToMinLimit")]
+        public decimal ToAssetDailyMinLimit { get; set; }
+        /// <summary>
+        /// ["<c>dailyToMaxLimit</c>"] Daily to asset max limit
+        /// </summary>
+        [JsonPropertyName("dailyToMaxLimit")]
+        public decimal ToAssetDailyMaxLimit { get; set; }
     }
 }
