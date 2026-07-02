@@ -11,6 +11,11 @@ namespace Bybit.Net.Objects.Models.V5
     public record BybitLinearInverseSymbol
     {
         /// <summary>
+        /// ["<c>symbolId</c>"] Symbol id
+        /// </summary>
+        [JsonPropertyName("symbolId")]
+        public int SymbolId { get; set; }
+        /// <summary>
         /// ["<c>symbol</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("symbol")]
@@ -133,7 +138,7 @@ namespace Bybit.Net.Objects.Models.V5
         /// ["<c>leverageFilter</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverageFilter")]
-        public BybitLinearInverseLeveragefilter? LeverageFilter { get; set; }
+        public BybitLinearInverseLeverageFilter? LeverageFilter { get; set; }
         /// <summary>
         /// ["<c>riskParameters</c>"] Risk limit parameters
         /// </summary>
@@ -234,7 +239,7 @@ namespace Bybit.Net.Objects.Models.V5
     /// Leverage filter info
     /// </summary>
     [SerializationModel]
-    public record BybitLinearInverseLeveragefilter
+    public record BybitLinearInverseLeverageFilter
     {
         /// <summary>
         /// ["<c>minLeverage</c>"] Min leverage
@@ -284,6 +289,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("minNotionalValue")]
         public decimal? MinNotionalValue { get; set; }
+        /// <summary>
+        /// ["<c>postOnlyMaxOrderQty</c>"] Max order quantity for post only orders
+        /// </summary>
+        [JsonPropertyName("postOnlyMaxOrderQty")]
+        public decimal? PostOnlyMaxOrderQuantity { get; set; }
     }
 
     /// <summary>
