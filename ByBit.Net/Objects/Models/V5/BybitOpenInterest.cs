@@ -20,5 +20,10 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// ["<c>singleOpenInterest</c>"] Single open interest
+        /// </summary>
+        [JsonPropertyName("singleOpenInterest")]
+        public decimal? SingleOpenInterest { get; set; }
     }
 }
