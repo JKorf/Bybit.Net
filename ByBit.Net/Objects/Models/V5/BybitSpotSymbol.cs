@@ -69,6 +69,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("stTag")]
         public bool SpecialTreatmentLabel { get; set; }
+        /// <summary>
+        /// ["<c>innovation</c>"] Whether the symbol has the innovation label
+        /// </summary>
+        [JsonPropertyName("innovation")]
+        public bool Innovation { get; set; }
     }
 
     /// <summary>
