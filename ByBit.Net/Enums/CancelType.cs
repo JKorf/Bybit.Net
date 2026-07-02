@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Attributes;
 using System.Text.Json.Serialization;
 namespace Bybit.Net.Enums
 {
@@ -18,7 +19,7 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Cancel due to liquidation
         /// </summary>
-        CancelyByPrepareLiq,
+        CancelByPrepareLiq,
         /// <summary>
         /// Cancel due to liquidation
         /// </summary>
@@ -86,6 +87,7 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// Unknown
         /// </summary>
+        [Map("UNKNOWN")]
         Unknown
     }
 }
