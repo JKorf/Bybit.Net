@@ -3,9 +3,15 @@ using System;
 
 namespace Bybit.Net.Objects.Models.V5
 {
+    /// <summary>
+    /// Exchange info
+    /// </summary>
     [SerializationModel]
-    internal record BybitAssetExchageWrapper : BybitBaseResponse
+    public record BybitAssetExchangePage : BybitBaseResponse
     {
+        /// <summary>
+        /// ["<c>orderBody</c>"] Asset exchange records
+        /// </summary>
         [JsonPropertyName("orderBody")]
         public BybitAssetExchange[] OrderBody { get; set; } = Array.Empty<BybitAssetExchange>();
     }

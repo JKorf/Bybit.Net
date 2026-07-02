@@ -679,7 +679,7 @@ namespace Bybit.Net.Clients.V5
         #region Get Asset Exchange History
 
         /// <inheritdoc />
-        public async Task<HttpResult<BybitAssetExchange[]>> GetAssetExchangeHistoryAsync(
+        public async Task<HttpResult<BybitAssetExchangePage>> GetAssetExchangeHistoryAsync(
             string? fromAsset = null,
             string? toAsset = null,
             int? limit = null,
@@ -694,11 +694,7 @@ namespace Bybit.Net.Clients.V5
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/asset/exchange/order-record", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(600, TimeSpan.FromMinutes(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
-            var result = await _baseClient.SendAsync<BybitAssetExchageWrapper>(request, parameters, ct).ConfigureAwait(false);
-            if (!result.Success)
-                return HttpResult.Fail<BybitAssetExchange[]>(result);
-
-            return HttpResult.Ok(result, result.Data.OrderBody);
+            return await _baseClient.SendAsync<BybitAssetExchangePage>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
