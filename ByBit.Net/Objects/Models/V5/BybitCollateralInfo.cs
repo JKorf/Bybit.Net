@@ -28,6 +28,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("freeBorrowAmount")]
         public decimal? FreeBorrowAmount { get; set; }
+        [JsonInclude, JsonPropertyName("freeBorrowingAmount")]
+        internal decimal? FreeBorrowAmountInt
+        {
+            set => FreeBorrowAmount = value;
+        }
         /// <summary>
         /// ["<c>freeBorrowingLimit</c>"] The maximum limit for interest-free borrowing
         /// </summary>
