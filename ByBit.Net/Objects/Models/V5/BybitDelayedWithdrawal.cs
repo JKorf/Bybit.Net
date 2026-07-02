@@ -41,6 +41,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("UTA")]
         public BybitDelayedWithdrawalQuantity Uta { get; set; } = null!;
+        /// <summary>
+        /// ["<c>EARN</c>"] Earn account
+        /// </summary>
+        [JsonPropertyName("EARN")]
+        public BybitDelayedWithdrawalQuantity Earn { get; set; } = null!;
     }
 
     /// <summary>
