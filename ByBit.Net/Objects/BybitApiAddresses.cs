@@ -78,6 +78,33 @@
         };
 
         /// <summary>
+        /// The addresses to connect to the Bybit main net for users from the United Arab Emirates
+        /// </summary>
+        public static BybitApiAddresses UnitedArabEmirates = new BybitApiAddresses
+        {
+            RestBaseAddress = "https://api.bybit.ae",
+            SocketBaseAddress = "wss://stream.bybit.ae"
+        };
+
+        /// <summary>
+        /// The addresses to connect to the Bybit main net for users from Indonesia
+        /// </summary>
+        public static BybitApiAddresses Indonesia = new BybitApiAddresses
+        {
+            RestBaseAddress = "https://api.bybit.id",
+            SocketBaseAddress = "wss://stream.bybitgeorgia.id"
+        };
+
+        /// <summary>
+        /// The addresses to connect to the Bybit main net for users from Japan
+        /// </summary>
+        public static BybitApiAddresses Japan = new BybitApiAddresses
+        {
+            RestBaseAddress = "https://api.moneypartners.co.jp",
+            SocketBaseAddress = "wss://stream.moneypartners.co.jp"
+        };
+
+        /// <summary>
         /// The addresses to connect to the Bybit demo trading environment
         /// </summary>
         public static BybitApiAddresses DemoTrading = new BybitApiAddresses

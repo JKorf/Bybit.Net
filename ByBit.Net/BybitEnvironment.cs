@@ -1,5 +1,6 @@
 ﻿using Bybit.Net.Objects;
 using CryptoExchange.Net.Objects;
+using System;
 
 namespace Bybit.Net
 {
@@ -47,6 +48,9 @@ namespace Bybit.Net
              "Turkey" => Turkey,
              "Kazakhstan" => Kazakhstan,
              "Georgia" => Georgia,
+             "UnitedArabEmirates" => UnitedArabEmirates,
+             "Indonesia" => Indonesia,
+             "Japan" => Japan,
              "demo" => DemoTrading,
              "" => Live,
              null => Live,
@@ -57,7 +61,18 @@ namespace Bybit.Net
         /// Available environment names
         /// </summary>
         /// <returns></returns>
-        public static string[] All => [Live.Name, Testnet.Name, Eu.Name, HongKong.Name, Turkey.Name, Kazakhstan.Name, Georgia.Name, DemoTrading.Name];
+        public static string[] All => [
+            Live.Name, 
+            Testnet.Name, 
+            Eu.Name,
+            HongKong.Name,
+            Turkey.Name, 
+            Kazakhstan.Name, 
+            Georgia.Name,
+            UnitedArabEmirates.Name,
+            Indonesia.Name,
+            Japan.Name,
+            DemoTrading.Name];
 
         /// <summary>
         /// Live environment
@@ -115,6 +130,27 @@ namespace Bybit.Net
                                      BybitApiAddresses.Georgia.RestBaseAddress,
                                      BybitApiAddresses.Georgia.SocketBaseAddress);
 
+        /// <summary>
+        /// Live environment for users from United Arab Emirates
+        /// </summary>
+        public static BybitEnvironment UnitedArabEmirates { get; }
+            = new BybitEnvironment("UnitedArabEmirates",
+                                     BybitApiAddresses.UnitedArabEmirates.RestBaseAddress,
+                                     BybitApiAddresses.UnitedArabEmirates.SocketBaseAddress);
+        /// <summary>
+        /// Live environment for users from Indonesia
+        /// </summary>
+        public static BybitEnvironment Indonesia { get; }
+            = new BybitEnvironment("Indonesia",
+                                     BybitApiAddresses.Indonesia.RestBaseAddress,
+                                     BybitApiAddresses.Indonesia.SocketBaseAddress);
+        /// <summary>
+        /// Live environment for users from Japan
+        /// </summary>
+        public static BybitEnvironment Japan { get; }
+            = new BybitEnvironment("Japan",
+                                     BybitApiAddresses.Japan.RestBaseAddress,
+                                     BybitApiAddresses.Japan.SocketBaseAddress);
         /// <summary>
         /// Demo trading environment, needs separate API key. See https://bybit-exchange.github.io/docs/v5/demo
         /// </summary>
