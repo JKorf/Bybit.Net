@@ -9,6 +9,14 @@ using System.Text.Json.Serialization;
 
 namespace Bybit.Net.Converters
 {
+    [JsonSerializable(typeof(BybitResult<BybitTravelRuleStatus>))]
+
+    [JsonSerializable(typeof(BybitWithdrawQuestionnaireEu))]
+    [JsonSerializable(typeof(BybitWithdrawQuestionnaireTurkey))]
+    [JsonSerializable(typeof(BybitWithdrawQuestionnaireKazakhstan))]
+    [JsonSerializable(typeof(BybitWithdrawQuestionnaireIndia))]
+    [JsonSerializable(typeof(BybitWithdrawQuestionnaireKorea))]
+
     [JsonSerializable(typeof(BybitResult<BybitList<BybitFeeGroup>>))]
     [JsonSerializable(typeof(BybitResult<BybitList<BybitMarginAssetData>>))]
     [JsonSerializable(typeof(BybitResult<BybitAnalysisTradeInfo>))]

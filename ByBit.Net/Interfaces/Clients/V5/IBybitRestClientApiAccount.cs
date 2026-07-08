@@ -696,9 +696,42 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="forceNetwork">["<c>forceChain</c>"] Force on-chain withdrawal</param>
         /// <param name="accountType">["<c>accountType</c>"] Account type to withdraw from</param>
         /// <param name="feeType">["<c>feeType</c>"] Handling fee option</param>
+        /// <param name="requestId">["<c>requestId</c>"] Customized ID, globally unique, it is used for idempotent verification. Max 32 chars</param>
+        /// <param name="questionnaire">["<c>questionnaire</c>"] Questionnaire answers. Use BybitWithdrawQuestionnaire to create the question list, for example <code>var questionnaire = BybitWithdrawQuestionnaire.Eu;</code></param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<HttpResult<BybitId>> WithdrawAsync(string asset, string network, string toAddress, decimal quantity, WithdrawAccountType accountType, string? tag = null, bool? forceNetwork = null, bool? feeType = null, CancellationToken ct = default);
+        Task<HttpResult<BybitId>> WithdrawAsync(
+            string asset, 
+            string network, 
+            string toAddress,
+            decimal quantity,
+            WithdrawAccountType accountType, 
+            string? tag = null, 
+            bool? forceNetwork = null, 
+            bool? feeType = null,
+            string? requestId = null,
+            BybitWithdrawQuestionnaire? questionnaire = null, 
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Submit deposit originator information for a deposit
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/asset/deposit/submit-info" /><br />
+        /// Endpoint:<br />
+        /// POST /v5/asset/travel-rule/deposit/submit
+        /// </para>
+        /// </summary>
+        /// <param name="depositId">The id of the deposit</param>
+        /// <param name="questionnaire">["<c>questionnaire</c>"] Questionnaire answers. Use BybitWithdrawQuestionnaire to create the question list, for example <code>var questionnaire = BybitWithdrawQuestionnaire.Eu;</code></param>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<HttpResult<BybitTravelRuleStatus>> SubmitDepositOriginatorInfoAsync(
+            long depositId,
+            BybitWithdrawQuestionnaire questionnaire,
+            long? subAccountId = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Manually add or reduce margin for isolated margin position

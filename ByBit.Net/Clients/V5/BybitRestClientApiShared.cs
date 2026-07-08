@@ -906,6 +906,10 @@ namespace Bybit.Net.Clients.V5
             RequiredOptionalParameters = new List<ParameterDescription>
             {
                 new ParameterDescription(nameof(WithdrawRequest.Network), typeof(string), "The network the withdrawal should use", "ETH")
+            },
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("TravelRuleQuestionnaire", typeof(BybitWithdrawQuestionnaire), "Travel rule questionnaire", new BybitWithdrawQuestionnaireEu())
             }
         };
 
@@ -916,6 +920,7 @@ namespace Bybit.Net.Clients.V5
                 return HttpResult.Fail<SharedId>(Exchange, validationError);
 
             // Get data
+            var questionnaire = ExchangeParameters.GetValue<BybitWithdrawQuestionnaireEu?>(request.ExchangeParameters, Exchange, "TravelRuleQuestionnaire");
             var withdrawal = await Account.WithdrawAsync(
                 request.Asset,
                 toAddress: request.Address,
@@ -923,6 +928,7 @@ namespace Bybit.Net.Clients.V5
                 network: request.Network!,
                 tag: request.AddressTag,
                 accountType: WithdrawAccountType.FundAndUta,
+                questionnaire: questionnaire,
                 ct: ct).ConfigureAwait(false);
             if (!withdrawal.Success)
                 return HttpResult.Fail<SharedId>(withdrawal);

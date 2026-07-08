@@ -821,6 +821,8 @@ namespace Bybit.Net.Clients.V5
             string? tag = null,
             bool? forceNetwork = null,
             bool? feeType = null,
+            string? requestId = null,
+            BybitWithdrawQuestionnaire? questionnaire = null,
             CancellationToken ct = default)
         {
             var parameters = new Parameters(BybitExchange._parameterSerializationSettings)
@@ -836,10 +838,32 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("accountType", EnumConverter.GetString(accountType));
             parameters.Add("forceChain", forceNetwork == null ? null : forceNetwork.Value ? 1 : 0);
             parameters.Add("feeType", feeType == null ? null : feeType.Value ? 1 : 0);
+            parameters.Add("questionnaire", questionnaire?.Serialize());
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/asset/withdraw/create", BybitExchange.RateLimiter.BybitRest, 1, true,
                 new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BybitId>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Submit Deposit Originator Info
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitTravelRuleStatus>> SubmitDepositOriginatorInfoAsync(
+            long depositId,
+            BybitWithdrawQuestionnaire questionnaire,
+            long? subAccountId = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("depositId", depositId);
+            parameters.Add("subAccountId", subAccountId);
+            parameters.Add("questionnaire", questionnaire?.Serialize());
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/asset/travel-rule/deposit/submit", BybitExchange.RateLimiter.BybitRest, 1, true,
+                new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, null, SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BybitTravelRuleStatus>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
