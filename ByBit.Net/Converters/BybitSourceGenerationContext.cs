@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 namespace Bybit.Net.Converters
 {
     [JsonSerializable(typeof(BybitResult<BybitTravelRuleStatus>))]
+    [JsonSerializable(typeof(BybitResult<BybitList<BybitLeverage>>))]
 
     [JsonSerializable(typeof(BybitWithdrawQuestionnaireEu))]
     [JsonSerializable(typeof(BybitWithdrawQuestionnaireTurkey))]

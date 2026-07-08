@@ -1607,5 +1607,25 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Futures Leverage
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitLeverage[]>> GetFuturesLeverageAsync(
+            Category category,
+            string? symbol = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("symbol", symbol);
+            parameters.Add("category", category);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/v5/position/symbol-info", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitList<BybitLeverage>>(request, parameters, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<BybitLeverage[]>(result);
+
+            return HttpResult.Ok(result, result.Data.List);
+        }
+
+        #endregion
     }
 }

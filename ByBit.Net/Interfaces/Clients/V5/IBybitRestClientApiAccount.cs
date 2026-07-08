@@ -1,4 +1,5 @@
 using Bybit.Net.Enums;
+using Bybit.Net.Objects.Internal;
 using Bybit.Net.Objects.Models.V5;
 using CryptoExchange.Net.Objects;
 using System;
@@ -1299,5 +1300,21 @@ namespace Bybit.Net.Interfaces.Clients.V5
             DateTime? endTime = null,
             CancellationToken ct = default);
 
+        /// <summary>
+        /// Get leverage settings for futures symbols
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/position/batch-lvg" /><br />
+        /// Endpoint:<br />
+        /// GET /v5/position/symbol-info<br />
+        /// </para>
+        /// </summary>
+        /// <param name="category">["<c>category</c>"] Category</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<BybitLeverage[]>> GetFuturesLeverageAsync(
+            Category category,
+            string? symbol = null,
+            CancellationToken ct = default);
     }
 }
