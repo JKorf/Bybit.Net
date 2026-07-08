@@ -42,6 +42,12 @@ namespace Bybit.Net.Objects.Models.V5
 
         public InternalDepositStatus Status { get; set; }
         /// <summary>
+        /// ["<c>complianceStatus</c>"] Compliance status, only applicable to Turkey users
+        /// </summary>
+        [JsonPropertyName("complianceStatus")]
+
+        public TravelRuleStatus? ComplianceStatus { get; set; }
+        /// <summary>
         /// ["<c>createdTime</c>"] Timestamp 
         /// </summary>
         [JsonPropertyName("createdTime")]
