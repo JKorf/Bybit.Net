@@ -326,6 +326,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="slippageTolerance">["<c>slippageTolerance</c>"] Slippage tolerance value</param>
         /// <param name="bboSideType">["<c>bboSideType</c>"] BBO side type</param>
         /// <param name="bboLevel">["<c>bboLevel</c>"] BBO level (1 - 5)</param>
+        /// <param name="rpiTakerAccess">["<c>rpiTakerAccess</c>"] When true matches against RPI quotes</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<HttpResult<BybitOrderId>> PlaceOrderAsync(
@@ -362,6 +363,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
             decimal? slippageTolerance = null,
             BboSideType? bboSideType = null,
             int? bboLevel = null,
+            bool? rpiTakerAccess = null,
             CancellationToken ct = default);
 
         /// <summary>

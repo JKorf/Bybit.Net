@@ -64,6 +64,7 @@ namespace Bybit.Net.Clients.V5
             decimal? slippageTolerance = null,
             BboSideType? bboSideType = null,
             int? bboLevel = null,
+            bool? rpiTakerAccess = null,
             CancellationToken ct = default
         )
         {
@@ -106,6 +107,7 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("slippageTolerance", slippageTolerance);
             parameters.Add("bboSideType", bboSideType);
             parameters.Add("bboLevel", bboLevel);
+            parameters.Add("rpiTakerAccess", rpiTakerAccess);
 
             var limits = BybitExchange.RateLimiter.GetOrderLimits();
             var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;

@@ -125,6 +125,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
         /// <param name="selfMatchPreventionType">Self match prevention type</param>
         /// <param name="marketUnit">The unit for qty when creating spot market orders for unified trading account</param>
+        /// <param name="rpiTakerAccess">["<c>rpiTakerAccess</c>"] When true matches against RPI quotes</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<QueryResult<BybitOrderId>> PlaceOrderAsync(Category category,
@@ -156,6 +157,7 @@ namespace Bybit.Net.Interfaces.Clients.V5
             StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             SelfMatchPreventionType? selfMatchPreventionType = null,
             MarketUnit? marketUnit = null,
+            bool? rpiTakerAccess = null,
             CancellationToken ct = default);
 
         /// <summary>

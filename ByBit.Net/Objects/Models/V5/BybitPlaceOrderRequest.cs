@@ -153,6 +153,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("isLeverage"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? IsLeverage { get; set; }
+        /// <summary>
+        /// When true matches against RPI quotes
+        /// </summary>
+        [JsonPropertyName("rpiTakerAccess"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool? RpiTakerAccess { get; set; }
     }
 
     [SerializationModel]
