@@ -669,5 +669,23 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
+        #region Get Fee Groups
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitFeeGroup[]>> GetFeeGroupsAsync(FeeGroup? group = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("productType", "contract");
+            parameters.Add("groupId", group);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/v5/market/fee-group-info", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var result = await _baseClient.SendAsync<BybitList<BybitFeeGroup>>(request, parameters, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<BybitFeeGroup[]>(result);
+
+            return HttpResult.Ok(result, result.Data.List);
+        }
+
+        #endregion
     }
 }

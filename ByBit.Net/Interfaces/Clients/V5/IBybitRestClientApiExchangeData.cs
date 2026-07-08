@@ -544,5 +544,18 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="indexName">["<c>indexName</c>"] Index name</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult<BybitIndexComponents>> GetIndexPriceComponentsAsync(string indexName, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get fee structure info
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/market/fee-group-info" /><br />
+        /// Endpoint:<br />
+        /// GET /v5/market/fee-group-info
+        /// </para>
+        /// </summary>
+        /// <param name="group">Filter by group</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<BybitFeeGroup[]>> GetFeeGroupsAsync(FeeGroup? group = null, CancellationToken ct = default);
     }
 }
