@@ -203,6 +203,25 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 7.1.0 - 09 Jul 2026
+    * Updated CryptoExchange.Net to v12.1.0
+    * Updated GetAssetExchangeHistoryAsync response type to include pagination info
+    * Added additional mapping, fixed typo in CancelType enum
+    * Added Earn to BybitDelayedWithdrawal model
+    * Added MarketUnit to BybitUserTrade model
+    * Added WithdrawMax to BybitUserAssetInfo network model
+    * Added Innovation to BybitSpotSymbol model
+    * Added BasePrice, TrailingValue, ActivationPrice and TrailingPercentage to BybitOrder model
+    * Added SymbolId to BybitOptionSymbol
+    * Added SingleOpenInterest to BybitOpenInterest model
+    * Added SingleOpenInterest and SingleOpenInterestValue to BybitLinearInverseTicker
+    * Added SymbolId to BybitLinearInverseSymbol, added PostOnlyMaxOrderQuantity to BybitLinearInverseLotSizeFilter, fixed typo BybitLinearInverseLeveragefilter
+    * Added mapping FreeBorrowAmount in BybitCollateralInfo model
+    * Added rpiTakerAccess parameter to PlaceOrderAsync
+    * Added restClient.V5Api.ExchangeData.GetFeeGroupsAsync endpoint
+    * Extended BybitApiKeyInfo permission types
+    * Updated BybitConvertAsset with some missing properties
+
 * Version 7.0.0 - 29 Jun 2026
     * Result types:
       * (Web)CallResult types are replaced by HttpResult, WebSocketResult and QueryResult with the same logic
