@@ -7,6 +7,7 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,12 +21,13 @@ namespace Bybit.Net.Clients.V5
 
         private const string _exchangeName = "Bybit";
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.DeliveryLinear, TradingMode.PerpetualInverse, TradingMode.DeliveryInverse };
-
-        private TradingMode[] FuturesTradingModes { get; } = new[] { TradingMode.PerpetualLinear, TradingMode.DeliveryLinear, TradingMode.PerpetualInverse, TradingMode.DeliveryInverse }; 
-
+                
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
         public SharedClientInfo Discover() => SharedUtils.GetClientInfo(BybitExchange.Metadata, this);
+
+        private static HashSet<string> _exchangeSupportedFiat = ["USD", "EUR", "BRL", "PLN", "TRY", "AED", "GBP"];
+        private static HashSet<string> _knownSpotMetals = ["XAUT"];
 
         #region Kline client
 
@@ -94,6 +96,7 @@ namespace Bybit.Net.Clients.V5
         #endregion
 
         #region Spot Symbol client
+        SharedSymbolCatalog? ISpotSymbolRestClient.SpotSymbolCatalog => ExchangeSymbolCache.GetSymbolCatalog(_topicSpotId, EnvironmentName, null);
 
         GetSpotSymbolsOptions ISpotSymbolRestClient.GetSpotSymbolsOptions { get; } = new GetSpotSymbolsOptions(_exchangeName, false);
         async Task<HttpResult<SharedSpotSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
@@ -106,17 +109,66 @@ namespace Bybit.Net.Clients.V5
             if (!result.Success)
                 return HttpResult.Fail<SharedSpotSymbol[]>(result);
 
-            var response = HttpResult.Ok(result, result.Data.List.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
+            var data = result.Data.List
+               .Select(x => ParseSymbol(x)!)
+               .Where(x => x != null)
+               .ToArray();
+
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicSpotId, EnvironmentName, null, data);
+            return HttpResult.Ok(result, SharedUtils.ApplySymbolFilter(data, request));
+        }
+
+        private SharedSpotSymbol ParseSymbol(BybitSpotSymbol s)
+        {
+            var result = new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinOrderQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxOrderQuantity,
                 MinNotionalValue = s.LotSizeFilter?.MinOrderValue,
                 QuantityStep = s.LotSizeFilter?.BasePrecision,
-                PriceStep = s.PriceFilter?.TickSize
-            }).ToArray());
+                PriceStep = s.PriceFilter?.TickSize,
+                DisplayNamea = s.Name
+            };
 
-            ExchangeSymbolCache.UpdateSymbolInfo(_topicSpotId, EnvironmentName, null, response.Data!);
-            return response;
+            if (s.SymbolType == SymbolType.XStocks)
+            {
+                result.BaseAssetType = SharedAssetType.TradFi;
+                result.BaseAssetSubType = SharedAssetSubType.Stock;
+            }
+            else if (_knownSpotMetals.Contains(result.BaseAsset))
+            {
+                result.BaseAssetType = SharedAssetType.TradFi;
+                result.BaseAssetSubType = SharedAssetSubType.Commodity;
+            }
+            else if (LibraryHelpers.IsStableCoin(result.BaseAsset))
+            {
+                result.BaseAssetType = SharedAssetType.Crypto;
+                result.BaseAssetSubType = SharedAssetSubType.StableCoin;
+            }
+            else if (_exchangeSupportedFiat.Contains(result.BaseAsset))
+            {
+                result.BaseAssetType = SharedAssetType.Fiat;
+            }
+            else
+            {
+                result.BaseAssetType = SharedAssetType.Crypto;
+            }
+
+            if (LibraryHelpers.IsStableCoin(result.QuoteAsset))
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
+                result.QuoteAssetSubType = SharedAssetSubType.StableCoin;
+            }
+            else if (_exchangeSupportedFiat.Contains(result.QuoteAsset))
+            {
+                result.QuoteAssetType = SharedAssetType.Fiat;
+            }
+            else
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
+            }
+
+                return result;
         }
 
         async Task<ExchangeCallResult<SharedSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsForBaseAssetAsync(string baseAsset)
@@ -1002,6 +1054,7 @@ namespace Bybit.Net.Clients.V5
 
         #region Futures Symbol client
 
+        SharedSymbolCatalog? IFuturesSymbolRestClient.FuturesSymbolCatalog => ExchangeSymbolCache.GetSymbolCatalog(_topicFuturesId, EnvironmentName, null);
         GetFuturesSymbolsOptions IFuturesSymbolRestClient.GetFuturesSymbolsOptions { get; } = new GetFuturesSymbolsOptions(_exchangeName, false);
         async Task<HttpResult<SharedFuturesSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
         {
@@ -1014,19 +1067,19 @@ namespace Bybit.Net.Clients.V5
             if (!result.Success)
                 return HttpResult.Fail<SharedFuturesSymbol[]>(result);
 
-            IEnumerable<BybitLinearInverseSymbol> data = result.Data.List;
-            if (request.TradingMode != null)
-            {
-                data = data.Where(x =>
-                    request.TradingMode == TradingMode.PerpetualLinear ? x.ContractType == ContractTypeV5.LinearPerpetual :
-                    request.TradingMode == TradingMode.PerpetualInverse ? x.ContractType == ContractTypeV5.InversePerpetual :
-                    request.TradingMode == TradingMode.DeliveryLinear ? x.ContractType == ContractTypeV5.LinearFutures :
-                    x.ContractType == ContractTypeV5.InverseFutures);
-            }
+            var data = result.Data.List
+                .Select(x => ParseSymbol(x))
+                .ToArray();
 
-            var response = HttpResult.Ok(result, data.Select(s => new SharedFuturesSymbol(
-                s.ContractType == ContractTypeV5.LinearPerpetual ? TradingMode.PerpetualLinear:
-                s.ContractType == ContractTypeV5.InversePerpetual ? TradingMode.PerpetualInverse:
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicFuturesId, EnvironmentName, category.ToString(), data);
+            return HttpResult.Ok(result, SharedUtils.ApplySymbolFilter(data, request));
+        }
+
+        private SharedFuturesSymbol ParseSymbol(BybitLinearInverseSymbol s)
+        {
+            var result = new SharedFuturesSymbol(
+                s.ContractType == ContractTypeV5.LinearPerpetual ? TradingMode.PerpetualLinear :
+                s.ContractType == ContractTypeV5.InversePerpetual ? TradingMode.PerpetualInverse :
                 s.ContractType == ContractTypeV5.LinearFutures ? TradingMode.DeliveryLinear :
                 TradingMode.DeliveryInverse,
                 s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
@@ -1038,11 +1091,43 @@ namespace Bybit.Net.Clients.V5
                 DeliveryTime = s.DeliveryTime,
                 ContractSize = 1,
                 MaxLongLeverage = s.LeverageFilter?.MaxLeverage,
-                MaxShortLeverage = s.LeverageFilter?.MaxLeverage
-            }).ToArray());
+                MaxShortLeverage = s.LeverageFilter?.MaxLeverage,
+                DisplayName = s.DisplayName,                
+            };
 
-            ExchangeSymbolCache.UpdateSymbolInfo(_topicFuturesId, EnvironmentName, null, response.Data!);
-            return response;
+            if (result.TradingMode.IsInverse())
+            {
+                result.QuoteAssetType = SharedAssetType.Fiat;
+            }
+            else
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
+                result.QuoteAssetSubType = SharedAssetSubType.StableCoin;
+            }
+
+            if (s.SymbolType == SymbolType.Stock || s.SymbolType == SymbolType.XStocks)
+            {
+                result.BaseAssetType = SharedAssetType.TradFi;
+                result.BaseAssetSubType = SharedAssetSubType.Stock;
+            }
+            else if (s.SymbolType == SymbolType.Commodity)
+            {
+                result.BaseAssetType = SharedAssetType.TradFi;
+                result.BaseAssetSubType = SharedAssetSubType.Commodity;
+            }
+            else if (s.SymbolType == SymbolType.Forex)
+            {
+                result.BaseAssetType = SharedAssetType.Fiat;
+            }
+            else
+            {
+                result.BaseAssetType = SharedAssetType.Crypto;
+
+                if (LibraryHelpers.IsStableCoin(result.BaseAsset))
+                    result.BaseAssetSubType = SharedAssetSubType.StableCoin;
+            }
+
+            return result;
         }
 
         async Task<ExchangeCallResult<SharedSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsForBaseAssetAsync(string baseAsset)
