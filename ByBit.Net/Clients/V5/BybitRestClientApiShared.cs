@@ -27,7 +27,6 @@ namespace Bybit.Net.Clients.V5
         public SharedClientInfo Discover() => SharedUtils.GetClientInfo(BybitExchange.Metadata, this);
 
         private static HashSet<string> _exchangeSupportedFiat = ["USD", "EUR", "BRL", "PLN", "TRY", "AED", "GBP"];
-        private static HashSet<string> _knownSpotMetals = ["XAUT"];
 
         #region Kline client
 
@@ -135,7 +134,7 @@ namespace Bybit.Net.Clients.V5
                 result.BaseAssetType = SharedAssetType.TradFi;
                 result.BaseAssetSubType = SharedAssetSubType.Stock;
             }
-            else if (_knownSpotMetals.Contains(result.BaseAsset))
+            else if (LibraryHelpers.IsCommodity(result.BaseAsset))
             {
                 result.BaseAssetType = SharedAssetType.TradFi;
                 result.BaseAssetSubType = SharedAssetSubType.Commodity;
