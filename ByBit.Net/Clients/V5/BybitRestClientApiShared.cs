@@ -126,13 +126,13 @@ namespace Bybit.Net.Clients.V5
                 MinNotionalValue = s.LotSizeFilter?.MinOrderValue,
                 QuantityStep = s.LotSizeFilter?.BasePrecision,
                 PriceStep = s.PriceFilter?.TickSize,
-                DisplayNamea = s.Name
+                DisplayName = s.Name
             };
 
             if (s.SymbolType == SymbolType.XStocks)
             {
                 result.BaseAssetType = SharedAssetType.TradFi;
-                result.BaseAssetSubType = SharedAssetSubType.Stock;
+                result.BaseAssetSubType = SharedAssetSubType.Equity;
             }
             else if (LibraryHelpers.IsCommodity(result.BaseAsset))
             {
@@ -1107,7 +1107,7 @@ namespace Bybit.Net.Clients.V5
             if (s.SymbolType == SymbolType.Stock || s.SymbolType == SymbolType.XStocks)
             {
                 result.BaseAssetType = SharedAssetType.TradFi;
-                result.BaseAssetSubType = SharedAssetSubType.Stock;
+                result.BaseAssetSubType = SharedAssetSubType.Equity;
             }
             else if (s.SymbolType == SymbolType.Commodity)
             {
