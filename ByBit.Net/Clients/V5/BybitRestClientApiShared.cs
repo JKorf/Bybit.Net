@@ -1091,7 +1091,7 @@ namespace Bybit.Net.Clients.V5
                 ContractSize = 1,
                 MaxLongLeverage = s.LeverageFilter?.MaxLeverage,
                 MaxShortLeverage = s.LeverageFilter?.MaxLeverage,
-                DisplayName = s.DisplayName,                
+                DisplayName = !string.IsNullOrEmpty(s.DisplayName) ? s.DisplayName : s.Name,
             };
 
             if (result.TradingMode.IsInverse())
