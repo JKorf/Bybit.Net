@@ -72,7 +72,7 @@ await socketClient.UnsubscribeAsync(sub.Data);
 
 ## Cross-exchange
 
-For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient` properties, for example `new BybitRestClient().V5Api.SharedClient`.
+For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient` properties, for example `new BybitRestClient().V5Api.SharedClient`. Shared spot/futures symbols include display names and typed base/quote asset metadata; the shared symbol clients support common request filtering and expose symbol catalogs.
 
 ## Avoid
 

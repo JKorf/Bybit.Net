@@ -4,8 +4,8 @@
 
 Bybit.Net is a strongly typed .NET client library for the Bybit REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket subscription patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 6.12.0.
-CryptoExchange.Net dependency: 11.1.0.
+Current package version in this repository: 7.2.0.
+CryptoExchange.Net dependency: 12.2.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
@@ -749,6 +749,8 @@ Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supporte
 Console.WriteLine(shared.Exchange);
 Console.WriteLine(string.Join(", ", shared.SupportedTradingModes));
 ```
+
+Shared spot and futures symbol responses include `DisplayName`, `BaseAssetType`, `BaseAssetSubType`, `QuoteAssetType`, and `QuoteAssetSubType`. Spot XStocks are `TradFi`/`Equity`, commodities are `TradFi`/`Commodity`, known fiat assets are `Fiat`, and stablecoins are `Crypto`/`StableCoin`. Futures stock/XStocks, commodity, and forex symbols receive the corresponding equity, commodity, or fiat classification; inverse quote assets are fiat, while linear quote assets are crypto stablecoins. The shared symbol clients expose `SpotSymbolCatalog` and `FuturesSymbolCatalog`, and their symbol requests use the common `GetSymbolsRequest` filters.
 
 Native Bybit endpoints remain better when the user needs Bybit-specific fields or parameters:
 

@@ -95,6 +95,7 @@ Console.WriteLine(spotTicker.Data.List.First().LastPrice);
 - Use `BybitCredentials("key", "secret")` for HMAC credentials; no passphrase.
 - Check `.Success` before `.Data`.
 - Use `.SharedClient.Discover()` before routing optional shared features across exchanges.
+- Shared spot/futures symbols provide display names, typed base/quote assets, common request filtering, and symbol catalogs.
 - Use async/await.
 - Reuse clients or use dependency injection.
 - Store and unsubscribe WebSocket subscriptions.

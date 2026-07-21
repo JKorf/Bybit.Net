@@ -88,6 +88,8 @@ var shared = new BybitRestClient().V5Api.SharedClient;
 Console.WriteLine(shared.Exchange);
 ```
 
+Shared spot/futures symbols include display names and typed base/quote asset metadata. Their shared clients support common symbol filtering and expose spot/futures symbol catalogs.
+
 ## Hard rules
 
 - Never write raw `HttpClient` calls to Bybit endpoints.

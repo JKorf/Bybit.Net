@@ -213,7 +213,7 @@ await privateSocket.V5PrivateApi.SubscribeToOrderUpdatesAsync(
 
 ## Multi-Exchange via CryptoExchange.Net.SharedApis
 
-Use `CryptoExchange.Net.SharedApis` when the user asks for exchange-agnostic code. Bybit exposes a shared REST client at `restClient.V5Api.SharedClient` and shared socket clients on the relevant socket API objects. Use `.SharedClient.Discover()` to inspect supported shared features at runtime.
+Use `CryptoExchange.Net.SharedApis` when the user asks for exchange-agnostic code. Bybit exposes a shared REST client at `restClient.V5Api.SharedClient` and shared socket clients on the relevant socket API objects. Use `.SharedClient.Discover()` to inspect supported shared features at runtime. Shared spot and futures symbol results include display names and base/quote asset type metadata (`Crypto`, `Fiat`, or `TradFi`, with stablecoin, equity, and commodity subtypes where applicable); the shared symbol clients also expose symbol catalogs and support the common symbol request filters.
 
 ```csharp
 using Bybit.Net.Clients;
