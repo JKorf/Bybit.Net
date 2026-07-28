@@ -11,6 +11,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Bybit.Net.Clients.V5
 {
@@ -88,7 +89,7 @@ namespace Bybit.Net.Clients.V5
                             x.HighPrice,
                             x.LowPrice,
                             x.OpenPrice,
-                            x.Volume))
+                            new SharedOrderQuantity(x.Volume, x.QuoteVolume)))
                    .ToArray(), nextPageRequest);
         }
 
@@ -223,10 +224,17 @@ namespace Bybit.Net.Clients.V5
             if (!result.Success)
                 return HttpResult.Fail<SharedSpotTicker[]>(result);
 
-            return HttpResult.Ok(result, result.Data.List.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentag24h * 100)
-            {
-                QuoteVolume = x.Turnover24h
-            }).ToArray());
+            return HttpResult.Ok(result, result.Data.List.Select(x => 
+                new SharedSpotTicker(
+                    ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, x.Symbol), 
+                    x.Symbol,
+                    x.LastPrice,
+                    x.HighPrice24h,
+                    x.LowPrice24h,
+                    new SharedOrderQuantity(x.Volume24h, x.Turnover24h),
+                    x.PriceChangePercentag24h * 100)
+                {
+                }).ToArray());
         }
 
         GetSpotTickerOptions ISpotTickerRestClient.GetSpotTickerOptions { get; } = new GetSpotTickerOptions(_exchangeName);
@@ -243,10 +251,17 @@ namespace Bybit.Net.Clients.V5
                     return HttpResult.Fail<SharedSpotTicker>(result);
 
                 var ticker = result.Data.List.Single();
-                return HttpResult.Ok(result, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, ticker.Symbol), ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h, ticker.PriceChangePercentag24h * 100)
-                {
-                    QuoteVolume = ticker.Turnover24h
-                });
+                return HttpResult.Ok(result, 
+                    new SharedSpotTicker(
+                        ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, ticker.Symbol), 
+                        ticker.Symbol, 
+                        ticker.LastPrice,
+                        ticker.HighPrice24h, 
+                        ticker.LowPrice24h,
+                        new SharedOrderQuantity(ticker.Volume24h, ticker.Turnover24h),
+                        ticker.PriceChangePercentag24h * 100)
+                    {
+                    });
             }
             else
             {
@@ -258,10 +273,17 @@ namespace Bybit.Net.Clients.V5
                     return HttpResult.Fail<SharedSpotTicker>(result);
 
                 var ticker = result.Data.List.Single();
-                return HttpResult.Ok(result, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, ticker.Symbol), ticker.Symbol, ticker.LastPrice, ticker.HighPrice24h, ticker.LowPrice24h, ticker.Volume24h, ticker.PriceChangePercentage24h)
-                {
-                    QuoteVolume = ticker.Turnover24h
-                });
+                return HttpResult.Ok(result, 
+                    new SharedSpotTicker(
+                        ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, ticker.Symbol), 
+                        ticker.Symbol,
+                        ticker.LastPrice, 
+                        ticker.HighPrice24h, 
+                        ticker.LowPrice24h,
+                        new SharedOrderQuantity(ticker.Volume24h, ticker.Turnover24h),
+                        ticker.PriceChangePercentage24h)
+                    {
+                    });
             }
         }
 
@@ -312,7 +334,7 @@ namespace Bybit.Net.Clients.V5
                 return HttpResult.Fail<SharedTrade[]>(result);
 
             return HttpResult.Ok(result, result.Data.List.Select(x =>
-            new SharedTrade(request.Symbol, x.Symbol, x.Quantity, x.Price, x.Timestamp)
+            new SharedTrade(request.Symbol, x.Symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
             {
                 Side = x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray());
@@ -1014,7 +1036,7 @@ namespace Bybit.Net.Clients.V5
                     symbol.LastPrice,
                     symbol.HighPrice24h,
                     symbol.LowPrice24h,
-                    symbol.Volume24h,
+                    new SharedOrderQuantity(symbol.Volume24h, symbol.Turnover24h),
                     symbol.PriceChangePercentage24h * 100)
                 {
                     IndexPrice = symbol.IndexPrice,
@@ -1039,7 +1061,14 @@ namespace Bybit.Net.Clients.V5
 
             return HttpResult.Ok(resultTicker,
                 resultTicker.Data.List.Select(x =>
-             new SharedFuturesTicker(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice24h, x.LowPrice24h, x.Volume24h, x.PriceChangePercentage24h * 100)
+             new SharedFuturesTicker(
+                 ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol),
+                 x.Symbol,
+                 x.LastPrice,
+                 x.HighPrice24h,
+                 x.LowPrice24h,
+                 new SharedOrderQuantity(x.Volume24h, x.Turnover24h),
+                 x.PriceChangePercentage24h * 100)
              {
                  FundingRate = x.FundingRate,
                  IndexPrice = x.IndexPrice,

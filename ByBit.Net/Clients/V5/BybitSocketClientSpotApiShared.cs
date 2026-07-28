@@ -37,9 +37,16 @@ namespace Bybit.Net.Clients.V5
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)) : [request.Symbol!.GetSymbol(FormatSymbol)];
             var result = await SubscribeToTickerUpdatesAsync(symbols, update =>
             {
-                handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24h, update.Data.LowPrice24h, update.Data.Volume24h, update.Data.PricePercentage24h * 100)
+                handler(update.ToType(
+                    new SharedSpotTicker(
+                        ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Data.Symbol),
+                        update.Data.Symbol, 
+                        update.Data.LastPrice, 
+                        update.Data.HighPrice24h,
+                        update.Data.LowPrice24h,
+                        new SharedOrderQuantity(update.Data.Volume24h, update.Data.Turnover24h),
+                        update.Data.PricePercentage24h * 100)
                 {
-                    QuoteVolume = update.Data.Turnover24h
                 }));
             }, ct).ConfigureAwait(false);
 
@@ -62,7 +69,7 @@ namespace Bybit.Net.Clients.V5
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)) : [request.Symbol!.GetSymbol(FormatSymbol)];
             var result = await SubscribeToTradeUpdatesAsync(symbols, update => handler(update.ToType(update.Data.Select(x => 
-            new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), x.Symbol, x.Quantity, x.Price, x.Timestamp)
+            new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), x.Symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
             {
                 Side = x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray())), ct).ConfigureAwait(false);
@@ -134,8 +141,19 @@ namespace Bybit.Net.Clients.V5
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)) : [request.Symbol!.GetSymbol(FormatSymbol)];
             var result = await SubscribeToKlineUpdatesAsync(symbols, interval, update =>
             {
-                foreach(var item in update.Data)
-                    handler(update.ToType(new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol), update.Symbol!, item.StartTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
+                foreach (var item in update.Data)
+                {
+                    handler(update.ToType(
+                        new SharedKline(
+                            ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol),
+                            update.Symbol!,
+                            item.StartTime,
+                            item.ClosePrice, 
+                            item.HighPrice, 
+                            item.LowPrice, 
+                            item.OpenPrice, 
+                            new SharedOrderQuantity(item.Volume, item.Turnover))));
+                }
             }, ct).ConfigureAwait(false);
 
             return result;
