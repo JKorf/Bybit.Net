@@ -864,12 +864,18 @@ namespace Bybit.Net.Clients.V5
 
         private SharedTransferStatus ParseTransferStatus(DepositStatus status)
         {
-            if (status == DepositStatus.Success)
+            if (status == DepositStatus.Success || status == DepositStatus.SuccessAfterRollback || status == DepositStatus.CreditedToFundingPool)
                 return SharedTransferStatus.Completed;
             if (status == DepositStatus.DepositFailed)
                 return SharedTransferStatus.Failed;
-            if (status == DepositStatus.Processing || status == DepositStatus.ToBeConfirmed)
+            if (status == DepositStatus.Processing
+                || status == DepositStatus.ToBeConfirmed
+                || status == DepositStatus.PendingCreditToFundingPool
+                || status == DepositStatus.PendingAfterRollback
+                || status == DepositStatus.RollbackProcessing)
+            {
                 return SharedTransferStatus.InProgress;
+            }
 
             return SharedTransferStatus.Unknown;
         }
