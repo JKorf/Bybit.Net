@@ -53,6 +53,11 @@ namespace Bybit.Net.Enums
         /// ["<c>FutureSpread</c>"] Spread trade
         /// </summary>
         [Map("FutureSpread")]
-        FutureSpread
+        FutureSpread,
+        /// <summary>
+        /// ["<c>CorporateAction</c>"] Stock split or reverse stock split
+        /// </summary>
+        [Map("CorporateAction")]
+        CorporateAction
     }
 }
