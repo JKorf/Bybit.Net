@@ -125,6 +125,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="stopLossTakeProfitMode">StopLoss / TakeProfit mode</param>
         /// <param name="selfMatchPreventionType">Self match prevention type</param>
         /// <param name="marketUnit">The unit for qty when creating spot market orders for unified trading account</param>
+        /// <param name="slippageToleranceType">["<c>slippageToleranceType</c>"] Slippage tolerance Type for market orders</param>
+        /// <param name="slippageTolerance">["<c>slippageTolerance</c>"] Slippage tolerance value</param>
+        /// <param name="bboSideType">["<c>bboSideType</c>"] BBO side type</param>
+        /// <param name="bboLevel">["<c>bboLevel</c>"] BBO level (1 - 5)</param>
         /// <param name="rpiTakerAccess">["<c>rpiTakerAccess</c>"] When true matches against RPI quotes</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -157,6 +161,10 @@ namespace Bybit.Net.Interfaces.Clients.V5
             StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             SelfMatchPreventionType? selfMatchPreventionType = null,
             MarketUnit? marketUnit = null,
+            SlippageToleranceType? slippageToleranceType = null,
+            decimal? slippageTolerance = null,
+            BboSideType? bboSideType = null,
+            int? bboLevel = null,
             bool? rpiTakerAccess = null,
             CancellationToken ct = default);
 

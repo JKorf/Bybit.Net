@@ -295,6 +295,10 @@ namespace Bybit.Net.Clients.V5
             StopLossTakeProfitMode? stopLossTakeProfitMode = null,
             SelfMatchPreventionType? selfMatchPreventionType = null,
             MarketUnit? marketUnit = null,
+            SlippageToleranceType? slippageToleranceType = null,
+            decimal? slippageTolerance = null,
+            BboSideType? bboSideType = null,
+            int? bboLevel = null,
             bool? rpiTakerAccess = null,
             CancellationToken ct = default)
         {

@@ -154,6 +154,26 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("isLeverage"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? IsLeverage { get; set; }
         /// <summary>
+        /// Slippage tolerance type
+        /// </summary>
+        [JsonPropertyName("slippageToleranceType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public SlippageToleranceType? SlippageToleranceType { get; set; }
+        /// <summary>
+        /// Slippage tolerance value
+        /// </summary>
+        [JsonPropertyName("slippageTolerance"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(DecimalStringWriterConverter))]
+        public decimal? SlippageTolerance { get; set; }
+        /// <summary>
+        /// BBO side type
+        /// </summary>
+        [JsonPropertyName("bboSideType"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public BboSideType? BboSideType { get; set; }
+        /// <summary>
+        /// BBO level
+        /// </summary>
+        [JsonPropertyName("bboLevel"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public int? BboLevel { get; set; }
+        /// <summary>
         /// When true matches against RPI quotes
         /// </summary>
         [JsonPropertyName("rpiTakerAccess"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
