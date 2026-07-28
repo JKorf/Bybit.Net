@@ -227,6 +227,23 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Full Order Book
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitOrderbook>> GetFullOrderbookAsync(Category category, string symbol, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings)
+            {
+                { "category", EnumConverter.GetString(category) },
+                { "symbol", symbol }
+            };
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/market/full_orderbook", BybitExchange.RateLimiter.BybitRest, 1, false);
+            return await _baseClient.SendAsync<BybitOrderbook>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get RPI Order Book
 
         /// <inheritdoc />

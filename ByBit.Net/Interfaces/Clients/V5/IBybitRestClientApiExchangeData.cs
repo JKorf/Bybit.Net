@@ -284,6 +284,21 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<HttpResult<BybitOrderbook>> GetOrderbookAsync(Category category, string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get the full order book, up to 10000 entries
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/market/full-ob" /><br />
+        /// Endpoint:<br />
+        /// GET /v5/market/full_orderbook
+        /// </para>
+        /// </summary>
+        /// <param name="category">["<c>category</c>"] Category</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BybitOrderbook>> GetFullOrderbookAsync(Category category, string symbol, CancellationToken ct = default);
+
+        /// <summary>
         /// Get RPI order book
         /// <para>
         /// Docs:<br />
