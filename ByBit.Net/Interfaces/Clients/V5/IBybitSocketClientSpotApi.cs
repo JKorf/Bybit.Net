@@ -76,5 +76,26 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="handler">Data handler</param>
         /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
         Task<WebSocketResult<UpdateSubscription>> SubscribeToPriceLimitUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOrderPriceLimit>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to order book delta updates for the full book
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/full-ob" /></para>
+        /// </summary>
+        /// <param name="symbols">The symbols to subscribe, for example `ETHUSDT`</param>
+        /// <param name="updateHandler">Update handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        /// <returns></returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderbookDeltaUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to order book delta updates for the full book
+        /// <para><a href="https://bybit-exchange.github.io/docs/v5/websocket/public/full-ob" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
+        /// <param name="updateHandler">Update handler</param>
+        /// <param name="ct">Cancellation token. Cancelling will cancel the subscription</param>
+        /// <returns></returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderbookDeltaUpdatesAsync(string symbol, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default);
+
     }
 }

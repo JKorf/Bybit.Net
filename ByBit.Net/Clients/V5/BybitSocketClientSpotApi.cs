@@ -101,5 +101,17 @@ namespace Bybit.Net.Clients.V5
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
+
+        /// <inheritdoc />
+        public virtual Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderbookDeltaUpdatesAsync(string symbol, Action<DataEvent<BybitOrderbook>> updateHandler, CancellationToken ct = default)
+            => SubscribeToOrderbookDeltaUpdatesAsync(new string[] { symbol }, updateHandler, ct);
+
+        /// <inheritdoc />
+        public async virtual Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderbookDeltaUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BybitOrderbook>> handler, CancellationToken ct = default)
+        {
+            var subscription = new BybitOrderBookSubscription(_logger, this, symbols.Select(s => $"orderbook.full.{s}").ToArray(), handler);
+            return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
+        }
+
     }
 }

@@ -96,7 +96,7 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("batchReleaseLimit")]
         public decimal DepositLimit { get; set; }
         /// <summary>
-        /// ["<c>depositType</c>"] The deposit type. 0: normal deposit, 10: the deposit reaches daily deposit limit, 20: abnormal deposit
+        /// ["<c>depositType</c>"] The deposit type. 0: normal deposit, 10: the deposit reaches daily deposit limit, 20: abnormal deposit, 50: The deposit has been blocked due to an account or compliance restriction, pls go to web to withdraw the funds
         /// </summary>
         [JsonPropertyName("depositType")]
         public int DepositType { get; set; }
