@@ -62,5 +62,10 @@ namespace Bybit.Net.Objects.Models.V5
         public decimal AdlStopThreshold { get; set; }
         [JsonInclude, JsonPropertyName("adl_sr")]
         internal decimal WSAdlStopThreshold { set => AdlStopThreshold = value; }
+        /// <summary>
+        /// ["<c>maxBalance</c>"] Maximum balance
+        /// </summary>
+        [JsonPropertyName("maxBalance")]
+        public decimal? MaxBalance { get; set; }
     }
 }

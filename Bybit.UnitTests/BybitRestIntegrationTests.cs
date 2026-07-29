@@ -104,10 +104,10 @@ namespace Bybit.Net.UnitTests
             await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetDeliveryPriceAsync(Enums.Category.Linear, default, default, default, default, default, default), false, "result");
             await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetLongShortRatioAsync(Enums.Category.Linear, "ETHUSDT", Enums.DataPeriod.OneDay, default, default, default, default), false, "result.list");
             await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetOrderPriceLimitAsync("ETHUSDT", default, default), false, "result");
-            await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetSystemStatusAsync("ETHUSDT", default, default), false, "result");
-            await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetAdlAlertsAsync("ETHUSDT", default), false, "result");
+            await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetSystemStatusAsync("ETHUSDT", default, default), false, "result.list");
+            await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetAdlAlertsAsync("ETHUSDT", default), false, "result.list");
             await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetIndexPriceComponentsAsync("ETHUSDT", default), false, "result");
-            await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetFeeGroupsAsync(default, default), false, "result");
+            await RunAndCheckResult(warnings, client => client.V5Api.ExchangeData.GetFeeGroupsAsync(default, default), false, "result.list");
             foreach (var warning in warnings)
                 Assert.Warn(warning.Message);
         }
