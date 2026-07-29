@@ -204,6 +204,19 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 7.3.0 - 29 Jul 2026
+    * Updated CryptoExchange.Net to version 12.4.0
+    * Added calculation of AveragePrice on Shared order models if data is available and AveragePrice is not set
+    * Added DebuggerDisplay attributes to Result models
+    * Added AveragePrice property to SharedQuantity model
+    * Added slippageToleranceType, slippageTolerance, bboSideType and bboLevel parameters to websocket PlaceOrderAsync request
+    * Added socketClient.V5SpotApi.SubscribeToOrderbookDeltaUpdatesAsync subscription
+    * Added restClient.V5Api.ExchangeData.GetFullOrderbookAsync endpoint
+    * Added MaxBalance to BybitAdlAlert model
+    * Added CorporateAction value to TradeType enum
+    * Updated DepositStatus enum values
+    * Updated SharedFuturesTicker, SharedSpotTicker, SharedTrade and SharedKline to use SharedOrderQuantity for volumes/quantities
+
 * Version 7.2.0 - 21 Jul 2026
     * Updated CryptoExchange.Net to v12.2.0 
     * Added SpotSymbolCatalog to Shared ISpotSymbolRestClient interface
