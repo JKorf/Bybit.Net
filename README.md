@@ -85,6 +85,55 @@ var tickerSubscriptionResult = socketClient.V5SpotApi.SubscribeToTickerUpdatesAs
 
 For information on the clients, dependency injection, response processing and more see the [Bybit.Net documentation](https://cryptoexchange.jkorf.dev?library=Bybit.Net), [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Bybit.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
+## Shared / unified API
+
+The CryptoExchange.Net [Shared APIs](https://cryptoexchange.jkorf.dev/client-libs/shared) provide exchange-agnostic, unified interfaces for common operations such as retrieving tickers, order books and balances, placing orders, and subscribing to market updates.
+
+This allows the same application code to work with different exchange libraries. The supported Bybit API surfaces expose their shared functionality through a `SharedClient` property. Because support differs between exchanges and API surfaces, call `Discover()` to inspect the available trading modes, environments, endpoints, and subscriptions at runtime.
+
+### Supported shared interfaces
+
+| API | Type | Supported interfaces |
+|--|--|--|
+| `V5Api` | REST | `IAssetsRestClient`, `IBalanceRestClient`, `IBookTickerRestClient`, `IDepositRestClient`, `IFeeRestClient`, `IFundingRateRestClient`, `IFuturesOrderClientIdRestClient`, `IFuturesOrderRestClient`, `IFuturesSymbolRestClient`, `IFuturesTickerRestClient`, `IFuturesTpSlRestClient`, `IFuturesTriggerOrderRestClient`, `IIndexPriceKlineRestClient`, `IKlineRestClient`, `ILeverageRestClient`, `IMarkPriceKlineRestClient`, `IOpenInterestRestClient`, `IOrderBookRestClient`, `IPositionHistoryRestClient`, `IPositionModeRestClient`, `IRecentTradeRestClient`, `ISpotOrderClientIdRestClient`, `ISpotOrderRestClient`, `ISpotSymbolRestClient`, `ISpotTickerRestClient`, `ISpotTriggerOrderRestClient`, `ITransferRestClient`, `IWithdrawalRestClient`, `IWithdrawRestClient` |
+| `V5SpotApi` | WebSocket | `IBookTickerSocketClient`, `IKlineSocketClient`, `ITickerSocketClient`, `ITradeSocketClient` |
+| `V5LinearApi` | WebSocket | `IBookTickerSocketClient`, `IKlineSocketClient`, `ITickerSocketClient`, `ITradeSocketClient` |
+| `V5InverseApi` | WebSocket | `IBookTickerSocketClient`, `IKlineSocketClient`, `ITickerSocketClient`, `ITradeSocketClient` |
+| `V5PrivateApi` | WebSocket | `IBalanceSocketClient`, `IFuturesOrderSocketClient`, `IPositionSocketClient`, `ISpotOrderSocketClient`, `IUserTradeSocketClient` |
+
+### Discover supported functionality
+
+```csharp
+var sharedClient = new BybitRestClient().V5Api.SharedClient;
+var clientInfo = sharedClient.Discover();
+
+Console.WriteLine(clientInfo);
+```
+
+### Example
+
+```csharp
+using Bybit.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+
+var sharedClient = new BybitRestClient().V5Api.SharedClient;
+ISpotTickerRestClient tickerClient = sharedClient;
+
+var symbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
+var result = await tickerClient.GetSpotTickerAsync(
+    new GetTickerRequest(symbol));
+
+if (!result.Success)
+{
+    Console.WriteLine(result.Error);
+    return;
+}
+
+Console.WriteLine(result.Data.LastPrice);
+```
+
+The request and response models belong to `CryptoExchange.Net.SharedApis`, so the same pattern can be used with another exchange's `SharedClient`.
+
 ## AI documentation
 This repository includes AI-focused guidance for generating correct Bybit.Net code:
 
@@ -195,10 +244,8 @@ If you do not yet have an account please consider using this referal link to sig
 [Link](https://partner.bybit.com/b/jkorf)
 
 ### Donate
-Make a one time donation in a crypto currency of your choice. If you prefer to donate a currency not listed here please contact me.
-
-**Btc**:  bc1q277a5n54s2l2mzlu778ef7lpkwhjhyvghuv8qf  
-**Eth**:  0xcb1b63aCF9fef2755eBf4a0506250074496Ad5b7   
+Make a one time donation in a crypto currency of your choice. If you prefer to donate in a different currency or network send me a message.
+   
 **USDT (TRX)**  TKigKeJPXZYyMVDgMyXxMf17MWYia92Rjd 
 
 ### Sponsor
