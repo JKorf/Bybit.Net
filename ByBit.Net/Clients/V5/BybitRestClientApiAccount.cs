@@ -838,6 +838,7 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("accountType", EnumConverter.GetString(accountType));
             parameters.Add("forceChain", forceNetwork == null ? null : forceNetwork.Value ? 1 : 0);
             parameters.Add("feeType", feeType == null ? null : feeType.Value ? 1 : 0);
+            parameters.Add("requestId", requestId);
             parameters.Add("questionnaire", questionnaire?.Serialize());
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/asset/withdraw/create", BybitExchange.RateLimiter.BybitRest, 1, true,
