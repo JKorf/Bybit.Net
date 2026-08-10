@@ -1,6 +1,7 @@
 POST
 /v5/asset/withdraw/create
 true
+BodyParams: {"requestId":"transfer123"}
 {
     "retCode": 0,
     "retMsg": "success",
