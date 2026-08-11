@@ -1,9 +1,10 @@
 # ![.Bybit.Net](https://github.com/JKorf/Bybit.Net/blob/main/ByBit.Net/Icon/icon.png?raw=true) Bybit.Net
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bybit.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bybit.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
- ![Since](https://img.shields.io/badge/since-2021-brightgreen?style=for-the-badge)
+ ![Since](https://img.shields.io/badge/since-2021-brightgreen?style=for-the-badge) [![Docs](https://img.shields.io/badge/Docs-Bybit.Net-1b7f50?style=for-the-badge)](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Bybit.Net)
  
 Bybit.Net is a strongly typed client library for accessing the [Bybit REST and Websocket API](https://bybit-exchange.github.io/docs/spot/#t-introduction).
+
 ## Features
 * Response data is mapped to descriptive models
 * Input parameters and response values are mapped to discriptive enum values where possible
@@ -15,6 +16,17 @@ Bybit.Net is a strongly typed client library for accessing the [Bybit REST and W
 * Support for different environments (production, testnet, Hongkong, The Netherlands, Turkey, ..)
 * Easy integration with other exchange client based on the CryptoExchange.Net base library
 * Native AOT support
+
+## Documentation
+
+The [Bybit.Net documentation](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Bybit.Net) is the main resource for installing, configuring, and using the library.
+
+| Resource | Description |
+|--|--|
+| [Client guide](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Bybit.Net) | Installation, REST and WebSocket clients, authentication, dependency injection, error handling, and advanced features |
+| [Examples](https://cryptoexchange.jkorf.dev/docs/exchange-clients/examples?library=Bybit.Net) | Common REST and WebSocket operations |
+| [API reference](https://cryptoexchange.jkorf.dev/docs/exchange-clients/reference?library=Bybit.Net) | Client interfaces, methods, and properties |
+| [Shared API guide](https://cryptoexchange.jkorf.dev/docs/shared-api) | Common interfaces and models for working with multiple exchanges |
 
 ## Benchmark
 Performance is a core focus. For a benchmark comparing Bybit.Net performance to CCXT and Bybit.Api, see [docs/bybit-net-benchmark.md](docs/bybit-net-benchmark.md).
@@ -83,11 +95,11 @@ var tickerSubscriptionResult = socketClient.V5SpotApi.SubscribeToTickerUpdatesAs
 });
 ```
 
-For information on the clients, dependency injection, response processing and more see the [Bybit.Net documentation](https://cryptoexchange.jkorf.dev?library=Bybit.Net), [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Bybit.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
+For more examples and explanations, continue with the [Bybit.Net documentation](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Bybit.Net) or browse the [compilable repository examples](https://github.com/JKorf/Bybit.Net/tree/main/Examples).
 
 ## Shared / unified API
 
-The CryptoExchange.Net [Shared APIs](https://cryptoexchange.jkorf.dev/client-libs/shared) provide exchange-agnostic, unified interfaces for common operations such as retrieving tickers, order books and balances, placing orders, and subscribing to market updates.
+The CryptoExchange.Net [Shared APIs](https://cryptoexchange.jkorf.dev/docs/shared-api) provide exchange-agnostic, unified interfaces for common operations such as retrieving tickers, order books and balances, placing orders, and subscribing to market updates.
 
 This allows the same application code to work with different exchange libraries. The supported Bybit API surfaces expose their shared functionality through a `SharedClient` property. Because support differs between exchanges and API surfaces, call `Discover()` to inspect the available trading modes, environments, endpoints, and subscriptions at runtime.
 
@@ -148,7 +160,7 @@ See [cryptoexchange-skills-hub](https://github.com/JKorf/cryptoexchange-skills-h
 ## CryptoExchange.Net
 Bybit.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
 
-CryptoExchange.Net also allows for [easy access to different exchange API's](https://cryptoexchange.jkorf.dev/client-libs/shared).
+CryptoExchange.Net also provides [shared access to different exchange APIs](https://cryptoexchange.jkorf.dev/docs/shared-api).
 
 |Exchange|Repository|Nuget|
 |--|--|--|
