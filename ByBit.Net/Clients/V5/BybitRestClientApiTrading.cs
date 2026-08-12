@@ -113,7 +113,7 @@ namespace Bybit.Net.Clients.V5
             var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
             var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/order/create", BybitExchange.RateLimiter.BybitRest, 1, true,
-                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "PlaceOrder" + categoryIdentifier);
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "PlaceOrder" + categoryIdentifier + _baseClient.BaseAddress);
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -218,7 +218,7 @@ namespace Bybit.Net.Clients.V5
             var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
             var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/order/create-batch", BybitExchange.RateLimiter.BybitRest, 1, true,
-                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "PlaceOrderBatch" + categoryIdentifier);
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "PlaceOrderBatch" + categoryIdentifier + _baseClient.BaseAddress);
             var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<CallResult<BybitBatchOrderId>[]>(result);
@@ -291,7 +291,7 @@ namespace Bybit.Net.Clients.V5
 
             var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/order/amend", BybitExchange.RateLimiter.BybitRest, 1, true,
-                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "EditOrder" + categoryIdentifier);
+                new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "EditOrder" + categoryIdentifier + _baseClient.BaseAddress);
             return await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -315,7 +315,7 @@ namespace Bybit.Net.Clients.V5
             var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
             var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/order/amend-batch", BybitExchange.RateLimiter.BybitRest, 1, true,
-                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "EditMultiple" + categoryIdentifier);
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "EditMultiple" + categoryIdentifier + _baseClient.BaseAddress);
             var result = await _baseClient.SendRawAsync<BybitList<BybitBatchOrderId>, BybitList<BybitBatchResult>>(request, parameters, ct, singleLimiterWeight: orderRequests.Count()).ConfigureAwait(false);
             if (!result.Success || result.Data == null)
                 return HttpResult.Fail<BybitBatchResult<BybitBatchOrderId>[]>(result);
@@ -369,7 +369,7 @@ namespace Bybit.Net.Clients.V5
             var limit = category == Category.Spot ? limits.limitSpot : limits.limitOther;
             var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/order/cancel", BybitExchange.RateLimiter.BybitRest, 1, true,
-                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "CancelOrder" + categoryIdentifier);
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "CancelOrder" + categoryIdentifier + _baseClient.BaseAddress);
             var result = await _baseClient.SendAsync<BybitOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -485,7 +485,7 @@ namespace Bybit.Net.Clients.V5
             var categoryIdentifier = category == Category.Spot ? "Spot" : category == Category.Option ? "Option" : "Futures";
             var limit = category == Category.Spot ? 20 : category == Category.Option ? 1 : 10;
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/order/cancel-all", BybitExchange.RateLimiter.BybitRest, 1, true,
-                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "CancelAll" + categoryIdentifier);
+                new SingleLimitGuard(limit, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding), identifier: "CancelAll" + categoryIdentifier + _baseClient.BaseAddress);
             return await _baseClient.SendAsync<BybitResponse<BybitOrderId>>(request, parameters, ct).ConfigureAwait(false);
         }
 
