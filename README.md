@@ -264,6 +264,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 7.3.1 - 12 Aug 2026
+    * Added requestId parameter to WithdrawAsync method
+    * Fixed request identifier key not containing environment causing issues in multi-user environments
+
 * Version 7.3.0 - 29 Jul 2026
     * Updated CryptoExchange.Net to version 12.4.0
     * Added calculation of AveragePrice on Shared order models if data is available and AveragePrice is not set
