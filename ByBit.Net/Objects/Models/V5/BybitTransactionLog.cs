@@ -118,5 +118,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("orderLinkId")]
         public string? ClientOrderId { get; set; }
+        /// <summary>
+        /// ["<c>displayType</c>"] Display type
+        /// </summary>
+        [JsonPropertyName("displayType")]
+        public string? DisplayType { get; set; }
     }
 }
