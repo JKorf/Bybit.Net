@@ -74,6 +74,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("innovation")]
         public bool Innovation { get; set; }
+        /// <summary>
+        /// ["<c>isPublicRpi</c>"] Indicates whether RPI quoting is enabled for this symbol.
+        /// </summary>
+        [JsonPropertyName("isPublicRpi")]
+        public bool? IsPublicRpi { get; set; }
     }
 
     /// <summary>
