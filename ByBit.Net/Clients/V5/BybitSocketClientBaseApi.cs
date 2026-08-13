@@ -51,6 +51,7 @@ namespace Bybit.Net.Clients.V5
             KeepAliveInterval = TimeSpan.Zero;
 
             MessageSendSizeLimit = 21000;
+
         }
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BybitExchange._serializerContext));
@@ -207,6 +208,14 @@ namespace Bybit.Net.Clients.V5
 
             var subscription = new BybitSubscription<BybitRpiOrderbook>(_logger, this, symbols.Select(s => $"orderbook.rpi.{s}").ToArray(), internalHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
+        }
+
+        protected override WebSocketParameters GetWebSocketParameters(string address)
+        {
+            var parameters = base.GetWebSocketParameters(address);
+            if (ClientOptions.Environment.Name == BybitEnvironment.Brazil.Name)
+                parameters.Headers.Add("x-site-id", "BRA_BTL");
+            return parameters;
         }
     }
 }

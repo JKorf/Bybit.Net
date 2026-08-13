@@ -70,6 +70,9 @@ namespace Bybit.Net.Clients.V5
 
             RequestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;
+
+            if (options.Environment.Name == BybitEnvironment.Brazil.Name)
+                StandardRequestHeaders.Add("x-site-id", "BRA_BTL");
         }
         #endregion
 

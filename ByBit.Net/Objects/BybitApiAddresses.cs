@@ -105,6 +105,15 @@
         };
 
         /// <summary>
+        /// The addresses to connect to the Bybit main net for users from Brazil
+        /// </summary>
+        public static BybitApiAddresses Brazil = new BybitApiAddresses
+        {
+            RestBaseAddress = "https://api.bybit.com",
+            SocketBaseAddress = "wss://stream.bybit.com"
+        };
+
+        /// <summary>
         /// The addresses to connect to the Bybit demo trading environment
         /// </summary>
         public static BybitApiAddresses DemoTrading = new BybitApiAddresses
