@@ -294,6 +294,10 @@ namespace Bybit.Net.Enums
         /// <summary>
         /// </summary>
         [Map("DEFI_INVESTMENT_REDEMPTION")]
-        DefiInvestmentTransferIn
+        DefiInvestmentTransferIn,
+        /// <summary>
+        /// </summary>
+        [Map("DIVIDEND_SETTLEMENT")]
+        DividendSettlement,
     }
 }
