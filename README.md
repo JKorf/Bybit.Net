@@ -264,6 +264,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 7.4.0 - 14 Aug 2026
+    * Added IsPublicRpi to BybitSpotSymbol and BybitLinearInverseSymbol models
+    * Added Brazil environment
+    * Added DividendSettlement value to TransactionLogType Enum
+    * Added DisplayType property to BybitTransactionLog model
+
 * Version 7.3.1 - 12 Aug 2026
     * Added requestId parameter to WithdrawAsync method
     * Fixed request identifier key not containing environment causing issues in multi-user environments
