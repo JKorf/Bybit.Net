@@ -75,7 +75,7 @@ var order = await restClient.V5Api.Trading.PlaceOrderAsync(
 
 ## Result handling
 
-All REST calls return `HttpResult<T>`, WebSocket calls return `WebSocketResult<T>`, and shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`.
+REST calls return `HttpResult<T>`, WebSocket subscriptions return `WebSocketResult<T>`, shared WebSocket order management returns `QueryResult<T>`, and shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`.
 
 ```csharp
 if (!spotTicker.Success)

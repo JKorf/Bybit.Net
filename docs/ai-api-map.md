@@ -190,7 +190,7 @@ var cancel = await restClient.V5Api.Trading.CancelOrderAsync(
 | `socketClient.V5InverseApi` | Inverse derivatives public streams |
 | `socketClient.V5OptionsApi` | Options public streams |
 | `socketClient.V5SpreadApi` | Spread public streams |
-| `socketClient.V5PrivateApi` | Private account/order/position/trade/wallet streams and WebSocket trading |
+| `socketClient.V5PrivateApi` | Private account/order/position/trade/wallet streams, native WebSocket trading, and shared spot/futures order management via `.SharedClient` |
 
 ## WebSocket Patterns
 
@@ -242,6 +242,12 @@ Shared non-I/O symbol/cache helpers:
 
 ```csharp
 ExchangeCallResult<T>
+```
+
+Shared WebSocket order placement/cancellation:
+
+```csharp
+QueryResult<SharedId>
 ```
 
 Pattern:

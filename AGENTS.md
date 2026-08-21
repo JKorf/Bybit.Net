@@ -54,7 +54,7 @@ var restClient = new BybitRestClient(options =>
 
 ## Core Pattern: Result Handling
 
-REST methods return `HttpResult<T>`. WebSocket methods return `WebSocketResult<UpdateSubscription>` for subscriptions. Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`. Always check `.Success` before reading `.Data`.
+REST methods return `HttpResult<T>`. WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`; shared WebSocket order management returns `QueryResult<T>`. Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`. Always check `.Success` before reading `.Data`.
 
 ```csharp
 var result = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");

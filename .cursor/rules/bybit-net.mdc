@@ -26,7 +26,7 @@ For public market data only, no credentials are needed: `new BybitRestClient()`.
 
 ## Result pattern
 
-All methods return `WebCallResult<T>` for REST or `CallResult<T>` for WebSocket operations. Always check `.Success` before reading `.Data`:
+REST methods return `HttpResult<T>`, WebSocket subscriptions return `WebSocketResult<T>`, and shared WebSocket order management returns `QueryResult<T>`. Always check `.Success` before reading `.Data`:
 
 ```csharp
 var ticker = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
@@ -96,7 +96,7 @@ Shared spot/futures symbols include display names and typed base/quote asset met
 - Never invent `SpotApi`, `UsdFuturesApi`, `CoinFuturesApi`, or `GeneralApi` roots for Bybit.Net.
 - Never use `.Result` or `.Wait()`; use async methods with `await`.
 - Never instantiate clients per request; reuse clients or use DI.
-- Never skip checking `WebCallResult.Success` or `CallResult.Success`.
+- Never skip checking result `.Success`.
 - Never use passphrase credentials for Bybit HMAC authentication.
 - Never use non-Bybit symbol formats such as `ETH-USDT`, `ETH_USDT`, `ETH/USD`, or `tETHUSD`.
 - Always use the V5 client roots and the correct product category.

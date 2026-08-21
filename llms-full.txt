@@ -4,8 +4,8 @@
 
 Bybit.Net is a strongly typed .NET client library for the Bybit REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket subscription patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 7.4.0.
-CryptoExchange.Net dependency: 12.2.0.
+Current package version in this repository: 7.5.0.
+CryptoExchange.Net dependency: 12.5.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
@@ -29,7 +29,8 @@ Primary documentation:
 - Bybit HMAC credentials are key and secret. Do not include an API passphrase.
 - Always check `.Success` before reading `.Data`.
 - REST methods return `HttpResult<T>` or `HttpResult`.
-- WebSocket subscriptions and socket API requests return `WebSocketResult<T>` or `WebSocketResult`.
+- WebSocket subscriptions and native socket API requests return `WebSocketResult<T>` or `WebSocketResult`.
+- Shared WebSocket order management returns `QueryResult<T>`.
 - Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
@@ -774,6 +775,8 @@ var linearShared = socketClient.V5LinearApi.SharedClient;
 var inverseShared = socketClient.V5InverseApi.SharedClient;
 var privateShared = socketClient.V5PrivateApi.SharedClient;
 ```
+
+The private shared client implements `ISpotOrderManagementSocketClient` and `IFuturesOrderManagementSocketClient`. Use `PlaceSpotOrderAsync` / `CancelSpotOrderAsync` or `PlaceFuturesOrderAsync` / `CancelFuturesOrderAsync` for exchange-agnostic WebSocket order management; these calls return `QueryResult<SharedId>`.
 
 For shared socket interface variables, keep the concrete `BybitSocketClient` so you can call:
 

@@ -28,7 +28,7 @@ var publicClient = new BybitRestClient();
 
 ## Result handling
 
-REST methods return `WebCallResult<T>` and WebSocket subscription methods return `CallResult<UpdateSubscription>`. Always check `.Success` before reading `.Data`; inspect `.Error` on failure.
+REST methods return `HttpResult<T>`, WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`, and shared WebSocket order management returns `QueryResult<T>`. Always check `.Success` before reading `.Data`; inspect `.Error` on failure.
 
 ## V5 API structure
 
@@ -72,7 +72,7 @@ await socketClient.UnsubscribeAsync(sub.Data);
 
 ## Cross-exchange
 
-For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient` properties, for example `new BybitRestClient().V5Api.SharedClient`. Shared spot/futures symbols include display names and typed base/quote asset metadata; the shared symbol clients support common request filtering and expose symbol catalogs.
+For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient` properties, for example `new BybitRestClient().V5Api.SharedClient`. `socketClient.V5PrivateApi.SharedClient` implements shared spot and futures order placement/cancellation over WebSocket. Shared spot/futures symbols include display names and typed base/quote asset metadata; the shared symbol clients support common request filtering and expose symbol catalogs.
 
 ## Avoid
 
