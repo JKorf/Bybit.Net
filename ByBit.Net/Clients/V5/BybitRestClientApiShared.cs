@@ -127,7 +127,7 @@ namespace Bybit.Net.Clients.V5
                 MinNotionalValue = s.LotSizeFilter?.MinOrderValue,
                 QuantityStep = s.LotSizeFilter?.BasePrecision,
                 PriceStep = s.PriceFilter?.TickSize,
-                DisplayName = s.Name
+                DisplayName = s.Name                
             };
 
             if (s.SymbolType == SymbolType.XStocks)
@@ -307,9 +307,9 @@ namespace Bybit.Net.Clients.V5
                 ExchangeSymbolCache.ParseSymbol(request.Symbol!.TradingMode == TradingMode.Spot ? _topicSpotId : _topicFuturesId, EnvironmentName, null, resultTicker.Data.Symbol),
                 resultTicker.Data.Symbol,
                 resultTicker.Data.Asks[0].Price,
-                resultTicker.Data.Asks[0].Quantity,
+                new SharedOrderQuantity(resultTicker.Data.Asks[0].Quantity),
                 resultTicker.Data.Bids[0].Price,
-                resultTicker.Data.Bids[0].Quantity));
+                new SharedOrderQuantity(resultTicker.Data.Bids[0].Quantity)));
         }
 
         #endregion
@@ -551,7 +551,7 @@ namespace Bybit.Net.Clients.V5
                 x.OrderId,
                 x.TradeId,
                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                x.Quantity,
+                new SharedOrderQuantity(x.Quantity),
                 x.Price,
                 x.Timestamp)
             {
@@ -602,7 +602,7 @@ namespace Bybit.Net.Clients.V5
                                 x.OrderId,
                                 x.TradeId,
                                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                                x.Quantity,
+                                new SharedOrderQuantity(x.Quantity),
                                 x.Price,
                                 x.Timestamp)
                             {
@@ -900,7 +900,7 @@ namespace Bybit.Net.Clients.V5
             if (!result.Success)
                 return HttpResult.Fail<SharedOrderBook>(result);
 
-            return HttpResult.Ok(result, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+            return HttpResult.Ok(result, new SharedOrderBook(SharedQuantityType.BaseAsset, result.Data.Asks, result.Data.Bids));
         }
 
         #endregion
@@ -1127,6 +1127,8 @@ namespace Bybit.Net.Clients.V5
                 MaxLongLeverage = s.LeverageFilter?.MaxLeverage,
                 MaxShortLeverage = s.LeverageFilter?.MaxLeverage,
                 DisplayName = !string.IsNullOrEmpty(s.DisplayName) ? s.DisplayName : s.Name,
+                LowerFundingCap = s.LowerFundingRate,
+                UpperFundingCap = s.UpperFundingRate,
             };
 
             if (result.TradingMode.IsInverse())
@@ -1139,7 +1141,9 @@ namespace Bybit.Net.Clients.V5
                 result.QuoteAssetSubType = SharedAssetSubType.StableCoin;
             }
 
-            if (s.SymbolType == SymbolType.Stock || s.SymbolType == SymbolType.XStocks)
+            if (s.SymbolType == SymbolType.Stock
+                || s.SymbolType == SymbolType.XStocks
+                || s.SymbolType == SymbolType.Etf)
             {
                 result.BaseAssetType = SharedAssetType.TradFi;
                 result.BaseAssetSubType = SharedAssetSubType.Equity;
@@ -1377,7 +1381,8 @@ namespace Bybit.Net.Clients.V5
             if (!result.Success)
                 return HttpResult.Fail<SharedOpenInterest>(result);
 
-            return HttpResult.Ok(result, new SharedOpenInterest(result.Data.List.Single().OpenInterest ?? 0));
+            var item = result.Data.List.SingleOrDefault();
+            return HttpResult.Ok(result, new SharedOpenInterest(new SharedOrderQuantity(item?.OpenInterest, item?.OpenInterestValue)));
         }
 
         #endregion
@@ -1647,7 +1652,7 @@ namespace Bybit.Net.Clients.V5
                 x.OrderId.ToString(),
                 x.TradeId,
                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                x.Quantity,
+                new SharedOrderQuantity(x.Quantity),
                 x.Price,
                 x.Timestamp)
             {
@@ -1700,7 +1705,7 @@ namespace Bybit.Net.Clients.V5
                                 x.OrderId.ToString(),
                                 x.TradeId,
                                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                                x.Quantity,
+                                new SharedOrderQuantity(x.Quantity),
                                 x.Price,
                                 x.Timestamp)
                             {
@@ -1760,17 +1765,22 @@ namespace Bybit.Net.Clients.V5
             if (!result.Success)
                 return HttpResult.Fail<SharedPosition[]>(result);
 
-            return HttpResult.Ok(result, result.Data.List.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol), x.Symbol, x.Quantity, x.UpdateTime)
-            {
-                UnrealizedPnl = x.UnrealizedPnl,
-                LiquidationPrice = x.LiquidationPrice,
-                AverageOpenPrice = x.AveragePrice,
-                Leverage = x.Leverage,
-                StopLossPrice = x.StopLoss,
-                TakeProfitPrice = x.TakeProfit,
-                PositionMode = x.PositionIdx == PositionIdx.OneWayMode ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
-                PositionSide = x.Side == PositionSide.None ? SharedPositionSide.Long : x.Side == PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long
-            }).ToArray());
+            return HttpResult.Ok(result, result.Data.List.Select(x => 
+                new SharedPosition(
+                    ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol),
+                    x.Symbol,
+                    new SharedOrderQuantity(x.Quantity), 
+                    x.UpdateTime)
+                {
+                    UnrealizedPnl = x.UnrealizedPnl,
+                    LiquidationPrice = x.LiquidationPrice,
+                    AverageOpenPrice = x.AveragePrice,
+                    Leverage = x.Leverage,
+                    StopLossPrice = x.StopLoss,
+                    TakeProfitPrice = x.TakeProfit,
+                    PositionMode = x.PositionIdx == PositionIdx.OneWayMode ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
+                    PositionSide = x.Side == PositionSide.None ? SharedPositionSide.Long : x.Side == PositionSide.Sell ? SharedPositionSide.Short : SharedPositionSide.Long
+                }).ToArray());
         }
 
         ClosePositionOptions IFuturesOrderRestClient.ClosePositionOptions { get; } = new ClosePositionOptions(_exchangeName, true)
@@ -1958,7 +1968,7 @@ namespace Bybit.Net.Clients.V5
                                 x.Side == OrderSide.Sell ? SharedPositionSide.Long : SharedPositionSide.Short,
                                 x.AverageEntryPrice,
                                 x.AverageExitPrice,
-                                x.ClosedSize,
+                                new SharedOrderQuantity(x.ClosedSize),
                                 x.ClosedPnl,
                                 x.UpdateTime)
                             {

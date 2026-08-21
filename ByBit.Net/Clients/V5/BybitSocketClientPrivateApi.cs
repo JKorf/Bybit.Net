@@ -82,20 +82,7 @@ namespace Bybit.Net.Clients.V5
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
-        {
-            if (tradingMode == TradingMode.Spot)
-                return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
-
-            if (tradingMode.IsLinear())
-            {
-                if (tradingMode.IsPerpetual())
-                    return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
-
-                return baseAsset.ToUpperInvariant() + "-" + deliverTime!.Value.ToString("ddMMMyy").ToUpperInvariant();
-            }
-
-            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
-        }
+            => BybitExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         public IBybitSocketClientPrivateApiShared SharedClient => this;
 

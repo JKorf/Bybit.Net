@@ -10,7 +10,9 @@ namespace Bybit.Net.Interfaces.Clients.V5
         ISpotOrderSocketClient,
         IFuturesOrderSocketClient,
         IUserTradeSocketClient,
-        IPositionSocketClient
+        IPositionSocketClient,
+        ISpotOrderManagementSocketClient,
+        IFuturesOrderManagementSocketClient
     {
     }
 }

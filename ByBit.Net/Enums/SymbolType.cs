@@ -39,5 +39,10 @@ namespace Bybit.Net.Enums
         /// </summary>
         [Map("forex")]
         Forex,
+        /// <summary>
+        /// ["<c>ETF</c>"] ETF
+        /// </summary>
+        [Map("ETF")]
+        Etf,
     }
 }

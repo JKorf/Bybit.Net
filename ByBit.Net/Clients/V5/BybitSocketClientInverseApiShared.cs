@@ -113,7 +113,14 @@ namespace Bybit.Net.Clients.V5
                     bestBidQuantity = bestBid.Quantity;
                 }
 
-                handler(update.ToType(new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, symbol), symbol, bestAskPrice, bestAskQuantity, bestBidPrice, bestBidQuantity)));
+                handler(update.ToType(
+                    new SharedBookTicker(
+                        ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, symbol), 
+                        symbol, 
+                        bestAskPrice,
+                        new SharedOrderQuantity(bestAskQuantity),
+                        bestBidPrice, 
+                        new SharedOrderQuantity(bestBidQuantity))));
             }, ct).ConfigureAwait(false);
 
             return result;
