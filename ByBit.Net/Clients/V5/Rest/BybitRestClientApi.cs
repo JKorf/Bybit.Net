@@ -26,10 +26,13 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitRestClientApi"/>
     internal partial class BybitRestClientApi : RestApiClient<BybitEnvironment, BybitAuthenticationProvider, BybitCredentials>, IBybitRestClientApi
     {
+        private readonly BybitRestClientSharedApi _sharedApi;
+
         protected override ErrorMapping ErrorMapping => BybitErrors.RestErrors;
 
         protected override IRestMessageHandler MessageHandler { get; } = new BybitRestMessageHandler(BybitErrors.RestErrors);
-        public IBybitRestClientApiShared SharedClient => this;
+        public IBybitRestClientApiShared SharedClient => _sharedApi;
+        public IBybitRestClientSharedApi SharedApi => _sharedApi;
 
         /// <summary>
         /// Options
@@ -67,6 +70,8 @@ namespace Bybit.Net.Clients.V5
             SubAccount = new BybitRestClientApiSubAccounts(this);
             CryptoLoan = new BybitRestClientApiCryptoLoan(this);
             Earn = new BybitRestClientApiEarn(this);
+
+            _sharedApi = new BybitRestClientSharedApi(this);
 
             RequestBodyFormat = RequestBodyFormat.Json;
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InUri;

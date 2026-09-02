@@ -1,0 +1,85 @@
+using Bybit.Net.Enums;
+using Bybit.Net.Interfaces.Clients;
+using Bybit.Net.Objects.Models.V5;
+using CryptoExchange.Net;
+using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.SharedApis;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Timers;
+
+namespace Bybit.Net.Clients.V5
+{
+    internal partial class BybitRestClientSharedApi
+    {
+        #region Tp/SL Client
+        public SetFuturesTpSlOptions SetFuturesTpSlOptions { get; } = new SetFuturesTpSlOptions(_exchangeName, true)
+        {
+            RequiredRequestParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription(nameof(PlaceFuturesTriggerOrderRequest.PositionMode), typeof(SharedPositionMode), "PositionMode the account is in", SharedPositionMode.OneWay)
+            }
+        };
+
+        public async Task<HttpResult<SharedId>> SetFuturesTpSlAsync(SetTpSlRequest request, CancellationToken ct)
+        {
+            var validationError = SetFuturesTpSlOptions.ValidateRequest(request, this);
+            if (validationError != null)
+                return HttpResult.Fail<SharedId>(Exchange, validationError);
+
+            var category = request.Symbol!.TradingMode.IsLinear() ? Category.Linear : Category.Inverse;
+            var result = await _api.Trading.SetTradingStopAsync(
+                category,
+                request.Symbol!.GetSymbol(FormatSymbol),
+                positionIdx: request.PositionMode == SharedPositionMode.OneWay ? PositionIdx.OneWayMode : request.PositionSide == SharedPositionSide.Long ? PositionIdx.BuyHedgeMode : PositionIdx.SellHedgeMode,
+                takeProfit: request.TpSlSide == SharedTpSlSide.TakeProfit ? request.TriggerPrice : null,
+                takeProfitOrderType: request.TpSlSide == SharedTpSlSide.TakeProfit ? OrderType.Market : null,
+                stopLoss: request.TpSlSide == SharedTpSlSide.StopLoss ? request.TriggerPrice : null,
+                stopLossOrderType: request.TpSlSide == SharedTpSlSide.StopLoss ? OrderType.Market : null,
+                stopLossTakeProfitMode: StopLossTakeProfitMode.Full,
+                ct: ct).ConfigureAwait(false);
+
+            if (!result.Success)
+                return HttpResult.Fail<SharedId>(result);
+
+            // Return
+            return HttpResult.Ok(result, new SharedId(""));
+        }
+
+        public CancelFuturesTpSlOptions CancelFuturesTpSlOptions { get; } = new CancelFuturesTpSlOptions(_exchangeName, true)
+        {
+            RequiredRequestParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription(nameof(CancelTpSlRequest.PositionMode), typeof(SharedPositionMode), "Position mode the account is in", SharedPositionMode.OneWay)
+            }
+        };
+
+        public async Task<HttpResult<bool>> CancelFuturesTpSlAsync(CancelTpSlRequest request, CancellationToken ct)
+        {
+            var validationError = CancelFuturesTpSlOptions.ValidateRequest(request, this);
+            if (validationError != null)
+                return HttpResult.Fail<bool>(Exchange, validationError);
+
+            var category = request.Symbol!.TradingMode.IsLinear() ? Category.Linear : Category.Inverse;
+            var result = await _api.Trading.SetTradingStopAsync(
+                category,
+                request.Symbol!.GetSymbol(FormatSymbol),
+                positionIdx: request.PositionMode == SharedPositionMode.OneWay ? PositionIdx.OneWayMode : request.PositionSide == SharedPositionSide.Long ? PositionIdx.BuyHedgeMode : PositionIdx.SellHedgeMode,
+                takeProfit: request.TpSlSide == SharedTpSlSide.TakeProfit ? 0 : null,
+                stopLoss: request.TpSlSide == SharedTpSlSide.StopLoss ? 0 : null,
+                ct: ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<bool>(result);
+
+            // Return
+            return HttpResult.Ok(result, true);
+        }
+
+        #endregion
+    }
+}

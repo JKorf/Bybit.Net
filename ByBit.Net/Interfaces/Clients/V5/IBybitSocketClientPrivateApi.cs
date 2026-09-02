@@ -16,9 +16,15 @@ namespace Bybit.Net.Interfaces.Clients.V5
     public interface IBybitSocketClientPrivateApi : ISocketApiClient<BybitCredentials>
     {
         /// <summary>
-        /// Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
+        /// [V1] Get the shared socket subscription client. For new implementations prefer using <see cref="SharedApi"/>
         /// </summary>
         IBybitSocketClientPrivateApiShared SharedClient { get; }
+        /// <summary>
+        /// [V2] Gets the aggregate Shared API interface. Shared APIs provide a common,
+        /// exchange-independent contract for accessing functionality across different
+        /// exchange client libraries.
+        /// </summary>
+        IBybitSocketClientPrivateSharedApi SharedApi { get; }
 
         /// <summary>
         /// Subscribe to Greek updates

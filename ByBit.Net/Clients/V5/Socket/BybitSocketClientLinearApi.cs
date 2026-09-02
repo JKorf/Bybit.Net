@@ -24,11 +24,15 @@ using System.Threading.Tasks;
 namespace Bybit.Net.Clients.V5
 {
     /// <inheritdoc cref="IBybitSocketClientLinearApi" />
-    internal partial class BybitSocketClientInverseApi : BybitSocketClientBaseApi, IBybitSocketClientInverseApi
+    internal partial class BybitSocketClientLinearApi : BybitSocketClientBaseApi, IBybitSocketClientLinearApi
     {
-        internal BybitSocketClientInverseApi(ILoggerFactory? loggerFactory, BybitSocketOptions options)
-            : base(loggerFactory, options, "/v5/public/inverse")
+        private readonly BybitSocketClientLinearSharedApi _sharedApi;
+
+        internal BybitSocketClientLinearApi(ILoggerFactory? loggerFactory, BybitSocketOptions options)
+            : base(loggerFactory, options, "/v5/public/linear")
         {
+            _sharedApi = new BybitSocketClientLinearSharedApi(this);
+
             RegisterPeriodicQuery(
                 "Heartbeat",
                 TimeSpan.FromSeconds(20),
@@ -43,9 +47,12 @@ namespace Bybit.Net.Clients.V5
                     }
                 });
         }
-        public IBybitSocketClientInverseApiShared SharedClient => this;
+
+        public IBybitSocketClientLinearApiShared SharedClient => _sharedApi;
+        public IBybitSocketClientLinearSharedApi SharedApi => _sharedApi;
+
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BybitSocketMessageHandler1();
-        
+
         /// <inheritdoc />
         public Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitLinearTickerUpdate>> handler, CancellationToken ct = default)
             => SubscribeToTickerUpdatesAsync(new string[] { symbol }, handler, ct);
@@ -95,7 +102,7 @@ namespace Bybit.Net.Clients.V5
         }
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToInsurancePoolUpdatesAsync(Action<DataEvent<BybitInsuranceUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToInsurancePoolUpdatesAsync(string contractAsset, Action<DataEvent<BybitInsuranceUpdate[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitInsuranceUpdate[]>>((receiveTime, originalData, data) =>
             {
@@ -109,12 +116,12 @@ namespace Bybit.Net.Clients.V5
                     );
             });
 
-            var subscription = new BybitSubscription<BybitInsuranceUpdate[]>(_logger, this, [$"insurance.inverse"], internalHandler);
+            var subscription = new BybitSubscription<BybitInsuranceUpdate[]>(_logger, this, [$"insurance.{contractAsset}"], internalHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async virtual Task<WebSocketResult<UpdateSubscription>> SubscribeToAdlAlertUpdatesAsync(Action<DataEvent<BybitAdlAlert[]>> handler, CancellationToken ct = default)
+        public async virtual Task<WebSocketResult<UpdateSubscription>> SubscribeToAdlAlertUpdatesAsync(string asset, Action<DataEvent<BybitAdlAlert[]>> handler, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, BybitSpotSocketEvent<BybitAdlAlert[]>>((receiveTime, originalData, data) =>
             {
@@ -129,13 +136,12 @@ namespace Bybit.Net.Clients.V5
                     );
             });
 
-            var subscription = new BybitSubscription<BybitAdlAlert[]>(_logger, this, ["adlAlert.inverse"], internalHandler);
+            var subscription = new BybitSubscription<BybitAdlAlert[]>(_logger, this, ["adlAlert." + asset], internalHandler);
             return await SubscribeAsync(_wsPublicAddress.AppendPath(_baseEndpoint), subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         protected override BybitAuthenticationProvider CreateAuthenticationProvider(BybitCredentials credentials)
             => new BybitAuthenticationProvider(credentials);
-        
     }
 }
