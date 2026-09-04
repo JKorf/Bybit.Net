@@ -118,6 +118,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 x.GetRequiredService<IOptions<BybitRestOptions>>(),
                 x.GetRequiredService<IOptions<BybitSocketOptions>>()));
 
+            services.AddTransient<IBybitSharedApiClient, BybitSharedApiClient>();
+
+            services.RegisterSharedApi(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5LinearApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5InverseApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5PrivateApi.SharedApi);
+
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5LinearApi.SharedClient);

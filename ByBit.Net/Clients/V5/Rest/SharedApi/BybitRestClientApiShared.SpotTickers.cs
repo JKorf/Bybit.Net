@@ -17,12 +17,16 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Spot Ticker client
+
+        #region Get All Spot Tickers
 
         Task<HttpResult<SharedSpotTicker[]>> ISpotTickerRestClient.GetSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
             => GetAllSpotTickersAsync(request, ct);
+
         GetAllSpotTickersOptions ISpotTickerRestClient.GetSpotTickersOptions => GetAllSpotTickersOptions;
 
+        async Task<ICallResult<SharedSpotTicker[]>> IGetAllSpotTickers.GetAllSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
+            => await GetAllSpotTickersAsync(request, ct).ConfigureAwait(false);
 
         public GetAllSpotTickersOptions GetAllSpotTickersOptions { get; } = new GetAllSpotTickersOptions(_exchangeName);
         public async Task<HttpResult<SharedSpotTicker[]>> GetAllSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
@@ -47,6 +51,13 @@ namespace Bybit.Net.Clients.V5
                 {
                 }).ToArray());
         }
+
+        #endregion
+
+        #region Get Spot Ticker
+
+        async Task<ICallResult<SharedSpotTicker>> IGetSpotTicker.GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
+            => await GetSpotTickerAsync(request, ct).ConfigureAwait(false);
 
         public GetSpotTickerOptions GetSpotTickerOptions { get; } = new GetSpotTickerOptions(_exchangeName);
         public async Task<HttpResult<SharedSpotTicker>> GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
@@ -99,5 +110,6 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
     }
 }

@@ -17,7 +17,11 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Futures Trigger Order Client
+        #region Place Futures Trigger Order
+
+        async Task<ICallResult<SharedId>> IPlaceFuturesTriggerOrder.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
+            => await PlaceFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public PlaceFuturesTriggerOrderOptions PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(_exchangeName, false)
         {
             RequiredRequestParameters = new List<ParameterDescription>
@@ -53,6 +57,13 @@ namespace Bybit.Net.Clients.V5
             // Return
             return HttpResult.Ok(result, new SharedId(result.Data.OrderId.ToString()));
         }
+
+        #endregion
+
+        #region Get Futures Trigger Order
+
+        async Task<ICallResult<SharedFuturesTriggerOrder>> IGetFuturesTriggerOrder.GetFuturesTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
 
         public GetFuturesTriggerOrderOptions GetFuturesTriggerOrderOptions { get; } = new GetFuturesTriggerOrderOptions(_exchangeName, true)
         {
@@ -97,6 +108,13 @@ namespace Bybit.Net.Clients.V5
             });
         }
 
+        #endregion
+
+        #region Cancel Futures Trigger Order
+
+        async Task<ICallResult<SharedId>> ICancelFuturesTriggerOrder.CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public CancelFuturesTriggerOrderOptions CancelFuturesTriggerOrderOptions { get; } = new CancelFuturesTriggerOrderOptions(_exchangeName, true);
         public async Task<HttpResult<SharedId>> CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
@@ -116,6 +134,8 @@ namespace Bybit.Net.Clients.V5
             return HttpResult.Ok(order, new SharedId(request.OrderId));
         }
 
+        #endregion
+
         private OrderSide GetTriggerOrderSide(PlaceFuturesTriggerOrderRequest request)
         {
             if (request.PositionSide == SharedPositionSide.Long)
@@ -123,6 +143,5 @@ namespace Bybit.Net.Clients.V5
 
             return request.OrderDirection == SharedTriggerOrderDirection.Enter ? OrderSide.Sell : OrderSide.Buy;
         }
-        #endregion
     }
 }

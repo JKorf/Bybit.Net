@@ -17,8 +17,12 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Leverage client
         public SharedLeverageSettingMode LeverageSettingType => SharedLeverageSettingMode.PerSymbol;
+
+        #region Get Leverage
+
+        async Task<ICallResult<SharedLeverage>> IGetLeverage.GetLeverageAsync(GetLeverageRequest request, CancellationToken ct)
+            => await GetLeverageAsync(request, ct).ConfigureAwait(false);
 
         public GetLeverageOptions GetLeverageOptions { get; } = new GetLeverageOptions(_exchangeName, true);
         public async Task<HttpResult<SharedLeverage>> GetLeverageAsync(GetLeverageRequest request, CancellationToken ct)
@@ -43,6 +47,13 @@ namespace Bybit.Net.Clients.V5
             });
         }
 
+        #endregion
+
+        #region Set Leverage
+
+        async Task<ICallResult<SharedLeverage>> ISetLeverage.SetLeverageAsync(SetLeverageRequest request, CancellationToken ct)
+            => await SetLeverageAsync(request, ct).ConfigureAwait(false);
+
         public SetLeverageOptions SetLeverageOptions { get; } = new SetLeverageOptions(_exchangeName);
         public async Task<HttpResult<SharedLeverage>> SetLeverageAsync(SetLeverageRequest request, CancellationToken ct)
         {
@@ -65,6 +76,7 @@ namespace Bybit.Net.Clients.V5
                 Side = request.Side
             });
         }
+
         #endregion
     }
 }

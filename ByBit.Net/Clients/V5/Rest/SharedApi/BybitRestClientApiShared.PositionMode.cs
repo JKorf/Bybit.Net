@@ -17,9 +17,14 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Position Mode client
+
+
+        #region Get Position Mode
 
         public SharedPositionModeSelection PositionModeSettingType => SharedPositionModeSelection.PerSymbol;
+
+        async Task<ICallResult<SharedPositionModeResult>> IGetPositionMode.GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
+            => await GetPositionModeAsync(request, ct).ConfigureAwait(false);
 
         public GetPositionModeOptions GetPositionModeOptions { get; } = new GetPositionModeOptions(_exchangeName);
         public async Task<HttpResult<SharedPositionModeResult>> GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
@@ -44,6 +49,13 @@ namespace Bybit.Net.Clients.V5
             return HttpResult.Ok(result, new SharedPositionModeResult(result.Data.List.Single().PositionIdx == PositionIdx.OneWayMode ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode));
         }
 
+        #endregion
+
+        #region Set Position Mode
+
+        async Task<ICallResult<SharedPositionModeResult>> ISetPositionMode.SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)
+            => await SetPositionModeAsync(request, ct).ConfigureAwait(false);
+
         public SetPositionModeOptions SetPositionModeOptions { get; } = new SetPositionModeOptions(_exchangeName);
         public async Task<HttpResult<SharedPositionModeResult>> SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)
         {
@@ -62,6 +74,8 @@ namespace Bybit.Net.Clients.V5
 
             return HttpResult.Ok(result, new SharedPositionModeResult(request.PositionMode));
         }
+
         #endregion
+
     }
 }

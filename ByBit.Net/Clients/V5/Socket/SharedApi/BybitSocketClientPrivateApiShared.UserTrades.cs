@@ -15,7 +15,7 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientPrivateSharedApi
     {
-        #region User Trade client
+        #region Subscribe User Trades
         public SubscribeUserTradeOptions SubscribeUserTradeOptions { get; } = new SubscribeUserTradeOptions(_exchangeName, false);
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(SubscribeUserTradeRequest request, Action<DataEvent<SharedUserTrade[]>> handler, CancellationToken ct)
         {

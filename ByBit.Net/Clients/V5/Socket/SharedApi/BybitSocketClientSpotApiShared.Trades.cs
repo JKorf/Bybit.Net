@@ -13,7 +13,7 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientSpotSharedApi
     {
-        #region Trade client
+        #region Subscribe Trades
 
         public SubscribeTradeOptions SubscribeTradeOptions { get; } = new SubscribeTradeOptions(_exchangeName, false)
         {

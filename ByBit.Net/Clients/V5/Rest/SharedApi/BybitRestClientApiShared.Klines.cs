@@ -17,7 +17,10 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Kline client
+        #region Get Klines
+
+        async Task<ICallResult<SharedKline[]>> IGetKlines.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetKlinesAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public GetKlinesOptions GetKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, false, true, true, 1000, false,
             SharedKlineInterval.OneMinute,
@@ -83,7 +86,10 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Mark Klines client
+        #region Get Mark Price Klines
+
+        async Task<ICallResult<SharedFuturesKline[]>> IGetMarkPriceKlines.GetMarkPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetMarkPriceKlinesAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public GetMarkPriceKlinesOptions GetMarkPriceKlinesOptions { get; } = new GetMarkPriceKlinesOptions(_exchangeName, false, true, true, 1000, false);
 
@@ -136,7 +142,10 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
-        #region Index Klines client
+        #region Get Index Price Klines
+
+        async Task<ICallResult<SharedFuturesKline[]>> IGetIndexPriceKlines.GetIndexPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetIndexPriceKlinesAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public GetIndexPriceKlinesOptions GetIndexPriceKlinesOptions { get; } = new GetIndexPriceKlinesOptions(_exchangeName, false, true, true, 50, false);
 
@@ -188,5 +197,6 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
     }
 }

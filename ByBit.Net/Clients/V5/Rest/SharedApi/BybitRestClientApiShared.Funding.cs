@@ -17,7 +17,11 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Funding Rate client
+        #region Get Funding Rate History
+
+        async Task<ICallResult<SharedFundingRate[]>> IGetFundingRateHistory.GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetFundingRateHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
+
         public GetFundingRateHistoryOptions GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(_exchangeName, false, true, true, 200, false);
 
         public async Task<HttpResult<SharedFundingRate[]>> GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
@@ -56,6 +60,7 @@ namespace Bybit.Net.Clients.V5
                         new SharedFundingRate(x.FundingRate, x.Timestamp))
                    .ToArray(), nextPageRequest);
         }
+
         #endregion
     }
 }

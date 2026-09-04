@@ -15,7 +15,7 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientPrivateSharedApi
     {
-        #region Spot Order client
+        #region Subscribe Spot Orders
 
         async Task<WebSocketResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<DataEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
             => await SubscribeToSpotOrderUpdatesAsync(request, x => handler(x.ToType<SharedSpotOrder[]>(x.Data)), ct).ConfigureAwait(false);
@@ -64,6 +64,8 @@ namespace Bybit.Net.Clients.V5
             return result;
         }
 
+        #endregion
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == OrderStatus.Active
@@ -88,9 +90,8 @@ namespace Bybit.Net.Clients.V5
 
             return SharedOrderStatus.Unknown;
         }
-        #endregion
 
-        #region Spot Order client
+        #region Place Spot Order
 
         public SharedFeeDeductionType SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         public SharedFeeAssetType SpotFeeAssetType => SharedFeeAssetType.OutputAsset;
@@ -135,6 +136,16 @@ namespace Bybit.Net.Clients.V5
             return QueryResult.Ok(result, new SharedId(result.Data.OrderId));
         }
 
+        #endregion
+
+        #region Cancel Spot Order
+
+        async Task<ICallResult<SharedId>> ICancelSpotOrder.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelSpotOrderAsync(request, ct).ConfigureAwait(false);
+
+        CancelSpotOrderOptions ICancelSpotOrder.CancelSpotOrderOptions
+            => CancelSpotOrderOptions;
+
         public CancelSpotOrderSocketOptions CancelSpotOrderOptions { get; } = new CancelSpotOrderSocketOptions(_exchangeName, true);
         public async Task<QueryResult<SharedId>> CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
@@ -149,6 +160,8 @@ namespace Bybit.Net.Clients.V5
             return QueryResult.Ok(order, new SharedId(order.Data.OrderId));
         }
 
+        #endregion
+
         private TimeInForce? GetTimeInForce(SharedOrderType type, SharedTimeInForce? tif)
         {
             if (type == SharedOrderType.LimitMaker) return TimeInForce.PostOnly;
@@ -159,7 +172,5 @@ namespace Bybit.Net.Clients.V5
 
             return null;
         }
-
-        #endregion
     }
 }

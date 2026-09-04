@@ -13,7 +13,7 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientInverseSharedApi
     {
-        #region Kline client
+        #region Subscribe Klines
         public SubscribeKlineOptions SubscribeKlineOptions { get; } = new SubscribeKlineOptions(_exchangeName, false,
             SharedKlineInterval.OneMinute,
             SharedKlineInterval.ThreeMinutes,

@@ -17,7 +17,10 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Transfer client
+        #region Transfer
+
+        async Task<ICallResult<SharedId>> ITransfer.TransferAsync(TransferRequest request, CancellationToken ct)
+            => await TransferAsync(request, ct).ConfigureAwait(false);
 
         public TransferOptions TransferOptions { get; } = new TransferOptions(_exchangeName, [
             SharedAccountType.Funding,
@@ -47,6 +50,8 @@ namespace Bybit.Net.Clients.V5
             return HttpResult.Ok(transfer, new SharedId(transfer.Data.TransferId));
         }
 
+        #endregion
+
         private AccountType? GetTransferType(SharedAccountType type)
         {
             if (type == SharedAccountType.Funding) return AccountType.Fund;
@@ -54,6 +59,5 @@ namespace Bybit.Net.Clients.V5
             return null;
         }
 
-        #endregion
     }
 }

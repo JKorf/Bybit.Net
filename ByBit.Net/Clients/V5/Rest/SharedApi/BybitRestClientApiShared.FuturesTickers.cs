@@ -17,7 +17,10 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Futures Ticker client
+        #region Get Futures Ticker
+
+        async Task<ICallResult<SharedFuturesTicker>> IGetFuturesTicker.GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)
+            => await GetFuturesTickerAsync(request, ct).ConfigureAwait(false);
 
         public GetFuturesTickerOptions GetFuturesTickerOptions { get; } = new GetFuturesTickerOptions(_exchangeName);
         public async Task<HttpResult<SharedFuturesTicker>> GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)
@@ -52,9 +55,17 @@ namespace Bybit.Net.Clients.V5
                 });
         }
 
+        #endregion
+
+        #region Get All Futures Tickers
+
         Task<HttpResult<SharedFuturesTicker[]>> IFuturesTickerRestClient.GetFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
             => GetAllFuturesTickersAsync(request, ct);
+
         GetAllFuturesTickersOptions IFuturesTickerRestClient.GetFuturesTickersOptions => GetAllFuturesTickersOptions;
+
+        async Task<ICallResult<SharedFuturesTicker[]>> IGetAllFuturesTickers.GetAllFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
+            => await GetAllFuturesTickersAsync(request, ct).ConfigureAwait(false);
 
         public GetAllFuturesTickersOptions GetAllFuturesTickersOptions { get; } = new GetAllFuturesTickersOptions(_exchangeName);
 
@@ -89,5 +100,6 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
     }
 }

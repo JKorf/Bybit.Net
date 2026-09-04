@@ -17,9 +17,12 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Futures Symbol client
+        #region Get Futures Symbols
 
         public SharedSymbolCatalog? FuturesSymbolCatalog => ExchangeSymbolCache.GetSymbolCatalog(_exchangeName, _topicFuturesId, _api.EnvironmentName, null);
+        async Task<ICallResult<SharedFuturesSymbol[]>> IGetFuturesSymbols.GetFuturesSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
+            => await GetFuturesSymbolsAsync(request, ct).ConfigureAwait(false);
+
         public GetFuturesSymbolsOptions GetFuturesSymbolsOptions { get; } = new GetFuturesSymbolsOptions(_exchangeName, false);
         public async Task<HttpResult<SharedFuturesSymbol[]>> GetFuturesSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
         {
@@ -39,6 +42,8 @@ namespace Bybit.Net.Clients.V5
             ExchangeSymbolCache.UpdateSymbolInfo(_topicFuturesId, _api.EnvironmentName, category.ToString(), data);
             return HttpResult.Ok(result, SharedUtils.ApplySymbolFilter(data, request));
         }
+
+        #endregion
 
         private SharedFuturesSymbol ParseSymbol(BybitLinearInverseSymbol s)
         {
@@ -137,6 +142,5 @@ namespace Bybit.Net.Clients.V5
 
             return ExchangeCallResult<bool>.Ok(Exchange, ExchangeSymbolCache.SupportsSymbol(_topicFuturesId, _api.EnvironmentName, null, symbolName));
         }
-        #endregion
     }
 }

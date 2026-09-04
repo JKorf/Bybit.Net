@@ -17,7 +17,10 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Book Ticker client
+        #region Get Book Ticker
+
+        async Task<ICallResult<SharedBookTicker>> IGetBookTicker.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
+            => await GetBookTickerAsync(request, ct).ConfigureAwait(false);
 
         public GetBookTickerOptions GetBookTickerOptions { get; } = new GetBookTickerOptions(_exchangeName, false);
         public async Task<HttpResult<SharedBookTicker>> GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
@@ -41,5 +44,6 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
     }
 }

@@ -17,7 +17,10 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Order Book client
+        #region Get Order Book
+
+        async Task<ICallResult<SharedOrderBook>> IGetOrderBook.GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
+            => await GetOrderBookAsync(request, ct).ConfigureAwait(false);
 
         public GetOrderBookOptions GetOrderBookOptions { get; } = new GetOrderBookOptions(_exchangeName, 1, 500, false);
         public async Task<HttpResult<SharedOrderBook>> GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
@@ -39,5 +42,6 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
     }
 }

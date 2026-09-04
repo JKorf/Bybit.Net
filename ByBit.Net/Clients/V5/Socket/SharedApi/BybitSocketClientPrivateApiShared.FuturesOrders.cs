@@ -15,7 +15,7 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientPrivateSharedApi
     {
-        #region Futures Order client
+        #region Subscribe Futures Orders
 
         async Task<WebSocketResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<DataEvent<SharedFuturesOrder[]>> handler, CancellationToken ct)
             => await SubscribeToFuturesOrderUpdatesAsync(request, x => handler(x.ToType<SharedFuturesOrder[]>(x.Data)), ct).ConfigureAwait(false);
@@ -74,7 +74,7 @@ namespace Bybit.Net.Clients.V5
         }
         #endregion
 
-        #region Futures Order Client
+        #region Place Futures Order
 
         public SharedFeeDeductionType FuturesFeeDeductionType => SharedFeeDeductionType.AddToCost;
         public SharedFeeAssetType FuturesFeeAssetType => SharedFeeAssetType.InputAsset;
@@ -85,6 +85,12 @@ namespace Bybit.Net.Clients.V5
                 SharedQuantityType.BaseAsset,
                 SharedQuantityType.BaseAsset,
                 SharedQuantityType.BaseAsset);
+
+        async Task<ICallResult<SharedId>> IPlaceFuturesOrder.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
+            => await PlaceFuturesOrderAsync(request, ct).ConfigureAwait(false);
+
+        PlaceFuturesOrderOptions IPlaceFuturesOrder.PlaceFuturesOrderOptions
+            => PlaceFuturesOrderOptions;
 
         public PlaceFuturesOrderSocketOptions PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderSocketOptions(_exchangeName, true);
         public async Task<QueryResult<SharedId>> PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
@@ -114,6 +120,16 @@ namespace Bybit.Net.Clients.V5
 
             return QueryResult.Ok(result, new SharedId(result.Data.OrderId.ToString()));
         }
+
+        #endregion
+
+        #region Cancel Futures Order
+
+        async Task<ICallResult<SharedId>> ICancelFuturesOrder.CancelFuturesOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelFuturesOrderAsync(request, ct).ConfigureAwait(false);
+
+        CancelFuturesOrderOptions ICancelFuturesOrder.CancelFuturesOrderOptions
+            => CancelFuturesOrderOptions;
 
         public CancelFuturesOrderSocketOptions CancelFuturesOrderOptions { get; } = new CancelFuturesOrderSocketOptions(_exchangeName, true);
         public async Task<QueryResult<SharedId>> CancelFuturesOrderAsync(CancelOrderRequest request, CancellationToken ct)

@@ -17,7 +17,11 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Tp/SL Client
+        #region Set Futures TP/SL
+
+        async Task<ICallResult<SharedId>> ISetFuturesTpSl.SetFuturesTpSlAsync(SetTpSlRequest request, CancellationToken ct)
+            => await SetFuturesTpSlAsync(request, ct).ConfigureAwait(false);
+
         public SetFuturesTpSlOptions SetFuturesTpSlOptions { get; } = new SetFuturesTpSlOptions(_exchangeName, true)
         {
             RequiredRequestParameters = new List<ParameterDescription>
@@ -51,6 +55,13 @@ namespace Bybit.Net.Clients.V5
             return HttpResult.Ok(result, new SharedId(""));
         }
 
+        #endregion
+
+        #region Cancel Futures TP/SL
+
+        async Task<ICallResult<bool>> ICancelFuturesTpSl.CancelFuturesTpSlAsync(CancelTpSlRequest request, CancellationToken ct)
+            => await CancelFuturesTpSlAsync(request, ct).ConfigureAwait(false);
+
         public CancelFuturesTpSlOptions CancelFuturesTpSlOptions { get; } = new CancelFuturesTpSlOptions(_exchangeName, true)
         {
             RequiredRequestParameters = new List<ParameterDescription>
@@ -81,5 +92,6 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
     }
 }

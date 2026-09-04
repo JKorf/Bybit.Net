@@ -17,7 +17,12 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Deposit client
+
+        #region Get Deposit Addresses
+
+        async Task<ICallResult<SharedDepositAddress[]>> IGetDepositAddresses.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
+            => await GetDepositAddressesAsync(request, ct).ConfigureAwait(false);
+
         public GetDepositAddressesOptions GetDepositAddressesOptions { get; } = new GetDepositAddressesOptions(_exchangeName, true);
 
         public async Task<HttpResult<SharedDepositAddress[]>> GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
@@ -38,10 +43,17 @@ namespace Bybit.Net.Clients.V5
             ).ToArray());
         }
 
+        #endregion
+
+        #region Get Deposit History
+
+        async Task<ICallResult<SharedDeposit[]>> IGetDepositHistory.GetDepositHistoryAsync(GetDepositsRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetDepositHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
+
         Task<HttpResult<SharedDeposit[]>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, PageRequest? nextPageToken, CancellationToken ct)
             => GetDepositHistoryAsync(request, nextPageToken, ct);
-        GetDepositHistoryOptions IDepositRestClient.GetDepositsOptions => GetDepositHistoryOptions;
 
+        GetDepositHistoryOptions IDepositRestClient.GetDepositsOptions => GetDepositHistoryOptions;
 
         public GetDepositHistoryOptions GetDepositHistoryOptions { get; } = new GetDepositHistoryOptions(_exchangeName, false, true, true, 50);
         public async Task<HttpResult<SharedDeposit[]>> GetDepositHistoryAsync(GetDepositsRequest request, PageRequest? pageRequest, CancellationToken ct)
@@ -89,6 +101,8 @@ namespace Bybit.Net.Clients.V5
                        .ToArray(), nextPageRequest);
         }
 
+        #endregion
+
         private SharedTransferStatus ParseTransferStatus(DepositStatus status)
         {
             if (status == DepositStatus.Success || status == DepositStatus.SuccessAfterRollback || status == DepositStatus.CreditedToFundingPool)
@@ -107,6 +121,5 @@ namespace Bybit.Net.Clients.V5
             return SharedTransferStatus.Unknown;
         }
 
-        #endregion
     }
 }

@@ -17,7 +17,12 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Spot Trigger Order Client
+
+        #region Place Spot Trigger Order
+
+        async Task<ICallResult<SharedId>> IPlaceSpotTriggerOrder.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
+            => await PlaceSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public PlaceSpotTriggerOrderOptions PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(_exchangeName, false);
 
         public async Task<HttpResult<SharedId>> PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
@@ -45,6 +50,13 @@ namespace Bybit.Net.Clients.V5
             // Return
             return HttpResult.Ok(result, new SharedId(result.Data.OrderId.ToString()));
         }
+
+        #endregion
+
+        #region Get Spot Trigger Order
+
+        async Task<ICallResult<SharedSpotTriggerOrder>> IGetSpotTriggerOrder.GetSpotTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
 
         public GetSpotTriggerOrderOptions GetSpotTriggerOrderOptions { get; } = new GetSpotTriggerOrderOptions(_exchangeName, true)
         {
@@ -86,6 +98,13 @@ namespace Bybit.Net.Clients.V5
             });
         }
 
+        #endregion
+
+        #region Cancel Spot Trigger Order
+
+        async Task<ICallResult<SharedId>> ICancelSpotTriggerOrder.CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public CancelSpotTriggerOrderOptions CancelSpotTriggerOrderOptions { get; } = new CancelSpotTriggerOrderOptions(_exchangeName, true);
         public async Task<HttpResult<SharedId>> CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
@@ -103,6 +122,8 @@ namespace Bybit.Net.Clients.V5
 
             return HttpResult.Ok(order, new SharedId(request.OrderId));
         }
+
+        #endregion
 
         private SharedTriggerOrderStatus ParseTriggerOrderStatus(BybitOrder order)
         {
@@ -132,6 +153,5 @@ namespace Bybit.Net.Clients.V5
             return SharedTriggerOrderStatus.Unknown;
         }
 
-        #endregion
     }
 }

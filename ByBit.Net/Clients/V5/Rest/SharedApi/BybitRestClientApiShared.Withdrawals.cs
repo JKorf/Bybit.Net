@@ -17,11 +17,16 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitRestClientSharedApi
     {
-        #region Withdrawal client
+
+        #region Get Withdrawal History
 
         Task<HttpResult<SharedWithdrawal[]>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, PageRequest? nextPageToken, CancellationToken ct)
             => GetWithdrawalHistoryAsync(request, nextPageToken, ct);
+
         GetWithdrawalHistoryOptions IWithdrawalRestClient.GetWithdrawalsOptions => GetWithdrawalHistoryOptions;
+
+        async Task<ICallResult<SharedWithdrawal[]>> IGetWithdrawalHistory.GetWithdrawalHistoryAsync(GetWithdrawalsRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetWithdrawalHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public GetWithdrawalHistoryOptions GetWithdrawalHistoryOptions { get; } = new GetWithdrawalHistoryOptions(_exchangeName, false, true, true, 50);
         public async Task<HttpResult<SharedWithdrawal[]>> GetWithdrawalHistoryAsync(GetWithdrawalsRequest request, PageRequest? pageRequest, CancellationToken ct)
@@ -73,6 +78,8 @@ namespace Bybit.Net.Clients.V5
                        .ToArray(), nextPageRequest);
         }
 
+        #endregion
+
         private SharedTransferStatus GetWithdrawalStatus(BybitWithdrawal x)
         {
             if (x.Status == WithdrawalStatus.Failed || x.Status == WithdrawalStatus.CanceledByUser || x.Status == WithdrawalStatus.Rejected)
@@ -92,9 +99,12 @@ namespace Bybit.Net.Clients.V5
             return SharedTransferStatus.Unknown;
         }
 
-        #endregion
 
-        #region Withdraw client
+
+        #region Withdraw
+
+        async Task<ICallResult<SharedId>> IWithdraw.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
+            => await WithdrawAsync(request, ct).ConfigureAwait(false);
 
         public WithdrawOptions WithdrawOptions { get; } = new WithdrawOptions(_exchangeName)
         {
@@ -132,5 +142,6 @@ namespace Bybit.Net.Clients.V5
         }
 
         #endregion
+
     }
 }

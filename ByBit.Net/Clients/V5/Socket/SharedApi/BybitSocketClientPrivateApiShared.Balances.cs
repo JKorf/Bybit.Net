@@ -15,7 +15,7 @@ namespace Bybit.Net.Clients.V5
 {
     internal partial class BybitSocketClientPrivateSharedApi
     {
-        #region Balance client
+        #region Subscribe Balances
         public SubscribeBalanceOptions SubscribeBalanceOptions { get; } = new SubscribeBalanceOptions(_exchangeName, false);
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance[]>> handler, CancellationToken ct)
         {
