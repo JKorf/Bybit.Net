@@ -108,14 +108,12 @@ namespace Bybit.Net.Clients.V5
 
         public WithdrawOptions WithdrawOptions { get; } = new WithdrawOptions(_exchangeName)
         {
-            RequiredRequestParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription(nameof(WithdrawRequest.Network), typeof(string), "The network the withdrawal should use", "ETH")
-            },
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("TravelRuleQuestionnaire", typeof(BybitWithdrawQuestionnaire), "Travel rule questionnaire", new BybitWithdrawQuestionnaireEu())
-            }
+            ParameterRuleOverwrites = [            
+                RequestParameterRuleOverride<WithdrawRequest>.Required(x => x.Network)
+            ],
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("TravelRuleQuestionnaire", "Travel rule questionnaire", new BybitWithdrawQuestionnaireEu())
+            ]
         };
 
         public async Task<HttpResult<SharedId>> WithdrawAsync(WithdrawRequest request, CancellationToken ct)
