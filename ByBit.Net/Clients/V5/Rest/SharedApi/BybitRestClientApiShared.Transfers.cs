@@ -25,7 +25,13 @@ namespace Bybit.Net.Clients.V5
         public TransferOptions TransferOptions { get; } = new TransferOptions(_exchangeName, [
             SharedAccountType.Funding,
             SharedAccountType.Unified
-            ]);
+            ])
+        {
+            ParameterRuleOverwrites = [
+                RequestParameterRuleOverride<TransferRequest>.NotSupported(x => x.FromSymbol),
+                RequestParameterRuleOverride<TransferRequest>.NotSupported(x => x.ToSymbol),
+                ]
+        };
         public async Task<HttpResult<SharedId>> TransferAsync(TransferRequest request, CancellationToken ct)
         {
             var validationError = TransferOptions.ValidateRequest(request, this);
