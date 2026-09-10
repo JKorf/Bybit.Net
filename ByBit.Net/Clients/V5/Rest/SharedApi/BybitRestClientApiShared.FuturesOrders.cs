@@ -36,7 +36,7 @@ namespace Bybit.Net.Clients.V5
 
         public PlaceFuturesOrderOptions PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(_exchangeName, true)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<PlaceFuturesOrderRequest>.NotSupported(x => x.Leverage),
                 RequestParameterRuleOverride<PlaceFuturesOrderRequest>.NotSupported(x => x.MarginMode),
                 ]
@@ -444,7 +444,7 @@ namespace Bybit.Net.Clients.V5
 
         public ClosePositionOptions ClosePositionOptions { get; } = new ClosePositionOptions(_exchangeName, true)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<ClosePositionRequest>.Required(x => x.PositionSide),
                 RequestParameterRuleOverride<ClosePositionRequest>.Required(x => x.Quantity)
             ]

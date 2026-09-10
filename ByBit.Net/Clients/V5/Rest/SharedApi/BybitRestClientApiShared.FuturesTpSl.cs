@@ -24,7 +24,7 @@ namespace Bybit.Net.Clients.V5
 
         public SetFuturesTpSlOptions SetFuturesTpSlOptions { get; } = new SetFuturesTpSlOptions(_exchangeName, true)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<SetTpSlRequest>.Required(x => x.PositionMode)
             ]
         };
@@ -63,7 +63,7 @@ namespace Bybit.Net.Clients.V5
 
         public CancelFuturesTpSlOptions CancelFuturesTpSlOptions { get; } = new CancelFuturesTpSlOptions(_exchangeName, true)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<CancelTpSlRequest>.Required(x => x.PositionMode)
             ]
         };

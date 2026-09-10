@@ -108,7 +108,7 @@ namespace Bybit.Net.Clients.V5
 
         public WithdrawOptions WithdrawOptions { get; } = new WithdrawOptions(_exchangeName)
         {
-            ParameterRuleOverwrites = [            
+            ParameterRuleOverrides = [            
                 RequestParameterRuleOverride<WithdrawRequest>.Required(x => x.Network)
             ],
             ExchangeParameterRules = [

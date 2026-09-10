@@ -63,7 +63,7 @@ namespace Bybit.Net.Clients.V5
 
         public GetAllTickersOptions GetAllTickersOptions { get; } = new GetAllTickersOptions(_exchangeName)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<GetTickersRequest>.Required(x => x.TradingMode)
                 ]
         };
