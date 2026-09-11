@@ -58,8 +58,9 @@ namespace Microsoft.Extensions.DependencyInjection
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
 
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddBybitCore(services, options.SocketClientLifeTime);
         }
@@ -87,8 +88,9 @@ namespace Microsoft.Extensions.DependencyInjection
             options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? BybitEnvironment.Live;
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddBybitCore(services, options.SocketClientLifeTime);
         }
@@ -125,6 +127,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5LinearApi.SharedApi);
             services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5InverseApi.SharedApi);
             services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5PrivateApi.SharedApi);
+            services.RegisterSharedApiClientCapabilities<IBybitSharedApiClient>();
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedClient);

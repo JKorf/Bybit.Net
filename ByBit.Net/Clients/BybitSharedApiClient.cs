@@ -1,6 +1,8 @@
 ﻿using Bybit.Net.Interfaces.Clients;
 using Bybit.Net.Interfaces.Clients.V5;
+using Bybit.Net.Objects.Options;
 using CryptoExchange.Net.SharedApis;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +30,9 @@ namespace Bybit.Net.Clients
         /// </summary>
         public BybitSharedApiClient(
             IBybitRestClient restClient,
-            IBybitSocketClient socketClient)
-            :base (new[] { SharedTransport.Rest, SharedTransport.Socket },
+            IBybitSocketClient socketClient,
+            IOptions<BybitOptions> options)
+            :base (options.Value.SharedApi.PreferredTransport,
                 restClient.V5Api.SharedApi,
                 socketClient.V5SpotApi.SharedApi,
                 socketClient.V5LinearApi.SharedApi,
