@@ -8,6 +8,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -120,20 +121,21 @@ namespace Microsoft.Extensions.DependencyInjection
                 x.GetRequiredService<IOptions<BybitRestOptions>>(),
                 x.GetRequiredService<IOptions<BybitSocketOptions>>()));
 
-            services.AddTransient<IBybitSharedApiClient, BybitSharedApiClient>();
-
-            services.RegisterSharedApi(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedApi);
-            services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedApi);
-            services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5LinearApi.SharedApi);
-            services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5InverseApi.SharedApi);
-            services.RegisterSharedApi(x => x.GetRequiredService<IBybitSocketClient>().V5PrivateApi.SharedApi);
-            services.RegisterSharedApiClientCapabilities<IBybitSharedApiClient>();
-
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBybitRestClient>().V5Api.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5LinearApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5InverseApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBybitSocketClient>().V5PrivateApi.SharedClient);
+
+            services.RegisterSharedApiClient<
+                IBybitSharedApiClient,
+                BybitSharedApiClient>(sharedApis => sharedApis
+                    .Add(client => client.Rest)
+                    .Add(client => client.SpotSocket)
+                    .Add(client => client.InverseSocket)
+                    .Add(client => client.LinearSocket)
+                    .Add(client => client.PrivateSocket)
+                    );
 
             return services;
         }
