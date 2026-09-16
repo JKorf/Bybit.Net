@@ -22,23 +22,44 @@ namespace Bybit.Net.Clients.V5
         async Task<ICallResult<SharedBalance[]>> IGetBalances.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
             => await GetBalancesAsync(request, ct).ConfigureAwait(false);
 
-        public GetBalancesOptions GetBalancesOptions { get; } = new GetBalancesOptions(_exchangeName, AccountTypeFilter.Spot, AccountTypeFilter.Futures, AccountTypeFilter.Funding, AccountTypeFilter.Margin, AccountTypeFilter.Option);
+        public GetBalancesOptions GetBalancesOptions { get; } = new GetBalancesOptions(_exchangeName, 
+            AccountTypeFilter.Spot,
+            AccountTypeFilter.Futures, 
+            AccountTypeFilter.Funding, 
+            AccountTypeFilter.Margin,
+            AccountTypeFilter.Option);
         public async Task<HttpResult<SharedBalance[]>> GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
         {
             var validationError = GetBalancesOptions.ValidateRequest(request, this);
             if (validationError != null)
                 return HttpResult.Fail<SharedBalance[]>(Exchange, validationError);
 
-            var result = await _api.Account.GetBalancesAsync(AccountType.Unified, ct: ct).ConfigureAwait(false);
-            if (!result.Success)
-                return HttpResult.Fail<SharedBalance[]>(result);
+            if (request.AccountType == SharedAccountType.Funding)
+            {
+                var result = await _api.Account.GetAllAssetBalancesAsync(AccountType.Fund, ct: ct).ConfigureAwait(false);
+                if (!result.Success)
+                    return HttpResult.Fail<SharedBalance[]>(result);
 
-            return HttpResult.Ok(result, result.Data.List.SelectMany(x => x.Assets.Select(x => 
-                new SharedBalance(
-                    SupportedTradingModes, 
-                    x.Asset,
-                    (x.WalletBalance ?? 0) - (x.Locked ?? 0),
-                    x.Equity ?? 0))).ToArray());
+                return HttpResult.Ok(result, result.Data.Balances.Select(x =>
+                    new SharedBalance(
+                        TradingMode.Spot,
+                        x.Asset,
+                        x.TransferBalance,
+                        x.WalletBalance ?? 0)).ToArray());
+            }
+            else
+            {
+                var result = await _api.Account.GetBalancesAsync(AccountType.Unified, ct: ct).ConfigureAwait(false);
+                if (!result.Success)
+                    return HttpResult.Fail<SharedBalance[]>(result);
+
+                return HttpResult.Ok(result, result.Data.List.SelectMany(x => x.Assets.Select(x =>
+                    new SharedBalance(
+                        SupportedTradingModes,
+                        x.Asset,
+                        (x.WalletBalance ?? 0) - (x.Locked ?? 0),
+                        x.Equity ?? 0))).ToArray());
+            }
         }
 
         #endregion
