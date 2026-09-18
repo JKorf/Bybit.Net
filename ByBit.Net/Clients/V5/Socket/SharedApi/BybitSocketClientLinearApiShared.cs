@@ -26,7 +26,7 @@ namespace Bybit.Net.Clients.V5
         public BybitSocketClientLinearSharedApi(BybitSocketClientLinearApi api)
             : base(
                   SharedTransport.Socket,
-                  api.Exchange,
+                  api,
                   [TradingMode.DeliveryLinear, TradingMode.PerpetualLinear],
                   () => api.Authenticated,
                   api.FormatSymbol)

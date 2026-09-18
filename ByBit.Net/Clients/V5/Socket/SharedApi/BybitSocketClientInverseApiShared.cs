@@ -26,7 +26,7 @@ namespace Bybit.Net.Clients.V5
         public BybitSocketClientInverseSharedApi(BybitSocketClientInverseApi api)
             : base(
                   SharedTransport.Socket,
-                  api.Exchange,
+                  api,
                   [TradingMode.DeliveryInverse, TradingMode.PerpetualInverse],
                   () => api.Authenticated,
                   api.FormatSymbol)

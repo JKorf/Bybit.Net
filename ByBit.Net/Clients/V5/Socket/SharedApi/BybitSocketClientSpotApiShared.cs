@@ -27,7 +27,7 @@ namespace Bybit.Net.Clients.V5
         public BybitSocketClientSpotSharedApi(BybitSocketClientSpotApi api)
             : base(
                   SharedTransport.Socket,
-                  api.Exchange,
+                  api,
                   [TradingMode.Spot],
                   () => api.Authenticated,
                   api.FormatSymbol)
