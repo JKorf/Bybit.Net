@@ -36,7 +36,7 @@ Public market data can use `new BybitRestClient()` or `new BybitSocketClient()` 
 - `restClient.V5Api.SubAccount`
 - `restClient.V5Api.CryptoLoan`
 - `restClient.V5Api.Earn`
-- `restClient.V5Api.SharedClient`
+- `restClient.V5Api.SharedApi`
 
 ## V5 WebSocket roots
 
@@ -50,7 +50,7 @@ Public market data can use `new BybitRestClient()` or `new BybitSocketClient()` 
 ## Common calls
 
 ```csharp
-var spotTicker = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var spotTicker = await restClient.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 var linearTicker = await restClient.V5Api.ExchangeData.GetLinearInverseTickersAsync(Category.Linear, "ETHUSDT");
 var klines = await restClient.V5Api.ExchangeData.GetKlinesAsync(Category.Linear, "ETHUSDT", KlineInterval.OneMinute, limit: 10);
 var orderBook = await restClient.V5Api.ExchangeData.GetOrderbookAsync(Category.Linear, "ETHUSDT", limit: 25);
@@ -94,7 +94,7 @@ Console.WriteLine(spotTicker.Data.List.First().LastPrice);
 - Use `Category.Spot`, `Category.Linear`, `Category.Inverse`, or `Category.Option` correctly.
 - Use `BybitCredentials("key", "secret")` for HMAC credentials; no passphrase.
 - Check `.Success` before `.Data`.
-- Use `.SharedClient.Discover()` before routing optional shared features across exchanges.
+- Use the exchange-level `IBybitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 - Shared spot/futures symbols provide display names, typed base/quote assets, common request filtering, and symbol catalogs.
 - Use async/await.
 - Reuse clients or use dependency injection.

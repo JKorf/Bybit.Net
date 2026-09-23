@@ -33,6 +33,8 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientPrivateApi" />
     internal partial class BybitSocketClientPrivateApi : SocketApiClient<BybitEnvironment, BybitAuthenticationProvider, BybitCredentials>, IBybitSocketClientPrivateApi
     {
+        private readonly BybitSocketClientPrivateSharedApi _sharedApi;
+
         protected override ErrorMapping ErrorMapping => BybitErrors.WebsocketErrors;
 
         public new BybitSocketOptions ClientOptions => (BybitSocketOptions)base.ClientOptions;
@@ -43,6 +45,8 @@ namespace Bybit.Net.Clients.V5
             KeepAliveInterval = TimeSpan.Zero;
 
             _clientName = "BybitSocketClientApi";
+
+            _sharedApi = new BybitSocketClientPrivateSharedApi(this);
 
             RegisterPeriodicQuery(
                 "Heartbeat",
@@ -84,7 +88,8 @@ namespace Bybit.Net.Clients.V5
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
             => BybitExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
-        public IBybitSocketClientPrivateApiShared SharedClient => this;
+        public IBybitSocketClientPrivateApiShared SharedClient => _sharedApi;
+        public IBybitSocketClientPrivateSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BybitPositionUpdate[]>> handler, CancellationToken ct = default)

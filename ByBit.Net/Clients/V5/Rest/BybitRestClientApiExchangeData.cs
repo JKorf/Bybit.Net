@@ -49,7 +49,9 @@ namespace Bybit.Net.Clients.V5
         /// <inheritdoc />
         public async Task<HttpResult<BybitTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/market/time", BybitExchange.RateLimiter.BybitRest, 1, false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/market/time", BybitExchange.RateLimiter.BybitRest, 1, false,
+                preventCaching: true,
+                preventRequestCoalescing: true);
             return await _baseClient.SendAsync<BybitTime>(request, null, ct).ConfigureAwait(false);
         }
 

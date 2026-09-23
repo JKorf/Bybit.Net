@@ -19,12 +19,16 @@ namespace Bybit.Net
             string? userIdentifier,
             SpotUserDataTrackerConfig? config) : base(
                 logger,
-                restClient.V5Api.SharedClient,
-                restClient.V5Api.SharedClient,
-                socketClient.V5PrivateApi.SharedClient,
-                restClient.V5Api.SharedClient,
-                socketClient.V5PrivateApi.SharedClient,
-                socketClient.V5PrivateApi.SharedClient,
+                restClient.V5Api.SharedApi,
+                restClient.V5Api.SharedApi,
+                socketClient.V5PrivateApi.SharedApi,
+
+                restClient.V5Api.SharedApi,
+                restClient.V5Api.SharedApi,
+                socketClient.V5PrivateApi.SharedApi,
+
+                restClient.V5Api.SharedApi,
+                socketClient.V5PrivateApi.SharedApi,
                 userIdentifier,
                 config ?? new SpotUserDataTrackerConfig())
         {
@@ -46,13 +50,19 @@ namespace Bybit.Net
             IBybitSocketClient socketClient,
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config) : base(logger,
-                restClient.V5Api.SharedClient,
-                restClient.V5Api.SharedClient,
-                socketClient.V5PrivateApi.SharedClient,
-                restClient.V5Api.SharedClient,
-                socketClient.V5PrivateApi.SharedClient,
-                socketClient.V5PrivateApi.SharedClient,
-                socketClient.V5PrivateApi.SharedClient,
+                restClient.V5Api.SharedApi,
+                restClient.V5Api.SharedApi,
+                socketClient.V5PrivateApi.SharedApi,
+
+                restClient.V5Api.SharedApi,
+                restClient.V5Api.SharedApi,
+                socketClient.V5PrivateApi.SharedApi,
+
+                restClient.V5Api.SharedApi,
+                socketClient.V5PrivateApi.SharedApi,
+
+                restClient.V5Api.SharedApi,
+                socketClient.V5PrivateApi.SharedApi,
                 userIdentifier,
                 config ?? new FuturesUserDataTrackerConfig())
         {

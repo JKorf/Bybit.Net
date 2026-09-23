@@ -15,4 +15,21 @@ namespace Bybit.Net.Interfaces.Clients.V5
         IFuturesOrderManagementSocketClient
     {
     }
+
+    /// <summary>
+    /// Shared API interface. Shared APIs provide a common,
+    /// exchange-independent contract for accessing functionality across different
+    /// exchange client libraries.
+    /// </summary>
+    public interface IBybitSocketClientPrivateSharedApi :
+        ISubscribeBalancesSocket,
+        ISubscribeSpotOrdersSocket,
+        ISubscribeFuturesOrdersSocket,
+        ISubscribeUserTradesSocket,
+        ISubscribePositionsSocket,
+        IPlaceSpotOrderSocket,
+        ICancelSpotOrderSocket,
+        IPlaceFuturesOrderSocket,
+        ICancelFuturesOrderSocket
+    { }
 }

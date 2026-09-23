@@ -27,9 +27,13 @@ namespace Bybit.Net.Clients.V5
     /// <inheritdoc cref="IBybitSocketClientSpotApi" />
     internal partial class BybitSocketClientSpotApi : BybitSocketClientBaseApi, IBybitSocketClientSpotApi
     {
+        private readonly BybitSocketClientSpotSharedApi _sharedApi;
+
         internal BybitSocketClientSpotApi(ILoggerFactory? loggerFactory, BybitSocketOptions options)
             : base(loggerFactory, options, "/v5/public/spot")
         {
+            _sharedApi = new BybitSocketClientSpotSharedApi(this);
+
             RegisterPeriodicQuery(
                 "Heartbeat",
                 TimeSpan.FromSeconds(20),
@@ -51,7 +55,8 @@ namespace Bybit.Net.Clients.V5
         protected override BybitAuthenticationProvider CreateAuthenticationProvider(BybitCredentials credentials) 
             => new BybitAuthenticationProvider(credentials);
 
-        public IBybitSocketClientSpotApiShared SharedClient => this;
+        public IBybitSocketClientSpotApiShared SharedClient => _sharedApi;
+        public IBybitSocketClientSpotSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         public Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BybitSpotTickerUpdate>> handler, CancellationToken ct = default)
