@@ -40,7 +40,7 @@ Primary documentation:
 - For V5 product-specific methods, pass the correct `Category`: `Spot`, `Linear`, `Inverse`, or `Option`.
 - For account and wallet calls, pass the correct `AccountType`: commonly `Unified`, `Spot`, `Fund`, or `Contract`.
 - Use Bybit V5 symbols such as `ETHUSDT`, `BTCUSDT`, and `BTCUSD`. Do not use `ETH-USDT`, `ETH_USDT`, `ETH/USD`, or `tETHUSD`.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient` and call `.Discover()` to inspect supported shared features.
+- Use the exchange-level `IBybitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ## Installation
 
@@ -92,7 +92,7 @@ Public market data does not require credentials:
 ```csharp
 var client = new BybitRestClient();
 
-var ticker = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var ticker = await client.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 if (!ticker.Success)
 {
     Console.WriteLine(ticker.Error);
@@ -262,7 +262,7 @@ BybitRestClient
     .SubAccount
     .CryptoLoan
     .Earn
-    .SharedClient
+    .SharedApi
 ```
 
 WebSocket:
@@ -270,15 +270,15 @@ WebSocket:
 ```text
 BybitSocketClient
   .V5SpotApi
-    .SharedClient
+    .SharedApi
   .V5LinearApi
-    .SharedClient
+    .SharedApi
   .V5InverseApi
-    .SharedClient
+    .SharedApi
   .V5OptionsApi
   .V5SpreadApi
   .V5PrivateApi
-    .SharedClient
+    .SharedApi
 ```
 
 Important: Bybit.Net does not use Binance-style REST roots. Do not generate:
@@ -315,7 +315,7 @@ await client.V5Api.Trading.GetPositionsAsync(Category.Linear, symbol: "ETHUSDT")
 If a method has a dedicated spot method, use the dedicated method:
 
 ```csharp
-await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+await client.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 await client.V5Api.ExchangeData.GetSpotSymbolsAsync("ETHUSDT");
 ```
 
@@ -360,7 +360,7 @@ Get announcements -> client.V5Api.ExchangeData.GetAnnouncementsAsync(...)
 Get spot symbols -> client.V5Api.ExchangeData.GetSpotSymbolsAsync(symbol)
 Get linear/inverse symbols -> client.V5Api.ExchangeData.GetLinearInverseSymbolsAsync(Category.Linear, ...)
 Get option symbols -> client.V5Api.ExchangeData.GetOptionSymbolsAsync(...)
-Get spot ticker -> client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT")
+Get spot ticker -> client.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT")
 Get linear/inverse ticker -> client.V5Api.ExchangeData.GetLinearInverseTickersAsync(Category.Linear, "ETHUSDT")
 Get option ticker -> client.V5Api.ExchangeData.GetOptionTickersAsync(...)
 Get klines -> client.V5Api.ExchangeData.GetKlinesAsync(category, symbol, interval, ...)
@@ -442,7 +442,7 @@ Other groups:
 Sub-account endpoints -> client.V5Api.SubAccount.*
 Crypto loan endpoints -> client.V5Api.CryptoLoan.*
 Earn endpoints -> client.V5Api.Earn.*
-Shared REST abstractions -> client.V5Api.SharedClient
+Shared REST abstractions -> client.V5Api.SharedApi
 ```
 
 Common WebSocket tasks:
@@ -479,7 +479,7 @@ using Bybit.Net.Enums;
 
 var client = new BybitRestClient();
 
-var spotTicker = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var spotTicker = await client.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 if (!spotTicker.Success)
 {
     Console.WriteLine(spotTicker.Error);
@@ -737,15 +737,13 @@ Use REST trading methods by default unless the user specifically asks for WebSoc
 
 ## SharedApis Multi-Exchange Pattern
 
-Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Bybit and other exchanges. Call `.Discover()` before routing optional shared features across exchanges.
+Use the exchange-level `IBybitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ```csharp
 using Bybit.Net.Clients;
 
-var shared = new BybitRestClient().V5Api.SharedClient;
-var info = shared.Discover();
-var supported = info.Features.Where(x => x.Supported).Select(x => x.EndpointName);
-Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supported)}");
+var shared = new BybitRestClient().V5Api.SharedApi;
+// Use the exchange-level `IBybitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 Console.WriteLine(shared.Exchange);
 Console.WriteLine(string.Join(", ", shared.SupportedTradingModes));
@@ -770,13 +768,13 @@ Shared WebSocket clients are exposed on specific socket roots:
 
 ```csharp
 var socketClient = new BybitSocketClient();
-var spotShared = socketClient.V5SpotApi.SharedClient;
-var linearShared = socketClient.V5LinearApi.SharedClient;
-var inverseShared = socketClient.V5InverseApi.SharedClient;
-var privateShared = socketClient.V5PrivateApi.SharedClient;
+var spotShared = socketClient.V5SpotApi.SharedApi;
+var linearShared = socketClient.V5LinearApi.SharedApi;
+var inverseShared = socketClient.V5InverseApi.SharedApi;
+var privateShared = socketClient.V5PrivateApi.SharedApi;
 ```
 
-The private shared client implements `ISpotOrderManagementSocketClient` and `IFuturesOrderManagementSocketClient`. Use `PlaceSpotOrderAsync` / `CancelSpotOrderAsync` or `PlaceFuturesOrderAsync` / `CancelFuturesOrderAsync` for exchange-agnostic WebSocket order management; these calls return `QueryResult<SharedId>`.
+The private shared client implements `IPlaceSpotOrderSocket` and `ICancelSpotOrderSocket` and `IPlaceFuturesOrderSocket` and `ICancelFuturesOrderSocket`. Use `PlaceSpotOrderAsync` / `CancelSpotOrderAsync` or `PlaceFuturesOrderAsync` / `CancelFuturesOrderAsync` for exchange-agnostic WebSocket order management; these calls return `QueryResult<SharedId>`.
 
 For shared socket interface variables, keep the concrete `BybitSocketClient` so you can call:
 
@@ -944,7 +942,7 @@ var ticker = await client.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
 Use:
 
 ```csharp
-var ticker = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var ticker = await client.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 ```
 
 Wrong:
@@ -980,14 +978,14 @@ options.ApiCredentials = new BybitCredentials("key", "secret");
 Wrong:
 
 ```csharp
-var result = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var result = await client.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 Console.WriteLine(result.Data.List.First().LastPrice);
 ```
 
 Use:
 
 ```csharp
-var result = await client.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var result = await client.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 if (!result.Success)
 {
     Console.WriteLine(result.Error);

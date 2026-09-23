@@ -41,20 +41,20 @@ Do not generate Binance-style `SpotApi`, `UsdFuturesApi`, `CoinFuturesApi`, or `
 
 | Group | Purpose | Common methods |
 |---|---|---|
-| `V5Api.ExchangeData` | Public and mostly unauthenticated market data | `GetSpotTickersAsync`, `GetLinearInverseTickersAsync`, `GetKlinesAsync`, `GetOrderbookAsync`, `GetTradeHistoryAsync`, `GetFundingRateHistoryAsync`, `GetOpenInterestAsync` |
+| `V5Api.ExchangeData` | Public and mostly unauthenticated market data | `GetAllTickersAsync`, `GetLinearInverseTickersAsync`, `GetKlinesAsync`, `GetOrderbookAsync`, `GetTradeHistoryAsync`, `GetFundingRateHistoryAsync`, `GetOpenInterestAsync` |
 | `V5Api.Account` | Balances, assets, deposits, withdrawals, transfers, account settings | `GetBalancesAsync`, `GetAllAssetBalancesAsync`, `GetAssetBalanceAsync`, `GetApiKeyInfoAsync`, `GetFeeRatesAsync`, `CreateInternalTransferAsync`, `CreateUniversalTransferAsync` |
 | `V5Api.Trading` | Orders, positions, executions, spread trading | `PlaceOrderAsync`, `EditOrderAsync`, `CancelOrderAsync`, `CancelAllOrderAsync`, `GetOrdersAsync`, `GetOrderHistoryAsync`, `GetPositionsAsync`, `GetUserTradesAsync` |
 | `V5Api.SubAccount` | Sub-account management | Use for sub-account operations when requested |
 | `V5Api.CryptoLoan` | Crypto loan endpoints | Use for loan orders and loan history when requested |
 | `V5Api.Earn` | Earn endpoints | Use for savings/earn products when requested |
-| `V5Api.SharedClient` | CryptoExchange.Net shared REST client | Use for exchange-agnostic code; call `Discover()` to inspect supported features; shared spot/futures symbols include display names, typed assets, common filtering, and symbol catalogs |
+| Resolve a runtime-selected Shared API capability | `IBybitSharedApiClient.GetCapability(...)` |
 
 ## Market Data Patterns
 
 Spot ticker:
 
 ```csharp
-var ticker = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var ticker = await restClient.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 if (!ticker.Success) { return; }
 
 var first = ticker.Data.List.First();
@@ -190,7 +190,7 @@ var cancel = await restClient.V5Api.Trading.CancelOrderAsync(
 | `socketClient.V5InverseApi` | Inverse derivatives public streams |
 | `socketClient.V5OptionsApi` | Options public streams |
 | `socketClient.V5SpreadApi` | Spread public streams |
-| `socketClient.V5PrivateApi` | Private account/order/position/trade/wallet streams, native WebSocket trading, and shared spot/futures order management via `.SharedClient` |
+| `socketClient.V5PrivateApi` | Private account/order/position/trade/wallet streams, native WebSocket trading, and shared spot/futures order management via `.SharedApi` |
 
 ## WebSocket Patterns
 

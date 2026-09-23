@@ -37,7 +37,7 @@ Use `BybitRestClient`. Public market data does not require credentials.
 using Bybit.Net.Clients;
 
 var publicClient = new BybitRestClient();
-var ticker = await publicClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var ticker = await publicClient.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 ```
 
 For private endpoints configure `BybitCredentials`. Bybit.Net supports HMAC credentials and RSA credential types. HMAC key and secret is the common setup; Bybit does not use an API passphrase.
@@ -57,7 +57,7 @@ var restClient = new BybitRestClient(options =>
 REST methods return `HttpResult<T>`. WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`; shared WebSocket order management returns `QueryResult<T>`. Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`. Always check `.Success` before reading `.Data`.
 
 ```csharp
-var result = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var result = await restClient.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 if (!result.Success)
 {
     Console.WriteLine($"Bybit request failed: {result.Error}");
@@ -79,7 +79,7 @@ restClient.V5Api.Trading       // orders, order history, trades, positions, leve
 restClient.V5Api.SubAccount    // sub-account endpoints
 restClient.V5Api.CryptoLoan    // crypto loan endpoints
 restClient.V5Api.Earn          // earn endpoints
-restClient.V5Api.SharedClient  // CryptoExchange.Net shared REST abstraction
+restClient.V5Api.SharedApi  // CryptoExchange.Net shared REST abstraction
 ```
 
 Most V5 market and trading calls need a `Category` value. Use the category that matches the product:
@@ -101,7 +101,7 @@ using Bybit.Net.Enums;
 
 var restClient = new BybitRestClient();
 
-var spotTicker = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var spotTicker = await restClient.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 var linearTicker = await restClient.V5Api.ExchangeData.GetLinearInverseTickersAsync(Category.Linear, "ETHUSDT");
 var klines = await restClient.V5Api.ExchangeData.GetKlinesAsync(
     Category.Linear,
@@ -213,17 +213,16 @@ await privateSocket.V5PrivateApi.SubscribeToOrderUpdatesAsync(
 
 ## Multi-Exchange via CryptoExchange.Net.SharedApis
 
-Use `CryptoExchange.Net.SharedApis` when the user asks for exchange-agnostic code. Bybit exposes a shared REST client at `restClient.V5Api.SharedClient` and shared socket clients on the relevant socket API objects. Use `.SharedClient.Discover()` to inspect supported shared features at runtime. Shared spot and futures symbol results include display names and base/quote asset type metadata (`Crypto`, `Fiat`, or `TradFi`, with stablecoin, equity, and commodity subtypes where applicable); the shared symbol clients also expose symbol catalogs and support the common symbol request filters.
+Use the exchange-level `IBybitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ```csharp
 using Bybit.Net.Clients;
 
-var bybitShared = new BybitRestClient().V5Api.SharedClient;
-var info = bybitShared.Discover();
+var bybitShared = new BybitRestClient().V5Api.SharedApi;
+// Use the exchange-level `IBybitSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 Console.WriteLine(bybitShared.Exchange);
 Console.WriteLine(string.Join(", ", bybitShared.SupportedTradingModes));
-Console.WriteLine($"{info.TypeName}: {info.Features.Count(x => x.Supported)} supported shared features");
 ```
 
 Native Bybit endpoints remain available beside the shared abstractions, and are usually better when the user needs Bybit-specific fields such as `Category`, `PositionIdx`, trigger settings, account types, or spread trading.

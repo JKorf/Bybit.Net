@@ -36,7 +36,7 @@ REST methods return `HttpResult<T>`, WebSocket subscriptions return `WebSocketRe
 - `restClient.V5Api.Account` for balances, assets, transfers, deposits, withdrawals, account settings
 - `restClient.V5Api.Trading` for orders, order history, user trades, positions, spread trading
 - `restClient.V5Api.SubAccount`, `CryptoLoan`, and `Earn` for specialized V5 endpoints
-- `restClient.V5Api.SharedClient` for CryptoExchange.Net shared REST abstractions
+- `restClient.V5Api.SharedApi` for CryptoExchange.Net shared REST abstractions
 - `socketClient.V5SpotApi`, `V5LinearApi`, `V5InverseApi`, `V5OptionsApi`, `V5SpreadApi`, `V5PrivateApi` for WebSocket streams
 
 Use `Category.Spot`, `Category.Linear`, `Category.Inverse`, or `Category.Option` when a V5 REST method asks for a product category.
@@ -72,7 +72,7 @@ await socketClient.UnsubscribeAsync(sub.Data);
 
 ## Cross-exchange
 
-For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient` properties, for example `new BybitRestClient().V5Api.SharedClient`. `socketClient.V5PrivateApi.SharedClient` implements shared spot and futures order placement/cancellation over WebSocket. Shared spot/futures symbols include display names and typed base/quote asset metadata; the shared symbol clients support common request filtering and expose symbol catalogs.
+For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedApi` properties, for example `new BybitRestClient().V5Api.SharedApi`. `socketClient.V5PrivateApi.SharedApi` implements shared spot and futures order placement/cancellation over WebSocket. Shared spot/futures symbols include display names and typed base/quote asset metadata; the shared symbol clients support common request filtering and expose symbol catalogs.
 
 ## Avoid
 

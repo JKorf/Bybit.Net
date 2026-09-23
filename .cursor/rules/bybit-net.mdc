@@ -29,7 +29,7 @@ For public market data only, no credentials are needed: `new BybitRestClient()`.
 REST methods return `HttpResult<T>`, WebSocket subscriptions return `WebSocketResult<T>`, and shared WebSocket order management returns `QueryResult<T>`. Always check `.Success` before reading `.Data`:
 
 ```csharp
-var ticker = await restClient.V5Api.ExchangeData.GetSpotTickersAsync("ETHUSDT");
+var ticker = await restClient.V5Api.ExchangeData.GetAllTickersAsync("ETHUSDT");
 if (!ticker.Success) { return; }
 var price = ticker.Data.List.First().LastPrice;
 ```
@@ -42,7 +42,7 @@ var price = ticker.Data.List.First().LastPrice;
 - `restClient.V5Api.SubAccount`
 - `restClient.V5Api.CryptoLoan`
 - `restClient.V5Api.Earn`
-- `restClient.V5Api.SharedClient`
+- `restClient.V5Api.SharedApi`
 - `socketClient.V5SpotApi`
 - `socketClient.V5LinearApi`
 - `socketClient.V5InverseApi`
@@ -84,7 +84,7 @@ Use `V5PrivateApi` for authenticated order, position, wallet, user trade, and Gr
 For exchange-agnostic code, use CryptoExchange.Net shared clients:
 
 ```csharp
-var shared = new BybitRestClient().V5Api.SharedClient;
+var shared = new BybitRestClient().V5Api.SharedApi;
 Console.WriteLine(shared.Exchange);
 ```
 
