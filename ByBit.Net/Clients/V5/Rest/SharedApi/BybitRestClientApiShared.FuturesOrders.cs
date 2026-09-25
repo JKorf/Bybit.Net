@@ -391,7 +391,7 @@ namespace Bybit.Net.Clients.V5
         public GetPositionsOptions GetPositionsOptions { get; } = new GetPositionsOptions(_exchangeName, true)
         {
             ExchangeParameterRules = [
-                ExchangeParameterRule.Optional("SettleAsset", "Settlement asset filter", "USDT", ["settleCoin"])
+                ExchangeParameterRule.Optional("SettleAsset", "Settlement asset filter, is required for Linear futures without symbol filter", "USDT", ["settleCoin"])
             ]
         };
         public async Task<HttpResult<SharedPosition[]>> GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
