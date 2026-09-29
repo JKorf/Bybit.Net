@@ -234,5 +234,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("breakEvenPrice")]
         public decimal? BreakEvenPrice { get; set; }
+        /// <summary>
+        /// ["<c>netDeltaRatio</c>"] Net delta ratio
+        /// </summary>
+        [JsonPropertyName("netDeltaRatio")]
+        public decimal? NetDeltaRatio { get; set; }
     }
 }
