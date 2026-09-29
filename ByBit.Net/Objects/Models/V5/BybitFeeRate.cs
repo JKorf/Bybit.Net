@@ -28,5 +28,10 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("makerFeeRate")]
         public decimal MakerFeeRate { get; set; }
+        /// <summary>
+        /// ["<c>rpiMakerRebate</c>"] RPI maker rebate
+        /// </summary>
+        [JsonPropertyName("rpiMakerRebate")]
+        public decimal? RpiMakerRebate { get; set; }
     }
 }
