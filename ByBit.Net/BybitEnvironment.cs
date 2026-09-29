@@ -52,6 +52,7 @@ namespace Bybit.Net
              "Indonesia" => Indonesia,
              "Japan" => Japan,
              "Brazil" => Brazil,
+             "Argentina" => Argentina,
              "demo" => DemoTrading,
              "" => Live,
              null => Live,
@@ -74,6 +75,7 @@ namespace Bybit.Net
             Indonesia.Name,
             Japan.Name,
             Brazil.Name,
+            Argentina.Name,
             DemoTrading.Name];
 
         /// <summary>
@@ -160,6 +162,13 @@ namespace Bybit.Net
             = new BybitEnvironment("Brazil",
                                      BybitApiAddresses.Brazil.RestBaseAddress,
                                      BybitApiAddresses.Brazil.SocketBaseAddress);
+        /// <summary>
+        /// Live environment for users from Argentina 
+        /// </summary>
+        public static BybitEnvironment Argentina { get; }
+            = new BybitEnvironment("Argentina",
+                                     BybitApiAddresses.Argentina.RestBaseAddress,
+                                     BybitApiAddresses.Argentina.SocketBaseAddress);
         /// <summary>
         /// Demo trading environment, needs separate API key. See https://bybit-exchange.github.io/docs/v5/demo
         /// </summary>
