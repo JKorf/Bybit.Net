@@ -485,6 +485,8 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// </summary>
         /// <param name="transferId">["<c>transferId</c>"] Filter by tansfer id</param>
         /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="fromMemberId">["<c>fromMemberId</c>"] Filter by from member id</param>
+        /// <param name="toMemberId">["<c>toMemberId</c>"] Filter by to member id</param>
         /// <param name="transferStatus">["<c>status</c>"] Filter by status</param>
         /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
         /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
@@ -492,7 +494,17 @@ namespace Bybit.Net.Interfaces.Clients.V5
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<HttpResult<BybitResponse<BybitTransfer>>> GetUniversalTransfersAsync(string? transferId = null, string? asset = null, TransferStatus? transferStatus = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+        Task<HttpResult<BybitResponse<BybitTransfer>>> GetUniversalTransfersAsync(
+            string? transferId = null,
+            string? asset = null,
+            TransferStatus? transferStatus = null,
+            string? fromMemberId = null,
+            string? toMemberId = null,
+            DateTime? startTime = null, 
+            DateTime? endTime = null, 
+            int? limit = null, 
+            string? cursor = null, 
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get withdrawal history

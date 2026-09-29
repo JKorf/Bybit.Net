@@ -605,6 +605,8 @@ namespace Bybit.Net.Clients.V5
             string? transferId = null,
             string? asset = null,
             TransferStatus? transferStatus = null,
+            string? fromMemberId = null,
+            string? toMemberId = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             int? limit = null,
@@ -615,6 +617,8 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("transferId", transferId);
             parameters.Add("coin", asset);
             parameters.Add("status", EnumConverter.GetString(transferStatus));
+            parameters.Add("fromMemberId", fromMemberId);
+            parameters.Add("toMemberId", toMemberId);
             parameters.Add("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.Add("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.Add("limit", limit);
