@@ -55,6 +55,21 @@ namespace Bybit.Net.Objects.Models.V5
         [JsonPropertyName("settleCoin")]
         public string SettleAsset { get; set; } = string.Empty;
         /// <summary>
+        /// ["<c>fullName</c>"] Full name
+        /// </summary>
+        [JsonPropertyName("fullName")]
+        public string FullName { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>marketRegion</c>"] Market region
+        /// </summary>
+        [JsonPropertyName("marketRegion")]
+        public string? MarketRegion { get; set; }
+        /// <summary>
+        /// ["<c>underlyingTicker</c>"] Underlying ticker
+        /// </summary>
+        [JsonPropertyName("underlyingTicker")]
+        public string? UnderlyingTicker { get; set; }
+        /// <summary>
         /// ["<c>launchTime</c>"] Launch time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
