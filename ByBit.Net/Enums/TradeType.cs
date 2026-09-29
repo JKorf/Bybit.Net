@@ -55,9 +55,19 @@ namespace Bybit.Net.Enums
         [Map("FutureSpread")]
         FutureSpread,
         /// <summary>
-        /// ["<c>CorporateAction</c>"] Stock split or reverse stock split
+        /// ["<c>ForwardSplitSettle</c>"] Forward split settle
         /// </summary>
-        [Map("CorporateAction")]
-        CorporateAction
+        [Map("ForwardSplitSettle")]
+        ForwardSplitSettle,
+        /// <summary>
+        /// ["<c>ReverseSplitSettle</c>"] Reverse split settle
+        /// </summary>
+        [Map("ReverseSplitSettle")]
+        ReverseSplitSettle,
+        /// <summary>
+        /// ["<c>Dividend</c>"] Dividend
+        /// </summary>
+        [Map("Dividend")]
+        Dividend,
     }
 }
