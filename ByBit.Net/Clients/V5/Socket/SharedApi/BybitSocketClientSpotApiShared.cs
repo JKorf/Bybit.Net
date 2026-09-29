@@ -41,5 +41,8 @@ namespace Bybit.Net.Clients.V5
                 SubscribeKlineOptions
                 );
         }
+
+        /// <inheritdoc />
+        public Task UnsubscribeAllAsync() => _api.UnsubscribeAllAsync();
     }
 }

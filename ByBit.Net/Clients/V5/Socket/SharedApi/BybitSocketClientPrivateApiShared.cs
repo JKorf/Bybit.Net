@@ -49,5 +49,8 @@ namespace Bybit.Net.Clients.V5
                 CancelFuturesOrderOptions
                 );
         }
+
+        /// <inheritdoc />
+        public Task UnsubscribeAllAsync() => _api.UnsubscribeAllAsync();
     }
 }
