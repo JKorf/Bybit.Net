@@ -46,8 +46,8 @@
         /// </summary>
         public static BybitApiAddresses HongKong = new BybitApiAddresses
         {
-            RestBaseAddress = "https://api.bybit.com.hk",
-            SocketBaseAddress = "wss://stream.bybit.com" // As per Telegram support, normal address should be used for websockets
+            RestBaseAddress = "https://api.spark-fintech.com",
+            SocketBaseAddress = "wss://stream.spark-fintech.com"
         };
 
         /// <summary>
