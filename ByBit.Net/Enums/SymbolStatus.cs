@@ -15,6 +15,11 @@ namespace Bybit.Net.Enums
         [Map("PreLaunch")]
         PreLaunch,
         /// <summary>
+        /// ["<c>PendingOpen</c>"] [Futures] Pending open
+        /// </summary>
+        [Map("PendingOpen")]
+        PendingOpen,
+        /// <summary>
         /// ["<c>Trading</c>"] Currently trading
         /// </summary>
         [Map("Trading")]
