@@ -213,8 +213,6 @@ namespace Bybit.Net.Clients.V5
         protected override WebSocketParameters GetWebSocketParameters(string address)
         {
             var parameters = base.GetWebSocketParameters(address);
-            if (ClientOptions.Environment.Name == BybitEnvironment.Brazil.Name)
-                parameters.Headers.Add("x-site-id", "BRA_BTL");
             return parameters;
         }
     }
