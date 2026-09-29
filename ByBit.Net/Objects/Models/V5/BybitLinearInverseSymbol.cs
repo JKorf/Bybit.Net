@@ -137,6 +137,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// </summary>
         [JsonPropertyName("isPublicRpi")]
         public bool? IsPublicRpi { get; set; }
+        /// <summary>
+        /// ["<c>tags</c>"] Tags
+        /// </summary>
+        [JsonPropertyName("tags")]
+        public string[] Tags { get; set; } = [];
 
         /// <summary>
         /// ["<c>preListingInfo</c>"] Prelisting information
