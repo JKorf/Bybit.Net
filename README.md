@@ -246,6 +246,21 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 7.7.0 - 30 Sep 2026
+    * Updated CryptoExchange.Net to V13.1.0
+    * Added fromMemberId, toMemberId parameters to GetUniversalTransfersAsync endpoint
+    * Added NetDeltaRatio to BybitPosition model
+    * Added FullName, MarketRegion and UnderlyingTicker to BybitLinearInverseSymbol model
+    * Added RpiMakerRebate to BybitFeeGroups model
+    * Added RpiMakerRebate to BybitFeeRate model
+    * Added Argentina environment
+    * Added PendingOpen to SymbolStatus enum
+    * Added Tags to BybitLinearInverseSymbol model
+    * Updated HongKong environment addresses
+    * Updated Shared API GetPositionsAsync SettleAsset description
+    * Updated TradeType enum values
+    * Removed x-site-id header for Brazil environment
+
 * Version 7.6.0 - 24 Sep 2026
     * Updated CryptoExchange.Net to v13.0.0
     * Shared APIs
