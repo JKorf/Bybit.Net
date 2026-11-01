@@ -797,6 +797,20 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<HttpResult<BybitSpotMarginLeverageStatus>> GetSpotMarginStatusAndLeverageAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Get UTA loan position tiers: the accumulated borrow limit, maintenance margin rate, initial margin rate and max leverage of each tier
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/position-tiers" /><br />
+        /// Endpoint:<br />
+        /// GET /v5/spot-margin-trade/position-tiers
+        /// </para>
+        /// </summary>
+        /// <param name="asset">["<c>currency</c>"] Filter by asset</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BybitSpotMarginPositionTiers[]>> GetSpotMarginPositionTiersAsync(string? asset = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Turn on / off spot margin trade
         /// <para>
         /// Docs:<br />

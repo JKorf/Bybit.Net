@@ -1040,6 +1040,24 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Spot Margin Position Tiers
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitSpotMarginPositionTiers[]>> GetSpotMarginPositionTiersAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("currency", asset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/spot-margin-trade/position-tiers", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitResponse<BybitSpotMarginPositionTiers>>(request, parameters, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<BybitSpotMarginPositionTiers[]>(result);
+
+            return HttpResult.Ok(result, result.Data.List);
+        }
+
+        #endregion
+
         #region Set Spot Margin Trade Mode
 
         /// <inheritdoc />
