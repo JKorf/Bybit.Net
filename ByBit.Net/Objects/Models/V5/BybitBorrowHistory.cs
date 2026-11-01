@@ -55,11 +55,11 @@ namespace Bybit.Net.Objects.Models.V5
         /// ["<c>unrealisedLoss</c>"] Unrealized loss
         /// </summary>
         [JsonPropertyName("unrealisedLoss")]
-        public decimal UnrealisedLoss { get; set; }
+        public decimal? UnrealisedLoss { get; set; }
         /// <summary>
         /// ["<c>freeBorrowedAmount</c>"] The borrowed quantity for interest free
         /// </summary>
         [JsonPropertyName("freeBorrowedAmount")]
-        public decimal FreeBorrowedQuantity { get; set; }
+        public decimal? FreeBorrowedQuantity { get; set; }
     }
 }
