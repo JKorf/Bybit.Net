@@ -1371,6 +1371,17 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Trade Behaviour Config
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitTradeBehaviourConfig>> GetTradeBehaviourConfigAsync(CancellationToken ct = default)
+        {
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/account/user-setting-config", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitTradeBehaviourConfig>(request, null, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Spot symbols
 
         /// <inheritdoc />

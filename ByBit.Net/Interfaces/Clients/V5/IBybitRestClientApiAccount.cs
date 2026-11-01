@@ -1053,6 +1053,19 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<HttpResult> SetPriceLimitBehaviorAsync(Category category, bool allowModifyPrice, CancellationToken ct = default);
 
         /// <summary>
+        /// Get the trade behaviour configuration of the account: the price limit behaviour for spot and futures, delta neutral mode, MNT fee deduction and self match prevention
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/account/get-user-setting-config" /><br />
+        /// Endpoint:<br />
+        /// GET /v5/account/user-setting-config
+        /// </para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BybitTradeBehaviourConfig>> GetTradeBehaviourConfigAsync(CancellationToken ct = default);
+
+        /// <summary>
         /// Get spot symbols available to the user
         /// <para>
         /// Docs:<br />
