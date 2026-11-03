@@ -1,0 +1,17 @@
+GET
+/v5/spot-margin-trade/liability
+true
+{
+    "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+        "currency": "BTC",
+        "totalBorrowAmount": "0.05000000",
+        "fixedBorrowAmount": "0.02000000",
+        "flexibleBorrowAmount": "0.03000000",
+        "spotTotalBorrow": "0.04000000",
+        "derivativesBorrow": "0.01000000"
+    },
+    "retExtInfo": {},
+    "time": 1756273388821
+}

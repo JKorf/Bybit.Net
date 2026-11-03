@@ -1212,6 +1212,66 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Manual Repay
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitRepaymentResult>> ManualRepayAsync(string? asset = null, decimal? quantity = null, RepaymentType? repaymentType = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("coin", asset);
+            parameters.Add("amount", quantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.Add("repaymentType", repaymentType);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/account/repay", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitRepaymentResult>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Manual Repay Without Conversion
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitRepaymentResult>> ManualRepayWithoutConversionAsync(string asset, decimal? quantity = null, RepaymentType? repaymentType = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("coin", asset);
+            parameters.Add("amount", quantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.Add("repaymentType", repaymentType);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/account/no-convert-repay", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitRepaymentResult>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Repayment Available Quantity
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitRepaymentAvailableQuantity>> GetRepaymentAvailableQuantityAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("currency", asset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/spot-margin-trade/repayment-available-amount", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitRepaymentAvailableQuantity>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Liability Info
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitLiabilityInfo>> GetLiabilityInfoAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("currency", asset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/spot-margin-trade/liability", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitLiabilityInfo>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Request Demo Funds
 
         /// <inheritdoc />

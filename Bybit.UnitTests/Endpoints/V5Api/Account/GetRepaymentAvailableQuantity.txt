@@ -1,0 +1,13 @@
+GET
+/v5/spot-margin-trade/repayment-available-amount
+true
+{
+    "retCode": 0,
+    "retMsg": "Success",
+    "result": {
+        "lossLessRepaymentAmount": "0.02000000",
+        "currency": "BTC"
+    },
+    "retExtInfo": {},
+    "time": 1756273388821
+}

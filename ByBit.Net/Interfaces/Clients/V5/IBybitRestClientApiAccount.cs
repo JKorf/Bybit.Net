@@ -903,6 +903,66 @@ namespace Bybit.Net.Interfaces.Clients.V5
         Task<HttpResult<BybitLiabilityRepayment[]>> RepayLiabilitiesAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Manually repay a UTA loan liability. The spot available balance of the debt asset is used first; any remainder is repaid by converting other assets in liquidation order
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/account/repay" /><br />
+        /// Endpoint:<br />
+        /// POST /v5/account/repay
+        /// </para>
+        /// </summary>
+        /// <param name="asset">["<c>coin</c>"] Asset to repay; if null repay all liabilities (repaymentType must then be All)</param>
+        /// <param name="quantity">["<c>amount</c>"] Quantity to repay; only with an asset. If null the available balance of the asset is used</param>
+        /// <param name="repaymentType">["<c>repaymentType</c>"] Which liabilities to repay, default Flexible</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BybitRepaymentResult>> ManualRepayAsync(string? asset = null, decimal? quantity = null, RepaymentType? repaymentType = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Manually repay a UTA loan liability using only the spot available balance of the debt asset, never converting other assets
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/account/no-convert-repay" /><br />
+        /// Endpoint:<br />
+        /// POST /v5/account/no-convert-repay
+        /// </para>
+        /// </summary>
+        /// <param name="asset">["<c>coin</c>"] Asset to repay</param>
+        /// <param name="quantity">["<c>amount</c>"] Quantity to repay. If null the available balance of the asset is used</param>
+        /// <param name="repaymentType">["<c>repaymentType</c>"] Which liabilities to repay, default Flexible</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BybitRepaymentResult>> ManualRepayWithoutConversionAsync(string asset, decimal? quantity = null, RepaymentType? repaymentType = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the quantity of an asset available to repay a UTA loan without asset conversion: min(spot available balance, borrow quantity)
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/repayment-available-amount" /><br />
+        /// Endpoint:<br />
+        /// GET /v5/spot-margin-trade/repayment-available-amount
+        /// </para>
+        /// </summary>
+        /// <param name="asset">["<c>currency</c>"] Asset</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BybitRepaymentAvailableQuantity>> GetRepaymentAvailableQuantityAsync(string asset, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the UTA loan liability of an asset: total, fixed-rate, floating-rate, spot and derivatives
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://bybit-exchange.github.io/docs/v5/spot-margin-uta/liability" /><br />
+        /// Endpoint:<br />
+        /// GET /v5/spot-margin-trade/liability
+        /// </para>
+        /// </summary>
+        /// <param name="asset">["<c>currency</c>"] Asset</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BybitLiabilityInfo>> GetLiabilityInfoAsync(string asset, CancellationToken ct = default);
+
+        /// <summary>
         /// Request funds for demo trading
         /// <para>
         /// Docs:<br />
