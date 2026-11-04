@@ -62,6 +62,10 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Account.GetBrokerEarningsAsync(), "GetBrokerEarnings");
             await tester.ValidateAsync(client => client.V5Api.Account.SetSpotHedgingModeAsync(true), "SetSpotHedgingMode");
             await tester.ValidateAsync(client => client.V5Api.Account.RepayLiabilitiesAsync(), "RepayLiabilities", "result.list");
+            await tester.ValidateAsync(client => client.V5Api.Account.ManualRepayAsync("BTC", 0.01m), "ManualRepay");
+            await tester.ValidateAsync(client => client.V5Api.Account.ManualRepayWithoutConversionAsync("BTC", 0.01m), "ManualRepayWithoutConversion");
+            await tester.ValidateAsync(client => client.V5Api.Account.GetRepaymentAvailableQuantityAsync("BTC"), "GetRepaymentAvailableQuantity");
+            await tester.ValidateAsync(client => client.V5Api.Account.GetLiabilityInfoAsync("BTC"), "GetLiabilityInfo");
             await tester.ValidateAsync(client => client.V5Api.Account.GetConvertAssetsAsync(Enums.ConvertAccountType.ConvertFunding), "GetConvertAssets", "result.coins", ignoreProperties: new List<string> { "timePeriod", "singleToMinLimit", "singleToMaxLimit", "dailyFromMinLimit", "dailyFromMaxLimit", "dailyToMinLimit", "dailyToMaxLimit" });
             await tester.ValidateAsync(client => client.V5Api.Account.GetConvertQuoteAsync(Enums.ConvertAccountType.ConvertFunding, "ETH", "BTC", 1), "GetConvertQuote", "result");
             await tester.ValidateAsync(client => client.V5Api.Account.ConvertConfirmQuoteAsync("123"), "ConvertConfirmQuote", "result");

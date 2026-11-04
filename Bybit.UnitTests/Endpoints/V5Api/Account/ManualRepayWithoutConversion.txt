@@ -1,0 +1,12 @@
+POST
+/v5/account/no-convert-repay
+true
+{
+    "retCode": 0,
+    "retMsg": "success",
+    "result": {
+        "resultStatus": "P"
+    },
+    "retExtInfo": {},
+    "time": 1756295680801
+}
