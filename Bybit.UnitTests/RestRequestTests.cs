@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
@@ -53,6 +53,8 @@ namespace Bybit.Net.UnitTests
             await tester.ValidateAsync(client => client.V5Api.Account.AddOrReduceMarginAsync(Enums.Category.Option, "ETHUSDT", 1), "AddOrReduceMargin");
             await tester.ValidateAsync(client => client.V5Api.Account.SetSpotMarginLeverageAsync(1), "SetSpotMarginLeverage");
             await tester.ValidateAsync(client => client.V5Api.Account.GetSpotMarginStatusAndLeverageAsync(), "GetSpotMarginStatusAndLeverage", ignoreProperties: new List<string> { "spotMarginMode" });
+            await tester.ValidateAsync(client => client.V5Api.Account.GetSpotMarginPositionTiersAsync("BTC"), "GetSpotMarginPositionTiers", "result.list");
+            await tester.ValidateAsync(client => client.V5Api.Account.GetTradeBehaviourConfigAsync(), "GetTradeBehaviourConfig", "result");
             await tester.ValidateAsync(client => client.V5Api.Account.SetSpotMarginTradeModeAsync(true), "SetSpotMarginTradeMode");
             await tester.ValidateAsync(client => client.V5Api.Account.GetSpotMarginDataAsync(), "GetSpotMarginData", "result.vipCoinList");
             await tester.ValidateAsync(client => client.V5Api.Account.GetSpotMarginInterestRateHistoryAsync("ETH"), "GetSpotMarginInterestRateHistory", "result.list");

@@ -1040,6 +1040,24 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        #region Get Spot Margin Position Tiers
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitSpotMarginPositionTiers[]>> GetSpotMarginPositionTiersAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BybitExchange._parameterSerializationSettings);
+            parameters.Add("currency", asset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/spot-margin-trade/position-tiers", BybitExchange.RateLimiter.BybitRest, 1, true);
+            var result = await _baseClient.SendAsync<BybitResponse<BybitSpotMarginPositionTiers>>(request, parameters, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<BybitSpotMarginPositionTiers[]>(result);
+
+            return HttpResult.Ok(result, result.Data.List);
+        }
+
+        #endregion
+
         #region Set Spot Margin Trade Mode
 
         /// <inheritdoc />
@@ -1349,6 +1367,17 @@ namespace Bybit.Net.Clients.V5
             parameters.Add("modifyEnable", allowModifyPrice);
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "v5/account/set-limit-px-action", BybitExchange.RateLimiter.BybitRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Trade Behaviour Config
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BybitTradeBehaviourConfig>> GetTradeBehaviourConfigAsync(CancellationToken ct = default)
+        {
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "v5/account/user-setting-config", BybitExchange.RateLimiter.BybitRest, 1, true);
+            return await _baseClient.SendAsync<BybitTradeBehaviourConfig>(request, null, ct).ConfigureAwait(false);
         }
 
         #endregion

@@ -124,6 +124,26 @@ namespace Bybit.Net.Enums
         [Map("SPOT_REPAYMENT_BUY")]
         SpotRepaymentBuy,
         /// <summary>
+        /// Loan borrow (manual or auto)
+        /// </summary>
+        [Map("BORROW")]
+        Borrow,
+        /// <summary>
+        /// Loan repay (manual or auto)
+        /// </summary>
+        [Map("REPAY")]
+        Repay,
+        /// <summary>
+        /// Auto loan borrow (UTA spot margin, borrowed by a leveraged spot order)
+        /// </summary>
+        [Map("AUTO_LOANS_BORROW")]
+        AutoLoansBorrow,
+        /// <summary>
+        /// Manual loan repay (UTA spot margin, repaid through the repay endpoint)
+        /// </summary>
+        [Map("MANUAL_LOANS_REPAY")]
+        ManualLoansRepay,
+        /// <summary>
         /// </summary>
         [Map("TOKENS_SUBSCRIPTION")]
         TokensSubscription,
