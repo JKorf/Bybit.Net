@@ -144,6 +144,11 @@ namespace Bybit.Net.Enums
         [Map("MANUAL_LOANS_REPAY")]
         ManualLoansRepay,
         /// <summary>
+        /// Auto loan repay (UTA spot margin, repaid automatically by the system, including the auto-repayment run when the account maintenance margin rate reaches 100%)
+        /// </summary>
+        [Map("AUTO_LOANS_REPAY")]
+        AutoLoansRepay,
+        /// <summary>
         /// </summary>
         [Map("TOKENS_SUBSCRIPTION")]
         TokensSubscription,
