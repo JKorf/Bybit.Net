@@ -23,7 +23,7 @@ namespace Bybit.Net.Clients.V5
 
         public SharedFeeDeductionType FuturesFeeDeductionType => SharedFeeDeductionType.AddToCost;
         public SharedFeeAssetType FuturesFeeAssetType => SharedFeeAssetType.InputAsset;
-        public SharedOrderType[] FuturesSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market };
+        public SharedOrderType[] FuturesSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market, SharedOrderType.LimitMaker };
         public SharedTimeInForce[] FuturesSupportedTimeInForce { get; } = new[] { SharedTimeInForce.GoodTillCanceled, SharedTimeInForce.ImmediateOrCancel, SharedTimeInForce.FillOrKill };
         public SharedQuantitySupport FuturesSupportedOrderQuantity { get; } = new SharedQuantitySupport(
                 SharedQuantityType.BaseAsset,
@@ -52,7 +52,7 @@ namespace Bybit.Net.Clients.V5
                 category,
                 request.Symbol!.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
-                request.OrderType == SharedOrderType.Limit ? NewOrderType.Limit : NewOrderType.Market,
+                request.OrderType == SharedOrderType.Market ? NewOrderType.Market : NewOrderType.Limit,
                 quantity: request.Quantity?.QuantityInBaseAsset ?? request.Quantity?.QuantityInContracts ?? 0,
                 price: request.Price,
                 positionIdx: request.PositionSide == null ? PositionIdx.OneWayMode: request.PositionSide == SharedPositionSide.Long ? PositionIdx.BuyHedgeMode : PositionIdx.SellHedgeMode,
