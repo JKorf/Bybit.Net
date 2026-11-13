@@ -31,11 +31,21 @@ namespace Bybit.Net.Clients.V5
                 return HttpResult.Fail<SharedFuturesSymbol[]>(Exchange, validationError);
 
             var category = (request.TradingMode == null || request.TradingMode == TradingMode.PerpetualLinear || request.TradingMode == TradingMode.DeliveryLinear) ? Category.Linear : Category.Inverse;
-            var result = await _api.ExchangeData.GetLinearInverseSymbolsAsync(category, limit: 1000, ct: ct).ConfigureAwait(false);
-            if (!result.Success)
-                return HttpResult.Fail<SharedFuturesSymbol[]>(result);
+            var symbols = new List<BybitLinearInverseSymbol>();
+            string? cursor = null;
+            HttpResult<BybitResponse<BybitLinearInverseSymbol>> result;
+            do
+            {
+                result = await _api.ExchangeData.GetLinearInverseSymbolsAsync(category, limit: 1000, cursor: cursor, ct: ct).ConfigureAwait(false);
+                if (!result.Success)
+                    return HttpResult.Fail<SharedFuturesSymbol[]>(result);
 
-            var data = result.Data.List
+                symbols.AddRange(result.Data.List);
+                cursor = result.Data.NextPageCursor;
+            }
+            while (!string.IsNullOrEmpty(cursor));
+
+            var data = symbols
                 .Select(x => ParseSymbol(x))
                 .ToArray();
 
