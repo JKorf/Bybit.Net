@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
-    <PackageReference Include="Bybit.Api" Version="5.6.510" />
-    <PackageReference Include="ccxt" Version="4.5.54" />
+    <PackageReference Include="Bybit.Api" Version="5.6.808" />
+    <PackageReference Include="ccxt" Version="4.5.92" />
   </ItemGroup>
 
   <ItemGroup>
