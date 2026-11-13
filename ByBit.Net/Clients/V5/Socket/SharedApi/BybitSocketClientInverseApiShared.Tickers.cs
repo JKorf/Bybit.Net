@@ -38,7 +38,7 @@ namespace Bybit.Net.Clients.V5
                 if (update.Data.Volume24h.HasValue)
                     vol = update.Data.Volume24h.Value;
                 if (update.Data.PricePercentage24h.HasValue)
-                    vol = update.Data.PricePercentage24h.Value;
+                    change = update.Data.PricePercentage24h.Value * 100;
                 if (update.Data.Turnover24h.HasValue)
                     quoteVol = update.Data.Turnover24h.Value;
 
