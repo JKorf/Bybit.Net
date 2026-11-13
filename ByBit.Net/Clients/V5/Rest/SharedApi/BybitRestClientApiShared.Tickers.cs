@@ -116,7 +116,7 @@ namespace Bybit.Net.Clients.V5
                  x.LastPrice,
                  x.HighPrice24h,
                  x.LowPrice24h,
-                 new SharedOrderQuantity(x.Volume24h, x.Turnover24h),
+                 GetFuturesTickerVolume(category, x.Volume24h, x.Turnover24h),
                  x.PriceChangePercentage24h * 100)
              {
                  FundingRate = x.FundingRate,
@@ -185,8 +185,9 @@ namespace Bybit.Net.Clients.V5
             }
             else
             {
+                var category = (request.Symbol!.TradingMode == TradingMode.DeliveryInverse || request.Symbol!.TradingMode == TradingMode.PerpetualInverse) ? Category.Inverse : Category.Linear;
                 var result = await _api.ExchangeData.GetLinearInverseTickersAsync(
-                    (request.Symbol!.TradingMode == TradingMode.DeliveryInverse || request.Symbol!.TradingMode == TradingMode.PerpetualInverse) ? Category.Inverse : Category.Linear,
+                    category,
                     request.Symbol!.GetSymbol(FormatSymbol),
                     ct: ct).ConfigureAwait(false);
                 if (!result.Success)
@@ -200,7 +201,7 @@ namespace Bybit.Net.Clients.V5
                         ticker.LastPrice,
                         ticker.HighPrice24h,
                         ticker.LowPrice24h,
-                        new SharedOrderQuantity(ticker.Volume24h, ticker.Turnover24h),
+                        GetFuturesTickerVolume(category, ticker.Volume24h, ticker.Turnover24h),
                         ticker.PriceChangePercentage24h)
                     {
                     });
@@ -229,7 +230,7 @@ namespace Bybit.Net.Clients.V5
                     symbol.LastPrice,
                     symbol.HighPrice24h,
                     symbol.LowPrice24h,
-                    new SharedOrderQuantity(symbol.Volume24h, symbol.Turnover24h),
+                    GetFuturesTickerVolume(category, symbol.Volume24h, symbol.Turnover24h),
                     symbol.PriceChangePercentage24h * 100)
                 {
                     IndexPrice = symbol.IndexPrice,
@@ -241,5 +242,12 @@ namespace Bybit.Net.Clients.V5
 
         #endregion
 
+        private static SharedOrderQuantity GetFuturesTickerVolume(Category category, decimal volume24h, decimal turnover24h)
+        {
+            if (category == Category.Inverse)
+                return new SharedOrderQuantity(turnover24h, volume24h, volume24h);
+
+            return new SharedOrderQuantity(volume24h, turnover24h);
+        }
     }
 }

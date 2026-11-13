@@ -49,7 +49,7 @@ namespace Bybit.Net.Clients.V5
                         lastPrice,
                         high, 
                         low,
-                        new SharedOrderQuantity(vol, quoteVol),
+                        new SharedOrderQuantity(quoteVol, vol, vol),
                         change)
                 {
                 }));
