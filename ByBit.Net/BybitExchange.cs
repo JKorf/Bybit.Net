@@ -10,6 +10,7 @@ using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace Bybit.Net
@@ -109,7 +110,11 @@ namespace Bybit.Net
                     return baseAsset + quoteAsset;
                 }
 
-                return baseAsset + "-" + deliverTime!.Value.ToString("ddMMMyy");
+                var deliveryDate = deliverTime!.Value.ToString("ddMMMyy", CultureInfo.InvariantCulture).ToUpperInvariant();
+                if (quoteAsset == "USDC")
+                    return baseAsset + "-" + deliveryDate;
+
+                return baseAsset + quoteAsset + "-" + deliveryDate;
             }
 
             return baseAsset + quoteAsset + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
