@@ -21,7 +21,7 @@ namespace Bybit.Net.Clients.V5
 
         public SharedFeeDeductionType SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         public SharedFeeAssetType SpotFeeAssetType => SharedFeeAssetType.OutputAsset;
-        public SharedOrderType[] SpotSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market };
+        public SharedOrderType[] SpotSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market, SharedOrderType.LimitMaker };
         public SharedTimeInForce[] SpotSupportedTimeInForce { get; } = new[] { SharedTimeInForce.GoodTillCanceled, SharedTimeInForce.ImmediateOrCancel, SharedTimeInForce.FillOrKill };
         public SharedQuantitySupport SpotSupportedOrderQuantity { get; } = new SharedQuantitySupport(
                 SharedQuantityType.BaseAsset,
