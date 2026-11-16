@@ -1,35 +1,13 @@
-# AI-Friendly Examples
+# Bybit.Net examples
 
-These examples are optimized for AI coding assistants and quick onboarding. Each file is:
+See [usage](../../.claude/skills/bybit-net/references/usage.md), [API routing](../../.claude/skills/bybit-net/references/api-surfaces.md), and [operational considerations](../../.claude/skills/bybit-net/references/safety.md) for maintained consumer guidance.
 
-- **Compilable**: drop into a console project with `dotnet add package Bybit.Net` and it builds.
-- **Self-contained**: single file, no shared helpers.
-- **Heavily commented**: explains why each line matters for Bybit.Net.
-- **V5-focused**: uses the current Bybit V5 REST and WebSocket client shapes.
+- [V5 market and account](01-v5-market-and-account.cs)
+- [V5 trading](02-v5-trading.cs)
+- [WebSockets](03-websocket.cs)
+- [Shared API V2](04-shared-client.cs)
+- [Error handling](05-error-handling.cs)
 
-## Files
+The documentation test compiles these files as independent console programs without executing exchange operations. Running them contacts Bybit. The trading example gates live placement with `BYBIT_EXAMPLE_PLACE_ORDER=true`; review its parameters before enabling it.
 
-| File | What it shows |
-|---|---|
-| `01-v5-market-and-account.cs` | V5 REST setup, public spot/linear market data, order book, and credential-gated wallet balance |
-| `02-v5-trading.cs` | V5 order placement, open orders, positions, cancellation, categories, and dry-run safety |
-| `03-websocket.cs` | V5 public spot and linear subscriptions, private order updates, and proper teardown |
-| `04-shared-client.cs` | CryptoExchange.Net shared client access, capability discovery, and native V5 endpoints |
-| `05-error-handling.cs` | `HttpResult` / `WebSocketResult` handling, typed errors, and retry-friendly helpers |
-
-## Running
-
-```bash
-dotnet new console -n MyBybitApp
-cd MyBybitApp
-dotnet add package Bybit.Net
-# Copy one example file into Program.cs
-dotnet run
-```
-
-Private examples read credentials from:
-
-- `BYBIT_API_KEY`
-- `BYBIT_API_SECRET`
-
-The trading example defaults to dry-run mode. Set `BYBIT_EXAMPLE_PLACE_ORDER=true` only after reviewing symbol, category, quantity, price, account mode, and permissions.
+See [repository instructions](../../AGENTS.md) for build and test commands.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bybit.Net"
+  short_description: "Build C# Bybit V5 integrations with Bybit.Net."
+  default_prompt: "Use $bybit-net to implement a Bybit.Net V5 REST or websocket workflow."
