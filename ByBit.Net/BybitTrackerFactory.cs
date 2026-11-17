@@ -58,22 +58,22 @@ namespace Bybit.Net
             var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient();
 
-            IKlineRestClient sharedRestClient;
-            IKlineSocketClient sharedSocketClient;
+            IGetKlinesRest sharedRestClient;
+            ISubscribeKlinesSocket sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedRestClient = restClient.V5Api.SharedClient;
-                sharedSocketClient = socketClient.V5SpotApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedApi;
+                sharedSocketClient = socketClient.V5SpotApi.SharedApi;
             }
             else if (symbol.TradingMode.IsLinear())
             {
-                sharedRestClient = restClient.V5Api.SharedClient;
-                sharedSocketClient = socketClient.V5LinearApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedApi;
+                sharedSocketClient = socketClient.V5LinearApi.SharedApi;
             }
             else
             {
-                sharedRestClient = restClient.V5Api.SharedClient;
-                sharedSocketClient = socketClient.V5InverseApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedApi;
+                sharedSocketClient = socketClient.V5InverseApi.SharedApi;
             }
 
             return new KlineTracker(
@@ -94,22 +94,22 @@ namespace Bybit.Net
             var restClient = _serviceProvider?.GetRequiredService<IBybitRestClient>() ?? new BybitRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBybitSocketClient>() ?? new BybitSocketClient();
 
-            IRecentTradeRestClient? sharedRestClient = null;
-            ITradeSocketClient sharedSocketClient;
+            IGetRecentTradesRest? sharedRestClient = null;
+            ISubscribeTradesSocket sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedRestClient = restClient.V5Api.SharedClient;
-                sharedSocketClient = socketClient.V5SpotApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedApi;
+                sharedSocketClient = socketClient.V5SpotApi.SharedApi;
             }
             else if (symbol.TradingMode.IsLinear())
             {
-                sharedRestClient = restClient.V5Api.SharedClient;
-                sharedSocketClient = socketClient.V5LinearApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedApi;
+                sharedSocketClient = socketClient.V5LinearApi.SharedApi;
             }
             else
             {
-                sharedRestClient = restClient.V5Api.SharedClient;
-                sharedSocketClient = socketClient.V5InverseApi.SharedClient;
+                sharedRestClient = restClient.V5Api.SharedApi;
+                sharedSocketClient = socketClient.V5InverseApi.SharedApi;
             }
 
             return new TradeTracker(
