@@ -240,6 +240,18 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 7.8.0 - 17 Nov 2026
+    * Updated CryptoExchange.Net to v13.3.0
+    * Added GetSpotMarginPositionTiersAsync and GetTradeBehaviourConfigAsync endpoints
+    * Added UTA manual repayment endpoints
+    * Added AutoLoansRepay to TransactionLogType
+    * Added LimitMaker support to Shared API implementation
+    * Updated BybitBorrowHistory.FreeBorrowedQuantity to nullable
+    * Fixed inverse ticker subscription overwriting volume with change percentage
+    * Fixed FormatSymbol for USDT delivery futures
+    * Fixed shared GetFuturesSymbolsAsync returning only the first page
+    * Fix swapped volumes in shared inverse futures tickers
+
 * Version 7.7.0 - 30 Sep 2026
     * Updated CryptoExchange.Net to V13.1.0
     * Added fromMemberId, toMemberId parameters to GetUniversalTransfersAsync endpoint
