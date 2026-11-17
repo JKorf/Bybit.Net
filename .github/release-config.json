@@ -1,0 +1,18 @@
+{
+  "baseBranch": "main",
+  "sdk": "11.0.100",
+  "packages": [
+    {
+      "key": "bybit",
+      "project": "ByBit.Net/Bybit.Net.csproj",
+      "testProjects": [
+        "Bybit.UnitTests/Bybit.UnitTests.csproj"
+      ],
+      "packageId": "Bybit.Net",
+      "readme": "README.md",
+      "tagPrefix": "Bybit.Net.",
+      "releaseIntegrationTests": false,
+      "publishToGitHubPackages": true
+    }
+  ]
+}
