@@ -14,9 +14,7 @@ namespace Bybit.Net.UnitTests
     [TestFixture]
     internal class SharedRestIntegrationTests
     {
-        private bool ManualRun { get; } = false;
-        private static SharedSymbol _spotSymbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
-        private static SharedSymbol _futuresSymbol = new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT");
+        private bool ManualRun { get; } = true;
 
         private bool ShouldRun()
         {
