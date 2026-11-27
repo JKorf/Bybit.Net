@@ -160,6 +160,6 @@ namespace Bybit.Net.Objects.Models.V5
         /// ["<c>marketUnit</c>"] Market unit
         /// </summary>
         [JsonPropertyName("marketUnit")]
-        public MarketUnit MarketUnit { get; set; }
+        public MarketUnit? MarketUnit { get; set; }
     }
 }
